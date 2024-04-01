@@ -1,0 +1,4 @@
+name: RpgU
+version: '${project.version}'
+main: me.udnek.rpgu.RpgU
+api-version: '1.20'
