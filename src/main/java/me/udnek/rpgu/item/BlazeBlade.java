@@ -113,24 +113,26 @@ public class BlazeBlade extends CustomModelDataItem implements InteractableItem,
                     velocity = victim.getVelocity();
                 }
             }
-
             @Override
             public void run() {
 
                 updateVelocity();
 
                 if (i == 0) {
-                    Vector extraVelocity = velocity.clone();
-                    extraVelocity.multiply(2).setY(0.4);
-                    victim.setVelocity(extraVelocity);
-                    velocity = extraVelocity;
+                    velocity.multiply(2).setY(0.4);
+                    victim.setVelocity(velocity);
                 }
 
+                LogUtils.log(velocity.toString());
+
+/*                if (i== 1){
+                    victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 17, 6, false, true, true));
+                }*/
 
                 if ((velocity.getX() == 0 || velocity.getZ() == 0) && previousVelocity.length() >= 0.3){
                     final int duration = 20*3;
 
-                    victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 5, false, true, true));
+                    victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, 4, false, true, true));
                     victim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration, 0, false, true, true));
                     victim.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, duration, 1, false, true, true));
 
@@ -149,9 +151,14 @@ public class BlazeBlade extends CustomModelDataItem implements InteractableItem,
                     //new BackstabParticle(victim.getEyeLocation()).play();
 
                     cancel();
+                    return;
                 }
+
                 i++;
-                if (i == 15) cancel();
+                if (i == 15) {
+                    cancel();
+                    return;
+                }
                 previousVelocity = velocity;
 
             }

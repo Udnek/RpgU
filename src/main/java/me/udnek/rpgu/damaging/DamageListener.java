@@ -1,10 +1,13 @@
 package me.udnek.rpgu.damaging;
 
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
+import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.*;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class DamageListener extends SelfRegisteringListener {
     public DamageListener(JavaPlugin plugin) {
@@ -19,6 +22,16 @@ public class DamageListener extends SelfRegisteringListener {
 
     @EventHandler
     public void onEntityTakesDamage(EntityDamageEvent event) {
+/*        if (event.getEntity() instanceof LivingEntity){
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    ((LivingEntity) event.getEntity()).setNoDamageTicks(0);
+                }
+            }.runTaskLater(RpgU.getInstance(), 1);
+
+        }*/
+
         Damage.DamageType damageType;
         switch (event.getCause()){
             case ENTITY_ATTACK:
