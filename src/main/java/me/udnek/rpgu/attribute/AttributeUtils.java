@@ -1,17 +1,17 @@
-package me.udnek.rpgu.damaging;
+package me.udnek.rpgu.attribute;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
 
 public class AttributeUtils {
 
@@ -19,7 +19,7 @@ public class AttributeUtils {
         return (4+attackSpeed);
     }
 
-    public static double getAttackDamage(ItemStack itemStack){
+/*    public static double getAttackDamage(ItemStack itemStack){
         return getWeaponAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE);
     }
 
@@ -48,7 +48,7 @@ public class AttributeUtils {
             return attributeModifier.getAmount();
         }
         return 0;
-    }
+    }*/
 
     public static void addDefaultAttributes(ItemStack itemStack){
 
@@ -121,5 +121,32 @@ public class AttributeUtils {
         itemMeta.addAttributeModifier(attribute, new AttributeModifier(UUID.randomUUID(), "addedByAttributeUtils", amount, operation, equipmentSlot));
     }
 
-
+    public static Multimap<Attribute, AttributeModifier> getAttributesBySlot(Multimap<Attribute, AttributeModifier> attributes, EquipmentSlotGroup slot){
+        ArrayListMultimap<Attribute, AttributeModifier> newAttributes = ArrayListMultimap.create();
+        for (Map.Entry<Attribute, AttributeModifier> entry : attributes.entries()) {
+            AttributeModifier modifier = entry.getValue();
+            if (modifier.getSlotGroup() != slot) continue;
+            newAttributes.put(entry.getKey(), modifier);
+        }
+        return newAttributes;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

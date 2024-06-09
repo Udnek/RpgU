@@ -3,11 +3,9 @@ package me.udnek.rpgu.particle;
 import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.Transformation;
 
 public class StunnedParticle extends CustomFlatParticle {

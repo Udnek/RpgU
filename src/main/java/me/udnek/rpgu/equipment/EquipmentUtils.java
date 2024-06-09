@@ -1,23 +1,20 @@
 package me.udnek.rpgu.equipment;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.CustomItemUtils;
-import me.udnek.rpgu.item.abstracts.ArmorItem;
-import me.udnek.rpgu.item.abstracts.ArtifactItem;
+import me.udnek.rpgu.item.abstraction.ArmorItem;
+import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class EquipmentUtils {
     public static ArmorItem armorItem(ItemStack itemStack){
-        if (!CustomItemUtils.isCustomItem(itemStack)) return null;
-        CustomItem customItem = CustomItemUtils.getFromItemStack(itemStack);
+        CustomItem customItem = CustomItem.get(itemStack);
         if (customItem instanceof ArmorItem) return (ArmorItem) customItem;
         return null;
     }
 
     public static ArtifactItem artifactItem(ItemStack itemStack){
-        if (!CustomItemUtils.isCustomItem(itemStack)) return null;
-        CustomItem customItem = CustomItemUtils.getFromItemStack(itemStack);
+        CustomItem customItem = CustomItem.get(itemStack);
         if (customItem instanceof ArtifactItem) return (ArtifactItem) customItem;
         return null;
     }

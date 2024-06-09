@@ -1,14 +1,15 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
 import me.udnek.rpgu.damaging.DamageEvent;
-import me.udnek.rpgu.item.abstracts.ArmorItem;
-import me.udnek.rpgu.lore.TranslationKeys;
+import me.udnek.rpgu.item.abstraction.ArmorItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
+import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
@@ -16,9 +17,9 @@ import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class HungryHorrorChestplate extends CustomModelDataItem implements ArmorItem {
+public class HungryHorrorChestplate extends ArmorItem{
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3100;
     }
 
@@ -27,18 +28,31 @@ public class HungryHorrorChestplate extends CustomModelDataItem implements Armor
         return Material.DIAMOND_CHESTPLATE;
     }
 
+    @Override
+    public String getRawId() {
+        return "hungry_horror_chestplate";
+    }
 
     @Override
-    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
-        ((ArmorMeta) itemMeta).setTrim(new ArmorTrim(TrimMaterial.LAPIS, Registry.TRIM_PATTERN.get(new NamespacedKey("rpgu", "hungry_horror"))));
-        itemMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
+    protected ItemFlag[] getTooltipHides() {
+        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM};
+    }
+
+    @Override
+    public ArmorTrim getArmorTrim() {
+        return new ArmorTrim(TrimMaterial.LAPIS, Registry.TRIM_PATTERN.get(new NamespacedKey("rpgu", "hungry_horror")));
+    }
+
+    @Override
+    protected void modifyFinalItemStack(ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
+        LoreUtils.generateFullLoreAndApply(itemStack);
     }
 
     @Override
     public void onPlayerAttacksWhenEquipped(Player player, DamageEvent damageEvent) {
 
-        if (!damageEvent.getEvent().isCritical()) return;
+        if (!damageEvent.getHandlerEvent().isCritical()) return;
 
         PotionEffect potionEffect = player.getPotionEffect(PotionEffectType.ABSORPTION);
         int applied;
@@ -52,13 +66,4 @@ public class HungryHorrorChestplate extends CustomModelDataItem implements Armor
 
     }
 
-    @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
-
-    @Override
-    protected String getItemName() {
-        return "hungry_horror_chestplate";
-    }
 }

@@ -1,7 +1,6 @@
 package me.udnek.rpgu.enchanting;
 
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

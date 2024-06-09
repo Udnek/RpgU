@@ -1,10 +1,12 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
 import me.udnek.itemscoreu.customitem.InteractableItem;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.lore.TranslationKeys;
-import org.bukkit.*;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
@@ -13,14 +15,14 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 
-public class WarpingClock extends CustomModelDataItem implements InteractableItem {
+public class WarpingClock extends RpgUCustomItem implements InteractableItem {
     static int clockDuration = 20*5;
     //static NamespacedKey playerWarpingNamespace = new NamespacedKey(RpgU.getInstance(),"player_is_warping");
 
     static final HashMap<String, WarpingData> warpingDatabase = new HashMap<>();
 
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3102;
     }
 
@@ -30,12 +32,7 @@ public class WarpingClock extends CustomModelDataItem implements InteractableIte
     }
 
     @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "warping_clock";
     }
 

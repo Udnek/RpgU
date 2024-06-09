@@ -1,13 +1,14 @@
 package me.udnek.rpgu.damaging;
 
 
+import me.udnek.itemscoreu.customevent.CustomEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.CustomItemUtils;
 import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
 import me.udnek.rpgu.equipment.PlayersEquipmentDatabase;
-import me.udnek.rpgu.item.abstracts.EquippableItem;
-import me.udnek.rpgu.item.abstracts.WeaponItem;
+import me.udnek.rpgu.item.abstraction.EquippableItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -17,24 +18,29 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
-public class DamageEvent{
+public class DamageEvent extends CustomEvent {
 
-    //private final HashMap<String, ExtraFlag<?>> extraFlags = new HashMap<>();
     private final ArrayList<ExtraFlag> extraFlags = new ArrayList<>();
 
-    private Damage damage = new Damage();
-    private final EntityDamageByEntityEvent event;
+    private Damage damage;
+    private final EntityDamageByEntityEvent handlerEvent;
+    private final Entity damager;
+    private final Entity victim;
 
-    public DamageEvent(EntityDamageByEntityEvent event){
-        this.event = event;
+    public DamageEvent(EntityDamageByEntityEvent handlerEvent){
+        this.handlerEvent = handlerEvent;
+        this.damager = handlerEvent.getDamager();
+        this.victim = handlerEvent.getEntity();
     }
 
     public Damage getDamage() {return this.damage;}
-    public EntityDamageByEntityEvent getEvent() {return this.event;}
+    public Entity getDamager() {return damager;}
+    public Entity getVictim() {return victim;}
+    public EntityDamageByEntityEvent getHandlerEvent() {return this.handlerEvent;}
 
     public void invoke(){
 
-        this.damage = new Damage(Damage.DamageType.PHYSICAL, event.getDamage());
+        damage = new Damage(Damage.Type.PHYSICAL, handlerEvent.getDamage());
 
         this.entityDependentCalculations();
         this.meeleCalculations();
@@ -42,44 +48,41 @@ public class DamageEvent{
         this.playerEquipmentReceives();
 
         // TODO: 2/15/2024 IMPLEMENT FINAL DAMAGE
-        event.setDamage(damage.getDamage());
-        DamageVisualizer.visualize(damage, event.getEntity());
+        handlerEvent.setDamage(damage.getTotalDamage());
+        DamageVisualizer.visualize(damage, victim);
     }
 
     private void entityDependentCalculations() {
-        if ((event.getDamager() instanceof Player)) {
-            Player player = (Player) event.getDamager();
-            damage = DamageUtils.calculateMeleeDamage(player);
-            //player.get
-            damage.multiplyPhysicalDamage(event.isCritical() ? 1.5 : 1);
+        damage = DamageUtils.calculateMeleeDamage(damager);
+
+        if (damager instanceof Player) {
+            damage.multiplyPhysicalDamage(handlerEvent.isCritical() ? 1.5 : 1);
         }
 
-        else if (event.getDamager() instanceof AbstractArrow) {
-            AbstractArrow arrow = (AbstractArrow) event.getDamager();
+        else if (damager instanceof AbstractArrow arrow) {
             this.damage = new Damage(
                     arrow.getDamage()*arrow.getVelocity().length()* (arrow.isCritical() ? 1.5f : 1), 0);
+            // TODO: 6/9/2024 MAGICAL DAMAGE
                     //MagicalDamageAttribute.get(arrow));
         }
     }
 
 
     private void meeleCalculations(){
-        if (this.event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK || !(this.event.getDamager() instanceof LivingEntity)) return;
-        EntityEquipment equipment = ((LivingEntity) this.event.getDamager()).getEquipment();
+        if (handlerEvent.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK || !(damager instanceof LivingEntity)) return;
+        EntityEquipment equipment = ((LivingEntity) damager).getEquipment();
         if (equipment == null) return;
         ItemStack itemStack = equipment.getItemInMainHand();
-        CustomItem customItem = CustomItemUtils.getFromItemStack(itemStack);
+        CustomItem customItem = CustomItem.get(itemStack);
         if (customItem == null) return;
-        if (customItem instanceof WeaponItem) {
-            ((WeaponItem) customItem).onEntityAttacks((LivingEntity) this.event.getDamager(), this);
+        if (customItem instanceof RpgUCustomItem rpgUCustomItem) {
+            rpgUCustomItem.onEntityAttacks(this);
         }
     }
 
 
     private void playerEquipmentAttacks() {
-        if (!(event.getDamager() instanceof Player)) return;
-
-        Player player = (Player) event.getDamager();
+        if (!(damager instanceof Player player)) return;
 
         for (EquippableItem equippableItem : PlayersEquipmentDatabase.get(player).getFullEquipment()) {
             if (equippableItem != null) equippableItem.onPlayerAttacksWhenEquipped(player, this);
@@ -89,9 +92,7 @@ public class DamageEvent{
     }
 
     private void playerEquipmentReceives() {
-        if (!(event.getEntity() instanceof Player)){return;}
-
-        Player player = (Player) event.getEntity();
+        if (!(victim instanceof Player player)) return;
 
         for (EquippableItem equippableItem : PlayersEquipmentDatabase.get(player).getFullEquipment()) {
             if (equippableItem != null)
@@ -100,10 +101,7 @@ public class DamageEvent{
     }
 
     public abstract static class ExtraFlag{
-
-
         public ExtraFlag(){}
-
         public String getName() {
             return this.getClass().getName();
         }
@@ -111,15 +109,12 @@ public class DamageEvent{
 
     public abstract static class ValuableExtraFlag<T> extends ExtraFlag{
         private T value;
-
         public ValuableExtraFlag(T value){
             this.value = value;
         }
-
         public T getValue() {
             return this.value;
         }
-
         public void setValue(T value) {
             this.value = value;
         }

@@ -1,14 +1,13 @@
 package me.udnek.rpgu.enchanting;
 
 import me.udnek.itemscoreu.custominventory.CustomInventory;
-import me.udnek.itemscoreu.utils.CustomItemUtils;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -17,10 +16,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -61,14 +58,14 @@ public class EnchantmentTableInventory extends CustomInventory {
         ItemStack itemStack = inventory.getItem(BOOK_SLOT);
         if (itemStack == null) return false;
         if (itemStack.getType() != Material.BOOK) return false;
-        if (CustomItemUtils.isCustomItem(itemStack)) return false;
+        if (CustomItem.isCustom(itemStack)) return false;
         return true;
     }
     public boolean hasLapis(){
         ItemStack itemStack = inventory.getItem(LAPIS_SLOT);
         if (itemStack == null) return false;
         if (itemStack.getType() != Material.LAPIS_LAZULI) return false;
-        if (CustomItemUtils.isCustomItem(itemStack)) return false;
+        if (CustomItem.isCustom(itemStack)) return false;
         return true;
     }
 

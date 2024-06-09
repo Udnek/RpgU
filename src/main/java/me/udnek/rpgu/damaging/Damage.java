@@ -2,13 +2,13 @@ package me.udnek.rpgu.damaging;
 
 public class Damage {
 
-    double physicalDamage = 0;
-    double magicalDamage = 0;
+    private double physicalDamage = 0;
+    private double magicalDamage = 0;
 
     public Damage(){}
 
-    public Damage(DamageType damageType, double amount) {
-        this.addDamage(damageType, amount);
+    public Damage(Type type, double amount) {
+        this.addDamage(type, amount);
     }
 
     public Damage(double physicalDamage, double magicalDamage){
@@ -17,8 +17,8 @@ public class Damage {
     }
 
 
-    public void addDamage(DamageType damageType, double amount){
-        if (damageType == DamageType.PHYSICAL){
+    public void addDamage(Type type, double amount){
+        if (type == Type.PHYSICAL){
             this.addPhysicalDamage(amount);
             return;
         }
@@ -52,14 +52,14 @@ public class Damage {
         return this.magicalDamage;
     }
 
-    public double getDamage() {return this.getPhysicalDamage() + this.getMagicalDamage();}
+    public double getTotalDamage() {return this.getPhysicalDamage() + this.getMagicalDamage();}
 
 
     public String toString(){
-        return "[Physical = " + this.getPhysicalDamage() + "; Magical = " + this.getMagicalDamage() + "; Sum = " + this.getDamage() + "]";
+        return "[Physical = " + this.getPhysicalDamage() + "; Magical = " + this.getMagicalDamage() + "; Sum = " + this.getTotalDamage() + "]";
     }
 
-    public enum DamageType {
+    public enum Type {
         PHYSICAL,
         MAGICAL
     }

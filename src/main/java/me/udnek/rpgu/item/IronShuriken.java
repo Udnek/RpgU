@@ -1,8 +1,8 @@
 package me.udnek.rpgu.item;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
 import me.udnek.itemscoreu.customitem.InteractableItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Damageable;
@@ -13,24 +13,17 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class IronShuriken extends CustomModelDataItem implements InteractableItem {
+public class IronShuriken extends RpgUCustomItem implements InteractableItem {
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3100;
     }
-
     @Override
     public Material getMaterial() {
         return Material.FISHING_ROD;
     }
-
     @Override
-    protected String getRawDisplayName() {
-        return "item.rpgu.iron_shuriken";
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "iron_shuriken";
     }
 
@@ -46,12 +39,12 @@ public class IronShuriken extends CustomModelDataItem implements InteractableIte
     }
 
 
-    @Override
+    // TODO: 6/8/2024 MAKE WORKING
     public void onThrowableProjectileHits(ProjectileHitEvent event, ItemStack itemStack) {
         Projectile projectile = event.getEntity();
         projectile.remove();
 
-        ParticleBuilder particleBuilder = new ParticleBuilder(Particle.BLOCK_CRACK);
+        ParticleBuilder particleBuilder = new ParticleBuilder(Particle.BLOCK);
         particleBuilder.offset(0.1, 0.1, 0.1);
         particleBuilder.count(8);
 

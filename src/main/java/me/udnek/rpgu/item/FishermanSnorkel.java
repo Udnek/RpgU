@@ -1,42 +1,61 @@
 package me.udnek.rpgu.item;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
-import me.udnek.rpgu.item.abstracts.ArtifactItem;
-import me.udnek.rpgu.lore.TranslationKeys;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
+import me.udnek.rpgu.item.abstraction.ArtifactItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
+import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
+import org.bukkit.MusicInstrument;
 import org.bukkit.Particle;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
+import oshi.util.tuples.Pair;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-public class FishermanSnorkel extends CustomModelDataItem implements ArtifactItem {
+public class FishermanSnorkel extends ArtifactItem implements ExtraDescriptionItem {
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3106;
     }
 
     @Override
     public Material getMaterial() {
-        return Material.GUNPOWDER;
+        return Material.GOAT_HORN;
     }
 
     @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "fisherman_snorkel";
     }
 
     @Override
-    public void onWhileBeingEquipped(Player player) {
+    public MusicInstrument getMusicInstrument() {
+        return MusicInstrument.DREAM_GOAT_HORN;
+    }
+
+    @Override
+    protected void modifyFinalItemStack(ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
+        LoreUtils.generateFullLoreAndApply(itemStack);
+    }
+
+    @Override
+    public Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription() {
+        return ExtraDescriptionItem.getSimple(EquipmentSlots.ARTIFACT, 2);
+    }
+
+    @Override
+    public void tickBeingEquipped(Player player) {
 
         if (player.getMaximumAir() == player.getRemainingAir()) return;
 
@@ -59,7 +78,7 @@ public class FishermanSnorkel extends CustomModelDataItem implements ArtifactIte
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(0), getItem());
         recipe.shape(
                 "AB",
                 "BA");

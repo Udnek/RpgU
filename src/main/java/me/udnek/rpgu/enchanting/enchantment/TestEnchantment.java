@@ -1,17 +1,6 @@
 package me.udnek.rpgu.enchanting.enchantment;
 
-import io.papermc.paper.enchantments.EnchantmentRarity;
-import me.udnek.itemscoreu.customenchantment.CustomEnchantment;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.entity.EntityCategory;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Set;
-
-public class TestEnchantment extends CustomEnchantment {
+/*public class TestEnchantment extends CustomEnchantment {
     @Override
     public @NotNull String getName() {
         return "test";
@@ -76,4 +65,4 @@ public class TestEnchantment extends CustomEnchantment {
     public @NotNull String translationKey() {
         return "test";
     }
-}
+}*/

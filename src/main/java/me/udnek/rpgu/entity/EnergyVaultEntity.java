@@ -1,6 +1,5 @@
 package me.udnek.rpgu.entity;
 
-import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customentity.CustomDumbTickingEntity;
 import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.RpgU;
@@ -9,7 +8,10 @@ import me.udnek.rpgu.multiblockstructure.Structures;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
 import org.bukkit.entity.*;
@@ -17,10 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Transformation;
-import org.bukkit.util.Vector;
-
-import java.text.DecimalFormat;
-import java.util.Random;
 
 public class EnergyVaultEntity extends CustomDumbTickingEntity {
     public static final NamespacedKey energyNamespacedKey = new NamespacedKey(RpgU.getInstance(), "vault_energy");

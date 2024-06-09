@@ -2,18 +2,13 @@ package me.udnek.rpgu.electricity;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.rpgu.RpgU;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.block.*;
-import org.bukkit.block.data.Directional;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.LightningRod;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;

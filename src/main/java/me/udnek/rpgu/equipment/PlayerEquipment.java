@@ -1,8 +1,8 @@
 package me.udnek.rpgu.equipment;
 
-import me.udnek.rpgu.item.abstracts.ArmorItem;
-import me.udnek.rpgu.item.abstracts.ArtifactItem;
-import me.udnek.rpgu.item.abstracts.EquippableItem;
+import me.udnek.rpgu.item.abstraction.ArmorItem;
+import me.udnek.rpgu.item.abstraction.ArtifactItem;
+import me.udnek.rpgu.item.abstraction.EquippableItem;
 
 public class PlayerEquipment {
 

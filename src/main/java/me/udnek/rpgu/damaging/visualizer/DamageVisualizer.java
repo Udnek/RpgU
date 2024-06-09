@@ -8,15 +8,11 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Transformation;
-import org.jetbrains.annotations.NotNull;
-
-import java.text.DecimalFormat;
 
 public class DamageVisualizer {
 
@@ -71,7 +67,7 @@ public class DamageVisualizer {
     public static Component generateText(Damage damage){
         double physicalDamage = damage.getPhysicalDamage();
         double magicalDamage = damage.getMagicalDamage();
-        double mainDamage = damage.getDamage();
+        double mainDamage = damage.getTotalDamage();
         TextColor damageColor = getDamageColor(mainDamage);
         Component text =
                 Component.text(Utils.roundDoubleValueToTwoDigits(mainDamage)).color(damageColor).decorate(TextDecoration.BOLD)

@@ -1,8 +1,7 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
 import me.udnek.itemscoreu.customitem.InteractableItem;
-import me.udnek.rpgu.lore.TranslationKeys;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -14,9 +13,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collections;
 import java.util.List;
 
-public class CopperPickaxe extends CustomModelDataItem implements InteractableItem {
+public class CopperPickaxe extends RpgUCustomItem implements InteractableItem {
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3100;
     }
 
@@ -26,12 +25,7 @@ public class CopperPickaxe extends CustomModelDataItem implements InteractableIt
     }
 
     @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "copper_pickaxe";
     }
 
@@ -46,7 +40,7 @@ public class CopperPickaxe extends CustomModelDataItem implements InteractableIt
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
         recipe.shape(
                 "CCC",
                 " S ",

@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.camera;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
 import me.udnek.itemscoreu.customitem.InteractableItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -21,9 +21,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class Camera extends CustomModelDataItem implements InteractableItem {
+public class Camera extends RpgUCustomItem implements InteractableItem {
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 0;
     }
 
@@ -33,12 +33,7 @@ public class Camera extends CustomModelDataItem implements InteractableItem {
     }
 
     @Override
-    protected String getRawDisplayName() {
-        return "item.rpgu.camera";
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "camera";
     }
 

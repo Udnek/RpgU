@@ -1,8 +1,9 @@
 package me.udnek.rpgu.particle;
 
 import me.udnek.itemscoreu.customparticle.CustomFlatAnimatedParticle;
-import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 

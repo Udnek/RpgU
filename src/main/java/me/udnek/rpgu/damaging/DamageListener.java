@@ -1,13 +1,11 @@
 package me.udnek.rpgu.damaging;
 
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
-import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.*;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class DamageListener extends SelfRegisteringListener {
     public DamageListener(JavaPlugin plugin) {
@@ -32,7 +30,7 @@ public class DamageListener extends SelfRegisteringListener {
 
         }*/
 
-        Damage.DamageType damageType;
+        Damage.Type type;
         switch (event.getCause()){
             case ENTITY_ATTACK:
             case ENTITY_SWEEP_ATTACK:
@@ -44,12 +42,12 @@ public class DamageListener extends SelfRegisteringListener {
             case POISON:
             case MAGIC:
             case WITHER:
-                damageType = Damage.DamageType.MAGICAL;
+                type = Damage.Type.MAGICAL;
                 break;
             default:
-                damageType = Damage.DamageType.PHYSICAL;
+                type = Damage.Type.PHYSICAL;
         }
-        DamageVisualizer.visualize(new Damage(damageType, event.getFinalDamage()), event.getEntity());
+        DamageVisualizer.visualize(new Damage(type, event.getFinalDamage()), event.getEntity());
     }
 
 /*    @EventHandler

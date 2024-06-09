@@ -1,8 +1,7 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
 import me.udnek.itemscoreu.customitem.InteractableItem;
-import me.udnek.rpgu.lore.TranslationKeys;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -17,26 +16,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Wrench extends CustomModelDataItem implements InteractableItem {
+public class Wrench extends RpgUCustomItem implements InteractableItem {
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3200;
     }
-
     @Override
     public Material getMaterial() {
         return Material.FISHING_ROD;
     }
-
     @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "wrench";
     }
+
 
     @Override
     public void onRightClicks(PlayerInteractEvent event) {
@@ -95,7 +88,7 @@ public class Wrench extends CustomModelDataItem implements InteractableItem {
 
     @Override
     public List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(0), getItem());
         recipe.shape(
                 " A ",
                 " AA",

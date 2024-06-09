@@ -1,14 +1,14 @@
 package me.udnek.rpgu.attribute;
 
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttributeManager;
-import me.udnek.itemscoreu.customattribute.CustomAttributeType;
 import me.udnek.rpgu.RpgU;
 
 public class Attributes{
 
-    public static final MagicalDamageAttribute magicalDamage = (MagicalDamageAttribute) register(new MagicalDamageAttribute());
+    public static final MagicalDamageAttribute MAGICAL_DAMAGE = (MagicalDamageAttribute) register(new MagicalDamageAttribute());
 
-    private static CustomAttributeType register(CustomAttributeType customAttributeType){
+    private static CustomAttribute register(CustomAttribute customAttributeType){
         return CustomAttributeManager.register(RpgU.getInstance(), customAttributeType);
     }
 

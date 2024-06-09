@@ -1,46 +1,75 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
+import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.damaging.DamageEvent;
-import me.udnek.rpgu.item.abstracts.ArmorItem;
-import me.udnek.rpgu.lore.TranslationKeys;
+import me.udnek.rpgu.item.abstraction.ArmorItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
+import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import oshi.util.tuples.Pair;
 
-public class HungryHorrorHelmet extends CustomModelDataItem implements ArmorItem {
+import java.util.Map;
+
+public class HungryHorrorHelmet extends ArmorItem {
+    private final CustomAttributesContainer container = new CustomAttributesContainer.Builder()
+            .add(Attributes.MAGICAL_DAMAGE, -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlots.HEAD)
+            .build();
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3100;
+    }
+    @Override
+    public String getRawId() {
+        return "hungry_horror_helmet";
     }
 
     @Override
-    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
-        super.modifyFinalItemMeta(itemMeta);
-        ((ArmorMeta) itemMeta).setTrim(new ArmorTrim(TrimMaterial.LAPIS, Registry.TRIM_PATTERN.get(new NamespacedKey("rpgu", "hungry_horror"))));
-        itemMeta.addItemFlags(ItemFlag.HIDE_ARMOR_TRIM);
+    protected ItemFlag[] getTooltipHides() {
+        return new ItemFlag[]{ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_ATTRIBUTES};
+    }
+
+    @Override
+    public ArmorTrim getArmorTrim() {
+        return new ArmorTrim(TrimMaterial.LAPIS, Registry.TRIM_PATTERN.get(new NamespacedKey("rpgu", "hungry_horror")));
+    }
+
+    @Override
+    protected void modifyFinalItemStack(ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
+        LoreUtils.generateFullLoreAndApply(itemStack);
+    }
+
+
+    @Override
+    public CustomAttributesContainer getDefaultCustomAttributes() {
+        return container;
     }
 
     @Override
     public void onPlayerAttacksWhenEquipped(Player player, DamageEvent damageEvent) {
-        damageEvent.getDamage().multiplyPhysicalDamage(0.5);
+        if (!damageEvent.getHandlerEvent().isCritical()) return;
 
-        if (!damageEvent.getEvent().isCritical()) return;
-
-        PotionEffect potionEffect = player.getPotionEffect(PotionEffectType.INCREASE_DAMAGE);
+        PotionEffect potionEffect = player.getPotionEffect(PotionEffectType.STRENGTH);
         int applied;
         if (potionEffect == null) {applied = -1;}
         else { applied = potionEffect.getAmplifier();}
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 40, Math.min(applied+1, 4), false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 40, Math.min(applied+1, 4), false, true));
     }
 
     @Override
@@ -48,13 +77,5 @@ public class HungryHorrorHelmet extends CustomModelDataItem implements ArmorItem
         return Material.DIAMOND_HELMET;
     }
 
-    @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
 
-    @Override
-    protected String getItemName() {
-        return "hungry_horror_helmet";
-    }
 }

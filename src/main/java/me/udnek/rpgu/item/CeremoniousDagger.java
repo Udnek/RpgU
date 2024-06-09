@@ -1,13 +1,13 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.CustomModelDataItem;
-import me.udnek.itemscoreu.utils.TranslateUtils;
-import me.udnek.rpgu.damaging.AttributeUtils;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
+import me.udnek.rpgu.attribute.AttributeUtils;
+import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.damaging.DamageEvent;
-import me.udnek.rpgu.item.abstracts.ArtifactItem;
-import me.udnek.rpgu.item.abstracts.WeaponItem;
-import me.udnek.rpgu.lore.LoreConstructor;
-import me.udnek.rpgu.lore.TranslationKeys;
+import me.udnek.rpgu.item.abstraction.ArtifactItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.lore.LoreUtils;
 import me.udnek.rpgu.particle.BackstabParticle;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,19 +15,20 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import oshi.util.tuples.Pair;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class CeremoniousDagger extends CustomModelDataItem implements WeaponItem, ArtifactItem {
+public class CeremoniousDagger extends ArtifactItem implements ExtraDescriptionItem {
     @Override
-    public int getCustomModelData() {
+    public Integer getCustomModelData() {
         return 3100;
     }
 
@@ -37,20 +38,13 @@ public class CeremoniousDagger extends CustomModelDataItem implements WeaponItem
     }
 
     @Override
-    protected String getRawDisplayName() {
-        return TranslationKeys.itemPrefix + getItemName();
-    }
-
-    @Override
-    protected String getItemName() {
+    public String getRawId() {
         return "ceremonious_dagger";
     }
 
-
     @Override
-    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+    protected ItemFlag[] getTooltipHides() {
+        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
     }
 
     @Override
@@ -58,16 +52,20 @@ public class CeremoniousDagger extends CustomModelDataItem implements WeaponItem
         super.modifyFinalItemStack(itemStack);
         AttributeUtils.addDefaultAttributes(itemStack);
         AttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, -2);
-        LoreConstructor loreConstructor = new LoreConstructor();
-        loreConstructor.addMeeleLore(itemStack);
-        loreConstructor.addExtraMeeleInformation(TranslateUtils.getTranslated("item.rpgu.ceremonious_dagger.description.0"));
-        loreConstructor.setArtifactInformation(TranslateUtils.getTranslated("item.rpgu.ceremonious_dagger.description.1"));
-        loreConstructor.apply(itemStack);
+        LoreUtils.generateFullLoreAndApply(itemStack);
+    }
+
+    @Override
+    public Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription() {
+        HashMap<CustomEquipmentSlot, Pair<Integer, Integer>> map = new HashMap<>();
+        map.put(CustomEquipmentSlots.MAIN_HAND, new Pair<>(0, 0));
+        map.put(EquipmentSlots.ARTIFACT, new Pair<>(1, 1));
+        return map;
     }
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
         recipe.shape(
                 "DSG",
                 "GSD",
@@ -86,21 +84,21 @@ public class CeremoniousDagger extends CustomModelDataItem implements WeaponItem
     }
 
     @Override
-    public void onEntityAttacks(LivingEntity entity, DamageEvent event) {
-        runIfBackstab(entity, event, 2.5);
+    public void onEntityAttacks(DamageEvent event) {
+        runIfBackstab(event, 2.5);
     }
 
     @Override
     public void onPlayerAttacksWhenEquipped(Player player, DamageEvent event) {
-        runIfBackstab(player, event, 1.5);
+        runIfBackstab(event, 1.5);
     }
 
-    private static void runIfBackstab(LivingEntity damager, DamageEvent event, double damageMultiplayer){
-        EntityDamageByEntityEvent entityDamageByEntityEvent = event.getEvent();
-        Entity victim = entityDamageByEntityEvent.getEntity();
+    private static void runIfBackstab(DamageEvent event, double damageMultiplayer){
+        Entity victim = event.getVictim();
+        Entity damager = event.getDamager();
 
         if (damager instanceof Player){
-            if (((Player) damager).getAttackCooldown() != 1) return;
+            if (((Player) damager).getAttackCooldown() < 0.848) return;
         }
         if (!isBackstab(damager, victim)) return;
         event.getDamage().multiplyPhysicalDamage(damageMultiplayer);
@@ -113,7 +111,7 @@ public class CeremoniousDagger extends CustomModelDataItem implements WeaponItem
 
     }
 
-    private static boolean isBackstab(LivingEntity damager, Entity victim){
+    private static boolean isBackstab(Entity damager, Entity victim){
         Vector damagerDir = damager.getLocation().getDirection();
         Vector victimDir = victim.getLocation().getDirection();
         return damagerDir.angle(victimDir) <= Math.toRadians(45);

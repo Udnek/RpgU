@@ -1,10 +1,10 @@
 package me.udnek.rpgu.equipment;
 
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
-import me.udnek.itemscoreu.utils.CustomItemUtils;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
-import me.udnek.rpgu.item.abstracts.ArmorItem;
-import me.udnek.rpgu.item.abstracts.ArtifactItem;
+import me.udnek.rpgu.item.abstraction.ArmorItem;
+import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
@@ -33,7 +33,7 @@ public class EquipmentListener extends SelfRegisteringListener {
                 return;
         }
 
-        if (CustomItemUtils.isSimilar(event.getOldItemStack(), event.getNewItemStack())) return;
+        if (CustomItem.isSameIds(event.getOldItemStack(), event.getNewItemStack())) return;
 
         ItemStack itemStack;
         Player player = event.getPlayer();
@@ -47,15 +47,15 @@ public class EquipmentListener extends SelfRegisteringListener {
                 itemStack = event.getOldItemStack();
                 artifactItem = EquipmentUtils.artifactItem(itemStack);
                 if (artifactItem != null){
-                    artifactItem.onBeingUnequipped(player, itemStack);
                     PlayersEquipmentDatabase.get(player).setArtifact(slot, null);
+                    artifactItem.onUnequipped(player, itemStack);
                 }
 
 
                 itemStack = event.getNewItemStack();
                 artifactItem = EquipmentUtils.artifactItem(itemStack);
                 if (artifactItem != null){
-                    artifactItem.onBeingEquipped(player, itemStack);
+                    artifactItem.onEquipped(player, itemStack);
                     PlayersEquipmentDatabase.get(player).setArtifact(slot, artifactItem);
                 }
                 return;
@@ -67,14 +67,14 @@ public class EquipmentListener extends SelfRegisteringListener {
                 itemStack = event.getOldItemStack();
                 armorItem = EquipmentUtils.armorItem(itemStack);
                 if (armorItem != null){
-                    armorItem.onBeingUnequipped(player, itemStack);
                     PlayersEquipmentDatabase.get(player).setArmor(slot, null);
+                    armorItem.onUnequipped(player, itemStack);
                 }
 
                 itemStack = event.getNewItemStack();
                 armorItem = EquipmentUtils.armorItem(itemStack);
                 if (armorItem != null){
-                    armorItem.onBeingEquipped(player, itemStack);
+                    armorItem.onEquipped(player, itemStack);
                     PlayersEquipmentDatabase.get(player).setArmor(slot, armorItem);
                 }
         }

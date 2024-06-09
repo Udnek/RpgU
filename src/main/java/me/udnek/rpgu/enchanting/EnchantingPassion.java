@@ -1,7 +1,6 @@
 package me.udnek.rpgu.enchanting;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.CustomItemUtils;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,17 +16,17 @@ public class EnchantingPassion {
     private static HashMap<CustomItem, EnchantmentsContainer> customItemsMap = new HashMap<>();
 
     static {
-        add(Material.CONDUIT, Enchantment.CHANNELING, Enchantment.WATER_WORKER);
-        add(Material.GOLDEN_APPLE, Enchantment.PROTECTION_ENVIRONMENTAL, Enchantment.PROTECTION_FIRE);
-        add(Material.NETHERITE_INGOT, Enchantment.DAMAGE_ALL, Enchantment.ARROW_DAMAGE);
-        add(Items.lightFeather, Enchantment.PROTECTION_FALL);
+        add(Material.CONDUIT, Enchantment.CHANNELING, Enchantment.AQUA_AFFINITY);
+        add(Material.GOLDEN_APPLE, Enchantment.PROTECTION, Enchantment.FIRE_PROTECTION);
+        add(Material.NETHERITE_INGOT, Enchantment.SHARPNESS, Enchantment.POWER);
+        add(Items.lightFeather, Enchantment.FEATHER_FALLING);
         add(Material.ENDER_EYE, Enchantment.MENDING);
     }
 
     public static EnchantmentsContainer mix(List<ItemStack> itemStacks){
         EnchantmentsContainer enchantmentsContainer = new EnchantmentsContainer();
         for (ItemStack itemStack : itemStacks) {
-            CustomItem customItem = CustomItemUtils.getFromItemStack(itemStack);
+            CustomItem customItem = CustomItem.get(itemStack);
             if (customItem != null){
                 enchantmentsContainer.add(get(customItem));
             }
@@ -48,8 +47,8 @@ public class EnchantingPassion {
 
 
     public static EnchantmentsContainer get(ItemStack itemStack){
-        if (CustomItemUtils.isCustomItem(itemStack)){
-            return get(CustomItemUtils.getFromItemStack(itemStack));
+        if (CustomItem.isCustom(itemStack)){
+            return get(CustomItem.get(itemStack));
         }
         return get(itemStack.getType());
     }
