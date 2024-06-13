@@ -23,6 +23,7 @@ public class Items {
     public final static CustomItem copperSword = register(new CopperSword());
     public final static CustomItem copperPickaxe = register(new CopperPickaxe());
     public final static CustomItem wrench = register(new Wrench());
+    public final static CustomItem injector = register(new Injector());
 
     public final static CustomItem testBlock = register(new TestBlockItem());
 

@@ -85,6 +85,9 @@ public class PlayerEquipment {
         return this.artifactThird;
     }
 
+    public boolean hasAnyArtifact(){
+        return !(artifactFirst == null && artifactSecond == null && artifactThird == null);
+    }
 
 /*    public ArmorItem getHead() {
         return this.head;

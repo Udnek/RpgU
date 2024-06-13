@@ -22,11 +22,18 @@ public class Hud implements CustomHud {
     private final static TextColor NO_SHADOW_COLOR = TextColor.fromHexString("#4e5c24");
     private final static Key FONT = new NamespacedKey(RpgU.getInstance(), "artifact");
     private final static int RIGHT_HANDED_OFFSET = 98;
-    private final static int LEFT_HANDED_OFFSET = -98;
-    private Component applyFontAndColor(Component text){
-        return text.font(FONT).color(NO_SHADOW_COLOR);
-    }
-    private Component generate(Player player) {
+    private final static int LEFT_HANDED_OFFSET = -160;
+
+    @Override
+    public Component getText(Player player) {
+        PlayerEquipment equipment = PlayerEquipmentDatabase.get(player);
+
+        if (!equipment.hasAnyArtifact()) return Component.empty();
+
+        ArtifactItem item0 = equipment.getArtifactFirst();
+        ArtifactItem item1 = equipment.getArtifactSecond();
+        ArtifactItem item2 = equipment.getArtifactThird();
+
 
         int offset = RIGHT_HANDED_OFFSET;
         if (player.getMainHand() == MainHand.LEFT) offset = LEFT_HANDED_OFFSET;
@@ -38,20 +45,18 @@ public class Hud implements CustomHud {
         );
 
 
-        PlayerEquipment equipment = PlayerEquipmentDatabase.get(player);
-        ArtifactItem item0 = equipment.getArtifactFirst();
-        ArtifactItem item1 = equipment.getArtifactSecond();
-        ArtifactItem item2 = equipment.getArtifactThird();
-
-
         Component result =
                 generateArtifactComponent(player, item0, offset + 2).append(
-                generateArtifactComponent(player, item1, offset + 2 + 16 + 4)).append(
-                generateArtifactComponent(player, item2, offset + 2 + (16 + 4) * 2));
+                        generateArtifactComponent(player, item1, offset + 2 + 16 + 4)).append(
+                        generateArtifactComponent(player, item2, offset + 2 + (16 + 4) * 2));
 
         return applyFontAndColor(hudImage.append(result));
     }
 
+
+    private Component applyFontAndColor(Component text){
+        return text.font(FONT).color(NO_SHADOW_COLOR);
+    }
     private Component generateArtifactComponent(Player player, ArtifactItem item, int offset){
         if (item == null) return Component.empty();
         Component cooldown  = cooldownToComponent(getArtifactCooldownProgress(item, player));
@@ -65,12 +70,6 @@ public class Hud implements CustomHud {
     private float getArtifactCooldownProgress(ArtifactItem artifact, Player player){
         if (!(artifact instanceof Cooldownable cooldownable)) return 0;
         return cooldownable.getCooldowns().getProgress(player);
-    }
-
-
-    @Override
-    public Component getText(Player player) {
-        return generate(player);
     }
 
     public void register(){
