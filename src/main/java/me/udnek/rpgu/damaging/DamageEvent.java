@@ -3,8 +3,9 @@ package me.udnek.rpgu.damaging;
 
 import me.udnek.itemscoreu.customevent.CustomEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
-import me.udnek.rpgu.equipment.PlayersEquipmentDatabase;
+import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import me.udnek.rpgu.item.abstraction.EquippableItem;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.entity.AbstractArrow;
@@ -61,7 +62,7 @@ public class DamageEvent extends CustomEvent {
 
         else if (damager instanceof AbstractArrow arrow) {
             this.damage = new Damage(
-                    arrow.getDamage()*arrow.getVelocity().length()* (arrow.isCritical() ? 1.5f : 1), 0);
+                    arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
             // TODO: 6/9/2024 MAGICAL DAMAGE
                     //MagicalDamageAttribute.get(arrow));
         }
@@ -84,7 +85,7 @@ public class DamageEvent extends CustomEvent {
     private void playerEquipmentAttacks() {
         if (!(damager instanceof Player player)) return;
 
-        for (EquippableItem equippableItem : PlayersEquipmentDatabase.get(player).getFullEquipment()) {
+        for (EquippableItem equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
             if (equippableItem != null) equippableItem.onPlayerAttacksWhenEquipped(player, this);
         }
 
@@ -94,7 +95,7 @@ public class DamageEvent extends CustomEvent {
     private void playerEquipmentReceives() {
         if (!(victim instanceof Player player)) return;
 
-        for (EquippableItem equippableItem : PlayersEquipmentDatabase.get(player).getFullEquipment()) {
+        for (EquippableItem equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
             if (equippableItem != null)
                 equippableItem.onPlayerReceivesDamageWhenEquipped(player, this);
         }

@@ -1,8 +1,6 @@
 package me.udnek.rpgu.item.abstraction;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import org.bukkit.inventory.EquipmentSlot;
 import oshi.util.tuples.Pair;
 
 import java.util.HashMap;

@@ -75,8 +75,18 @@ public class PlayerEquipment {
         if (this.feet == customItem) return true;
         return false;
     }
+    public ArtifactItem getArtifactFirst() {
+        return this.artifactFirst;
+    }
+    public ArtifactItem getArtifactSecond() {
+        return this.artifactSecond;
+    }
+    public ArtifactItem getArtifactThird() {
+        return this.artifactThird;
+    }
 
-    public ArmorItem getHead() {
+
+/*    public ArmorItem getHead() {
         return this.head;
     }
 
@@ -128,5 +138,5 @@ public class PlayerEquipment {
 
     public void setArtifactThird(ArtifactItem artifactThird) {
         this.artifactThird = artifactThird;
-    }
+    }*/
 }

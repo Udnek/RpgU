@@ -47,7 +47,7 @@ public class EquipmentListener extends SelfRegisteringListener {
                 itemStack = event.getOldItemStack();
                 artifactItem = EquipmentUtils.artifactItem(itemStack);
                 if (artifactItem != null){
-                    PlayersEquipmentDatabase.get(player).setArtifact(slot, null);
+                    PlayerEquipmentDatabase.get(player).setArtifact(slot, null);
                     artifactItem.onUnequipped(player, itemStack);
                 }
 
@@ -56,7 +56,7 @@ public class EquipmentListener extends SelfRegisteringListener {
                 artifactItem = EquipmentUtils.artifactItem(itemStack);
                 if (artifactItem != null){
                     artifactItem.onEquipped(player, itemStack);
-                    PlayersEquipmentDatabase.get(player).setArtifact(slot, artifactItem);
+                    PlayerEquipmentDatabase.get(player).setArtifact(slot, artifactItem);
                 }
                 return;
 
@@ -67,7 +67,7 @@ public class EquipmentListener extends SelfRegisteringListener {
                 itemStack = event.getOldItemStack();
                 armorItem = EquipmentUtils.armorItem(itemStack);
                 if (armorItem != null){
-                    PlayersEquipmentDatabase.get(player).setArmor(slot, null);
+                    PlayerEquipmentDatabase.get(player).setArmor(slot, null);
                     armorItem.onUnequipped(player, itemStack);
                 }
 
@@ -75,7 +75,7 @@ public class EquipmentListener extends SelfRegisteringListener {
                 armorItem = EquipmentUtils.armorItem(itemStack);
                 if (armorItem != null){
                     armorItem.onEquipped(player, itemStack);
-                    PlayersEquipmentDatabase.get(player).setArmor(slot, armorItem);
+                    PlayerEquipmentDatabase.get(player).setArmor(slot, armorItem);
                 }
         }
 

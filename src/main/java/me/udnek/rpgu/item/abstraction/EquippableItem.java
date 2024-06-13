@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class EquippableItem extends RpgUCustomItem implements DefaultCustomAttributeHolder {
+    // TODO: 6/13/2024 ADD INIT DEFAULT DefaultCustomAttributeHolder
 
     public abstract boolean isEquippedInAppropriateSlot(Player player);
     public void onEquipped(Player player, ItemStack itemStack){}

@@ -3,7 +3,6 @@ package me.udnek.rpgu.item;
 import me.udnek.itemscoreu.customplayerdata.CustomPlayerDatabase;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;

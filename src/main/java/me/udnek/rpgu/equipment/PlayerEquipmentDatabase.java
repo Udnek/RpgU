@@ -4,10 +4,11 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class PlayersEquipmentDatabase {
+public class PlayerEquipmentDatabase {
 
-    private static final HashMap<Player, PlayerEquipment> playersData = new HashMap<>();
+    private static final Map<Player, PlayerEquipment> playersData = new HashMap<>();
 
     public static @NotNull PlayerEquipment get(Player player){
         if (playersData.containsKey(player)){

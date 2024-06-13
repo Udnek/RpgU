@@ -20,9 +20,9 @@ public class EquipmentUtils {
     }
 
     public static boolean isItemEquippedAsArtifact(Player player, ArtifactItem artifactItem){
-        return PlayersEquipmentDatabase.get(player).isEquippedAsArtifact(artifactItem);
+        return PlayerEquipmentDatabase.get(player).isEquippedAsArtifact(artifactItem);
     }
     public static boolean isItemEquippedAsArmor(Player player, ArmorItem armorItem){
-        return PlayersEquipmentDatabase.get(player).isEquippedAsArmor(armorItem);
+        return PlayerEquipmentDatabase.get(player).isEquippedAsArmor(armorItem);
     }
 }

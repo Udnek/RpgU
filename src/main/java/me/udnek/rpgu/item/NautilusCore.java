@@ -2,13 +2,13 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
+import me.udnek.rpgu.item.abstraction.Cooldownable;
 import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
+import me.udnek.rpgu.item.abstraction.PlayerCooldownData;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
@@ -22,10 +22,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem {
+public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem, Cooldownable {
     private final CustomAttributesContainer container = new CustomAttributesContainer.Builder()
             .add(Attributes.MAGICAL_DAMAGE, 0.1, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACT)
             .build();
+
+    private final PlayerCooldownData cooldownData = new PlayerCooldownData(20*3);
+
+    @Override
+    public PlayerCooldownData getCooldowns() {return cooldownData;}
 
     @Override
     public Integer getCustomModelData() {
@@ -75,6 +80,7 @@ public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem {
         if (event.getHandlerEvent().isCritical() && !event.containsExtraFlag(new isMagicalCriticalApplied())){
             event.getDamage().multiplyMagicalDamage(1.5);
             event.addExtraFlag(new isMagicalCriticalApplied());
+            cooldownData.set(player);
         }
     }
 

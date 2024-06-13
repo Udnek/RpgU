@@ -1,15 +1,13 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.utils.ItemUtils;
+import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.rpgu.Utils;
 import me.udnek.rpgu.attribute.VanillaAttributeContainer;
-import me.udnek.rpgu.attribute.equipmentslot.ArtifactSlot;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Color;
@@ -101,7 +99,7 @@ public class FlowerWreath extends ArtifactItem implements ExtraDescriptionItem {
     public Map<Attribute, List<AttributeModifier>> getAttributes() {
         HashMap<Attribute, List<AttributeModifier>> map = new HashMap<>();
         map.put(Attribute.GENERIC_GRAVITY, Collections.singletonList(
-                new AttributeModifier(Utils.UUIDFromSeed("asd8q9dhajfh kf"), "", 1, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.OFFHAND)));
+                new AttributeModifier(AttributeUtils.UUIDFromSeed("asd8q9dhajfh kf"), "", 1, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.OFFHAND)));
         return map;
     }
 

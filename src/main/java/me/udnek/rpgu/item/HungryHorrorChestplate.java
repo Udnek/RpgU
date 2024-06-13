@@ -2,7 +2,6 @@ package me.udnek.rpgu.item;
 
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArmorItem;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -10,8 +9,6 @@ import org.bukkit.Registry;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ArmorMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.potion.PotionEffect;
@@ -35,7 +32,7 @@ public class HungryHorrorChestplate extends ArmorItem{
 
     @Override
     protected ItemFlag[] getTooltipHides() {
-        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM};
+        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
     }
 
     @Override

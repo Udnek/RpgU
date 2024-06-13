@@ -2,7 +2,7 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import me.udnek.rpgu.attribute.AttributeUtils;
+import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
@@ -48,10 +48,12 @@ public class CeremoniousDagger extends ArtifactItem implements ExtraDescriptionI
     }
 
     @Override
+    public boolean getAddDefaultAttributes() {return true;}
+
+    @Override
     protected void modifyFinalItemStack(ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
-        AttributeUtils.addDefaultAttributes(itemStack);
-        AttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, -2);
+        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, "189dasijk d", -2);
         LoreUtils.generateFullLoreAndApply(itemStack);
     }
 

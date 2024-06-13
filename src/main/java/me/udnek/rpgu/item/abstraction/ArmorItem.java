@@ -1,11 +1,11 @@
 package me.udnek.rpgu.item.abstraction;
 
-import me.udnek.rpgu.equipment.PlayersEquipmentDatabase;
+import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import org.bukkit.entity.Player;
 
 public abstract class ArmorItem extends EquippableItem{
     @Override
     public boolean isEquippedInAppropriateSlot(Player player) {
-        return PlayersEquipmentDatabase.get(player).isEquippedAsArmor(this);
+        return PlayerEquipmentDatabase.get(player).isEquippedAsArmor(this);
     }
 }

@@ -1,7 +1,6 @@
 package me.udnek.rpgu.lore;
 
 import com.google.common.collect.Multimap;
-import io.papermc.paper.registry.keys.TrimPatternKeys;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -11,26 +10,35 @@ import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.ComponentU;
 import me.udnek.rpgu.Utils;
-import me.udnek.rpgu.attribute.*;
+import me.udnek.rpgu.attribute.RpgUAttributeUtils;
+import me.udnek.rpgu.attribute.CustomUUIDAttributeModifier;
+import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;
+import me.udnek.rpgu.attribute.VanillaAttributeContainer;
 import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import oshi.util.tuples.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LoreUtils {
 
     public static final TextColor meleeDescriptionColor = TextColor.color(0, 170, 0);
     public static final TextColor otherDescriptionColor = TextColor.color(85, 85, 255);
     public static final TextColor headerColor = TextColor.color(170, 170, 170);
+
+    public static final TextColor equalsAttributeColor = TextColor.color(0, 170, 0);
+    public static final TextColor takeAttributeColor = TextColor.color(255, 85, 85);
+    public static final TextColor plusAttributeColor = TextColor.color(85, 85, 255);
 
     public static void apply(ItemStack itemStack, List<Component> lore){
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -84,7 +92,7 @@ public class LoreUtils {
 
             EquipmentSlotGroup vanillaSlot = slot.getVanillaAlternative();
             if (vanillaSlot != null){
-                Multimap<Attribute, AttributeModifier> attributesBySlot = AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);
+                Multimap<Attribute, AttributeModifier> attributesBySlot = me.udnek.itemscoreu.customattribute.AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);
                 for (Map.Entry<Attribute, AttributeModifier> entry : attributesBySlot.entries()) {
                     Attribute attribute = entry.getKey();
                     AttributeModifier modifier = entry.getValue();
@@ -144,7 +152,7 @@ public class LoreUtils {
     public static List<Component> getExtraDescription(CustomItem customItem, Pair<Integer, Integer> range, CustomEquipmentSlot slot){
         List<Component> lore = new ArrayList<>();
         for (int i = range.getA(); i <= range.getB(); i++) {
-            lore.add(addOuter(Component.translatable(TranslationKeys.itemPrefix+customItem.getRawId()+".description."+i)).color(getLineColor(slot)));
+            lore.add(addOuter(Component.translatable(TranslationKeys.itemPrefix+customItem.getRawId()+".description."+i)).color(getDescriptionColor(slot)));
         }
         return lore;
     }
@@ -152,13 +160,11 @@ public class LoreUtils {
         String attributeName = TranslationKeys.get(attribute);
         double amount = modifier.getAmount();
         if (attribute == Attribute.GENERIC_ATTACK_DAMAGE && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount++;
-        else if (attribute == Attribute.GENERIC_ATTACK_SPEED && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount = AttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount);
+        else if (attribute == Attribute.GENERIC_ATTACK_SPEED && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount = RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount);
         return getAttributeLine(attributeName, amount, modifier.getOperation(), slot);
     }
     public static Component getAttributeLine(CustomAttribute attribute, CustomAttributeModifier modifier, CustomEquipmentSlot slot){
-        String attributeName;
-        if (attribute instanceof TranslatableAttribute translatableAttribute) attributeName = translatableAttribute.getTranslatableName();
-        else attributeName = attribute.getClass().getSimpleName();
+        String attributeName = attribute.translationKey();
         return getAttributeLine(attributeName, modifier.getAmount(), modifier.getOperation(), slot);
     }
     public static Component getAttributeLine(Attribute attribute, CustomUUIDAttributeModifier modifier, CustomEquipmentSlot slot){
@@ -174,7 +180,7 @@ public class LoreUtils {
         else line = "attribute.modifier.plus.";
         line += TranslationKeys.get(operation);
 
-        TextColor color = getLineColor(slot);
+        TextColor color = getAttributeColor(amount, slot);
 
         if (operation != AttributeModifier.Operation.ADD_NUMBER) amount*=100;
 
@@ -183,17 +189,25 @@ public class LoreUtils {
         return withOuter;
     }
 
-    public static TextColor getLineColor(CustomEquipmentSlot slot){
+    public static TextColor getDescriptionColor(CustomEquipmentSlot slot){
         if (slot == CustomEquipmentSlots.MAIN_HAND) return meleeDescriptionColor;
         return otherDescriptionColor;
     }
+    public static TextColor getAttributeColor(double amount, CustomEquipmentSlot slot){
+        if (slot == CustomEquipmentSlots.MAIN_HAND) return equalsAttributeColor;
+        if (amount > 0) return plusAttributeColor;
+        return takeAttributeColor;
+    }
 
     public static Component getHeader(CustomEquipmentSlot slot){
-        String line = TranslationKeys.get(slot);
+        String line = slot.translationKey();
         return Component.translatable(line).color(headerColor).decoration(TextDecoration.ITALIC, false);
     }
 
     public static Component addOuter(Component noOuter){
         return ComponentU.translatableWithInsertion(TranslationKeys.equipmentDescriptionLine, noOuter).decoration(TextDecoration.ITALIC, false);
     }
+
+
+
 }

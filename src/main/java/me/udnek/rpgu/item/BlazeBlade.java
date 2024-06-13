@@ -6,13 +6,12 @@ import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customitem.InteractableItem;
-import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.attribute.AttributeUtils;
 import me.udnek.rpgu.damaging.DamageEvent;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import me.udnek.rpgu.particle.StunnedParticle;
 import org.bukkit.Location;
@@ -36,15 +35,14 @@ import org.bukkit.util.Vector;
 import oshi.util.tuples.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BlazeBlade extends RpgUCustomItem implements InteractableItem, DefaultCustomAttributeHolder, ExtraDescriptionItem {
+public class BlazeBlade extends RpgUCustomItem implements InteractableItem, DefaultCustomAttributeHolder{
 
     private final CustomAttributesContainer customAttributes =
             new CustomAttributesContainer.Builder()
-                    .add(Attributes.MAGICAL_DAMAGE, 6, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlots.MAIN_HAND)
+                    .add(Attributes.MAGICAL_DAMAGE, 4, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlots.MAIN_HAND)
                     .build();
 
     @Override
@@ -66,16 +64,13 @@ public class BlazeBlade extends RpgUCustomItem implements InteractableItem, Defa
     }
 
     @Override
-    protected void modifyFinalItemStack(ItemStack itemStack) {
-        super.modifyFinalItemStack(itemStack);
-        AttributeUtils.addDefaultAttributes(itemStack);
-        AttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, -3);
-        LoreUtils.generateFullLoreAndApply(itemStack);
-    }
+    public boolean getAddDefaultAttributes() {return true;}
 
     @Override
-    public Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription() {
-        return ExtraDescriptionItem.getSimple(CustomEquipmentSlots.MAIN_HAND, 1);
+    protected void modifyFinalItemStack(ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
+        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, "ufsiud mpo,fp",-4);
+        LoreUtils.generateFullLoreAndApply(itemStack);
     }
 
     @Override

@@ -1,8 +1,5 @@
 package me.udnek.rpgu.damaging;
 
-import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.attribute.AttributeUtils;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

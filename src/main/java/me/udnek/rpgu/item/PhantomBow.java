@@ -1,17 +1,29 @@
 package me.udnek.rpgu.item;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
+import me.udnek.itemscoreu.customevent.AllEventListener;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import me.udnek.rpgu.particle.BowParticles;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Entity;
+import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PhantomBow extends RpgUCustomItem {
+public class PhantomBow extends RpgUCustomItem implements AllEventListener, DefaultCustomAttributeHolder {
+
+    private CustomAttributesContainer container = new CustomAttributesContainer.Builder()
+            .add(Attributes.PROJECTILE_SPEED, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlots.HAND)
+            .add(Attributes.PROJECTILE_DAMAGE, -0.25, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlots.HAND)
+            .build();
+
     @Override
     public Integer getCustomModelData() {
         return 1000;
@@ -33,17 +45,16 @@ public class PhantomBow extends RpgUCustomItem {
         LoreUtils.generateFullLoreAndApply(itemStack);
     }
 
-    // TODO: 6/8/2024 MAKE WORKING
-    public void onShoots(EntityShootBowEvent event, ItemStack itemStack) {
+    @Override
+    public CustomAttributesContainer getDefaultCustomAttributes() {
+        return container;
+    }
 
-        Entity projectile = event.getProjectile();
-        if (!(projectile instanceof AbstractArrow)) return;
-        AbstractArrow arrow = ((AbstractArrow) projectile);
-
-        //CustomAttributes.set(new MagicalDamageAttribute(5D), arrow);
-
-        arrow.setVelocity(arrow.getVelocity().multiply(1.5));
-        arrow.setDamage(arrow.getDamage()/4);
+    @Override
+    public void onBukkitEvent(Event event) {
+        if (!(event instanceof EntityShootBowEvent shootEvent)) return;
+        if (!isThisItem(shootEvent.getBow())) return;
+        if (!(shootEvent.getProjectile() instanceof AbstractArrow arrow)) return;
 
         ParticleBuilder particleBuilder = new ParticleBuilder(Particle.ASH);
         particleBuilder.count(7);
@@ -51,12 +62,5 @@ public class PhantomBow extends RpgUCustomItem {
         particleBuilder.offset(0.3, 0.3, 0.3);
 
         BowParticles.playParticleUntilGround(arrow, particleBuilder);
-
-/*        if (!(event.getEntity() instanceof Player)) return;
-
-        Player player = (Player) event.getEntity();
-        player.sendMessage("PJAMTO");*/
-
-
     }
 }

@@ -6,7 +6,6 @@ import me.udnek.rpgu.damaging.Damage;
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,7 +15,6 @@ import org.bukkit.inventory.ShapedRecipe;
 import oshi.util.tuples.Pair;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

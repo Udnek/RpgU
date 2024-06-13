@@ -1,7 +1,9 @@
 package me.udnek.rpgu.attribute.equipmentslot;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.rpgu.lore.TranslationKeys;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public class ArtifactSlot extends CustomEquipmentSlot {
     @Override
@@ -10,6 +12,11 @@ public class ArtifactSlot extends CustomEquipmentSlot {
             case 9, 10, 11 -> {return true;}
             default -> {return false;}
         }
+    }
+
+    @Override
+    public @NotNull String translationKey() {
+        return TranslationKeys.whenEquippedAsArtifact;
     }
 
     @Override

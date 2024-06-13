@@ -1,13 +1,16 @@
 package me.udnek.rpgu.attribute;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.rpgu.Utils;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class VanillaAttributeContainer {
 
@@ -50,7 +53,7 @@ public class VanillaAttributeContainer {
             container = new VanillaAttributeContainer();
         }
         public VanillaAttributeContainer.Builder add(Attribute attribute, String seed, double amount, AttributeModifier.Operation operation, CustomEquipmentSlot slot){
-            CustomUUIDAttributeModifier attributeModifier = new CustomUUIDAttributeModifier(Utils.UUIDFromSeed(seed), amount, operation, slot);
+            CustomUUIDAttributeModifier attributeModifier = new CustomUUIDAttributeModifier(AttributeUtils.UUIDFromSeed(seed), amount, operation, slot);
             return add(attribute, attributeModifier);
         }
 

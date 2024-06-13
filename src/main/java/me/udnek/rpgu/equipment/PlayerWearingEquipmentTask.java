@@ -11,7 +11,7 @@ public class PlayerWearingEquipmentTask extends TickingTask {
 
     public void run(){
         for (Player player : Bukkit.getOnlinePlayers()) {
-            for (EquippableItem equippableItem : PlayersEquipmentDatabase.get(player).getFullEquipment()) {
+            for (EquippableItem equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
                 if (equippableItem != null) equippableItem.tickBeingEquipped(player);
             }
         }

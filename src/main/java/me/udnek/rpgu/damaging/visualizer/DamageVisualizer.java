@@ -24,6 +24,9 @@ public class DamageVisualizer {
     public static final double blackDamage = 100;
     public static final float blackDamageDarkness = 0.5f;
 
+    public static final TextColor zeroDamageColor = TextColor.color(0.7f, 0.7f, 0.7f);
+    public static final TextColor subDamageColor = TextColor.color(0.7f, 0.7f, 0.7f);
+
     public static void visualize(Damage damage, Location location){
         TextDisplay display = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
 
@@ -69,6 +72,7 @@ public class DamageVisualizer {
         double magicalDamage = damage.getMagicalDamage();
         double mainDamage = damage.getTotalDamage();
         TextColor damageColor = getDamageColor(mainDamage);
+
         Component text =
                 Component.text(Utils.roundDoubleValueToTwoDigits(mainDamage)).color(damageColor).decorate(TextDecoration.BOLD)
                         .appendNewline()
@@ -77,13 +81,14 @@ public class DamageVisualizer {
                                 +Utils.roundDoubleValueToTwoDigits(physicalDamage)+
                                 "+"
                                 +Utils.roundDoubleValueToTwoDigits(magicalDamage)+
-                                ")").color(TextColor.color(0.7f, 0.7f, 0.7f)).font(Key.key("minecraft:uniform")).decoration(TextDecoration.BOLD, false));
+                                ")").color(subDamageColor).font(Key.key("minecraft:uniform")).decoration(TextDecoration.BOLD, false));
 
         return text;
     }
 
     private static TextColor getDamageColor(double mainDamage) {
         float red, green, blue;
+        if (mainDamage == 0) return zeroDamageColor;
         if (mainDamage <= redDamage){
             float normalized = (float) Math.min(mainDamage /redDamage, 1);
             red = Math.min(normalized*3f, 1f);

@@ -24,7 +24,9 @@ public class Items {
     public final static CustomItem copperPickaxe = register(new CopperPickaxe());
     public final static CustomItem wrench = register(new Wrench());
 
+    public final static CustomItem testBlock = register(new TestBlockItem());
+
     private static CustomItem register(CustomItem customItem){
-        return CustomItemManager.registerItem(RpgU.getInstance(), customItem);
+        return CustomItemManager.register(RpgU.getInstance(), customItem);
     }
 }

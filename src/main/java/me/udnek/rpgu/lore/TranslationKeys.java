@@ -30,6 +30,8 @@ public class TranslationKeys {
     public static final String attributeProjectilePhysicalDamage = "attribute.rpgu.projectile_damage_physical";
     public static final String attributeProjectileMagicalDamage = "attribute.rpgu.projectile_damage_magical";
 
+    public static final String artifactHud = "image.rpgu.artifact.hud";
+    public static final String artifactCooldown = "image.rpgu.artifact.cooldown.";
 
     public static String get(Attribute attribute){
         switch (attribute){
@@ -49,15 +51,5 @@ public class TranslationKeys {
                 return "unknown";
             }
         }
-    }
-    public static String get(CustomEquipmentSlot slot){
-        if (CustomEquipmentSlots.MAIN_HAND == slot) return whenInMainHand;
-        if (CustomEquipmentSlots.OFF_HAND == slot) return whenInOffHand;
-        if (CustomEquipmentSlots.HEAD == slot) return whenOnHead;
-        if (CustomEquipmentSlots.CHEST == slot) return whenOnBody;
-        if (CustomEquipmentSlots.LEGS == slot) return whenOnLegs;
-        if (CustomEquipmentSlots.FEET == slot) return whenOnFeet;
-        if (EquipmentSlots.ARTIFACT == slot) return whenEquippedAsArtifact;
-        return "unknown";
     }
 }
