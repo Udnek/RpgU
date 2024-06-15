@@ -32,6 +32,7 @@ public class TranslationKeys {
 
     public static final String artifactHud = "image.rpgu.artifact.hud";
     public static final String artifactCooldown = "image.rpgu.artifact.cooldown.";
+    public static final String unknownArtifactImage = "image.rpgu.artifact.unknown_artifact";
 
     public static String get(Attribute attribute){
         switch (attribute){

@@ -3,6 +3,8 @@ package me.udnek.rpgu.equipment;
 import me.udnek.rpgu.item.abstraction.ArmorItem;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import me.udnek.rpgu.item.abstraction.EquippableItem;
+import me.udnek.rpgu.item.abstraction.OriginItem;
+import me.udnek.rpgu.origin.Origin;
 
 public class PlayerEquipment {
 
@@ -14,6 +16,15 @@ public class PlayerEquipment {
     private ArtifactItem artifactFirst;
     private ArtifactItem artifactSecond;
     private ArtifactItem artifactThird;
+
+    private Origin origin;
+
+    public void setOrigin(Origin origin){
+        this.origin = origin;
+    }
+    public Origin getOrigin(){
+        return origin;
+    }
 
     public void setArtifact(int slot, ArtifactItem artifactItem){
         switch (slot){
@@ -45,19 +56,21 @@ public class PlayerEquipment {
         }
     }
 
-    public EquippableItem[] getFullEquipment(){
-        EquippableItem[] equippableItems = new EquippableItem[7];
+    public Equippable[] getFullEquipment(){
+        Equippable[] equippables = new Equippable[8];
 
-        equippableItems[0] = this.head;
-        equippableItems[1] = this.chest;
-        equippableItems[2] = this.legs;
-        equippableItems[3] = this.feet;
+        equippables[0] = this.head;
+        equippables[1] = this.chest;
+        equippables[2] = this.legs;
+        equippables[3] = this.feet;
 
-        equippableItems[4] = this.artifactFirst;
-        equippableItems[5] = this.artifactSecond;
-        equippableItems[6] = this.artifactThird;
+        equippables[4] = this.artifactFirst;
+        equippables[5] = this.artifactSecond;
+        equippables[6] = this.artifactThird;
 
-        return equippableItems;
+        equippables[7] = this.origin;
+
+        return equippables;
     }
 
 

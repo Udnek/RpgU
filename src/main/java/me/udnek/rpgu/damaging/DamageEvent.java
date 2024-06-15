@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customevent.CustomEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
+import me.udnek.rpgu.equipment.Equippable;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import me.udnek.rpgu.item.abstraction.EquippableItem;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -85,7 +86,7 @@ public class DamageEvent extends CustomEvent {
     private void playerEquipmentAttacks() {
         if (!(damager instanceof Player player)) return;
 
-        for (EquippableItem equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
+        for (Equippable equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
             if (equippableItem != null) equippableItem.onPlayerAttacksWhenEquipped(player, this);
         }
 
@@ -95,7 +96,7 @@ public class DamageEvent extends CustomEvent {
     private void playerEquipmentReceives() {
         if (!(victim instanceof Player player)) return;
 
-        for (EquippableItem equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
+        for (Equippable equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
             if (equippableItem != null)
                 equippableItem.onPlayerReceivesDamageWhenEquipped(player, this);
         }

@@ -44,11 +44,11 @@ public class Hud implements CustomHud {
                 62
         );
 
-
+        offset += 3;
         Component result =
-                generateArtifactComponent(player, item0, offset + 2).append(
-                        generateArtifactComponent(player, item1, offset + 2 + 16 + 4)).append(
-                        generateArtifactComponent(player, item2, offset + 2 + (16 + 4) * 2));
+                generateArtifactComponent(player, item0, offset).append(
+                generateArtifactComponent(player, item1, offset + 16 + 4)).append(
+                generateArtifactComponent(player, item2, offset + (16 + 4) * 2));
 
         return applyFontAndColor(hudImage.append(result));
     }
@@ -59,17 +59,13 @@ public class Hud implements CustomHud {
     }
     private Component generateArtifactComponent(Player player, ArtifactItem item, int offset){
         if (item == null) return Component.empty();
-        Component cooldown  = cooldownToComponent(getArtifactCooldownProgress(item, player));
-        Component image = item.getArtifactImage().rawImage;
-        return ComponentU.textWithNoSpace(offset, image.append(cooldown), 0);
+        Component cooldown  = cooldownToComponent(item.getHudCooldownProgress(player));
+        Component image = item.getArtifactImage();
+        return ComponentU.textWithNoSpace(offset, image.append(cooldown), 16);
     }
     private Component cooldownToComponent(float cd){
         cd *= 16;
-        return ComponentU.textWithNoSpace(0, Component.translatable(TranslationKeys.artifactCooldown + Math.round(cd)), 16);
-    }
-    private float getArtifactCooldownProgress(ArtifactItem artifact, Player player){
-        if (!(artifact instanceof Cooldownable cooldownable)) return 0;
-        return cooldownable.getCooldowns().getProgress(player);
+        return Component.translatable(TranslationKeys.artifactCooldown + Math.round(cd));
     }
 
     public void register(){

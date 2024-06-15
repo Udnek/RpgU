@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class PlayerCooldownData {
 
-    private Map<Player, Integer> cooldownExpireTime = new HashMap<>();
-    public int standardCooldown;
+    private final Map<Player, Integer> cooldownExpireTime = new HashMap<>();
+    private int standardCooldown;
     public PlayerCooldownData(int cooldown){
         standardCooldown = cooldown;
     }
@@ -28,7 +28,10 @@ public class PlayerCooldownData {
         Integer expire = cooldownExpireTime.get(player);
         if (expire == null) return 0;
         int cooldown = expire - Bukkit.getCurrentTick();
-        if (cooldown <= 0) cooldownExpireTime.remove(player);
+        if (cooldown <= 0) {
+            cooldownExpireTime.remove(player);
+            return 0;
+        }
         return cooldown;
     }
     public boolean has(Player player){

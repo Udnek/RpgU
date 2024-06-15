@@ -65,6 +65,11 @@ public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem, 
     }
 
     @Override
+    public float getHudCooldownProgress(Player player) {
+        return cooldownData.getProgress(player);
+    }
+
+    @Override
     protected List<Recipe> generateRecipes() {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
         recipe.shape("AAA","ABA","AAA");
