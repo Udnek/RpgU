@@ -3,7 +3,9 @@ package me.udnek.rpgu;
 import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customentity.CustomDumbTickingEntity;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.CustomItemCommand;
 import me.udnek.rpgu.block.Blocks;
+import me.udnek.rpgu.command.DebugEquipmentCommand;
 import me.udnek.rpgu.damaging.DamageListener;
 import me.udnek.rpgu.electricity.ElectricityEvents;
 import me.udnek.rpgu.enchanting.EnchantmentTableListener;
@@ -34,6 +36,9 @@ public final class RpgU extends JavaPlugin {
         new EquipmentListener(this);
         new ElectricityEvents(this);
         new EnchantmentTableListener(this);
+       // new TestListener(this);
+
+        this.getCommand("debugEquipmentU").setExecutor(new DebugEquipmentCommand());
 
         wearingEquipmentTask = new PlayerWearingEquipmentTask();
         wearingEquipmentTask.start(this);

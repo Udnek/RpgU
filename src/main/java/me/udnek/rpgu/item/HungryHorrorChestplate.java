@@ -1,5 +1,7 @@
 package me.udnek.rpgu.item;
 
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArmorItem;
 import me.udnek.rpgu.lore.LoreUtils;
@@ -14,7 +16,7 @@ import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class HungryHorrorChestplate extends ArmorItem{
+public class HungryHorrorChestplate extends CustomItem implements ArmorItem {
     @Override
     public Integer getCustomModelData() {
         return 3100;
@@ -31,7 +33,7 @@ public class HungryHorrorChestplate extends ArmorItem{
     }
 
     @Override
-    protected ItemFlag[] getTooltipHides() {
+    public ItemFlag[] getTooltipHides() {
         return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
     }
 
@@ -47,9 +49,8 @@ public class HungryHorrorChestplate extends ArmorItem{
     }
 
     @Override
-    public void onPlayerAttacksWhenEquipped(Player player, DamageEvent damageEvent) {
-
-        if (!damageEvent.getHandlerEvent().isCritical()) return;
+    public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
+        if (!event.getHandlerEvent().isCritical()) return;
 
         PotionEffect potionEffect = player.getPotionEffect(PotionEffectType.ABSORPTION);
         int applied;
@@ -60,7 +61,5 @@ public class HungryHorrorChestplate extends ArmorItem{
         //for (int lvl = 0; lvl <= Math.min(applied+1, 4) ; lvl++) {
         //    player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, (4-lvl)*40+20, lvl, false, true));
         //}
-
     }
-
 }

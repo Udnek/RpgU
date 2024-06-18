@@ -1,13 +1,12 @@
 package me.udnek.rpgu.item.abstraction;
 
-import me.udnek.itemscoreu.utils.ComponentU;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.rpgu.attribute.CustomUUIDAttributeModifier;
 import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;
 import me.udnek.rpgu.attribute.VanillaAttributeContainer;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
-import me.udnek.rpgu.lore.TranslationKeys;
-import net.kyori.adventure.text.Component;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
@@ -16,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ArtifactItem extends EquippableItem implements DefaultVanillaAttributeHolder {
-    protected Component artifactImage;
+public interface ArtifactItem extends EquippableItem {
+/*    protected Component artifactImage;
     @Override
     public VanillaAttributeContainer getDefaultVanillaAttributes() {return null;}
     public Component getArtifactImage(){
@@ -37,14 +36,19 @@ public abstract class ArtifactItem extends EquippableItem implements DefaultVani
     }
     public int getArtifactImageSize(){return 16;};
 
-    public float getHudCooldownProgress(Player player) {return 0;}
+    public float getHudCooldownProgress(Player player) {return 0;}*/
 
     @Override
-    public boolean isEquippedInAppropriateSlot(Player player) {
+    default boolean isAppropriateSlot(CustomEquipmentSlot slot){
+        return slot == EquipmentSlots.ARTIFACT;
+    }
+
+    @Override
+    default boolean isEquippedInAppropriateSlot(Player player) {
         return PlayerEquipmentDatabase.get(player).isEquippedAsArtifact(this);
     }
     @Override
-    public void onEquipped(Player player, ItemStack itemStack) {
+    default void onEquipped(Player player, CustomEquipmentSlot slot, ItemStack itemStack) {
         VanillaAttributeContainer defaultVanillaAttributes = getDefaultVanillaAttributes();
         if (defaultVanillaAttributes == null) return;
         for (Map.Entry<Attribute, List<CustomUUIDAttributeModifier>> entry : defaultVanillaAttributes.get(EquipmentSlots.ARTIFACT).getAll().entrySet()) {
@@ -59,7 +63,7 @@ public abstract class ArtifactItem extends EquippableItem implements DefaultVani
     }
 
     @Override
-    public void onUnequipped(Player player, ItemStack itemStack) {
+    default void onUnequipped(Player player, CustomEquipmentSlot slot, ItemStack itemStack) {
         if (isEquippedInAppropriateSlot(player)) return;
         VanillaAttributeContainer defaultVanillaAttributes = getDefaultVanillaAttributes();
         if (defaultVanillaAttributes == null) return;

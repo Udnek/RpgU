@@ -1,6 +1,5 @@
 package me.udnek.rpgu.hud;
 
-import com.sun.jna.Platform;
 import me.udnek.itemscoreu.customhud.CustomHud;
 import me.udnek.itemscoreu.customhud.CustomHudManager;
 import me.udnek.itemscoreu.utils.ComponentU;
@@ -8,7 +7,6 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.equipment.PlayerEquipment;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.Cooldownable;
 import me.udnek.rpgu.lore.TranslationKeys;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -26,6 +24,8 @@ public class Hud implements CustomHud {
 
     @Override
     public Component getText(Player player) {
+        // TODO: 6/18/2024 FOR ALL EQUIPMENT
+
         PlayerEquipment equipment = PlayerEquipmentDatabase.get(player);
 
         if (!equipment.hasAnyArtifact()) return Component.empty();
@@ -59,9 +59,12 @@ public class Hud implements CustomHud {
     }
     private Component generateArtifactComponent(Player player, ArtifactItem item, int offset){
         if (item == null) return Component.empty();
-        Component cooldown  = cooldownToComponent(item.getHudCooldownProgress(player));
-        Component image = item.getArtifactImage();
-        return ComponentU.textWithNoSpace(offset, image.append(cooldown), 16);
+        //Component cooldown  = cooldownToComponent(item.getHudCooldownProgress(player));
+        //Component image = item.getArtifactImage();
+        // TODO: 6/18/2024 FIX
+        return ComponentU.textWithNoSpace(offset, Component.empty(), 0);
+        //Component image =
+        //return ComponentU.textWithNoSpace(offset, image.append(cooldown), 16);
     }
     private Component cooldownToComponent(float cd){
         cd *= 16;

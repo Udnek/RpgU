@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.InteractableItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Material;
@@ -17,7 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Collections;
 import java.util.List;
 
-public class Injector extends RpgUCustomItem implements InteractableItem {
+public class Injector extends CustomItem implements RightClickable, RpgUCustomItem {
     @Override
     public String getRawId() {return "injector";}
     @Override

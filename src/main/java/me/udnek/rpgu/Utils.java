@@ -1,9 +1,7 @@
 package me.udnek.rpgu;
 
 
-import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
-import java.util.UUID;
 
 public class Utils {
 

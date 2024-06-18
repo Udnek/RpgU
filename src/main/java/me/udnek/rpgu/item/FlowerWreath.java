@@ -2,12 +2,12 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.ItemUtils;
-import me.udnek.rpgu.Utils;
 import me.udnek.rpgu.attribute.VanillaAttributeContainer;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescribed;
 import me.udnek.rpgu.lore.LoreUtils;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Color;
@@ -26,7 +26,7 @@ import oshi.util.tuples.Pair;
 
 import java.util.*;
 
-public class FlowerWreath extends ArtifactItem implements ExtraDescriptionItem {
+public class FlowerWreath extends CustomItem implements ArtifactItem, ExtraDescribed {
 
     private final VanillaAttributeContainer vanillaAttributeContainer = new VanillaAttributeContainer.Builder()
             .add(Attribute.GENERIC_SCALE, getRawId(), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACT)
@@ -66,7 +66,7 @@ public class FlowerWreath extends ArtifactItem implements ExtraDescriptionItem {
     }
 
     @Override
-    protected ItemFlag[] getTooltipHides() {
+    public ItemFlag[] getTooltipHides() {
         return new ItemFlag[]{ItemFlag.HIDE_ADDITIONAL_TOOLTIP, ItemFlag.HIDE_ATTRIBUTES};
     }
 
@@ -92,7 +92,7 @@ public class FlowerWreath extends ArtifactItem implements ExtraDescriptionItem {
 
     @Override
     public Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription() {
-        return ExtraDescriptionItem.getSimple(EquipmentSlots.ARTIFACT, 1);
+        return ExtraDescribed.getSimple(EquipmentSlots.ARTIFACT, 1);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class FlowerWreath extends ArtifactItem implements ExtraDescriptionItem {
     }
 
     @Override
-    public void tickBeingEquipped(Player player) {
+    public void tickBeingEquipped(Player player, CustomEquipmentSlot slot) {
         Material material = player.getLocation().getWorld().getBlockAt(randomOffset(player.getLocation())).getType();
         boolean isInForest = isForestMaterial(material);
         if (isInForest) {

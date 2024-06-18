@@ -1,10 +1,11 @@
 package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.equipment.PlayerWearingEquipmentTask;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescribed;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,7 +16,7 @@ import oshi.util.tuples.Pair;
 
 import java.util.Map;
 
-public class LifeCrystal extends ArtifactItem implements ExtraDescriptionItem {
+public class LifeCrystal extends CustomItem implements ExtraDescribed, ArtifactItem {
 
     public final static int duration = 20*5 + PlayerWearingEquipmentTask.DELAY;
 
@@ -38,7 +39,7 @@ public class LifeCrystal extends ArtifactItem implements ExtraDescriptionItem {
     }
 
     @Override
-    public void tickBeingEquipped(Player player) {
+    public void tickBeingEquipped(Player player, CustomEquipmentSlot slot) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, duration, 4, true, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, 1, true, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, duration, 1, true, true));
@@ -52,6 +53,6 @@ public class LifeCrystal extends ArtifactItem implements ExtraDescriptionItem {
 
     @Override
     public Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription() {
-        return ExtraDescriptionItem.getSimple(EquipmentSlots.ARTIFACT, 3);
+        return ExtraDescribed.getSimple(EquipmentSlots.ARTIFACT, 3);
     }
 }

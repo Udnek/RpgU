@@ -1,10 +1,8 @@
 package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import me.udnek.rpgu.Utils;
-import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArmorItem;
 import me.udnek.rpgu.lore.LoreUtils;
@@ -27,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HungryHorrorHelmet extends ArmorItem{
+public class HungryHorrorHelmet extends CustomItem implements ArmorItem {
     @Override
     public Integer getCustomModelData() {
         return 3100;
@@ -38,7 +36,7 @@ public class HungryHorrorHelmet extends ArmorItem{
     }
 
     @Override
-    protected ItemFlag[] getTooltipHides() {
+    public ItemFlag[] getTooltipHides() {
         return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM};
     }
 
@@ -66,8 +64,8 @@ public class HungryHorrorHelmet extends ArmorItem{
     }
 
     @Override
-    public void onPlayerAttacksWhenEquipped(Player player, DamageEvent damageEvent) {
-        if (!damageEvent.getHandlerEvent().isCritical()) return;
+    public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
+        if (!event.getHandlerEvent().isCritical()) return;
 
         PotionEffect potionEffect = player.getPotionEffect(PotionEffectType.STRENGTH);
         int applied;

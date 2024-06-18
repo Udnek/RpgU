@@ -6,7 +6,7 @@ import oshi.util.tuples.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
-public interface ExtraDescriptionItem {
+public interface ExtraDescribed {
     Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription();
 
     static Map<CustomEquipmentSlot, Pair<Integer, Integer>> getSimple(CustomEquipmentSlot slot, int amount){

@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item;
 
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customplayerdata.CustomPlayerDatabase;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
@@ -12,7 +13,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class LightFeather extends ArtifactItem {
+public class LightFeather extends CustomItem implements ArtifactItem {
 
     private static final NamespacedKey featherEquippedNamespace = new NamespacedKey(RpgU.getInstance(), "light_feather_equipped");
 
@@ -31,7 +32,8 @@ public class LightFeather extends ArtifactItem {
         LoreUtils.generateFullLoreAndApply(itemStack);
     }
 
-    @Override
+
+/*    @Override
     public void onEquipped(Player player, ItemStack itemStack) {
         player.sendMessage(Component.text("LIGHT FEATHER EQUIPED").color(TextColor.color(0f, 1f, 0f)));
         CustomPlayerDatabase.getData(player).setValue(featherEquippedNamespace, true);
@@ -50,7 +52,7 @@ public class LightFeather extends ArtifactItem {
 
     public static void isEquipped(Player player){
         CustomPlayerDatabase.getData(player).getBooleanValue(featherEquippedNamespace);
-    }
+    }*/
 
     @Override
     public Integer getCustomModelData() {

@@ -1,7 +1,6 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customevent.AllEventListener;
-import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.attribute.RpgUAttribute;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.Event;

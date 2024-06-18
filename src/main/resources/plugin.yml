@@ -2,3 +2,10 @@ name: RpgU
 version: '${project.version}'
 main: me.udnek.rpgu.RpgU
 api-version: '1.20'
+commands:
+  debugEquipmentU:
+    description: "debugEquipmentU"
+    usage: "/debugEquipmentU"
+    aliases: [i]
+    permission: rpgu.admin
+    permission-message: "You do not have permission to use this command"

@@ -3,11 +3,10 @@ package me.udnek.rpgu.damaging;
 
 import me.udnek.itemscoreu.customevent.CustomEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
 import me.udnek.rpgu.equipment.Equippable;
+import me.udnek.rpgu.equipment.PlayerEquipment;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
-import me.udnek.rpgu.item.abstraction.EquippableItem;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
@@ -19,6 +18,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DamageEvent extends CustomEvent {
 
@@ -45,7 +45,6 @@ public class DamageEvent extends CustomEvent {
         damage = new Damage(Damage.Type.PHYSICAL, handlerEvent.getDamage());
 
         this.entityDependentCalculations();
-        this.meeleCalculations();
         this.playerEquipmentAttacks();
         this.playerEquipmentReceives();
 
@@ -69,36 +68,19 @@ public class DamageEvent extends CustomEvent {
         }
     }
 
-
-    private void meeleCalculations(){
-        if (handlerEvent.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK || !(damager instanceof LivingEntity)) return;
-        EntityEquipment equipment = ((LivingEntity) damager).getEquipment();
-        if (equipment == null) return;
-        ItemStack itemStack = equipment.getItemInMainHand();
-        CustomItem customItem = CustomItem.get(itemStack);
-        if (customItem == null) return;
-        if (customItem instanceof RpgUCustomItem rpgUCustomItem) {
-            rpgUCustomItem.onEntityAttacks(this);
-        }
-    }
-
-
     private void playerEquipmentAttacks() {
         if (!(damager instanceof Player player)) return;
 
-        for (Equippable equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
-            if (equippableItem != null) equippableItem.onPlayerAttacksWhenEquipped(player, this);
+        for (Map.Entry<PlayerEquipment.Slot, Equippable> entry : PlayerEquipmentDatabase.get(player).getFullEquipment().entrySet()) {
+            entry.getValue().onPlayerAttacksWhenEquipped(player, entry.getKey().equipmentSlot, this);
         }
-
-
     }
 
     private void playerEquipmentReceives() {
         if (!(victim instanceof Player player)) return;
 
-        for (Equippable equippableItem : PlayerEquipmentDatabase.get(player).getFullEquipment()) {
-            if (equippableItem != null)
-                equippableItem.onPlayerReceivesDamageWhenEquipped(player, this);
+        for (Map.Entry<PlayerEquipment.Slot, Equippable> entry : PlayerEquipmentDatabase.get(player).getFullEquipment().entrySet()) {
+            entry.getValue().onPlayerReceivesDamageWhenEquipped(player, entry.getKey().equipmentSlot, this);
         }
     }
 

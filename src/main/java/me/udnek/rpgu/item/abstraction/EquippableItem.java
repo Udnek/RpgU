@@ -2,14 +2,18 @@ package me.udnek.rpgu.item.abstraction;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
-import me.udnek.rpgu.damaging.DamageEvent;
+import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;
+import me.udnek.rpgu.attribute.VanillaAttributeContainer;
 import me.udnek.rpgu.equipment.Equippable;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-public abstract class EquippableItem extends RpgUCustomItem implements Equippable, DefaultCustomAttributeHolder {
+public interface EquippableItem extends RpgUCustomItem, Equippable, DefaultCustomAttributeHolder, DefaultVanillaAttributeHolder {
     // TODO: 6/13/2024 ADD INIT DEFAULT DefaultCustomAttributeHolder
-    abstract boolean isEquippedInAppropriateSlot(Player player);
+    boolean isEquippedInAppropriateSlot(Player player);
+    boolean isAppropriateSlot(CustomEquipmentSlot slot);
     @Override
-    public CustomAttributesContainer getDefaultCustomAttributes() {return null;}
+    default CustomAttributesContainer getDefaultCustomAttributes() {return null;}
+    @Override
+    default VanillaAttributeContainer getDefaultVanillaAttributes() {return null;}
 }

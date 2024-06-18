@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item;
 
-import me.udnek.itemscoreu.customitem.InteractableItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Bukkit;
@@ -15,7 +16,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 
-public class WarpingClock extends RpgUCustomItem implements InteractableItem {
+public class WarpingClock extends CustomItem implements RightClickable, RpgUCustomItem {
     static int clockDuration = 20*5;
     //static NamespacedKey playerWarpingNamespace = new NamespacedKey(RpgU.getInstance(),"player_is_warping");
 

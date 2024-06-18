@@ -10,11 +10,11 @@ import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.ComponentU;
 import me.udnek.rpgu.Utils;
-import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.attribute.CustomUUIDAttributeModifier;
 import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;
+import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.attribute.VanillaAttributeContainer;
-import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescribed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -125,7 +125,7 @@ public class LoreUtils {
             // EXTRA DESCRIPTION
 
             Map<CustomEquipmentSlot, Pair<Integer, Integer>> extraDescription;
-            if (customItem instanceof ExtraDescriptionItem descriptionItem){
+            if (customItem instanceof ExtraDescribed descriptionItem){
                 extraDescription = descriptionItem.getExtraDescription();
             } else extraDescription = new HashMap<>();
             List<Component> extraDescriptionLore;

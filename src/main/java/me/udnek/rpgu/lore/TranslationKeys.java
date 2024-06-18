@@ -1,8 +1,5 @@
 package me.udnek.rpgu.lore;
 
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 
@@ -16,6 +13,7 @@ public class TranslationKeys {
     public static final String whenOnLegs = "item.modifiers.legs";
     public static final String whenOnFeet = "item.modifiers.feet";
     public static final String whenEquippedAsArtifact = "item.modifiers.artifact";
+    public static final String whenEquippedAsOrigin = "item.modifiers.origin";
     public static final String whenShoots = "item.modifiers.shot";
 
 

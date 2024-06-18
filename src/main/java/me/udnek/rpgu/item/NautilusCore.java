@@ -2,12 +2,13 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
 import me.udnek.rpgu.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import me.udnek.rpgu.item.abstraction.Cooldownable;
-import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.ExtraDescribed;
 import me.udnek.rpgu.item.abstraction.PlayerCooldownData;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
@@ -22,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem, Cooldownable {
+public class NautilusCore extends CustomItem implements ExtraDescribed, Cooldownable, ArtifactItem {
     private final CustomAttributesContainer container = new CustomAttributesContainer.Builder()
             .add(Attributes.MAGICAL_DAMAGE, 0.1, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACT)
             .build();
@@ -61,13 +62,9 @@ public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem, 
 
     @Override
     public Map<CustomEquipmentSlot, Pair<Integer, Integer>> getExtraDescription() {
-        return ExtraDescriptionItem.getSimple(EquipmentSlots.ARTIFACT, 1);
+        return ExtraDescribed.getSimple(EquipmentSlots.ARTIFACT, 1);
     }
 
-    @Override
-    public float getHudCooldownProgress(Player player) {
-        return cooldownData.getProgress(player);
-    }
 
     @Override
     protected List<Recipe> generateRecipes() {
@@ -81,7 +78,7 @@ public class NautilusCore extends ArtifactItem implements ExtraDescriptionItem, 
     }
 
     @Override
-    public void onPlayerAttacksWhenEquipped(Player player, DamageEvent event) {
+    public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
         if (event.getHandlerEvent().isCritical() && !event.containsExtraFlag(new isMagicalCriticalApplied())){
             event.getDamage().multiplyMagicalDamage(1.5);
             event.addExtraFlag(new isMagicalCriticalApplied());

@@ -5,12 +5,13 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import me.udnek.itemscoreu.customitem.InteractableItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.damaging.DamageEvent;
-import me.udnek.rpgu.item.abstraction.ExtraDescriptionItem;
+import me.udnek.rpgu.item.abstraction.MainHandItem;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import me.udnek.rpgu.particle.StunnedParticle;
@@ -32,13 +33,11 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
-import oshi.util.tuples.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class BlazeBlade extends RpgUCustomItem implements InteractableItem, DefaultCustomAttributeHolder{
+public class BlazeBlade extends CustomItem implements MainHandItem, RightClickable, DefaultCustomAttributeHolder {
 
     private final CustomAttributesContainer customAttributes =
             new CustomAttributesContainer.Builder()
@@ -59,7 +58,7 @@ public class BlazeBlade extends RpgUCustomItem implements InteractableItem, Defa
     }
 
     @Override
-    protected ItemFlag[] getTooltipHides() {
+    public ItemFlag[] getTooltipHides() {
         return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
     }
 
@@ -79,7 +78,7 @@ public class BlazeBlade extends RpgUCustomItem implements InteractableItem, Defa
     }
 
     @Override
-    public void onEntityAttacks(DamageEvent event) {
+    public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
         if (!(event.getVictim() instanceof LivingEntity victim)) return;
 
         Entity damager = event.getDamager();
