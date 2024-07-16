@@ -3,13 +3,14 @@ package me.udnek.rpgu;
 import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customentity.CustomDumbTickingEntity;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.CustomItemCommand;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
-import me.udnek.rpgu.damaging.DamageListener;
-import me.udnek.rpgu.electricity.ElectricityEvents;
-import me.udnek.rpgu.enchanting.EnchantmentTableListener;
+import me.udnek.rpgu.mechanic.rail.MinecartListener;
+import me.udnek.rpgu.mechanic.damaging.DamageListener;
+import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
+import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.entity.Entities;
+import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
 import me.udnek.rpgu.equipment.EquipmentListener;
 import me.udnek.rpgu.equipment.PlayerWearingEquipmentTask;
 import me.udnek.rpgu.hud.Hud;
@@ -28,15 +29,17 @@ public final class RpgU extends JavaPlugin {
         instance = this;
 
 
-        CustomItem blazeBlade = Items.blazeBlade;
+        CustomItem blazeBlade = Items.BLAZE_BLADE;
         CustomDumbTickingEntity customDumbTickingEntity = Entities.energyVault;
-        CustomBlock customBlock = Blocks.testBlock;
+        CustomBlock customBlock = Blocks.TEST;
 
         new DamageListener(this);
         new EquipmentListener(this);
         new ElectricityEvents(this);
         new EnchantmentTableListener(this);
-       // new TestListener(this);
+        new ModifiedEntitySpawnListener(this);
+        new MinecartListener(this);
+        new TestListener(this);
 
         this.getCommand("debugEquipmentU").setExecutor(new DebugEquipmentCommand());
 

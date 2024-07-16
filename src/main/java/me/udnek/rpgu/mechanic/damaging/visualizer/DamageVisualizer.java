@@ -1,9 +1,9 @@
-package me.udnek.rpgu.damaging.visualizer;
+package me.udnek.rpgu.mechanic.damaging.visualizer;
 
 
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.Utils;
-import me.udnek.rpgu.damaging.Damage;
+import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;

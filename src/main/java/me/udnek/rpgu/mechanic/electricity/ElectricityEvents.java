@@ -1,4 +1,4 @@
-package me.udnek.rpgu.electricity;
+package me.udnek.rpgu.mechanic.electricity;
 
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
 import org.bukkit.Bukkit;

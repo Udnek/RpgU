@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item;
 
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customplayerdata.CustomPlayerDatabase;
 import me.udnek.rpgu.RpgU;
@@ -13,7 +14,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class LightFeather extends CustomItem implements ArtifactItem {
+public class LightFeather extends ConstructableCustomItem implements ArtifactItem {
 
     private static final NamespacedKey featherEquippedNamespace = new NamespacedKey(RpgU.getInstance(), "light_feather_equipped");
 

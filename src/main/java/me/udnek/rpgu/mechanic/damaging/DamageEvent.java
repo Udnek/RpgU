@@ -1,21 +1,16 @@
-package me.udnek.rpgu.damaging;
+package me.udnek.rpgu.mechanic.damaging;
 
 
 import me.udnek.itemscoreu.customevent.CustomEvent;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
+import me.udnek.rpgu.mechanic.damaging.visualizer.DamageVisualizer;
 import me.udnek.rpgu.equipment.Equippable;
 import me.udnek.rpgu.equipment.PlayerEquipment;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,26 +20,37 @@ public class DamageEvent extends CustomEvent {
     private final ArrayList<ExtraFlag> extraFlags = new ArrayList<>();
 
     private Damage damage;
-    private final EntityDamageByEntityEvent handlerEvent;
+    private final EntityDamageEvent handlerEvent;
     private final Entity damager;
     private final Entity victim;
+    private final boolean isCritical;
+    private final DamagerType damagerType;
 
-    public DamageEvent(EntityDamageByEntityEvent handlerEvent){
+    public DamageEvent(EntityDamageEvent handlerEvent){
         this.handlerEvent = handlerEvent;
-        this.damager = handlerEvent.getDamager();
         this.victim = handlerEvent.getEntity();
+        if (handlerEvent instanceof EntityDamageByEntityEvent entityDamageByEntityEvent){
+            damager = entityDamageByEntityEvent.getDamager();
+            isCritical = entityDamageByEntityEvent.isCritical();
+            damagerType = DamagerType.ENTITY;
+        }
+        else {
+            damager = null;
+            isCritical = false;
+            damagerType = DamagerType.NON_ENTITY;
+        }
     }
 
     public Damage getDamage() {return this.damage;}
     public Entity getDamager() {return damager;}
     public Entity getVictim() {return victim;}
-    public EntityDamageByEntityEvent getHandlerEvent() {return this.handlerEvent;}
+    public EntityDamageEvent getHandlerEvent() {return this.handlerEvent;}
+    public boolean isCritical() {return isCritical;}
+    public DamagerType getDamagerType() {return damagerType;}
 
     public void invoke(){
 
-        damage = new Damage(Damage.Type.PHYSICAL, handlerEvent.getDamage());
-
-        this.entityDependentCalculations();
+        this.damagerDependentCalculations();
         this.playerEquipmentAttacks();
         this.playerEquipmentReceives();
 
@@ -53,19 +59,38 @@ public class DamageEvent extends CustomEvent {
         DamageVisualizer.visualize(damage, victim);
     }
 
-    private void entityDependentCalculations() {
-        damage = DamageUtils.calculateMeleeDamage(damager);
+    private void damagerDependentCalculations() {
+        if (damagerType == DamagerType.ENTITY){
+            damage = DamageUtils.calculateMeleeDamage(damager);
 
-        if (damager instanceof Player) {
-            damage.multiplyPhysicalDamage(handlerEvent.isCritical() ? 1.5 : 1);
+            if (damager instanceof Player) {
+                damage.multiplyPhysicalDamage(isCritical ? 1.5 : 1);
+            }
+
+            else if (damager instanceof AbstractArrow arrow) {
+                this.damage = new Damage(
+                        arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
+                // TODO: 6/9/2024 MAGICAL DAMAGE
+                //MagicalDamageAttribute.get(arrow));
+            }
+        }
+        else {
+            Damage.Type type;
+            switch (handlerEvent.getCause()){
+                case POISON:
+                case MAGIC:
+                case WITHER:
+                case SONIC_BOOM:
+                case DRAGON_BREATH:
+                    type = Damage.Type.MAGICAL;
+                    break;
+                default:
+                    type = Damage.Type.PHYSICAL;
+            }
+            damage = new Damage(type, handlerEvent.getDamage());
         }
 
-        else if (damager instanceof AbstractArrow arrow) {
-            this.damage = new Damage(
-                    arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
-            // TODO: 6/9/2024 MAGICAL DAMAGE
-                    //MagicalDamageAttribute.get(arrow));
-        }
+
     }
 
     private void playerEquipmentAttacks() {
@@ -127,4 +152,8 @@ public class DamageEvent extends CustomEvent {
         return null;
     }
 
+    public enum DamagerType {
+        ENTITY,
+        NON_ENTITY
+    }
 }

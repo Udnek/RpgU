@@ -1,11 +1,9 @@
 package me.udnek.rpgu.item.abstraction;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.rpgu.attribute.CustomUUIDAttributeModifier;
-import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;
 import me.udnek.rpgu.attribute.VanillaAttributeContainer;
-import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

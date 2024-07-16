@@ -1,7 +1,7 @@
 package me.udnek.rpgu.equipment;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.rpgu.damaging.DamageEvent;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,6 +14,6 @@ public interface Equippable {
     default void tickBeingEquipped(Player player, CustomEquipmentSlot slot){}
     default void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event){}
     default void onPlayerReceivesDamageWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event){}
-    default List<Component> getHudImages(){return null;}
+    default List<Component> getHudImages(Player player){return null;}
 
 }

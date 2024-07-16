@@ -1,4 +1,4 @@
-package me.udnek.rpgu.enchanting;
+package me.udnek.rpgu.mechanic.enchanting;
 
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
 import org.bukkit.Material;

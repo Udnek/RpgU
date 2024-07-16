@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item;
 
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Wrench extends CustomItem implements RightClickable, RpgUCustomItem {
+public class Wrench extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
     @Override
     public Integer getCustomModelData() {
         return 3200;

@@ -1,4 +1,4 @@
-package me.udnek.rpgu.enchanting;
+package me.udnek.rpgu.mechanic.enchanting;
 
 import org.bukkit.enchantments.Enchantment;
 

@@ -1,4 +1,4 @@
-package me.udnek.rpgu.enchanting.enchantment;
+package me.udnek.rpgu.mechanic.enchanting.enchantment;
 
 /*public class TestEnchantment extends CustomEnchantment {
     @Override

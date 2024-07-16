@@ -2,12 +2,13 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
-import me.udnek.rpgu.damaging.DamageEvent;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.ExtraDescribed;
+import me.udnek.rpgu.util.ExtraDescribed;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
@@ -25,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class WitherWreath extends CustomItem implements ExtraDescribed, ArtifactItem {
+public class WitherWreath extends ConstructableCustomItem implements ExtraDescribed, ArtifactItem {
     private final CustomAttributesContainer container = new CustomAttributesContainer.Builder()
             .add(Attributes.MAGICAL_DAMAGE, 0.2, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACT)
             .build();

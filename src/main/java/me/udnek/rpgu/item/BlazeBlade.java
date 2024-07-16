@@ -5,19 +5,20 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RightClickable;
+import me.udnek.itemscoreu.serializabledata.SerializableData;
+import me.udnek.itemscoreu.serializabledata.SerializableDataManager;
+import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
-import me.udnek.rpgu.damaging.DamageEvent;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.MainHandItem;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import me.udnek.rpgu.particle.StunnedParticle;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Entity;
@@ -37,7 +38,7 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlazeBlade extends CustomItem implements MainHandItem, RightClickable, DefaultCustomAttributeHolder {
+public class BlazeBlade extends ConstructableCustomItem implements MainHandItem, RightClickable, DefaultCustomAttributeHolder {
 
     private final CustomAttributesContainer customAttributes =
             new CustomAttributesContainer.Builder()
@@ -79,6 +80,17 @@ public class BlazeBlade extends CustomItem implements MainHandItem, RightClickab
 
     @Override
     public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
+
+        SaveData previousData = new SaveData();
+        SerializableDataManager.read(previousData, RpgU.getInstance(), player);
+        LogUtils.log(String.valueOf(previousData.getLocation()));
+
+        SerializableDataManager.write(new SaveData(player.getLocation()), RpgU.getInstance(), player);
+
+        if (previousData.getLocation() != null){
+            player.teleport(previousData.getLocation());
+        }
+
         if (!(event.getVictim() instanceof LivingEntity victim)) return;
 
         Entity damager = event.getDamager();
@@ -231,4 +243,42 @@ public class BlazeBlade extends CustomItem implements MainHandItem, RightClickab
         return recipes;
     }
 
+
+    public class SaveData implements SerializableData {
+
+        private Location location = null;
+        public SaveData(Location location){
+            this.location = location;
+        }
+        public SaveData(){}
+
+        public Location getLocation() {
+            return location;
+        }
+
+        @Override
+        public String serialize() {
+            return location.getWorld().getName()+","+location.getX()+","+location.getY()+","+location.getZ()+","+location.getYaw()+","+location.getPitch();
+        }
+
+        @Override
+        public void deserialize(String data) {
+            if (data == null) return;
+            String[] split = data.split(",");
+            if (split.length != 6) return;
+            World world = Bukkit.getWorld(split[0]);
+            double x = Double.parseDouble(split[1]);
+            double y = Double.parseDouble(split[2]);
+            double z = Double.parseDouble(split[3]);
+            float yaw = Float.parseFloat(split[4]);
+            float pitch = Float.parseFloat(split[5]);
+            if (world == null) return;
+            location = new Location(world, x, y, z, yaw, pitch);
+        }
+
+        @Override
+        public String getDataName() {
+            return getId()+"_tp_location";
+        }
+    }
 }

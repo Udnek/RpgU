@@ -1,4 +1,4 @@
-package me.udnek.rpgu.attribute.equipmentslot;
+package me.udnek.rpgu.equipment.slot;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;

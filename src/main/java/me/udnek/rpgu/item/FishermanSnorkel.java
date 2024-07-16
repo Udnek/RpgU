@@ -2,17 +2,17 @@ package me.udnek.rpgu.item;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.ExtraDescribed;
+import me.udnek.rpgu.util.ExtraDescribed;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
 import org.bukkit.Particle;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class FishermanSnorkel extends CustomItem implements ExtraDescribed, ArtifactItem {
+public class FishermanSnorkel extends ConstructableCustomItem implements ExtraDescribed, ArtifactItem {
     @Override
     public Integer getCustomModelData() {
         return 3106;

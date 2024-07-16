@@ -1,9 +1,7 @@
-package me.udnek.rpgu.damaging;
+package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
-import me.udnek.rpgu.damaging.visualizer.DamageVisualizer;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,27 +9,12 @@ public class DamageListener extends SelfRegisteringListener {
     public DamageListener(JavaPlugin plugin) {
         super(plugin);
     }
-
-    @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        DamageEvent damageEvent = new DamageEvent(event);
-        damageEvent.invoke();
-    }
-
     @EventHandler
     public void onEntityTakesDamage(EntityDamageEvent event) {
-/*        if (event.getEntity() instanceof LivingEntity){
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    ((LivingEntity) event.getEntity()).setNoDamageTicks(0);
-                }
-            }.runTaskLater(RpgU.getInstance(), 1);
+        new DamageEvent(event).invoke();
 
-        }*/
-
-        Damage.Type type;
-        switch (event.getCause()){
+/*        switch (event.getCause()){
+            case FIRE_TICK:
             case ENTITY_ATTACK:
             case ENTITY_SWEEP_ATTACK:
             case ENTITY_EXPLOSION:
@@ -48,6 +31,14 @@ public class DamageListener extends SelfRegisteringListener {
                 type = Damage.Type.PHYSICAL;
         }
         DamageVisualizer.visualize(new Damage(type, event.getFinalDamage()), event.getEntity());
+        if (event.getEntity() instanceof LivingEntity livingEntity){
+            int finalNoDamageTicks = noDamageTicks;
+            new BukkitRunnable() {
+                @Override
+                public void run() {livingEntity.setNoDamageTicks(finalNoDamageTicks);}
+            }.runTaskLater(RpgU.getInstance(), 1);
+        }*/
+
     }
 
 /*    @EventHandler

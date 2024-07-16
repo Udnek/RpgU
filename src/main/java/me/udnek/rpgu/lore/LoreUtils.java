@@ -9,12 +9,13 @@ import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.ComponentU;
+import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.Utils;
 import me.udnek.rpgu.attribute.CustomUUIDAttributeModifier;
 import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.attribute.VanillaAttributeContainer;
-import me.udnek.rpgu.item.abstraction.ExtraDescribed;
+import me.udnek.rpgu.util.ExtraDescribed;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -25,10 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import oshi.util.tuples.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LoreUtils {
 
@@ -92,12 +90,14 @@ public class LoreUtils {
 
             EquipmentSlotGroup vanillaSlot = slot.getVanillaAlternative();
             if (vanillaSlot != null){
-                Multimap<Attribute, AttributeModifier> attributesBySlot = me.udnek.itemscoreu.customattribute.AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);
-                for (Map.Entry<Attribute, AttributeModifier> entry : attributesBySlot.entries()) {
-                    Attribute attribute = entry.getKey();
-                    AttributeModifier modifier = entry.getValue();
 
-                    attributesLore.add(getAttributeLine(attribute, modifier, slot));
+                Multimap<Attribute, AttributeModifier> attributesBySlot = me.udnek.itemscoreu.customattribute.AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);
+                Attribute[] sorted = sortAttributes(attributesBySlot);
+
+                for (Attribute attribute : sorted) {
+                    for (AttributeModifier modifier : attributesBySlot.get(attribute)) {
+                        attributesLore.add(getAttributeLine(attribute, modifier, slot));
+                    }
                 }
             }
 
@@ -147,6 +147,21 @@ public class LoreUtils {
         //lore.add(Component.text(customItem.getId()).color(TextColor.fromHexString("#555555")).decoration(TextDecoration.ITALIC, false));
 
         return lore;
+    }
+
+    public static Attribute[] sortAttributes(Multimap<Attribute, AttributeModifier> multimap){
+        Attribute[] keys = new Attribute[multimap.keys().size()];
+        multimap.keys().toArray(keys);
+        Arrays.sort(keys, new Comparator<Attribute>() {
+            @Override
+            public int compare(Attribute a1, Attribute a2) {
+                if (a1 == Attribute.GENERIC_ATTACK_DAMAGE) return -1;
+                if (a2 == Attribute.GENERIC_ATTACK_DAMAGE) return 1;
+                return -1;
+            }
+        });
+
+        return keys;
     }
 
     public static List<Component> getExtraDescription(CustomItem customItem, Pair<Integer, Integer> range, CustomEquipmentSlot slot){
@@ -207,7 +222,5 @@ public class LoreUtils {
     public static Component addOuter(Component noOuter){
         return ComponentU.translatableWithInsertion(TranslationKeys.equipmentDescriptionLine, noOuter).decoration(TextDecoration.ITALIC, false);
     }
-
-
 
 }

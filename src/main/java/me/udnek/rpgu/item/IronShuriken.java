@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -14,7 +15,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class IronShuriken extends CustomItem implements RightClickable, RpgUCustomItem {
+public class IronShuriken extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
     @Override
     public Integer getCustomModelData() {
         return 3100;

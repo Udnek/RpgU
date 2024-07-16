@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.abstraction;
+package me.udnek.rpgu.util;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import oshi.util.tuples.Pair;

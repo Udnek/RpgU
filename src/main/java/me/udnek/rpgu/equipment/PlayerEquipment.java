@@ -2,9 +2,9 @@ package me.udnek.rpgu.equipment;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.abstraction.*;
-import me.udnek.rpgu.origin.Origin;
+import me.udnek.rpgu.mechanic.origin.Origin;
 
 import java.util.EnumMap;
 
@@ -30,9 +30,8 @@ public class PlayerEquipment {
     // GENERAL
     ///////////////////////////////////////////////////////////////////////////
 
-    public EnumMap<Slot, Equippable> getFullEquipment(){
-        return equippmentMap;
-    }
+    public EnumMap<Slot, Equippable> getFullEquipment(){return equippmentMap;}
+    public boolean isEmpty() {return equippmentMap.isEmpty();}
     private void put(Slot slot, Equippable equippable){
         if (equippable == null){
             equippmentMap.remove(slot);
@@ -106,18 +105,6 @@ public class PlayerEquipment {
                 put(Slot.ARTIFACT_THIRD, artifactItem);
                 break;
         }
-    }
-    public ArtifactItem getArtifactFirst() {
-        return this.artifactFirst;
-    }
-    public ArtifactItem getArtifactSecond() {
-        return this.artifactSecond;
-    }
-    public ArtifactItem getArtifactThird() {
-        return this.artifactThird;
-    }
-    public boolean hasAnyArtifact(){
-        return !(artifactFirst == null && artifactSecond == null && artifactThird == null);
     }
     public boolean isEquippedAsArtifact(ArtifactItem customItem){
         if (this.artifactFirst == customItem) return true;

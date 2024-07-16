@@ -1,4 +1,4 @@
-package me.udnek.rpgu.electricity;
+package me.udnek.rpgu.mechanic.electricity;
 
 import me.udnek.rpgu.entity.Entities;
 import me.udnek.rpgu.multiblockstructure.Structures;

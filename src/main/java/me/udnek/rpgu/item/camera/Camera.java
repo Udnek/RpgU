@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.camera;
 
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class Camera extends CustomItem implements RightClickable, RpgUCustomItem {
+public class Camera extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
     @Override
     public Integer getCustomModelData() {
         return 0;

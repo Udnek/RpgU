@@ -1,4 +1,4 @@
-package me.udnek.rpgu.damaging;
+package me.udnek.rpgu.mechanic.damaging;
 
 public class Damage {
 

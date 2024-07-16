@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class PlayerWearingEquipmentTask extends TickingTask {
 
-    public static final int DELAY = 15;
+    public static final int DELAY = 10;
 
     public void run(){
         for (Player player : Bukkit.getOnlinePlayers()) {

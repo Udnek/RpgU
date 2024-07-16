@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item;
 
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RightClickable;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -14,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collections;
 import java.util.List;
 
-public class CopperPickaxe extends CustomItem implements RightClickable, RpgUCustomItem {
+public class CopperPickaxe extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
     @Override
     public Integer getCustomModelData() {
         return 3100;

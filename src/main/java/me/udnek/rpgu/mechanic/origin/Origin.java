@@ -1,4 +1,4 @@
-package me.udnek.rpgu.origin;
+package me.udnek.rpgu.mechanic.origin;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.equipment.Equippable;

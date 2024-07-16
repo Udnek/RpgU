@@ -3,7 +3,7 @@ package me.udnek.rpgu.entity;
 import me.udnek.itemscoreu.customentity.CustomDumbTickingEntity;
 import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.electricity.ElectricCharge;
+import me.udnek.rpgu.mechanic.electricity.ElectricCharge;
 import me.udnek.rpgu.multiblockstructure.Structures;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -21,17 +21,17 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Transformation;
 
 public class EnergyVaultEntity extends CustomDumbTickingEntity {
-    public static final NamespacedKey energyNamespacedKey = new NamespacedKey(RpgU.getInstance(), "vault_energy");
+    public static final NamespacedKey ENERGY_NAMESPACED_KEY = new NamespacedKey(RpgU.getInstance(), "vault_energy");
     public static final float MAX_ENERGY = 4096f;
 
     public float getEnergy(Entity entity){
-        return entity.getPersistentDataContainer().get(energyNamespacedKey, PersistentDataType.FLOAT);
+        return entity.getPersistentDataContainer().get(ENERGY_NAMESPACED_KEY, PersistentDataType.FLOAT);
     }
 
     protected void setEnergy(Entity entity, float amount){
 /*        if (amount > MAX_ENERGY) amount = MAX_ENERGY;
         else if (amount < 0) amount = 0;*/
-        entity.getPersistentDataContainer().set(energyNamespacedKey, PersistentDataType.FLOAT, amount);
+        entity.getPersistentDataContainer().set(ENERGY_NAMESPACED_KEY, PersistentDataType.FLOAT, amount);
     }
 
     public float addEnergy(Entity entity, float amount){
@@ -142,7 +142,6 @@ public class EnergyVaultEntity extends CustomDumbTickingEntity {
     protected String getName() {
         return "energy_vault";
     }
-
     @Override
     public void onLoad(Entity entity) {
         LogUtils.log("LOAD");

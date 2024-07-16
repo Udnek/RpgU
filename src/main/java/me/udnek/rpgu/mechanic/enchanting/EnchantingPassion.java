@@ -1,4 +1,4 @@
-package me.udnek.rpgu.enchanting;
+package me.udnek.rpgu.mechanic.enchanting;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.item.Items;
@@ -19,7 +19,7 @@ public class EnchantingPassion {
         add(Material.CONDUIT, Enchantment.CHANNELING, Enchantment.AQUA_AFFINITY);
         add(Material.GOLDEN_APPLE, Enchantment.PROTECTION, Enchantment.FIRE_PROTECTION);
         add(Material.NETHERITE_INGOT, Enchantment.SHARPNESS, Enchantment.POWER);
-        add(Items.lightFeather, Enchantment.FEATHER_FALLING);
+        add(Items.LIGHT_FEATHER, Enchantment.FEATHER_FALLING);
         add(Material.ENDER_EYE, Enchantment.MENDING);
     }
 

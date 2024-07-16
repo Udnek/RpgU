@@ -6,26 +6,27 @@ import me.udnek.rpgu.RpgU;
 
 public class Items {
 
-    public final static CustomItem blazeBlade = register(new BlazeBlade());
-    public final static CustomItem lightFeather = register(new LightFeather());
-    public final static CustomItem lifeCrystal  = register(new LifeCrystal());
-    public final static CustomItem hungryHorrorHelmet =  register(new HungryHorrorHelmet());
-    public final static CustomItem hungryHorrorChestplate = register(new HungryHorrorChestplate());
-    public final static CustomItem ironShuriken = register(new IronShuriken());
-    public final static CustomItem warpingClock = register(new WarpingClock());
-    public final static CustomItem ceremoniousDagger = register(new CeremoniousDagger());
-    public final static CustomItem flowerWreath = register(new FlowerWreath());
-    public final static CustomItem witherWreath = register(new WitherWreath());
-    public final static CustomItem nautilusCore = register(new NautilusCore());
-    public final static CustomItem sphereOfBalance = register(new SphereOfBalance());
-    public final static CustomItem phantomBow = register(new PhantomBow());
-    public final static CustomItem fishermanSnorkel = register(new FishermanSnorkel());
-    public final static CustomItem copperSword = register(new CopperSword());
-    public final static CustomItem copperPickaxe = register(new CopperPickaxe());
-    public final static CustomItem wrench = register(new Wrench());
-    public final static CustomItem injector = register(new Injector());
+    public final static CustomItem BLAZE_BLADE = register(new BlazeBlade());
+    public final static CustomItem LIGHT_FEATHER = register(new LightFeather());
+    public final static CustomItem LIFE_CRYSTAL = register(new LifeCrystal());
+    public final static CustomItem HUNGRY_HORROR_HELMET =  register(new HungryHorrorHelmet());
+    public final static CustomItem HUNGRY_HORROR_CHESTPLATE = register(new HungryHorrorChestplate());
+    public final static CustomItem IRON_SHURIKEN = register(new IronShuriken());
+    public final static CustomItem WARPING_CLOCK = register(new WarpingClock());
+    public final static CustomItem CEREMONIOUS_DAGGER = register(new CeremoniousDagger());
+    public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
+    public final static CustomItem WITHER_WREATH = register(new WitherWreath());
+    public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
+    public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
+    public final static CustomItem PHANTOM_BOW = register(new PhantomBow());
+    public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
+    public final static CustomItem COPPER_SWORD = register(new CopperSword());
+    public final static CustomItem COPPER_PICKAXE = register(new CopperPickaxe());
+    public final static CustomItem WRENCH = register(new Wrench());
+    public final static CustomItem INJECTOR = register(new Injector());
+    public final static CustomItem SHINY_AXE = register(new ShinyAxe());
 
-    public final static CustomItem testBlock = register(new TestBlockItem());
+    public final static CustomItem TEST_BLOCK = register(new TestBlockItem());
 
     private static CustomItem register(CustomItem customItem){
         return CustomItemManager.register(RpgU.getInstance(), customItem);

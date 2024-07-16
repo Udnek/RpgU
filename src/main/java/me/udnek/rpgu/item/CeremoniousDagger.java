@@ -2,14 +2,15 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
-import me.udnek.rpgu.attribute.equipmentslot.EquipmentSlots;
-import me.udnek.rpgu.damaging.DamageEvent;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.equipment.PlayerEquipment;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.item.abstraction.ExtraDescribed;
+import me.udnek.rpgu.util.ExtraDescribed;
 import me.udnek.rpgu.item.abstraction.MainHandItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import me.udnek.rpgu.particle.BackstabParticle;
@@ -30,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CeremoniousDagger extends CustomItem implements ArtifactItem, MainHandItem, ExtraDescribed {
+public class CeremoniousDagger extends ConstructableCustomItem implements ArtifactItem, MainHandItem, ExtraDescribed {
     @Override
     public Integer getCustomModelData() {
         return 3100;

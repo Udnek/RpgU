@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customevent.AllEventListener;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -18,7 +19,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PhantomBow extends CustomItem implements AllEventListener, DefaultCustomAttributeHolder, RpgUCustomItem {
+public class PhantomBow extends ConstructableCustomItem implements AllEventListener, DefaultCustomAttributeHolder, RpgUCustomItem {
 
     private CustomAttributesContainer container = new CustomAttributesContainer.Builder()
             .add(Attributes.PROJECTILE_SPEED, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlots.HAND)

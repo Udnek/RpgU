@@ -1,4 +1,4 @@
-package me.udnek.rpgu.electricity;
+package me.udnek.rpgu.mechanic.electricity;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.rpgu.RpgU;

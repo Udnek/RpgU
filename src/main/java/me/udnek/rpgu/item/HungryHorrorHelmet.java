@@ -2,8 +2,9 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.damaging.DamageEvent;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.item.abstraction.ArmorItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HungryHorrorHelmet extends CustomItem implements ArmorItem {
+public class HungryHorrorHelmet extends ConstructableCustomItem implements ArmorItem {
     @Override
     public Integer getCustomModelData() {
         return 3100;
@@ -65,7 +66,7 @@ public class HungryHorrorHelmet extends CustomItem implements ArmorItem {
 
     @Override
     public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
-        if (!event.getHandlerEvent().isCritical()) return;
+        if (!event.isCritical()) return;
 
         PotionEffect potionEffect = player.getPotionEffect(PotionEffectType.STRENGTH);
         int applied;

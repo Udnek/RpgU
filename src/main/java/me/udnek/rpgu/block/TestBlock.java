@@ -1,10 +1,12 @@
 package me.udnek.rpgu.block;
 
+import me.udnek.itemscoreu.customblock.ConstructableCustomBlock;
 import me.udnek.itemscoreu.customblock.CustomBlock;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class TestBlock extends CustomBlock {
+public class TestBlock extends ConstructableCustomBlock {
     @Override
     public String getRawId() {
         return "test_block";
