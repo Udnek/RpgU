@@ -6,6 +6,6 @@ commands:
   debugEquipmentU:
     description: "debugEquipmentU"
     usage: "/debugEquipmentU"
-    aliases: [i]
+    aliases: []
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"

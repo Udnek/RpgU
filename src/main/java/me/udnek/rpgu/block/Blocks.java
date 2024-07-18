@@ -10,6 +10,6 @@ public class Blocks {
 
 
     private static CustomBlock register(CustomBlock customBlock){
-        return CustomBlockManager.register(RpgU.getInstance(), customBlock);
+        return CustomBlockManager.getInstance().register(RpgU.getInstance(), customBlock);
     }
 }

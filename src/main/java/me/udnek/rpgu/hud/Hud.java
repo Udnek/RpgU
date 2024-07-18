@@ -24,8 +24,6 @@ public class Hud implements CustomHud {
 
     @Override
     public Component getText(Player player) {
-        // TODO: 6/18/2024 FOR ALL EQUIPMENT
-
         PlayerEquipment equipment = PlayerEquipmentDatabase.get(player);
         if (equipment.isEmpty()) return Component.empty();
 
@@ -41,54 +39,12 @@ public class Hud implements CustomHud {
         }
 
         int offset = RIGHT_HANDED_OFFSET;
-        if (player.getMainHand() == MainHand.LEFT) offset = LEFT_HANDED_OFFSET-totalImagesSize;
+        if (player.getMainHand() == MainHand.LEFT) offset = LEFT_HANDED_OFFSET - totalImagesSize;
 
         joinedImage = ComponentU.textWithNoSpace(offset, joinedImage, totalImagesSize);
 
         return joinedImage.color(NO_SHADOW_COLOR).font(FONT);
-/*        PlayerEquipment equipment = PlayerEquipmentDatabase.get(player);
-
-        if (!equipment.hasAnyArtifact()) return Component.empty();
-
-        ArtifactItem item0 = equipment.getArtifactFirst();
-        ArtifactItem item1 = equipment.getArtifactSecond();
-        ArtifactItem item2 = equipment.getArtifactThird();
-
-
-
-
-        Component hudImage = ComponentU.textWithNoSpace(
-                offset,
-                Component.translatable(TranslationKeys.artifactHud),
-                62
-        );
-
-        offset += 3;
-        Component result =
-                generateArtifactComponent(player, item0, offset).append(
-                generateArtifactComponent(player, item1, offset + 16 + 4)).append(
-                generateArtifactComponent(player, item2, offset + (16 + 4) * 2));
-
-        return applyFontAndColor(hudImage.append(result));*/
     }
-
-
-/*    private Component applyFontAndColor(Component text){
-        return text.font(FONT).color(NO_SHADOW_COLOR);
-    }
-    private Component generateArtifactComponent(Player player, ArtifactItem item, int offset){
-        if (item == null) return Component.empty();
-        //Component cooldown  = cooldownToComponent(item.getHudCooldownProgress(player));
-        //Component image = item.getArtifactImage();
-        // TODO: 6/18/2024 FIX
-        return ComponentU.textWithNoSpace(offset, Component.empty(), 0);
-        //Component image =
-        //return ComponentU.textWithNoSpace(offset, image.append(cooldown), 16);
-    }
-    private Component cooldownToComponent(float cd){
-        cd *= 16;
-        return Component.translatable(TranslationKeys.artifactCooldown + Math.round(cd));
-    }*/
 
     public void register(){
         CustomHudManager.addTicket(RpgU.getInstance(), this);

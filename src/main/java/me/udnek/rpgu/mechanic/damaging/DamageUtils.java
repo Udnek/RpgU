@@ -42,20 +42,4 @@ public class DamageUtils {
         if (entity instanceof LivingEntity livingEntity) return calculateMeleeDamage(livingEntity);
         return new Damage();
     }
-/*    public static Damage getBaseItemDamage(ItemStack itemStack){
-
-        // TODO: 6/8/2024 MAGICAL DAMAGE
-        //double magicalDamage = Attributes.magicalDamage.getMeeleDamage(itemStack);
-
-        double magicalDamage = 0;
-*//*        CustomItem customItem = CustomItem.get(itemStack);
-*//**//*        if (customItem != null && customItem instanceof DefaultCustomAttributeHolder attributeHolder){
-            attributeHolder.getDefaultCustomAttributes().
-        }*//*
-
-        double physicalDamage = AttributeUtils.getAttackDamage(itemStack) + 1;
-
-        return new Damage(physicalDamage, magicalDamage);
-    }*/
-
 }

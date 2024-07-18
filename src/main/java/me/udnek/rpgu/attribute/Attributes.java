@@ -14,7 +14,7 @@ public class Attributes{
     public static final ProjectileDamageAttribute PROJECTILE_DAMAGE = (ProjectileDamageAttribute) register(new ProjectileDamageAttribute());
 
     private static CustomAttribute register(CustomAttribute customAttributeType){
-        return CustomAttributeManager.register(RpgU.getInstance(), customAttributeType);
+        return CustomAttributeManager.getInstance().register(RpgU.getInstance(), customAttributeType);
     }
 
 }

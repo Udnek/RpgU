@@ -29,6 +29,6 @@ public class Items {
     public final static CustomItem TEST_BLOCK = register(new TestBlockItem());
 
     private static CustomItem register(CustomItem customItem){
-        return CustomItemManager.register(RpgU.getInstance(), customItem);
+        return CustomItemManager.getInstance().register(RpgU.getInstance(), customItem);
     }
 }
