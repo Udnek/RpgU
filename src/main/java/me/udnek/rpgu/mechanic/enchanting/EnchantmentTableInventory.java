@@ -1,6 +1,8 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
+import me.udnek.itemscoreu.custominventory.ConstructableCustomInventory;
 import me.udnek.itemscoreu.custominventory.CustomInventory;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class EnchantmentTableInventory extends CustomInventory {
+public class EnchantmentTableInventory extends ConstructableCustomInventory {
 
     private final int LAPIS_SLOT = 9*3;
     private final int BOOK_SLOT = 9*3+1;

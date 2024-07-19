@@ -9,6 +9,6 @@ public class Entities {
     public static final EnergyVaultEntity energyVault = (EnergyVaultEntity) register(new EnergyVaultEntity());
 
     private static CustomDumbTickingEntity register(CustomDumbTickingEntity customDumbTickingEntity){
-        return CustomEntityManager.register(RpgU.getInstance(), customDumbTickingEntity);
+        return CustomEntityManager.getInstance().register(RpgU.getInstance(), customDumbTickingEntity);
     }
 }
