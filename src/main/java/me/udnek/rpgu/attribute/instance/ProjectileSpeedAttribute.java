@@ -16,7 +16,7 @@ public class ProjectileSpeedAttribute extends RpgUAttribute implements AllEventL
     public double getDefaultValue() {return 1;}
 
     @Override
-    public void onBukkitEvent(Event event) {
+    public void onEvent(Event event) {
         if (!(event instanceof EntityShootBowEvent shootEvent)) return;
         double amount = this.calculate(shootEvent.getEntity());
         if (amount == getDefaultValue()) return;

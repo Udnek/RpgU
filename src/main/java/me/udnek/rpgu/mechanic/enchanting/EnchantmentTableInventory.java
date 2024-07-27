@@ -1,8 +1,6 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
 import me.udnek.itemscoreu.custominventory.ConstructableCustomInventory;
-import me.udnek.itemscoreu.custominventory.CustomInventory;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;

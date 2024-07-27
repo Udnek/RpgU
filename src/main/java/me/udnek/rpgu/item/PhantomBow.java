@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customevent.AllEventListener;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
@@ -53,7 +52,7 @@ public class PhantomBow extends ConstructableCustomItem implements AllEventListe
     }
 
     @Override
-    public void onBukkitEvent(Event event) {
+    public void onEvent(Event event) {
         if (!(event instanceof EntityShootBowEvent shootEvent)) return;
         if (!isThisItem(shootEvent.getBow())) return;
         if (!(shootEvent.getProjectile() instanceof AbstractArrow arrow)) return;

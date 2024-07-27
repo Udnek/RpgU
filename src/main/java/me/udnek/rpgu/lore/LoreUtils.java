@@ -9,7 +9,6 @@ import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.ComponentU;
-import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.rpgu.Utils;
 import me.udnek.rpgu.attribute.CustomUUIDAttributeModifier;
 import me.udnek.rpgu.attribute.DefaultVanillaAttributeHolder;

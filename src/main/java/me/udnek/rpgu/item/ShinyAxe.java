@@ -2,7 +2,6 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;

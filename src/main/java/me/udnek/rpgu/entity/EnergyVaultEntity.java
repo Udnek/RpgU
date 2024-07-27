@@ -1,26 +1,8 @@
 package me.udnek.rpgu.entity;
 
-import me.udnek.itemscoreu.customentity.CustomDumbTickingEntity;
-import me.udnek.itemscoreu.utils.LogUtils;
-import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.mechanic.electricity.ElectricCharge;
-import me.udnek.rpgu.multiblockstructure.Structures;
-import net.kyori.adventure.key.Key;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.Directional;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.util.Transformation;
+// TODO: 7/26/2024 FIX
 
-public class EnergyVaultEntity extends CustomDumbTickingEntity {
+/*public class EnergyVaultEntity extends ConstructableCustomEntity {
     public static final NamespacedKey ENERGY_NAMESPACED_KEY = new NamespacedKey(RpgU.getInstance(), "vault_energy");
     public static final float MAX_ENERGY = 4096f;
 
@@ -29,8 +11,8 @@ public class EnergyVaultEntity extends CustomDumbTickingEntity {
     }
 
     protected void setEnergy(Entity entity, float amount){
-/*        if (amount > MAX_ENERGY) amount = MAX_ENERGY;
-        else if (amount < 0) amount = 0;*/
+*//*        if (amount > MAX_ENERGY) amount = MAX_ENERGY;
+        else if (amount < 0) amount = 0;*//*
         entity.getPersistentDataContainer().set(ENERGY_NAMESPACED_KEY, PersistentDataType.FLOAT, amount);
     }
 
@@ -155,3 +137,4 @@ public class EnergyVaultEntity extends CustomDumbTickingEntity {
         return EntityType.ITEM_DISPLAY;
     }
 }
+*/

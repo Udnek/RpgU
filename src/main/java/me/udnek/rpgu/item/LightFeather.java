@@ -1,17 +1,11 @@
 package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customplayerdata.CustomPlayerDatabase;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import me.udnek.rpgu.lore.LoreUtils;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class LightFeather extends ConstructableCustomItem implements ArtifactItem {

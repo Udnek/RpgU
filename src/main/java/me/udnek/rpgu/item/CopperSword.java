@@ -69,7 +69,7 @@ public class CopperSword extends ConstructableCustomItem implements RightClickab
     }
 
     @Override
-    public void onBukkitEvent(Event unknowEvent) {
+    public void onEvent(Event unknowEvent) {
         if (!(unknowEvent instanceof EntityShootBowEvent event)) return;
         if (!(event.getEntity() instanceof Player player)) return;
         Material material = event.getBow().getType();

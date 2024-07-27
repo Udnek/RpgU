@@ -1,7 +1,7 @@
 package me.udnek.rpgu.attribute;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customattribute.CustomAttributeManager;
+import me.udnek.itemscoreu.customattribute.CustomAttributeRegistry;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.instance.MagicalDamageAttribute;
 import me.udnek.rpgu.attribute.instance.ProjectileDamageAttribute;
@@ -14,7 +14,7 @@ public class Attributes{
     public static final ProjectileDamageAttribute PROJECTILE_DAMAGE = (ProjectileDamageAttribute) register(new ProjectileDamageAttribute());
 
     private static CustomAttribute register(CustomAttribute customAttributeType){
-        return CustomAttributeManager.getInstance().register(RpgU.getInstance(), customAttributeType);
+        return CustomAttributeRegistry.getInstance().register(RpgU.getInstance(), customAttributeType);
     }
 
 }

@@ -2,12 +2,11 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.equipment.PlayerWearingEquipmentTask;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
-import me.udnek.rpgu.util.ExtraDescribed;
 import me.udnek.rpgu.lore.LoreUtils;
+import me.udnek.rpgu.util.ExtraDescribed;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

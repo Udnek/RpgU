@@ -2,10 +2,10 @@ package me.udnek.rpgu.mechanic.damaging;
 
 
 import me.udnek.itemscoreu.customevent.CustomEvent;
-import me.udnek.rpgu.mechanic.damaging.visualizer.DamageVisualizer;
 import me.udnek.rpgu.equipment.Equippable;
 import me.udnek.rpgu.equipment.PlayerEquipment;
 import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
+import me.udnek.rpgu.mechanic.damaging.visualizer.DamageVisualizer;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -53,6 +53,8 @@ public class DamageEvent extends CustomEvent {
         this.damagerDependentCalculations();
         this.playerEquipmentAttacks();
         this.playerEquipmentReceives();
+
+        callEvent();
 
         // TODO: 2/15/2024 IMPLEMENT FINAL DAMAGE
         handlerEvent.setDamage(damage.getTotalDamage());

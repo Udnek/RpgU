@@ -45,12 +45,13 @@ public class ElectricityEvents extends SelfRegisteringListener {
         ElectricCharge.createChargeAtStruckLocation(location);
     }
 
-    @EventHandler
+    // TODO: 7/26/2024 FIX
+/*    @EventHandler
     public void playerPlacesCore(BlockPlaceEvent event){
         if (event.getBlock().getType() != EnergyVault.CORE_BLOCK) return;
         EnergyVault.playerPlacesCore(event);
 
-    }
+    }*/
 
 }
 

@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.CustomItemManager;
+import me.udnek.itemscoreu.customitem.CustomItemRegistry;
 import me.udnek.rpgu.RpgU;
 
 public class Items {
@@ -29,6 +29,6 @@ public class Items {
     public final static CustomItem TEST_BLOCK = register(new TestBlockItem());
 
     private static CustomItem register(CustomItem customItem){
-        return CustomItemManager.getInstance().register(RpgU.getInstance(), customItem);
+        return CustomItemRegistry.getInstance().register(RpgU.getInstance(), customItem);
     }
 }

@@ -13,7 +13,6 @@ import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.xml.crypto.dom.DOMCryptoContext;
 import java.util.List;
 
 public class MinecartListener extends SelfRegisteringListener {
