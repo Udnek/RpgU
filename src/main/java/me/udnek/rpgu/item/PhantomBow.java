@@ -4,7 +4,6 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
-import me.udnek.itemscoreu.customevent.AllEventListener;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
@@ -14,11 +13,13 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-public class PhantomBow extends ConstructableCustomItem implements AllEventListener, DefaultCustomAttributeHolder, RpgUCustomItem {
+public class PhantomBow extends ConstructableCustomItem implements DefaultCustomAttributeHolder, RpgUCustomItem, Listener {
 
     private CustomAttributesContainer container = new CustomAttributesContainer.Builder()
             .add(Attributes.PROJECTILE_SPEED, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlots.HAND)
@@ -36,7 +37,7 @@ public class PhantomBow extends ConstructableCustomItem implements AllEventListe
     }
 
     @Override
-    public String getRawId() {
+    public @NotNull String getRawId() {
         return "phantom_bow";
     }
 
@@ -51,11 +52,10 @@ public class PhantomBow extends ConstructableCustomItem implements AllEventListe
         return container;
     }
 
-    @Override
-    public void onEvent(Event event) {
-        if (!(event instanceof EntityShootBowEvent shootEvent)) return;
-        if (!isThisItem(shootEvent.getBow())) return;
-        if (!(shootEvent.getProjectile() instanceof AbstractArrow arrow)) return;
+    @EventHandler
+    public void onFire(EntityShootBowEvent event) {
+        if (!isThisItem(event.getBow())) return;
+        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
 
         ParticleBuilder particleBuilder = new ParticleBuilder(Particle.ASH);
         particleBuilder.count(7);

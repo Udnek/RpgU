@@ -3,6 +3,7 @@ package me.udnek.rpgu;
 import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.itemscoreu.utils.VanillaItemDisabler;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
@@ -17,9 +18,10 @@ import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
 import org.bukkit.Material;
+import org.bukkit.packs.ResourcePack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class RpgU extends JavaPlugin {
+public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
     private static RpgU instance;
     private PlayerWearingEquipmentTask wearingEquipmentTask;

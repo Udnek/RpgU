@@ -8,6 +8,7 @@ import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import me.udnek.rpgu.mechanic.damaging.visualizer.DamageVisualizer;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -44,11 +45,13 @@ public class DamageEvent extends CustomEvent {
     public Damage getDamage() {return this.damage;}
     public Entity getDamager() {return damager;}
     public Entity getVictim() {return victim;}
-    public EntityDamageEvent getHandlerEvent() {return this.handlerEvent;}
+    public EntityDamageEvent getHandler() {return this.handlerEvent;}
     public boolean isCritical() {return isCritical;}
     public DamagerType getDamagerType() {return damagerType;}
 
     public void invoke(){
+
+        damage = new Damage(Damage.Type.PHYSICAL, handlerEvent.getDamage());
 
         this.damagerDependentCalculations();
         this.playerEquipmentAttacks();
@@ -63,8 +66,6 @@ public class DamageEvent extends CustomEvent {
 
     private void damagerDependentCalculations() {
         if (damagerType == DamagerType.ENTITY){
-            damage = DamageUtils.calculateMeleeDamage(damager);
-
             if (damager instanceof Player) {
                 damage.multiplyPhysicalDamage(isCritical ? 1.5 : 1);
             }
@@ -75,20 +76,15 @@ public class DamageEvent extends CustomEvent {
                 // TODO: 6/9/2024 MAGICAL DAMAGE
                 //MagicalDamageAttribute.get(arrow));
             }
+            else if (damager instanceof LivingEntity livingEntity){
+                damage = DamageUtils.calculateMeleeDamage(livingEntity);
+            }
         }
         else {
-            Damage.Type type;
-            switch (handlerEvent.getCause()){
-                case POISON:
-                case MAGIC:
-                case WITHER:
-                case SONIC_BOOM:
-                case DRAGON_BREATH:
-                    type = Damage.Type.MAGICAL;
-                    break;
-                default:
-                    type = Damage.Type.PHYSICAL;
-            }
+            Damage.Type type = switch (handlerEvent.getCause()) {
+                case POISON, MAGIC, WITHER, SONIC_BOOM, DRAGON_BREATH -> Damage.Type.MAGICAL;
+                default -> Damage.Type.PHYSICAL;
+            };
             damage = new Damage(type, handlerEvent.getDamage());
         }
 

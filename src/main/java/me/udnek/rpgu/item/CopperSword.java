@@ -1,7 +1,6 @@
 package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customevent.AllEventListener;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.utils.ComponentU;
 import me.udnek.itemscoreu.utils.LogUtils;
@@ -13,7 +12,8 @@ import me.udnek.rpgu.util.PerPlayerData;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -27,7 +27,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Collections;
 import java.util.List;
 
-public class CopperSword extends ConstructableCustomItem implements RightClickable, ArtifactItem, AllEventListener {
+public class CopperSword extends ConstructableCustomItem implements RightClickable, ArtifactItem, Listener {
 
     private final CooldownData cooldownData = new CooldownData(10);
     private final WindupData windupData = new WindupData();
@@ -68,9 +68,8 @@ public class CopperSword extends ConstructableCustomItem implements RightClickab
         return Collections.singletonList(recipe);
     }
 
-    @Override
-    public void onEvent(Event unknowEvent) {
-        if (!(unknowEvent instanceof EntityShootBowEvent event)) return;
+    @EventHandler
+    public void onFire(EntityShootBowEvent event) {
         if (!(event.getEntity() instanceof Player player)) return;
         Material material = event.getBow().getType();
         if (material != Material.CROSSBOW) return;

@@ -1,12 +1,12 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.itemscoreu.customevent.AllEventListener;
 import me.udnek.rpgu.attribute.RpgUAttribute;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
-public class ProjectileDamageAttribute extends RpgUAttribute implements AllEventListener {
+public class ProjectileDamageAttribute extends RpgUAttribute implements Listener {
     @Override
     public String getRawId() {
         return "projectile_damage";
@@ -15,12 +15,11 @@ public class ProjectileDamageAttribute extends RpgUAttribute implements AllEvent
     @Override
     public double getDefaultValue() {return 1;}
 
-    @Override
-    public void onEvent(Event event) {
-        if (!(event instanceof EntityShootBowEvent shootEvent)) return;
-        double amount = this.calculate(shootEvent.getEntity());
+    @EventHandler
+    public void onFire(EntityShootBowEvent event) {
+        double amount = this.calculate(event.getEntity());
         if (amount == getDefaultValue()) return;
-        if (!(shootEvent.getProjectile() instanceof AbstractArrow arrow)) return;
+        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
         arrow.setDamage(arrow.getDamage() * amount);
     }
 }

@@ -1,0 +1,11 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/energy.png",
+			"ascent": 7,
+			"height": 8,
+			"chars": ["0123456789/"]
+		}
+	]
+}

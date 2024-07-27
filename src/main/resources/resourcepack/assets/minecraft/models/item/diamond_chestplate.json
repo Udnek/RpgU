@@ -1,0 +1,10 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "item/diamond_chestplate"
+	},
+ 
+	"overrides": [
+		{ "predicate": { "custom_model_data": 3100}, "model": "rpgu:item/hungry_horror_chestplate" }
+	]
+}

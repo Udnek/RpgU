@@ -1,0 +1,10 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "item/golden_sword"
+	},
+	"overrides": [
+		{ "predicate": { "custom_model_data": 3100}, "model": "rpgu:item/copper_sword" },
+		{ "predicate": { "custom_model_data": 3101}, "model": "rpgu:item/copper_sword_charged" }
+	]
+}

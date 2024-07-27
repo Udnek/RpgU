@@ -1,0 +1,27 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "rpgu:item/fisherman_snorkel"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [13, 70, -47],
+			"translation": [-1, 1.25, 2],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-167, -70, -133],
+			"translation": [-1, 1.25, 2],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [150, 52, 180],
+			"translation": [-0.25, -5.25, -9]
+		},
+		"firstperson_lefthand": {
+			"rotation": [150, -128, 180],
+			"translation": [-0.25, -5.25, -9]
+		}
+	}
+}

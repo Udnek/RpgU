@@ -37,9 +37,4 @@ public class DamageUtils {
 
         return damage;
     }
-
-    public static Damage calculateMeleeDamage(Entity entity){
-        if (entity instanceof LivingEntity livingEntity) return calculateMeleeDamage(livingEntity);
-        return new Damage();
-    }
 }

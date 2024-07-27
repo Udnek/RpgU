@@ -1,7 +1,6 @@
 package me.udnek.rpgu.entity;
 
 import me.udnek.itemscoreu.customentity.CustomEntity;
-import me.udnek.itemscoreu.customentity.CustomEntityManager;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.itemscoreu.customentity.CustomEntityTypeRegistry;
 import me.udnek.rpgu.RpgU;

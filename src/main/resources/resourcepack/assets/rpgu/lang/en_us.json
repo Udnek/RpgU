@@ -1,0 +1,92 @@
+{
+	"image.rpgu.artifact.hud": "z",
+	"image.rpgu.artifact.cooldown.0": "0",
+	"image.rpgu.artifact.cooldown.1": "1",
+	"image.rpgu.artifact.cooldown.2": "2",
+	"image.rpgu.artifact.cooldown.3": "3",
+	"image.rpgu.artifact.cooldown.4": "4",
+	"image.rpgu.artifact.cooldown.5": "5",
+	"image.rpgu.artifact.cooldown.6": "6",
+	"image.rpgu.artifact.cooldown.7": "7",
+	"image.rpgu.artifact.cooldown.8": "8",
+	"image.rpgu.artifact.cooldown.9": "9",
+	"image.rpgu.artifact.cooldown.10": "a",
+	"image.rpgu.artifact.cooldown.11": "b",
+	"image.rpgu.artifact.cooldown.12": "c",
+	"image.rpgu.artifact.cooldown.13": "d",
+	"image.rpgu.artifact.cooldown.14": "e",
+	"image.rpgu.artifact.cooldown.15": "f",
+	"image.rpgu.artifact.cooldown.16": "g",
+	
+	"image.rpgu.artifact.unknown_artifact": "x",
+		
+	"item.modifiers.artifact": "When Equipped as Artifact:",
+	"item.modifiers.shot": "When Shoots:",
+	
+	"equipment.rpgu.description_line": " %s",
+	
+	"attribute.rpgu.physical_damage": "Physical Damage",
+	"attribute.rpgu.magical_damage": "Magical Damage",
+	"attribute.rpgu.attack_speed": "Attacks per Second",
+	
+	"attribute.rpgu.projectile_speed": "Projectile Speed",
+	"attribute.rpgu.projectile_damage": "Projectile Physical Damage",
+	"attribute.rpgu.projectile_damage_magical": "%s Projectile Magical Damage",
+	
+	
+	
+	
+	
+	
+	
+	
+	"item.rpgu.blaze_blade": "Blaze Blade",
+	
+	"item.rpgu.ceremonious_dagger": "Ceremonious Dagger",
+	"item.rpgu.ceremonious_dagger.description.0": "+150% Physical Damage to backstab",
+	"item.rpgu.ceremonious_dagger.description.1": "+50% Physical Damage to backstab",
+	
+	"item.rpgu.light_feather": "Light Feather",
+	"item.rpgu.light_feather.description.0": "Allows to double jump",
+	
+	"item.rpgu.life_crystal": "Life Crystal",
+	"item.rpgu.life_crystal.description.0": "Health Boost V",
+	"item.rpgu.life_crystal.description.1": "Regeneration II",
+	"item.rpgu.life_crystal.description.2": "Hunger II",
+	
+	"item.rpgu.hungry_horror_helmet": "Mask of Hungry Horror",
+	"item.rpgu.hungry_horror_chestplate": "Aegis of Hungry Horror",
+	
+	"item.rpgu.iron_shuriken": "Iron Shuriken",
+	
+	"item.rpgu.flower_wreath": "Flower Wreath",
+	"item.rpgu.flower_wreath.description.0": "Applies Regeneration in forest",
+	
+	"item.rpgu.wither_wreath": "Wither Wreath",
+	"item.rpgu.wither_wreath.description.0": "Applies Wither II on attack",
+	
+	"item.rpgu.nautilus_core": "Nautilus Core",
+	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",
+	"item.rpgu.nautilus_core.image": "\uE001",
+	
+	"item.rpgu.sphere_of_balance": "Sphere of Balance",	
+	"item.rpgu.sphere_of_balance.description.0": "Transfers up to 5 Physical Damage to Magical",
+	"item.rpgu.sphere_of_balance.description.1": "-5 Physical Damage",
+	"item.rpgu.sphere_of_balance.description.2": "+5 Magical Damage",
+	
+	"item.rpgu.phantom_bow": "Phantom Bow",
+	
+	"item.rpgu.fisherman_snorkel": "Fisherman's Snorkel",
+	"item.rpgu.fisherman_snorkel.description.0": "Allows to breathe underwater",
+	"item.rpgu.fisherman_snorkel.description.1": " if the bobber has access to air",
+	
+	"item.rpgu.copper_sword": "Copper Sword",
+	"item.rpgu.copper_sword.image.0": "\uE002",
+	"item.rpgu.copper_sword.image.1": "\uE003",
+	"item.rpgu.copper_sword.image.2": "\uE004",
+	"item.rpgu.copper_sword.image.3": "\uE005",
+	"item.rpgu.copper_sword.image.4": "\uE006",
+	"item.rpgu.copper_sword.image.5": "\uE007"
+	
+	
+}
