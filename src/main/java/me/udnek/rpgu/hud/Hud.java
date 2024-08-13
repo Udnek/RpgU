@@ -16,7 +16,6 @@ import org.bukkit.inventory.MainHand;
 
 public class Hud implements CustomHud {
 
-    private final static TextColor NO_SHADOW_COLOR = TextColor.fromHexString("#4e5c24");
     private final static Key FONT = new NamespacedKey(RpgU.getInstance(), "artifact");
     private final static int OFFSET_BETWEEN_IMAGES = 16 + 3;
     private final static int RIGHT_HANDED_OFFSET = 74;
@@ -43,7 +42,7 @@ public class Hud implements CustomHud {
 
         joinedImage = ComponentU.textWithNoSpace(offset, joinedImage, totalImagesSize);
 
-        return joinedImage.color(NO_SHADOW_COLOR).font(FONT);
+        return joinedImage.color(ComponentU.NO_SHADOW_COLOR).font(FONT);
     }
 
     public void register(){
