@@ -1,9 +1,19 @@
 package me.udnek.rpgu;
 
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
+import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
+import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
+import me.udnek.itemscoreu.utils.ItemUtils;
+import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
+import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.management.Attribute;
 
 public class TestListener extends SelfRegisteringListener {
     public TestListener(JavaPlugin plugin) {
@@ -25,8 +35,32 @@ public class TestListener extends SelfRegisteringListener {
         entity.remove();
     }*/
 
+/*
     @EventHandler
-    public void on(PlayerInteractEvent event){
+    public void onLoot(LootEntryCreateItemEvent event){
+        if (!event.isSameLootTable(LootTables.ANCIENT_CITY.getLootTable())) return;
+        LogUtils.log(event.getAll());
+        if (!event.contains(Material.ECHO_SHARD)) return;
+        LogUtils.log("FOUND ANCIENT ECHO SHARD");
+        event.addItem(new ItemStack(Material.MACE));
+        LogUtils.log(event.getAll());
+    }
+*/
+
+    @EventHandler
+    public void onItemGenerates(CustomItemGeneratedEvent event){
+        System.out.println("CALLED EVENT");
+        AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
+        if (event.getCustomItem() instanceof VanillaBasedCustomItem){
+            System.out.println("MODIFING");
+            event.getItemStack().addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            System.out.println(event.getItemStack().getItemFlags());
+        }
+    }
+
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event){
 /*        if (!event.getAction().isRightClick()) return;
 
 

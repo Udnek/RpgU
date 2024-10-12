@@ -1,7 +1,6 @@
 package me.udnek.rpgu.entity;
 
 import me.udnek.itemscoreu.customentity.ConstructableCustomEntity;
-import me.udnek.itemscoreu.utils.LogUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;

@@ -12,7 +12,10 @@ public class TranslationKeys {
     public static final String whenOnBody = "item.modifiers.chest";
     public static final String whenOnLegs = "item.modifiers.legs";
     public static final String whenOnFeet = "item.modifiers.feet";
-    public static final String whenEquippedAsArtifact = "item.modifiers.artifact";
+    public static final String whenEquippedAsArtifact = "item.modifiers.artifacts";
+    public static final String whenEquippedAsFirstArtifact = "item.modifiers.first_artifact";
+    public static final String whenEquippedAsSecondArtifact = "item.modifiers.second_artifact";
+    public static final String whenEquippedAsThirdArtifact = "item.modifiers.third_artifact";
     public static final String whenEquippedAsOrigin = "item.modifiers.origin";
     public static final String whenShoots = "item.modifiers.shot";
 

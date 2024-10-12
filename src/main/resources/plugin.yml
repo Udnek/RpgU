@@ -1,8 +1,8 @@
 name: RpgU
 version: '${project.version}'
 main: me.udnek.rpgu.RpgU
-api-version: '1.20'
-depend: [ItemsCoreU]
+api-version: '1.21.1'
+depend: [ItemsCoreU, JeiU]
 commands:
   debugEquipmentU:
     description: "debugEquipmentU"

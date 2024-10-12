@@ -1,24 +1,26 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customevent.CustomEvent;
-import me.udnek.rpgu.equipment.Equippable;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.equipment.PlayerEquipment;
-import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
-import me.udnek.rpgu.mechanic.damaging.visualizer.DamageVisualizer;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class DamageEvent extends CustomEvent {
 
-    private final ArrayList<ExtraFlag> extraFlags = new ArrayList<>();
+    private final List<ExtraFlag> extraFlags = new ArrayList<>();
 
     private Damage damage;
     private final EntityDamageEvent handlerEvent;
@@ -53,9 +55,9 @@ public class DamageEvent extends CustomEvent {
 
         damage = new Damage(Damage.Type.PHYSICAL, handlerEvent.getDamage());
 
-        this.damagerDependentCalculations();
-        this.playerEquipmentAttacks();
-        this.playerEquipmentReceives();
+        damagerDependentCalculations();
+        playerEquipmentAttacks();
+        playerEquipmentReceives();
 
         callEvent();
 
@@ -67,11 +69,12 @@ public class DamageEvent extends CustomEvent {
     private void damagerDependentCalculations() {
         if (damagerType == DamagerType.ENTITY){
             if (damager instanceof Player) {
-                damage.multiplyPhysicalDamage(isCritical ? 1.5 : 1);
+                //damage.multiplyPhysicalDamage(isCritical ? 1.5 : 1);
+                damage.addMagicalDamage(Attributes.MAGICAL_DAMAGE.calculate(damager));
             }
 
             else if (damager instanceof AbstractArrow arrow) {
-                this.damage = new Damage(
+                damage = new Damage(
                         arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
                 // TODO: 6/9/2024 MAGICAL DAMAGE
                 //MagicalDamageAttribute.get(arrow));
@@ -94,17 +97,23 @@ public class DamageEvent extends CustomEvent {
     private void playerEquipmentAttacks() {
         if (!(damager instanceof Player player)) return;
 
-        for (Map.Entry<PlayerEquipment.Slot, Equippable> entry : PlayerEquipmentDatabase.get(player).getFullEquipment().entrySet()) {
-            entry.getValue().onPlayerAttacksWhenEquipped(player, entry.getKey().equipmentSlot, this);
-        }
+        PlayerEquipment.get(player).getEquipment(new PlayerEquipment.EquipmentConsumer() {
+            @Override
+            public void accept(@NotNull SingleSlot slot, @NotNull CustomItem customItem) {
+                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(customItem, player, slot, DamageEvent.this);
+            }
+        });
     }
 
     private void playerEquipmentReceives() {
         if (!(victim instanceof Player player)) return;
 
-        for (Map.Entry<PlayerEquipment.Slot, Equippable> entry : PlayerEquipmentDatabase.get(player).getFullEquipment().entrySet()) {
-            entry.getValue().onPlayerReceivesDamageWhenEquipped(player, entry.getKey().equipmentSlot, this);
-        }
+        PlayerEquipment.get(player).getEquipment(new PlayerEquipment.EquipmentConsumer() {
+            @Override
+            public void accept(@NotNull SingleSlot slot, @NotNull CustomItem customItem) {
+                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(customItem, player, slot, DamageEvent.this);
+            }
+        });
     }
 
     public abstract static class ExtraFlag{

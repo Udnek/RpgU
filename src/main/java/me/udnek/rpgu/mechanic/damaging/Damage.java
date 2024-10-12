@@ -55,6 +55,7 @@ public class Damage {
     public double getTotalDamage() {return this.getPhysicalDamage() + this.getMagicalDamage();}
 
 
+    @Override
     public String toString(){
         return "[Physical = " + this.getPhysicalDamage() + "; Magical = " + this.getMagicalDamage() + "; Sum = " + this.getTotalDamage() + "]";
     }

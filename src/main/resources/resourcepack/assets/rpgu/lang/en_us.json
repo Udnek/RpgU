@@ -20,7 +20,10 @@
 	
 	"image.rpgu.artifact.unknown_artifact": "x",
 		
-	"item.modifiers.artifact": "When Equipped as Artifact:",
+	"item.modifiers.artifacts": "When equipped as Artifact:",
+	"item.modifiers.first_artifact": "When equipped as First Artifact:",
+	"item.modifiers.second_artifact": "When equipped as Second Artifact:",
+	"item.modifiers.third_artifact": "When equipped as Third Artifact:",
 	"item.modifiers.shot": "When Shoots:",
 	
 	"equipment.rpgu.description_line": " %s",
@@ -31,10 +34,9 @@
 	
 	"attribute.rpgu.projectile_speed": "Projectile Speed",
 	"attribute.rpgu.projectile_damage": "Projectile Physical Damage",
-	"attribute.rpgu.projectile_damage_magical": "%s Projectile Magical Damage",
 	
 	
-	
+	"gui.rpgu.alloy_forge": "Alloy Forge",
 	
 	
 	
@@ -42,9 +44,9 @@
 	
 	"item.rpgu.blaze_blade": "Blaze Blade",
 	
-	"item.rpgu.ceremonious_dagger": "Ceremonious Dagger",
-	"item.rpgu.ceremonious_dagger.description.0": "+150% Physical Damage to backstab",
-	"item.rpgu.ceremonious_dagger.description.1": "+50% Physical Damage to backstab",
+	"item.rpgu.ceremonial_dagger": "Ceremonial Dagger",
+	"item.rpgu.ceremonial_dagger.description.0": "+150% Physical Damage to backstab",
+	"item.rpgu.ceremonial_dagger.description.1": "+50% Physical Damage to backstab",
 	
 	"item.rpgu.light_feather": "Light Feather",
 	"item.rpgu.light_feather.description.0": "Allows to double jump",

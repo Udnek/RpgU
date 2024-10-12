@@ -7,13 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
 public class ProjectileSpeedAttribute extends RpgUAttribute implements Listener {
-    @Override
-    public String getRawId() {
-        return "projectile_speed";
+    public ProjectileSpeedAttribute() {
+        super("projectile_speed", 1, 0, 100);
     }
-
-    @Override
-    public double getDefaultValue() {return 1;}
 
     @EventHandler
     public void onFire(EntityShootBowEvent event) {

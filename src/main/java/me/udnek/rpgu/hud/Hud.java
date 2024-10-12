@@ -1,18 +1,20 @@
 package me.udnek.rpgu.hud;
 
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customhud.CustomHud;
 import me.udnek.itemscoreu.customhud.CustomHudManager;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.utils.ComponentU;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.equipment.Equippable;
+import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.equipment.PlayerEquipment;
-import me.udnek.rpgu.equipment.PlayerEquipmentDatabase;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MainHand;
+import org.jetbrains.annotations.NotNull;
 
 public class Hud implements CustomHud {
 
@@ -21,27 +23,31 @@ public class Hud implements CustomHud {
     private final static int RIGHT_HANDED_OFFSET = 74;
     private final static int LEFT_HANDED_OFFSET = -109;
 
+    Component joinedImage = Component.empty();
+    int totalImagesSize;
+
     @Override
-    public Component getText(Player player) {
-        PlayerEquipment equipment = PlayerEquipmentDatabase.get(player);
+    public @NotNull Component getText(Player player) {
+        PlayerEquipment equipment = PlayerEquipment.get(player);
         if (equipment.isEmpty()) return Component.empty();
 
-        Component joinedImage = Component.empty();
-        int totalImagesSize = 0;
+        joinedImage = Component.empty();
+        totalImagesSize = 0;
 
-        for (Equippable equippable : equipment.getFullEquipment().values()) {
-            if (equippable.getHudImages(player) == null) continue;
-            for (Component image : equippable.getHudImages(player)) {
-                joinedImage = joinedImage.append(ComponentU.space(OFFSET_BETWEEN_IMAGES)).append(image);
+        equipment.getEquipment(new PlayerEquipment.EquipmentConsumer() {
+            @Override
+            public void accept(@NotNull SingleSlot slot, @NotNull CustomItem customItem) {
+                EquippableItemComponent equippable = customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM);
+                Component hudImage = equippable.getHudImage(customItem, player);
+                if (hudImage == null) return;
+                joinedImage.append(ComponentU.space(OFFSET_BETWEEN_IMAGES)).append(hudImage);
                 totalImagesSize += OFFSET_BETWEEN_IMAGES;
             }
-        }
+        });
 
-        int offset = RIGHT_HANDED_OFFSET;
-        if (player.getMainHand() == MainHand.LEFT) offset = LEFT_HANDED_OFFSET - totalImagesSize;
-
-        joinedImage = ComponentU.textWithNoSpace(offset, joinedImage, totalImagesSize);
-
+        if (totalImagesSize == 0) return Component.empty();
+        int offset = (player.getMainHand() == MainHand.LEFT) ? LEFT_HANDED_OFFSET - totalImagesSize : RIGHT_HANDED_OFFSET;
+        joinedImage = ComponentU.textWithNoSpace(offset, joinedImage, totalImagesSize-1);
         return joinedImage.color(ComponentU.NO_SHADOW_COLOR).font(FONT);
     }
 

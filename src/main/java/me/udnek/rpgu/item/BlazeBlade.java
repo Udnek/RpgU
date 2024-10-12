@@ -1,10 +1,11 @@
+/*
 package me.udnek.rpgu.item;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customattribute.DefaultCustomAttributeHolder;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlots;
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.serializabledata.SerializableData;
 import me.udnek.itemscoreu.serializabledata.SerializableDataManager;
@@ -41,7 +42,7 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
 
     private final CustomAttributesContainer customAttributes =
             new CustomAttributesContainer.Builder()
-                    .add(Attributes.MAGICAL_DAMAGE, 4, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlots.MAIN_HAND)
+                    .add(Attributes.MAGICAL_DAMAGE, 4, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND)
                     .build();
 
     @Override
@@ -68,7 +69,7 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
     @Override
     protected void modifyFinalItemStack(ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, "ufsiud mpo,fp",-4);
+        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, null,-4);
         LoreUtils.generateFullLoreAndApply(itemStack);
     }
 
@@ -80,7 +81,8 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
     @Override
     public void onPlayerAttacksWhenEquipped(Player player, CustomEquipmentSlot slot, DamageEvent event) {
 
-        SaveData previousData = new SaveData();
+*/
+/*        SaveData previousData = new SaveData();
         SerializableDataManager.read(previousData, RpgU.getInstance(), player);
         LogUtils.log(String.valueOf(previousData.getLocation()));
 
@@ -88,7 +90,8 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
 
         if (previousData.getLocation() != null){
             player.teleport(previousData.getLocation());
-        }
+        }*//*
+
 
         if (!(event.getVictim() instanceof LivingEntity victim)) return;
 
@@ -123,9 +126,11 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
 
                 //LogUtils.log(velocity.toString());
 
+*/
 /*                if (i== 1){
                     victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 17, 6, false, true, true));
-                }*/
+                }*//*
+
 
                 if ((velocity.getX() == 0 || velocity.getZ() == 0) && previousVelocity.length() >= 0.3){
                     final int duration = 20*3;
@@ -176,39 +181,48 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
         // TODO: 2/11/2024 USAGE
 
 
+*/
 /*        event.getPlayer().sendMessage("CLICKED");
-        NMSTest.sendEffectPacket(event.getPlayer());*/
+        NMSTest.sendEffectPacket(event.getPlayer());*//*
+
 
         //Entities.energyVault.spawn(event.getPlayer().getLocation());
 
         //Structures.energyVault.build(playerInteractEvent.getPlayer().getLocation());
+*/
 /*
         if (event.getClickedBlock() == null) return;
 
         boolean standingHere = Structures.energyVault.isStandingHere(event.getClickedBlock().getLocation());
-        event.getPlayer().sendMessage(String.valueOf(standingHere));*/
+        event.getPlayer().sendMessage(String.valueOf(standingHere));*//*
 
+
+*/
 /*        ItemStack itemStack1 = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta itemMeta = itemStack1.getItemMeta();
         //itemMeta.addEnchant(Enchantments.test, 1, true);
         itemStack1.setItemMeta(itemMeta);
-        playerInteractEvent.getPlayer().getInventory().addItem(itemStack1);*/
+        playerInteractEvent.getPlayer().getInventory().addItem(itemStack1);*//*
+
 
         //NMSTest.getAllFeatures(playerInteractEvent.getPlayer().getLocation());
 
         //playerInteractEvent.getPlayer().getInventory().addItem(CeremoniousDagger.getInstance().getItem());
 
+*/
 /*        Collection<Entity> nearbyEntities = player.getLocation().getWorld().getNearbyEntities(player.getLocation(), 5, 5, 5);
         for (Entity nearbyEntity : nearbyEntities) {
             if (nearbyEntity instanceof Player) continue;
             NMSTest.setCameraEntity(player, nearbyEntity);
-        }*/
+        }*//*
+
 
         //NMSTest.sendExplosionPacket(player);
         //NMSTest.startRiptiding(player, 5);
         //player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 5, 1, false, true));
 
         //player.setVelocity(player.getVelocity().multiply(4));
+*/
 /*        SizedFireball fireball = player.launchProjectile(SmallFireball.class);
         fireball.setIsIncendiary(false);
         fireball.setDisplayItem(new ItemStack(Material.AIR));
@@ -217,13 +231,16 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
         fireball.setVelocity(fireball.getVelocity().multiply(0));
         fireball.setDirection(fireball.getDirection().multiply(0));
 
-        player.*/
+        player.*//*
+
         //fireball.setShooter(null);
         //player.damage(3, fireball);
         //player.setNoDamageTicks(0);
+*/
 /*        new EntityDamageByEntityEvent(fireball, player, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION,
                 new HashMap<EntityDamageEvent.DamageModifier, Double>(),
-                new HashMap<EntityDamageEvent.DamageModifier, Function<? super Double, Double>>());*/
+                new HashMap<EntityDamageEvent.DamageModifier, Function<? super Double, Double>>());*//*
+
     }
 
     @Override
@@ -281,3 +298,4 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
         }
     }
 }
+*/

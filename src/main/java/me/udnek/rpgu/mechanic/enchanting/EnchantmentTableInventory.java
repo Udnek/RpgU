@@ -170,11 +170,6 @@ public class EnchantmentTableInventory extends ConstructableCustomInventory {
     }
 
     @Override
-    public String getRawDisplayName() {
-        return "";
-    }
-
-    @Override
     public Component getDisplayName() {
         return Component.translatable("space.-8").append(Component.text("0").font(Key.key("rpgu:enchanting")).color(TextColor.color(1f,1f,1f)))
                 .append(Component.translatable("space.-170")).append(Component.translatable("container.enchant").color(TextColor.color(1f, 1f, 1f)));

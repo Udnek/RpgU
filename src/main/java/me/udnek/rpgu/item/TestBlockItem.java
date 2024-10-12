@@ -4,7 +4,6 @@ import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomBlockItem;
 import me.udnek.rpgu.block.Blocks;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
 import org.bukkit.Material;
 
 public class TestBlockItem extends ConstructableCustomItem implements RpgUCustomItem, CustomBlockItem {

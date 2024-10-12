@@ -1,8 +1,9 @@
+/*
 package me.udnek.rpgu.item.camera;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.utils.RightClickable;
-import me.udnek.rpgu.item.abstraction.RpgUCustomItem;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
@@ -107,8 +108,6 @@ public class Camera extends ConstructableCustomItem implements RightClickable, R
         return color;
     }
 
-
-    @Override
     public void onRightClicks(PlayerInteractEvent playerInteractEvent) {
         Player player = playerInteractEvent.getPlayer();
 
@@ -135,11 +134,13 @@ public class Camera extends ConstructableCustomItem implements RightClickable, R
                 for (int y = 0; y < 128; ++y) {
                     for (int x = 0; x < 128; ++x) {
 
+*/
 /*                        frameDirection = location.getDirection().clone();
 
                         frameDirection.setX(frameDirection.getX() + (y-64)/64f);
                         frameDirection.setZ(frameDirection.getZ() + (y-64)/64f);
-                        frameDirection.setY(frameDirection.getY() + (y-64)/64f);*/
+                        frameDirection.setY(frameDirection.getY() + (y-64)/64f);*//*
+
 
                         //frameDirection.rotateAroundZ((y-64)/64f*Math.sin(frameDirection.getX()));
                         //frameDirection.rotateAroundX((y-64)/64f*Math.cos(frameDirection.getZ()));
@@ -191,3 +192,4 @@ public class Camera extends ConstructableCustomItem implements RightClickable, R
 
 
 
+*/

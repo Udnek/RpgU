@@ -18,7 +18,7 @@ import java.util.List;
 public class MinecartListener extends SelfRegisteringListener {
 
     public static final double DEFAULT_MINECART_SPEED = 0.4;
-    public static final double BUFFED_MINECART_SPEED = 0.8;
+    public static final double BUFFED_MINECART_SPEED = 2;
 
     public MinecartListener(JavaPlugin plugin) {super(plugin);}
 
@@ -31,7 +31,7 @@ public class MinecartListener extends SelfRegisteringListener {
         List<Entity> passengers = vehicle.getPassengers();
 
         if (passengers.isEmpty()) return;
-        if (!(passengers.get(0) instanceof Player player)) return;
+        if (!(passengers.getFirst() instanceof Player player)) return;
         //if (!(vehicle instanceof Minecart minecart)) return;
 
         player.sendMessage(String.valueOf(event.getFrom().distance(event.getTo())));

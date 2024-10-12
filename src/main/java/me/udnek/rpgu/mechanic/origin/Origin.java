@@ -1,3 +1,4 @@
+/*
 package me.udnek.rpgu.mechanic.origin;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -10,3 +11,4 @@ public abstract class Origin implements Equippable {
 
 
 }
+*/

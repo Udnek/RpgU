@@ -42,7 +42,8 @@ public class CooldownData extends PerPlayerData<Integer>{
     }
 
     public Component getImage(Player player){
-        return ComponentU.textWithNoSpace(Component.translatable(TranslationKeys.artifactCooldown + Math.round(getProgress(player) * 16)), 16);
+        float progress = getProgress(player);
+        return ComponentU.textWithNoSpace(Component.translatable(TranslationKeys.artifactCooldown + Math.round(progress * 16)), 16);
 
     }
 }

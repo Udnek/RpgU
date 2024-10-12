@@ -14,25 +14,12 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <remapped.version>1.20.6-R0.1-SNAPSHOT</remapped.version>
         <lib.itemscoreu>C:\Users\glebd\OneDrive\Documents\CODING\Java\ItemsCoreU\target\ItemsCoreU-1.0-SNAPSHOT-remapped.jar</lib.itemscoreu>
+        <lib.jeiu>C:\Users\glebd\OneDrive\Рабочий стол\TestServer\plugins\JeiU.jar</lib.jeiu>
     </properties>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>ca.bkaw</groupId>
-                <artifactId>paper-nms-maven-plugin</artifactId>
-                <version>1.4.3</version>
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>remap</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -52,43 +39,6 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>net.md-5</groupId>
-                <artifactId>specialsource-maven-plugin</artifactId>
-                <!-- Get the latest version from https://mvnrepository.com/artifact/net.md-5/specialsource-maven-plugin -->
-                <version>2.0.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>remap</goal>
-                        </goals>
-                        <id>remap-obf</id>
-                        <configuration>
-                            <srgIn>org.spigotmc:minecraft-server:${remapped.version}:txt:maps-mojang</srgIn>
-                            <reverse>true</reverse>
-                            <remappedDependencies>org.spigotmc:spigot:${remapped.version}:jar:remapped-mojang</remappedDependencies>
-                            <remappedArtifactAttached>true</remappedArtifactAttached>
-                            <remappedClassifierName>remapped-obf</remappedClassifierName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>remap</goal>
-                        </goals>
-                        <id>remap-spigot</id>
-                        <configuration>
-                            <inputFile>${project.build.directory}/${project.artifactId}-${project.version}-remapped-obf.jar</inputFile>
-                            <srgIn>org.spigotmc:minecraft-server:${remapped.version}:csrg:maps-spigot</srgIn>
-                            <remappedDependencies>org.spigotmc:spigot:${remapped.version}:jar:remapped-obf</remappedDependencies>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -113,7 +63,12 @@
     </repositories>
 
     <dependencies>
-
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>me.udnek</groupId>
             <artifactId>ItemsCoreU</artifactId>
@@ -121,23 +76,12 @@
             <scope>system</scope>
             <systemPath>${lib.itemscoreu}</systemPath>
         </dependency>
-
-
-
         <dependency>
-            <groupId>io.papermc.paper</groupId>
-            <artifactId>paper-api</artifactId>
-            <version>${remapped.version}</version>
-            <scope>provided</scope>
+            <groupId>me.udnek</groupId>
+            <artifactId>JeiU</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${lib.jeiu}</systemPath>
         </dependency>
-
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>${remapped.version}</version>
-            <scope>provided</scope>
-            <classifier>remapped-mojang</classifier>
-        </dependency>
-
     </dependencies>
 </project>

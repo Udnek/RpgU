@@ -1,7 +1,7 @@
 package me.udnek.rpgu.block;
 
 import me.udnek.itemscoreu.customblock.CustomBlock;
-import me.udnek.itemscoreu.customblock.CustomBlockRegistry;
+import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 
 public class Blocks {
@@ -10,6 +10,6 @@ public class Blocks {
 
 
     private static CustomBlock register(CustomBlock customBlock){
-        return CustomBlockRegistry.getInstance().register(RpgU.getInstance(), customBlock);
+        return CustomRegistries.BLOCK.register(RpgU.getInstance(), customBlock);
     }
 }

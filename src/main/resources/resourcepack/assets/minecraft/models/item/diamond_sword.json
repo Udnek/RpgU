@@ -4,6 +4,6 @@
 		"layer0": "minecraft:item/diamond_sword"
 	},
 	"overrides": [
-		{ "predicate": { "custom_model_data": 3100}, "model": "rpgu:item/ceremonious_dagger" }
+		{ "predicate": { "custom_model_data": 3100}, "model": "rpgu:item/ceremonial_dagger" }
 	]
 }
