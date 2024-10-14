@@ -51,11 +51,39 @@ public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
                 lootPoolBuilder
         );
         Nms.get().addLootPool(
+                LootTables.DROWNED.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
                 LootTables.HUSK.getLootTable(),
                 lootPoolBuilder
         );
         Nms.get().addLootPool(
-                LootTables.DROWNED.getLootTable(),
+                LootTables.HUSK.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
+                LootTables.HUSK.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
+                LootTables.HUSK.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
+                LootTables.HUSK.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
+                LootTables.HUSK.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
+                LootTables.HUSK.getLootTable(),
+                lootPoolBuilder
+        );
+        Nms.get().addLootPool(
+                LootTables.HUSK.getLootTable(),
                 lootPoolBuilder
         );
     }
