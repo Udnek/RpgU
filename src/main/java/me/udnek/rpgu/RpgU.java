@@ -9,6 +9,7 @@ import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.nms.entry.CustomNmsLootEntryBuilder;
 import me.udnek.itemscoreu.nms.entry.ItemStackCreator;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
+import me.udnek.itemscoreu.utils.VanillaItemManager;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
 import me.udnek.rpgu.entity.EntityTypes;
@@ -70,6 +71,12 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
                         )
                 )
         );
+
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SWORD);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_PICKAXE);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
 
         this.getServer().getScheduler().scheduleSyncDelayedTask(this, () ->
                 RecipeRegistering.register()

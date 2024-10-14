@@ -29,10 +29,14 @@ public class Items {
     public final static CustomItem INJECTOR = register(new Injector());*/
     public final static CustomItem SHINY_AXE = register(new ShinyAxe());
     public final static CustomItem CEREMONIOUS_DAGGER = register(new CeremonialDagger());
-
-    public final static CustomItem TEST_BLOCK = register(new TestBlockItem());
-
+    //public final static CustomItem TEST_BLOCK = register(new TestBlockItem());
     public final static CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
+    public final static CustomItem FABRIC = register(new Fabric());
+    public final static CustomItem FLINT_SWORD = register(new FlintSword());
+    public final static CustomItem FLINT_PICKAXE = register(new FlintPickaxe());
+    public final static CustomItem FLINT_AXE = register(new FlintAxe());
+    public final static CustomItem FLINT_SHOVEL = register(new FlintShovel());
+    public final static CustomItem FLINT_HOE = register(new FlintHoe());
 
     public final static CustomItem FABRIC = register(new Fabric());
 
