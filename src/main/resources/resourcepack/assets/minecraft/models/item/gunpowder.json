@@ -13,6 +13,7 @@
 		{ "predicate": { "custom_model_data": 3105}, "model": "rpgu:item/sphere_of_balance" },
 		{ "predicate": { "custom_model_data": 3106}, "model": "rpgu:item/fisherman_snorkel" },
 		{ "predicate": { "custom_model_data": 3107}, "model": "rpgu:item/injector" },
+		{ "predicate": { "custom_model_data": 3108}, "model": "rpgu:item/fabric" },
 		
 		{ "predicate": { "custom_model_data": 5000}, "model": "rpgu:item/backpack/water_full" },
 		{ "predicate": { "custom_model_data": 5001}, "model": "rpgu:item/backpack/lava_full" }

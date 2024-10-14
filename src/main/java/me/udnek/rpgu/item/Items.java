@@ -34,6 +34,8 @@ public class Items {
 
     public final static CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
 
+    public final static CustomItem FABRIC = register(new Fabric());
+
     private static CustomItem register(CustomItem customItem){
         return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);
     }
