@@ -25,7 +25,7 @@ public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
     public @NotNull String getRawId() {return "fabric";}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem().add());
         recipe.shape("SWS");
 
         RecipeChoice.MaterialChoice string = new RecipeChoice.MaterialChoice(Material.STRING);
@@ -35,14 +35,13 @@ public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
 
         consumer.accept(recipe);
     }
-
     @Override
     public void afterInitialization() {
         super.afterInitialization();
         CustomNmsLootPoolBuilder lootPoolBuilder = new CustomNmsLootPoolBuilder(
                 CustomNmsLootEntryBuilder.fromVanilla(
-                        LootTables.SKELETON.getLootTable(),
-                        itemStack -> itemStack.getType() == Material.ARROW,
+                        LootTables.BLAZE.getLootTable(),
+                        itemStack -> itemStack.getType() == Material.BLAZE_ROD,
                         new ItemStackCreator.CustomSimple(Items.FABRIC)
                 )
         );
