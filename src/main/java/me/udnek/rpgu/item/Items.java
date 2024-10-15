@@ -38,8 +38,6 @@ public class Items {
     public final static CustomItem FLINT_SHOVEL = register(new FlintShovel());
     public final static CustomItem FLINT_HOE = register(new FlintHoe());
 
-    public final static CustomItem FABRIC = register(new Fabric());
-
     private static CustomItem register(CustomItem customItem){
         return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);
     }

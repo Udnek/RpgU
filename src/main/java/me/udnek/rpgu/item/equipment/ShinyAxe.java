@@ -1,7 +1,12 @@
 package me.udnek.rpgu.item.equipment;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.nms.CustomNmsLootPoolBuilder;
+import me.udnek.itemscoreu.nms.Nms;
+import me.udnek.itemscoreu.nms.entry.CustomNmsLootEntryBuilder;
+import me.udnek.itemscoreu.nms.entry.ItemStackCreator;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
+import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
@@ -9,6 +14,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
 public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem {
@@ -33,5 +39,20 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
         RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, null, 2);
         RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_SPEED, null, -0.3);
         LoreUtils.generateFullLoreAndApply(itemStack);
+    }
+
+    @Override
+    public void afterInitialization() {
+        super.afterInitialization();
+        Nms.get().addLootPool(
+                LootTables.PIGLIN_BRUTE.getLootTable(),
+                new CustomNmsLootPoolBuilder(
+                        CustomNmsLootEntryBuilder.fromVanilla(
+                                LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
+                                itemStack -> itemStack.getType() == Material.GOLD_NUGGET,
+                                new ItemStackCreator.CustomSimple(Items.SHINY_AXE)
+                        )
+                )
+        );
     }
 }

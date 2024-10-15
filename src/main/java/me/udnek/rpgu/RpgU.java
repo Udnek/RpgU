@@ -61,16 +61,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         new Hud().register();
 
-        Nms.get().addLootPool(
-                LootTables.PIGLIN_BRUTE.getLootTable(),
-                new CustomNmsLootPoolBuilder(
-                        CustomNmsLootEntryBuilder.fromVanilla(
-                                LootTables.SKELETON.getLootTable(),
-                                itemStack -> itemStack.getType() == Material.ARROW,
-                                new ItemStackCreator.CustomSimple(Items.SHINY_AXE)
-                        )
-                )
-        );
 
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SWORD);
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_PICKAXE);
