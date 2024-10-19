@@ -56,6 +56,9 @@
 	"item.rpgu.flint_shovel": "Flint Shovel",
 	"item.rpgu.flint_hoe": "Flint Hoe",
 
+	"item.rpgu.raw_magnetite": "Raw Magnetite",
+	"item.rpgu.magnetite_ingot": "Magnetite Ingot",
+
 	"item.rpgu.light_feather": "Light Feather",
 	"item.rpgu.light_feather.description.0": "Allows to double jump",
 	

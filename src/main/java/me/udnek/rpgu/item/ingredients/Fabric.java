@@ -1,10 +1,12 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.ingredients;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.nms.CustomNmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.nms.entry.CustomNmsLootEntryBuilder;
 import me.udnek.itemscoreu.nms.entry.ItemStackCreator;
+import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.Recipe;
