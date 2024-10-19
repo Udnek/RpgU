@@ -50,11 +50,26 @@
 
 	"item.rpgu.fabric": "Fabric",
 
+	"item.rpgu.ferrudam_ingot": "Ferrudam Ingot",
+
+	"item.rpgu.ferrudam_sword": "Ferrudam Sword",
+	"item.rpgu.ferrudam_pickaxe": "Ferrudam Pickaxe",
+	"item.rpgu.ferrudam_axe": "Ferrudam Axe",
+	"item.rpgu.ferrudam_shovel": "Ferrudam Shovel",
+	"item.rpgu.ferrudam_hoe": "Ferrudam Hoe",
+
+	"item.rpgu.ingot_mold": "Ingot Mold",
+
+	"item.rpgu.blast_coal": "Blast Coal",
+
 	"item.rpgu.flint_sword": "Flint Sword",
 	"item.rpgu.flint_pickaxe": "Flint Pickaxe",
 	"item.rpgu.flint_axe": "Flint Axe",
 	"item.rpgu.flint_shovel": "Flint Shovel",
 	"item.rpgu.flint_hoe": "Flint Hoe",
+
+	"item.rpgu.raw_magnetite": "Raw Magnetite",
+	"item.rpgu.magnetite_ingot": "Magnetite Ingot",
 
 	"item.rpgu.light_feather": "Light Feather",
 	"item.rpgu.light_feather.description.0": "Allows to double jump",

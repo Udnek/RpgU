@@ -1,6 +1,8 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.equipment.flint_tool;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.Recipe;
@@ -11,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class FlintSword extends ConstructableCustomItem implements RpgUCustomItem{
+public class FlintSword extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
@@ -25,7 +27,8 @@ public class FlintSword extends ConstructableCustomItem implements RpgUCustomIte
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
-        recipe.shape(" F ",
+        recipe.shape(
+                " F ",
                 "KF ",
                 " S ");
 

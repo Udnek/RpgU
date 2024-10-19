@@ -1,0 +1,11 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "item/diamond_pickaxe"
+  },
+
+  "overrides": [
+    { "predicate": { "custom_model_data": 1000}, "model": "rpgu:item/ferrudam_pickaxe" }
+
+  ]
+}

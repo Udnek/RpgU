@@ -4,6 +4,7 @@
 		"layer0": "minecraft:item/diamond_axe"
 	},
 	"overrides": [
+		{ "predicate": { "custom_model_data": 1000}, "model": "rpgu:item/ferrudam_axe" },
 		{ "predicate": { "custom_model_data": 3100}, "model": "rpgu:item/shiny_axe" }
 	]
 }

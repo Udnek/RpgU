@@ -1,10 +1,12 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.ingredients;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.nms.CustomNmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.nms.entry.CustomNmsLootEntryBuilder;
-import me.udnek.itemscoreu.nms.entry.ItemStackCreator;
+import me.udnek.itemscoreu.nms.loot.ItemStackCreator;
+import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
+import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.Recipe;
@@ -38,11 +40,11 @@ public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public void afterInitialization() {
         super.afterInitialization();
-        CustomNmsLootPoolBuilder lootPoolBuilder = new CustomNmsLootPoolBuilder(
-                CustomNmsLootEntryBuilder.fromVanilla(
+        NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
+                NmsCustomLootEntryBuilder.fromVanilla(
                         LootTables.BLAZE.getLootTable(),
                         itemStack -> itemStack.getType() == Material.BLAZE_ROD,
-                        new ItemStackCreator.CustomSimple(Items.FABRIC)
+                        new ItemStackCreator.Custom(Items.FABRIC)
                 )
         );
         Nms.get().addLootPool(
