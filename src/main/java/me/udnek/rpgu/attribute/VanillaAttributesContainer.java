@@ -50,7 +50,7 @@ public class VanillaAttributesContainer {
 
     public static class Builder{
 
-        private VanillaAttributesContainer container;
+        private final VanillaAttributesContainer container;
         public Builder(){
             container = new VanillaAttributesContainer();
         }

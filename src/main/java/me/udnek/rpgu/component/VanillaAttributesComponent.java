@@ -16,7 +16,7 @@ public class VanillaAttributesComponent implements CustomComponent<CustomItem> {
         this.container = container;
     }
 
-    public @NotNull VanillaAttributesContainer getAttributes() {return container;}
+    public @NotNull VanillaAttributesContainer getAttributes(@NotNull CustomItem customItem) {return container;}
 
     @Override
     public @NotNull CustomComponentType<CustomItem, VanillaAttributesComponent> getType() {

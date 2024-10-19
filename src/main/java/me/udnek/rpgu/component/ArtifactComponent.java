@@ -48,7 +48,7 @@ public interface ArtifactComponent extends EquippableItemComponent{
     }
 
     default void getAttributes(@NotNull CustomItem item, Player player, ArtifactComponent.AttributeConsumer consumer){
-        VanillaAttributesContainer container = item.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes();
+        VanillaAttributesContainer container = item.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes(item);
         if (container.isEmpty()) return;
 
         for (Map.Entry<Attribute, List<CustomKeyedAttributeModifier>> entry : container.get(EquipmentSlots.ARTIFACTS).getAll().entrySet()) {

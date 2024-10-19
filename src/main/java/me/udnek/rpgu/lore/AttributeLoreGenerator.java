@@ -59,9 +59,9 @@ public class AttributeLoreGenerator {
 
         CustomItem customItem = CustomItem.get(itemStack);
         if (customItem != null){
-            customAttributes = customItem.getComponentOrDefault(CustomComponentType.CUSTOM_ITEM_ATTRIBUTES).getAttributes();
+            customAttributes = customItem.getComponentOrDefault(CustomComponentType.CUSTOM_ITEM_ATTRIBUTES).getAttributes(customItem);
             // VANILLA-CUSTOM
-            vanillaCustomAttributes = customItem.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes();
+            vanillaCustomAttributes = customItem.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes(customItem);
         } else {
             customAttributes = CustomAttributesContainer.empty();
             vanillaCustomAttributes = VanillaAttributesContainer.empty();

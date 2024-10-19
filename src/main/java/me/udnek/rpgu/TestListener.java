@@ -49,12 +49,12 @@ public class TestListener extends SelfRegisteringListener {
 
     @EventHandler
     public void onItemGenerates(CustomItemGeneratedEvent event){
-        System.out.println("CALLED EVENT");
+        //System.out.println("CALLED EVENT");
         AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
         if (event.getCustomItem() instanceof VanillaBasedCustomItem){
-            System.out.println("MODIFING");
+           // System.out.println("MODIFING");
             event.getItemStack().addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            System.out.println(event.getItemStack().getItemFlags());
+            ///System.out.println(event.getItemStack().getItemFlags());
         }
     }
 
