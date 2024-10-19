@@ -27,7 +27,8 @@ public class FlintHoe extends ConstructableCustomItem implements RpgUCustomItem 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
-        recipe.shape("FF ",
+        recipe.shape(
+                "FF ",
                 "KS ",
                 " S ");
 
