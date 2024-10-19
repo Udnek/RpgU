@@ -24,13 +24,15 @@ public class FerrudamIngot extends ConstructableCustomItem implements RpgUCustom
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
-        CustomSingleRecipeChoice diamondIngot = new CustomSingleRecipeChoice(Material.DIAMOND);
-        alloys.add(diamondIngot);
-        alloys.add(diamondIngot);
         CustomSingleRecipeChoice ironIngot = new CustomSingleRecipeChoice(Material.IRON_INGOT);
         alloys.add(ironIngot);
         alloys.add(ironIngot);
         alloys.add(ironIngot);
+        CustomSingleRecipeChoice diamondIngot = new CustomSingleRecipeChoice(Material.DIAMOND);
+        alloys.add(diamondIngot);
+        alloys.add(diamondIngot);
+
+
 
         AlloyingRecipe recipe = new AlloyingRecipe(
                 getRecipeNamespace(0),

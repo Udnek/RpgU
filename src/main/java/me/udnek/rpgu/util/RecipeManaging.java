@@ -14,10 +14,10 @@ import org.bukkit.inventory.ShapedRecipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeRegistering {
+public class RecipeManaging {
 
 
-    public static void register(){
+    public static void run(){
 
         netheriteIngot();
 
@@ -27,10 +27,10 @@ public class RecipeRegistering {
 
         ironArmor();
 
-        deleteCraft();
+        unregister();
     }
 
-    private static void deleteCraft() {
+    private static void unregister() {
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_hoe"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_axe"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_pickaxe"));
@@ -175,9 +175,7 @@ public class RecipeRegistering {
         alloys.add(magnetiteIngot);
         alloys.add(magnetiteIngot);
         alloys.add(magnetiteIngot);
-        alloys.add(magnetiteIngot);
         CustomSingleRecipeChoice netheriteScrap = new CustomSingleRecipeChoice(Material.NETHERITE_SCRAP);
-        alloys.add(netheriteScrap);
         alloys.add(netheriteScrap);
         alloys.add(netheriteScrap);
         alloys.add(netheriteScrap);

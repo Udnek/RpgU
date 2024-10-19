@@ -1,8 +1,6 @@
 package me.udnek.rpgu;
 
-import me.udnek.itemscoreu.customadvancement.AdvancementCriterion;
 import me.udnek.itemscoreu.customadvancement.ConstructableCustomAdvancement;
-import me.udnek.itemscoreu.customadvancement.CustomAdvancementDisplayBuilder;
 import me.udnek.itemscoreu.customadvancement.CustomAdvancementUtils;
 import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
@@ -24,11 +22,9 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
-import me.udnek.rpgu.util.RecipeRegistering;
+import me.udnek.rpgu.util.RecipeManaging;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.advancement.Advancement;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
@@ -69,9 +65,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
 
-        this.getServer().getScheduler().scheduleSyncDelayedTask(this, () ->
-                RecipeRegistering.register()
-        );
 
         ConstructableCustomAdvancement advancement = CustomAdvancementUtils.itemAdvancement(new NamespacedKey("rpg", "test"), Items.FABRIC.getItem());
         advancement.getDisplay().background("textures/block/cobblestone.png");

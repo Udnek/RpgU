@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.equipment.flint_tool;
+package me.udnek.rpgu.item.equipment.flint;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.item.Items;
@@ -13,13 +13,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class FlintShovel extends ConstructableCustomItem implements RpgUCustomItem {
+public class FlintPickaxe extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
-    public @NotNull String getRawId() {return "flint_shovel";}
+    public @NotNull String getRawId() {return "flint_pickaxe";}
     @Override
-    public @NotNull Material getMaterial() {return Material.STONE_SHOVEL;}
+    public @NotNull Material getMaterial() {return Material.STONE_PICKAXE;}
     @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
     @Override
@@ -28,7 +28,7 @@ public class FlintShovel extends ConstructableCustomItem implements RpgUCustomIt
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
         recipe.shape(
-                " F ",
+                "FFF",
                 "KS ",
                 " S ");
 

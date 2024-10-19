@@ -23,7 +23,7 @@ public class IngotMold extends ConstructableCustomItem implements RpgUCustomItem
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
         recipe.shape(
                 "C C",
-                "CCC");
+                " C ");
 
         RecipeChoice.MaterialChoice clayBall = new RecipeChoice.MaterialChoice(Material.CLAY_BALL);
         recipe.setIngredient('C', clayBall);

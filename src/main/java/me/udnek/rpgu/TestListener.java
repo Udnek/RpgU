@@ -1,9 +1,11 @@
 package me.udnek.rpgu;
 
+import me.udnek.itemscoreu.customevent.BeforeVanillaManagerActivationEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
+import me.udnek.rpgu.util.RecipeManaging;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
@@ -40,6 +42,10 @@ public class TestListener extends SelfRegisteringListener {
         LogUtils.log(event.getAll());
     }
 */
+    @EventHandler
+    public void onRecipes(BeforeVanillaManagerActivationEvent event){
+        RecipeManaging.run();
+    }
 
     @EventHandler
     public void onItemGenerates(CustomItemGeneratedEvent event){

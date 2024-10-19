@@ -1,14 +1,12 @@
-package me.udnek.rpgu.item.equipment.ferrudam_tool;
+package me.udnek.rpgu.item.equipment.ferrudam;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customrecipe.RecipeManager;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.Recipe;
@@ -19,15 +17,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamAxe extends ConstructableCustomItem implements RpgUCustomItem {
+public class FerrudamPickaxe extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
-    public @NotNull String getRawId() {return "ferrudam_axe";}
+    public @NotNull String getRawId() {return "ferrudam_pickaxe";}
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_AXE;}
+    public @NotNull Material getMaterial() {return Material.DIAMOND_PICKAXE;}
     @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
     @Override
@@ -36,9 +35,9 @@ public class FerrudamAxe extends ConstructableCustomItem implements RpgUCustomIt
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
         recipe.shape(
-                "FF",
-                "FS",
-                " S");
+                "FFF",
+                " S ",
+                " S ");
 
         RecipeChoice.ExactChoice flint = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
         RecipeChoice.MaterialChoice stick = new RecipeChoice.MaterialChoice(Material.STICK);
@@ -47,16 +46,12 @@ public class FerrudamAxe extends ConstructableCustomItem implements RpgUCustomIt
 
         consumer.accept(recipe);
 
-        List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
-        CustomSingleRecipeChoice magnetiteIngot = new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT);
-        alloys.add(magnetiteIngot);
-
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
                 getRecipeNamespace(0),
-                alloys,
-                new CustomCompatibleRecipeChoice(List.of(), new ArrayList<>(Tag.ITEMS_COALS.getValues())),
-                new CustomSingleRecipeChoice(Material.IRON_AXE),
+                List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT)),
+                new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                new CustomSingleRecipeChoice(Material.IRON_PICKAXE),
                 getItem()
         );
 

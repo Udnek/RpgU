@@ -5,8 +5,8 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
-import me.udnek.rpgu.item.equipment.ferrudam_tool.*;
-import me.udnek.rpgu.item.equipment.flint_tool.*;
+import me.udnek.rpgu.item.equipment.ferrudam.*;
+import me.udnek.rpgu.item.equipment.flint.*;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 

@@ -28,6 +28,7 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
         Preconditions.checkArgument(fuel != null, "Fuel can not be null!");
         Preconditions.checkArgument(addition != null, "TargetInput can not be null!");
         Preconditions.checkArgument(result != null, "Result can not be null!");
+        Preconditions.checkArgument(alloys.size() <= 6, "Alloys must be <= 6!");
         for (CustomRecipeChoice alloyInput : alloys) {
             Preconditions.checkArgument(alloyInput != null, "AlloyInput can not be null!");
         }

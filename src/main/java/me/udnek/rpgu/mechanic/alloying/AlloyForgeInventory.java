@@ -45,10 +45,9 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     protected static final int[] ALLOYS_SLOTS = new int[]
             {
             9*0+0, 9*0+1, 9*0+2,
-            9*1+0, 9*1+1, 9*1+2,
-            9*2+0, 9*2+1, 9*2+2
+            9*1+0, 9*1+1, 9*1+2
             };
-    protected static final int FUEL_SLOT = 9*4+1;
+    protected static final int FUEL_SLOT = 9*3+1;
     protected static final int ADDITION_SLOT = 9*2+4;
     protected static final int RESULT_SLOT = 9*2+7;
 

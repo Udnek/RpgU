@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.equipment.flint_tool;
+package me.udnek.rpgu.item.equipment.flint;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.item.Items;

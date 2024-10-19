@@ -2,9 +2,9 @@ package me.udnek.rpgu.item.equipment;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.nms.loot.ItemStackCreator;
 import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
@@ -44,15 +44,13 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
     @Override
     public void afterInitialization() {
         super.afterInitialization();
-        Nms.get().addLootPool(
-                LootTables.PIGLIN_BRUTE.getLootTable(),
-                new NmsLootPoolBuilder(
-                        NmsCustomLootEntryBuilder.fromVanilla(
-                                LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
-                                itemStack -> itemStack.getType() == Material.GOLD_NUGGET,
-                                new ItemStackCreator.Custom(Items.SHINY_AXE)
-                        )
-                )
-        );
+        Nms.get().getLootTableContainer(LootTables.PIGLIN_BRUTE.getLootTable())
+                        .addPool(new NmsLootPoolBuilder(
+                                NmsCustomLootEntryBuilder.fromVanilla(
+                                        LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
+                                        itemStack -> itemStack.getType() == Material.GOLD_NUGGET,
+                                        new ItemStackCreator.Custom(Items.SHINY_AXE)
+                                )
+                        ));
     }
 }
