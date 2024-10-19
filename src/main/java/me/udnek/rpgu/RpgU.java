@@ -4,10 +4,6 @@ import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.nms.CustomNmsLootPoolBuilder;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.nms.entry.CustomNmsLootEntryBuilder;
-import me.udnek.itemscoreu.nms.entry.ItemStackCreator;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.itemscoreu.utils.VanillaItemManager;
 import me.udnek.rpgu.block.Blocks;
@@ -26,7 +22,6 @@ import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
 import me.udnek.rpgu.util.RecipeRegistering;
 import org.bukkit.Material;
-import org.bukkit.loot.LootTables;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {

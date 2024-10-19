@@ -27,7 +27,8 @@ public class FlintShovel extends ConstructableCustomItem implements RpgUCustomIt
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
-        recipe.shape(" F ",
+        recipe.shape(
+                " F ",
                 "KS ",
                 " S ");
 

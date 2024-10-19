@@ -1,18 +1,18 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.ingredients;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class MagnetiteIngot extends ConstructableCustomItem implements RpgUCustomItem{
+public class MagnetiteIngot extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @Nullable Integer getCustomModelData() {return 3110;}
     @Override

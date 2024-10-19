@@ -5,8 +5,9 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
+import me.udnek.rpgu.item.equipment.ferrudam_tool.*;
 import me.udnek.rpgu.item.equipment.flint_tool.*;
-import me.udnek.rpgu.item.ingredients.Fabric;
+import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 
 public class Items {
@@ -34,6 +35,18 @@ public class Items {
     public final static CustomItem CEREMONIOUS_DAGGER = register(new CeremonialDagger());
 
     public final static CustomItem FABRIC = register(new Fabric());
+
+    public final static CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
+
+    public final static CustomItem FERRUDAM_SWORD = register(new FerrudamSword());
+    public final static CustomItem FERRUDAM_PICKAXE = register(new FerrudamPickaxe());
+    public final static CustomItem FERRUDAM_AXE = register(new FerrudamAxe());
+    public final static CustomItem FERRUDAM_SHOVEL = register(new FerrudamShovel());
+    public final static CustomItem FERRUDAM_HOE = register(new FerrudamHoe());
+
+    public final static CustomItem BLAST_COAL = register(new BlastCoal());
+
+    public final static CustomItem INGOT_MOLD = register(new IngotMold());
 
     public final static CustomItem FLINT_SWORD = register(new FlintSword());
     public final static CustomItem FLINT_PICKAXE = register(new FlintPickaxe());

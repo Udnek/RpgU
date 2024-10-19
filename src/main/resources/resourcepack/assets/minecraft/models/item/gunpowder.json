@@ -16,6 +16,9 @@
 		{ "predicate": { "custom_model_data": 3108}, "model": "rpgu:item/fabric" },
 		{ "predicate": { "custom_model_data": 3109}, "model": "rpgu:item/raw_magnetite" },
 		{ "predicate": { "custom_model_data": 3110}, "model": "rpgu:item/magnetite_ingot" },
+		{ "predicate": { "custom_model_data": 3111}, "model": "rpgu:item/ferrudam_ingot" },
+		{ "predicate": { "custom_model_data": 3112}, "model": "rpgu:item/ingot_mold" },
+		{ "predicate": { "custom_model_data": 3113}, "model": "rpgu:item/blast_coal" },
 		
 		{ "predicate": { "custom_model_data": 5000}, "model": "rpgu:item/backpack/water_full" },
 		{ "predicate": { "custom_model_data": 5001}, "model": "rpgu:item/backpack/lava_full" }

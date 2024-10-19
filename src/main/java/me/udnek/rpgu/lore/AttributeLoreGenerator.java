@@ -26,7 +26,10 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class AttributeLoreGenerator {
 
@@ -59,7 +62,7 @@ public class AttributeLoreGenerator {
 
         CustomItem customItem = CustomItem.get(itemStack);
         if (customItem != null){
-            customAttributes = customItem.getComponentOrDefault(CustomComponentType.CUSTOM_ITEM_ATTRIBUTES).getAttributes();
+            customAttributes = customItem.getComponentOrDefault(CustomComponentType.CUSTOM_ITEM_ATTRIBUTES).getAttributes(customItem);
             // VANILLA-CUSTOM
             vanillaCustomAttributes = customItem.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes();
         } else {

@@ -1,15 +1,12 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.ingredients;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import net.kyori.adventure.text.Component;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
-import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
-
-public class RawMagnetite extends ConstructableCustomItem implements RpgUCustomItem{
+public class RawMagnetite extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @Nullable Integer getCustomModelData() {return 3109;}
     @Override
@@ -18,6 +15,7 @@ public class RawMagnetite extends ConstructableCustomItem implements RpgUCustomI
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
     @Override
     public void afterInitialization() {
+
         super.afterInitialization();
     }
 }

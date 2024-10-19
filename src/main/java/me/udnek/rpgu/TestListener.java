@@ -1,19 +1,13 @@
 package me.udnek.rpgu;
 
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
-import me.udnek.itemscoreu.utils.ItemUtils;
-import me.udnek.itemscoreu.utils.LogUtils;
 import me.udnek.itemscoreu.utils.SelfRegisteringListener;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.management.Attribute;
 
 public class TestListener extends SelfRegisteringListener {
     public TestListener(JavaPlugin plugin) {

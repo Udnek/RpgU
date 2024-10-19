@@ -27,7 +27,8 @@ public class FlintPickaxe extends ConstructableCustomItem implements RpgUCustomI
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
-        recipe.shape("FFF",
+        recipe.shape(
+                "FFF",
                 "KS ",
                 " S ");
 

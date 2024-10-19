@@ -1,6 +1,5 @@
 package me.udnek.rpgu.component;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.CustomKeyedAttributeModifier;
