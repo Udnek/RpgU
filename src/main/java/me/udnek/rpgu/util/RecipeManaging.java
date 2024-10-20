@@ -3,6 +3,7 @@ package me.udnek.rpgu.util;
 import me.udnek.itemscoreu.customrecipe.RecipeManager;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
@@ -31,6 +32,8 @@ public class RecipeManaging {
         ironArmor();
 
         unregister();
+
+        netheriteTolls();
     }
 
     private static void unregister() {
@@ -40,38 +43,82 @@ public class RecipeManaging {
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_shovel"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_sword"));
 
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_hoe"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_axe"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_pickaxe"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_shovel"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_sword"));
-
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_helmet"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_chestplate"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_leggings"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_boots"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_hoe_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_axe_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_pickaxe_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_shovel_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_sword_smithing"));
 
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_helmet"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_chestplate"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_leggings"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_boots"));
 
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_helmet"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_chestplate"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_leggings"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_boots"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_helmet"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_chestplate"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_leggings"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_boots"));
+
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("blast_furnace"));
 
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_ingot"));
+
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SWORD);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_PICKAXE);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
     }
 
-    /*private  static  void netheriteTolls(){
-        AlloyingRecipe recipeAlloy = new AlloyingRecipe(
-                new NamespacedKey(RpgU.getInstance(), "netherite_ingot"),
-                List.of(ingot, ingot),
-                new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
-                new CustomSingleRecipeChoice(Material.IRON_AXE),
-                getItem()
-        );
+    private  static  void netheriteTolls(){
+        CustomCompatibleRecipeChoice fuel = new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues());
+        List<CustomSingleRecipeChoice> alloys = List.of(new CustomSingleRecipeChoice(Material.NETHERITE_INGOT));
 
-        consumer.accept(recipeAlloy);
-    }*/
+        AlloyingRecipe recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_hoe"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_HOE),
+                new ItemStack(Material.NETHERITE_HOE)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_axe"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_AXE),
+                new ItemStack(Material.NETHERITE_AXE)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_pickaxe"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_PICKAXE),
+                new ItemStack(Material.NETHERITE_PICKAXE)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_shovel"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_SHOVEL),
+                new ItemStack(Material.NETHERITE_SHOVEL)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_sword"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_SWORD),
+                new ItemStack(Material.NETHERITE_SWORD)
+        );
+        RecipeManager.getInstance().register(recipe);
+    }
 
     private static void ironArmor() {
         RecipeChoice.MaterialChoice iron = new RecipeChoice.MaterialChoice(Material.IRON_INGOT);
