@@ -1,8 +1,9 @@
 package me.udnek.rpgu;
 
-import me.udnek.itemscoreu.customevent.BeforeVanillaManagerActivationEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
+import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
+import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.util.RecipeManaging;
@@ -43,7 +44,8 @@ public class TestListener extends SelfRegisteringListener {
     }
 */
     @EventHandler
-    public void onRecipes(BeforeVanillaManagerActivationEvent event){
+    public void onInit(InitializationEvent event){
+        if (event.getStep() != InitializationProcess.Step.AFTER_REGISTRIES_INITIALIZATION) return;
         RecipeManaging.run();
     }
 
