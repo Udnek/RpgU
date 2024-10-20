@@ -22,7 +22,6 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
-import me.udnek.rpgu.util.RecipeManaging;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
