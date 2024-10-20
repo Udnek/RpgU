@@ -5,7 +5,11 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
-import me.udnek.rpgu.item.equipment.ferrudam.*;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmet;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamLeggings;
+import me.udnek.rpgu.item.equipment.ferrudam.tools.*;
 import me.udnek.rpgu.item.equipment.flint.*;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
@@ -43,6 +47,11 @@ public class Items {
     public final static CustomItem FERRUDAM_AXE = register(new FerrudamAxe());
     public final static CustomItem FERRUDAM_SHOVEL = register(new FerrudamShovel());
     public final static CustomItem FERRUDAM_HOE = register(new FerrudamHoe());
+
+    public final static CustomItem FERRUDAM_HELMET = register(new FerrudamHelmet());
+    public final static CustomItem FERRUDAM_CHESTPLATE = register(new FerrudamChestplate());
+    public final static CustomItem FERRUDAM_LEGGINGS = register(new FerrudamLeggings());
+    public final static CustomItem FERRUDAM_BOOTS = register(new FerrudamBoots());
 
     public final static CustomItem BLAST_COAL = register(new BlastCoal());
 

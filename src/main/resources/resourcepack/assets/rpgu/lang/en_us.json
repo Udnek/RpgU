@@ -37,12 +37,15 @@
 	
 	
 	"gui.rpgu.alloy_forge": "Alloy Forge",
-	
-	
-	
-	
-	
+
+	"item.rpgu.ferrudam_helmet": "Ferrudam Helmet",
+	"item.rpgu.ferrudam_chestplate": "Ferrudam Chestplate",
+	"item.rpgu.ferrudam_leggings": "Ferrudam Leggings",
+	"item.rpgu.ferrudam_boots": "Ferrudam Boots",
+
 	"item.rpgu.blaze_blade": "Blaze Blade",
+
+	"item.rpgu.shiny_axe": "Shiny Axe",
 	
 	"item.rpgu.ceremonial_dagger": "Ceremonial Dagger",
 	"item.rpgu.ceremonial_dagger.description.0": "+150% Physical Damage to backstab",
