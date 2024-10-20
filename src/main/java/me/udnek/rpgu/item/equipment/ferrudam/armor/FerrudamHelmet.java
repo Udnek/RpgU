@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.equipment.ferrudam;
+package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamAxe extends ConstructableCustomItem implements RpgUCustomItem {
+public class FerrudamHelmet extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
-    public @NotNull String getRawId() {return "ferrudam_axe";}
+    public @NotNull String getRawId() {return "ferrudam_helmet";}
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_AXE;}
+    public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
     @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
     @Override
@@ -34,14 +34,11 @@ public class FerrudamAxe extends ConstructableCustomItem implements RpgUCustomIt
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
         recipe.shape(
-                "FF",
-                "FS",
-                " S");
+                "FFF",
+                "F F");
 
-        RecipeChoice.ExactChoice flint = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
-        RecipeChoice.MaterialChoice stick = new RecipeChoice.MaterialChoice(Material.STICK);
-        recipe.setIngredient('F', flint);
-        recipe.setIngredient('S', stick);
+        RecipeChoice.ExactChoice ferrudam = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
+        recipe.setIngredient('F', ferrudam);
 
         consumer.accept(recipe);
 
@@ -49,9 +46,9 @@ public class FerrudamAxe extends ConstructableCustomItem implements RpgUCustomIt
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
                 getRecipeNamespace(0),
-                List.of(ingot, ingot),
+                List.of(ingot, ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
-                new CustomSingleRecipeChoice(Material.IRON_AXE),
+                new CustomSingleRecipeChoice(Material.IRON_HELMET),
                 getItem()
         );
 

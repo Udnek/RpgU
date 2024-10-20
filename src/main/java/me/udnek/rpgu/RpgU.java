@@ -58,13 +58,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         new Hud().register();
 
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SWORD);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_PICKAXE);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
-
-
         ConstructableCustomAdvancement advancement = CustomAdvancementUtils.itemAdvancement(new NamespacedKey("rpg", "test"), Items.FABRIC.getItem());
         advancement.getDisplay().background("textures/block/cobblestone.png");
         advancement.register();
