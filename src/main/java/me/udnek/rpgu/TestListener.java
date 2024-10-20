@@ -3,7 +3,7 @@ package me.udnek.rpgu;
 import me.udnek.itemscoreu.customevent.BeforeVanillaManagerActivationEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
-import me.udnek.itemscoreu.utils.SelfRegisteringListener;
+import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.util.RecipeManaging;
 import org.bukkit.event.EventHandler;

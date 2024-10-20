@@ -4,7 +4,7 @@ import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.SelfRegisteringListener;
+import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;

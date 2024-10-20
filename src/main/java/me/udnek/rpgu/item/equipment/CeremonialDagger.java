@@ -3,7 +3,7 @@ package me.udnek.rpgu.item.equipment;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.LoreBuilder;
+import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;

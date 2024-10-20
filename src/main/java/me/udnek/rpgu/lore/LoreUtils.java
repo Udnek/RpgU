@@ -5,7 +5,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.ComponentU;
+import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.rpgu.attribute.CustomKeyedAttributeModifier;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.util.Utils;

@@ -6,7 +6,7 @@ import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.instance.ConstructableGroupSlot;
 import me.udnek.itemscoreu.customequipmentslot.instance.ConstructableSingleSlot;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
-import me.udnek.itemscoreu.utils.LogUtils;
+import me.udnek.itemscoreu.util.LogUtils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.lore.TranslationKeys;
 

@@ -1,6 +1,6 @@
 package me.udnek.rpgu.util;
 
-import me.udnek.itemscoreu.utils.ComponentU;
+import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.rpgu.lore.TranslationKeys;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

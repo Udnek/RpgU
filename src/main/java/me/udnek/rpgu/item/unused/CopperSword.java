@@ -3,9 +3,9 @@ package me.udnek.rpgu.item.equipment;
 
 import me.udnek.itemscoreu.customattribute.equipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.utils.ComponentU;
-import me.udnek.itemscoreu.utils.LogUtils;
-import me.udnek.itemscoreu.utils.RightClickable;
+import me.udnek.itemscoreu.util.ComponentU;
+import me.udnek.itemscoreu.util.LogUtils;
+import me.udnek.itemscoreu.util.RightClickable;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.abstraction.ArtifactItem;
 import me.udnek.rpgu.util.CooldownData;

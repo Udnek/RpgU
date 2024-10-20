@@ -1,7 +1,7 @@
 package me.udnek.rpgu.lore;
 
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.utils.LoreBuilder;
+import me.udnek.itemscoreu.util.LoreBuilder;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

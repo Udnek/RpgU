@@ -1,7 +1,7 @@
 package me.udnek.rpgu.mechanic.alloying;
 
 import com.destroystokyo.paper.event.block.BlockDestroyEvent;
-import me.udnek.itemscoreu.utils.TickingTask;
+import me.udnek.itemscoreu.util.TickingTask;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

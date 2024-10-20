@@ -2,7 +2,7 @@
 package me.udnek.rpgu.item.camera;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.utils.RightClickable;
+import me.udnek.itemscoreu.util.RightClickable;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;

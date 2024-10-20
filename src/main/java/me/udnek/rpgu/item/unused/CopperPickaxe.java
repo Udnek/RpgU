@@ -2,7 +2,7 @@
 package me.udnek.rpgu.item.equipment;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.utils.RightClickable;
+import me.udnek.itemscoreu.util.RightClickable;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;

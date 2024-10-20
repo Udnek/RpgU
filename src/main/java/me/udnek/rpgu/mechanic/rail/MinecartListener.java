@@ -1,7 +1,7 @@
 package me.udnek.rpgu.mechanic.rail;
 
-import me.udnek.itemscoreu.utils.LogUtils;
-import me.udnek.itemscoreu.utils.SelfRegisteringListener;
+import me.udnek.itemscoreu.util.LogUtils;
+import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;

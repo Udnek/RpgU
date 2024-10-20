@@ -4,7 +4,7 @@ import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customhud.CustomHud;
 import me.udnek.itemscoreu.customhud.CustomHudManager;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.utils.ComponentU;
+import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.EquippableItemComponent;
