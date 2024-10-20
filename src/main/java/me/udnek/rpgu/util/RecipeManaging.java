@@ -1,18 +1,21 @@
 package me.udnek.rpgu.util;
 
 import me.udnek.itemscoreu.customrecipe.RecipeManager;
+import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RecipeManaging {
 
@@ -36,7 +39,39 @@ public class RecipeManaging {
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_pickaxe"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_shovel"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_sword"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_hoe"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_axe"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_pickaxe"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_shovel"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_sword"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_helmet"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_chestplate"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_leggings"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_boots"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_helmet"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_chestplate"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_leggings"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_boots"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("blast_furnace"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_ingot"));
     }
+
+    /*private  static  void netheriteTolls(){
+        AlloyingRecipe recipeAlloy = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_ingot"),
+                List.of(ingot, ingot),
+                new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                new CustomSingleRecipeChoice(Material.IRON_AXE),
+                getItem()
+        );
+
+        consumer.accept(recipeAlloy);
+    }*/
 
     private static void ironArmor() {
         RecipeChoice.MaterialChoice iron = new RecipeChoice.MaterialChoice(Material.IRON_INGOT);
@@ -44,11 +79,6 @@ public class RecipeManaging {
         RecipeChoice.MaterialChoice leatherChestPlate = new RecipeChoice.MaterialChoice(Material.LEATHER_CHESTPLATE);
         RecipeChoice.MaterialChoice leatherLeggings = new RecipeChoice.MaterialChoice(Material.LEATHER_LEGGINGS);
         RecipeChoice.MaterialChoice leatherBoots = new RecipeChoice.MaterialChoice(Material.LEATHER_BOOTS);
-
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_helmet"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_chestplate"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_leggings"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("iron_boots"));
 
         ShapedRecipe recipeIronChestPlate = new ShapedRecipe(new NamespacedKey(RpgU.getInstance() ,"iron_chestplate"), new ItemStack(Material.IRON_CHESTPLATE));
         recipeIronChestPlate.shape(
@@ -97,11 +127,6 @@ public class RecipeManaging {
         RecipeChoice.MaterialChoice leather = new RecipeChoice.MaterialChoice(Material.LEATHER);
         RecipeChoice.ExactChoice fabric = new RecipeChoice.ExactChoice(Items.FABRIC.getItem());
 
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_helmet"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_chestplate"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_leggings"));
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("leather_boots"));
-
         ShapedRecipe recipeLeatherChestPlate = new ShapedRecipe(new NamespacedKey(RpgU.getInstance() ,"leather_chestplate"), new ItemStack(Material.LEATHER_CHESTPLATE));
         recipeLeatherChestPlate.shape(
                 "L L",
@@ -146,9 +171,6 @@ public class RecipeManaging {
     }
 
     private static void blastFurnace() {
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("blast_furnace"));
-
-
         ShapedRecipe recipeBlastFurnace = new ShapedRecipe(new NamespacedKey(RpgU.getInstance() ,"blast_furnace"), new ItemStack(Material.BLAST_FURNACE));
         recipeBlastFurnace.shape(
                 "SSS",
@@ -168,8 +190,6 @@ public class RecipeManaging {
     }
 
     private static void netheriteIngot() {
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_ingot"));
-
         List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
         CustomSingleRecipeChoice magnetiteIngot = new CustomSingleRecipeChoice(Items.MAGNETITE_INGOT);
         alloys.add(magnetiteIngot);

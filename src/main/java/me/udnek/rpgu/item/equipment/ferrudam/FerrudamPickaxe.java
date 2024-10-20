@@ -15,7 +15,6 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -46,10 +45,11 @@ public class FerrudamPickaxe extends ConstructableCustomItem implements RpgUCust
 
         consumer.accept(recipe);
 
+        var ingot = new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT);
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
                 getRecipeNamespace(0),
-                List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT)),
+                List.of(ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
                 new CustomSingleRecipeChoice(Material.IRON_PICKAXE),
                 getItem()
