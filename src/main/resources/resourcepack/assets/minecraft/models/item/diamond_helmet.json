@@ -5,6 +5,7 @@
 	},
  
 	"overrides": [
+		{ "predicate": { "custom_model_data": 1000}, "model": "rpgu:item/ferrudam_helmet" },
 		{ "predicate": { "custom_model_data": 3100}, "model": "rpgu:item/hungry_horror_helmet" }
 	]
 }
