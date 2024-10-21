@@ -38,7 +38,6 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
         super.modifyFinalItemStack(itemStack);
         RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, null, 2);
         RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_SPEED, null, -0.3);
-        LoreUtils.generateFullLoreAndApply(itemStack);
     }
 
     @Override
@@ -48,7 +47,7 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
                         .addPool(new NmsLootPoolBuilder(
                                 NmsCustomLootEntryBuilder.fromVanilla(
                                         LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
-                                        itemStack -> itemStack.getType() == Material.GOLD_NUGGET,
+                                        itemStack -> itemStack.getType() == Material.GOLD_INGOT,
                                         new ItemStackCreator.Custom(Items.SHINY_AXE)
                                 )
                         ));

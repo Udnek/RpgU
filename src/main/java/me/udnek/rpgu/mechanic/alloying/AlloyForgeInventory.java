@@ -12,6 +12,7 @@ import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
 import org.bukkit.block.BlastFurnace;
 import org.bukkit.block.Block;
@@ -352,7 +353,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     public Component getDisplayName() {
         return ComponentU.textWithNoSpace(
                 -8,
-                Component.text(0).color(NamedTextColor.WHITE).font(Key.key("rpgu", "alloying")),
+                Component.text(0).color(TextColor.color(91, 100, 118)).font(Key.key("rpgu", "alloying")),
                 176)
                 .append(Component.translatable("gui.rpgu.alloy_forge").font(NamespacedKey.minecraft("default")).color(NamedTextColor.BLACK));
 /*        return ComponentU.space(-8).append(ComponentU.textWithNoSpace(Component.text(0).color(NamedTextColor.WHITE).font(Key.key("rpgu", "alloying")), 176))
