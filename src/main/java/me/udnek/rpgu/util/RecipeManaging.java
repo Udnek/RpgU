@@ -34,6 +34,8 @@ public class RecipeManaging {
         unregister();
 
         netheriteTolls();
+
+        netheriteArmor();
     }
 
     private static void unregister() {
@@ -64,6 +66,11 @@ public class RecipeManaging {
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_leggings"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_boots"));
 
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_helmet_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_chestplate_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_leggings_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_boots_smithing"));
+
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("blast_furnace"));
 
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("netherite_ingot"));
@@ -73,6 +80,43 @@ public class RecipeManaging {
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
+    }
+
+    private  static  void netheriteArmor(){
+        CustomCompatibleRecipeChoice fuel = new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues());
+        List<CustomSingleRecipeChoice> alloys = List.of(new CustomSingleRecipeChoice(Material.NETHERITE_INGOT));
+
+        AlloyingRecipe recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_helmet"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_HELMET),
+                new ItemStack(Material.NETHERITE_HELMET)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_chestplate"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_CHESTPLATE),
+                new ItemStack(Material.NETHERITE_CHESTPLATE)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_leggings"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_LEGGINGS),
+                new ItemStack(Material.NETHERITE_LEGGINGS)
+        );
+        RecipeManager.getInstance().register(recipe);
+
+        recipe = new AlloyingRecipe(
+                new NamespacedKey(RpgU.getInstance(), "netherite_boots"),
+                alloys, fuel,
+                new CustomSingleRecipeChoice(Material.DIAMOND_BOOTS),
+                    new ItemStack(Material.NETHERITE_BOOTS)
+        );
+        RecipeManager.getInstance().register(recipe);
     }
 
     private  static  void netheriteTolls(){
