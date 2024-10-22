@@ -8,7 +8,6 @@ import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
-import me.udnek.rpgu.lore.LoreUtils;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.ItemFlag;

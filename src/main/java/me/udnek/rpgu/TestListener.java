@@ -6,17 +6,14 @@ import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
-import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableInventory;
 import me.udnek.rpgu.util.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.plugin.java.JavaPlugin;
 
