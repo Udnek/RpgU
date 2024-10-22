@@ -20,7 +20,6 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
-import me.udnek.rpgu.util.AdvancementRegistering;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
@@ -54,8 +53,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         wearingEquipmentTask.start(this);
 
         new Hud().register();
-
-        AdvancementRegistering.run();
     }
 
     @Override
