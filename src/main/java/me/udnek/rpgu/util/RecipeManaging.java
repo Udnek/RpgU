@@ -36,6 +36,8 @@ public class RecipeManaging {
         netheriteTolls();
 
         netheriteArmor();
+
+        craftsWithMagnetite();
     }
 
     private static void unregister() {
@@ -80,6 +82,55 @@ public class RecipeManaging {
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("lodestone"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("powered_rail"));
+
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft("compass"));
+    }
+
+    private  static void craftsWithMagnetite(){
+        RecipeChoice.MaterialChoice stoneBricks = new RecipeChoice.MaterialChoice(Material.STONE_BRICKS);
+        RecipeChoice.MaterialChoice stick = new RecipeChoice.MaterialChoice(Material.STICK);
+        RecipeChoice.MaterialChoice redstone = new RecipeChoice.MaterialChoice(Material.REDSTONE);
+        RecipeChoice.MaterialChoice ironIngot = new RecipeChoice.MaterialChoice(Material.IRON_INGOT);
+        RecipeChoice.ExactChoice magnetite = new RecipeChoice.ExactChoice(Items.MAGNETITE_INGOT.getItem());
+
+        ShapedRecipe recipeLodeStone = new ShapedRecipe(new NamespacedKey(RpgU.getInstance() ,"lodestone"), new ItemStack(Material.LODESTONE));
+        recipeLodeStone.shape(
+                "BBB",
+                "BMB",
+                "BBB");
+
+        recipeLodeStone.setIngredient('B', stoneBricks);
+        recipeLodeStone.setIngredient('M', magnetite);
+
+        RecipeManager.getInstance().register(recipeLodeStone);
+
+        ShapedRecipe recipePoweredRail = new ShapedRecipe(new NamespacedKey(RpgU.getInstance() ,"powered_rail"), new ItemStack(Material.POWERED_RAIL));
+        recipePoweredRail.shape(
+                "M M",
+                "MSM",
+                "MRM");
+
+        recipePoweredRail.setIngredient('S', stick);
+        recipePoweredRail.setIngredient('M', magnetite);
+        recipePoweredRail.setIngredient('R', redstone);
+
+        RecipeManager.getInstance().register(recipePoweredRail);
+
+        ShapedRecipe recipeCompass = new ShapedRecipe(new NamespacedKey(RpgU.getInstance() ,"compass"), new ItemStack(Material.COMPASS));
+        recipeCompass.shape(
+                " I ",
+                "IMI",
+                " I ");
+
+
+        recipeCompass.setIngredient('M', magnetite);
+        recipeCompass.setIngredient('I', ironIngot);
+
+        RecipeManager.getInstance().register(recipeCompass);
     }
 
     private  static  void netheriteArmor(){
@@ -89,7 +140,7 @@ public class RecipeManaging {
         AlloyingRecipe recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_helmet"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_HELMET),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_HELMET),
                 new ItemStack(Material.NETHERITE_HELMET)
         );
         RecipeManager.getInstance().register(recipe);
@@ -97,7 +148,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_chestplate"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_CHESTPLATE),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_CHESTPLATE),
                 new ItemStack(Material.NETHERITE_CHESTPLATE)
         );
         RecipeManager.getInstance().register(recipe);
@@ -105,7 +156,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_leggings"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_LEGGINGS),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_LEGGINGS),
                 new ItemStack(Material.NETHERITE_LEGGINGS)
         );
         RecipeManager.getInstance().register(recipe);
@@ -113,7 +164,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_boots"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_BOOTS),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_BOOTS),
                     new ItemStack(Material.NETHERITE_BOOTS)
         );
         RecipeManager.getInstance().register(recipe);
@@ -126,7 +177,7 @@ public class RecipeManaging {
         AlloyingRecipe recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_hoe"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_HOE),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_HOE),
                 new ItemStack(Material.NETHERITE_HOE)
         );
         RecipeManager.getInstance().register(recipe);
@@ -134,7 +185,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_axe"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_AXE),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_AXE),
                 new ItemStack(Material.NETHERITE_AXE)
         );
         RecipeManager.getInstance().register(recipe);
@@ -142,7 +193,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_pickaxe"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_PICKAXE),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_PICKAXE),
                 new ItemStack(Material.NETHERITE_PICKAXE)
         );
         RecipeManager.getInstance().register(recipe);
@@ -150,7 +201,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_shovel"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_SHOVEL),
+                new CustomSingleRecipeChoice(Items.FLINT_SHOVEL),
                 new ItemStack(Material.NETHERITE_SHOVEL)
         );
         RecipeManager.getInstance().register(recipe);
@@ -158,7 +209,7 @@ public class RecipeManaging {
         recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), "netherite_sword"),
                 alloys, fuel,
-                new CustomSingleRecipeChoice(Material.DIAMOND_SWORD),
+                new CustomSingleRecipeChoice(Items.FERRUDAM_SWORD),
                 new ItemStack(Material.NETHERITE_SWORD)
         );
         RecipeManager.getInstance().register(recipe);

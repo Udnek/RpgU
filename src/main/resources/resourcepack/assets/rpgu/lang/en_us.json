@@ -1,4 +1,10 @@
 {
+	"advancement.rpgu.root.title": "Welcome to the ScumShield.",
+	"advancement.rpgu.root.description": "We have prepared a quest chain for you so that you can figure out all the changes. Go through the quests and you will see all the innovations.",
+
+	"advancement.rpgu.first_tools.title": "First tools.",
+	"advancement.rpgu.first_tools.description": "Embark on your journey by acquiring the first flimsy tools.",
+
 	"image.rpgu.artifact.hud": "z",
 	"image.rpgu.artifact.cooldown.0": "0",
 	"image.rpgu.artifact.cooldown.1": "1",
