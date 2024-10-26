@@ -57,7 +57,7 @@ public class CopperSword extends ConstructableCustomItem implements RightClickab
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 " C ",
                 " C ",

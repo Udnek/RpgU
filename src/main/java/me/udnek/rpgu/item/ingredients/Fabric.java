@@ -27,7 +27,7 @@ public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
     public @NotNull String getRawId() {return "fabric";}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem().add());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem().add());
         recipe.shape("SWS");
 
         RecipeChoice.MaterialChoice string = new RecipeChoice.MaterialChoice(Material.STRING);

@@ -70,7 +70,7 @@ public class NautilusCore extends ConstructableCustomItem implements ExtraDescri
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape("AAA","ABA","AAA");
 
         recipe.setIngredient('A', Material.PRISMARINE_SHARD);

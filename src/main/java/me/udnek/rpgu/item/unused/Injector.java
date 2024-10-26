@@ -61,7 +61,7 @@ public class Injector extends ConstructableCustomItem implements RightClickable,
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(0), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "  I",
                 " G ",

@@ -103,7 +103,7 @@ public class FlowerWreath extends ConstructableCustomItem implements ArtifactIte
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape("AAA","A A","AAA");
 
         RecipeChoice.MaterialChoice choices = new RecipeChoice.MaterialChoice(flowerColors.keySet().toArray(new Material[0]));

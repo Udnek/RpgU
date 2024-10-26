@@ -35,7 +35,7 @@ public class FerrudamIngot extends ConstructableCustomItem implements RpgUCustom
 
 
         AlloyingRecipe recipe = new AlloyingRecipe(
-                getRecipeNamespace(0),
+                getNewRecipeKey(),
                 alloys,
                 new CustomSingleRecipeChoice(Items.BLAST_COAL),
                 new CustomSingleRecipeChoice(Items.INGOT_MOLD),
