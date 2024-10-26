@@ -247,7 +247,7 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
     protected List<Recipe> generateRecipes() {
         ArrayList<Recipe> recipes = new ArrayList<>();
 
-        ShapedRecipe recipe1 = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe1 = new ShapedRecipe(getNewRecipeKey(), this.getItem());
 
         recipe1.shape("A","B","C");
 

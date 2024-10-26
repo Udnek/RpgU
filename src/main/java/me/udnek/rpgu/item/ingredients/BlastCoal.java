@@ -22,7 +22,7 @@ public class BlastCoal extends ConstructableCustomItem implements RpgUCustomItem
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapelessRecipe recipe = new ShapelessRecipe(this.getRecipeNamespace(0), getItem());
+        ShapelessRecipe recipe = new ShapelessRecipe(getNewRecipeKey(), getItem());
 
         RecipeChoice.MaterialChoice coal = new RecipeChoice.MaterialChoice(Tag.ITEMS_COALS);
         RecipeChoice.MaterialChoice gunpowder = new RecipeChoice.MaterialChoice(Material.GUNPOWDER);

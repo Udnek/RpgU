@@ -91,7 +91,7 @@ public class Wrench extends ConstructableCustomItem implements RpgUCustomItem {
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(0), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 " A ",
                 " AA",

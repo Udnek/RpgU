@@ -25,7 +25,7 @@ public class MagnetiteIngot extends ConstructableCustomItem implements RpgUCusto
         RecipeChoice.ExactChoice rawMagnetite = new RecipeChoice.ExactChoice(Items.RAW_MAGNETITE.getItem());
 
         FurnaceRecipe recipe = new FurnaceRecipe(
-                getRecipeNamespace(0),
+                getNewRecipeKey(),
                 getItem(),
                 rawMagnetite,
                  0.7f,

@@ -32,7 +32,7 @@ public class FerrudamPickaxe extends ConstructableCustomItem implements RpgUCust
     public boolean getAddDefaultAttributes() {return true;}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "FFF",
                 " S ",
@@ -48,7 +48,7 @@ public class FerrudamPickaxe extends ConstructableCustomItem implements RpgUCust
         var ingot = new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT);
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
-                getRecipeNamespace(0),
+                getNewRecipeKey(),
                 List.of(ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
                 new CustomSingleRecipeChoice(Material.IRON_PICKAXE),

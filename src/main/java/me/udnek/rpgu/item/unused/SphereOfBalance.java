@@ -51,7 +51,7 @@ public class SphereOfBalance extends ConstructableCustomItem implements ExtraDes
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 "ABB",
                 "ACB",

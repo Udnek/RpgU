@@ -32,7 +32,7 @@ public class FerrudamSword extends ConstructableCustomItem implements RpgUCustom
     public boolean getAddDefaultAttributes() {return true;}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "F",
                 "F",
@@ -48,7 +48,7 @@ public class FerrudamSword extends ConstructableCustomItem implements RpgUCustom
 
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
-                getRecipeNamespace(0),
+                getNewRecipeKey(),
                 List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT)),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
                 new CustomSingleRecipeChoice(Material.IRON_SWORD),

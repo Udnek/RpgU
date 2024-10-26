@@ -61,7 +61,7 @@ public class WitherWreath extends ConstructableCustomItem implements ExtraDescri
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape("AAA","A A","AAA");
 
         recipe.setIngredient('A', Material.WITHER_ROSE);

@@ -26,7 +26,7 @@ public class FlintAxe extends ConstructableCustomItem implements RpgUCustomItem 
     public boolean getAddDefaultAttributes() {return true;}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(this.getRecipeNamespace(0), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "FF ",
                 "FSK",

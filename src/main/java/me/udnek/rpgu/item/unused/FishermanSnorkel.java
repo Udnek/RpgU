@@ -76,7 +76,7 @@ public class FishermanSnorkel extends ConstructableCustomItem implements ExtraDe
 
     @Override
     protected List<Recipe> generateRecipes() {
-        ShapedRecipe recipe = new ShapedRecipe(getRecipeNamespace(0), getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "AB",
                 "BA");
