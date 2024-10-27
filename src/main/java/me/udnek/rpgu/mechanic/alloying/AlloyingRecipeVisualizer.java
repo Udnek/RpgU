@@ -2,6 +2,7 @@ package me.udnek.rpgu.mechanic.alloying;
 
 import me.udnek.itemscoreu.customrecipe.choice.CustomRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.jeiu.item.Items;
 import me.udnek.jeiu.menu.RecipesMenu;
 import me.udnek.jeiu.visualizer.abstraction.AbstractVisualizer;
 import net.kyori.adventure.text.Component;
@@ -27,14 +28,15 @@ public class AlloyingRecipeVisualizer extends AbstractVisualizer {
             CustomSingleRecipeChoice alloy = alloys.get(i);
             setAlloy(i, alloy);
         }
-        setItem(AlloyForgeInventory.FUEL_SLOT + OFFSET, recipe.getFuel());
-        setItem(AlloyForgeInventory.ADDITION_SLOT + OFFSET, recipe.getAddition());
-        setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET -1, recipe.getResult());
+        setChoice(AlloyForgeInventory.FUEL_SLOT + OFFSET, recipe.getFuel());
+        setChoice(AlloyForgeInventory.ADDITION_SLOT + OFFSET, recipe.getAddition());
+        menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET -1, recipe.getResult());
 
-        setItem(RecipesMenu.RECIPE_STATION_POSITION, Material.BLAST_FURNACE);
+        menu.setItem(RecipesMenu.RECIPE_STATION_POSITION, Material.BLAST_FURNACE);
+        menu.setItem(AlloyForgeInventory.FUEL_SLOT + OFFSET - 9, Items.FIRE_ICON);
     }
     public void setAlloy(int index, CustomRecipeChoice choice){
-        setItem(AlloyForgeInventory.ALLOYS_SLOTS[index] + OFFSET, choice);
+        setChoice(AlloyForgeInventory.ALLOYS_SLOTS[index] + OFFSET, choice);
     }
     @Override
     public @Nullable List<Component> getInformation(){
