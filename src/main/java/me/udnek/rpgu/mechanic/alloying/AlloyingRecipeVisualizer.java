@@ -33,7 +33,7 @@ public class AlloyingRecipeVisualizer extends AbstractVisualizer {
         menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET -1, recipe.getResult());
 
         menu.setItem(RecipesMenu.RECIPE_STATION_POSITION, Material.BLAST_FURNACE);
-        menu.setItem(AlloyForgeInventory.FUEL_SLOT + OFFSET - 9, Items.FIRE_ICON);
+        menu.setThemedItem(AlloyForgeInventory.FUEL_SLOT + OFFSET - 9, Items.FIRE_ICON);
     }
     public void setAlloy(int index, CustomRecipeChoice choice){
         setChoice(AlloyForgeInventory.ALLOYS_SLOTS[index] + OFFSET, choice);
