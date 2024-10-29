@@ -78,6 +78,7 @@ public class AttributeLoreGenerator {
 
                 for (Attribute attribute : sorted) {
                     for (AttributeModifier modifier : attributesBySlot.get(attribute)) {
+                        if (modifier.getAmount() == 0) continue;
                         attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier, slot));
                     }
                 }
@@ -88,6 +89,7 @@ public class AttributeLoreGenerator {
             for (Map.Entry<CustomAttribute, List<CustomAttributeModifier>> entry : customAttributesBySlot.getAll().entrySet()) {
                 CustomAttribute attribute = entry.getKey();
                 for (CustomAttributeModifier modifier : entry.getValue()) {
+                    if (modifier.getAmount() == 0) continue;
                     attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier, slot));
                 }
             }
@@ -97,30 +99,14 @@ public class AttributeLoreGenerator {
             for (Map.Entry<Attribute, List<CustomKeyedAttributeModifier>> entry : vanillaCustomAttributesBySlot.getAll().entrySet()) {
                 Attribute attribute = entry.getKey();
                 for (CustomKeyedAttributeModifier modifier : entry.getValue()) {
+                    if (modifier.getAmount() == 0) continue;
                     attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier, slot));
                 }
             }
 
 
-            // EXTRA DESCRIPTION
-
-/*            Map<CustomEquipmentSlot, Pair<Integer, Integer>> extraDescription;
-            if (customItem instanceof ExtraDescribed descriptionItem){
-                extraDescription = descriptionItem.getExtraDescription();
-            } else extraDescription = new HashMap<>();
-            List<Component> extraDescriptionLore;
-            if (extraDescription.containsKey(slot)){
-                extraDescriptionLore = getExtraDescription(customItem, extraDescription.get(slot), slot);
-            } else extraDescriptionLore = new ArrayList<>();*/
-
-            // FINAL
-
-            /*if (attributesLorePart.get(slot) == null){
-                attributesLorePart.remove(slot);*/
-
         }
         // TODO: 6/9/2024 ADD ID???
-        //lore.add(Component.text(customItem.getId()).color(TextColor.fromHexString("#555555")).decoration(TextDecoration.ITALIC, false));
 
         if (customItem != null){
             builder.add(LoreBuilder.Position.ID,

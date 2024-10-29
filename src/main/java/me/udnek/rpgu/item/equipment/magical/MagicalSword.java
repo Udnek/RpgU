@@ -7,8 +7,10 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+@ApiStatus.ScheduledForRemoval
 public class MagicalSword extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {

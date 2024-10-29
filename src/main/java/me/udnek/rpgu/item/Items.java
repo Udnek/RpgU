@@ -4,6 +4,8 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.item.artifact.FishermanSnorkel;
+import me.udnek.rpgu.item.artifact.NautilusCore;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
@@ -16,9 +18,10 @@ import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
+import me.udnek.rpgu.item.utility.Wrench;
 
 public class Items {
-    public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
+
     //public final static CustomItem BLAZE_BLADE = register(new BlazeBlade());
     //public final static CustomItem LIGHT_FEATHER = register(new LightFeather());
 /*    public final static CustomItem LIFE_CRYSTAL = register(new LifeCrystal());
@@ -38,12 +41,13 @@ public class Items {
     public final static CustomItem WRENCH = register(new Wrench());
     public final static CustomItem INJECTOR = register(new Injector());*/
 
+    // ARTIFACTS
+    public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
+    public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
+
+    // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
     public static final CustomItem CEREMONIOUS_DAGGER = register(new CeremonialDagger());
-
-    public static final CustomItem FABRIC = register(new Fabric());
-
-    public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
 
     public static final CustomItem FERRUDAM_SWORD = register(new FerrudamSword());
     public static final CustomItem FERRUDAM_PICKAXE = register(new FerrudamPickaxe());
@@ -56,23 +60,32 @@ public class Items {
     public static final CustomItem FERRUDAM_LEGGINGS = register(new FerrudamLeggings());
     public static final CustomItem FERRUDAM_BOOTS = register(new FerrudamBoots());
 
-    public static final CustomItem BLAST_COAL = register(new BlastCoal());
-
-    public static final CustomItem INGOT_MOLD = register(new IngotMold());
-
     public static final CustomItem FLINT_SWORD = register(new FlintSword());
     public static final CustomItem FLINT_PICKAXE = register(new FlintPickaxe());
     public static final CustomItem FLINT_AXE = register(new FlintAxe());
     public static final CustomItem FLINT_SHOVEL = register(new FlintShovel());
     public static final CustomItem FLINT_HOE = register(new FlintHoe());
 
+    // INGREDIENT
+    public static final CustomItem FABRIC = register(new Fabric());
+    public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
+    public static final CustomItem BLAST_COAL = register(new BlastCoal());
+    public static final CustomItem INGOT_MOLD = register(new IngotMold());
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
     public static final CustomItem MAGNETITE_INGOT = register(new MagnetiteIngot());
 
+    // TECHNICAL
+    public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
+
+    // UTILITY
+    public final static CustomItem WRENCH = register(new Wrench());
+    public static final CustomItem MAGICAL_MIRROR = register(new DarkMirror());
+
+    // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
 
-    public static final CustomItem MAGICAL_MIRROR = register(new DarkMirror());
+
 
 
     private static CustomItem register(CustomItem customItem){
