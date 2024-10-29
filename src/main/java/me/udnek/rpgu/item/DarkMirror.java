@@ -35,7 +35,7 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
 
     static class MagicalMirrorComponent extends RightClickableItem {
         static HashMap<PotionEffectType, PotionEffectType> effectSwitches = new HashMap<>();
-        static List<PotionEffectType> disspellableEffects = new ArrayList<>();
+        static List<PotionEffectType> dispellableEffects = new ArrayList<>();
         public static final int EXTRA_DURATION = 0;
 
         static{
@@ -50,9 +50,9 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
             effectSwitches.put(PotionEffectType.JUMP_BOOST, PotionEffectType.SLOWNESS);
             effectSwitches.put(PotionEffectType.NAUSEA, PotionEffectType.NIGHT_VISION);
             effectSwitches.put(PotionEffectType.REGENERATION, PotionEffectType.WITHER);
-            disspellableEffects.add(PotionEffectType.RESISTANCE);
-            disspellableEffects.add(PotionEffectType.FIRE_RESISTANCE);
-            disspellableEffects.add(PotionEffectType.WATER_BREATHING);
+            dispellableEffects.add(PotionEffectType.RESISTANCE);
+            dispellableEffects.add(PotionEffectType.FIRE_RESISTANCE);
+            dispellableEffects.add(PotionEffectType.WATER_BREATHING);
             effectSwitches.put(PotionEffectType.INVISIBILITY, PotionEffectType.GLOWING);
             effectSwitches.put(PotionEffectType.BLINDNESS, PotionEffectType.NIGHT_VISION);
             effectSwitches.put(PotionEffectType.NIGHT_VISION, PotionEffectType.DARKNESS);
@@ -71,10 +71,10 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
             effectSwitches.put(PotionEffectType.CONDUIT_POWER, PotionEffectType.MINING_FATIGUE);
             effectSwitches.put(PotionEffectType.DOLPHINS_GRACE, PotionEffectType.SLOWNESS);
             effectSwitches.put(PotionEffectType.DARKNESS, PotionEffectType.NIGHT_VISION);
-            disspellableEffects.add(PotionEffectType.WIND_CHARGED);
-            disspellableEffects.add(PotionEffectType.WEAVING);
-            disspellableEffects.add(PotionEffectType.OOZING);
-            disspellableEffects.add(PotionEffectType.INFESTED);
+            dispellableEffects.add(PotionEffectType.WIND_CHARGED);
+            dispellableEffects.add(PotionEffectType.WEAVING);
+            dispellableEffects.add(PotionEffectType.OOZING);
+            dispellableEffects.add(PotionEffectType.INFESTED);
         }
 
         @Override
@@ -83,13 +83,12 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
             Player player = event.getPlayer();
             Collection<PotionEffect> potionEffects = new ArrayList<>(player.getActivePotionEffects());
             for (PotionEffect potionEffect : potionEffects) {
-                if (!(effectSwitches.containsKey(potionEffect.getType()))) continue;
-                if (disspellableEffects.contains(potionEffect.getType())){
+                if (dispellableEffects.contains(potionEffect.getType())){
                     player.removePotionEffect(potionEffect.getType());
-                } else {
+                } else if (effectSwitches.containsKey(potionEffect.getType())) {
                     player.removePotionEffect(potionEffect.getType());
                     PotionEffectType newEffectType = effectSwitches.get(potionEffect.getType());
-                    player.addPotionEffect(potionEffect.withType(newEffectType));
+                    player.addPotionEffect(potionEffect.withType(newEffectType).withDuration(potionEffect.getDuration() + EXTRA_DURATION));
                 }
             }
         }
