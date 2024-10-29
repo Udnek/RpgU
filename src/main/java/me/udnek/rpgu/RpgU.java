@@ -1,6 +1,5 @@
 package me.udnek.rpgu;
 
-
 import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
@@ -32,6 +31,8 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        getLogger().info("\n\n\nkek\n\n\n");
 
         CustomItem blazeBlade = Items.SHINY_AXE;
         CustomBlock customBlock = Blocks.TEST;
