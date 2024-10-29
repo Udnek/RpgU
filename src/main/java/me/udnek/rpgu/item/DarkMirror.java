@@ -1,0 +1,93 @@
+package me.udnek.rpgu.item;
+
+import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
+public class DarkMirror extends ConstructableCustomItem implements RpgUCustomItem {
+
+    @Override
+    public @NotNull String getRawId() {
+        return "dark_mirror";
+    }
+
+    @Override
+    public @NotNull Material getMaterial() {
+        return Material.FISHING_ROD;
+    }
+
+    @Override
+    public void afterInitialization() {
+        super.afterInitialization();
+        setComponent(new DarkMirror.MagicalMirrorComponent());
+    }
+
+    static class MagicalMirrorComponent extends RightClickableItem {
+        static HashMap<PotionEffectType, PotionEffectType> effectSwitches = new HashMap<>();
+        static List<PotionEffectType> disspellableEffects = new ArrayList<>();
+        public static final int EXTRA_DURATION = 0;
+
+        static{
+            //TODO add vulnerability effect or smth, so Resistance and Fire Resistance can be swapped with it
+            effectSwitches.put(PotionEffectType.SPEED, PotionEffectType.SLOWNESS);
+            effectSwitches.put(PotionEffectType.SLOWNESS, PotionEffectType.SPEED);
+            effectSwitches.put(PotionEffectType.HASTE, PotionEffectType.MINING_FATIGUE);
+            effectSwitches.put(PotionEffectType.MINING_FATIGUE, PotionEffectType.HASTE);
+            effectSwitches.put(PotionEffectType.STRENGTH, PotionEffectType.WEAKNESS);
+            effectSwitches.put(PotionEffectType.INSTANT_HEALTH, PotionEffectType.INSTANT_DAMAGE);
+            effectSwitches.put(PotionEffectType.INSTANT_DAMAGE, PotionEffectType.INSTANT_HEALTH);
+            effectSwitches.put(PotionEffectType.JUMP_BOOST, PotionEffectType.SLOWNESS);
+            effectSwitches.put(PotionEffectType.NAUSEA, PotionEffectType.NIGHT_VISION);
+            effectSwitches.put(PotionEffectType.REGENERATION, PotionEffectType.WITHER);
+            disspellableEffects.add(PotionEffectType.RESISTANCE);
+            disspellableEffects.add(PotionEffectType.FIRE_RESISTANCE);
+            disspellableEffects.add(PotionEffectType.WATER_BREATHING);
+            effectSwitches.put(PotionEffectType.INVISIBILITY, PotionEffectType.GLOWING);
+            effectSwitches.put(PotionEffectType.BLINDNESS, PotionEffectType.NIGHT_VISION);
+            effectSwitches.put(PotionEffectType.NIGHT_VISION, PotionEffectType.DARKNESS);
+            effectSwitches.put(PotionEffectType.HUNGER, PotionEffectType.SATURATION);
+            effectSwitches.put(PotionEffectType.WEAKNESS, PotionEffectType.STRENGTH);
+            effectSwitches.put(PotionEffectType.POISON, PotionEffectType.REGENERATION);
+            effectSwitches.put(PotionEffectType.WITHER, PotionEffectType.REGENERATION);
+            effectSwitches.put(PotionEffectType.HEALTH_BOOST, PotionEffectType.WITHER);
+            effectSwitches.put(PotionEffectType.ABSORPTION, PotionEffectType.WITHER);
+            effectSwitches.put(PotionEffectType.SATURATION, PotionEffectType.HUNGER);
+            effectSwitches.put(PotionEffectType.GLOWING, PotionEffectType.INVISIBILITY);
+            effectSwitches.put(PotionEffectType.LEVITATION, PotionEffectType.SLOW_FALLING);
+            effectSwitches.put(PotionEffectType.LUCK, PotionEffectType.UNLUCK);
+            effectSwitches.put(PotionEffectType.UNLUCK, PotionEffectType.LUCK);
+            effectSwitches.put(PotionEffectType.SLOW_FALLING, PotionEffectType.LEVITATION);
+            effectSwitches.put(PotionEffectType.CONDUIT_POWER, PotionEffectType.MINING_FATIGUE);
+            effectSwitches.put(PotionEffectType.DOLPHINS_GRACE, PotionEffectType.SLOWNESS);
+            effectSwitches.put(PotionEffectType.DARKNESS, PotionEffectType.NIGHT_VISION);
+            disspellableEffects.add(PotionEffectType.WIND_CHARGED);
+            disspellableEffects.add(PotionEffectType.WEAVING);
+            disspellableEffects.add(PotionEffectType.OOZING);
+            disspellableEffects.add(PotionEffectType.INFESTED);
+        }
+
+        @Override
+        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+            event.setCancelled(true);
+            Player player = event.getPlayer();
+            Collection<PotionEffect> potionEffects = new ArrayList<>(player.getActivePotionEffects());
+            for (PotionEffect potionEffect : potionEffects) {
+                if (!(effectSwitches.containsKey(potionEffect.getType()))) continue;
+                player.removePotionEffect(potionEffect.getType());
+                PotionEffectType newEffectType = effectSwitches.get(potionEffect.getType());
+                player.addPotionEffect(potionEffect.withType(newEffectType));
+            }
+        }
+    }
+}
