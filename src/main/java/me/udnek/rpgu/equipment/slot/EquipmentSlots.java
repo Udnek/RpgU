@@ -13,9 +13,9 @@ import me.udnek.rpgu.lore.TranslationKeys;
 import java.util.Set;
 
 public class EquipmentSlots {
-    public static final SingleSlot FIRST_ARTIFACT = (SingleSlot) register(new ConstructableSingleSlot("first_artifact", 9,null, TranslationKeys.whenEquippedAsFirstArtifact));
-    public static final SingleSlot SECOND_ARTIFACT = (SingleSlot) register(new ConstructableSingleSlot("second_artifact", 10,null, TranslationKeys.whenEquippedAsSecondArtifact));
-    public static final SingleSlot THIRD_ARTIFACT = (SingleSlot) register(new ConstructableSingleSlot("third_artifact", 11,null, TranslationKeys.whenEquippedAsThirdArtifact));
+    public static final SingleSlot FIRST_ARTIFACT = (SingleSlot) register(new ConstructableSingleSlot("first_artifact", 9,null, null, TranslationKeys.whenEquippedAsFirstArtifact));
+    public static final SingleSlot SECOND_ARTIFACT = (SingleSlot) register(new ConstructableSingleSlot("second_artifact", 10,null, null, TranslationKeys.whenEquippedAsSecondArtifact));
+    public static final SingleSlot THIRD_ARTIFACT = (SingleSlot) register(new ConstructableSingleSlot("third_artifact", 11,null, null, TranslationKeys.whenEquippedAsThirdArtifact));
     public static final GroupSlot ARTIFACTS;
     public static final SingleSlot ORIGIN = (SingleSlot) register(new OriginSlot());
 
@@ -28,7 +28,9 @@ public class EquipmentSlots {
                 FIRST_ARTIFACT,
                 SECOND_ARTIFACT,
                 THIRD_ARTIFACT),
-                null, TranslationKeys.whenEquippedAsArtifact)
+                null,
+                null,
+                TranslationKeys.whenEquippedAsArtifact)
         );
     }
 

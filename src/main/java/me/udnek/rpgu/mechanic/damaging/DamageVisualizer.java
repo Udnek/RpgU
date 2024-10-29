@@ -67,9 +67,9 @@ public class DamageVisualizer {
 
 
     public static Component generateText(Damage damage){
-        double physicalDamage = damage.getPhysicalDamage();
-        double magicalDamage = damage.getMagicalDamage();
-        double mainDamage = damage.getTotalDamage();
+        double physicalDamage = damage.getPhysical();
+        double magicalDamage = damage.getMagical();
+        double mainDamage = damage.getTotal();
         TextColor damageColor = getDamageColor(mainDamage);
 
         Component text =

@@ -1,5 +1,7 @@
 package me.udnek.rpgu.mechanic.damaging;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Damage {
 
     private double physicalDamage = 0;
@@ -8,56 +10,48 @@ public class Damage {
     public Damage(){}
 
     public Damage(Type type, double amount) {
-        this.addDamage(type, amount);
+        add(type, amount);
     }
 
     public Damage(double physicalDamage, double magicalDamage){
-        this.addPhysicalDamage(physicalDamage);
-        this.addMagicalDamage(magicalDamage);
+        addPhysical(physicalDamage);
+        addMagical(magicalDamage);
     }
 
-
-    public void addDamage(Type type, double amount){
-        if (type == Type.PHYSICAL){
-            this.addPhysicalDamage(amount);
-            return;
-        }
-        this.addMagicalDamage(amount);
+    public void nullify(){
+        physicalDamage = 0;
+        magicalDamage = 0;
     }
 
-    public void addDamage(Damage damage){
-        this.addPhysicalDamage(damage.getPhysicalDamage());
-        this.addMagicalDamage(damage.getMagicalDamage());
+    public void add(@NotNull Type type, double amount){
+        if (type == Type.PHYSICAL) addPhysical(amount);
+        else addMagical(amount);
     }
 
-    public void addPhysicalDamage(double amount){
-        this.physicalDamage += amount;
+    public void add(@NotNull Damage other){
+        addPhysical(other.getPhysical());
+        addMagical(other.getMagical());
     }
 
-    public void addMagicalDamage(double amount){
-        this.magicalDamage += amount;
-    }
+    public void addPhysical(double amount){physicalDamage += amount;}
 
-    public void multiplyPhysicalDamage(double amount){this.physicalDamage *= amount;}
+    public void addMagical(double amount){magicalDamage += amount;}
 
-    public void multiplyMagicalDamage(double amount){
-        this.magicalDamage *= amount;
-    }
+    public void multiplyPhysical(double amount){physicalDamage *= amount;}
 
-    public double getPhysicalDamage() {
-        return this.physicalDamage;
-    }
+    public void multiplyMagical(double amount){magicalDamage *= amount;}
 
-    public double getMagicalDamage() {
-        return this.magicalDamage;
-    }
+    public double getPhysical() {return physicalDamage;}
 
-    public double getTotalDamage() {return this.getPhysicalDamage() + this.getMagicalDamage();}
+    public double getMagical() {return magicalDamage;}
+
+    public double getTotal() {return getPhysical() + getMagical();}
+
 
 
     @Override
     public String toString(){
-        return "[Physical = " + this.getPhysicalDamage() + "; Magical = " + this.getMagicalDamage() + "; Sum = " + this.getTotalDamage() + "]";
+        return "[Physical = " + getPhysical() + "; Magical = " + getMagical() + "; Sum = " + getTotal() + "]";
     }
 
     public enum Type {
