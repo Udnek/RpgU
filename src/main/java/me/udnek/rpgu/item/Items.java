@@ -2,6 +2,7 @@ package me.udnek.rpgu.item;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
+import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
@@ -70,6 +71,9 @@ public class Items {
 
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
+
+    public static final CustomItem MAGICAL_MIRROR = register(new DarkMirror());
+
 
     private static CustomItem register(CustomItem customItem){
         return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);
