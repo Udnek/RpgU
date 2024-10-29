@@ -12,11 +12,13 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class DamageEvent extends CustomEvent {
 
@@ -70,53 +72,39 @@ public class DamageEvent extends CustomEvent {
     }
 
     private void damagerDependentCalculations() {
-        if (damager != null && (
-                handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
-                || handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
-        )){
+        damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
+        if (damager != null){
             switch (damager){
                 case LivingEntity living -> {
+                    if (!(handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK || handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK)){return;}
                     damage = new Damage();
                     double potential = Attributes.MAGICAL_POTENTIAL.calculate(living);
                     AttributeInstance attribute = living.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
                     damage.addPhysical((attribute == null ? 0 : attribute.getValue()) * (isCritical() ? 1.5 : 1));
                     damage.addMagical(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER.calculate(living) * potential);
+                    if (living instanceof Player player){
+                        damage.multiplyPhysical(player.getCooledAttackStrength(0));
+                    }
+
                 }
-                case AbstractArrow arrow -> {
-                    damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
+                case Projectile projectile -> {
+                    if (projectile instanceof AbstractArrow arrow){
+                        damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
+                    }
+                    getDamagerIfPlayer(player ->
+                            PlayerEquipment.get(player).getEquipment((slot, customItem) ->
+                                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(customItem, player, slot, DamageEvent.this))
+                    );
                 }
                 default -> {
-                    damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
+                    return;
                 }
             }
-        } else {
-            damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
         }
+    }
 
-/*            if (damager instanceof Player) {
-                //damage.multiplyPhysicalDamage(isCritical ? 1.5 : 1);
-                damage.addMagical(Attributes.MAGICAL_DAMAGE.calculate(damager));
-            }
-
-            else if (damager instanceof AbstractArrow arrow) {
-                damage = new Damage(
-                        arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
-                // TODO: 6/9/2024 MAGICAL DAMAGE
-                //MagicalDamageAttribute.get(arrow));
-            }
-            else if (damager instanceof LivingEntity livingEntity){
-                damage = DamageUtils.calculateMeleeDamage(livingEntity);
-            }
-        }
-        else {
-            Damage.Type type = switch (handlerEvent.getCause()) {
-                case POISON, MAGIC, WITHER, SONIC_BOOM, DRAGON_BREATH -> Damage.Type.MAGICAL;
-                default -> Damage.Type.PHYSICAL;
-            };
-            damage = new Damage(type, handlerEvent.getDamage());
-        }*/
-
-
+    private void getDamagerIfPlayer(Consumer<Player> consumer){
+        if (damager instanceof Player player) consumer.accept(player);
     }
 
     private void equipmentAttacks() {
