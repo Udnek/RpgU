@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.item.artifact.FishermanSnorkel;
 import me.udnek.rpgu.item.artifact.NautilusCore;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
@@ -42,6 +43,7 @@ public class Items {
 
     // ARTIFACTS
     public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
+    public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
@@ -77,12 +79,13 @@ public class Items {
 
     // UTILITY
     public final static CustomItem WRENCH = register(new Wrench());
+    public static final CustomItem MAGICAL_MIRROR = register(new DarkMirror());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
 
-    public static final CustomItem MAGICAL_MIRROR = register(new DarkMirror());
+
 
 
     private static CustomItem register(CustomItem customItem){

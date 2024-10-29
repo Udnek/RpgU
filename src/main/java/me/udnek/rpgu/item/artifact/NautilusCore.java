@@ -51,7 +51,7 @@ public class NautilusCore extends ConstructableCustomItem implements RpgUCustomI
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable("item.rpgu.nautilus_core.description.0").color(AttributeLoreGenerator.PLUS_ATTRIBUTE_COLOR));
+        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.0").color(AttributeLoreGenerator.PLUS_ATTRIBUTE_COLOR));
         return loreBuilder;
     }
 
