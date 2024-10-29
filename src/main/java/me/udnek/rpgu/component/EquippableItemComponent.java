@@ -26,6 +26,7 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
     default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot){}
     default void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageEvent event){}
     default void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageEvent event){}
+    default void onPlayerHitsWithProjectileWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageEvent event){}
     default @Nullable Component getHudImage(@NotNull CustomItem item, @NotNull Player player){return null;}
 
     @Override
