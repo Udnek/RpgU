@@ -1,19 +1,19 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customevent.CustomEvent;
-import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.attribute.instance.MagicalDefenseMultiplierAttribute;
+import me.udnek.rpgu.attribute.instance.PhysicalArmorAttribute;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.equipment.PlayerEquipment;
-import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,53 +24,78 @@ public class DamageEvent extends CustomEvent {
 
     private Damage damage;
     private final EntityDamageEvent handlerEvent;
-    private final Entity damager;
-    private final Entity victim;
+    private final @Nullable Entity damager;
+    private final LivingEntity victim;
     private final boolean isCritical;
-    private final DamagerType damagerType;
 
-    public DamageEvent(EntityDamageEvent handlerEvent){
+    public DamageEvent(@NotNull EntityDamageEvent handlerEvent){
         this.handlerEvent = handlerEvent;
-        this.victim = handlerEvent.getEntity();
+        if (handlerEvent.getEntity() instanceof LivingEntity living){victim = living;}
+        else victim = null;
         if (handlerEvent instanceof EntityDamageByEntityEvent entityDamageByEntityEvent){
             damager = entityDamageByEntityEvent.getDamager();
             isCritical = entityDamageByEntityEvent.isCritical();
-            damagerType = DamagerType.ENTITY;
         }
         else {
             damager = null;
             isCritical = false;
-            damagerType = DamagerType.NON_ENTITY;
         }
     }
 
-    public Damage getDamage() {return this.damage;}
-    public Entity getDamager() {return damager;}
-    public Entity getVictim() {return victim;}
-    public EntityDamageEvent getHandler() {return this.handlerEvent;}
+    public @NotNull Damage getDamage() {return this.damage;}
+    public @Nullable Entity getDamager() {return damager;}
+    public @NotNull Entity getVictim() {return victim;}
+    public @NotNull EntityDamageEvent getHandler() {return this.handlerEvent;}
     public boolean isCritical() {return isCritical;}
-    public DamagerType getDamagerType() {return damagerType;}
-
     public void invoke(){
-
-        damage = new Damage(Damage.Type.PHYSICAL, handlerEvent.getDamage());
+        if (victim == null) return;
 
         damagerDependentCalculations();
-        playerEquipmentAttacks();
-        playerEquipmentReceives();
+        equipmentAttacks();
+        equipmentReceives();
 
         callEvent();
 
         // TODO: 2/15/2024 IMPLEMENT FINAL DAMAGE
-        handlerEvent.setDamage(damage.getTotalDamage());
+        handlerEvent.setDamage(0);
+        handlerEvent.setDamage(damage.getTotal());
+        //victim.damage(damage.getTotal());
+/*        if (damager == null){
+            victim.damage(damage.getTotal(), handlerEvent.getDamageSource());
+        } else {
+            victim.damage(damage.getTotal(), damager);
+        }*/
+
         DamageVisualizer.visualize(damage, victim);
     }
 
     private void damagerDependentCalculations() {
-        if (damagerType == DamagerType.ENTITY){
-            if (damager instanceof Player) {
+        if (damager != null && (
+                handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK
+                || handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
+        )){
+            switch (damager){
+                case LivingEntity living -> {
+                    damage = new Damage();
+                    double potential = Attributes.MAGICAL_POTENTIAL.calculate(living);
+                    AttributeInstance attribute = living.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+                    damage.addPhysical((attribute == null ? 0 : attribute.getValue()) * (isCritical() ? 1.5 : 1));
+                    damage.addMagical(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER.calculate(living) * potential);
+                }
+                case AbstractArrow arrow -> {
+                    damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
+                }
+                default -> {
+                    damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
+                }
+            }
+        } else {
+            damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
+        }
+
+/*            if (damager instanceof Player) {
                 //damage.multiplyPhysicalDamage(isCritical ? 1.5 : 1);
-                damage.addMagicalDamage(Attributes.MAGICAL_DAMAGE.calculate(damager));
+                damage.addMagical(Attributes.MAGICAL_DAMAGE.calculate(damager));
             }
 
             else if (damager instanceof AbstractArrow arrow) {
@@ -89,31 +114,29 @@ public class DamageEvent extends CustomEvent {
                 default -> Damage.Type.PHYSICAL;
             };
             damage = new Damage(type, handlerEvent.getDamage());
-        }
+        }*/
 
 
     }
 
-    private void playerEquipmentAttacks() {
+    private void equipmentAttacks() {
         if (!(damager instanceof Player player)) return;
 
-        PlayerEquipment.get(player).getEquipment(new PlayerEquipment.EquipmentConsumer() {
-            @Override
-            public void accept(@NotNull SingleSlot slot, @NotNull CustomItem customItem) {
-                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(customItem, player, slot, DamageEvent.this);
-            }
-        });
+        PlayerEquipment.get(player).getEquipment((slot, customItem) ->
+                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(customItem, player, slot, DamageEvent.this));
     }
 
-    private void playerEquipmentReceives() {
-        if (!(victim instanceof Player player)) return;
+    private void equipmentReceives() {
+        double armor = Attributes.PHYSICAL_ARMOR.calculate(victim);
+        double magical_defense_mul = Attributes.MAGICAL_DEFENSE_MULTIPLIER.calculate(victim);
+        double potential = Attributes.MAGICAL_POTENTIAL.calculate(victim);
 
-        PlayerEquipment.get(player).getEquipment(new PlayerEquipment.EquipmentConsumer() {
-            @Override
-            public void accept(@NotNull SingleSlot slot, @NotNull CustomItem customItem) {
-                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(customItem, player, slot, DamageEvent.this);
-            }
-        });
+        damage.multiplyPhysical(1- PhysicalArmorAttribute.calculateAbsorption(armor));
+        damage.multiplyMagical(1- MagicalDefenseMultiplierAttribute.calculateAbsorption(magical_defense_mul*potential));
+
+        if (!(victim instanceof Player player)) return;
+        PlayerEquipment.get(player).getEquipment((slot, customItem) ->
+                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(customItem, player, slot, DamageEvent.this));
     }
 
     public abstract static class ExtraFlag{
@@ -157,10 +180,5 @@ public class DamageEvent extends CustomEvent {
             }
         }
         return null;
-    }
-
-    public enum DamagerType {
-        ENTITY,
-        NON_ENTITY
     }
 }

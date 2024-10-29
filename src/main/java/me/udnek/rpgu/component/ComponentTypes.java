@@ -10,8 +10,6 @@ public class ComponentTypes {
 
     public static final CustomComponentType<CustomItem, EquippableItemComponent>
             EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.DEFAULT));
-    public static final CustomComponentType<CustomItem, VanillaAttributesComponent>
-            VANILLA_ATTRIBUTES_ITEM = register(new ConstructableComponentType("vanilla_attributes_item", VanillaAttributesComponent.DEFAULT));
 
     private static CustomComponentType register(CustomComponentType type){
         return CustomRegistries.COMPONENT_TYPE.register(RpgU.getInstance(), type);

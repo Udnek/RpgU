@@ -11,6 +11,7 @@ public class DamageListener extends SelfRegisteringListener {
     }
     @EventHandler
     public void onEntityTakesDamage(EntityDamageEvent event) {
+        if (event.getCause() == EntityDamageEvent.DamageCause.CUSTOM) return;
         new DamageEvent(event).invoke();
 
 /*        switch (event.getCause()){
