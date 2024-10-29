@@ -9,8 +9,10 @@ import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+@ApiStatus.ScheduledForRemoval
 public class MagicalChestplate extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {
