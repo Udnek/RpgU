@@ -1,18 +1,22 @@
 package me.udnek.rpgu.attribute.instance;
 
+import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.rpgu.attribute.RpgUAttribute;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class PhysicalArmorAttribute extends RpgUAttribute {
+public class PhysicalArmorAttribute extends ConstructableCustomAttribute {
 
     public static final double MAX = 20;
     public static final double MAX_ABSORPTION = 0.75;
 
+
+
     public PhysicalArmorAttribute(@NotNull String rawId) {
-        super(rawId, 0, 0, MAX);
+        super(rawId, "attribute.name.armor", 0, 0, MAX);
     }
 
     @Override

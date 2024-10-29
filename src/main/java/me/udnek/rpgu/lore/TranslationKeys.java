@@ -22,14 +22,10 @@ public class TranslationKeys {
 
     public static final String equipmentDescriptionLine = "equipment.rpgu.description_line";
 
-    public static final String attributePrefix = "attribute.rpgu.";
+    public static final String attributePrefix = "attribute.rpgu.name.";
 
     public static final String attributePhysicalDamage = "attribute.rpgu.name.physical_damage";
-    public static final String attributeMagicalDamage = "attribute.rpgu.name.magical_damage";
     public static final String attributeAttackSpeed = "attribute.rpgu.name.attack_speed";
-    public static final String attributeProjectileSpeed = "attribute.rpgu.name.projectile_speed";
-    public static final String attributeProjectilePhysicalDamage = "attribute.name.rpgu.projectile_damage_physical";
-    public static final String attributeProjectileMagicalDamage = "attribute.name.rpgu.projectile_damage_magical";
 
     public static final String artifactHud = "image.rpgu.artifact.hud";
     public static final String artifactCooldown = "image.rpgu.artifact.cooldown.";
