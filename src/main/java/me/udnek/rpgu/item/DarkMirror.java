@@ -84,9 +84,13 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
             Collection<PotionEffect> potionEffects = new ArrayList<>(player.getActivePotionEffects());
             for (PotionEffect potionEffect : potionEffects) {
                 if (!(effectSwitches.containsKey(potionEffect.getType()))) continue;
-                player.removePotionEffect(potionEffect.getType());
-                PotionEffectType newEffectType = effectSwitches.get(potionEffect.getType());
-                player.addPotionEffect(potionEffect.withType(newEffectType));
+                if (disspellableEffects.contains(potionEffect.getType())){
+                    player.removePotionEffect(potionEffect.getType());
+                } else {
+                    player.removePotionEffect(potionEffect.getType());
+                    PotionEffectType newEffectType = effectSwitches.get(potionEffect.getType());
+                    player.addPotionEffect(potionEffect.withType(newEffectType));
+                }
             }
         }
     }
