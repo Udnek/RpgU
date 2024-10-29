@@ -1,11 +1,15 @@
 package me.udnek.rpgu;
 
 
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customblock.CustomBlock;
+import me.udnek.itemscoreu.customenchantment.NmsEnchantmentContainer;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
 import me.udnek.rpgu.entity.EntityTypes;
@@ -20,6 +24,10 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
@@ -37,6 +45,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         CustomBlock customBlock = Blocks.TEST;
         CustomEntityType ancientBreeze = EntityTypes.ANCIENT_BREEZE;
         SingleSlot artifacts = EquipmentSlots.FIRST_ARTIFACT;
+        CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
 
         new DamageListener(this);
         new EquipmentListener(this);
@@ -53,6 +62,29 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         wearingEquipmentTask.start(this);
 
         new Hud().register();
+
+        editEnchantments();
+    }
+
+    // TODO MOVE SOMEWHERE ELSE
+    public void editEnchantments(){
+        NmsEnchantmentContainer enchantment = Nms.get().getEnchantment(Enchantment.PROTECTION);
+        enchantment.clearEffects();
+        enchantment.addEffect(
+                new NamespacedKey(RpgU.getInstance(), "enchantment.protection"),
+                Attribute.GENERIC_ARMOR,
+                1/4f, 1/4f,
+                AttributeModifier.Operation.ADD_NUMBER
+        );
+
+        enchantment = Nms.get().getEnchantment(Enchantment.SHARPNESS);
+        enchantment.clearEffects();
+        enchantment.addEffect(
+                new NamespacedKey(RpgU.getInstance(), "enchantment.sharpness"),
+                Attribute.GENERIC_ATTACK_DAMAGE,
+                1f, 0.5f,
+                AttributeModifier.Operation.ADD_NUMBER
+        );
     }
 
     @Override
