@@ -126,7 +126,7 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
                 if (player.getAttackCooldown() < 0.848) return;
             }
             if (!isBackstab(damager, victim)) return;
-            event.getDamage().multiplyPhysicalDamage(damageMultiplayer);
+            event.getDamage().multiplyPhysical(damageMultiplayer);
 
             if (victim instanceof LivingEntity livingVictim){
                 livingVictim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*5, 0));

@@ -1,20 +1,14 @@
 package me.udnek.rpgu.lore;
 
 import com.google.common.collect.Multimap;
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customattribute.*;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.itemscoreu.util.LoreBuilder;
-import me.udnek.rpgu.attribute.CustomKeyedAttributeModifier;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
-import me.udnek.rpgu.attribute.VanillaAttributesContainer;
-import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -58,13 +52,13 @@ public class AttributeLoreGenerator {
         // CUSTOM
         CustomAttributesContainer customAttributes;
         // VANILLA-CUSTOM
-        VanillaAttributesContainer vanillaCustomAttributes;
+        me.udnek.itemscoreu.customattribute.VanillaAttributesContainer vanillaCustomAttributes;
 
         CustomItem customItem = CustomItem.get(itemStack);
         if (customItem != null){
             customAttributes = customItem.getComponentOrDefault(CustomComponentType.CUSTOM_ITEM_ATTRIBUTES).getAttributes(customItem);
             // VANILLA-CUSTOM
-            vanillaCustomAttributes = customItem.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes(customItem);
+            vanillaCustomAttributes = customItem.getComponentOrDefault(CustomComponentType.VANILLA_ATTRIBUTES_ITEM).getAttributes(customItem);
         } else {
             customAttributes = CustomAttributesContainer.empty();
             vanillaCustomAttributes = VanillaAttributesContainer.empty();
@@ -76,7 +70,7 @@ public class AttributeLoreGenerator {
             //List<Component> attributesLore = new ArrayList<>();
 
             // VANILLA
-            EquipmentSlotGroup vanillaSlot = slot.getVanillaAlternative();
+            EquipmentSlotGroup vanillaSlot = slot.getVanillaGroup();
             if (vanillaSlot != null){
 
                 Multimap<Attribute, AttributeModifier> attributesBySlot = me.udnek.itemscoreu.customattribute.AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);

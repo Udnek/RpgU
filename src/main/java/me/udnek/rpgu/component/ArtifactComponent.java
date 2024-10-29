@@ -1,9 +1,10 @@
 package me.udnek.rpgu.component;
 
+import me.udnek.itemscoreu.customattribute.CustomKeyedAttributeModifier;
+import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
+import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.attribute.CustomKeyedAttributeModifier;
-import me.udnek.rpgu.attribute.VanillaAttributesContainer;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -47,7 +48,7 @@ public interface ArtifactComponent extends EquippableItemComponent{
     }
 
     default void getAttributes(@NotNull CustomItem item, Player player, ArtifactComponent.AttributeConsumer consumer){
-        VanillaAttributesContainer container = item.getComponentOrDefault(ComponentTypes.VANILLA_ATTRIBUTES_ITEM).getAttributes(item);
+        VanillaAttributesContainer container = item.getComponentOrDefault(CustomComponentType.VANILLA_ATTRIBUTES_ITEM).getAttributes(item);
         if (container.isEmpty()) return;
 
         for (Map.Entry<Attribute, List<CustomKeyedAttributeModifier>> entry : container.get(EquipmentSlots.ARTIFACTS).getAll().entrySet()) {

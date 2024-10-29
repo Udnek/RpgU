@@ -28,12 +28,12 @@
 	
 	"equipment.rpgu.description_line": " %s",
 	
-	"attribute.rpgu.physical_damage": "Physical Damage",
-	"attribute.rpgu.magical_damage": "Magical Damage",
-	"attribute.rpgu.attack_speed": "Attacks per Second",
+	"attribute.rpgu.name.physical_damage": "Physical Damage",
+	"attribute.rpgu.name.magical_damage": "Magical Damage",
+	"attribute.rpgu.name.attack_speed": "Attacks per Second",
 	
-	"attribute.rpgu.projectile_speed": "Projectile Speed",
-	"attribute.rpgu.projectile_damage": "Projectile Physical Damage",
+	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
+	"attribute.rpgu.name.projectile_damage": "Projectile Physical Damage",
 	
 	
 	"gui.rpgu.alloy_forge": "Alloy Forge",

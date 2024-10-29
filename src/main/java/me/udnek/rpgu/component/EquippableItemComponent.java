@@ -21,7 +21,6 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
     };
 
     boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot);
-    //boolean isEquippedInAppropriateSlot(@NotNull Player player);
     default void onEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack){}
     default void onUnequipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack){}
     default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot){}

@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.rpgu.lore.TranslationKeys;
 import org.bukkit.entity.Entity;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,19 +21,19 @@ public class OriginSlot extends AbstractCustomEquipmentSlot implements SingleSlo
         return false;
     }
     @Override
-    public @Nullable EquipmentSlotGroup getVanillaAlternative() {
+    public @Nullable EquipmentSlotGroup getVanillaGroup() {
         return null;
     }
+    @Override
+    public @Nullable EquipmentSlot getVanillaSlot() {return null;}
     @Override
     public @NotNull String translationKey() {
         return TranslationKeys.whenEquippedAsOrigin;
     }
-
     @Override
     public @Nullable Integer getSlot(@NotNull Entity entity) {
         return null;
     }
-
     @Override
     public void getAllSlots(@NotNull Entity entity, @NotNull Consumer<@NotNull Integer> consumer) {}
 
