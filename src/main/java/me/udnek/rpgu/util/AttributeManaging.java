@@ -90,6 +90,7 @@ public class AttributeManaging extends SelfRegisteringListener {
     @EventHandler
     public void PlayerJoinEvent(PlayerJoinEvent event){
         Player player = event.getPlayer();
+
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
     }
 }
