@@ -1,9 +1,7 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customevent.CustomEvent;
-import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.instance.MagicalDefenseMultiplierAttribute;
 import me.udnek.rpgu.attribute.instance.PhysicalArmorAttribute;
@@ -20,14 +18,11 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 
 import static org.bukkit.event.entity.EntityDamageEvent.DamageCause.*;
 
