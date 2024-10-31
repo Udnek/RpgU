@@ -4,9 +4,15 @@ main: me.udnek.rpgu.RpgU
 api-version: '1.21.1'
 depend: [ItemsCoreU, JeiU]
 commands:
-  debugEquipmentU:
-    description: "debugEquipmentU"
-    usage: "/debugEquipmentU"
+  debugequipment:
+    description: "debugequipment"
+    usage: "/debugequipment"
+    aliases: []
+    permission: rpgu.admin
+    permission-message: "You do not have permission to use this command"
+  customdamagesystem:
+    description: "customdamagesystem"
+    usage: "/customdamagesystem"
     aliases: []
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"

@@ -23,26 +23,27 @@ public class Damage {
         magicalDamage = 0;
     }
 
-    public void add(@NotNull Type type, double amount){
-        if (type == Type.PHYSICAL) addPhysical(amount);
-        else addMagical(amount);
+    public @NotNull Damage addPhysical(double amount){physicalDamage += amount; return this;}
+    public @NotNull Damage addMagical(double amount){magicalDamage += amount; return this;}
+    public @NotNull Damage add(@NotNull Type type, double amount){
+        if (type == Type.PHYSICAL) return addPhysical(amount);
+        return addMagical(amount);
     }
-
-    public void add(@NotNull Damage other){
+    public @NotNull Damage add(@NotNull Damage other){
         addPhysical(other.getPhysical());
         addMagical(other.getMagical());
+        return this;
     }
 
-    public void addPhysical(double amount){physicalDamage += amount;}
-
-    public void addMagical(double amount){magicalDamage += amount;}
-
-    public void multiplyPhysical(double amount){physicalDamage *= amount;}
-
-    public void multiplyMagical(double amount){magicalDamage *= amount;}
+    public @NotNull Damage multiply(double amount){return multiplyMagical(amount).multiplyPhysical(amount);}
+    public @NotNull Damage multiply(@NotNull Type type, double amount){
+        if (type == Type.PHYSICAL) return multiplyPhysical(amount);
+        return multiplyMagical(amount);
+    }
+    public @NotNull Damage multiplyPhysical(double amount){physicalDamage *= amount; return this;}
+    public @NotNull Damage multiplyMagical(double amount){magicalDamage *= amount; return this;}
 
     public double getPhysical() {return physicalDamage;}
-
     public double getMagical() {return magicalDamage;}
 
     public double getTotal() {return getPhysical() + getMagical();}

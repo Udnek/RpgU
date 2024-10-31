@@ -119,6 +119,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         // TODO: 10/7/2024 MAKE WORKING
         Furnace blockData = (Furnace) block.getBlockData();
         blockData.setLit(b);
+        block.setBlockData(blockData, true);
     }
 
     public void foundRecipe(AlloyingRecipe recipe){

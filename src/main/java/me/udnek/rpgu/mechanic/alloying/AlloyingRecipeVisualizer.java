@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AlloyingRecipeVisualizer extends AbstractVisualizer {
-    public static final int OFFSET = 9+1;
+    public static final int OFFSET = 9*2+1;
 
     protected AlloyingRecipe recipe;
     public AlloyingRecipeVisualizer(AlloyingRecipe recipe){
