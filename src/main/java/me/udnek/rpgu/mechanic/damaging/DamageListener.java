@@ -1,88 +1,49 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.rpgu.RpgU;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class DamageListener extends SelfRegisteringListener {
+
+    public static boolean CUSTOM_DAMAGE_SYSTEM = true;
+
     public DamageListener(JavaPlugin plugin) {
         super(plugin);
     }
     @EventHandler
     public void onEntityTakesDamage(EntityDamageEvent event) {
-        if (event.getCause() == EntityDamageEvent.DamageCause.CUSTOM) return;
-        new DamageEvent(event).invoke();
+        if (!CUSTOM_DAMAGE_SYSTEM) {
+            DamageVisualizer.visualize(new Damage(Damage.Type.PHYSICAL, event.getDamage()), event.getEntity());
+            return;
+        }
 
-/*        switch (event.getCause()){
-            case FIRE_TICK:
-            case ENTITY_ATTACK:
-            case ENTITY_SWEEP_ATTACK:
-            case ENTITY_EXPLOSION:
-            case FALLING_BLOCK:
-            case SONIC_BOOM:
-            case PROJECTILE:
+        if (event.getEntity() instanceof LivingEntity living){
+            if (living.getNoDamageTicks() > 0){
+                event.setCancelled(true);
                 return;
-            case POISON:
-            case MAGIC:
-            case WITHER:
-                type = Damage.Type.MAGICAL;
-                break;
-            default:
-                type = Damage.Type.PHYSICAL;
+            } else {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {living.setNoDamageTicks(5);}
+                }.runTaskLater(RpgU.getInstance(), 1);
+            }
         }
-        DamageVisualizer.visualize(new Damage(type, event.getFinalDamage()), event.getEntity());
-        if (event.getEntity() instanceof LivingEntity livingEntity){
-            int finalNoDamageTicks = noDamageTicks;
-            new BukkitRunnable() {
-                @Override
-                public void run() {livingEntity.setNoDamageTicks(finalNoDamageTicks);}
-            }.runTaskLater(RpgU.getInstance(), 1);
-        }*/
-
+        new DamageEvent(event).invoke();
     }
-
-/*    @EventHandler
-    public void onDoubleJump(PlayerToggleFlightEvent event){
-
-        if (!event.isFlying()) return;
-        Player player = event.getPlayer();
-        if (player.getGameMode() == GameMode.CREATIVE) return;
-
-        event.setCancelled(true);
-
-        if (!player.getLocation().add(0, -1.5, 0).getBlock().isSolid()) return;
-
-        Vector velocity = player.getVelocity().multiply(3).setY(0.75);
-        player.setVelocity(velocity);
-
-    }*/
-
-/*    @EventHandler
-    public void onPlayerShoots(EntityShootBowEvent event){
-        if (!(event.getEntity() instanceof Player)) return;
-
-        Player player = (Player) event.getEntity();
-        AbstractArrow projectile = (AbstractArrow) event.getProjectile();
-        Random random = new Random();
-
-        double vel = projectile.getVelocity().length();
-        double dmg = projectile.getDamage();
-        double res = vel*dmg;
-        if (projectile.isCritical()){
-            res += 1 * (dmg/2 +1);
-        }
-
-        player.sendMessage(String.valueOf(res));
-        player.sendMessage(String.valueOf(projectile.getDamage()));
-
-        //AbstractArrow projectile = (AbstractArrow) event.getProjectile();
-
-        projectile.setVelocity(projectile.getVelocity().multiply(2f));
-        projectile.setDamage(projectile.getDamage() * (1f/2f));
-
-        //player.sendMessage(String.valueOf(projectile.getVelocity().length()*20));
-        player.sendMessage(String.valueOf(projectile.getDamage() * projectile.getVelocity().length()));
-
-    }*/
+    @EventHandler
+    public void onEntityShootBow(EntityShootBowEvent event){
+        if (!CUSTOM_DAMAGE_SYSTEM) return;
+        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
+        if (event.getBow() == null) return;
+        arrow.setDamage(arrow.getDamage() + event.getBow().getEnchantmentLevel(Enchantment.POWER));
+    }
 }

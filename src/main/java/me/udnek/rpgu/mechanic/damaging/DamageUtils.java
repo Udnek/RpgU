@@ -1,6 +1,7 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.rpgu.attribute.Attributes;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
@@ -14,30 +15,17 @@ import org.jetbrains.annotations.NotNull;
 
 public class DamageUtils {
 
-/*    public static Damage calculateMeleeDamage(LivingEntity entity){
-        AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
-        Damage damage = new Damage();
+    private DamageUtils(){}
 
-        if (attribute != null){
-            double rawDamage = attribute.getValue();
-            if (entity instanceof Player player) rawDamage *= player.getAttackCooldown();
-            damage.addPhysical(rawDamage);
+
+    public static @NotNull ItemStack getItemInMainHand(@NotNull LivingEntity entity){
+        if (entity instanceof Player player){
+            return player.getInventory().getItemInMainHand();
         }
-
-        double magicalDamage = Attributes.MAGICAL_DAMAGE.calculate(entity);
-        damage.addMagical(magicalDamage);
-
         EntityEquipment equipment = entity.getEquipment();
-        if (equipment != null){
-            ItemStack itemStack = equipment.getItem(EquipmentSlot.HAND);
-
-            int sharpness = itemStack.getEnchantmentLevel(Enchantment.SHARPNESS);
-            damage.addPhysical(sharpness == 0 ? 0 : sharpness*0.5 + 0.5);
-        }
-
-
-        return damage;
-    }*/
+        if (equipment == null) return new ItemStack(Material.AIR);
+        return equipment.getItemInMainHand();
+    }
 
     public static Damage.Type getDamageType(@NotNull EntityDamageEvent event){
         return switch (event.getCause()){

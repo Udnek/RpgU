@@ -1,29 +1,41 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customevent.CustomEvent;
+import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.instance.MagicalDefenseMultiplierAttribute;
 import me.udnek.rpgu.attribute.instance.PhysicalArmorAttribute;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.equipment.PlayerEquipment;
+import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+
+import static org.bukkit.event.entity.EntityDamageEvent.DamageCause.*;
 
 public class DamageEvent extends CustomEvent {
 
-    private final List<ExtraFlag> extraFlags = new ArrayList<>();
+    public static final double NARROW_ENCHANTMENTS_DAMAGE_BONUS = 2.5;
 
+    private final List<ExtraFlag> extraFlags = new ArrayList<>();
     private Damage damage;
     private final EntityDamageEvent handlerEvent;
     private final @Nullable Entity damager;
@@ -32,7 +44,9 @@ public class DamageEvent extends CustomEvent {
 
     public DamageEvent(@NotNull EntityDamageEvent handlerEvent){
         this.handlerEvent = handlerEvent;
-        if (handlerEvent.getEntity() instanceof LivingEntity living){victim = living;}
+        if (handlerEvent.getEntity() instanceof LivingEntity living){
+            victim = living;
+        }
         else victim = null;
         if (handlerEvent instanceof EntityDamageByEntityEvent entityDamageByEntityEvent){
             damager = entityDamageByEntityEvent.getDamager();
@@ -44,67 +58,116 @@ public class DamageEvent extends CustomEvent {
         }
     }
 
+    public @NotNull Damage.Type getDamageType(){return DamageUtils.getDamageType(handlerEvent);}
     public @NotNull Damage getDamage() {return this.damage;}
     public @Nullable Entity getDamager() {return damager;}
     public @NotNull Entity getVictim() {return victim;}
     public @NotNull EntityDamageEvent getHandler() {return this.handlerEvent;}
+    public @NotNull EntityDamageEvent.DamageCause getCause(){return handlerEvent.getCause();}
     public boolean isCritical() {return isCritical;}
     public void invoke(){
         if (victim == null) return;
 
-        damagerDependentCalculations();
+        System.out.println(getCause() + ", " + handlerEvent.getDamageSource().getDamageType().getTranslationKey());
+
+        if (getCause() == ENTITY_SWEEP_ATTACK){
+            System.out.println(damager);
+        }
+
+        attackCalculations();
         equipmentAttacks();
         equipmentReceives();
 
         callEvent();
 
-        // TODO: 2/15/2024 IMPLEMENT FINAL DAMAGE
         handlerEvent.setDamage(0);
         handlerEvent.setDamage(damage.getTotal());
-        //victim.damage(damage.getTotal());
-/*        if (damager == null){
-            victim.damage(damage.getTotal(), handlerEvent.getDamageSource());
-        } else {
-            victim.damage(damage.getTotal(), damager);
-        }*/
 
         DamageVisualizer.visualize(damage, victim);
     }
 
-    private void damagerDependentCalculations() {
+    private void attackCalculations() {
         damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
         if (damager != null){
             switch (damager){
-                case LivingEntity living -> {
-                    if (!(handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK || handlerEvent.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK)){return;}
+                case LivingEntity livingDamager -> {
+                    if (getCause() != ENTITY_ATTACK && getCause() != ENTITY_SWEEP_ATTACK){return;}
                     damage = new Damage();
-                    double potential = Attributes.MAGICAL_POTENTIAL.calculate(living);
-                    AttributeInstance attribute = living.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+                    double potential = Attributes.MAGICAL_POTENTIAL.calculate(livingDamager);
+                    AttributeInstance attribute = livingDamager.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
                     damage.addPhysical((attribute == null ? 0 : attribute.getValue()) * (isCritical() ? 1.5 : 1));
-                    damage.addMagical(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER.calculate(living) * potential);
-                    if (living instanceof Player player){
-                        damage.multiplyPhysical(player.getCooledAttackStrength(0));
+                    damage.addMagical(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER.calculate(livingDamager) * potential);
+
+
+                    ItemStack mainHand = DamageUtils.getItemInMainHand(livingDamager);
+                    // SMITE
+                    int smite = mainHand.getEnchantmentLevel(Enchantment.SMITE);
+                    if (smite != 0 && Tag.ENTITY_TYPES_SENSITIVE_TO_SMITE.isTagged(victim.getType())){
+                        damage.addMagical(smite * NARROW_ENCHANTMENTS_DAMAGE_BONUS);}
+                    // ARTHROPODS
+                    int arthropods = mainHand.getEnchantmentLevel(Enchantment.BANE_OF_ARTHROPODS);
+                    if (arthropods != 0 && Tag.ENTITY_TYPES_SENSITIVE_TO_BANE_OF_ARTHROPODS.isTagged(victim.getType())){
+                        damage.addMagical(arthropods * NARROW_ENCHANTMENTS_DAMAGE_BONUS);}
+                    // IMPALING
+                    int impaling = mainHand.getEnchantmentLevel(Enchantment.IMPALING);
+                    if (impaling != 0 && victim.isInWaterOrRain()){
+                        damage.addMagical(impaling * NARROW_ENCHANTMENTS_DAMAGE_BONUS);}
+
+                    // MACE
+                    if (mainHand.getType() == Material.MACE && !damager.isOnGround() && damager.getFallDistance() > 1.5){
+                        float firstLimit = 3;
+                        float secondLimit = 8;
+                        float fallDistance = damager.getFallDistance();
+                        float bonus;
+                        if (fallDistance <= firstLimit) {
+                            bonus = 4 * fallDistance;
+                        } else if (fallDistance <= secondLimit) {
+                            bonus = 4*firstLimit + 2*(fallDistance - firstLimit);
+                        } else {
+                            bonus = (4*firstLimit +2*(secondLimit - firstLimit)) + 1*(fallDistance - secondLimit);
+                        }
+                        damage.addPhysical(bonus);
+                    }
+
+                    // DENSITY
+                    int density = mainHand.getEnchantmentLevel(Enchantment.DENSITY);
+                    if (density != 0){
+                        damage.addPhysical(livingDamager.getFallDistance() * 0.5 * density);
+                    }
+
+                    // BREACH
+                    int breach = mainHand.getEnchantmentLevel(Enchantment.BREACH);
+                    if (breach != 0){
+                        double toTransfer = damage.getPhysical()*0.15*breach;
+                        damage.addPhysical(-toTransfer);
+                        damage.addMagical(toTransfer);
+                    }
+
+                    if (livingDamager instanceof Player player){
+                        if (getCause() == ENTITY_SWEEP_ATTACK){
+                            double value = player.getAttribute(Attribute.PLAYER_SWEEPING_DAMAGE_RATIO).getValue();
+                            damage.multiply(value).addPhysical(1);
+                        } else {
+                            damage.multiply(player.getCooledAttackStrength(0));
+                        }
+
                     }
 
                 }
                 case Projectile projectile -> {
                     if (projectile instanceof AbstractArrow arrow){
                         damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
+                        int impaling = arrow.getItemStack().getEnchantmentLevel(Enchantment.IMPALING);
+                        if (impaling != 0 && victim.isInWaterOrRain()) damage.addMagical(impaling * NARROW_ENCHANTMENTS_DAMAGE_BONUS);
                     }
-                    getDamagerIfPlayer(player ->
-                            PlayerEquipment.get(player).getEquipment((slot, customItem) ->
-                                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(customItem, player, slot, DamageEvent.this))
-                    );
+                    if (projectile.getShooter() instanceof Player shooter){
+                        PlayerEquipment.get(shooter).getEquipment((slot, customItem) ->
+                                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(customItem, shooter, slot, DamageEvent.this));
+                    }
                 }
-                default -> {
-                    return;
-                }
+                default -> {}
             }
         }
-    }
-
-    private void getDamagerIfPlayer(Consumer<Player> consumer){
-        if (damager instanceof Player player) consumer.accept(player);
     }
 
     private void equipmentAttacks() {
@@ -121,6 +184,28 @@ public class DamageEvent extends CustomEvent {
 
         damage.multiplyPhysical(1- PhysicalArmorAttribute.calculateAbsorption(armor));
         damage.multiplyMagical(1- MagicalDefenseMultiplierAttribute.calculateAbsorption(magical_defense_mul*potential));
+
+        final List<EntityDamageEvent.DamageCause> fireCauses = List.of(CAMPFIRE, FIRE, HOT_FLOOR, LAVA);
+        if (damager instanceof Projectile){
+            double levels = Attributes.PROJECTILE_PROTECTION.calculate(victim);
+            damage.multiply(getDamageType(),1-levels/16);
+        } else if (getCause() == BLOCK_EXPLOSION || handlerEvent.getCause() == ENTITY_EXPLOSION){
+            double levels = Attributes.BLAST_PROTECTION.calculate(victim);
+            damage.multiply(getDamageType(),1-levels/16);
+        } else if (fireCauses.contains(getCause())){
+            double levels = Attributes.FIRE_PROTECTION.calculate(victim);
+            damage.multiply(getDamageType(),1-levels/16);
+        } else if (handlerEvent.getCause() == FALL){
+            double levels = Attributes.FALLING_PROTECTION.calculate(victim);
+            damage.multiply(getDamageType(), 1-(levels/4/2));
+        }
+        PotionEffect effect = victim.getPotionEffect(PotionEffectType.RESISTANCE);
+        if (effect != null){
+            double absorb = (effect.getAmplifier() + 1) * 0.2;
+            damage.multiplyPhysical(1-absorb);
+        }
+
+
 
         if (!(victim instanceof Player player)) return;
         PlayerEquipment.get(player).getEquipment((slot, customItem) ->

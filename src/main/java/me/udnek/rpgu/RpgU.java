@@ -11,6 +11,7 @@ import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
+import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -56,7 +57,8 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new TestListener(this);
         AlloyForgeManager.getInstance();
 
-        this.getCommand("debugEquipmentU").setExecutor(new DebugEquipmentCommand());
+        getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
+        getCommand("customdamagesystem").setExecutor(new CustomDamageSystemCommand());
 
         wearingEquipmentTask = new PlayerWearingEquipmentTask();
         wearingEquipmentTask.start(this);
