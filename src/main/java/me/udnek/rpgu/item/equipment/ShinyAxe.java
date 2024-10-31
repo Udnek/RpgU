@@ -24,11 +24,9 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
     @Override
     public Integer getMaxDamage() {return 300;}
     @Override
-    public Integer getCustomModelData() {return 3100;}
-    @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
     @Override
-    public ItemRarity getItemRarity() {return ItemRarity.UNCOMMON;}
+    public ItemRarity getRarity() {return ItemRarity.UNCOMMON;}
     @Override
     public boolean getAddDefaultAttributes() {return true;}
 

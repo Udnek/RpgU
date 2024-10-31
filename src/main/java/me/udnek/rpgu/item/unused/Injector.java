@@ -25,8 +25,6 @@ public class Injector extends ConstructableCustomItem implements RightClickable,
     @Override
     public Integer getMaxStackSize() {return 1;}
     @Override
-    public Integer getCustomModelData() {return 3107;}
-    @Override
     public FoodComponent getFoodComponent() {
         FoodComponent food = new ItemStack(Material.POTATO).getItemMeta().getFood();
         food.setCanAlwaysEat(true);

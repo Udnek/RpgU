@@ -9,13 +9,10 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class FlintHoe extends ConstructableCustomItem implements RpgUCustomItem {
-    @Override
-    public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
     public @NotNull String getRawId() {return "flint_hoe";}
     @Override

@@ -16,10 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CopperPickaxe extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
-    @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
+
 
     @Override
     public Material getMaterial() {

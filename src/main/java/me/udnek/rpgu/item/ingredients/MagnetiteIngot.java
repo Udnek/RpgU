@@ -8,13 +8,10 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class MagnetiteIngot extends ConstructableCustomItem implements RpgUCustomItem {
-    @Override
-    public @Nullable Integer getCustomModelData() {return 3110;}
     @Override
     public @NotNull String getRawId() {return "magnetite_ingot";}
     @Override

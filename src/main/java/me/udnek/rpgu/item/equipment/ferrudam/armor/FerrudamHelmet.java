@@ -16,15 +16,12 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
 public class FerrudamHelmet extends ConstructableCustomItem implements RpgUCustomItem {
-    @Override
-    public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
     public @NotNull String getRawId() {return "ferrudam_helmet";}
     @Override

@@ -22,11 +22,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class HungryHorrorChestplate extends ConstructableCustomItem implements ArmorItem {
     @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
-
-    @Override
     public Material getMaterial() {
         return Material.DIAMOND_CHESTPLATE;
     }

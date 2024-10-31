@@ -33,10 +33,7 @@ public class CopperSword extends ConstructableCustomItem implements RightClickab
     private final CooldownData cooldownData = new CooldownData(10);
     private final WindupData windupData = new WindupData();
 
-    @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
+
     @Override
     public Material getMaterial() {
         return Material.GOLDEN_SWORD;

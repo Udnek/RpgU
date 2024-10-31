@@ -8,7 +8,6 @@ import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +19,6 @@ public class FerrudamIngot extends ConstructableCustomItem implements RpgUCustom
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
     @Override
-    public @Nullable Integer getCustomModelData() {return 3111;}
-    @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
         CustomSingleRecipeChoice ironIngot = new CustomSingleRecipeChoice(Material.IRON_INGOT);
@@ -32,8 +29,6 @@ public class FerrudamIngot extends ConstructableCustomItem implements RpgUCustom
         alloys.add(diamondIngot);
         alloys.add(diamondIngot);
 
-
-
         AlloyingRecipe recipe = new AlloyingRecipe(
                 getNewRecipeKey(),
                 alloys,
@@ -41,7 +36,7 @@ public class FerrudamIngot extends ConstructableCustomItem implements RpgUCustom
                 new CustomSingleRecipeChoice(Items.INGOT_MOLD),
                 getItem()
         );
-        consumer.accept(recipe);
 
+        consumer.accept(recipe);
     }
 }

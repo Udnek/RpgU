@@ -24,10 +24,7 @@ public class SphereOfBalance extends ConstructableCustomItem implements ExtraDes
 
     public static final double rebalanceDamage = 5;
 
-    @Override
-    public Integer getCustomModelData() {
-        return 3105;
-    }
+
     @Override
     public Material getMaterial() {
         return Material.GUNPOWDER;

@@ -36,10 +36,6 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
     public static final float BACKSTAB_ARTIFACT_MULTIPLIER = 1.5f;
 
     @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
-    @Override
     public @NotNull Material getMaterial() {
         return Material.DIAMOND_SWORD;
     }

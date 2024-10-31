@@ -14,13 +14,10 @@ import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
-    @Override
-    public @Nullable Integer getCustomModelData() {return 3108;}
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
     @Override
