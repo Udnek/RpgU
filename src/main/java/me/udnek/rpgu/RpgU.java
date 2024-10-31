@@ -25,6 +25,7 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
+import me.udnek.rpgu.util.AttributeManaging;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -55,6 +56,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new ModifiedEntitySpawnListener(this);
         new MinecartListener(this);
         new TestListener(this);
+        new AttributeManaging(this);
         AlloyForgeManager.getInstance();
 
         getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
