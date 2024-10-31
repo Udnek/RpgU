@@ -27,10 +27,6 @@ public class PhantomBow extends ConstructableCustomItem implements DefaultCustom
             .add(Attributes.PROJECTILE_DAMAGE_MULTIPLIER, -0.25, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.HAND)
             .build();
 
-    @Override
-    public Integer getCustomModelData() {
-        return 1000;
-    }
 
     @Override
     public @NotNull Material getMaterial() {

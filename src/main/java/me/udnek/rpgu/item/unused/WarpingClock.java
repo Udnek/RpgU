@@ -23,10 +23,6 @@ public class WarpingClock extends ConstructableCustomItem implements RpgUCustomI
 
     static final HashMap<String, WarpingData> warpingDatabase = new HashMap<>();
 
-    @Override
-    public Integer getCustomModelData() {
-        return 3102;
-    }
 
     @Override
     public void afterInitialization() {

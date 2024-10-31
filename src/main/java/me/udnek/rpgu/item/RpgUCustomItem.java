@@ -8,5 +8,4 @@ public interface RpgUCustomItem extends CustomItem, CustomItemProperties {
 
     @Override
     default String getRawItemName(){return TranslationKeys.itemPrefix + getRawId();}
-
 }

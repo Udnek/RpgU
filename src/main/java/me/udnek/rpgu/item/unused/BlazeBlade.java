@@ -53,10 +53,7 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
     public String getRawId() {
         return "blaze_blade";
     }
-    @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
+
 
     @Override
     public ItemFlag[] getTooltipHides() {

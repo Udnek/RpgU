@@ -13,15 +13,12 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
 public class FerrudamShovel extends ConstructableCustomItem implements RpgUCustomItem {
-    @Override
-    public @Nullable Integer getCustomModelData() {return 1000;}
     @Override
     public @NotNull String getRawId() {return "ferrudam_shovel";}
     @Override

@@ -30,10 +30,7 @@ public class WitherWreath extends ConstructableCustomItem implements ExtraDescri
     private final CustomAttributesContainer container = new CustomAttributesContainer.Builder()
             .add(Attributes.MAGICAL_DAMAGE, 0.2, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACT)
             .build();
-    @Override
-    public Integer getCustomModelData() {
-        return 3103;
-    }
+
     @Override
     public Material getMaterial() {
         return Material.GUNPOWDER;

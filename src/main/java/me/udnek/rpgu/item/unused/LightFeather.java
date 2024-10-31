@@ -52,9 +52,6 @@ public class LightFeather extends ConstructableCustomItem implements ArtifactIte
     }*//*
 
 
-    @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
+
 }
 */

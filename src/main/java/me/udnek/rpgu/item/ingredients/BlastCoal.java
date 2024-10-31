@@ -8,7 +8,6 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -17,8 +16,6 @@ public class BlastCoal extends ConstructableCustomItem implements RpgUCustomItem
     public @NotNull String getRawId() {return "blast_coal";}
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-    @Override
-    public @Nullable Integer getCustomModelData() {return 3113;}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

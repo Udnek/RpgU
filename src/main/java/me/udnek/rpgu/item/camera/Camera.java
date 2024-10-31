@@ -24,10 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 public class Camera extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
-    @Override
-    public Integer getCustomModelData() {
-        return 0;
-    }
+
 
     @Override
     public Material getMaterial() {

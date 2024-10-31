@@ -22,10 +22,6 @@ public class LifeCrystal extends ConstructableCustomItem implements ExtraDescrib
     public final static int duration = 20*5 + PlayerWearingEquipmentTask.DELAY;
 
     @Override
-    public Integer getCustomModelData() {
-        return 3101;
-    }
-    @Override
     public String getRawId() {
         return "life_crystal";
     }

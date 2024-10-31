@@ -20,10 +20,6 @@ import java.util.function.Consumer;
 
 public class Wrench extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
-    public Integer getCustomModelData() {
-        return 3200;
-    }
-    @Override
     public @NotNull Material getMaterial() {
         return Material.FISHING_ROD;
     }

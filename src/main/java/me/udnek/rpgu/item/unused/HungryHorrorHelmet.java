@@ -30,10 +30,6 @@ import java.util.Map;
 
 public class HungryHorrorHelmet extends ConstructableCustomItem implements ArmorItem {
     @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
-    @Override
     public @NotNull String getRawId() {
         return "hungry_horror_helmet";
     }

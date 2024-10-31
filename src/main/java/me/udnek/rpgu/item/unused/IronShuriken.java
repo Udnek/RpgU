@@ -17,10 +17,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class IronShuriken extends ConstructableCustomItem implements RightClickable, RpgUCustomItem {
     @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
-    @Override
     public Material getMaterial() {
         return Material.FISHING_ROD;
     }

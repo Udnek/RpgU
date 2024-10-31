@@ -24,9 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 
 public class NautilusCore extends ConstructableCustomItem implements RpgUCustomItem {
-
-    @Override
-    public Integer getCustomModelData() {return 3104;}
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
     @Override

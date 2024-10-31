@@ -24,9 +24,6 @@ import java.util.function.Consumer;
 
 public class FishermanSnorkel extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
-    public Integer getCustomModelData() {return 3106;}
-
-    @Override
     public @NotNull Material getMaterial() {return Material.GOAT_HORN;}
 
     @Override

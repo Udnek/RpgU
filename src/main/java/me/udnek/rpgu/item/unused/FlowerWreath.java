@@ -59,11 +59,6 @@ public class FlowerWreath extends ConstructableCustomItem implements ArtifactIte
     }
 
     @Override
-    public Integer getCustomModelData() {
-        return 3100;
-    }
-
-    @Override
     public ItemFlag[] getTooltipHides() {
         return new ItemFlag[]{ItemFlag.HIDE_ADDITIONAL_TOOLTIP, ItemFlag.HIDE_ATTRIBUTES};
     }
