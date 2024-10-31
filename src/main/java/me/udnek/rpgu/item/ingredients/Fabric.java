@@ -39,7 +39,6 @@ public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
     }
     @Override
     public void afterInitialization() {
-
         super.afterInitialization();
         NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(

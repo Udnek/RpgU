@@ -8,7 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class TechnicalInventoryFiller extends ConstructableCustomItem{
     @Override
-    public void afterInitialization() {
+    public void initializeComponents() {
+        super.initializeComponents();
         setComponent(ComponentTypes.TECHNICAL_ITEM.getDefault());
     }
 

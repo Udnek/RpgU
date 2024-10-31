@@ -1,8 +1,6 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.rpgu.attribute.RpgUAttribute;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;

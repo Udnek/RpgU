@@ -9,6 +9,7 @@ import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.util.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -64,7 +65,7 @@ public class TestListener extends SelfRegisteringListener {
         RecipeManaging.run();
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onItemGenerates(CustomItemGeneratedEvent event){
         //System.out.println("CALLED EVENT");
         AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());

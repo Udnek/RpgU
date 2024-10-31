@@ -21,8 +21,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class RecipeManaging {
-
-
     public static void run(){
         replaceRecipe(Material.LODESTONE, "lodestone", new String[]{ "BBB", "BMB", "BBB"}, Map.of('B', Material.STONE_BRICKS), Map.of('M', Items.MAGNETITE_INGOT));
         replaceRecipe(Material.POWERED_RAIL, "powered_rail", new String[]{"M M", "MSM", "MRM"}, Map.of('S', Material.STICK, 'R', Material.REDSTONE), Map.of('M', Items.MAGNETITE_INGOT));
@@ -43,24 +41,24 @@ public class RecipeManaging {
         alloyingRecipe(Material.NETHERITE_INGOT, "netherite_ingot", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_SCRAP, 3), Map.of(Items.MAGNETITE_INGOT, 3)),
                 getCustomRecipeChoice(Set.of(Items.BLAST_COAL), Set.of()), getCustomRecipeChoice(Set.of(Items.INGOT_MOLD), Set.of()));
         ///////////////////////////////////////////////////
-        alloyingRecipe(Material.NETHERITE_HELMET, "netherite_helmet", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_HELMET, "netherite_helmet_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_HELMET), Set.of()));
-        alloyingRecipe(Material.NETHERITE_CHESTPLATE, "netherite_chestplate", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_CHESTPLATE, "netherite_chestplate_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_CHESTPLATE), Set.of()));
-        alloyingRecipe(Material.NETHERITE_LEGGINGS, "netherite_leggings", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_LEGGINGS, "netherite_leggings_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_LEGGINGS), Set.of()));
-        alloyingRecipe(Material.NETHERITE_BOOTS, "netherite_boots", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_BOOTS, "netherite_boots_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_BOOTS), Set.of()));
         /////////////////////////////////////////////
-        alloyingRecipe(Material.NETHERITE_HOE, "netherite_hoe", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_HOE, "netherite_hoe_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_HOE), Set.of()));
-        alloyingRecipe(Material.NETHERITE_AXE, "netherite_axe", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_AXE, "netherite_axe_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_AXE), Set.of()));
-        alloyingRecipe(Material.NETHERITE_PICKAXE, "netherite_pickaxe", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_PICKAXE, "netherite_pickaxe_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_PICKAXE), Set.of()));
-        alloyingRecipe(Material.NETHERITE_SHOVEL, "netherite_shovel", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_SHOVEL, "netherite_shovel_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_SHOVEL), Set.of()));
-        alloyingRecipe(Material.NETHERITE_SWORD, "netherite_sword", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
+        alloyingRecipe(Material.NETHERITE_SWORD, "netherite_sword_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_SWORD), Set.of()));
         ////////////////////////////////////////////
         unregister();
@@ -125,7 +123,7 @@ public class RecipeManaging {
     }
 
     private static void alloyingRecipe(@NotNull Material material, @NotNull String key, @NotNull List<CustomSingleRecipeChoice> alloys, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition){
-        RecipeManager.getInstance().unregister(NamespacedKey.minecraft(key + "_smithing"));
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft(key));
 
         AlloyingRecipe recipe = new AlloyingRecipe(
                 new NamespacedKey(RpgU.getInstance(), key),
@@ -163,4 +161,3 @@ public class RecipeManaging {
         RecipeManager.getInstance().register(recipe);
     }
 }
-
