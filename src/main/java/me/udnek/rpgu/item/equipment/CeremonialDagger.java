@@ -79,8 +79,8 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
         return loreBuilder;
     }
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void initializeComponents() {
+        super.initializeComponents();
         setComponent(new CeremoniousDaggerComponent());
     }
 

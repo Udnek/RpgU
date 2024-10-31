@@ -33,8 +33,8 @@ public class Wrench extends ConstructableCustomItem implements RpgUCustomItem {
     }
 
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void initializeComponents() {
+        super.initializeComponents();
         setComponent(new RightClickableItem() {
             @Override
             public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {

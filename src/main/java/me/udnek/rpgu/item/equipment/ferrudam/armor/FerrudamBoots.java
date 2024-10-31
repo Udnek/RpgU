@@ -1,17 +1,20 @@
 package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,5 +56,14 @@ public class FerrudamBoots extends ConstructableCustomItem implements RpgUCustom
         );
 
         consumer.accept(recipeAlloy);
+    }
+
+    @Override
+    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
+        super.modifyFinalItemMeta(itemMeta);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.GENERIC_MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_boots"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.FEET);
+        itemMeta.removeAttributeModifier(Attribute.GENERIC_ARMOR);
+        AttributeUtils.addAttribute(itemMeta, Attribute.GENERIC_ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_boots"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.FEET);
+        itemMeta.removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
     }
 }
