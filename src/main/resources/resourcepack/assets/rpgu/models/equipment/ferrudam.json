@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "rpgu:ferrudam"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "rpgu:ferrudam"
+      }
+    ]
+  }
+}

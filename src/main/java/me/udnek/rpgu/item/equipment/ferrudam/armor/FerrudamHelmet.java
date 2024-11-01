@@ -15,21 +15,21 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamHelmet extends ConstructableCustomItem implements RpgUCustomItem {
+public class FerrudamHelmet extends ConstructableCustomItem implements RpgUCustomItem, FerrudamArmorItemProperties {
     @Override
     public @NotNull String getRawId() {return "ferrudam_helmet";}
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
-    @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public @Nullable EquippableComponent getEquippable() {return FerrudamArmorItemProperties.super.getEquippable();}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
