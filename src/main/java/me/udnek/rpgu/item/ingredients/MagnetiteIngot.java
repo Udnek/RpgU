@@ -39,10 +39,10 @@ public class MagnetiteIngot extends ConstructableCustomItem implements RpgUCusto
     @Override
     public void afterInitialization() {
         super.afterInitialization();
-        extracted(LootTables.SIMPLE_DUNGEON, LootTables.ABANDONED_MINESHAFT, LootTables.JUNGLE_TEMPLE);
+        addToLootTables(LootTables.SIMPLE_DUNGEON, LootTables.ABANDONED_MINESHAFT, LootTables.JUNGLE_TEMPLE);
     }
 
-    private static void extracted(LootTables ...lootTables) {
+    private void addToLootTables(LootTables ...lootTables) {
         for (LootTables lootTable : lootTables) {
             Nms.get().getLootTableContainer(lootTable.getLootTable()).addPool(
                     new NmsLootPoolBuilder(
