@@ -15,6 +15,7 @@ import org.bukkit.MusicInstrument;
 import org.bukkit.Particle;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
@@ -25,12 +26,12 @@ import java.util.function.Consumer;
 public class FishermanSnorkel extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
     public @NotNull Material getMaterial() {return Material.GOAT_HORN;}
-
     @Override
     public @NotNull String getRawId() {return "fisherman_snorkel";}
-
     @Override
     public MusicInstrument getMusicInstrument() {return MusicInstrument.DREAM_GOAT_HORN;}
+    @Override
+    public @Nullable ItemRarity getRarity() {return ItemRarity.COMMON;}
 
     @Override
     public @Nullable LoreBuilder getLoreBuilder() {

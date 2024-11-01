@@ -41,7 +41,7 @@ public class HungryHorrorHelmet extends ConstructableCustomItem implements Armor
 
     @Override
     public ArmorTrim getArmorTrim() {
-        return new ArmorTrim(TrimMaterial.LAPIS, Registry.TRIM_PATTERN.get(new NamespacedKey("rpgu", "hungry_horror")));
+        return new ArmorTrim(TrimMaterial.LAPIS, Registry.TRIM_PATTERN.get(new NamespacedKey("rpgu", "hungry_horror.json")));
     }
 
     @Override

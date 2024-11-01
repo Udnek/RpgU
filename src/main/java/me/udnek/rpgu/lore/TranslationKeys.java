@@ -34,7 +34,7 @@ public class TranslationKeys {
     public static String get(Attribute attribute){
         if (attribute == Attribute.ATTACK_DAMAGE) return attributePhysicalDamage;
         if (attribute == Attribute.ATTACK_SPEED) return attributeAttackSpeed;
-        return attribute.getKey().toString();
+        return attribute.translationKey();
     }
     public static String get(AttributeModifier.Operation operation){
         switch (operation){
