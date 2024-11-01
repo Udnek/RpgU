@@ -42,15 +42,17 @@ public class AttributeManaging extends SelfRegisteringListener {
          items.put(Material.LEATHER_LEGGINGS, new HpAndArmor(1, 0));
          items.put(Material.LEATHER_BOOTS, new HpAndArmor(1, 0));
 
-         items.put(Material.CHAINMAIL_HELMET, items.get(Material.LEATHER_HELMET));
-         items.put(Material.CHAINMAIL_CHESTPLATE, items.get(Material.LEATHER_CHESTPLATE));
-         items.put(Material.CHAINMAIL_LEGGINGS, items.get(Material.LEATHER_LEGGINGS));
-         items.put(Material.CHAINMAIL_BOOTS, items.get(Material.LEATHER_BOOTS));
+
 
          items.put(Material.IRON_HELMET, new HpAndArmor(1, 1));
          items.put(Material.IRON_CHESTPLATE, new HpAndArmor(2, 1));
          items.put(Material.IRON_LEGGINGS, new HpAndArmor(2, 1));
          items.put(Material.IRON_BOOTS, new HpAndArmor(1, 1));
+
+         items.put(Material.CHAINMAIL_HELMET, items.get(Material.IRON_HELMET));
+         items.put(Material.CHAINMAIL_CHESTPLATE, items.get(Material.IRON_CHESTPLATE));
+         items.put(Material.CHAINMAIL_LEGGINGS, items.get(Material.IRON_LEGGINGS));
+         items.put(Material.CHAINMAIL_BOOTS, items.get(Material.IRON_BOOTS));
 
          items.put(Material.GOLDEN_HELMET, items.get(Material.IRON_HELMET));
          items.put(Material.GOLDEN_CHESTPLATE, items.get(Material.IRON_CHESTPLATE));

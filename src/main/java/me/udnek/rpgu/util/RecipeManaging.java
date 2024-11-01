@@ -61,6 +61,11 @@ public class RecipeManaging {
         alloyingRecipe(Material.NETHERITE_SWORD, "netherite_sword_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_SWORD), Set.of()));
         ////////////////////////////////////////////
+        replaceRecipeMaterial(Material.CHAINMAIL_CHESTPLATE, "chainmail_chestplate", new String[]{"C C", "CCC", "CCC"}, Map.of('C', Material.CHAIN));
+        replaceRecipeMaterial(Material.CHAINMAIL_HELMET, "chainmail_helmet", new String[]{"CCC", "C C"}, Map.of('C', Material.CHAIN));
+        replaceRecipeMaterial(Material.CHAINMAIL_LEGGINGS, "chainmail_leggings", new String[]{"CCC", "C C", "C C"}, Map.of('C', Material.CHAIN));
+        replaceRecipeMaterial(Material.CHAINMAIL_BOOTS, "chainmail_boots", new String[]{"C C", "C C"}, Map.of('C', Material.CHAIN));
+        /////////////////////////////////////////////////
         unregister();
     }
 
