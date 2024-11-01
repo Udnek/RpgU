@@ -21,9 +21,6 @@ public class EquipmentSlots {
 
 
     static {
-        LogUtils.pluginLog(FIRST_ARTIFACT);
-        LogUtils.pluginLog(SECOND_ARTIFACT);
-        LogUtils.pluginLog(THIRD_ARTIFACT);
         ARTIFACTS = (GroupSlot) register(new ConstructableGroupSlot("hand", Set.of(
                 FIRST_ARTIFACT,
                 SECOND_ARTIFACT,

@@ -65,10 +65,6 @@ public class DamageEvent extends CustomEvent {
 
         System.out.println(getCause() + ", " + handlerEvent.getDamageSource().getDamageType().getTranslationKey());
 
-        if (getCause() == ENTITY_SWEEP_ATTACK){
-            System.out.println(damager);
-        }
-
         attackCalculations();
         equipmentAttacks();
         equipmentReceives();

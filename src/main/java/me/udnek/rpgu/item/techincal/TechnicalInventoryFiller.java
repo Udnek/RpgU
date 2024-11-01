@@ -28,6 +28,6 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     public boolean getHideTooltip() {return true;}
     @Override
     public @NotNull Material getMaterial() {
-        return Material.FEATHER;
+        return Material.GUNPOWDER;
     }
 }

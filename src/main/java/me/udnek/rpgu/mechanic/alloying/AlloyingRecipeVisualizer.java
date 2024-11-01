@@ -5,15 +5,18 @@ import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.jeiu.item.Items;
 import me.udnek.jeiu.menu.RecipesMenu;
 import me.udnek.jeiu.visualizer.abstraction.AbstractVisualizer;
+import me.udnek.rpgu.RpgU;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class AlloyingRecipeVisualizer extends AbstractVisualizer {
-    public static final int OFFSET = 9*2+1;
+    public static final int OFFSET = 9;
 
     protected AlloyingRecipe recipe;
     public AlloyingRecipeVisualizer(AlloyingRecipe recipe){
@@ -30,10 +33,13 @@ public class AlloyingRecipeVisualizer extends AbstractVisualizer {
         }
         setChoice(AlloyForgeInventory.FUEL_SLOT + OFFSET, recipe.getFuel());
         setChoice(AlloyForgeInventory.ADDITION_SLOT + OFFSET, recipe.getAddition());
-        menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET -1, recipe.getResult());
+        menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET-1, recipe.getResult());
 
-        menu.setItem(RecipesMenu.RECIPE_STATION_POSITION, Material.BLAST_FURNACE);
+        menu.setItem(RecipesMenu.getRecipeStationPosition(), Material.BLAST_FURNACE);
         menu.setThemedItem(AlloyForgeInventory.FUEL_SLOT + OFFSET - 9, Items.FIRE_ICON);
+        ItemStack banner = Items.BANNER.getItem();
+        banner.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "alloying_banner")));
+        menu.setThemedItem(RecipesMenu.getBannerPosition(), banner);
     }
     public void setAlloy(int index, CustomRecipeChoice choice){
         setChoice(AlloyForgeInventory.ALLOYS_SLOTS[index] + OFFSET, choice);
