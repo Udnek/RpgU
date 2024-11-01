@@ -22,15 +22,13 @@ public class RpgUAttributeUtils {
                 AttributeUtils.appendAttribute(itemMeta, attribute, id, amount, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
                 break;
             default:
-                switch (attribute) {
-                    case GENERIC_ATTACK_SPEED:
-                    case GENERIC_ATTACK_DAMAGE:
-                    case GENERIC_MOVEMENT_SPEED:
-                        AttributeUtils.appendAttribute(itemMeta, attribute, id, amount, AttributeModifier.Operation.MULTIPLY_SCALAR_1, itemStack.getType().getEquipmentSlot().getGroup());
-                        break;
-                    default:
-                        AttributeUtils.appendAttribute(itemMeta, attribute, id, amount, AttributeModifier.Operation.ADD_NUMBER, itemStack.getType().getEquipmentSlot().getGroup());
-                        break;
+                if (attribute == Attribute.ATTACK_SPEED ||
+                    attribute == Attribute.ATTACK_DAMAGE ||
+                    attribute == Attribute.MOVEMENT_SPEED)
+                {
+                    AttributeUtils.appendAttribute(itemMeta, attribute, id, amount, AttributeModifier.Operation.MULTIPLY_SCALAR_1, itemStack.getType().getEquipmentSlot().getGroup());
+                } else {
+                    AttributeUtils.appendAttribute(itemMeta, attribute, id, amount, AttributeModifier.Operation.ADD_NUMBER, itemStack.getType().getEquipmentSlot().getGroup());
                 }
         }
         itemStack.setItemMeta(itemMeta);
