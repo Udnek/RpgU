@@ -76,7 +76,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         enchantment.clearEffects();
         enchantment.addEffect(
                 new NamespacedKey(RpgU.getInstance(), "enchantment.protection"),
-                Attribute.GENERIC_ARMOR,
+                Attribute.ARMOR,
                 1/4f, 1/4f,
                 AttributeModifier.Operation.ADD_NUMBER
         );
@@ -85,7 +85,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         enchantment.clearEffects();
         enchantment.addEffect(
                 new NamespacedKey(RpgU.getInstance(), "enchantment.sharpness"),
-                Attribute.GENERIC_ATTACK_DAMAGE,
+                Attribute.ATTACK_DAMAGE,
                 1f, 0.5f,
                 AttributeModifier.Operation.ADD_NUMBER
         );

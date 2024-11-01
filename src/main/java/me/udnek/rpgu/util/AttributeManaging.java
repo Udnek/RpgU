@@ -79,10 +79,10 @@ public class AttributeManaging extends SelfRegisteringListener {
          if (VanillaItemManager.isReplaced(itemStack) && items.containsKey(material)){
             if (itemStack.getItemMeta().getAttributeModifiers() != null) AttributeUtils.addDefaultAttributes(itemStack);
             EquipmentSlotGroup slot = material.getEquipmentSlot().getGroup();
-            AttributeUtils.appendAttribute(itemStack, Attribute.GENERIC_MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), items.get(material).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
-            itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.GENERIC_ARMOR));
-            AttributeUtils.addAttribute(itemStack, Attribute.GENERIC_ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), items.get(material).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
-            itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS));
+            AttributeUtils.appendAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), items.get(material).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
+            itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR));
+            AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), items.get(material).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
+            itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS));
         }
     }
 
@@ -93,6 +93,6 @@ public class AttributeManaging extends SelfRegisteringListener {
     public void PlayerJoinEvent(PlayerJoinEvent event){
         Player player = event.getPlayer();
 
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
+        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
     }
 }

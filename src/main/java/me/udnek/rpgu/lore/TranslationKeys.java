@@ -32,13 +32,9 @@ public class TranslationKeys {
     public static final String unknownArtifactImage = "image.rpgu.artifact.unknown_artifact";
 
     public static String get(Attribute attribute){
-        switch (attribute){
-            case GENERIC_ATTACK_DAMAGE -> {return attributePhysicalDamage;}
-            case GENERIC_ATTACK_SPEED -> {return attributeAttackSpeed;}
-            default -> {
-                return attribute.getTranslationKey();
-            }
-        }
+        if (attribute == Attribute.ATTACK_DAMAGE) return attributePhysicalDamage;
+        if (attribute == Attribute.ATTACK_SPEED) return attributeAttackSpeed;
+        return attribute.getKey().toString();
     }
     public static String get(AttributeModifier.Operation operation){
         switch (operation){
