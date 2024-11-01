@@ -89,7 +89,7 @@ public class DamageEvent extends CustomEvent {
                     if (getCause() != ENTITY_ATTACK && getCause() != ENTITY_SWEEP_ATTACK){return;}
                     damage = new Damage();
                     double potential = Attributes.MAGICAL_POTENTIAL.calculate(livingDamager);
-                    AttributeInstance attribute = livingDamager.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+                    AttributeInstance attribute = livingDamager.getAttribute(Attribute.ATTACK_DAMAGE);
                     damage.addPhysical((attribute == null ? 0 : attribute.getValue()) * (isCritical() ? 1.5 : 1));
                     damage.addMagical(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER.calculate(livingDamager) * potential);
 
@@ -140,7 +140,7 @@ public class DamageEvent extends CustomEvent {
 
                     if (livingDamager instanceof Player player){
                         if (getCause() == ENTITY_SWEEP_ATTACK){
-                            double value = player.getAttribute(Attribute.PLAYER_SWEEPING_DAMAGE_RATIO).getValue();
+                            double value = player.getAttribute(Attribute.SWEEPING_DAMAGE_RATIO).getValue();
                             damage.multiply(value).addPhysical(1);
                         } else {
                             damage.multiply(player.getCooledAttackStrength(0));
