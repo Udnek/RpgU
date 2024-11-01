@@ -19,7 +19,7 @@ public class PhysicalArmorAttribute extends ConstructableCustomAttribute {
 
     @Override
     public double calculate(@NotNull LivingEntity entity) {
-        AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_ARMOR);
+        AttributeInstance attribute = entity.getAttribute(Attribute.ARMOR);
         if (attribute == null) return getDefaultValue();
         return Math.clamp(attribute.getValue(), 0, 20);
     }

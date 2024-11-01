@@ -33,8 +33,8 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
     @Override
     protected void modifyFinalItemStack(ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, null, 2);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_SPEED, null, -0.3);
+        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 2);
+        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.3);
     }
 
     @Override

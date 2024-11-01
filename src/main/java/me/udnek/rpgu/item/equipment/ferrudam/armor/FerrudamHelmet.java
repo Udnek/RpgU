@@ -58,9 +58,9 @@ public class FerrudamHelmet extends ConstructableCustomItem implements RpgUCusto
     @Override
     protected void modifyFinalItemMeta(ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.GENERIC_MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
-        itemMeta.removeAttributeModifier(Attribute.GENERIC_ARMOR);
-        AttributeUtils.addAttribute(itemMeta, Attribute.GENERIC_ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
-        itemMeta.removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
+        itemMeta.removeAttributeModifier(Attribute.ARMOR);
+        AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
+        itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);
     }
 }
