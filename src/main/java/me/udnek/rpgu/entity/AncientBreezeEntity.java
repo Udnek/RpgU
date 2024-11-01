@@ -15,7 +15,7 @@ public class AncientBreezeEntity extends ConstructableCustomEntity<Breeze>{
     public EntityType getVanillaEntityType() {return EntityType.BREEZE;}
     @Override
     public void onSpawn() {
-        entity.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(SIZE);
+        entity.getAttribute(Attribute.SCALE).setBaseValue(SIZE);
     }
     @Override
     public void unload() {}

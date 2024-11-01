@@ -121,8 +121,8 @@ public class AttributeLoreGenerator {
         Arrays.sort(keys, new Comparator<Attribute>() {
             @Override
             public int compare(Attribute a1, Attribute a2) {
-                if (a1 == Attribute.GENERIC_ATTACK_DAMAGE) return -1;
-                if (a2 == Attribute.GENERIC_ATTACK_DAMAGE) return 1;
+                if (a1 == Attribute.ATTACK_DAMAGE) return -1;
+                if (a2 == Attribute.ATTACK_DAMAGE) return 1;
                 return 0;
             }
         });
@@ -133,8 +133,8 @@ public class AttributeLoreGenerator {
     public static Component getAttributeLine(Attribute attribute, AttributeModifier modifier, CustomEquipmentSlot slot){
         String attributeName = TranslationKeys.get(attribute);
         double amount = modifier.getAmount();
-        if (attribute == Attribute.GENERIC_ATTACK_DAMAGE && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount++;
-        else if (attribute == Attribute.GENERIC_ATTACK_SPEED && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount = RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount);
+        if (attribute == Attribute.ATTACK_DAMAGE && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount++;
+        else if (attribute == Attribute.ATTACK_SPEED && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount = RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount);
         return getAttributeLine(attributeName, amount, modifier.getOperation(), slot);
     }
     public static Component getAttributeLine(CustomAttribute attribute, CustomAttributeModifier modifier, CustomEquipmentSlot slot){

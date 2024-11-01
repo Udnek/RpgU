@@ -52,7 +52,7 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
     @Override
     protected void modifyFinalItemStack(ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.GENERIC_ATTACK_DAMAGE, null, -2);
+        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, -2);
     }
 
     @Override
