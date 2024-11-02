@@ -6,6 +6,7 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.FishermanSnorkel;
 import me.udnek.rpgu.item.artifact.NautilusCore;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
+import me.udnek.rpgu.item.artifact.RustyIronRing;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
@@ -43,6 +44,7 @@ public class Items {
     // ARTIFACTS
     public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
     public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
+    public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
@@ -72,6 +74,7 @@ public class Items {
     public static final CustomItem INGOT_MOLD = register(new IngotMold());
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
     public static final CustomItem MAGNETITE_INGOT = register(new MagnetiteIngot());
+    public static final CustomItem PHANTOM_WING = register(new PhantomWing());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());

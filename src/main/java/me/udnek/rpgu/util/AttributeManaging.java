@@ -88,11 +88,4 @@ public class AttributeManaging extends SelfRegisteringListener {
 
     record HpAndArmor(double hp, double armor) {
     }
-
-    @EventHandler
-    public void PlayerJoinEvent(PlayerJoinEvent event){
-        Player player = event.getPlayer();
-
-        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
-    }
 }
