@@ -13,6 +13,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
+import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
 import me.udnek.rpgu.equipment.EquipmentListener;
@@ -69,7 +70,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         editEnchantments();
     }
-
+    
     // TODO MOVE SOMEWHERE ELSE
     public void editEnchantments(){
         NmsEnchantmentContainer enchantment = Nms.get().getEnchantment(Enchantment.PROTECTION);

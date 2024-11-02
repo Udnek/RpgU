@@ -7,8 +7,10 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.bukkit.Art;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -28,24 +30,22 @@ public interface ArtifactComponent extends EquippableItemComponent{
     @Override
     default void onEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
         if (!isAppropriateSlot(slot)) return;
-        getAttributes(item, player, new ArtifactComponent.AttributeConsumer() {
-            @Override
-            public void accept(AttributeInstance attributeInstance, CustomKeyedAttributeModifier modifier) {
-                if (attributeInstance.getModifier(modifier.getKey()) == null) {
-                    attributeInstance.addModifier(modifier.toVanilla());
-                }
+
+        getAttributes(item, player, (attributeInstance, modifier) -> {
+            if (attributeInstance.getModifier(modifier.getKey()) == null) {
+                String namespace = modifier.getKey().getNamespace();
+                String key = modifier.getKey().getKey();
+                AttributeModifier vanilla = modifier.toVanilla(new NamespacedKey(namespace, key + slot.getKey().asString().replace(":","_")));
+                attributeInstance.addModifier(vanilla);
             }
         });
     }
     @Override
     default void onUnequipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
         if (!isAppropriateSlot(slot)) return;
-        getAttributes(item, player, new ArtifactComponent.AttributeConsumer() {
-            @Override
-            public void accept(AttributeInstance attributeInstance, CustomKeyedAttributeModifier modifier) {
-                if (attributeInstance.getModifier(modifier.getKey()) != null) {
-                    attributeInstance.removeModifier(modifier.toVanilla());
-                }
+        getAttributes(item, player, (attributeInstance, modifier) -> {
+            if (attributeInstance.getModifier(modifier.getKey()) != null) {
+                attributeInstance.removeModifier(modifier.toVanilla());
             }
         });
     }
