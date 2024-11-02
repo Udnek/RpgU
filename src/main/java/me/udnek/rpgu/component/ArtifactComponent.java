@@ -31,21 +31,20 @@ public interface ArtifactComponent extends EquippableItemComponent{
     default void onEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
         if (!isAppropriateSlot(slot)) return;
 
-        getAttributes(item, player, (attributeInstance, modifier) -> {
+        getAttributes(item, player, (attributeInstance, customModifier) -> {
+            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey(slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) == null) {
-                String namespace = modifier.getKey().getNamespace();
-                String key = modifier.getKey().getKey();
-                AttributeModifier vanilla = modifier.toVanilla(new NamespacedKey(namespace, key + slot.getKey().asString().replace(":","_")));
-                attributeInstance.addModifier(vanilla);
+                attributeInstance.addModifier(modifier);
             }
         });
     }
     @Override
     default void onUnequipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
         if (!isAppropriateSlot(slot)) return;
-        getAttributes(item, player, (attributeInstance, modifier) -> {
+        getAttributes(item, player, (attributeInstance, customModifier) -> {
+            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey(slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) != null) {
-                attributeInstance.removeModifier(modifier.toVanilla());
+                attributeInstance.removeModifier(modifier);
             }
         });
     }
