@@ -62,7 +62,7 @@ public class FerrudamChestplate extends ConstructableCustomItem implements RpgUC
     @Override
     protected void modifyFinalItemMeta(ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_chestplate"), 4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_chestplate"), 4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);
         AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_chestplate"), 3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
         itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);

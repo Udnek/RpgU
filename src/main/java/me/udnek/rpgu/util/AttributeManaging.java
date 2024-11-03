@@ -11,10 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,8 +40,6 @@ public class AttributeManaging extends SelfRegisteringListener {
          items.put(Material.LEATHER_CHESTPLATE, new HpAndArmor(1, 0));
          items.put(Material.LEATHER_LEGGINGS, new HpAndArmor(1, 0));
          items.put(Material.LEATHER_BOOTS, new HpAndArmor(1, 0));
-
-
 
          items.put(Material.IRON_HELMET, new HpAndArmor(1, 1));
          items.put(Material.IRON_CHESTPLATE, new HpAndArmor(2, 1));
@@ -76,6 +73,7 @@ public class AttributeManaging extends SelfRegisteringListener {
          ItemStack itemStack = event.getItemStack();
          Material material = itemStack.getType();
 
+
          if (VanillaItemManager.isReplaced(itemStack) && items.containsKey(material)){
             if (itemStack.getItemMeta().getAttributeModifiers() != null) AttributeUtils.addDefaultAttributes(itemStack);
             EquipmentSlotGroup slot = material.getEquipmentSlot().getGroup();
@@ -83,16 +81,17 @@ public class AttributeManaging extends SelfRegisteringListener {
             itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR));
             AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), items.get(material).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
             itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS));
-        }
+         }
+
+         if (VanillaItemManager.isReplaced(itemStack)){
+             if (material == Material.CHAINMAIL_HELMET || material == Material.CHAINMAIL_CHESTPLATE ||
+                 material == Material.CHAINMAIL_LEGGINGS || material == Material.CHAINMAIL_BOOTS){
+                 itemStack.editMeta(itemMeta -> itemMeta.setRarity(ItemRarity.COMMON));
+             }
+
+         }
     }
 
     record HpAndArmor(double hp, double armor) {
-    }
-
-    @EventHandler
-    public void PlayerJoinEvent(PlayerJoinEvent event){
-        Player player = event.getPlayer();
-
-        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
     }
 }

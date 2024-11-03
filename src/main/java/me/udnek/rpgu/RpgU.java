@@ -13,7 +13,6 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
-import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
 import me.udnek.rpgu.equipment.EquipmentListener;
