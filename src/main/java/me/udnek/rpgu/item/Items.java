@@ -19,28 +19,11 @@ import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
+import me.udnek.rpgu.item.utility.DarkMirror;
+import me.udnek.rpgu.item.utility.TotemOfSavingItem;
 import me.udnek.rpgu.item.utility.Wrench;
 
 public class Items {
-
-    //public final static CustomItem BLAZE_BLADE = register(new BlazeBlade());
-    //public final static CustomItem LIGHT_FEATHER = register(new LightFeather());
-/*    public final static CustomItem LIFE_CRYSTAL = register(new LifeCrystal());
-    public final static CustomItem HUNGRY_HORROR_HELMET =  register(new HungryHorrorHelmet());
-    public final static CustomItem HUNGRY_HORROR_CHESTPLATE = register(new HungryHorrorChestplate());
-    public final static CustomItem IRON_SHURIKEN = register(new IronShuriken());
-    public final static CustomItem WARPING_CLOCK = register(new WarpingClock());
-    public final static CustomItem CEREMONIOUS_DAGGER = register(new CeremoniousDagger());
-    public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
-    public final static CustomItem WITHER_WREATH = register(new WitherWreath());
-    public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
-    public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
-    public final static CustomItem PHANTOM_BOW = register(new PhantomBow());
-    public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
-    public final static CustomItem COPPER_SWORD = register(new CopperSword());
-    public final static CustomItem COPPER_PICKAXE = register(new CopperPickaxe());
-    public final static CustomItem WRENCH = register(new Wrench());
-    public final static CustomItem INJECTOR = register(new Injector());*/
 
     // ARTIFACTS
     public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
@@ -70,6 +53,8 @@ public class Items {
 
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
+    public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
+
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
     public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
@@ -84,14 +69,13 @@ public class Items {
 
     // UTILITY
     public final static CustomItem WRENCH = register(new Wrench());
-    public static final CustomItem MAGICAL_MIRROR = register(new DarkMirror());
+    public static final CustomItem DARK_MIRROR = register(new DarkMirror());
+    public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
 
-    //////////
-    public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSaving());
 
     private static CustomItem register(CustomItem customItem){
         return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);

@@ -1,8 +1,9 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.utility;
 
 import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -33,7 +34,7 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
         setComponent(new DarkMirror.MagicalMirrorComponent());
     }
 
-    static class MagicalMirrorComponent extends RightClickableItem {
+    static class MagicalMirrorComponent implements RightClickableItem {
         static HashMap<PotionEffectType, PotionEffectType> effectSwitches = new HashMap<>();
         static List<PotionEffectType> dispellableEffects = new ArrayList<>();
         public static final int EXTRA_DURATION = 0;
