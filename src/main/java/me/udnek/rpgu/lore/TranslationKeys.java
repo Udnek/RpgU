@@ -30,20 +30,4 @@ public class TranslationKeys {
     public static final String artifactHud = "image.rpgu.artifact.hud";
     public static final String artifactCooldown = "image.rpgu.artifact.cooldown.";
     public static final String unknownArtifactImage = "image.rpgu.artifact.unknown_artifact";
-
-    public static String get(Attribute attribute){
-        if (attribute == Attribute.ATTACK_DAMAGE) return attributePhysicalDamage;
-        if (attribute == Attribute.ATTACK_SPEED) return attributeAttackSpeed;
-        return attribute.translationKey();
-    }
-    public static String get(AttributeModifier.Operation operation){
-        switch (operation){
-            case ADD_NUMBER -> {return "0";}
-            case ADD_SCALAR -> {return "1";}
-            case MULTIPLY_SCALAR_1 -> {return "2";}
-            case null, default -> {
-                return "unknown";
-            }
-        }
-    }
 }

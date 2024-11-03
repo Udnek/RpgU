@@ -31,7 +31,7 @@
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",
 	"attribute.rpgu.name.meele_magical_damage_multiplier": "Meele Magical Damage per Potential",
-	"attribute.rpgu.name.magical_potential": "Magical Potential",
+	"attribute.rpgu.name.magical_potential": "Magical Potential (MP)",
 	"attribute.rpgu.name.magical_defense_multiplier": "Magical Defense per Potential",
 	
 	"gui.rpgu.alloy_forge": "Alloy Forge",
@@ -44,7 +44,9 @@
 	"item.rpgu.blaze_blade": "Blaze Blade",
 
 	"item.rpgu.shiny_axe": "Shiny Axe",
-	
+
+	"item.rpgu.wrench": "Wrench",
+
 	"item.rpgu.ceremonial_dagger": "Ceremonial Dagger",
 	"item.rpgu.ceremonial_dagger.description.0": "+150% Physical Damage to backstab",
 	"item.rpgu.ceremonial_dagger.description.1": "+50% Physical Damage to backstab",
@@ -74,18 +76,10 @@
 	"item.rpgu.raw_magnetite": "Raw Magnetite",
 	"item.rpgu.magnetite_ingot": "Magnetite Ingot",
 
-	"item.rpgu.light_feather": "Light Feather",
-	"item.rpgu.light_feather.description.0": "Allows to double jump",
-	
-	"item.rpgu.life_crystal": "Life Crystal",
-	"item.rpgu.life_crystal.description.0": "Health Boost V",
-	"item.rpgu.life_crystal.description.1": "Regeneration II",
-	"item.rpgu.life_crystal.description.2": "Hunger II",
 	
 	"item.rpgu.hungry_horror_helmet": "Mask of Hungry Horror",
 	"item.rpgu.hungry_horror_chestplate": "Aegis of Hungry Horror",
-	
-	"item.rpgu.iron_shuriken": "Iron Shuriken",
+
 	
 	"item.rpgu.flower_wreath": "Flower Wreath",
 	"item.rpgu.flower_wreath.description.0": "Applies Regeneration in forest",
@@ -95,26 +89,13 @@
 	
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",
-	"item.rpgu.nautilus_core.image": "\uE001",
 	
-	"item.rpgu.sphere_of_balance": "Sphere of Balance",	
-	"item.rpgu.sphere_of_balance.description.0": "Transfers up to 5 Physical Damage to Magical",
-	"item.rpgu.sphere_of_balance.description.1": "-5 Physical Damage",
-	"item.rpgu.sphere_of_balance.description.2": "+5 Magical Damage",
+	"item.rpgu.sphere_of_balance": "Sphere of Balance",
 	
 	"item.rpgu.phantom_bow": "Phantom Bow",
 	
 	"item.rpgu.fisherman_snorkel": "Fisherman's Snorkel",
 	"item.rpgu.fisherman_snorkel.description.0": "Allows to breathe underwater",
-	"item.rpgu.fisherman_snorkel.description.1": " if the bobber has access to air",
-	
-	"item.rpgu.copper_sword": "Copper Sword",
-	"item.rpgu.copper_sword.image.0": "\uE002",
-	"item.rpgu.copper_sword.image.1": "\uE003",
-	"item.rpgu.copper_sword.image.2": "\uE004",
-	"item.rpgu.copper_sword.image.3": "\uE005",
-	"item.rpgu.copper_sword.image.4": "\uE006",
-	"item.rpgu.copper_sword.image.5": "\uE007"
-	
+	"item.rpgu.fisherman_snorkel.description.1": " if the bobber has access to air"
 	
 }

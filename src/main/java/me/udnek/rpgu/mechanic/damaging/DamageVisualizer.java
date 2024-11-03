@@ -1,8 +1,8 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
+import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -73,13 +73,13 @@ public class DamageVisualizer {
         TextColor damageColor = getDamageColor(mainDamage);
 
         Component text =
-                Component.text(Utils.roundDoubleValueToTwoDigits(mainDamage)).color(damageColor).decorate(TextDecoration.BOLD)
+                Component.text(Utils.roundToTwoDigits(mainDamage)).color(damageColor).decorate(TextDecoration.BOLD)
                         .appendNewline()
                         .append(Component.text(
                                 "("
-                                +Utils.roundDoubleValueToTwoDigits(physicalDamage)+
+                                +Utils.roundToTwoDigits(physicalDamage)+
                                 "+"
-                                +Utils.roundDoubleValueToTwoDigits(magicalDamage)+
+                                +Utils.roundToTwoDigits(magicalDamage)+
                                 ")").color(SUB_LINE_DAMAGE_COLOR).font(Key.key("minecraft:uniform")).decoration(TextDecoration.BOLD, false));
 
         return text;

@@ -8,8 +8,9 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.itemscoreu.util.Utils;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
-import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
@@ -30,11 +31,6 @@ public class AttributeLoreGenerator {
     public static final TextColor MELEE_DESCRIPTION_COLOR = NamedTextColor.DARK_GREEN;
     public static final TextColor OTHER_DESCRIPTION_COLOR = NamedTextColor.BLUE;
     public static final TextColor HEADER_COLOR = NamedTextColor.GRAY;
-
-    public static final TextColor EQUALS_ATTRIBUTE_COLOR = NamedTextColor.DARK_GREEN;
-    public static final TextColor TAKE_ATTRIBUTE_COLOR = NamedTextColor.RED;
-    public static final TextColor PLUS_ATTRIBUTE_COLOR = NamedTextColor.BLUE;
-
 
     public static void generate(@NotNull ItemStack itemStack, @NotNull LoreBuilder builder){
 
@@ -67,8 +63,6 @@ public class AttributeLoreGenerator {
 
         for (CustomEquipmentSlot slot : CustomRegistries.EQUIPMENT_SLOT.getAll()) {
 
-            //List<Component> attributesLore = new ArrayList<>();
-
             // VANILLA
             EquipmentSlotGroup vanillaSlot = slot.getVanillaGroup();
             if (vanillaSlot != null){
@@ -79,7 +73,7 @@ public class AttributeLoreGenerator {
                 for (Attribute attribute : sorted) {
                     for (AttributeModifier modifier : attributesBySlot.get(attribute)) {
                         if (modifier.getAmount() == 0) continue;
-                        attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier, slot));
+                        attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier.getAmount(), modifier.getOperation(), slot));
                     }
                 }
             }
@@ -90,7 +84,7 @@ public class AttributeLoreGenerator {
                 CustomAttribute attribute = entry.getKey();
                 for (CustomAttributeModifier modifier : entry.getValue()) {
                     if (modifier.getAmount() == 0) continue;
-                    attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier, slot));
+                    attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier.getAmount(), modifier.getOperation(), slot));
                 }
             }
 
@@ -100,13 +94,12 @@ public class AttributeLoreGenerator {
                 Attribute attribute = entry.getKey();
                 for (CustomKeyedAttributeModifier modifier : entry.getValue()) {
                     if (modifier.getAmount() == 0) continue;
-                    attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier, slot));
+                    attributesLorePart.addAttribute(slot, getAttributeLine(attribute, modifier.getAmount(), modifier.getOperation(), slot));
                 }
             }
 
 
         }
-        // TODO: 6/9/2024 ADD ID???
 
         if (customItem != null){
             builder.add(LoreBuilder.Position.ID,
@@ -130,51 +123,39 @@ public class AttributeLoreGenerator {
         return keys;
     }
 
-    public static Component getAttributeLine(Attribute attribute, AttributeModifier modifier, CustomEquipmentSlot slot){
-        String attributeName = TranslationKeys.get(attribute);
-        double amount = modifier.getAmount();
-        if (attribute == Attribute.ATTACK_DAMAGE && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount++;
-        else if (attribute == Attribute.ATTACK_SPEED && modifier.getOperation() == AttributeModifier.Operation.ADD_NUMBER) amount = RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount);
-        return getAttributeLine(attributeName, amount, modifier.getOperation(), slot);
-    }
-    public static Component getAttributeLine(CustomAttribute attribute, CustomAttributeModifier modifier, CustomEquipmentSlot slot){
-        String attributeName = attribute.translationKey();
-        return getAttributeLine(attributeName, modifier.getAmount(), modifier.getOperation(), slot);
-    }
-    public static Component getAttributeLine(Attribute attribute, CustomKeyedAttributeModifier modifier, CustomEquipmentSlot slot){
-        String attributeName = TranslationKeys.get(attribute);
-        double amount = modifier.getAmount();
-        return getAttributeLine(attributeName, amount, modifier.getOperation(), slot);
+    public static Component getAttributeLine(@NotNull CustomAttribute attribute, double amount, @NotNull AttributeModifier.Operation operation, @NotNull CustomEquipmentSlot slot){
+        if (attribute == Attributes.ATTACK_SPEED && operation == AttributeModifier.Operation.ADD_NUMBER && slot == CustomEquipmentSlot.MAIN_HAND){
+            return attribute.getLoreLineWithBase(RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount));
+        }
+        if (attribute == Attributes.PHYSICAL_DAMAGE && operation == AttributeModifier.Operation.ADD_NUMBER && slot == CustomEquipmentSlot.MAIN_HAND){
+            return attribute.getLoreLineWithBase(amount+1);
+        }
+        return attribute.getLoreLine(amount, operation);
     }
 
-    public static Component getAttributeLine(String attributeName, double amount, AttributeModifier.Operation operation, CustomEquipmentSlot slot){
-        String line;
-        if (slot == CustomEquipmentSlot.MAIN_HAND) line = "attribute.modifier.equals.";
-        else if (amount < 0) line = "attribute.modifier.take.";
-        else line = "attribute.modifier.plus.";
-        line += TranslationKeys.get(operation);
-
-        TextColor color = getAttributeColor(amount, slot);
+    public static Component getAttributeLine(@NotNull Attribute attribute, double amount, @NotNull AttributeModifier.Operation operation, @NotNull CustomEquipmentSlot slot){
+        if (attribute == Attribute.ATTACK_SPEED && operation == AttributeModifier.Operation.ADD_NUMBER && slot == CustomEquipmentSlot.MAIN_HAND){
+            return Attributes.ATTACK_SPEED.getLoreLineWithBase(RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount));
+        }
+        if (attribute == Attribute.ATTACK_DAMAGE && operation == AttributeModifier.Operation.ADD_NUMBER && slot == CustomEquipmentSlot.MAIN_HAND){
+            return Attributes.PHYSICAL_DAMAGE.getLoreLineWithBase(amount+1);
+        }
+        String key;
+        TextColor color;
+        if (amount < 0) {
+            key = "attribute.modifier.take."; color = CustomAttribute.TAKE_COLOR;
+        } else {
+            key = "attribute.modifier.plus."; color = CustomAttribute.PLUS_COLOR;
+        }
+        key += switch (operation){
+            case ADD_NUMBER -> "0";
+            case ADD_SCALAR -> "1";
+            case MULTIPLY_SCALAR_1 -> "2";
+        };
 
         if (operation != AttributeModifier.Operation.ADD_NUMBER) amount*=100d;
 
-        Component noTab = ComponentU.translatableWithInsertion(
-                line,
-                Component.text(Utils.roundDoubleValueToTwoDigits(Math.abs(amount))),
-                Component.translatable(attributeName))
-                .color(color);
-        //Component withTab = addTab(noTab).color(color);
-        return noTab;
-    }
-
-/*    public static TextColor getDescriptionColor(CustomEquipmentSlot slot){
-        if (slot == CustomEquipmentSlot.MAIN_HAND) return MELEE_DESCRIPTION_COLOR;
-        return OTHER_DESCRIPTION_COLOR;
-    }*/
-    public static TextColor getAttributeColor(double amount, CustomEquipmentSlot slot){
-        if (slot == CustomEquipmentSlot.MAIN_HAND) return EQUALS_ATTRIBUTE_COLOR;
-        if (amount < 0) return TAKE_ATTRIBUTE_COLOR;
-        return PLUS_ATTRIBUTE_COLOR;
+        return Component.translatable(key, Component.text(Utils.roundToTwoDigits(amount)), Component.translatable(attribute.translationKey())).color(color);
     }
 
     public static Component getHeader(CustomEquipmentSlot slot){

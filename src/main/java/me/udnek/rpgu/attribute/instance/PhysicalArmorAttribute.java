@@ -1,12 +1,13 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.rpgu.attribute.AttributeWrapperAttribute;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class PhysicalArmorAttribute extends ConstructableCustomAttribute {
+public class PhysicalArmorAttribute extends AttributeWrapperAttribute {
 
     public static final double MAX = 20;
     public static final double MAX_ABSORPTION = 0.75;
@@ -14,14 +15,12 @@ public class PhysicalArmorAttribute extends ConstructableCustomAttribute {
 
 
     public PhysicalArmorAttribute(@NotNull String rawId) {
-        super(rawId, "attribute.name.armor", 0, 0, MAX);
+        super(rawId,0, 0, MAX, Attribute.ARMOR);
     }
 
     @Override
-    public double calculate(@NotNull LivingEntity entity) {
-        AttributeInstance attribute = entity.getAttribute(Attribute.ARMOR);
-        if (attribute == null) return getDefaultValue();
-        return Math.clamp(attribute.getValue(), 0, 20);
+    public @NotNull String translationKey() {
+        return "attribute.name.armor";
     }
 
     public static double calculateAbsorption(double armor){

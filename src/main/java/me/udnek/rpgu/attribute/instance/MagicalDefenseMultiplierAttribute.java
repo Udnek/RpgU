@@ -1,9 +1,9 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.rpgu.attribute.RpgUAttribute;
+import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import org.jetbrains.annotations.NotNull;
 
-public class MagicalDefenseMultiplierAttribute extends RpgUAttribute {
+public class MagicalDefenseMultiplierAttribute extends ConstructableCustomAttribute {
 
     public static final double MAX = 20;
     public static final double MAX_ABSORPTION = 0.8;
