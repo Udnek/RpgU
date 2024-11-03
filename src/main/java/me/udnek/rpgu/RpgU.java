@@ -45,7 +45,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         CustomItem blazeBlade = Items.SHINY_AXE;
         CustomBlock customBlock = Blocks.TEST;
-        CustomEntityType ancientBreeze = EntityTypes.ANCIENT_BREEZE;
+        EntityTypes.TOTEM_OF_SAVING.getRawId();
         SingleSlot artifacts = EquipmentSlots.FIRST_ARTIFACT;
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
 

@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.artifact;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
@@ -38,8 +39,8 @@ public class FishermanSnorkel extends ConstructableCustomItem implements RpgUCus
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.0").color(AttributeLoreGenerator.PLUS_ATTRIBUTE_COLOR));
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.1").color(AttributeLoreGenerator.PLUS_ATTRIBUTE_COLOR));
+        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.0").color(CustomAttribute.PLUS_COLOR));
+        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.1").color(CustomAttribute.PLUS_COLOR));
         return loreBuilder;
     }
 

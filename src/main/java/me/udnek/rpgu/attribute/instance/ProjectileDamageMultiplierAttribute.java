@@ -1,12 +1,12 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.rpgu.attribute.RpgUAttribute;
+import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
-public class ProjectileDamageMultiplierAttribute extends RpgUAttribute implements Listener {
+public class ProjectileDamageMultiplierAttribute extends ConstructableCustomAttribute implements Listener {
     public ProjectileDamageMultiplierAttribute() {
         super("projectile_damage_multiplier",1, 0, 100);
     }

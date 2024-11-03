@@ -1,5 +1,6 @@
 package me.udnek.rpgu.attribute;
 
+import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -7,7 +8,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class EnchantmentCalculatorAttribute extends RpgUAttribute {
+public class EnchantmentCalculatorAttribute extends ConstructableCustomAttribute {
     protected Enchantment enchantment;
     public EnchantmentCalculatorAttribute(@NotNull String rawId, @NotNull Enchantment enchantment) {
         super(rawId, 0, 0, 1024);

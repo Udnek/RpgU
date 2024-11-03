@@ -11,6 +11,9 @@ public class ComponentTypes {
     public static final CustomComponentType<CustomItem, EquippableItemComponent>
             EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.DEFAULT));
 
+    public static final CustomComponentType<CustomItem, EquippableItemComponent>
+            ACTIVE_ABILITY = register(new ConstructableComponentType("active_ability_item", ActiveAbilityComponent.DEFAULT));
+
     private static CustomComponentType register(CustomComponentType type){
         return CustomRegistries.COMPONENT_TYPE.register(RpgU.getInstance(), type);
     }

@@ -1,12 +1,12 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.rpgu.attribute.RpgUAttribute;
+import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
-public class ProjectileSpeedAttribute extends RpgUAttribute implements Listener {
+public class ProjectileSpeedAttribute extends ConstructableCustomAttribute implements Listener {
     public ProjectileSpeedAttribute() {
         super("projectile_speed", 1, 0, 100);
     }

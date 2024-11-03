@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.artifact;
 
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -45,7 +46,7 @@ public class NautilusCore extends ConstructableCustomItem implements RpgUCustomI
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawId()+".description.0").color(AttributeLoreGenerator.PLUS_ATTRIBUTE_COLOR));
+        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.0").color(CustomAttribute.PLUS_COLOR));
         return loreBuilder;
     }
 
