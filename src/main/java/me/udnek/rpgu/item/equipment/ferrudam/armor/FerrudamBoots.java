@@ -61,7 +61,7 @@ public class FerrudamBoots extends ConstructableCustomItem implements RpgUCustom
     @Override
     protected void modifyFinalItemMeta(ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_boots"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.FEET);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_boots"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.FEET);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);
         AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_boots"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.FEET);
         itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);

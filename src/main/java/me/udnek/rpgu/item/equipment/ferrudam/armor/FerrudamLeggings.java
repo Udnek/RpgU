@@ -61,7 +61,7 @@ public class FerrudamLeggings extends ConstructableCustomItem implements RpgUCus
     @Override
     protected void modifyFinalItemMeta(ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);
         AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);
         itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);

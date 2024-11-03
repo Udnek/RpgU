@@ -8,21 +8,17 @@ import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
-import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
-import me.udnek.rpgu.lore.AttributesLorePart;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class RustyIronRing extends ConstructableCustomItem implements RpgUCustomItem {
     @Override
@@ -51,7 +47,7 @@ public class RustyIronRing extends ConstructableCustomItem implements RpgUCustom
         super.initializeComponents();
         setComponent(ArtifactComponent.DEFAULT);
 
-        CustomKeyedAttributeModifier baseHp = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_hp_rusty_iron_ring"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        CustomKeyedAttributeModifier baseHp = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_max_health_rusty_iron_ring"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         CustomKeyedAttributeModifier baseArmor = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_armor_rusty_iron_ring"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
 
         setComponent(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.MAX_HEALTH, baseHp).add(Attribute.ARMOR, baseArmor).build()));

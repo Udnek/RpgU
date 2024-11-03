@@ -5,8 +5,9 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.FishermanSnorkel;
 import me.udnek.rpgu.item.artifact.NautilusCore;
-import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.artifact.RustyIronRing;
+import me.udnek.rpgu.item.equipment.CeremonialDagger;
+import me.udnek.rpgu.item.equipment.PhantomChestplate;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
@@ -66,6 +67,8 @@ public class Items {
     public static final CustomItem FLINT_AXE = register(new FlintAxe());
     public static final CustomItem FLINT_SHOVEL = register(new FlintShovel());
     public static final CustomItem FLINT_HOE = register(new FlintHoe());
+
+    public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());

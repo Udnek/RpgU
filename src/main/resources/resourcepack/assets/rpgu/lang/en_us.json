@@ -73,6 +73,8 @@
 	"item.rpgu.flint_shovel": "Flint Shovel",
 	"item.rpgu.flint_hoe": "Flint Hoe",
 
+	"item.rpgu.phantom_chestplate": "Phantom Chestplate",
+
 	"item.rpgu.light_feather": "Light Feather",
 	"item.rpgu.light_feather.description.0": "Allows to double jump",
 	
@@ -113,8 +115,5 @@
 	"item.rpgu.copper_sword.image.2": "\uE004",
 	"item.rpgu.copper_sword.image.3": "\uE005",
 	"item.rpgu.copper_sword.image.4": "\uE006",
-	"item.rpgu.copper_sword.image.5": "\uE007",
-	
-	"items.rpgu.rusty_iron_ring.lore_0" : "+2 Max Health",
-	"items.rpgu.rusty_iron_ring.lore_1" : "+1 Armor"
+	"item.rpgu.copper_sword.image.5": "\uE007"
 }

@@ -6,8 +6,6 @@ import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import org.bukkit.Art;
-import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
@@ -32,7 +30,7 @@ public interface ArtifactComponent extends EquippableItemComponent{
         if (!isAppropriateSlot(slot)) return;
 
         getAttributes(item, player, (attributeInstance, customModifier) -> {
-            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey(slot.getKey().asString().replace(':', '_'));
+            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) == null) {
                 attributeInstance.addModifier(modifier);
             }
@@ -42,7 +40,7 @@ public interface ArtifactComponent extends EquippableItemComponent{
     default void onUnequipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
         if (!isAppropriateSlot(slot)) return;
         getAttributes(item, player, (attributeInstance, customModifier) -> {
-            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey(slot.getKey().asString().replace(':', '_'));
+            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) != null) {
                 attributeInstance.removeModifier(modifier);
             }
