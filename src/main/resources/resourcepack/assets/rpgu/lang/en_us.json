@@ -115,5 +115,7 @@
 	"item.rpgu.copper_sword.image.2": "\uE004",
 	"item.rpgu.copper_sword.image.3": "\uE005",
 	"item.rpgu.copper_sword.image.4": "\uE006",
-	"item.rpgu.copper_sword.image.5": "\uE007"
+	"item.rpgu.copper_sword.image.5": "\uE007",
+
+	"item.rpgu.totem_of_saving" : "Totem of Saving"
 }
