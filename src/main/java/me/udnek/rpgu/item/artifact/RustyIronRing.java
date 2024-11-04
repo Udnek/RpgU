@@ -36,7 +36,6 @@ public class RustyIronRing extends ConstructableCustomItem implements RpgUCustom
                         new ItemStackCreator.Custom(Items.RUSTY_IRON_RING)
                 )
         );
-
         Nms.get().getLootTableContainer(LootTables.ZOMBIE.getLootTable()).addPool(lootPoolBuilder);
         Nms.get().getLootTableContainer(LootTables.HUSK.getLootTable()).addPool(lootPoolBuilder);
         Nms.get().getLootTableContainer(LootTables.DROWNED.getLootTable()).addPool(lootPoolBuilder);
