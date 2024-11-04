@@ -3,10 +3,7 @@ package me.udnek.rpgu.item;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.item.artifact.FishermanSnorkel;
-import me.udnek.rpgu.item.artifact.NautilusCore;
-import me.udnek.rpgu.item.artifact.RustyIronRing;
-import me.udnek.rpgu.item.artifact.WitherWreath;
+import me.udnek.rpgu.item.artifact.*;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.PhantomChestplate;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
@@ -30,6 +27,8 @@ public class Items {
     public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
     public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
     public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
+    public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
+    public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());

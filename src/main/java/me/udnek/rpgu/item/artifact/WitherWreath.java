@@ -51,7 +51,6 @@ public class WitherWreath extends ConstructableCustomItem implements RpgUCustomI
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        //setComponent(ArtifactComponent.DEFAULT);
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(6, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
