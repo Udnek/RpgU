@@ -56,20 +56,20 @@ public interface ConstructableActiveAbilityComponent<Context> extends ActiveAbil
     @Override
     default void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull Context context){
         if (customItem.hasCooldown(player)) return;
-        ActivationResult result = action(customItem, player, context);
+        ActionResult result = action(customItem, player, context);
         if (!(result.applyCooldown)) return;
         Utils.consumeIfNotNull(getCooldown(player), cooldown -> customItem.setCooldown(player, cooldown));
     }
 
-    @NotNull ActivationResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull Context context);
+    @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull Context context);
 
-    enum ActivationResult{
+    enum ActionResult {
         SUCCESSFUL(true),
         UNSUCCESSFUL(false),
         UNSUCCESSFUL_WITH_COOLDOWN_PENALTY(true);
 
         public final boolean applyCooldown;
-        ActivationResult(boolean applyCooldown){
+        ActionResult(boolean applyCooldown){
             this.applyCooldown = applyCooldown;
         }
     }

@@ -34,12 +34,12 @@ public class ShamanTambourine extends ConstructableCustomItem {
         public int getBaseCastRange() {return 15;}
 
         @Override
-        public @NotNull ActivationResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
+        public @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
             RayTraceResult rayTraceResult = event.getPlayer().rayTraceEntities(getCastRange(player));
-            if (rayTraceResult == null || rayTraceResult.getHitEntity() == null) return ActivationResult.UNSUCCESSFUL;
-            if (!(rayTraceResult.getHitEntity() instanceof LivingEntity living)) return ActivationResult.UNSUCCESSFUL;
+            if (rayTraceResult == null || rayTraceResult.getHitEntity() == null) return ActionResult.UNSUCCESSFUL;
+            if (!(rayTraceResult.getHitEntity() instanceof LivingEntity living)) return ActionResult.UNSUCCESSFUL;
             living.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 0));
-            return ActivationResult.SUCCESSFUL;
+            return ActionResult.SUCCESSFUL;
         }
 
         @Override
