@@ -1,6 +1,4 @@
 {
-	"image.rpgu.artifact.unknown_artifact": "x",
-
 	"item.modifiers.artifacts": "When equipped as Artifact:",
 	"item.modifiers.first_artifact": "When equipped as First Artifact:",
 	"item.modifiers.second_artifact": "When equipped as Second Artifact:",
@@ -9,11 +7,18 @@
 
 	"equipment.rpgu.description_line": " %s",
 
+	"active_ability.rpgu.title": "Active Ability:",
+	"active_ability.rpgu.cast_range": "Cast Range: %s blocks",
+	"active_ability.rpgu.cooldown": "Cooldown: %s seconds",
+
+
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",
 	"attribute.rpgu.name.meele_magical_damage_multiplier": "Meele Magical Damage per Potential",
 	"attribute.rpgu.name.magical_potential": "Magical Potential (MP)",
 	"attribute.rpgu.name.magical_defense_multiplier": "Magical Defense per Potential",
+	"attribute.rpgu.name.cast_range": "Cast Range",
+	"attribute.rpgu.name.cooldown_time": "Cooldown Time",
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 

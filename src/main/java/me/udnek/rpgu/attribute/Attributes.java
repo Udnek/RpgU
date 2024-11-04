@@ -31,8 +31,8 @@ public class Attributes{
         MAGICAL_POTENTIAL = register(new ConstructableCustomAttribute("magical_potential",0, 1024));
         MELEE_MAGICAL_DAMAGE_MULTIPLIER = register(new ConstructableCustomAttribute("meele_magical_damage_multiplier",0, 1024));
         MAGICAL_DEFENSE_MULTIPLIER = register(new MagicalDefenseMultiplierAttribute("magical_defense_multiplier"));
-        CAST_RANGE = register(new ConstructableCustomAttribute("cast_range",0, 1024));
-        COOLDOWN_TIME = register(new ConstructableCustomAttribute("cooldown_time",0, 1024));
+        CAST_RANGE = register(new ConstructableCustomAttribute("cast_range",1,0, 1024));
+        COOLDOWN_TIME = register(new ConstructableCustomAttribute("cooldown_time",1,0, 1024, false));
 
         PROJECTILE_PROTECTION = register(new EnchantmentCalculatorAttribute("projectile_protection", Enchantment.PROJECTILE_PROTECTION));
         BLAST_PROTECTION = register(new EnchantmentCalculatorAttribute("blast_protection", Enchantment.BLAST_PROTECTION));

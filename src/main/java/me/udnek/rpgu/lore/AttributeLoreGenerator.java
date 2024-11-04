@@ -155,7 +155,7 @@ public class AttributeLoreGenerator {
 
         if (operation != AttributeModifier.Operation.ADD_NUMBER) amount*=100d;
 
-        return Component.translatable(key, Component.text(Utils.roundToTwoDigits(amount)), Component.translatable(attribute.translationKey())).color(color);
+        return Component.translatable(key, Component.text(Utils.roundToTwoDigits(Math.abs(amount))), Component.translatable(attribute.translationKey())).color(color);
     }
 
     public static Component getHeader(CustomEquipmentSlot slot){

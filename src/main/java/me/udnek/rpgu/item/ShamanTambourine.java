@@ -1,11 +1,16 @@
 package me.udnek.rpgu.item;
 
+import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.component.ActiveAbilityComponent;
+import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,22 +26,28 @@ public class ShamanTambourine extends ConstructableCustomItem {
         setComponent(new ShamanTambourineComponent());
     }
 
-    public static class ShamanTambourineComponent implements ActiveAbilityComponent{
+    public static class ShamanTambourineComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
         @Override
-        public @Nullable Integer getBaseCooldown() {
-            return 20;
-        }
+        public @Nullable Integer getBaseCooldown() {return 20;}
+        @Override
+        public int getBaseCastRange() {return 15;}
 
         @Override
-        public @Nullable Integer getBaseCastRange() {
-            return null;
-        }
-
-        @Override
-        public @NotNull ActivationResult onActivation(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
-            event.getPlayer().sendMessage("ACT");
+        public @NotNull ActivationResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
+            RayTraceResult rayTraceResult = event.getPlayer().rayTraceEntities(getCastRange(player));
+            if (rayTraceResult == null || rayTraceResult.getHitEntity() == null) return ActivationResult.UNSUCCESSFUL;
+            if (!(rayTraceResult.getHitEntity() instanceof LivingEntity living)) return ActivationResult.UNSUCCESSFUL;
+            living.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 0));
             return ActivationResult.SUCCESSFUL;
         }
+
+        @Override
+        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+            activate(customItem, event.getPlayer(), event);
+        }
+
+        @Override
+        public void onStopUsing(@NotNull CustomItem customItem, @NotNull PlayerStopUsingItemEvent event) {}
     }
 }

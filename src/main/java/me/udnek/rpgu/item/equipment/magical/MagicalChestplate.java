@@ -6,9 +6,11 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.AttributeModifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @ApiStatus.ScheduledForRemoval
 public class MagicalChestplate extends ConstructableCustomItem {
@@ -18,9 +20,15 @@ public class MagicalChestplate extends ConstructableCustomItem {
     }
 
     @Override
+    public @Nullable NamespacedKey getItemModel() {return null;}
+
+    @Override
     public @NotNull Material getMaterial() {
         return Material.IRON_CHESTPLATE;
     }
+
+    @Override
+    public boolean getAddDefaultAttributes() {return true;}
 
     @Override
     public void afterInitialization() {
@@ -29,6 +37,7 @@ public class MagicalChestplate extends ConstructableCustomItem {
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MAGICAL_POTENTIAL, 5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST)
                         .add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, 1, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST)
+                        .add(Attributes.CAST_RANGE, 1, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.CHEST)
                         .build()
                 ));
     }

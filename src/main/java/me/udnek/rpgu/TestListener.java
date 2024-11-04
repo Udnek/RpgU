@@ -1,5 +1,6 @@
 package me.udnek.rpgu;
 
+import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -42,10 +43,17 @@ public class TestListener extends SelfRegisteringListener {
     }
 
     @EventHandler
-    public void abilityActivation(PlayerInteractEvent event){
+    public void abilityRightClick(PlayerInteractEvent event){
         if (!event.getAction().isRightClick()) return;
         CustomItem.consumeIfCustom(event.getItem(), customItem -> {
             customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event);
+        });
+    }
+
+    @EventHandler
+    public void abilityStopUsing(PlayerStopUsingItemEvent event){
+        CustomItem.consumeIfCustom(event.getItem(), customItem -> {
+            customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event);
         });
     }
 
