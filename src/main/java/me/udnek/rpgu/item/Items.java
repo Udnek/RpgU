@@ -6,6 +6,7 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.FishermanSnorkel;
 import me.udnek.rpgu.item.artifact.NautilusCore;
 import me.udnek.rpgu.item.artifact.RustyIronRing;
+import me.udnek.rpgu.item.artifact.WitherWreath;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.PhantomChestplate;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
@@ -54,6 +55,8 @@ public class Items {
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
     public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
+
+    public static final CustomItem WITHER_WREATH = register(new WitherWreath());
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
