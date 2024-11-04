@@ -8,7 +8,6 @@ import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.RpgUCustomItem;
-import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;

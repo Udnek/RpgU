@@ -1,7 +1,5 @@
 package me.udnek.rpgu.lore;
 
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 
 public class TranslationKeys {
     public static final String whenEquippedAsArtifact = "item.modifiers.artifacts";
