@@ -66,6 +66,11 @@ public class RecipeManaging {
         replaceRecipeMaterial(Material.CHAINMAIL_LEGGINGS, "chainmail_leggings", new String[]{"CCC", "C C", "C C"}, Map.of('C', Material.CHAIN));
         replaceRecipeMaterial(Material.CHAINMAIL_BOOTS, "chainmail_boots", new String[]{"C C", "C C"}, Map.of('C', Material.CHAIN));
         /////////////////////////////////////////////////
+        replaceRecipeMaterial(Material.GOLDEN_CHESTPLATE, "golden_chestplate", new String[]{"GLG", "GGG", "GGG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_CHESTPLATE));
+        replaceRecipeMaterial(Material.GOLDEN_HELMET, "golden_helmet", new String[]{"GGG", "GLG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_HELMET));
+        replaceRecipeMaterial(Material.GOLDEN_LEGGINGS, "golden_leggings", new String[]{"GGG", "GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_LEGGINGS));
+        replaceRecipeMaterial(Material.GOLDEN_BOOTS, "golden_boots", new String[]{"GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_BOOTS));
+
         unregister();
     }
 
