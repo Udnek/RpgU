@@ -1,10 +1,7 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import me.udnek.rpgu.attribute.AttributeWrapperAttribute;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class PhysicalArmorAttribute extends AttributeWrapperAttribute {
