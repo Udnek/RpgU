@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.artifact;
 
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -103,7 +104,7 @@ public class FlowerWreath extends ConstructableCustomItem implements RpgUCustomI
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName() + ".description.0"));
+        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName() + ".description.0").color(CustomAttribute.PLUS_COLOR));
 
         return loreBuilder;
     }
