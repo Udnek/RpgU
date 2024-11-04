@@ -31,8 +31,8 @@ public class RustyIronRing extends ConstructableCustomItem implements RpgUCustom
         super.afterInitialization();
         NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(
-                        LootTables.ZOMBIE.getLootTable(),
-                        itemStack -> itemStack.getType() == Material.POTATO,
+                        LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
+                        itemStack -> itemStack.getType() == Material.GOLD_INGOT,
                         new ItemStackCreator.Custom(Items.RUSTY_IRON_RING)
                 )
         );
