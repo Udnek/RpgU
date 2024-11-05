@@ -1,17 +1,25 @@
 package me.udnek.rpgu.item.artifact;
 
-import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customattribute.*;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
+import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
+import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.RpgUCustomItem;
+import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -22,6 +30,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -49,11 +58,26 @@ public class WitherWreath extends ConstructableCustomItem implements RpgUCustomI
     }
 
     @Override
+    public @Nullable LoreBuilder getLoreBuilder() {
+        LoreBuilder loreBuilder = new LoreBuilder();
+        AttributesLorePart attributesLorePart = new AttributesLorePart();
+        loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
+        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName() + ".description.0").color(CustomAttribute.PLUS_COLOR));
+
+        return loreBuilder;
+    }
+
+    @Override
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomAttributeModifier attribute = new CustomAttributeModifier(6, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        CustomAttributeModifier attribute = new CustomAttributeModifier(5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
+
+        CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_attack_damage_wither_wreath"), -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
+        CustomKeyedAttributeModifier attributeHealth = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_max_health_wither_wreath"), -2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+
+        setComponent(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).add(Attribute.MAX_HEALTH, attributeHealth).build()));
 
         setComponent(new WitherWreathComponent());
     }
