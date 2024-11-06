@@ -6,21 +6,26 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.util.RecipeManaging;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.VillagerAcquireTradeEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TestListener extends SelfRegisteringListener {
@@ -41,6 +46,33 @@ public class TestListener extends SelfRegisteringListener {
         if (villager.getProfession() == Villager.Profession.LIBRARIAN) event.setCancelled(true);
     }
 
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void villagerTrades(VillagerAcquireTradeEvent event){
+        MerchantRecipe recipe = event.getRecipe();
+        ItemStack itemStack = recipe.getResult();
+        if (VanillaItemManager.isReplaced(itemStack))return;
+        if (!(event.getEntity() instanceof Villager villager)) return;
+
+        if (villager.getProfession() == Villager.Profession.TOOLSMITH) {
+            Material material = recipe.getResult().getType();
+            System.out.println(recipe);
+            System.out.println(material);
+            if (material == Material.STONE_AXE || material == Material.STONE_PICKAXE || material == Material.STONE_SHOVEL) {
+                event.setRecipe(replaceRecipe(recipe, new ItemStack(material)));
+                System.out.println(event.getRecipe().getResult());
+                //event.setCancelled(true);
+            }
+        }
+    }
+
+    public MerchantRecipe replaceRecipe(MerchantRecipe recipe, ItemStack newRecipe){
+        MerchantRecipe customRecipe = new MerchantRecipe(newRecipe, recipe.getUses(), recipe.getMaxUses(), recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier(),
+                recipe.getDemand(), recipe.getSpecialPrice(), recipe.shouldIgnoreDiscounts());
+        customRecipe.setIngredients(recipe.getIngredients());
+
+        return customRecipe;
+    }
+
     @EventHandler
     public void abilityActivation(PlayerInteractEvent event){
         if (!event.getAction().isRightClick()) return;
@@ -48,6 +80,7 @@ public class TestListener extends SelfRegisteringListener {
             customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event);
         });
     }
+
 
 /*    @EventHandler
     public void onSlot(InventoryClickEvent event){

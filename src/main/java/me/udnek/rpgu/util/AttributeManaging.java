@@ -42,15 +42,15 @@ public class AttributeManaging extends SelfRegisteringListener {
     private static final Set<Material> diamondTools = new HashSet<>();
 
      static {
-         itemsArmor.put(Material.LEATHER_HELMET, new HpAndArmor(1, 0));
-         itemsArmor.put(Material.LEATHER_CHESTPLATE, new HpAndArmor(1, 0));
-         itemsArmor.put(Material.LEATHER_LEGGINGS, new HpAndArmor(1, 0));
-         itemsArmor.put(Material.LEATHER_BOOTS, new HpAndArmor(1, 0));
+         itemsArmor.put(Material.LEATHER_HELMET, new HpAndArmor(1, 0, 0));
+         itemsArmor.put(Material.LEATHER_CHESTPLATE, new HpAndArmor(1, 0, 0));
+         itemsArmor.put(Material.LEATHER_LEGGINGS, new HpAndArmor(1, 0, 0));
+         itemsArmor.put(Material.LEATHER_BOOTS, new HpAndArmor(1, 0, 0));
 
-         itemsArmor.put(Material.IRON_HELMET, new HpAndArmor(1, 1));
-         itemsArmor.put(Material.IRON_CHESTPLATE, new HpAndArmor(2, 1));
-         itemsArmor.put(Material.IRON_LEGGINGS, new HpAndArmor(2, 1));
-         itemsArmor.put(Material.IRON_BOOTS, new HpAndArmor(1, 1));
+         itemsArmor.put(Material.IRON_HELMET, new HpAndArmor(1, 1, 0.025));
+         itemsArmor.put(Material.IRON_CHESTPLATE, new HpAndArmor(2, 1, 0.025));
+         itemsArmor.put(Material.IRON_LEGGINGS, new HpAndArmor(2, 1, 0.025));
+         itemsArmor.put(Material.IRON_BOOTS, new HpAndArmor(1, 1, 0.025));
 
          itemsArmor.put(Material.CHAINMAIL_HELMET, itemsArmor.get(Material.IRON_HELMET));
          itemsArmor.put(Material.CHAINMAIL_CHESTPLATE, itemsArmor.get(Material.IRON_CHESTPLATE));
@@ -62,10 +62,10 @@ public class AttributeManaging extends SelfRegisteringListener {
          itemsArmor.put(Material.GOLDEN_LEGGINGS, itemsArmor.get(Material.IRON_LEGGINGS));
          itemsArmor.put(Material.GOLDEN_BOOTS, itemsArmor.get(Material.IRON_BOOTS));
 
-         itemsArmor.put(Material.DIAMOND_HELMET, new HpAndArmor(2, 2));
-         itemsArmor.put(Material.DIAMOND_CHESTPLATE, new HpAndArmor(4, 5));
-         itemsArmor.put(Material.DIAMOND_LEGGINGS, new HpAndArmor(2, 4));
-         itemsArmor.put(Material.DIAMOND_BOOTS, new HpAndArmor(2, 1));
+         itemsArmor.put(Material.DIAMOND_HELMET, new HpAndArmor(2, 2, 0.05));
+         itemsArmor.put(Material.DIAMOND_CHESTPLATE, new HpAndArmor(4, 5, 0.05));
+         itemsArmor.put(Material.DIAMOND_LEGGINGS, new HpAndArmor(2, 4, 0.05));
+         itemsArmor.put(Material.DIAMOND_BOOTS, new HpAndArmor(2, 1, 0.05));
 
          itemsArmor.put(Material.NETHERITE_HELMET, itemsArmor.get(Material.DIAMOND_HELMET));
          itemsArmor.put(Material.NETHERITE_CHESTPLATE, itemsArmor.get(Material.DIAMOND_CHESTPLATE));
@@ -100,9 +100,12 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (itemsArmor.containsKey(material)){
             AttributeUtils.addDefaultAttributes(itemStack);
             EquipmentSlotGroup slot = material.getEquipmentSlot().getGroup();
-            AttributeUtils.appendAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), itemsArmor.get(material).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
             itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR));
+
+            AttributeUtils.appendAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), itemsArmor.get(material).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
             AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), itemsArmor.get(material).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
+            AttributeUtils.addAttribute(itemStack, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage" + slot), itemsArmor.get(material).attack, AttributeModifier.Operation.ADD_SCALAR, slot);
+
             itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS));
         }
 
@@ -118,6 +121,6 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
     }
 
-    record HpAndArmor(double hp, double armor) {
+    record HpAndArmor(double hp, double armor, double attack) {
     }
 }
