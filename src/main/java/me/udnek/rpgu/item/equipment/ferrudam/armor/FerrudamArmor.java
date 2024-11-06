@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class FerrudamArmorItemProperties extends ConstructableCustomItem {
+public abstract class FerrudamArmor extends ConstructableCustomItem {
 
     @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}

@@ -23,18 +23,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamLeggings extends FerrudamArmorItemProperties implements RpgUCustomItem {
+public class FerrudamChestplateCustom extends FerrudamArmor implements RpgUCustomItem {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_leggings";}
+    public @NotNull String getRawId() {return "ferrudam_chestplate";}
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_LEGGINGS;}
+    public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
-                "FFF",
                 "F F",
-                "F F");
+                "FFF",
+                "FFF");
 
         RecipeChoice.ExactChoice ferrudam = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
         recipe.setIngredient('F', ferrudam);
@@ -47,19 +47,19 @@ public class FerrudamLeggings extends FerrudamArmorItemProperties implements Rpg
                 getNewRecipeKey(),
                 List.of(ingot, ingot, ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
-                new CustomSingleRecipeChoice(Material.IRON_LEGGINGS),
+                new CustomSingleRecipeChoice(Material.IRON_CHESTPLATE),
                 getItem()
         );
 
         consumer.accept(recipeAlloy);
     }
+
     @Override
     protected void modifyFinalItemMeta(ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_chestplate"), 4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);
-        AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);
+        AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_chestplate"), 3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
         itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);
     }
-
 }
