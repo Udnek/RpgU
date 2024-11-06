@@ -130,8 +130,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
         currentAddition = inventory.getItem(ADDITION_SLOT);
         if (currentAddition != null) currentAddition = currentAddition.clone();
-        
-        System.out.println(currentAddition);
+
         iterateTroughAllInputSlots(integer -> takeItem(integer, 1));
 
         currentRecipe = recipe;
@@ -214,31 +213,29 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
     @Override
     public void load(@NotNull Block block) {
-        LogUtils.log("LOAD " + block);
         BlastFurnace state = (BlastFurnace) block.getState();
         ItemStack fuel = state.getInventory().getFuel();
-        if (fuel != null && fuel.getType() == Material.BUNDLE){
-            BundleMeta saveMeta = (BundleMeta) fuel.getItemMeta();
-            List<ItemStack> items = saveMeta.getItems();
-            AtomicInteger bundleSlot = new AtomicInteger(0);
-            iterateTroughAllInputSlots(slot -> {
-                ItemStack item = items.get(bundleSlot.get());
-                if (!FILLER.isThisItem(item)){
-                    inventory.setItem(slot, item);
-                }
-                bundleSlot.incrementAndGet();
-            });
-            ItemStack result = items.get(bundleSlot.get());
-            if (!FILLER.isThisItem(result)){
-                inventory.setItem(RESULT_SLOT, result);
+        if (fuel == null || fuel.getType() != Material.BUNDLE) return;
+        BundleMeta saveMeta = (BundleMeta) fuel.getItemMeta();
+        List<ItemStack> items = saveMeta.getItems();
+        AtomicInteger bundleSlot = new AtomicInteger(0);
+        iterateTroughAllInputSlots(slot -> {
+            ItemStack item = items.get(bundleSlot.get());
+            if (!FILLER.isThisItem(item)){
+                inventory.setItem(slot, item);
             }
-            ItemStack addition = items.get(bundleSlot.addAndGet(1));
-            if (!FILLER.isThisItem(addition)){
-                currentAddition = addition;
-            }
+            bundleSlot.incrementAndGet();
+        });
+        ItemStack result = items.get(bundleSlot.get());
+        if (!FILLER.isThisItem(result)){
+            inventory.setItem(RESULT_SLOT, result);
         }
-        String recipeId = state.getPersistentDataContainer().get(SERIALIZE_RECIPE_KEY, PersistentDataType.STRING);
-        System.out.println("LOA_REC: " + recipeId);
+        ItemStack addition = items.get(bundleSlot.addAndGet(1));
+        if (!FILLER.isThisItem(addition)){
+            currentAddition = addition;
+        }
+
+        String recipeId = fuel.getItemMeta().getPersistentDataContainer().get(SERIALIZE_RECIPE_KEY, PersistentDataType.STRING);
         if (recipeId == null) return;
         NamespacedKey id = NamespacedKey.fromString(recipeId);
         if (id == null) return;
@@ -246,8 +243,8 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         // TODO: 8/27/2024 SERIALIZE AND LOAD PROGRESS
         progress = 0;
     }
+
     public void serializeItems(){
-        System.out.println("CALLED SERIALIZE");
         ItemStack saveItem = new ItemStack(Material.BUNDLE);
         BundleMeta saveMeta = (BundleMeta) saveItem.getItemMeta();
 
@@ -264,8 +261,6 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         consumer.accept(RESULT_SLOT);
         consumer.accept(currentAddition);
 
-
-        System.out.println("SER_RECIPE: " + currentRecipe);
         if (currentRecipe != null) {
             saveMeta.getPersistentDataContainer().set(
                     SERIALIZE_RECIPE_KEY,
