@@ -7,10 +7,10 @@ import me.udnek.rpgu.item.artifact.*;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
 import me.udnek.rpgu.item.equipment.PhantomChestplate;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
-import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBootsCustom;
-import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplateCustom;
-import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmetCustom;
-import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamLeggingsCustom;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmet;
+import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamLeggings;
 import me.udnek.rpgu.item.equipment.ferrudam.tools.*;
 import me.udnek.rpgu.item.equipment.flint.*;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
@@ -40,10 +40,10 @@ public class Items {
     public static final CustomItem FERRUDAM_SHOVEL = register(new FerrudamShovel());
     public static final CustomItem FERRUDAM_HOE = register(new FerrudamHoe());
 
-    public static final CustomItem FERRUDAM_HELMET = register(new FerrudamHelmetCustom());
-    public static final CustomItem FERRUDAM_CHESTPLATE = register(new FerrudamChestplateCustom());
-    public static final CustomItem FERRUDAM_LEGGINGS = register(new FerrudamLeggingsCustom());
-    public static final CustomItem FERRUDAM_BOOTS = register(new FerrudamBootsCustom());
+    public static final CustomItem FERRUDAM_HELMET = register(new FerrudamHelmet());
+    public static final CustomItem FERRUDAM_CHESTPLATE = register(new FerrudamChestplate());
+    public static final CustomItem FERRUDAM_LEGGINGS = register(new FerrudamLeggings());
+    public static final CustomItem FERRUDAM_BOOTS = register(new FerrudamBoots());
 
     public static final CustomItem FLINT_SWORD = register(new FlintSword());
     public static final CustomItem FLINT_PICKAXE = register(new FlintPickaxe());

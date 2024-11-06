@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamChestplateCustom extends FerrudamArmor implements RpgUCustomItem {
+public class FerrudamChestplate extends FerrudamArmor implements RpgUCustomItem {
     @Override
     public @NotNull String getRawId() {return "ferrudam_chestplate";}
     @Override
