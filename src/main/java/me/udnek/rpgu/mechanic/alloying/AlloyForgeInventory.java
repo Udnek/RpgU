@@ -31,16 +31,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public class AlloyForgeInventory extends ConstructableCustomInventory implements AlloyForgeMachine, SmartIntractableCustomInventory {
 
-    public static final int CRAFT_DURATION = 40;
-
+    public static final int CRAFT_DURATION = 20*20;
     public static final NamespacedKey SERIALIZE_RECIPE_KEY = new NamespacedKey(RpgU.getInstance(), "alloy_forge_recipe");
-
     protected static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
     protected static final int[] ALLOYS_SLOTS = new int[]
@@ -55,6 +54,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     protected boolean shouldUpdateItems = false;
     protected float progress = 0;
     protected AlloyingRecipe currentRecipe = null;
+    protected ItemStack currentAddition = null;
 
     protected final Block block;
 
@@ -70,12 +70,10 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     @Override
     public boolean canPlaceItem(@Nullable ItemStack itemStack, int slot) {
         return canTakeItem(itemStack, slot) && slot != RESULT_SLOT;
-        //return slot == ADDITION_SLOT || slot == FUEL_SLOT || (Arrays.stream(ALLOYS_SLOTS).anyMatch(i -> i == slot));
     }
     @Override
     public boolean canTakeItem(@Nullable ItemStack itemStack, int slot) {
         return !FILLER.isThisItem(inventory.getItem(slot));
-        //return canPlaceItem(itemStack, slot) || slot == RESULT_SLOT;
     }
     @Override
     public int getInventorySize() {return 9*5;}
@@ -103,9 +101,14 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         if (currentRecipe == null) return;
 
         if (progress >= 1){
-            if (!canFit(RESULT_SLOT, currentRecipe.getResult())) return;
+            ItemStack result = currentRecipe.getResult();
+            if (!canFit(RESULT_SLOT, result)) return;
             progress = 0;
-            addItem(RESULT_SLOT, currentRecipe.getResult());
+            System.out.println(currentAddition);
+            if (currentRecipe.isKeepEnchantments() && currentAddition != null){
+                result.addEnchantments(currentAddition.getEnchantments());
+            }
+            addItem(RESULT_SLOT, result);
             currentRecipe = null;
             setLit(false);
             updateItems();
@@ -116,7 +119,6 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     public void setLit(boolean b){
-        // TODO: 10/7/2024 MAKE WORKING
         Furnace blockData = (Furnace) block.getBlockData();
         blockData.setLit(b);
         block.setBlockData(blockData, true);
@@ -126,13 +128,19 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         if (currentRecipe != null) return;
         if (!canFit(RESULT_SLOT, recipe.getResult())) return;
 
+        currentAddition = inventory.getItem(ADDITION_SLOT);
+        if (currentAddition != null) currentAddition = currentAddition.clone();
+        
+        System.out.println(currentAddition);
         iterateTroughAllInputSlots(integer -> takeItem(integer, 1));
-        serializeItems();
 
         currentRecipe = recipe;
         progress = 0;
+
+        serializeItems();
         setLit(true);
     }
+
 
     public void updateItems(){
         serializeItems();
@@ -149,6 +157,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         ItemStack addition = inventory.getItem(ADDITION_SLOT);
         if (addition == null) return;
 
+        if (currentRecipe != null) return;
         List<AlloyingRecipe> recipes = RecipeManager.getInstance().getByType(AlloyingRecipeType.getInstance());
         for (AlloyingRecipe recipe : recipes) {
             boolean matches = recipe.matches(alloys, fuel, addition);
@@ -201,29 +210,11 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     @Override
-    public void unload(@NotNull Block block) {
-        LogUtils.log("TERMINATE " + block);
-        if (block.getType() != Material.BLAST_FURNACE) return;
+    public void unload(@NotNull Block block) {}
 
-        BlastFurnace state = (BlastFurnace) block.getState();
-
-        if (currentRecipe != null){
-            state.getPersistentDataContainer().set(
-                    SERIALIZE_RECIPE_KEY,
-                    PersistentDataType.STRING,
-                    currentRecipe.getKey().asString());
-        } else {
-            state.getPersistentDataContainer().remove(SERIALIZE_RECIPE_KEY);
-        }
-
-        state.update(true, false);
-
-        LogUtils.log("SAVE_ITEM_AFTER: " + ((BlastFurnace) block.getState()).getInventory().getFuel());
-        LogUtils.log("SAVED_RECIPE: " + ((BlastFurnace) block.getState()).getPersistentDataContainer().get(SERIALIZE_RECIPE_KEY, PersistentDataType.STRING));
-    }
     @Override
     public void load(@NotNull Block block) {
-        LogUtils.log("SETUP " + block);
+        LogUtils.log("LOAD " + block);
         BlastFurnace state = (BlastFurnace) block.getState();
         ItemStack fuel = state.getInventory().getFuel();
         if (fuel != null && fuel.getType() == Material.BUNDLE){
@@ -241,8 +232,13 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
             if (!FILLER.isThisItem(result)){
                 inventory.setItem(RESULT_SLOT, result);
             }
+            ItemStack addition = items.get(bundleSlot.addAndGet(1));
+            if (!FILLER.isThisItem(addition)){
+                currentAddition = addition;
+            }
         }
         String recipeId = state.getPersistentDataContainer().get(SERIALIZE_RECIPE_KEY, PersistentDataType.STRING);
+        System.out.println("LOA_REC: " + recipeId);
         if (recipeId == null) return;
         NamespacedKey id = NamespacedKey.fromString(recipeId);
         if (id == null) return;
@@ -251,43 +247,40 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         progress = 0;
     }
     public void serializeItems(){
-        LogUtils.log("CALLED SERIALIZATION");
+        System.out.println("CALLED SERIALIZE");
         ItemStack saveItem = new ItemStack(Material.BUNDLE);
         BundleMeta saveMeta = (BundleMeta) saveItem.getItemMeta();
 
-        AtomicBoolean atLeastOneItem = new AtomicBoolean(false);
-        Consumer<Integer> consumer = new Consumer<>() {
+        SlotOrItemConsumer consumer = new SlotOrItemConsumer() {
             @Override
-            public void accept(Integer slot) {
-                ItemStack item = inventory.getItem(slot);
-                if (item == null) {
-                    saveMeta.addItem(FILLER.getItem());
-                } else {
-                    atLeastOneItem.set(true);
-                    saveMeta.addItem(item);
-                }
+            public void accept(Integer slot) {accept(inventory.getItem(slot));}
+            @Override
+            public void accept(@Nullable ItemStack itemStack) {
+                saveMeta.addItem(Objects.requireNonNullElseGet(itemStack, FILLER::getItem));
             }
+
         };
         iterateTroughAllInputSlots(consumer);
         consumer.accept(RESULT_SLOT);
+        consumer.accept(currentAddition);
 
-        if (!atLeastOneItem.get()) return;
 
-        BlastFurnace state = (BlastFurnace) block.getState();
+        System.out.println("SER_RECIPE: " + currentRecipe);
+        if (currentRecipe != null) {
+            saveMeta.getPersistentDataContainer().set(
+                    SERIALIZE_RECIPE_KEY,
+                    PersistentDataType.STRING,
+                    currentRecipe.getKey().asString());
+            saveMeta.displayName(Component.text(currentRecipe.getKey().asString()));
+        }
         saveItem.setItemMeta(saveMeta);
+        BlastFurnace state = (BlastFurnace) block.getState();
         state.getInventory().setFuel(saveItem);
-        LogUtils.log("SAVE_ITEM: " + saveItem);
-
-    }
-    @Override
-    public void onRightClick(PlayerInteractEvent event) {
-        if (event.getPlayer().isSneaking()) return;
-        event.setCancelled(true);
-        open(event.getPlayer());
     }
 
     @Override
     public void onBlastInventoryOpen(InventoryOpenEvent event) {
+        if (event.getPlayer().getGameMode() == GameMode.SPECTATOR) return;
         event.setCancelled(true);
         open((Player) event.getPlayer());
     }
@@ -297,7 +290,9 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         event.setInventory(inventory);
     }
     @Override
-    public void onHopperGivesItem(InventoryMoveItemEvent event) {}
+    public void onHopperGivesItem(InventoryMoveItemEvent event) {
+        updateItemsTickLater();
+    }
     @Override
     public void onHopperTakesItem(InventoryMoveItemEvent event) {
         ItemStack result = inventory.getItem(RESULT_SLOT);
@@ -306,6 +301,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
             event.getDestination().addItem(result.asQuantity(1));
             takeItem(RESULT_SLOT, 1);
         }
+        updateItemsTickLater();
     }
     @Override
     public void onDestroy(BlockDestroyEvent event) {destroy(event);}
@@ -357,7 +353,13 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
                 Component.text(0).color(TextColor.color(91, 100, 118)).font(Key.key("rpgu", "alloying")),
                 176)
                 .append(Component.translatable("gui.rpgu.alloy_forge").font(NamespacedKey.minecraft("default")).color(NamedTextColor.BLACK));
-/*        return ComponentU.space(-8).append(ComponentU.textWithNoSpace(Component.text(0).color(NamedTextColor.WHITE).font(Key.key("rpgu", "alloying")), 176))
-                .append(Component.translatable("gui.rpgu.alloy_forge").font(NamespacedKey.minecraft("default")).color(NamedTextColor.BLACK));*/
+    }
+
+
+
+    public interface SlotOrItemConsumer extends Consumer<Integer>{
+        @Override
+        void accept(Integer slot);
+        void accept(@Nullable ItemStack itemStack);
     }
 }

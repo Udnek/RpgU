@@ -13,7 +13,6 @@ public interface AlloyForgeMachine {
     void unload(@NotNull Block block);
     void load(@NotNull Block block);
     void tick();
-    void onRightClick(PlayerInteractEvent event);
     void onBlastInventoryOpen(InventoryOpenEvent event);
     void onHopperSearch(HopperInventorySearchEvent event);
     void onHopperTakesItem(InventoryMoveItemEvent event);

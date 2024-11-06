@@ -46,8 +46,8 @@ public class AlloyForgeManager extends TickingTask implements Listener {
         AlloyForgeMachine machine = machines.get(serialized);
         if (machine != null) return machine;
         machine = new AlloyForgeInventory(block);
-        machine.load(block);
         machines.put(serialized, machine);
+        machine.load(block);
         return machine;
     }
     public void addUnloadTicket(Block block){
