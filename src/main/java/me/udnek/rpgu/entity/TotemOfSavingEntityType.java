@@ -5,9 +5,11 @@ import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -39,12 +41,22 @@ class TotemOfSavingEntityType extends CustomEntityType<TotemOfSavingEntity> impl
         }
         if (foundTotem == null) return;
         drops.remove(foundTotem);
+        foundTotem.subtract(1);
+        if (foundTotem.getAmount() > 0) drops.add(foundTotem);
         EntityTypes.TOTEM_OF_SAVING.spawn(player.getLocation()).setItems(drops);
         drops.clear();
     }
 
     @EventHandler
-    public void playerInteractWithTotemOfSaving(PlayerInteractAtEntityEvent event){
+    public void onTotemDeath(EntityDeathEvent event){
+        CustomEntity customEntity = CustomEntity.get(event.getEntity());
+        if (customEntity == null || customEntity.getType() != EntityTypes.TOTEM_OF_SAVING) return;
+        ((TotemOfSavingEntity) customEntity).onDeath(event);
+    }
+
+
+    @EventHandler
+    public void playerInteractWithTotem(PlayerInteractAtEntityEvent event){
         CustomEntity customEntity = CustomEntity.get(event.getRightClicked());
         if (!(customEntity instanceof TotemOfSavingEntity totemOfSavingEntity)) return;
         PlayerInventory inventory = event.getPlayer().getInventory();

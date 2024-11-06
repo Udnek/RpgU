@@ -23,7 +23,8 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
     protected final CustomRecipeChoice fuel;
     protected ItemStack result;
     protected final NamespacedKey id;
-    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> alloys, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result){
+    protected final boolean keepEnchantments;
+    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> alloys, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result, boolean keepEnchantments){
         Preconditions.checkArgument(key != null, "Key can not be null!");
         Preconditions.checkArgument(fuel != null, "Fuel can not be null!");
         Preconditions.checkArgument(addition != null, "TargetInput can not be null!");
@@ -37,11 +38,16 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
         this.addition = addition;
         this.result = result.clone();
         this.id = key;
+        this.keepEnchantments = keepEnchantments;
+    }
+    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> alloys, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result){
+        this(key, alloys, fuel, addition, result, true);
     }
 
     public CustomRecipeChoice getFuel() {return fuel;}
     public CustomRecipeChoice getAddition() {return addition;}
     public List<CustomSingleRecipeChoice> getAlloys() {return new ArrayList<>(alloys);}
+    public boolean isKeepEnchantments() {return keepEnchantments;}
 
     @Override
     public @NotNull Visualizer getVisualizer() {

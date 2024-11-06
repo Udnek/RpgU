@@ -1,10 +1,12 @@
 package me.udnek.rpgu.entity;
 
 import me.udnek.itemscoreu.customentity.ConstructableCustomEntity;
+import me.udnek.itemscoreu.customentity.CustomEntityType;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
@@ -44,10 +46,23 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<ArmorStand> i
         return bundleMeta.getItems();
     }
 
+    public void onDeath(@NotNull EntityDeathEvent event) {
+        List<ItemStack> drops = event.getDrops();
+        drops.clear();
+        drops.addAll(getItems());
+    }
+
     @Override
     public void unload() {}
     @Override
     public void tick() {}
+
+    @Override
+    public @NotNull CustomEntityType<?> getType() {
+        return EntityTypes.TOTEM_OF_SAVING;
+    }
+
+
 }
 
 

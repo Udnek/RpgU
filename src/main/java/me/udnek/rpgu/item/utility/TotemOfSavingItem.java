@@ -2,6 +2,9 @@ package me.udnek.rpgu.item.utility;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.item.RpgUCustomItem;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -16,6 +19,12 @@ public class TotemOfSavingItem extends ConstructableCustomItem implements RpgUCu
 
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
+
+    @Override
+    public void getLore(@NotNull Consumer<Component> consumer) {
+        consumer.accept(Component.translatable(getRawItemName() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
+        consumer.accept(Component.translatable(getRawItemName() + ".description.1").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

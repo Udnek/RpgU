@@ -2,6 +2,7 @@ package me.udnek.rpgu.mechanic.damaging;
 
 
 import me.udnek.itemscoreu.customevent.CustomEvent;
+import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.instance.MagicalDefenseMultiplierAttribute;
 import me.udnek.rpgu.attribute.instance.PhysicalArmorAttribute;
@@ -18,6 +19,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,18 +65,25 @@ public class DamageEvent extends CustomEvent {
     public void invoke(){
         if (victim == null) return;
 
-        System.out.println(getCause() + ", " + handlerEvent.getDamageSource().getDamageType().getTranslationKey());
-
         attackCalculations();
         equipmentAttacks();
         equipmentReceives();
 
         callEvent();
 
-        handlerEvent.setDamage(0);
-        handlerEvent.setDamage(damage.getTotal());
+        if(victim.getNoDamageTicks() > 0 && victim.getLastDamage() >= damage.getTotal()){
+            handlerEvent.setCancelled(true);
+        } else {
+            handlerEvent.setDamage(0);
+            handlerEvent.setDamage(damage.getTotal());
 
-        DamageVisualizer.visualize(damage, victim);
+            DamageVisualizer.visualize(damage, victim);
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {victim.setNoDamageTicks(5);}
+            }.runTaskLater(RpgU.getInstance(), 1);
+        }
     }
 
     private void attackCalculations() {

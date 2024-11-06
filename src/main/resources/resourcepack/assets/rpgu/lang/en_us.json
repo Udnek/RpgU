@@ -51,7 +51,9 @@
 	"item.rpgu.ferrudam_hoe": "Ferrudam Hoe",
 
 	"item.rpgu.dark_mirror": "Dark Mirror",
-
+	"item.rpgu.totem_of_saving": "Totem of Saving",
+	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
+	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
 	"item.rpgu.rusty_iron_ring": "Rusty Iron Ring",
 
 	"item.rpgu.flint_sword": "Flint Sword",

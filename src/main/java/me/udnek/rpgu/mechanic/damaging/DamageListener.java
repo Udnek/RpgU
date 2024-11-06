@@ -24,18 +24,6 @@ public class DamageListener extends SelfRegisteringListener {
             DamageVisualizer.visualize(new Damage(Damage.Type.PHYSICAL, event.getDamage()), event.getEntity());
             return;
         }
-
-        if (event.getEntity() instanceof LivingEntity living){
-            if (living.getNoDamageTicks() > 0){
-                event.setCancelled(true);
-                return;
-            } else {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {living.setNoDamageTicks(5);}
-                }.runTaskLater(RpgU.getInstance(), 1);
-            }
-        }
         new DamageEvent(event).invoke();
     }
     @EventHandler

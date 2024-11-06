@@ -134,12 +134,9 @@ public class AttributeLoreGenerator {
     }
 
     public static Component getAttributeLine(@NotNull Attribute attribute, double amount, @NotNull AttributeModifier.Operation operation, @NotNull CustomEquipmentSlot slot){
-        if (attribute == Attribute.ATTACK_SPEED && operation == AttributeModifier.Operation.ADD_NUMBER && slot == CustomEquipmentSlot.MAIN_HAND){
-            return Attributes.ATTACK_SPEED.getLoreLineWithBase(RpgUAttributeUtils.attributeAttackSpeedToAttacksPerSecond(amount));
-        }
-        if (attribute == Attribute.ATTACK_DAMAGE && operation == AttributeModifier.Operation.ADD_NUMBER && slot == CustomEquipmentSlot.MAIN_HAND){
-            return Attributes.PHYSICAL_DAMAGE.getLoreLineWithBase(amount+1);
-        }
+        if (attribute == Attribute.ATTACK_SPEED) return getAttributeLine(Attributes.ATTACK_SPEED, amount, operation, slot);
+        if (attribute == Attribute.ATTACK_DAMAGE) return getAttributeLine(Attributes.PHYSICAL_DAMAGE, amount, operation, slot);
+
         String key;
         TextColor color;
         if (amount < 0) {
