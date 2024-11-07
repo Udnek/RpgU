@@ -30,6 +30,7 @@ public class Items {
     public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
     public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
     public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
+    public final static CustomItem SPHERE_OF_DISCORD = register(new SphereOfDiscord());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
