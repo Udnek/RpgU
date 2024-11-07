@@ -14,11 +14,13 @@
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",
-	"attribute.rpgu.name.meele_magical_damage_multiplier": "Meele Magical Damage per Potential",
+	"attribute.rpgu.name.melee_magical_damage_multiplier": "Melee Magical Damage per Potential",
 	"attribute.rpgu.name.magical_potential": "Magical Potential (MP)",
 	"attribute.rpgu.name.magical_defense_multiplier": "Magical Defense per Potential",
 	"attribute.rpgu.name.cast_range": "Cast Range",
 	"attribute.rpgu.name.cooldown_time": "Cooldown Time",
+	"attribute.rpgu.name.projectile_damage_multiplier": "Projectile Damage",
+	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 
@@ -30,6 +32,7 @@
 	"item.rpgu.blaze_blade": "Blaze Blade",
 
 	"item.rpgu.shiny_axe": "Shiny Axe",
+	"item.rpgu.phantom_bow": "Phantom Bow",
 
 	"item.rpgu.ceremonial_dagger": "Ceremonial Dagger",
 	"item.rpgu.ceremonial_dagger.description.0": "+150% Physical Damage to backstab",

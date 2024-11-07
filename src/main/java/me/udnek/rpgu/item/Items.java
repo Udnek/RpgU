@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.*;
 import me.udnek.rpgu.item.equipment.CeremonialDagger;
+import me.udnek.rpgu.item.equipment.PhantomBow;
 import me.udnek.rpgu.item.equipment.PhantomChestplate;
 import me.udnek.rpgu.item.equipment.ShinyAxe;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
@@ -33,6 +34,7 @@ public class Items {
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
     public static final CustomItem CEREMONIOUS_DAGGER = register(new CeremonialDagger());
+    public static final CustomItem PHANTOM_BOW = register(new PhantomBow());
 
     public static final CustomItem FERRUDAM_SWORD = register(new FerrudamSword());
     public static final CustomItem FERRUDAM_PICKAXE = register(new FerrudamPickaxe());
