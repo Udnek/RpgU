@@ -36,9 +36,9 @@ public class SphereOfDiscord extends ConstructableCustomItem implements RpgUCust
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
-                "QQQ",
-                "SNS",
-                "QQQ");
+                "QSS",
+                "QNS",
+                "QQS");
 
         RecipeChoice.MaterialChoice quartz = new RecipeChoice.MaterialChoice(Material.QUARTZ);
         RecipeChoice.MaterialChoice netherStar = new RecipeChoice.MaterialChoice(Material.NETHER_STAR);
