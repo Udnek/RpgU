@@ -1,7 +1,9 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -14,7 +16,6 @@ public class ProjectileSpeedAttribute extends ConstructableCustomAttribute imple
     @EventHandler
     public void onFire(EntityShootBowEvent event) {
         double amount = this.calculate(event.getEntity());
-        if (amount == getDefaultValue()) return;
         Entity projectile = event.getProjectile();
         projectile.setVelocity(projectile.getVelocity().multiply(amount));
     }

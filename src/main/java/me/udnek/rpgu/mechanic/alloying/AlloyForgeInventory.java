@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.custominventory.SmartIntractableCustomInventory;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customrecipe.RecipeManager;
 import me.udnek.itemscoreu.util.ComponentU;
-import me.udnek.itemscoreu.util.LogUtils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.key.Key;
@@ -21,10 +20,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExpEvent;
 import org.bukkit.event.inventory.*;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
+import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,24 +31,25 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public class AlloyForgeInventory extends ConstructableCustomInventory implements AlloyForgeMachine, SmartIntractableCustomInventory {
 
+    public static final TextColor COLOR = TextColor.color(91, 100, 118);
     public static final int CRAFT_DURATION = 20*20;
     public static final NamespacedKey SERIALIZE_RECIPE_KEY = new NamespacedKey(RpgU.getInstance(), "alloy_forge_recipe");
-    protected static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
+    public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
-    protected static final int[] ALLOYS_SLOTS = new int[]
+    public static final int[] ALLOYS_SLOTS = new int[]
             {
             9*0+0, 9*0+1, 9*0+2,
             9*1+0, 9*1+1, 9*1+2
             };
-    protected static final int FUEL_SLOT = 9*3+1;
-    protected static final int ADDITION_SLOT = 9*2+4;
-    protected static final int RESULT_SLOT = 9*2+7;
+    public static final int FUEL_SLOT = 9*3+1;
+    public static final int ADDITION_SLOT = 9*2+4;
+    public static final int RESULT_SLOT = 9*2+7;
+    public static final int PROGRESS_SLOT = 9*2-1;
 
     protected boolean shouldUpdateItems = false;
     protected float progress = 0;
@@ -75,8 +75,6 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     public boolean canTakeItem(@Nullable ItemStack itemStack, int slot) {
         return !FILLER.isThisItem(inventory.getItem(slot));
     }
-    @Override
-    public int getInventorySize() {return 9*5;}
     public void iterateTroughAllInputSlots(Consumer<Integer> consumer){
         for (int alloysSlot : ALLOYS_SLOTS) {
             consumer.accept(alloysSlot);
@@ -97,23 +95,34 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         tickRecipe();
     }
 
+    public void updateProgressAnimation(){
+        ItemStack icon = Items.TECHNICAL_INVENTORY_FILLER.getItem();
+        icon.editMeta(ColorableArmorMeta.class, itemMeta -> itemMeta.setColor(Color.fromRGB(COLOR.value())));
+
+        String model = "rpgu:gui/alloying/progress/";
+        if (progress == 0) model += "empty";
+        else model += (int) (progress*29);
+        String finalModel = model;
+        icon.editMeta(itemMeta -> itemMeta.setItemModel(NamespacedKey.fromString(finalModel)));
+        inventory.setItem(PROGRESS_SLOT, icon);
+    }
+
     public void tickRecipe(){
         if (currentRecipe == null) return;
+        updateProgressAnimation();
 
         if (progress >= 1){
             ItemStack result = currentRecipe.getResult();
             if (!canFit(RESULT_SLOT, result)) return;
             progress = 0;
-            System.out.println(currentAddition);
             if (currentRecipe.isKeepEnchantments() && currentAddition != null){
                 result.addEnchantments(currentAddition.getEnchantments());
             }
             addItem(RESULT_SLOT, result);
             currentRecipe = null;
             setLit(false);
-            updateItems();
+            updateProgressAnimation();
         } else {
-            inventory.setItem(8, inventory.getItem(8).asQuantity((int) (Math.max(progress*64f, 1))));
             progress += 1f/CRAFT_DURATION;
         }
     }
@@ -345,11 +354,12 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     public Component getDisplayName() {
         return ComponentU.textWithNoSpace(
                 -8,
-                Component.text(0).color(TextColor.color(91, 100, 118)).font(Key.key("rpgu", "alloying")),
+                Component.text(0).color(COLOR).font(Key.key("rpgu", "alloying")),
                 176)
                 .append(Component.translatable("gui.rpgu.alloy_forge").font(NamespacedKey.minecraft("default")).color(NamedTextColor.BLACK));
     }
-
+    @Override
+    public int getInventorySize() {return 9*5;}
 
 
     public interface SlotOrItemConsumer extends Consumer<Integer>{
