@@ -50,6 +50,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     protected static final int FUEL_SLOT = 9*3+1;
     protected static final int ADDITION_SLOT = 9*2+4;
     protected static final int RESULT_SLOT = 9*2+7;
+    protected static final int PROGRESS_SLOT = 9*2-1;
 
     protected boolean shouldUpdateItems = false;
     protected float progress = 0;
@@ -75,8 +76,6 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     public boolean canTakeItem(@Nullable ItemStack itemStack, int slot) {
         return !FILLER.isThisItem(inventory.getItem(slot));
     }
-    @Override
-    public int getInventorySize() {return 9*5;}
     public void iterateTroughAllInputSlots(Consumer<Integer> consumer){
         for (int alloysSlot : ALLOYS_SLOTS) {
             consumer.accept(alloysSlot);
@@ -349,7 +348,8 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
                 176)
                 .append(Component.translatable("gui.rpgu.alloy_forge").font(NamespacedKey.minecraft("default")).color(NamedTextColor.BLACK));
     }
-
+    @Override
+    public int getInventorySize() {return 9*5;}
 
 
     public interface SlotOrItemConsumer extends Consumer<Integer>{

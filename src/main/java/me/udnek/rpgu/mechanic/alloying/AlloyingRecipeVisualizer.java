@@ -38,7 +38,7 @@ public class AlloyingRecipeVisualizer extends AbstractVisualizer {
         menu.setItem(RecipesMenu.getRecipeStationPosition(), Material.BLAST_FURNACE);
         menu.setThemedItem(AlloyForgeInventory.FUEL_SLOT + OFFSET - 9, Items.FIRE_ICON);
         ItemStack banner = Items.BANNER.getItem();
-        banner.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "alloying_banner")));
+        banner.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "gui/alloying/banner")));
         menu.setThemedItem(RecipesMenu.getBannerPosition(), banner);
     }
     public void setAlloy(int index, CustomRecipeChoice choice){
