@@ -28,16 +28,8 @@ import java.util.function.Consumer;
 
 
 public class PhantomBow extends ConstructableCustomItem implements RpgUCustomItem, Listener {
-
-    /*private CustomAttributesContainer container = new CustomAttributesContainer.Builder()
-            .add(Attributes.PROJECTILE_SPEED, 0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.HAND)
-            .add(Attributes.PROJECTILE_DAMAGE_MULTIPLIER, -0.25, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.HAND)
-            .build();*/
-
-
     @Override
     public @NotNull Material getMaterial() {return Material.BOW;}
-
     @Override
     public @NotNull String getRawId() {return "phantom_bow";}
 
@@ -46,13 +38,12 @@ public class PhantomBow extends ConstructableCustomItem implements RpgUCustomIte
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 " WS",
-                "W S",
+                "M S",
                 " WS");
 
-        RecipeChoice.ExactChoice wing = new RecipeChoice.ExactChoice(Items.PHANTOM_WING.getItem());
-        RecipeChoice.MaterialChoice string = new RecipeChoice.MaterialChoice(Material.STRING);
-        recipe.setIngredient('W', wing);
-        recipe.setIngredient('S', string);
+        recipe.setIngredient('W', new RecipeChoice.ExactChoice(Items.PHANTOM_WING.getItem()));
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STRING));
+        recipe.setIngredient('M', new RecipeChoice.MaterialChoice(Material.PHANTOM_MEMBRANE));
 
         consumer.accept(recipe);
     }
@@ -61,8 +52,8 @@ public class PhantomBow extends ConstructableCustomItem implements RpgUCustomIte
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomAttributeModifier projectileSpeedAttribute = new CustomAttributeModifier(0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.HAND);
-        CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(-0.25, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.HAND);
+        CustomAttributeModifier projectileSpeedAttribute = new CustomAttributeModifier(0.5, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND);
+        CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(-0.25, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND);
 
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.PROJECTILE_SPEED, projectileSpeedAttribute).
                 add(Attributes.PROJECTIL_DAMAGE_MULTIPLIER, projectileDamageMultiplierAttribute).build()));

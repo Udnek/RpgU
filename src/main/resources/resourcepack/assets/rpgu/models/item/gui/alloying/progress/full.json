@@ -1,5 +1,5 @@
 {
-	"parent": "rpgu:item/alloying/progress/template",
+	"parent": "rpgu:item/gui/alloying/progress/template",
 	"textures": {
 		"layer0": "rpgu:item/gui/alloying/progress/full"
 	}
