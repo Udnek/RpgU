@@ -4,6 +4,9 @@ import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.item.RpgUCustomItem;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
@@ -98,8 +101,10 @@ public class Wrench extends ConstructableCustomItem implements RpgUCustomItem {
         consumer.accept(recipe);
     }
 
-
-
+    @Override
+    public void getLore(@NotNull Consumer<Component> consumer) {
+        consumer.accept(Component.translatable(getRawItemName() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
+    }
 }
 
 
