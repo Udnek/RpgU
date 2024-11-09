@@ -11,6 +11,8 @@ import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmet;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamLeggings;
 import me.udnek.rpgu.item.equipment.ferrudam.tools.*;
 import me.udnek.rpgu.item.equipment.flint.*;
+import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorChestplate;
+import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorHelmet;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
 import me.udnek.rpgu.item.ingredients.*;
@@ -49,6 +51,9 @@ public class Items {
     public static final CustomItem FERRUDAM_CHESTPLATE = register(new FerrudamChestplate());
     public static final CustomItem FERRUDAM_LEGGINGS = register(new FerrudamLeggings());
     public static final CustomItem FERRUDAM_BOOTS = register(new FerrudamBoots());
+
+    public static final CustomItem HUNGRY_HORROR_HELMET = register(new HungryHorrorHelmet());
+    public static final CustomItem HUNGRY_HORROR_CHESTPLATE = register(new HungryHorrorChestplate());
 
     public static final CustomItem FLINT_SWORD = register(new FlintSword());
     public static final CustomItem FLINT_PICKAXE = register(new FlintPickaxe());

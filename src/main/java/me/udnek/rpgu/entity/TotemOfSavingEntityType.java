@@ -5,7 +5,6 @@ import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

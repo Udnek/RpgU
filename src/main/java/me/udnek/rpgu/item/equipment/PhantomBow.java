@@ -7,7 +7,6 @@ import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponen
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
-
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.particle.BowParticles;
