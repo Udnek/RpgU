@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
-import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
@@ -42,12 +41,6 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(new EquippableItemComponent() {
-            @Override
-            public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-                return EquipmentSlots.ARTIFACTS.test(slot) || CustomEquipmentSlot.MAIN_HAND.test(slot);
-            }
-        });
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                 .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, 1.5, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
                 .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, 0.5, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
