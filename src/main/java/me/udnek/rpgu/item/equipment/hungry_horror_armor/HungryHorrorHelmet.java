@@ -22,7 +22,7 @@ public class HungryHorrorHelmet extends HungryHorrorArmor {
     public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
 
     @Override
-    public @Nullable LoreBuilder getLoreBuilder() {return getLoreBuilder(CustomEquipmentSlot.CHEST);}
+    public @Nullable LoreBuilder getLoreBuilder() {return getLoreBuilder(CustomEquipmentSlot.HEAD);}
 
     @Override
     protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
@@ -38,6 +38,6 @@ public class HungryHorrorHelmet extends HungryHorrorArmor {
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new HungryHorrorComponent(PotionEffectType.STRENGTH));
+        setComponent(new HungryHorrorComponent(PotionEffectType.STRENGTH, CustomEquipmentSlot.HEAD));
     }
 }

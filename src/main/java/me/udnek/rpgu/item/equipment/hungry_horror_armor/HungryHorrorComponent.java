@@ -11,14 +11,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class HungryHorrorComponent implements EquippableItemComponent {
     protected final PotionEffectType effectType;
+    protected final CustomEquipmentSlot slot;
 
-    public HungryHorrorComponent(PotionEffectType effectType){
+    public HungryHorrorComponent(PotionEffectType effectType, CustomEquipmentSlot slot){
         this.effectType = effectType;
+        this.slot = slot;
     }
 
     @Override
     public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-        return CustomEquipmentSlot.HEAD.test(slot);
+        return slot.test(slot);
     }
 
     @Override
