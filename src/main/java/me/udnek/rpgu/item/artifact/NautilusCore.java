@@ -61,12 +61,12 @@ public class NautilusCore extends ConstructableCustomItem implements RpgUCustomI
     public static class NautilusCoreComponent implements ArtifactComponent {
 
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, me.udnek.itemscoreu.customequipmentslot.@NotNull CustomEquipmentSlot slot, @NotNull DamageInstance event) {
-            if (!event.isCritical()) return;
-            if (event.containsExtraFlag(new isMagicalCriticalApplied())) return;
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, me.udnek.itemscoreu.customequipmentslot.@NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
+            if (!damageInstance.isCritical()) return;
+            if (damageInstance.containsExtraFlag(new isMagicalCriticalApplied())) return;
 
-            event.getDamage().multiplyMagical(1.5);
-            event.addExtraFlag(new isMagicalCriticalApplied());
+            damageInstance.getDamage().multiplyMagical(1.5);
+            damageInstance.addExtraFlag(new isMagicalCriticalApplied());
         }
     }
 

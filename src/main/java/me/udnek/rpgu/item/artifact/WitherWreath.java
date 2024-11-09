@@ -60,8 +60,8 @@ public class WitherWreath extends ConstructableCustomItem implements RpgUCustomI
 
     public static class WitherWreathComponent implements ArtifactComponent {
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance event) {
-            Entity victim = event.getVictim();
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
+            Entity victim = damageInstance.getVictim();
 
             if (!(victim instanceof LivingEntity livingEntity)) return;
             livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20*2,1));
