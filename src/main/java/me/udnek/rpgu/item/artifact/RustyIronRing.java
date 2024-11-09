@@ -44,7 +44,6 @@ public class RustyIronRing extends ConstructableCustomItem implements RpgUCustom
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(ArtifactComponent.DEFAULT);
 
         CustomKeyedAttributeModifier baseHp = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_max_health_rusty_iron_ring"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         CustomKeyedAttributeModifier baseArmor = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_armor_rusty_iron_ring"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);

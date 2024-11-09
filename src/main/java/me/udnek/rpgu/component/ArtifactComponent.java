@@ -5,6 +5,9 @@ import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.jetbrains.annotations.NotNull;
 
 public interface ArtifactComponent extends EquippableItemComponent {
+
+    ArtifactComponent DEFAULT = new ArtifactComponent(){};
+
     @Override
     default boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
         return EquipmentSlots.ARTIFACTS.test(slot);

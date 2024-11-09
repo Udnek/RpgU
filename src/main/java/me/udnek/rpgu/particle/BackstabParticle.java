@@ -1,16 +1,19 @@
 package me.udnek.rpgu.particle;
 
 import me.udnek.itemscoreu.customparticle.CustomFlatAnimatedParticle;
+import me.udnek.rpgu.RpgU;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.jetbrains.annotations.NotNull;
 
 public class BackstabParticle extends CustomFlatAnimatedParticle {
     private final static Color color = Color.fromRGB(255, 10, 10);
 
-    public BackstabParticle(Location location) {
+    public BackstabParticle(@NotNull Location location) {
         super(location);
     }
 
@@ -35,16 +38,12 @@ public class BackstabParticle extends CustomFlatAnimatedParticle {
     @Override
     protected ItemStack getItemStack() {
         ItemStack itemStack = new ItemStack(Material.LEATHER_HELMET);
-        LeatherArmorMeta itemMeta = (LeatherArmorMeta) itemStack.getItemMeta();
-        itemMeta.setColor(color);
-        itemStack.setItemMeta(itemMeta);
+        itemStack.editMeta(LeatherArmorMeta.class, meta -> meta.setColor(color));
         return itemStack;
     }
 
     @Override
-    protected int currentModelData() {
-        return 1000+frameNumber;
+    protected @NotNull NamespacedKey getCurrentModelPath() {
+        return new NamespacedKey(RpgU.getInstance(), "particle/sweep/"+frameNumber);
     }
-
-
 }

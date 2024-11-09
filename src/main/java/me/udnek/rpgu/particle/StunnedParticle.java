@@ -7,11 +7,12 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Transformation;
+import org.jetbrains.annotations.NotNull;
 
 public class StunnedParticle extends CustomFlatParticle {
     public LivingEntity targetEntity;
 
-    public StunnedParticle(Location location, LivingEntity entity) {
+    public StunnedParticle(@NotNull Location location, @NotNull LivingEntity entity) {
         super(location);
         targetEntity = entity;
     }
@@ -40,18 +41,15 @@ public class StunnedParticle extends CustomFlatParticle {
         return 15;
     }
 
+    @Override
+    protected void nextFrame() {}
 
     @Override
     protected void afterSpawned() {
         super.afterSpawned();
-        targetEntity.addPassenger(entity);
-        Transformation transformation = entity.getTransformation();
+        targetEntity.addPassenger(display);
+        Transformation transformation = display.getTransformation();
         transformation.getTranslation().set(0, targetEntity.getEyeHeight()/2f + 0.2, 0);
-        entity.setTransformation(transformation);
-    }
-
-    @Override
-    protected void nextFrame(){
-        //entity.teleport(targetEntity.getEyeLocation().add(0, 0.5, 0));
+        display.setTransformation(transformation);
     }
 }

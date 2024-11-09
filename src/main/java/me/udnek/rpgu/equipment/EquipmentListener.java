@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EquipmentListener extends SelfRegisteringListener {
@@ -20,19 +21,24 @@ public class EquipmentListener extends SelfRegisteringListener {
         super(plugin);
     }
 
-    private static @Nullable CustomItem getIfEquippable(ItemStack itemStack, CustomEquipmentSlot slot){
-        CustomItem customItem = CustomItem.get(itemStack);
-        if (customItem == null) return null;
+    private static boolean isEquippableAtSlot(@NotNull CustomItem customItem, @NotNull CustomEquipmentSlot slot){
         EquippableItemComponent component = customItem.getComponent(ComponentTypes.EQUIPPABLE_ITEM);
-        if (component == null) return null;
-        if (!component.isAppropriateSlot(slot)) return null;
-        return customItem;
+        if (component == null) return false;
+        return component.isAppropriateSlot(slot);
     }
 
+    private static @Nullable CustomItem getIfEquippable(@Nullable ItemStack itemStack, @NotNull CustomEquipmentSlot slot){
+        CustomItem customItem = CustomItem.get(itemStack);
+        if (customItem == null) return null;
+        if (isEquippableAtSlot(customItem, slot)) return customItem;
+        return null;
+    }
+    
     @EventHandler
     public void onHotbarScroll(PlayerItemHeldEvent event){
         Player player = event.getPlayer();
         ItemStack itemStack = player.getInventory().getItem(event.getNewSlot());
+        // todo fire equipped and unequipped
         PlayerEquipment.get(player).setItem(getIfEquippable(itemStack, CustomEquipmentSlot.MAIN_HAND), CustomEquipmentSlot.MAIN_HAND);
     }
 
@@ -55,21 +61,21 @@ public class EquipmentListener extends SelfRegisteringListener {
 
         Player player = event.getPlayer();
         ItemStack itemStack;
-        CustomItem equippable;
+        CustomItem customItem;
 
         itemStack = event.getOldItemStack();
-        equippable = getIfEquippable(itemStack, equipmentSlot);
-        if (equippable != null){
+        customItem = CustomItem.get(itemStack);
+        if (customItem != null){
             PlayerEquipment.get(player).setItem(null, equipmentSlot);
-            equippable.getComponent(ComponentTypes.EQUIPPABLE_ITEM).onUnequipped(equippable, player, equipmentSlot, itemStack);
+            customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onUnequipped(customItem, player, equipmentSlot, itemStack);
         }
 
 
         itemStack = event.getNewItemStack();
-        equippable = getIfEquippable(itemStack, equipmentSlot);
-        if (equippable != null){
-            PlayerEquipment.get(player).setItem(equippable, equipmentSlot);
-            equippable.getComponent(ComponentTypes.EQUIPPABLE_ITEM).onEquipped(equippable, player, equipmentSlot, itemStack);
+        customItem = CustomItem.get(itemStack);
+        if (customItem != null){
+            if (isEquippableAtSlot(customItem, equipmentSlot)) PlayerEquipment.get(player).setItem(customItem, equipmentSlot);
+            customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onEquipped(customItem, player, equipmentSlot, itemStack);
         }
     }
 }

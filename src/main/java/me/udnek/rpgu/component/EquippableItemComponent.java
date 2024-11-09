@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import net.kyori.adventure.text.Component;
 import org.bukkit.attribute.Attribute;
@@ -22,17 +21,10 @@ import java.util.Map;
 
 public interface EquippableItemComponent extends CustomComponent<CustomItem> {
 
-    EquippableItemComponent DEFAULT = new EquippableItemComponent() {
-        @Override
-        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-            return false;
-        }
-    };
+    EquippableItemComponent EMPTY = slot -> false;
 
     boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot);
     default void onEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack){
-        if (!isAppropriateSlot(slot)) return;
-
         getAttributes(item, player, slot, (attributeInstance, customModifier) -> {
             AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) == null) {
@@ -41,7 +33,6 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
         });
     }
     default void onUnequipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
-        if (!isAppropriateSlot(slot)) return;
         getAttributes(item, player, slot, (attributeInstance, customModifier) -> {
             AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) != null) {

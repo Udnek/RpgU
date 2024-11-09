@@ -9,7 +9,7 @@ import me.udnek.rpgu.RpgU;
 public class ComponentTypes {
 
     public static final CustomComponentType<CustomItem, EquippableItemComponent>
-            EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.DEFAULT));
+            EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.EMPTY));
 
     public static final CustomComponentType<CustomItem, ActiveAbilityComponent<?>>
             ACTIVE_ABILITY_ITEM = register(new ConstructableComponentType("active_ability_item", ConstructableActiveAbilityComponent.DEFAULT));

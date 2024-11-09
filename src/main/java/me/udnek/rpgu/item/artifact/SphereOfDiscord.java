@@ -54,8 +54,6 @@ public class SphereOfDiscord extends ConstructableCustomItem implements RpgUCust
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(ArtifactComponent.DEFAULT);
-
         CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + getRawId()), -0.8, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
         setComponent(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
 
@@ -63,4 +61,4 @@ public class SphereOfDiscord extends ConstructableCustomItem implements RpgUCust
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeMP).build()));
     }
 
-    }
+}

@@ -47,7 +47,7 @@ public class BackstabDamageAttribute extends ConstructableCustomAttribute implem
 
     public void playParticles(@NotNull Location location){
         Random random = new Random();
-        BackstabParticle particle = new BackstabParticle(location.add(random.nextFloat()-0.3, random.nextFloat()-0.3, random.nextFloat()-0.3));
+        BackstabParticle particle = new BackstabParticle(location.add(random.nextFloat()-0.5, random.nextFloat()-0.5, random.nextFloat()-0.5));
         particle.play();
     }
 }
