@@ -4,10 +4,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.*;
-import me.udnek.rpgu.item.equipment.CeremonialDagger;
-import me.udnek.rpgu.item.equipment.PhantomBow;
-import me.udnek.rpgu.item.equipment.PhantomChestplate;
-import me.udnek.rpgu.item.equipment.ShinyAxe;
+import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmet;
@@ -28,9 +25,14 @@ public class Items {
     public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
     public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
     public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
+
     public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
+    public static final CustomItem WITHER_WREATH = register(new WitherWreath());
+
     public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
     public final static CustomItem SPHERE_OF_DISCORD = register(new SphereOfDiscord());
+
+    public final static CustomItem CRUDE_AMETHYST_SWORD = register(new CrudeAmethystSword());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
@@ -57,8 +59,6 @@ public class Items {
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
     public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
-
-    public static final CustomItem WITHER_WREATH = register(new WitherWreath());
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
