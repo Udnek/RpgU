@@ -56,7 +56,7 @@ public class PhantomBow extends ConstructableCustomItem implements RpgUCustomIte
         CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(-0.25, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND);
 
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.PROJECTILE_SPEED, projectileSpeedAttribute).
-                add(Attributes.PROJECTIL_DAMAGE_MULTIPLIER, projectileDamageMultiplierAttribute).build()));
+                add(Attributes.PROJECTILE_DAMAGE_MULTIPLIER, projectileDamageMultiplierAttribute).build()));
     }
 
     @EventHandler

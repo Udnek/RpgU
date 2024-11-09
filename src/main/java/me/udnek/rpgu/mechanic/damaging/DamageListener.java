@@ -1,15 +1,12 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
-import me.udnek.rpgu.RpgU;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class DamageListener extends SelfRegisteringListener {
 
@@ -24,7 +21,7 @@ public class DamageListener extends SelfRegisteringListener {
             DamageVisualizer.visualize(new Damage(Damage.Type.PHYSICAL, event.getDamage()), event.getEntity());
             return;
         }
-        new DamageEvent(event).invoke();
+        new DamageInstance(event).invoke();
     }
     @EventHandler
     public void onEntityShootBow(EntityShootBowEvent event){

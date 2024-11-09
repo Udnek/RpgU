@@ -7,9 +7,10 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ProjectileSpeedAttribute extends ConstructableCustomAttribute implements Listener {
-    public ProjectileSpeedAttribute() {
+    public ProjectileSpeedAttribute(@NotNull String rawId) {
         super("projectile_speed", 1, 0, 100);
     }
 

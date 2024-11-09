@@ -10,7 +10,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.RpgUCustomItem;
-import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Entity;
@@ -60,7 +60,7 @@ public class WitherWreath extends ConstructableCustomItem implements RpgUCustomI
 
     public static class WitherWreathComponent implements ArtifactComponent {
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageEvent event) {
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance event) {
             Entity victim = event.getVictim();
 
             if (!(victim instanceof LivingEntity livingEntity)) return;

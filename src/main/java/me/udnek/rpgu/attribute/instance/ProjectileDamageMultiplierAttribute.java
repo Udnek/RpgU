@@ -5,14 +5,12 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ProjectileDamageMultiplierAttribute extends ConstructableCustomAttribute implements Listener {
-    public ProjectileDamageMultiplierAttribute() {
-        super("projectile_damage_multiplier",1, 0, 100);
+    public ProjectileDamageMultiplierAttribute(@NotNull String rawId) {
+        super(rawId,1, 0, 100);
     }
-
-    @Override
-    public double getDefaultValue() {return 1;}
 
     @EventHandler
     public void onFire(EntityShootBowEvent event) {

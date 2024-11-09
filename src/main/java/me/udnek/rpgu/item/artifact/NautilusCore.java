@@ -11,7 +11,7 @@ import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.lore.AttributesLorePart;
-import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
@@ -61,7 +61,7 @@ public class NautilusCore extends ConstructableCustomItem implements RpgUCustomI
     public static class NautilusCoreComponent implements ArtifactComponent {
 
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, me.udnek.itemscoreu.customequipmentslot.@NotNull CustomEquipmentSlot slot, @NotNull DamageEvent event) {
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, me.udnek.itemscoreu.customequipmentslot.@NotNull CustomEquipmentSlot slot, @NotNull DamageInstance event) {
             if (!event.isCritical()) return;
             if (event.containsExtraFlag(new isMagicalCriticalApplied())) return;
 
@@ -71,7 +71,7 @@ public class NautilusCore extends ConstructableCustomItem implements RpgUCustomI
     }
 
 
-    private static class isMagicalCriticalApplied extends DamageEvent.ExtraFlag{}
+    private static class isMagicalCriticalApplied extends DamageInstance.ExtraFlag{}
 }
 
 

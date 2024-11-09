@@ -21,6 +21,7 @@
 	"attribute.rpgu.name.cooldown_time": "Cooldown Time",
 	"attribute.rpgu.name.projectile_damage_multiplier": "Projectile Damage",
 	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
+	"attribute.rpgu.name.backstab_damage_multiplier": "Backstab damage",
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 
