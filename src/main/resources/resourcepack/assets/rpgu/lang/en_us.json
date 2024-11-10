@@ -73,8 +73,18 @@
 	"item.rpgu.phantom_chestplate": "Phantom Cloak",
 
 	"item.rpgu.hungry_horror_helmet": "Mask of Hungry Horror",
-	"item.rpgu.hungry_horror_chestplate": "Aegis of Hungry Horror",
+	"item.rpgu.hungry_horror_helmet.description.0": "On Attack:",
+	"item.rpgu.hungry_horror_helmet.description.1": "  Reapplies Strength effect with increased",
+	"item.rpgu.hungry_horror_helmet.description.2": "  by one amplifier and 2 seconds duration.",
+	"item.rpgu.hungry_horror_helmet.description.3": "  Max effect level: V.",
+	"item.rpgu.hungry_horror_helmet.description.4": "  If you don't have effect, applies Strength I for 2 seconds.",
 
+	"item.rpgu.hungry_horror_chestplate": "Aegis of Hungry Horror",
+	"item.rpgu.hungry_horror_chestplate.description.0": "On Attack:",
+	"item.rpgu.hungry_horror_chestplate.description.1": "  Reapplies Absorption effect with increased",
+	"item.rpgu.hungry_horror_chestplate.description.2": "  by one amplifier and 2 seconds duration.",
+	"item.rpgu.hungry_horror_chestplate.description.3": "  Max effect level: V.",
+	"item.rpgu.hungry_horror_chestplate.description.4": "  If you don't have effect, applies Absorption I for 2 seconds.",
 
 	"item.rpgu.flower_wreath": "Flower Wreath",
 	"item.rpgu.flower_wreath.description.0": "Applies Regeneration in forest",
