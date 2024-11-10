@@ -2,9 +2,7 @@ package me.udnek.rpgu.particle;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.ItemsCoreU;
-import org.bukkit.attribute.Attributable;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class BowParticles {

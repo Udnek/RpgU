@@ -9,7 +9,6 @@ import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
