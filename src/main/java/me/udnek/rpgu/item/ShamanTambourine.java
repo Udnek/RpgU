@@ -11,11 +11,16 @@ import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 public class ShamanTambourine extends ConstructableCustomItem {
 
@@ -37,6 +42,22 @@ public class ShamanTambourine extends ConstructableCustomItem {
     }
 
     @Override
+    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
+        recipe.shape(
+                "RSB",
+                "SFS",
+                " S ");
+
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
+        recipe.setIngredient('F', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
+        recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.FEATHER));
+        recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.RED_DYE));
+
+        consumer.accept(recipe);
+    }
+
+    @Override
     public void initializeComponents() {
         super.initializeComponents();
         setComponent(new ShamanTambourineComponent());
@@ -52,7 +73,7 @@ public class ShamanTambourine extends ConstructableCustomItem {
         public int getBaseCastTime() {return CAST_TIME;}
 
         @Override
-        public @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent event) {
             RayTraceResult rayTraceResult = player.getWorld().rayTraceEntities(player.getEyeLocation(), player.getLocation().getDirection(), getCastRange(player), 1, entity -> entity!=player);
             if (!(rayTraceResult != null && rayTraceResult.getHitEntity() instanceof LivingEntity living)) {
                 ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1)
