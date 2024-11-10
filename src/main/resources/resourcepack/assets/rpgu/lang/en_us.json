@@ -10,6 +10,7 @@
 	"active_ability.rpgu.title": "Active Ability:",
 	"active_ability.rpgu.cast_range": "Cast Range: %s blocks",
 	"active_ability.rpgu.cooldown": "Cooldown: %s seconds",
+	"active_ability.rpgu.cast_time": "Cast Time: %s seconds",
 
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
@@ -36,8 +37,6 @@
 	"item.rpgu.phantom_bow": "Phantom Bow",
 
 	"item.rpgu.ceremonial_dagger": "Ceremonial Dagger",
-	"item.rpgu.ceremonial_dagger.description.0": "+150% Physical Damage to backstab",
-	"item.rpgu.ceremonial_dagger.description.1": "+50% Physical Damage to backstab",
 
 	"item.rpgu.fabric": "Fabric",
 	"item.rpgu.ferrudam_ingot": "Ferrudam Ingot",
@@ -49,6 +48,8 @@
 
 	"item.rpgu.wrench": "Wrench",
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
+
+	"item.rpgu.shaman_tambourine": "Shaman Tambourine",
 
 	"item.rpgu.ferrudam_sword": "Ferrudam Sword",
 	"item.rpgu.ferrudam_pickaxe": "Ferrudam Pickaxe",

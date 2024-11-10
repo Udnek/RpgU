@@ -24,6 +24,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -113,14 +114,18 @@ public class TestListener extends SelfRegisteringListener {
             customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event);
         });
     }
-
     @EventHandler
     public void abilityStopUsing(PlayerStopUsingItemEvent event){
         CustomItem.consumeIfCustom(event.getItem(), customItem -> {
             customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event);
         });
     }
-
+    @EventHandler
+    public void abilityConsume(PlayerItemConsumeEvent event){
+        CustomItem.consumeIfCustom(event.getItem(), customItem -> {
+            customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event);
+        });
+    }
 /*    @EventHandler
     public void onSlot(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();

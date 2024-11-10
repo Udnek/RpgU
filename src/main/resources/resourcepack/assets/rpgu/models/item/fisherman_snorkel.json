@@ -2,5 +2,8 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "rpgu:item/fisherman_snorkel"
-    }
+    },
+    "overrides": [
+        { "predicate": {"tooting": 1 },"model": "rpgu:item/fisherman_snorkel_tooting" }
+    ]
 }

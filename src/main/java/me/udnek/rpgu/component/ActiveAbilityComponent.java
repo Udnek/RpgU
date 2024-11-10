@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,18 +17,14 @@ public interface ActiveAbilityComponent<ActivationContext> extends CustomCompone
         @Override
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
         @Override
-        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {}
-        @Override
-        public void onStopUsing(@NotNull CustomItem customItem, @NotNull PlayerStopUsingItemEvent event) {}
-        @Override
         public void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull Object o) {}
     };
 
     void getLore(@NotNull LoreBuilder loreBuilder);
 
-    void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event);
-    void onStopUsing(@NotNull CustomItem customItem, @NotNull PlayerStopUsingItemEvent event);
-
+    default void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event){}
+    default void onStopUsing(@NotNull CustomItem customItem, @NotNull PlayerStopUsingItemEvent event){}
+    default void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event){}
     void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext);
 
     default @NotNull CustomComponentType<CustomItem, ?> getType(){return ComponentTypes.ACTIVE_ABILITY_ITEM;}
