@@ -58,10 +58,16 @@
 	"item.rpgu.ferrudam_hoe": "Ferrudam Hoe",
 
 	"item.rpgu.dark_mirror": "Dark Mirror",
+	"item.rpgu.rusty_iron_ring": "Rusty Iron Ring",
+
+	"item.rpgu.armadillo_bar": "Armadillo Bar",
+	"item.rpgu.armadillo_bar.ability.0": "Applies for %s seconds:",
+	"item.rpgu.armadillo_bar.ability.1": "  Removes negative effects.",
+	"item.rpgu.armadillo_bar.ability.2": "  Applies 90% magical resistance.",
+
 	"item.rpgu.totem_of_saving": "Totem of Saving",
 	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
 	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
-	"item.rpgu.rusty_iron_ring": "Rusty Iron Ring",
 
 	"item.rpgu.flint_sword": "Flint Sword",
 	"item.rpgu.flint_pickaxe": "Flint Pickaxe",

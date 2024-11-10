@@ -17,6 +17,7 @@ import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
+import me.udnek.rpgu.item.utility.ArmadilloBar;
 import me.udnek.rpgu.item.utility.DarkMirror;
 import me.udnek.rpgu.item.utility.TotemOfSavingItem;
 import me.udnek.rpgu.item.utility.Wrench;
@@ -81,6 +82,7 @@ public class Items {
     public final static CustomItem WRENCH = register(new Wrench());
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
+    public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
