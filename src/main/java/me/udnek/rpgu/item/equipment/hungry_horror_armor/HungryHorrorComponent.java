@@ -13,14 +13,14 @@ public class HungryHorrorComponent implements EquippableItemComponent {
     protected final PotionEffectType effectType;
     protected final CustomEquipmentSlot slot;
 
-    public HungryHorrorComponent(PotionEffectType effectType, CustomEquipmentSlot slot){
+    public HungryHorrorComponent(@NotNull PotionEffectType effectType, @NotNull CustomEquipmentSlot slot){
         this.effectType = effectType;
         this.slot = slot;
     }
 
     @Override
     public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-        return slot.test(slot);
+        return this.slot.test(slot);
     }
 
     @Override
