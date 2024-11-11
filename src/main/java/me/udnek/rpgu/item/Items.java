@@ -74,6 +74,7 @@ public class Items {
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
     public static final CustomItem MAGNETITE_INGOT = register(new MagnetiteIngot());
     public static final CustomItem PHANTOM_WING = register(new PhantomWing());
+    public static final CustomItem MAGICAL_DYE = register(new MagicalDye());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
