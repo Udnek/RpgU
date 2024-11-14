@@ -17,7 +17,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.HashSet;
@@ -36,7 +38,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
     }
 
-    private static final EnumMap<Material, HpAndArmor> itemsArmor = new EnumMap<>(Material.class);
+    public static final EnumMap<Material, HpAndArmor> itemsArmor = new EnumMap<>(Material.class);
     private static final Set<Material> leatherArmor = new HashSet<>();
     private static final Set<Material> chainmailArmor = new HashSet<>();
     private static final Set<Material> diamondArmor = new HashSet<>();
@@ -63,10 +65,10 @@ public class AttributeManaging extends SelfRegisteringListener {
         itemsArmor.put(Material.GOLDEN_LEGGINGS, itemsArmor.get(Material.IRON_LEGGINGS));
         itemsArmor.put(Material.GOLDEN_BOOTS, itemsArmor.get(Material.IRON_BOOTS));
 
-         itemsArmor.put(Material.DIAMOND_HELMET, new HpAndArmor(2, 2, 0.05));
-         itemsArmor.put(Material.DIAMOND_CHESTPLATE, new HpAndArmor(4, 5, 0.05));
-         itemsArmor.put(Material.DIAMOND_LEGGINGS, new HpAndArmor(2, 4, 0.05));
-         itemsArmor.put(Material.DIAMOND_BOOTS, new HpAndArmor(2, 1, 0.05));
+        itemsArmor.put(Material.DIAMOND_HELMET, new HpAndArmor(2, 2, 0.05));
+        itemsArmor.put(Material.DIAMOND_CHESTPLATE, new HpAndArmor(4, 5, 0.05));
+        itemsArmor.put(Material.DIAMOND_LEGGINGS, new HpAndArmor(2, 4, 0.05));
+        itemsArmor.put(Material.DIAMOND_BOOTS, new HpAndArmor(2, 1, 0.05));
 
         itemsArmor.put(Material.NETHERITE_HELMET, itemsArmor.get(Material.DIAMOND_HELMET));
         itemsArmor.put(Material.NETHERITE_CHESTPLATE, itemsArmor.get(Material.DIAMOND_CHESTPLATE));
@@ -104,12 +106,8 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (!VanillaItemManager.isReplaced(itemStack))return;
 
         if (itemsArmor.containsKey(material)){
-            AttributeUtils.addDefaultAttributes(itemStack);
-            EquipmentSlotGroup slot = material.getEquipmentSlot().getGroup();
-            itemStack.editMeta(itemMeta -> itemMeta.removeAttributeModifier(Attribute.ARMOR));
-            AttributeUtils.appendAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), itemsArmor.get(material).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
-            AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), itemsArmor.get(material).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
-            AttributeUtils.addAttribute(itemStack, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), itemsArmor.get(material).attack, AttributeModifier.Operation.ADD_SCALAR, slot);
+
+            applyDefaultArmorAttribute(itemStack, material);
         }
 
         if (leatherArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));}
@@ -126,6 +124,17 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
     }
 
-    record HpAndArmor(double hp, double armor, double attack) {
+    public static void applyDefaultArmorAttribute(@NotNull ItemStack target, @NotNull Material source) {
+        target.editMeta((itemMeta) -> applyDefaultArmorAttribute(itemMeta, source));
+    }
+
+    public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source) {
+        EquipmentSlotGroup slot = source.getEquipmentSlot().getGroup();
+        AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), itemsArmor.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
+        AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), itemsArmor.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
+        AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), itemsArmor.get(source).attack, AttributeModifier.Operation.ADD_SCALAR, slot);
+    }
+
+    public record HpAndArmor(double hp, double armor, double attack) {
     }
 }

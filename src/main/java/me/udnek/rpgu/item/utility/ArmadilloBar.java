@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -83,8 +84,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, 10);
 
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.REGENERATION, 160, 7, false, true, true);
-            player.addPotionEffect(potionEffect);
+            Effects.MAGICAL_RESISTANCE.apply(player, 160, 8, false, true, true);
 
             return ActionResult.APPLY_COOLDOWN;
         }
