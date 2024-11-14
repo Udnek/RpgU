@@ -15,6 +15,9 @@ import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorChestplate;
 import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorHelmet;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
+import me.udnek.rpgu.item.equipment.shaman.ShamanBoots;
+import me.udnek.rpgu.item.equipment.shaman.ShamanHelmet;
+import me.udnek.rpgu.item.equipment.shaman.ShamanTambourine;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 import me.udnek.rpgu.item.utility.ArmadilloBar;
@@ -56,6 +59,9 @@ public class Items {
     public static final CustomItem HUNGRY_HORROR_HELMET = register(new HungryHorrorHelmet());
     public static final CustomItem HUNGRY_HORROR_CHESTPLATE = register(new HungryHorrorChestplate());
 
+    public static final CustomItem SHAMAN_HELMET = register(new ShamanHelmet());
+    public static final CustomItem SHAMAN_BOOTS = register(new ShamanBoots());
+
     public static final CustomItem FLINT_SWORD = register(new FlintSword());
     public static final CustomItem FLINT_PICKAXE = register(new FlintPickaxe());
     public static final CustomItem FLINT_AXE = register(new FlintAxe());
@@ -74,6 +80,7 @@ public class Items {
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
     public static final CustomItem MAGNETITE_INGOT = register(new MagnetiteIngot());
     public static final CustomItem PHANTOM_WING = register(new PhantomWing());
+    public static final CustomItem MAGICAL_DYE = register(new MagicalDye());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());

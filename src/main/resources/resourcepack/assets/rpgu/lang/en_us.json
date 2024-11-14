@@ -45,11 +45,14 @@
 	"item.rpgu.raw_magnetite": "Raw Magnetite",
 	"item.rpgu.magnetite_ingot": "Magnetite Ingot",
 	"item.rpgu.phantom_wing": "Phantom Wing",
+	"item.rpgu.magical_dye": "Magical Dye",
 
 	"item.rpgu.wrench": "Wrench",
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
 	"item.rpgu.shaman_tambourine": "Shaman Tambourine",
+	"item.rpgu.shaman_helmet": "Shaman Helmet",
+	"item.rpgu.shaman_boots": "Shaman Boots",
 
 	"item.rpgu.ferrudam_sword": "Ferrudam Sword",
 	"item.rpgu.ferrudam_pickaxe": "Ferrudam Pickaxe",

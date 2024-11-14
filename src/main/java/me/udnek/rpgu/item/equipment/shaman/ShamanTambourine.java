@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item;
+package me.udnek.rpgu.item.equipment.shaman;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -6,6 +6,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.nms.ConsumableAnimation;
 import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
@@ -52,7 +53,7 @@ public class ShamanTambourine extends ConstructableCustomItem {
         recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
         recipe.setIngredient('F', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
         recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.FEATHER));
-        recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.RED_DYE));
+        recipe.setIngredient('R', new RecipeChoice.ExactChoice(Items.MAGICAL_DYE.getItem()));
 
         consumer.accept(recipe);
     }

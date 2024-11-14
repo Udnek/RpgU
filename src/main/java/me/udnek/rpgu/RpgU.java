@@ -3,17 +3,17 @@ package me.udnek.rpgu;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customblock.CustomBlock;
-import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
+import me.udnek.itemscoreu.customeffect.CustomEffect;
 import me.udnek.itemscoreu.customenchantment.NmsEnchantmentContainer;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
+import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
 import me.udnek.rpgu.equipment.EquipmentListener;
@@ -28,17 +28,10 @@ import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
 import me.udnek.rpgu.util.AttributeManaging;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionEffectTypeCategory;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
 
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
@@ -56,6 +49,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         EntityTypes.TOTEM_OF_SAVING.getRawId();
         SingleSlot artifacts = EquipmentSlots.FIRST_ARTIFACT;
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
+        CustomEffect magicalResistance = Effects.MAGICAL_RESISTANCE;
 
         new DamageListener(this);
         new EquipmentListener(this);
@@ -76,34 +70,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new Hud().register();
 
         editEnchantments();
-
-        CustomRegistries.EFFECT.register(this, new ConstructableCustomEffect() {
-
-            @Override
-            public @Nullable Particle getParticle() {
-                return Particle.INSTANT_EFFECT;
-            }
-
-            @Override
-            public @NotNull Color getColor() {
-                return Color.YELLOW;
-            }
-
-            @Override
-            public @NotNull PotionEffectTypeCategory getCategory() {
-                return PotionEffectTypeCategory.BENEFICIAL;
-            }
-
-            @Override
-            public @Nullable PotionEffectType getVanillaDisguise() {
-                return PotionEffectType.HASTE;
-            }
-
-            @Override
-            public @NotNull String getRawId() {
-                return "bkb";
-            }
-        });
     }
     
     // TODO MOVE SOMEWHERE ELSE

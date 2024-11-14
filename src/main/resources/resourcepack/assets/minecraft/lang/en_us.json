@@ -10,5 +10,7 @@
 	"attribute.modifier.plus.2": "+%s%%(*) %s",
 	"attribute.modifier.take.0": "-%s %s",
 	"attribute.modifier.take.1": "-%s%%(+) %s",
-	"attribute.modifier.take.2": "-%s%%(*) %s"
+	"attribute.modifier.take.2": "-%s%%(*) %s",
+
+	"effect.minecraft.luck": "Magical Resistance"
 }
