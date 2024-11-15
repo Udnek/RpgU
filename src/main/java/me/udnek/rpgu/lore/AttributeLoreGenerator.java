@@ -79,7 +79,7 @@ public class AttributeLoreGenerator {
             }
 
             // CUSTOM
-            CustomAttributesContainer customAttributesBySlot = customAttributes.get(slot);
+            CustomAttributesContainer customAttributesBySlot = customAttributes.getExact(slot);
             for (Map.Entry<CustomAttribute, List<CustomAttributeModifier>> entry : customAttributesBySlot.getAll().entrySet()) {
                 CustomAttribute attribute = entry.getKey();
                 for (CustomAttributeModifier modifier : entry.getValue()) {
@@ -89,7 +89,7 @@ public class AttributeLoreGenerator {
             }
 
             // VANILLA-CUSTOM
-            VanillaAttributesContainer vanillaCustomAttributesBySlot = vanillaCustomAttributes.get(slot);
+            VanillaAttributesContainer vanillaCustomAttributesBySlot = vanillaCustomAttributes.getExact(slot);
             for (Map.Entry<Attribute, List<CustomKeyedAttributeModifier>> entry : vanillaCustomAttributesBySlot.getAll().entrySet()) {
                 Attribute attribute = entry.getKey();
                 for (CustomKeyedAttributeModifier modifier : entry.getValue()) {
