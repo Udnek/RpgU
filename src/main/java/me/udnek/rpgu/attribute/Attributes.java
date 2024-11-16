@@ -12,11 +12,15 @@ public class Attributes{
     public static final CustomAttribute PHYSICAL_DAMAGE;
     public static final CustomAttribute ATTACK_SPEED;
     public static final CustomAttribute PHYSICAL_ARMOR;
+
     public static final CustomAttribute MAGICAL_POTENTIAL;
     public static final CustomAttribute MELEE_MAGICAL_DAMAGE_MULTIPLIER;
     public static final CustomAttribute MAGICAL_DEFENSE_MULTIPLIER;
+
     public static final CustomAttribute CAST_RANGE;
     public static final CustomAttribute COOLDOWN_TIME;
+    public static final CustomAttribute AREA_OF_EFFECT;
+
     public static final CustomAttribute PROJECTILE_DAMAGE_MULTIPLIER;
     public static final CustomAttribute PROJECTILE_SPEED;
     public static final CustomAttribute BACKSTAB_DAMAGE_MULTIPLIER;
@@ -39,6 +43,7 @@ public class Attributes{
         PROJECTILE_DAMAGE_MULTIPLIER = register(new ProjectileDamageMultiplierAttribute("projectile_damage_multiplier"));
         PROJECTILE_SPEED = register(new ProjectileSpeedAttribute("projectile_speed"));
         BACKSTAB_DAMAGE_MULTIPLIER = register(new BackstabDamageAttribute("backstab_damage_multiplier"));
+        AREA_OF_EFFECT = register(new ConstructableCustomAttribute("area_of_effect",1,0, 1024));
 
         PROJECTILE_PROTECTION = register(new EnchantmentCalculatorAttribute("projectile_protection", Enchantment.PROJECTILE_PROTECTION));
         BLAST_PROTECTION = register(new EnchantmentCalculatorAttribute("blast_protection", Enchantment.BLAST_PROTECTION));
