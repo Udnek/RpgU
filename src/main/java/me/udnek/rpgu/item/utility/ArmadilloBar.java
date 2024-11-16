@@ -60,24 +60,17 @@ public class ArmadilloBar extends ConstructableCustomItem {
     }
 
     public class ArmadilloBarComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
-        @Override
-        public @Nullable DamageFormula<Object> getDamage() {return null;}
 
-    public class ArmadilloBarComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent> {
-
-        private static final int COOLDOWN = 70;
-        private static final int DURATION = 8;
+        private static final int COOLDOWN_SECONDS = 70;
+        private static final int DURATION_SECONDS = 8;
 
         @Override
-        public int getBaseCooldown() {return 200;}
-        public int getBaseCooldown() {return COOLDOWN * 20;}
+        public @Nullable DamageFormula<Object> getDamage() {
+            return null;
+        }
 
         @Override
-        public double getBaseCastRange() {return 0;}
-        @Override
-        public double getBaseAreaOfEffect() {return 0;}
-        @Override
-        public int getBaseCastTime() {return 0;}
+        public int getBaseCooldown() {return COOLDOWN_SECONDS * 20;}
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
@@ -92,11 +85,11 @@ public class ArmadilloBar extends ConstructableCustomItem {
                         }
                     }
                     count++;
-                    if (count == DURATION) cancel();
+                    if (count == DURATION_SECONDS) cancel();
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, 10);
 
-            Effects.MAGICAL_RESISTANCE.apply(player, DURATION * 20, 8, false, true, true);
+            Effects.MAGICAL_RESISTANCE.apply(player, DURATION_SECONDS * 20, 8, false, true, true);
 
             return ActionResult.APPLY_COOLDOWN;
         }
