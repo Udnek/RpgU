@@ -12,5 +12,6 @@
 	"attribute.modifier.take.1": "-%s%%(+) %s",
 	"attribute.modifier.take.2": "-%s%%(*) %s",
 
-	"effect.minecraft.luck": "Magical Resistance"
+	"effect.minecraft.luck": "Magical Resistance",
+	"effect.minecraft.resistance": "Physical Resistance"
 }
