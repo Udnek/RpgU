@@ -52,7 +52,7 @@ public class Damage {
 
     @Override
     public String toString(){
-        return "[Physical = " + getPhysical() + "; Magical = " + getMagical() + "; Sum = " + getTotal() + "]";
+        return "[Physical=" + getPhysical() + "; Magical=" + getMagical() + "; Total=" + getTotal() + "]";
     }
 
     public enum Type {

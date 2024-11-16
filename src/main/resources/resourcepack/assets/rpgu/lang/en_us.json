@@ -9,9 +9,13 @@
 
 	"active_ability.rpgu.title": "Active Ability:",
 	"active_ability.rpgu.cast_range": "Cast Range: %s blocks",
+	"active_ability.rpgu.area_of_effect": "AOE: %s blocks",
 	"active_ability.rpgu.cooldown": "Cooldown: %s seconds",
 	"active_ability.rpgu.cast_time": "Cast Time: %s seconds",
 
+	"damage_formula.rpgu.magical": "Magical Damage: %s",
+	"damage_formula.rpgu.physical": "Physical Damage: %s",
+	"damage_formula.rpgu.base_plus_per_magical_potential": "%s + %s*MP",
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",
@@ -23,6 +27,7 @@
 	"attribute.rpgu.name.projectile_damage_multiplier": "Projectile Damage",
 	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
 	"attribute.rpgu.name.backstab_damage_multiplier": "Backstab damage",
+	"attribute.rpgu.name.area_of_effect": "Area of Effect",
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 

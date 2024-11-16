@@ -5,10 +5,16 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.nms.ConsumableAnimation;
 import me.udnek.itemscoreu.nms.ConsumableComponent;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.mechanic.damaging.Damage;
+import me.udnek.rpgu.mechanic.damaging.DamageUtils;
+import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
+import me.udnek.rpgu.mechanic.damaging.formula.MagicalPotentialBasedFormula;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -23,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class ShamanTambourine extends ConstructableCustomItem {
+public class ShamanTambourine extends ConstructableCustomItem{
 
     public static int CAST_TIME = (int) (0.75 * 20);
 
@@ -64,12 +70,16 @@ public class ShamanTambourine extends ConstructableCustomItem {
         setComponent(new ShamanTambourineComponent());
     }
 
-    public static class ShamanTambourineComponent implements ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
-
+    public static class ShamanTambourineComponent implements ConstructableActiveAbilityComponent<PlayerItemConsumeEvent, Double> {
+        DamageFormula<Double> damageFormula =  new MagicalPotentialBasedFormula(3, 1);
+        @Override
+        public @Nullable DamageFormula<Double> getDamage() {
+            return damageFormula;
+        }
         @Override
         public int getBaseCooldown() {return 20;}
         @Override
-        public int getBaseCastRange() {return 15;}
+        public double getBaseCastRange() {return 15;}
         @Override
         public int getBaseCastTime() {return CAST_TIME;}
 
@@ -84,6 +94,7 @@ public class ShamanTambourine extends ConstructableCustomItem {
                 return ActionResult.NO_COOLDOWN;
             }
             living.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 0));
+            DamageUtils.damage(living, calculateDamage(Attributes.MAGICAL_POTENTIAL.calculate(player)), player);
             new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(player.getWorld())).spawn();
             return ActionResult.APPLY_COOLDOWN;
         }

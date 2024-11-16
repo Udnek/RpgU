@@ -6,6 +6,7 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
+import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -19,6 +20,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -57,13 +59,16 @@ public class ArmadilloBar extends ConstructableCustomItem {
         setComponent(new ArmadilloBarComponent());
     }
 
-    public class ArmadilloBarComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent> {
+    public class ArmadilloBarComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
+        @Override
+        public @Nullable DamageFormula<Object> getDamage() {return null;}
+
         @Override
         public int getBaseCooldown() {return 200;}
-
         @Override
-        public int getBaseCastRange() {return 0;}
-
+        public double getBaseCastRange() {return 0;}
+        @Override
+        public double getBaseAreaOfEffect() {return 0;}
         @Override
         public int getBaseCastTime() {return 0;}
 

@@ -65,13 +65,14 @@ public class DamageInstance {
     public void invoke(){
         if (victim == null) return;
 
+        /*System.out.println(handlerEvent.getCause() + ", " + handlerEvent.getDamageSource().getDamageType().getTranslationKey());*/
+
         attackCalculations();
 
         DamageEvent event = new DamageEvent(this);
         event.callEvent();
 
         equipmentAttacks();
-
         event.setState(DamageEvent.State.AFTER_EQUIPMENT_ATTACKS);
         event.callEvent();
 
@@ -95,6 +96,14 @@ public class DamageInstance {
     }
 
     private void attackCalculations() {
+        if (handlerEvent.getDamage() >= DamageUtils.PHYSICAL_DAMAGE_BUFFER*DamageUtils.PHYSICAL_DAMAGE_PRECISION){
+            double rawDamage = handlerEvent.getDamage();
+            damage = new Damage(
+                    (Math.floor(rawDamage/DamageUtils.PHYSICAL_DAMAGE_BUFFER)/DamageUtils.PHYSICAL_DAMAGE_PRECISION) -1,
+                    (rawDamage%(DamageUtils.PHYSICAL_DAMAGE_BUFFER))/DamageUtils.MAGICAL_DAMAGE_PRECISION);
+            return;
+        }
+
         damage = new Damage(DamageUtils.getDamageType(handlerEvent), handlerEvent.getDamage());
         if (damager != null){
             switch (damager){
