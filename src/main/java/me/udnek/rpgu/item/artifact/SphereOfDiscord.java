@@ -25,6 +25,9 @@ import java.util.function.Consumer;
 
 public class SphereOfDiscord extends ConstructableCustomItem implements RpgUCustomItem {
 
+    private static final double MAGICAL_POTENTIAL = 8;
+    private static final double ATTACK_DAMAGE = -0.8;
+
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
 
@@ -53,10 +56,10 @@ public class SphereOfDiscord extends ConstructableCustomItem implements RpgUCust
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + getRawId()), -0.8, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
+        CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_" + getRawId()), ATTACK_DAMAGE, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
         setComponent(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
 
-        CustomAttributeModifier attributeMP = new CustomAttributeModifier(8, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        CustomAttributeModifier attributeMP = new CustomAttributeModifier(MAGICAL_POTENTIAL, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeMP).build()));
     }
 

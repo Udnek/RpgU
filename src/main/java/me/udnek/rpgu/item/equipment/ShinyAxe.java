@@ -1,18 +1,20 @@
 package me.udnek.rpgu.item.equipment;
 
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
-import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,10 +33,10 @@ public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem 
     public boolean getAddDefaultAttributes() {return true;}
 
     @Override
-    protected void modifyFinalItemStack(ItemStack itemStack) {
-        super.modifyFinalItemStack(itemStack);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 2);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.3);
+    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
+        super.initializeAttributes(itemMeta);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_DAMAGE, null, 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_SPEED, null, -0.3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
 
     @Override

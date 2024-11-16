@@ -17,6 +17,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class CrudeAmethystSword extends ConstructableCustomItem implements RpgUCustomItem {
+
+    private static final double MELEE_MAGICAL_DAMAGE_MULTIPLIER = 0.25;
+
     @Override
     public @NotNull Material getMaterial() {
         return Material.STONE_SWORD;
@@ -36,7 +39,7 @@ public class CrudeAmethystSword extends ConstructableCustomItem implements RpgUC
     public boolean getAddDefaultAttributes() {return true;}
 
     @Override
-    protected void modifyFinalItemStack(ItemStack itemStack) {
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
         RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, -1);
     }
@@ -60,7 +63,7 @@ public class CrudeAmethystSword extends ConstructableCustomItem implements RpgUC
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomAttributeModifier attribute = new CustomAttributeModifier(0.5,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
+        CustomAttributeModifier attribute = new CustomAttributeModifier(MELEE_MAGICAL_DAMAGE_MULTIPLIER,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
     }
 }

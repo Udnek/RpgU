@@ -18,6 +18,9 @@ import java.util.function.Consumer;
 
 public class CeremonialDagger extends ConstructableCustomItem implements RpgUCustomItem {
 
+    public static final double BACKSTAB_DAMAGE_MULTIPLIER = 2;
+    public static final double BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT =  0.75;
+
     @Override
     public @NotNull Material getMaterial() {
         return Material.DIAMOND_SWORD;
@@ -42,8 +45,8 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
     public void initializeComponents() {
         super.initializeComponents();
         setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
-                .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, 1.5, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
-                .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, 0.5, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, BACKSTAB_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
+                .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                 .build()));
     }
 

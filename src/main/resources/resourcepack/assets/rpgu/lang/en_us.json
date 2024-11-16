@@ -77,6 +77,10 @@
 	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
 	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
 
+	"item.rpgu.air_elemental_tome": "Air Elemental Tome",
+	"item.rpgu.air_elemental_tome.description.0": "",
+	"item.rpgu.air_elemental_tome.description.1": "",
+
 	"item.rpgu.flint_sword": "Flint Sword",
 	"item.rpgu.flint_pickaxe": "Flint Pickaxe",
 	"item.rpgu.flint_axe": "Flint Axe",

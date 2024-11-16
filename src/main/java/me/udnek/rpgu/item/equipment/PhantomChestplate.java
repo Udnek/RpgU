@@ -50,9 +50,6 @@ public class PhantomChestplate extends ConstructableCustomItem implements RpgUCu
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
 
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
-
-    @Override
     public @Nullable EquippableComponent getEquippable() {
         EquippableComponent equippable = new ItemStack(getMaterial()).getItemMeta().getEquippable();
         equippable.setSlot(getMaterial().getEquipmentSlot());
@@ -61,10 +58,8 @@ public class PhantomChestplate extends ConstructableCustomItem implements RpgUCu
     }
 
     @Override
-    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
-        itemMeta.removeAttributeModifier(Attribute.ARMOR);
-        itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);
+    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
+        super.initializeAttributes(itemMeta);
         AttributeUtils.addAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_chestplate"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
     }
 

@@ -20,10 +20,7 @@ import me.udnek.rpgu.item.equipment.shaman.ShamanHelmet;
 import me.udnek.rpgu.item.equipment.shaman.ShamanTambourine;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
-import me.udnek.rpgu.item.utility.ArmadilloBar;
-import me.udnek.rpgu.item.utility.DarkMirror;
-import me.udnek.rpgu.item.utility.TotemOfSavingItem;
-import me.udnek.rpgu.item.utility.Wrench;
+import me.udnek.rpgu.item.utility.*;
 
 public class Items {
 
@@ -90,6 +87,7 @@ public class Items {
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
+    public static final CustomItem UPDRAFT_TOME = register(new AirElementalTome());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());

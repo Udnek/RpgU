@@ -6,6 +6,9 @@ import me.udnek.rpgu.RpgU;
 
 public class Effects {
     public static final CustomEffect MAGICAL_RESISTANCE = register(new MagicalResistance());
+    public static final CustomEffect INCREASED_FALL_DAMAGE = register(new IncreasedFallDamage());
+    public static final CustomEffect NO_FALL_DAMAGE = register(new NoFallDamage());
+    public static final CustomEffect NO_GRAVITY = register(new NoGravity());
 
     private static CustomEffect register(CustomEffect customEffect){
         return CustomRegistries.EFFECT.register(RpgU.getInstance(), customEffect);
