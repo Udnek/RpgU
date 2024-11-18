@@ -9,7 +9,7 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.RpgUCustomItem;
-import me.udnek.rpgu.particle.BowParticles;
+import me.udnek.rpgu.particle.ParticleUtils;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.AttributeModifier;
@@ -68,6 +68,6 @@ public class PhantomBow extends ConstructableCustomItem implements RpgUCustomIte
         particleBuilder.extra(0);
         particleBuilder.offset(0.3, 0.3, 0.3);
 
-        BowParticles.playParticleUntilGround(arrow, particleBuilder);
+        ParticleUtils.particleUntilGround(arrow, particleBuilder);
     }
 }

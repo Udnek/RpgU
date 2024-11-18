@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "rpgu:item/base_elemental_tome",
+		"layer1": "rpgu:item/air_elemental_tome_overlay"
+	}
+}

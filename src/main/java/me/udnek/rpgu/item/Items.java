@@ -28,6 +28,7 @@ public class Items {
     public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
     public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
     public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
+    public final static CustomItem BLOOD_STONE = register(new BloodStone());
 
     public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
     public static final CustomItem WITHER_WREATH = register(new WitherWreath());
@@ -87,7 +88,7 @@ public class Items {
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
-    public static final CustomItem UPDRAFT_TOME = register(new AirElementalTome());
+    public static final CustomItem AIR_ELEMENTAL_TOME = register(new AirElementalTome());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
