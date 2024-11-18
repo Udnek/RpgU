@@ -1,6 +1,7 @@
 package me.udnek.rpgu.particle;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import com.google.common.base.Preconditions;
 import me.udnek.itemscoreu.ItemsCoreU;
 import org.bukkit.Location;
 import org.bukkit.entity.AbstractArrow;
@@ -23,7 +24,7 @@ public class ParticleUtils {
 
         public static void circle(@NotNull ParticleBuilder particleBuilder, double size) {
         Location location = particleBuilder.location();
-        if (location == null) return;
+        Preconditions.checkArgument(location != null, "Location must be not null");
         for (int d = 0; d <= 90; d += 1) {
             Location particleLoc = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ());
             particleLoc.setX(location.getX() + Math.cos(d) * size);
