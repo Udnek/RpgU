@@ -46,12 +46,11 @@ public class AirElementalTome extends ConstructableCustomItem {
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
-                "SRS",
+                " R ",
                 "RBR",
-                "SRS");
+                " R ");
 
         recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.BOOK));
-        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
         recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.BREEZE_ROD));
 
         consumer.accept(recipe);
