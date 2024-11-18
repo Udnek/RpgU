@@ -8,6 +8,7 @@ import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
+import me.udnek.rpgu.particle.ParticleUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -17,6 +18,9 @@ import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -24,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.function.Consumer;
 
 public class AirElementalTome extends ConstructableCustomItem {
 
@@ -37,16 +42,20 @@ public class AirElementalTome extends ConstructableCustomItem {
         return Material.GUNPOWDER;
     }
 
-    /*@Override
+    @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
-        recipe.shape();
+        recipe.shape(
+                "SRS",
+                "RBR",
+                "SRS");
 
-        recipe.setIngredient('A', ));
-        recipe.setIngredient('N', );
+        recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.BOOK));
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
+        recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.BREEZE_ROD));
 
         consumer.accept(recipe);
-    }*/
+    }
 
 
     @Override
@@ -84,7 +93,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             double RADIUS = getAreaOfEffect(player);
             Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, RADIUS, RADIUS, RADIUS, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
-            summonCircle(location, RADIUS, Particle.SMALL_GUST);
+            ParticleUtils.summonCircle(new ParticleBuilder(Particle.SMALL_GUST).location(location), RADIUS);
 
             if (nearbyLivingEntities.isEmpty()) {return ActionResult.APPLY_COOLDOWN;}
             for (LivingEntity livingEntity : nearbyLivingEntities) {
@@ -128,13 +137,6 @@ public class AirElementalTome extends ConstructableCustomItem {
             activate(customItem, event.getPlayer(), event);
         }
 
-        public void summonCircle(Location location, double size, Particle particle) {
-            for (int d = 0; d <= 90; d += 1) {
-                Location particleLoc = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ());
-                particleLoc.setX(location.getX() + Math.cos(d) * size);
-                particleLoc.setZ(location.getZ() + Math.sin(d) * size);
-                location.getWorld().spawnParticle(particle, particleLoc, 1);
-            }
-        }
+
     }
 }
