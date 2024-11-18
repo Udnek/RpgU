@@ -67,9 +67,9 @@ public class AirElementalTome extends ConstructableCustomItem {
     public class AirElementalTomeComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
 
         public static double BASE_RADIUS = 2.5;
-        public static double CAST_TIME = 200;
+        public static double CAST_TIME = 4 * 20;
         public static double UP_TIME = CAST_TIME / 5;
-        public static double HEIGHT = 10;
+        public static double HEIGHT = 15;
 
         @Override
         public int getBaseCooldown() {return 20;}
@@ -92,7 +92,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             double RADIUS = getAreaOfEffect(player);
             Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, RADIUS, RADIUS, RADIUS, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
-            ParticleUtils.summonCircle(new ParticleBuilder(Particle.SMALL_GUST).location(location), RADIUS);
+            ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), RADIUS);
 
             if (nearbyLivingEntities.isEmpty()) {return ActionResult.APPLY_COOLDOWN;}
             for (LivingEntity livingEntity : nearbyLivingEntities) {

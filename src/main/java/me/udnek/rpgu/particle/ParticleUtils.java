@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ParticleUtils {
 
-    public static void playParticleUntilGround(AbstractArrow arrow, ParticleBuilder particleBuilder){
+    public static void particleUntilGround(AbstractArrow arrow, ParticleBuilder particleBuilder){
         new BukkitRunnable() {
             public void run() {
                 if (arrow.isOnGround() || !arrow.isValid()) {
@@ -21,7 +21,7 @@ public class ParticleUtils {
         }.runTaskTimer(ItemsCoreU.getInstance(), 0, 1);
     }
 
-        public static void summonCircle(@NotNull ParticleBuilder particleBuilder, double size) {
+        public static void circle(@NotNull ParticleBuilder particleBuilder, double size) {
         Location location = particleBuilder.location();
         if (location == null) return;
         for (int d = 0; d <= 90; d += 1) {
