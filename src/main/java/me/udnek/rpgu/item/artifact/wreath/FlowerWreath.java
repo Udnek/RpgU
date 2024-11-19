@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.artifact;
+package me.udnek.rpgu.item.artifact.wreath;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
@@ -75,7 +75,7 @@ public class FlowerWreath extends ConstructableCustomItem implements RpgUCustomI
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ADDITIONAL_TOOLTIP};}
 
     @Override
-    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
+    protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
         ItemUtils.setFireworkColor((FireworkEffectMeta) itemMeta, Color.fromRGB(getColorByFlower(Material.DANDELION)));
     }

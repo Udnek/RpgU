@@ -4,6 +4,9 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.*;
+import me.udnek.rpgu.item.artifact.sphere.SphereOfDiscord;
+import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
+import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
@@ -29,14 +32,13 @@ public class Items {
     public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
     public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
     public final static CustomItem BLOOD_STONE = register(new BloodStone());
+    public final static CustomItem ARCANE_ACCUMULATOR = register(new ArcaneAccumulator());
 
     public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
     public static final CustomItem WITHER_WREATH = register(new WitherWreath());
 
     public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
     public final static CustomItem SPHERE_OF_DISCORD = register(new SphereOfDiscord());
-
-    public final static CustomItem CRUDE_AMETHYST_SWORD = register(new CrudeAmethystSword());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
@@ -68,8 +70,6 @@ public class Items {
 
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
-    public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
-
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
     public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
@@ -89,6 +89,7 @@ public class Items {
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
     public static final CustomItem AIR_ELEMENTAL_TOME = register(new AirElementalTome());
+    public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());

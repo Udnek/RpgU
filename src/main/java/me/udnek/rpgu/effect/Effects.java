@@ -9,6 +9,7 @@ public class Effects {
     public static final CustomEffect INCREASED_FALL_DAMAGE = register(new IncreasedFallDamage());
     public static final CustomEffect NO_FALL_DAMAGE = register(new NoFallDamage());
     public static final CustomEffect NO_GRAVITY = register(new NoGravity());
+    public static final CustomEffect AREA_OF_EFFECT = register(new BonusAreaOfEffect());
 
     private static CustomEffect register(CustomEffect customEffect){
         return CustomRegistries.EFFECT.register(RpgU.getInstance(), customEffect);

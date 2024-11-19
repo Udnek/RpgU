@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.artifact;
+package me.udnek.rpgu.item.artifact.sphere;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
