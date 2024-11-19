@@ -5,12 +5,15 @@ import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -53,9 +56,8 @@ class TotemOfSavingEntityType extends CustomEntityType<TotemOfSavingEntity> impl
         ((TotemOfSavingEntity) customEntity).onDeath(event);
     }
 
-
     @EventHandler
-    public void playerInteractWithTotem(PlayerInteractAtEntityEvent event){
+    public void playerInteractWithTotem(PlayerInteractEntityEvent event){
         CustomEntity customEntity = CustomEntity.get(event.getRightClicked());
         if (!(customEntity instanceof TotemOfSavingEntity totemOfSavingEntity)) return;
         PlayerInventory inventory = event.getPlayer().getInventory();
@@ -77,5 +79,12 @@ class TotemOfSavingEntityType extends CustomEntityType<TotemOfSavingEntity> impl
             }
         });
         customEntity.remove();
+    }
+    @EventHandler
+    public void onAgr(EntityTargetLivingEntityEvent event){
+        LivingEntity target = event.getTarget();
+        if (target == null) return;
+        CustomEntity customEntity = CustomEntity.get(target);
+        if (customEntity instanceof TotemOfSavingEntity) event.setCancelled(true);
     }
 }

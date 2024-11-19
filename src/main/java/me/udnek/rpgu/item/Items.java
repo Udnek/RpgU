@@ -87,7 +87,6 @@ public class Items {
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
-    public static final CustomItem UPDRAFT_TOME = register(new AirElementalTome());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
