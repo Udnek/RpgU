@@ -68,6 +68,11 @@
 	"item.rpgu.dark_mirror": "Dark Mirror",
 	"item.rpgu.rusty_iron_ring": "Rusty Iron Ring",
 
+	"item.rpgu.arcane_accumulator": "Arcane Accumulator",
+	"item.rpgu.arcane_accumulator.description.0": "Applies for %s seconds:",
+	"item.rpgu.arcane_accumulator.description.1": "  Removes negative effects.",
+	"item.rpgu.arcane_accumulator.description.2": "  Applies 90% magical resistance.",
+
 	"item.rpgu.armadillo_bar": "Armadillo Bar",
 	"item.rpgu.armadillo_bar.ability.0": "Applies for %s seconds:",
 	"item.rpgu.armadillo_bar.ability.1": "  Removes negative effects.",

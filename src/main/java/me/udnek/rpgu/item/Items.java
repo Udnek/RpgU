@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.artifact.*;
+import me.udnek.rpgu.item.artifact.sphere.SphereOfBalance;
 import me.udnek.rpgu.item.artifact.sphere.SphereOfDiscord;
 import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
@@ -69,6 +70,9 @@ public class Items {
     public static final CustomItem FLINT_HOE = register(new FlintHoe());
 
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
+
+    public final static CustomItem CRUDE_AMETHYST_SWORD = register(new CrudeAmethystSword());
+
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
