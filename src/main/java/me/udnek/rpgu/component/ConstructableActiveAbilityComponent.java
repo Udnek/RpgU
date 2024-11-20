@@ -88,19 +88,19 @@ public interface ConstructableActiveAbilityComponent<ActivationContext, DamageCo
     default void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext){
         if (customItem.hasCooldown(player)) return;
         ActionResult result = action(customItem, player, activationContext);
-        if (!(result.applyCooldown)) return;
-        Utils.consumeIfPositive(getCooldown(player), cooldown -> customItem.setCooldown(player, cooldown));
+        if (result == ActionResult.FULL_COOLDOWN || result == ActionResult.PENALTY_COOLDOWN){
+            int cooldown = getCooldown(player);
+            if (result == ActionResult.PENALTY_COOLDOWN) cooldown = (int) (cooldown * getMissUsageCooldownPenalty());
+            if (cooldown > 0) customItem.setCooldown(player, cooldown);
+        }
+
     }
 
     @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext);
 
     enum ActionResult {
-        APPLY_COOLDOWN(true),
-        NO_COOLDOWN(false);
-
-        public final boolean applyCooldown;
-        ActionResult(boolean applyCooldown){
-            this.applyCooldown = applyCooldown;
-        }
+        FULL_COOLDOWN,
+        PENALTY_COOLDOWN,
+        NO_COOLDOWN
     }
 }

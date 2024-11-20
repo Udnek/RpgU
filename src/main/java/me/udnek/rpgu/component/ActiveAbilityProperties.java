@@ -10,5 +10,5 @@ interface ActiveAbilityProperties<DamageContext> {
     double getBaseCastRange();
     double getBaseAreaOfEffect();
     int getBaseCastTime();
-
+    default double getMissUsageCooldownPenalty(){return 0.3;}
 }

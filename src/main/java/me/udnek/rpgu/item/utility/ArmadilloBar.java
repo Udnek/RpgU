@@ -91,7 +91,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
 
             Effects.MAGICAL_RESISTANCE.apply(player, DURATION_SECONDS * 20, 8, false, true, true);
 
-            return ActionResult.APPLY_COOLDOWN;
+            return ActionResult.FULL_COOLDOWN;
         }
 
         @Override

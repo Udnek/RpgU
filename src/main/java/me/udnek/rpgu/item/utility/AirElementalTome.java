@@ -94,7 +94,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, radius, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
             ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius);
 
-            if (nearbyLivingEntities.isEmpty()) {return ActionResult.APPLY_COOLDOWN;}
+            if (nearbyLivingEntities.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
             for (LivingEntity livingEntity : nearbyLivingEntities) {
                 new BukkitRunnable() {
                     int count = 0;
@@ -120,7 +120,7 @@ public class AirElementalTome extends ConstructableCustomItem {
                 }.runTaskTimer(RpgU.getInstance(), 0, 1);
             }
 
-            return ActionResult.APPLY_COOLDOWN;
+            return ActionResult.FULL_COOLDOWN;
         }
 
         @Override

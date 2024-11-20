@@ -94,7 +94,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
             living.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 0));
             DamageUtils.damage(living, calculateDamage(Attributes.MAGICAL_POTENTIAL.calculate(player)), player);
             new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(player.getWorld())).spawn();
-            return ActionResult.APPLY_COOLDOWN;
+            return ActionResult.FULL_COOLDOWN;
         }
 
         @Override
