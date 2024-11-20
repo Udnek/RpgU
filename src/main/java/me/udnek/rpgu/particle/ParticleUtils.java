@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ParticleUtils {
 
-    public static void particleUntilGround(AbstractArrow arrow, ParticleBuilder particleBuilder){
+    public static void playUntilGround(AbstractArrow arrow, ParticleBuilder particleBuilder){
         new BukkitRunnable() {
             public void run() {
                 if (arrow.isOnGround() || !arrow.isValid()) {
@@ -22,13 +22,17 @@ public class ParticleUtils {
         }.runTaskTimer(ItemsCoreU.getInstance(), 0, 1);
     }
 
-        public static void circle(@NotNull ParticleBuilder particleBuilder, double size) {
+    public static void circle(@NotNull ParticleBuilder particleBuilder, double size) {
+        circle(particleBuilder, size, 1);
+    }
+
+    public static void circle(@NotNull ParticleBuilder particleBuilder, double size, int angle) {
         Location location = particleBuilder.location();
         Preconditions.checkArgument(location != null, "Location must be not null");
-        for (int d = 0; d <= 90; d += 1) {
+        for (int d = 0; d <= 360; d += angle) {
             Location particleLoc = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ());
-            particleLoc.setX(location.getX() + Math.cos(d) * size);
-            particleLoc.setZ(location.getZ() + Math.sin(d) * size);
+            particleLoc.setX(location.getX() + Math.cos(Math.toRadians(d)) * size);
+            particleLoc.setZ(location.getZ() + Math.sin(Math.toRadians(d)) * size);
             particleBuilder.location(particleLoc);
             particleBuilder.spawn();
         }

@@ -22,6 +22,6 @@ public class BonusAreaOfEffect extends ConstructableCustomEffect {
 
     @Override
     public void getCustomAttributes(@NotNull PotionEffect context, @NotNull CustomAttributeConsumer consumer) {
-        consumer.consume(Attributes.AREA_OF_EFFECT, context.getAmplifier(), AttributeModifier.Operation.ADD_NUMBER);
+        consumer.consume(Attributes.AREA_OF_EFFECT, context.getAmplifier() + 1, AttributeModifier.Operation.ADD_NUMBER);
     }
 }
