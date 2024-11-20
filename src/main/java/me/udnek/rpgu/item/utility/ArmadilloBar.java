@@ -85,11 +85,11 @@ public class ArmadilloBar extends ConstructableCustomItem {
                         }
                     }
                     count++;
-                    if (count == DURATION_SECONDS) cancel();
+                    if (count == DURATION_SECONDS * 2) cancel();
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, 10);
 
-            Effects.MAGICAL_RESISTANCE.apply(player, DURATION_SECONDS * 20, 8, false, true, true);
+            Effects.MAGICAL_RESISTANCE.applyInvisible(player, DURATION_SECONDS * 20, 8);
 
             return ActionResult.FULL_COOLDOWN;
         }

@@ -1,6 +1,9 @@
 package me.udnek.rpgu.effect;
 
 import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
+import me.udnek.rpgu.attribute.Attributes;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionEffectTypeCategory;
 import org.jetbrains.annotations.NotNull;
@@ -17,4 +20,8 @@ public class BonusAreaOfEffect extends ConstructableCustomEffect {
     @Override
     public @NotNull String getRawId() {return "bonus_area_of_effect";}
 
+    @Override
+    public void getCustomAttributes(@NotNull PotionEffect context, @NotNull CustomAttributeConsumer consumer) {
+        consumer.consume(Attributes.AREA_OF_EFFECT, context.getAmplifier(), AttributeModifier.Operation.ADD_NUMBER);
+    }
 }

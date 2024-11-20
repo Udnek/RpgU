@@ -16,3 +16,9 @@ commands:
     aliases: []
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"
+  reset_cooldown:
+    description: "reset_cooldown"
+    usage: "/reset_cooldown"
+    aliases: [ ]
+    permission: rpgu.admin
+    permission-message: "You do not have permission to use this command"
