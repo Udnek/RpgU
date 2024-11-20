@@ -56,7 +56,7 @@ public interface ConstructableActiveAbilityComponent<ActivationContext, DamageCo
     }
     default void addCooldownLine(@NotNull ActiveAbilityLorePart componentable){
         Utils.consumeIfPositive(getBaseCooldown(), value ->
-                componentable.addWithFormat(Component.translatable("active_ability.rpgu.cooldown", Component.text(me.udnek.itemscoreu.util.Utils.roundToTwoDigits(value)))));
+                componentable.addWithFormat(Component.translatable("active_ability.rpgu.cooldown", Component.text(me.udnek.itemscoreu.util.Utils.roundToTwoDigits(value/20d)))));
     }
     default void addAreaOfEffectLine(@NotNull ActiveAbilityLorePart componentable){
         Utils.consumeIfPositive(getBaseAreaOfEffect(), value ->

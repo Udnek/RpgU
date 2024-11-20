@@ -1,0 +1,20 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "rpgu:test"
+      }
+    ],
+    "wings": [
+      {
+        "texture": "rpgu:test",
+        "use_player_texture": true
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "rpgu:test"
+      }
+    ]
+  }
+}
