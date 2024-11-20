@@ -1,14 +1,19 @@
 package me.udnek.rpgu.item.equipment.shaman;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
+import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
+import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.components.EquippableComponent;
@@ -35,4 +40,14 @@ public abstract class ShamanArmor extends ConstructableCustomItem {
         attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.1").color(NamedTextColor.GRAY));
         return loreBuilder;
     }
+
+    @Override
+    public void initializeComponents() {
+        super.initializeComponents();
+
+        CustomAttributeModifier attributeModifier = new CustomAttributeModifier(2, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup()));
+        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
+    }
+
+
 }
