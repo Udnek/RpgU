@@ -13,6 +13,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
+import me.udnek.rpgu.command.ResetCooldown;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -63,6 +64,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
         getCommand("customdamagesystem").setExecutor(new CustomDamageSystemCommand());
+        getCommand("reset_cooldown").setExecutor(new ResetCooldown());
 
         wearingEquipmentTask = new PlayerWearingEquipmentTask();
         wearingEquipmentTask.start(this);
