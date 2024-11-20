@@ -92,7 +92,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             final double radius = getAreaOfEffect(player);
             Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, radius, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
-            ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius);
+            ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
 
             if (nearbyLivingEntities.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
             for (LivingEntity livingEntity : nearbyLivingEntities) {
@@ -108,12 +108,12 @@ public class AirElementalTome extends ConstructableCustomItem {
                             livingEntity.setVelocity(new Vector());
                             new ParticleBuilder(Particle.GUST).count(3).location(locationEntity).offset(1,0,1).spawn();
                         } else if (count == CAST_TIME) {
-                            if (livingEntity == player) Effects.NO_FALL_DAMAGE.apply(player, 10, 0);
-                            else Effects.INCREASED_FALL_DAMAGE.apply(livingEntity, 10, 1) ;
+                            if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
+                            else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 1);
                             livingEntity.setVelocity(new Vector(0, -4, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
                         } else cancel();
-                        if (count == UP_TIME) Effects.NO_GRAVITY.apply(livingEntity, (int) (UP_TIME * 4), 0);
+                        if (count == UP_TIME) Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_TIME * 4), 0);
 
                         count++;
                     }

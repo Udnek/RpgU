@@ -68,6 +68,6 @@ public class PhantomBow extends ConstructableCustomItem implements RpgUCustomIte
         particleBuilder.extra(0);
         particleBuilder.offset(0.3, 0.3, 0.3);
 
-        ParticleUtils.particleUntilGround(arrow, particleBuilder);
+        ParticleUtils.playUntilGround(arrow, particleBuilder);
     }
 }
