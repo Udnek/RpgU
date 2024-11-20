@@ -5,14 +5,12 @@ import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
-import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -91,9 +89,7 @@ public interface ConstructableActiveAbilityComponent<ActivationContext, DamageCo
         if (customItem.hasCooldown(player)) return;
         ActionResult result = action(customItem, player, activationContext);
         if (!(result.applyCooldown)) return;
-        Utils.consumeIfPositive(getCooldown(player), cooldown -> {
-            customItem.setCooldown(player, cooldown);
-        });
+        Utils.consumeIfPositive(getCooldown(player), cooldown -> customItem.setCooldown(player, cooldown));
     }
 
     @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext);

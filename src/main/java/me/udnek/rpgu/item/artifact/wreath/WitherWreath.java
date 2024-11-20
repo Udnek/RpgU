@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.artifact;
+package me.udnek.rpgu.item.artifact.wreath;
 
 import me.udnek.itemscoreu.customattribute.*;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
