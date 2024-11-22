@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class CrudeAmethystSword extends ConstructableCustomItem implements RpgUCustomItem {
+public class AmethystDirk extends ConstructableCustomItem implements RpgUCustomItem {
 
     private static final double MELEE_MAGICAL_DAMAGE_MULTIPLIER = 0.25;
 
@@ -27,7 +27,7 @@ public class CrudeAmethystSword extends ConstructableCustomItem implements RpgUC
 
     @Override
     public @NotNull String getRawId() {
-        return "crude_amethyst_sword";
+        return "amethyst_dirk";
     }
 
     @Override

@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "rpgu:item/magical_dye"
+		"layer0": "rpgu:item/wolf_pelt"
 	}
 }

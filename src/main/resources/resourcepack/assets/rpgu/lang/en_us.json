@@ -50,8 +50,8 @@
 	"item.rpgu.raw_magnetite": "Raw Magnetite",
 	"item.rpgu.magnetite_ingot": "Magnetite Ingot",
 	"item.rpgu.phantom_wing": "Phantom Wing",
-	"item.rpgu.magical_dye": "Magical Dye",
-	"item.rpgu.wolf_leather": "Wolf Leather",
+	"item.rpgu.esoteric_salve": "Esoteric Salve",
+	"item.rpgu.wolf_pelt": "Wolf Pelt",
 
 	"item.rpgu.wrench": "Wrench",
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
@@ -93,7 +93,7 @@
 	"item.rpgu.flint_shovel": "Flint Shovel",
 	"item.rpgu.flint_hoe": "Flint Hoe",
 
-	"item.rpgu.crude_amethyst_sword": "Crude Amethyst Sword",
+	"item.rpgu.amethyst_dirk": "Amethyst Dirk",
 
 	"item.rpgu.phantom_chestplate": "Phantom Cloak",
 
