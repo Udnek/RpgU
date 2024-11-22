@@ -1,0 +1,15 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "rpgu:evoker_robe"
+      }
+    ],
+    "wings": [
+      {
+        "texture": "rpgu:evoker_robe",
+        "use_player_texture": false
+      }
+    ]
+  }
+}
