@@ -80,7 +80,7 @@ public class Items {
 
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
-    public final static CustomItem CRUDE_AMETHYST_SWORD = register(new CrudeAmethystSword());
+    public final static CustomItem AMETHYST_DIRK = register(new AmethystDirk());
 
 
     // INGREDIENT
@@ -91,8 +91,8 @@ public class Items {
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
     public static final CustomItem MAGNETITE_INGOT = register(new MagnetiteIngot());
     public static final CustomItem PHANTOM_WING = register(new PhantomWing());
-    public static final CustomItem MAGICAL_DYE = register(new MagicalDye());
-    public static final CustomItem WOLF_LEATHER = register(new WolfLeather());
+    public static final CustomItem ESOTERIC_SALVE = register(new EsotericSalve());
+    public static final CustomItem WOLF_PELT = register(new WolfPelt());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());

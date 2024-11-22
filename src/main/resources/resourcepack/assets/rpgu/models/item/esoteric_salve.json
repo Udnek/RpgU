@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "rpgu:item/wolf_leather"
+		"layer0": "rpgu:item/esoteric_salve"
 	}
 }

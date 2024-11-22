@@ -45,10 +45,10 @@ public class ArcaneAccumulator extends ConstructableCustomItem {
         @Override
         public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
             if (damageInstance.getDamage().getMagical() == 0) return;
-            int level = Effects.AREA_OF_EFFECT.getAppliedLevel(player);
+            int level = Effects.BONUS_AREA_OF_EFFECT.getAppliedLevel(player);
             if (level <= 7) {level += 1;}
 
-            Effects.AREA_OF_EFFECT.applyInvisible(player, 10 * 20, level);
+            Effects.BONUS_AREA_OF_EFFECT.applyInvisible(player, 10 * 20, level);
         }
     }
 }

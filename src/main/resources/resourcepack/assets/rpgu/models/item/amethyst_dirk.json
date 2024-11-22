@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "rpgu:item/crude_amethyst_sword"
+		"layer0": "rpgu:item/amethyst_dirk"
 	}
 
 }

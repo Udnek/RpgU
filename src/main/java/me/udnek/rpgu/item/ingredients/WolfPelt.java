@@ -10,9 +10,9 @@ import org.bukkit.Material;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
-public class WolfLeather extends ConstructableCustomItem {
+public class WolfPelt extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "wolf_leather";}
+    public @NotNull String getRawId() {return "wolf_pelt";}
 
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
@@ -25,7 +25,7 @@ public class WolfLeather extends ConstructableCustomItem {
                 NmsCustomLootEntryBuilder.fromVanilla(
                         LootTables.COW.getLootTable(),
                         itemStack -> itemStack.getType() == Material.LEATHER,
-                        new ItemStackCreator.Custom(Items.WOLF_LEATHER)
+                        new ItemStackCreator.Custom(Items.WOLF_PELT)
                 )
         );
 
