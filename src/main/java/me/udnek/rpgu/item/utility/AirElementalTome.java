@@ -104,16 +104,19 @@ public class AirElementalTome extends ConstructableCustomItem {
                         if (count >= 0 && count < UP_TIME) {
                             livingEntity.setVelocity(new Vector(0, HEIGHT / UP_TIME, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
-                        } else if (count >= UP_TIME && count < CAST_TIME) {
-                            livingEntity.setVelocity(new Vector());
-                            new ParticleBuilder(Particle.GUST).count(3).location(locationEntity).offset(1,0,1).spawn();
+                        } else if (count >= UP_TIME && count < CAST_TIME && (count % 5 == 0)) {
+                            new ParticleBuilder(Particle.GUST).count(4).location(locationEntity).offset(1,0,1).spawn();
                         } else if (count == CAST_TIME) {
                             if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
                             else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 1);
                             livingEntity.setVelocity(new Vector(0, -4, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
-                        } else cancel();
-                        if (count == UP_TIME) Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_TIME * 4), 0);
+                        } else if (count > CAST_TIME) cancel();
+
+                        if (count == UP_TIME) {
+                            Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_TIME * 4), 0);
+                            livingEntity.setVelocity(new Vector());
+                        }
 
                         count++;
                     }
