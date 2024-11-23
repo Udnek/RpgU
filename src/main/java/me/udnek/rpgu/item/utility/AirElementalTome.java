@@ -72,7 +72,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         public static double UP_TIME = CAST_TIME / 5;
 
         @Override
-        public int getBaseCooldown() {return 20;}
+        public int getBaseCooldown() {return 20 * 27;}
 
         @Override
         public double getBaseCastRange() {return 15;}
@@ -94,7 +94,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, radius, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
             ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
 
-            if (nearbyLivingEntities.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
+            if (nearbyLivingEntities.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
             for (LivingEntity livingEntity : nearbyLivingEntities) {
                 new BukkitRunnable() {
                     int count = 0;
