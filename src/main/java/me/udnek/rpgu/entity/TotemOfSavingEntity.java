@@ -14,6 +14,8 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,8 +42,9 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
         entity.clearLootTable();
         entity.setRotation(entity.getYaw(), 0);
         entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
-        entity.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(0.9);
+        entity.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(0.8);
         entity.setPersistent(true);
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0, false, false, false));
     }
 
     public void setItems(@Nullable List<ItemStack> items){

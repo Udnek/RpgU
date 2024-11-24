@@ -20,6 +20,7 @@ public class Attributes{
     public static final CustomAttribute CAST_RANGE;
     public static final CustomAttribute COOLDOWN_TIME;
     public static final CustomAttribute AREA_OF_EFFECT;
+    public static final CustomAttribute ABILITY_DURATION;
 
     public static final CustomAttribute PROJECTILE_DAMAGE_MULTIPLIER;
     public static final CustomAttribute PROJECTILE_SPEED;
@@ -44,6 +45,7 @@ public class Attributes{
         PROJECTILE_SPEED = register(new ProjectileSpeedAttribute("projectile_speed"));
         BACKSTAB_DAMAGE_MULTIPLIER = register(new BackstabDamageAttribute("backstab_damage_multiplier"));
         AREA_OF_EFFECT = register(new ConstructableCustomAttribute("area_of_effect",1,0, 1024));
+        ABILITY_DURATION = register(new ConstructableCustomAttribute("ability_duration",1,0, 1024));
 
         PROJECTILE_PROTECTION = register(new EnchantmentCalculatorAttribute("projectile_protection", Enchantment.PROJECTILE_PROTECTION));
         BLAST_PROTECTION = register(new EnchantmentCalculatorAttribute("blast_protection", Enchantment.BLAST_PROTECTION));

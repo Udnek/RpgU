@@ -3,7 +3,7 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;

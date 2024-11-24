@@ -1,6 +1,8 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.rpgu.command.CustomDamageSystemCommand;
+import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +16,8 @@ public class ProjectileDamageMultiplierAttribute extends ConstructableCustomAttr
 
     @EventHandler
     public void onFire(EntityShootBowEvent event) {
-        double amount = this.calculate(event.getEntity());
+        if (!DamageListener.CUSTOM_DAMAGE_SYSTEM) return;
+        double amount = calculate(event.getEntity());
         if (amount == getDefaultValue()) return;
         if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
         arrow.setDamage(arrow.getDamage() * amount);

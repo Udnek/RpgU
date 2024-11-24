@@ -6,7 +6,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.nms.ConsumableAnimation;
 import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;

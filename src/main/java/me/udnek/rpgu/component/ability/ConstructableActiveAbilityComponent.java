@@ -1,24 +1,29 @@
-package me.udnek.rpgu.component;
+package me.udnek.rpgu.component.ability;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.component.ability.property.ActiveAbilityProperty;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
+import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public interface ConstructableActiveAbilityComponent<ActivationContext, DamageContext> extends ActiveAbilityComponent<ActivationContext>, ActiveAbilityProperties<DamageContext> {
+public interface ConstructableActiveAbilityComponent<ActivationContext, DamageContext> extends ActiveAbilityComponent<ActivationContext>, ActiveAbilityProperty<DamageContext> {
 
     default @NotNull Damage calculateDamage(@NotNull DamageContext context){
         return Objects.requireNonNull(getDamage()).calculate(context);
     }
+    @Override
+    default @Nullable DamageFormula<DamageContext> getDamage(){return null;}
 
     @Override
     default int getBaseCooldown(){return 0;}
