@@ -91,7 +91,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             final double radius = getAreaOfEffect(player);
-            Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, radius, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
+            Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
             ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
 
             if (nearbyLivingEntities.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
