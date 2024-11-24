@@ -44,7 +44,7 @@ public class CeremonialDagger extends ConstructableCustomItem implements RpgUCus
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                 .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, BACKSTAB_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
                 .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                 .build()));

@@ -67,7 +67,7 @@ public class PhantomChestplate extends ConstructableCustomItem implements RpgUCu
     public void initializeComponents() {
         super.initializeComponents();
         CustomAttributeModifier attributeModifier = new CustomAttributeModifier(2, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST);
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
     }
 }
 

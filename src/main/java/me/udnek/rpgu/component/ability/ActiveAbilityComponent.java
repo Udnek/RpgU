@@ -13,12 +13,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.jetbrains.annotations.NotNull;
 
-public interface ActiveAbilityComponent<ActivationContext> extends CustomComponent<CustomItem>, ComponentHolder<ActiveAbilityComponent<ActivationContext>> {
+public interface ActiveAbilityComponent<ActivationContext> extends CustomComponent<CustomItem>, ComponentHolder<ActiveAbilityComponent<?>> {
 
     ActiveAbilityComponent<?> DEFAULT = new ActiveAbilityComponent<>() {
-        final CustomComponentMap<ActiveAbilityComponent<Object>> components = new CustomComponentMap<>();
+        final CustomComponentMap<ActiveAbilityComponent<?>> components = new CustomComponentMap<>();
         @Override
-        public @NotNull CustomComponentMap<ActiveAbilityComponent<Object>> getComponents() {return components;}
+        public @NotNull CustomComponentMap<ActiveAbilityComponent<?>> getComponents() {return components;}
         @Override
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
         @Override

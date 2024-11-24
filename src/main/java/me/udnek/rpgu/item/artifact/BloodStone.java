@@ -21,9 +21,9 @@ public class BloodStone extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(ArtifactComponent.DEFAULT);
+        getComponents().set(ArtifactComponent.DEFAULT);
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.AREA_OF_EFFECT, attribute).build()));
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.AREA_OF_EFFECT, attribute).build()));
     }
 }

@@ -33,7 +33,7 @@ public class MagicalChestplate extends ConstructableCustomItem {
     @Override
     public void afterInitialization() {
         super.afterInitialization();
-        setComponent(new CustomItemAttributesComponent(
+        getComponents().set(new CustomItemAttributesComponent(
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MAGICAL_POTENTIAL, 5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST)
                         .add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, 1, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST)

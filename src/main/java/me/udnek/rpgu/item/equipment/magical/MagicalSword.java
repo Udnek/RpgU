@@ -33,7 +33,7 @@ public class MagicalSword extends ConstructableCustomItem {
     @Override
     public void afterInitialization() {
         super.afterInitialization();
-        setComponent(new CustomItemAttributesComponent(
+        getComponents().set(new CustomItemAttributesComponent(
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND)
                         .add(Attributes.COOLDOWN_TIME, -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.MAIN_HAND)

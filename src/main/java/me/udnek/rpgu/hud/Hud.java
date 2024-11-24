@@ -37,7 +37,7 @@ public class Hud implements CustomHud {
         equipment.getEquipment(new PlayerEquipment.EquipmentConsumer() {
             @Override
             public void accept(@NotNull SingleSlot slot, @NotNull CustomItem customItem) {
-                EquippableItemComponent equippable = customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM);
+                EquippableItemComponent equippable = customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM);
                 Component hudImage = equippable.getHudImage(customItem, player);
                 if (hudImage == null) return;
                 joinedImage.append(ComponentU.space(OFFSET_BETWEEN_IMAGES)).append(hudImage);

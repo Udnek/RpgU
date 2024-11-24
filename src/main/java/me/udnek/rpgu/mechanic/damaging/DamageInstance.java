@@ -179,7 +179,7 @@ public class DamageInstance {
                     }
                     if (projectile.getShooter() instanceof Player shooter){
                         PlayerEquipment.get(shooter).getEquipment((slot, customItem) ->
-                                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(customItem, shooter, slot, DamageInstance.this));
+                                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(customItem, shooter, slot, DamageInstance.this));
                     }
                 }
                 default -> {}
@@ -191,7 +191,7 @@ public class DamageInstance {
         if (!(damager instanceof Player player)) return;
 
         PlayerEquipment.get(player).getEquipment((slot, customItem) ->
-                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(customItem, player, slot, DamageInstance.this));
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(customItem, player, slot, DamageInstance.this));
     }
 
     private void equipmentReceives() {
@@ -226,7 +226,7 @@ public class DamageInstance {
 
         if (!(victim instanceof Player player)) return;
         PlayerEquipment.get(player).getEquipment((slot, customItem) ->
-                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(customItem, player, slot, DamageInstance.this));
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(customItem, player, slot, DamageInstance.this));
     }
 
     public abstract static class ExtraFlag{

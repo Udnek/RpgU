@@ -4,7 +4,9 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
@@ -61,36 +63,29 @@ public class AirElementalTome extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new AirElementalTomeComponent());
+        getComponents().set(new AirElementalTomeComponent());
     }
 
-    public class AirElementalTomeComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
+    public class AirElementalTomeComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
-        public static double BASE_RADIUS = 2.5;
-        public static double CAST_TIME = 4 * 20;
+        public static double AOE_RADIUS = 2.5;
+        public static double DURATION = 4 * 20;
         public static double HEIGHT = 15;
-        public static double UP_TIME = CAST_TIME / 5;
+        public static double UP_DURATION = DURATION / 5;
 
-        @Override
-        public int getBaseCooldown() {return 20;}
 
-        @Override
-        public double getBaseCastRange() {return 15;}
-
-        @Override
-        public double getBaseAreaOfEffect() {return BASE_RADIUS;}
-
-        @Override
-        public @Nullable DamageFormula<Object> getDamage() {
-            return null;
+        public AirElementalTomeComponent(){
+            getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(AttributeBasedProperty.from(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
         }
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            RayTraceResult rayTraceResult = player.rayTraceBlocks(getBaseCastRange());
+            RayTraceResult rayTraceResult = player.rayTraceBlocks(getComponents().get(ComponentTypes.ABILITY_CAST_RANGE).get(player));
             if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
-            final double radius = getAreaOfEffect(player);
+            final double radius = getComponents().get(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
             Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, radius, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
             ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
 
@@ -101,20 +96,20 @@ public class AirElementalTome extends ConstructableCustomItem {
                     @Override
                     public void run() {
                         Location locationEntity = livingEntity.getLocation();
-                        if (count >= 0 && count < UP_TIME) {
-                            livingEntity.setVelocity(new Vector(0, HEIGHT / UP_TIME, 0));
+                        if (count >= 0 && count < UP_DURATION) {
+                            livingEntity.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
-                        } else if (count >= UP_TIME && count < CAST_TIME && (count % 5 == 0)) {
+                        } else if (count >= UP_DURATION && count < DURATION && (count % 5 == 0)) {
                             new ParticleBuilder(Particle.GUST).count(4).location(locationEntity).offset(1,0,1).spawn();
-                        } else if (count == CAST_TIME) {
+                        } else if (count == DURATION) {
                             if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
                             else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 1);
                             livingEntity.setVelocity(new Vector(0, -4, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
-                        } else if (count > CAST_TIME) cancel();
+                        } else if (count > DURATION) cancel();
 
-                        if (count == UP_TIME) {
-                            Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_TIME * 4), 0);
+                        if (count == UP_DURATION) {
+                            Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_DURATION * 4), 0);
                             livingEntity.setVelocity(new Vector());
                         }
 
@@ -131,14 +126,12 @@ public class AirElementalTome extends ConstructableCustomItem {
             componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.2").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            ConstructableActiveAbilityComponent.super.addLoreLines(componentable);
+            super.addLoreLines(componentable);
         }
 
         @Override
         public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
             activate(customItem, event.getPlayer(), event);
         }
-
-
     }
 }

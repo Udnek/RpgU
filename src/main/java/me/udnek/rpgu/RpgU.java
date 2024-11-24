@@ -22,7 +22,6 @@ import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
-import me.udnek.rpgu.mechanic.electricity.ElectricityEvents;
 import me.udnek.rpgu.mechanic.enchanting.EnchantmentTableListener;
 import me.udnek.rpgu.mechanic.rail.MinecartListener;
 import me.udnek.rpgu.util.AttributeManaging;
@@ -51,7 +50,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         new DamageListener(this);
         new EquipmentListener(this);
-        new ElectricityEvents(this);
         new EnchantmentTableListener(this);
         new ModifiedEntitySpawnListener(this);
         new MinecartListener(this);

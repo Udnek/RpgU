@@ -38,6 +38,6 @@ public class HungryHorrorHelmet extends HungryHorrorArmor {
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new HungryHorrorComponent(PotionEffectType.STRENGTH, CustomEquipmentSlot.HEAD));
+        getComponents().set(new HungryHorrorComponent(PotionEffectType.STRENGTH, CustomEquipmentSlot.HEAD));
     }
 }

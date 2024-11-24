@@ -31,7 +31,7 @@ public class DarkMirror extends ConstructableCustomItem implements RpgUCustomIte
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(new DarkMirror.MagicalMirrorComponent());
+        getComponents().set(new DarkMirror.MagicalMirrorComponent());
     }
 
     static class MagicalMirrorComponent implements RightClickableItem {

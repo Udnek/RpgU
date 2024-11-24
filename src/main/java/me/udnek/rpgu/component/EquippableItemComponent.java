@@ -48,7 +48,7 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
 
 
     default void getAttributes(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull AttributeConsumer consumer){
-        VanillaAttributesContainer container = item.getComponentOrDefault(CustomComponentType.VANILLA_ATTRIBUTES_ITEM).getAttributes(item);
+        VanillaAttributesContainer container = item.getComponents().getOrDefault(CustomComponentType.VANILLA_ATTRIBUTES_ITEM).getAttributes(item);
         if (container.isEmpty()) return;
 
         for (Map.Entry<Attribute, List<CustomKeyedAttributeModifier>> entry : container.get(slot).getAll().entrySet()) {

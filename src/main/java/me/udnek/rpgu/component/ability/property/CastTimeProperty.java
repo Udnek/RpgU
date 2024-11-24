@@ -16,7 +16,7 @@ public class CastTimeProperty extends AbstractAbilityProperty<Player, Integer> {
     }
 
     @Override
-    public Integer get(@NotNull Player player) {
+    public @NotNull Integer get(@NotNull Player player) {
         return getBase();
     }
 

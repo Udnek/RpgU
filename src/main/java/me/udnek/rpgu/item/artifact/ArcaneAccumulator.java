@@ -37,7 +37,7 @@ public class ArcaneAccumulator extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new ArcaneAccumulatorComponent());
+        getComponents().set(new ArcaneAccumulatorComponent());
     }
 
     public static class ArcaneAccumulatorComponent implements ArtifactComponent {

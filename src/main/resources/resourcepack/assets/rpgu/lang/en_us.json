@@ -16,7 +16,7 @@
 
 	"damage_formula.rpgu.magical": "Magical Damage: %s",
 	"damage_formula.rpgu.physical": "Physical Damage: %s",
-	"damage_formula.rpgu.base_plus_per_magical_potential": "%s + %s*MP",
+	"magical_potential_formula.rpgu.linear": "%s + %s*MP",
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",

@@ -12,6 +12,12 @@ public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Doub
 
     protected AttributeBasedPropertyType type;
 
+
+    public static AttributeBasedProperty from(double base, @NotNull AttributeBasedPropertyType type){
+        return new AttributeBasedProperty(base).setType(type);
+    }
+
+    @ApiStatus.Internal
     public AttributeBasedProperty(double base) {
         super(base);
     }

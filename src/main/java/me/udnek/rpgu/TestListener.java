@@ -111,47 +111,21 @@ public class TestListener extends SelfRegisteringListener {
     public void abilityRightClick(PlayerInteractEvent event){
         if (!event.getAction().isRightClick()) return;
         CustomItem.consumeIfCustom(event.getItem(), customItem -> {
-            customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event);
+            customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event);
         });
     }
     @EventHandler
     public void abilityStopUsing(PlayerStopUsingItemEvent event){
         CustomItem.consumeIfCustom(event.getItem(), customItem -> {
-            customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event);
+            customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event);
         });
     }
     @EventHandler
     public void abilityConsume(PlayerItemConsumeEvent event){
         CustomItem.consumeIfCustom(event.getItem(), customItem -> {
-            customItem.getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event);
+            customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event);
         });
     }
-/*    @EventHandler
-    public void onSlot(InventoryClickEvent event){
-        Player player = (Player) event.getWhoClicked();
-
-        HoverEvent<?> hoverEvent = HoverEvent.showItem(HoverEvent.ShowItem.showItem(Material.BRICK, 1));
-        Component text = Component.text("123").hoverEvent(hoverEvent);
-        player.sendMessage(text);
-
-        Entity entity = player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
-        hoverEvent = HoverEvent.showEntity(HoverEvent.ShowEntity.showEntity(EntityType.ARMOR_STAND, entity.getUniqueId()));
-        text = Component.text("#$23").hoverEvent(hoverEvent);
-        player.sendMessage(text);
-        entity.remove();
-    }*/
-
-/*
-    @EventHandler
-    public void onLoot(LootEntryCreateItemEvent event){
-        if (!event.isSameLootTable(LootTables.ANCIENT_CITY.getLootTable())) return;
-        LogUtils.log(event.getAll());
-        if (!event.contains(Material.ECHO_SHARD)) return;
-        LogUtils.log("FOUND ANCIENT ECHO SHARD");
-        event.addItem(new ItemStack(Material.MACE));
-        LogUtils.log(event.getAll());
-    }
-*/
 
 
     @EventHandler
@@ -168,17 +142,5 @@ public class TestListener extends SelfRegisteringListener {
     public void recipeInitialization(InitializationEvent event){
         if (event.getStep() != InitializationProcess.Step.AFTER_REGISTRIES_INITIALIZATION) return;
         RecipeManaging.run();
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void itemGenerates(CustomItemGeneratedEvent event){
-        //System.out.println("CALLED EVENT");
-        AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
-        event.getCustomItem().getComponentOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
-        if (event.getCustomItem() instanceof VanillaBasedCustomItem){
-           // System.out.println("MODIFING");
-            event.getItemStack().addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            ///System.out.println(event.getItemStack().getItemFlags());
-        }
     }
 }
