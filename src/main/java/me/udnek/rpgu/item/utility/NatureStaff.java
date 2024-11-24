@@ -1,14 +1,17 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import me.udnek.rpgu.particle.ParticleUtils;
+import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -57,11 +60,10 @@ public class NatureStaff extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-
-        setComponent(new NatureStaffComponent());
+        getComponents().set(new NatureStaffComponent());
     }
 
-    public class NatureStaffComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
+    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
 
         public static double BASE_RADIUS = 2.5;
         public static double BASE_DURATION = 4 * 20;
@@ -86,7 +88,7 @@ public class NatureStaff extends ConstructableCustomItem {
             if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             final double radius = getAreaOfEffect(player);
-            Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > radius));
+            Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
             ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.GREEN).location(location), radius, 5);
             final int duration = (int) (BASE_DURATION + Attributes.MAGICAL_POTENTIAL.calculate(player));
 
@@ -109,6 +111,11 @@ public class NatureStaff extends ConstructableCustomItem {
         @Override
         public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
             activate(customItem, event.getPlayer(), event);
+        }
+
+        @Override
+        public @NotNull CustomComponentMap<ActiveAbilityComponent<PlayerInteractEvent>> getComponents() {
+            return null;
         }
     }
 }
