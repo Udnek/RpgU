@@ -57,7 +57,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
         recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
         recipe.setIngredient('F', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
         recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.FEATHER));
-        recipe.setIngredient('R', new RecipeChoice.ExactChoice(Items.MAGICAL_DYE.getItem()));
+        recipe.setIngredient('R', new RecipeChoice.ExactChoice(Items.ESOTERIC_SALVE.getItem()));
 
         consumer.accept(recipe);
     }

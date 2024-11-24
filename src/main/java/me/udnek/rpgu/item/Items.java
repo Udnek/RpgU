@@ -19,6 +19,10 @@ import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorChestplate;
 import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorHelmet;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
+import me.udnek.rpgu.item.equipment.melee.MeleeBoots;
+import me.udnek.rpgu.item.equipment.melee.MeleeChestplate;
+import me.udnek.rpgu.item.equipment.melee.MeleeHelmet;
+import me.udnek.rpgu.item.equipment.melee.MeleeLeggings;
 import me.udnek.rpgu.item.equipment.shaman.ShamanBoots;
 import me.udnek.rpgu.item.equipment.shaman.ShamanHelmet;
 import me.udnek.rpgu.item.equipment.shaman.ShamanTambourine;
@@ -63,6 +67,11 @@ public class Items {
     public static final CustomItem SHAMAN_HELMET = register(new ShamanHelmet());
     public static final CustomItem SHAMAN_BOOTS = register(new ShamanBoots());
 
+    public static final CustomItem MELEE_HELMET = register(new MeleeHelmet());
+    public static final CustomItem MELEE_CHESTPLATE = register(new MeleeChestplate());
+    public static final CustomItem MELEE_LEGGINGS = register(new MeleeLeggings());
+    public static final CustomItem MELEE_BOOTS = register(new MeleeBoots());
+
     public static final CustomItem FLINT_SWORD = register(new FlintSword());
     public static final CustomItem FLINT_PICKAXE = register(new FlintPickaxe());
     public static final CustomItem FLINT_AXE = register(new FlintAxe());
@@ -71,7 +80,7 @@ public class Items {
 
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
-    public final static CustomItem CRUDE_AMETHYST_SWORD = register(new CrudeAmethystSword());
+    public final static CustomItem AMETHYST_DIRK = register(new AmethystDirk());
 
 
     // INGREDIENT
@@ -82,7 +91,8 @@ public class Items {
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
     public static final CustomItem MAGNETITE_INGOT = register(new MagnetiteIngot());
     public static final CustomItem PHANTOM_WING = register(new PhantomWing());
-    public static final CustomItem MAGICAL_DYE = register(new MagicalDye());
+    public static final CustomItem ESOTERIC_SALVE = register(new EsotericSalve());
+    public static final CustomItem WOLF_PELT = register(new WolfPelt());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());

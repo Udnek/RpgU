@@ -129,10 +129,18 @@ public class AttributeManaging extends SelfRegisteringListener {
     }
 
     public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source) {
+        applyDefaultArmorAttribute(target, source, true, true);
+    }
+
+    public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source, boolean addArmor, boolean addAttackDamage) {
         EquipmentSlotGroup slot = source.getEquipmentSlot().getGroup();
         AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), itemsArmor.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
-        AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), itemsArmor.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
-        AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), itemsArmor.get(source).attack, AttributeModifier.Operation.ADD_SCALAR, slot);
+        if (addArmor) {
+            AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), itemsArmor.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
+        }
+        if (addAttackDamage) {
+            AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), itemsArmor.get(source).attack, AttributeModifier.Operation.ADD_SCALAR, slot);
+        }
     }
 
     public record HpAndArmor(double hp, double armor, double attack) {
