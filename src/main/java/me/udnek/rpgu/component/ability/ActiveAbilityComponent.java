@@ -1,18 +1,24 @@
-package me.udnek.rpgu.component;
+package me.udnek.rpgu.component.ability;
 
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
+import me.udnek.itemscoreu.customcomponent.ComponentHolder;
 import me.udnek.itemscoreu.customcomponent.CustomComponent;
+import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.rpgu.component.ComponentTypes;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.jetbrains.annotations.NotNull;
 
-public interface ActiveAbilityComponent<ActivationContext> extends CustomComponent<CustomItem> {
+public interface ActiveAbilityComponent<ActivationContext> extends CustomComponent<CustomItem>, ComponentHolder<ActiveAbilityComponent<ActivationContext>> {
 
     ActiveAbilityComponent<?> DEFAULT = new ActiveAbilityComponent<>() {
+        final CustomComponentMap<ActiveAbilityComponent<Object>> components = new CustomComponentMap<>();
+        @Override
+        public @NotNull CustomComponentMap<ActiveAbilityComponent<Object>> getComponents() {return components;}
         @Override
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
         @Override

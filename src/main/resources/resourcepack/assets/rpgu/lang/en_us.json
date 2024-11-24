@@ -8,10 +8,11 @@
 	"equipment.rpgu.description_line": " %s",
 
 	"active_ability.rpgu.title": "Active Ability:",
-	"active_ability.rpgu.cast_range": "Cast Range: %s blocks",
-	"active_ability.rpgu.area_of_effect": "AOE: %s blocks",
-	"active_ability.rpgu.cooldown": "Cooldown: %s seconds",
-	"active_ability.rpgu.cast_time": "Cast Time: %s seconds",
+	"ability.rpgu.cast_range": "Cast Range: %s blocks",
+	"ability.rpgu.area_of_effect": "AOE: %s blocks",
+	"ability.rpgu.cooldown": "Cooldown: %s seconds",
+	"ability.rpgu.cast_time": "Cast Time: %s seconds",
+	"ability.rpgu.duration": "Duration: %s seconds",
 
 	"damage_formula.rpgu.magical": "Magical Damage: %s",
 	"damage_formula.rpgu.physical": "Physical Damage: %s",

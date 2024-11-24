@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.rpgu.lore.TranslationKeys;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +18,7 @@ public class OriginSlot extends AbstractCustomEquipmentSlot implements SingleSlo
         super("origin");
     }
     @Override
-    public boolean isAppropriateSlot(Entity entity, int slot) {
+    public boolean isAppropriateSlot(@NotNull LivingEntity entity, int slot) {
         return false;
     }
     @Override
@@ -31,14 +32,5 @@ public class OriginSlot extends AbstractCustomEquipmentSlot implements SingleSlo
         return TranslationKeys.whenEquippedAsOrigin;
     }
     @Override
-    public @Nullable Integer getSlot(@NotNull Entity entity) {
-        return null;
-    }
-    @Override
-    public void getAllSlots(@NotNull Entity entity, @NotNull Consumer<@NotNull Integer> consumer) {}
-
-    @Override
-    public boolean test(@NotNull CustomEquipmentSlot customEquipmentSlot) {
-        return customEquipmentSlot == this;
-    }
+    public @Nullable Integer getSlot(@NotNull LivingEntity entity) {return null;}
 }

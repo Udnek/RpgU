@@ -2,7 +2,6 @@ package me.udnek.rpgu;
 
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customblock.CustomBlock;
 import me.udnek.itemscoreu.customeffect.CustomEffect;
 import me.udnek.itemscoreu.customenchantment.NmsEnchantmentContainer;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
@@ -10,10 +9,9 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
-import me.udnek.rpgu.command.ResetCooldown;
+import me.udnek.rpgu.command.ResetCooldownCommand;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -46,7 +44,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         instance = this;
 
         CustomItem blazeBlade = Items.SHINY_AXE;
-        CustomBlock customBlock = Blocks.TEST;
         EntityTypes.TOTEM_OF_SAVING.getRawId();
         SingleSlot artifacts = EquipmentSlots.FIRST_ARTIFACT;
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
@@ -64,7 +61,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
         getCommand("customdamagesystem").setExecutor(new CustomDamageSystemCommand());
-        getCommand("reset_cooldown").setExecutor(new ResetCooldown());
+        getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
 
         wearingEquipmentTask = new PlayerWearingEquipmentTask();
         wearingEquipmentTask.start(this);

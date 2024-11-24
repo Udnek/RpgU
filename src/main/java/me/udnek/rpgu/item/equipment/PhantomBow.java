@@ -1,6 +1,8 @@
 package me.udnek.rpgu.item.equipment;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import io.papermc.paper.datacomponent.DataComponentType;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -17,6 +19,7 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -27,6 +30,9 @@ import java.util.function.Consumer;
 
 
 public class PhantomBow extends ConstructableCustomItem implements RpgUCustomItem, Listener {
+
+    public static final double SPEED_BUFF = 0.25;
+
     @Override
     public @NotNull Material getMaterial() {return Material.BOW;}
     @Override
@@ -50,12 +56,12 @@ public class PhantomBow extends ConstructableCustomItem implements RpgUCustomIte
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        CustomAttributeModifier projectileSpeedAttribute = new CustomAttributeModifier(SPEED_BUFF, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.ACTIVE_HAND);
+        CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(1/(1+SPEED_BUFF)-1, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.ACTIVE_HAND);
 
-        CustomAttributeModifier projectileSpeedAttribute = new CustomAttributeModifier(0.5, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND);
-        CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(-0.25, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND);
-
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.PROJECTILE_SPEED, projectileSpeedAttribute).
-                add(Attributes.PROJECTILE_DAMAGE_MULTIPLIER, projectileDamageMultiplierAttribute).build()));
+        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+                .add(Attributes.PROJECTILE_SPEED, projectileSpeedAttribute)
+                .add(Attributes.PROJECTILE_DAMAGE_MULTIPLIER, projectileDamageMultiplierAttribute).build()));
     }
 
     @EventHandler
