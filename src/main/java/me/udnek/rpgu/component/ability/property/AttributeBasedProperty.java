@@ -1,7 +1,5 @@
 package me.udnek.rpgu.component.ability.property;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import org.bukkit.entity.Player;

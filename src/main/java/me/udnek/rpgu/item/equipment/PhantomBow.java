@@ -1,8 +1,6 @@
 package me.udnek.rpgu.item.equipment;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import io.papermc.paper.datacomponent.DataComponentType;
-import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -19,7 +17,6 @@ import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;

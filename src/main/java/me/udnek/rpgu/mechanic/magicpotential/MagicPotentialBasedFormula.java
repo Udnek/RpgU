@@ -1,11 +1,9 @@
 package me.udnek.rpgu.mechanic.magicpotential;
 
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ability.AbilityDescribable;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 

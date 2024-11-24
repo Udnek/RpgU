@@ -5,12 +5,10 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
-import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
@@ -29,7 +27,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -88,7 +85,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             final double radius = getComponents().get(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
-            Collection<LivingEntity> nearbyLivingEntities = location.getWorld().getNearbyLivingEntities(location, radius, radius, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > 5));
+            Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
             ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
 
             if (nearbyLivingEntities.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
@@ -98,10 +95,10 @@ public class AirElementalTome extends ConstructableCustomItem {
                     @Override
                     public void run() {
                         Location locationEntity = livingEntity.getLocation();
-                        if (count >= 0 && count < UP_TIME) {
-                            livingEntity.setVelocity(new Vector(0, HEIGHT / UP_TIME, 0));
+                        if (count >= 0 && count < UP_DURATION) {
+                            livingEntity.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
-                        } else if (count >= UP_TIME && count < CAST_TIME && (count % 5 == 0)) {
+                        } else if (count >= UP_DURATION && count < DURATION && (count % 5 == 0)) {
                             new ParticleBuilder(Particle.GUST).count(4).location(locationEntity).offset(1,0,1).spawn();
                         } else if (count == DURATION) {
                             if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);

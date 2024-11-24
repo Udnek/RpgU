@@ -8,12 +8,11 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.component.ability.property.CastTimeProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.MissUsageCooldownMultiplierProperty;
-import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.component.ability.property.type.AbilityPropertyType;
+import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
 
 public class ComponentTypes {

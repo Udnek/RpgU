@@ -1,15 +1,12 @@
 package me.udnek.rpgu;
 
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
-import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.util.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -26,7 +23,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;

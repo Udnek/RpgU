@@ -1,15 +1,14 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
+import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
-import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
@@ -25,7 +24,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -63,31 +61,25 @@ public class NatureStaff extends ConstructableCustomItem {
         getComponents().set(new NatureStaffComponent());
     }
 
-    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
+    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
         public static double BASE_RADIUS = 2.5;
         public static double BASE_DURATION = 4 * 20;
 
-        @Override
-        public int getBaseCooldown() {return 20;}
-
-        @Override
-        public double getBaseCastRange() {return 15;}
-
-        @Override
-        public double getBaseAreaOfEffect() {return BASE_RADIUS;}
-
-        @Override
-        public @Nullable DamageFormula<Object> getDamage() {
-            return null;
+        public NatureStaffComponent() {
+            getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
         }
+
+
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            RayTraceResult rayTraceResult = player.rayTraceBlocks(getBaseCastRange());
+            RayTraceResult rayTraceResult = player.rayTraceBlocks(getComponents().get(ComponentTypes.ABILITY_CAST_RANGE).get(player));
             if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
-            final double radius = getAreaOfEffect(player);
+            final double radius = getComponents().get(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
             Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
             ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.GREEN).location(location), radius, 5);
             final int duration = (int) (BASE_DURATION + Attributes.MAGICAL_POTENTIAL.calculate(player));
@@ -105,7 +97,7 @@ public class NatureStaff extends ConstructableCustomItem {
             componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.2").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            ConstructableActiveAbilityComponent.super.addLoreLines(componentable);
+            super.addLoreLines(componentable);
         }
 
         @Override
@@ -113,9 +105,6 @@ public class NatureStaff extends ConstructableCustomItem {
             activate(customItem, event.getPlayer(), event);
         }
 
-        @Override
-        public @NotNull CustomComponentMap<ActiveAbilityComponent<PlayerInteractEvent>> getComponents() {
-            return null;
-        }
+
     }
 }

@@ -1,6 +1,5 @@
 package me.udnek.rpgu.mechanic.damaging.formula;
 
-import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.magicpotential.LinearMPFormula;
 import me.udnek.rpgu.mechanic.magicpotential.MagicPotentialBasedFormula;
