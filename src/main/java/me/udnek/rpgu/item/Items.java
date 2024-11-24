@@ -104,6 +104,7 @@ public class Items {
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
     public static final CustomItem AIR_ELEMENTAL_TOME = register(new AirElementalTome());
     public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
+    public static final CustomItem NATURE_STAFF = register(new NatureStaff());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
