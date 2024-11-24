@@ -23,6 +23,6 @@ public class NoGravity extends ConstructableCustomEffect {
 
     @Override
     public void addAttributes(@NotNull AttributeConsumer consumer) {
-        consumer.accept(Attribute.GRAVITY, new NamespacedKey(RpgU.getInstance(), "gravity"), -1, AttributeModifier.Operation.MULTIPLY_SCALAR_1);
+        consumer.accept(Attribute.GRAVITY, new NamespacedKey(RpgU.getInstance(), "gravity_" + getRawId()), -1, AttributeModifier.Operation.MULTIPLY_SCALAR_1);
     }
 }

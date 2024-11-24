@@ -3,7 +3,7 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
@@ -14,6 +14,7 @@ import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -21,21 +22,17 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.function.Consumer;
 
-public class AirElementalTome extends ConstructableCustomItem {
+public class NatureStaff extends ConstructableCustomItem {
 
     @Override
     public @NotNull String getRawId() {
-        return "air_elemental_tome";
+        return "nature_staff";
     }
 
     @Override
@@ -45,7 +42,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
+        /*ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 " R ",
                 "RBR",
@@ -54,30 +51,28 @@ public class AirElementalTome extends ConstructableCustomItem {
         recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.BOOK));
         recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.BREEZE_ROD));
 
-        consumer.accept(recipe);
+        consumer.accept(recipe);*/
     }
 
 
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-
-        getComponents().set(new AirElementalTomeComponent());
+        getComponents().set(new NatureStaffComponent());
     }
 
-    public class AirElementalTomeComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
+    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
-        public static double AOE_RADIUS = 2.5;
-        public static double DURATION = 4 * 20;
-        public static double HEIGHT = 15;
-        public static double UP_DURATION = DURATION / 5;
+        public static double BASE_RADIUS = 2.5;
+        public static double BASE_DURATION = 4 * 20;
 
-
-        public AirElementalTomeComponent(){
+        public NatureStaffComponent() {
             getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(AttributeBasedProperty.from(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
         }
+
+
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
@@ -86,35 +81,12 @@ public class AirElementalTome extends ConstructableCustomItem {
             Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
             final double radius = getComponents().get(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
             Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
-            ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
+            ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.GREEN).location(location), radius, 5);
+            final int duration = (int) (BASE_DURATION + Attributes.MAGICAL_POTENTIAL.calculate(player));
 
-            if (nearbyLivingEntities.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
+            if (nearbyLivingEntities.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
             for (LivingEntity livingEntity : nearbyLivingEntities) {
-                new BukkitRunnable() {
-                    int count = 0;
-                    @Override
-                    public void run() {
-                        Location locationEntity = livingEntity.getLocation();
-                        if (count >= 0 && count < UP_DURATION) {
-                            livingEntity.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
-                            new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
-                        } else if (count >= UP_DURATION && count < DURATION && (count % 5 == 0)) {
-                            new ParticleBuilder(Particle.GUST).count(4).location(locationEntity).offset(1,0,1).spawn();
-                        } else if (count == DURATION) {
-                            if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
-                            else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 1);
-                            livingEntity.setVelocity(new Vector(0, -4, 0));
-                            new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
-                        } else if (count > DURATION) cancel();
-
-                        if (count == UP_DURATION) {
-                            Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_DURATION * 4), 0);
-                            livingEntity.setVelocity(new Vector());
-                        }
-
-                        count++;
-                    }
-                }.runTaskTimer(RpgU.getInstance(), 0, 1);
+                Effects.ROOT_EFFECT.apply(livingEntity, duration, 0);
             }
 
             return ActionResult.FULL_COOLDOWN;

@@ -1,9 +1,7 @@
 package me.udnek.rpgu.component.ability.property.type;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.util.Utils;
-import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import net.kyori.adventure.text.Component;

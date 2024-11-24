@@ -3,7 +3,6 @@ package me.udnek.rpgu.mechanic.magicpotential;
 import me.udnek.itemscoreu.util.Utils;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
