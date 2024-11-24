@@ -46,7 +46,7 @@ public class FishermanSnorkel extends ConstructableCustomItem implements RpgUCus
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(new ArtifactComponent() {
+        getComponents().set(new ArtifactComponent() {
             static final ParticleBuilder particleBuilder = new ParticleBuilder(Particle.BUBBLE_COLUMN_UP);
             static {
                 particleBuilder.offset(0.2, 0.2, 0.2);

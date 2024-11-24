@@ -26,7 +26,7 @@ public class WarpingClock extends ConstructableCustomItem implements RpgUCustomI
 
     @Override
     public void afterInitialization() {
-        setComponent(new WarpingClockComponent());
+        getComponents().set(new WarpingClockComponent());
     }
 
     @Override

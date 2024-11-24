@@ -37,6 +37,6 @@ public class HungryHorrorChestplate extends HungryHorrorArmor {
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new HungryHorrorComponent(PotionEffectType.ABSORPTION, CustomEquipmentSlot.CHEST));
+        getComponents().set(new HungryHorrorComponent(PotionEffectType.ABSORPTION, CustomEquipmentSlot.CHEST));
     }
 }

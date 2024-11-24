@@ -51,8 +51,8 @@ public class NautilusCore extends ConstructableCustomItem implements RpgUCustomI
 
     @Override
     public void initializeComponents() {
-        setComponent(new NautilusCoreComponent());
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().set(new NautilusCoreComponent());
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                 .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS)
                 .build()
         ));

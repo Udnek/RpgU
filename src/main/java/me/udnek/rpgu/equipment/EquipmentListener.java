@@ -22,7 +22,7 @@ public class EquipmentListener extends SelfRegisteringListener {
     }
 
     private static boolean isEquippableAtSlot(@NotNull CustomItem customItem, @NotNull CustomEquipmentSlot slot){
-        EquippableItemComponent component = customItem.getComponent(ComponentTypes.EQUIPPABLE_ITEM);
+        EquippableItemComponent component = customItem.getComponents().get(ComponentTypes.EQUIPPABLE_ITEM);
         if (component == null) return false;
         return component.isAppropriateSlot(slot);
     }
@@ -67,7 +67,7 @@ public class EquipmentListener extends SelfRegisteringListener {
         customItem = CustomItem.get(itemStack);
         if (customItem != null){
             PlayerEquipment.get(player).setItem(null, equipmentSlot);
-            customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onUnequipped(customItem, player, equipmentSlot, itemStack);
+            customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onUnequipped(customItem, player, equipmentSlot, itemStack);
         }
 
 
@@ -75,7 +75,7 @@ public class EquipmentListener extends SelfRegisteringListener {
         customItem = CustomItem.get(itemStack);
         if (customItem != null){
             if (isEquippableAtSlot(customItem, equipmentSlot)) PlayerEquipment.get(player).setItem(customItem, equipmentSlot);
-            customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onEquipped(customItem, player, equipmentSlot, itemStack);
+            customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onEquipped(customItem, player, equipmentSlot, itemStack);
         }
     }
 }

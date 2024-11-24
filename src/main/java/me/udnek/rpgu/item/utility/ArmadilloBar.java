@@ -3,10 +3,11 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
-import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -20,7 +21,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -56,24 +56,23 @@ public class ArmadilloBar extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new ArmadilloBarComponent());
+        getComponents().set(new ArmadilloBarComponent());
     }
 
-    public class ArmadilloBarComponent implements ConstructableActiveAbilityComponent<PlayerInteractEvent, Object> {
+    public class ArmadilloBarComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
-        private static final int COOLDOWN_SECONDS = 70;
-        private static final int DURATION_SECONDS = 8;
+        private static final int COOLDOWN = 70*20;
+        private static final int DURATION = 7*20;
 
-        @Override
-        public @Nullable DamageFormula<Object> getDamage() {
-            return null;
+        public ArmadilloBarComponent(){
+            getComponents().set(AttributeBasedProperty.from(COOLDOWN, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(DURATION, ComponentTypes.ABILITY_DURATION));
         }
 
         @Override
-        public int getBaseCooldown() {return COOLDOWN_SECONDS * 20;}
-
-        @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
+            final double duration = getComponents().get(ComponentTypes.ABILITY_DURATION).get(player);
+            final int PERIOD = 10;
             new BukkitRunnable() {
                 int count = 0;
                 @Override
@@ -85,11 +84,11 @@ public class ArmadilloBar extends ConstructableCustomItem {
                         }
                     }
                     count++;
-                    if (count == DURATION_SECONDS * 2) cancel();
+                    if (count == duration/PERIOD) cancel();
                 }
-            }.runTaskTimer(RpgU.getInstance(), 0, 10);
+            }.runTaskTimer(RpgU.getInstance(), 0, PERIOD);
 
-            Effects.MAGICAL_RESISTANCE.applyInvisible(player, DURATION_SECONDS * 20, 8);
+            Effects.MAGICAL_RESISTANCE.applyInvisible(player, DURATION, 8);
 
             return ActionResult.FULL_COOLDOWN;
         }
@@ -99,7 +98,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
             componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.2").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            ConstructableActiveAbilityComponent.super.addLoreLines(componentable);
+            super.addLoreLines(componentable);
         }
 
         @Override

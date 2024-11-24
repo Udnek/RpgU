@@ -47,6 +47,6 @@ public class RustyIronRing extends ConstructableCustomItem implements RpgUCustom
         CustomKeyedAttributeModifier baseHp = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_max_health_rusty_iron_ring"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         CustomKeyedAttributeModifier baseArmor = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_armor_rusty_iron_ring"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
 
-        setComponent(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.MAX_HEALTH, baseHp).add(Attribute.ARMOR, baseArmor).build()));
+        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.MAX_HEALTH, baseHp).add(Attribute.ARMOR, baseArmor).build()));
     }
 }

@@ -46,7 +46,7 @@ public abstract class ShamanArmor extends ConstructableCustomItem {
         super.initializeComponents();
 
         CustomAttributeModifier attributeModifier = new CustomAttributeModifier(2, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup()));
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
     }
 
 

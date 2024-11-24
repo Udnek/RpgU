@@ -71,12 +71,12 @@ public class WitherWreath extends ConstructableCustomItem implements RpgUCustomI
 
         CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_" + getRawId()), -0.3, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
         CustomKeyedAttributeModifier attributeHealth = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "max_health_" + getRawId()), -2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        setComponent(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).add(Attribute.MAX_HEALTH, attributeHealth).build()));
+        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).add(Attribute.MAX_HEALTH, attributeHealth).build()));
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
 
-        setComponent(new WitherWreathComponent());
+        getComponents().set(new WitherWreathComponent());
     }
 
     public static class WitherWreathComponent implements ArtifactComponent {

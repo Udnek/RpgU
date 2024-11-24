@@ -1,87 +1,30 @@
 package me.udnek.rpgu.component.ability;
 
+import me.udnek.itemscoreu.customcomponent.CustomComponent;
+import me.udnek.itemscoreu.customcomponent.OptimizedComponentHolder;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
-import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ability.property.ActiveAbilityProperty;
+import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
-import me.udnek.rpgu.mechanic.damaging.Damage;
-import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
-import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
+public abstract class ConstructableActiveAbilityComponent<ActivationContext> extends OptimizedComponentHolder<ActiveAbilityComponent<?>> implements ActiveAbilityComponent<ActivationContext> {
 
-public interface ConstructableActiveAbilityComponent<ActivationContext, DamageContext> extends ActiveAbilityComponent<ActivationContext>, ActiveAbilityProperty<DamageContext> {
-
-    default @NotNull Damage calculateDamage(@NotNull DamageContext context){
-        return Objects.requireNonNull(getDamage()).calculate(context);
-    }
-    @Override
-    default @Nullable DamageFormula<DamageContext> getDamage(){return null;}
-
-    @Override
-    default int getBaseCooldown(){return 0;}
-    default int getCooldown(@NotNull Player player){
-        int baseCooldown = getBaseCooldown();
-        if (baseCooldown <= 0) return 0;
-        return (int) Attributes.COOLDOWN_TIME.calculateWithBase(player, baseCooldown);
+    public void addLoreLines(@NotNull ActiveAbilityLorePart componentable){
+        for (CustomComponent<ActiveAbilityComponent<?>> component : getComponents()) {
+            if (component instanceof AbilityProperty<?,?> abilityProperty){
+                abilityProperty.describe(componentable);
+            }
+        }
     }
 
     @Override
-    default double getBaseCastRange(){return 0;}
-    default double getCastRange(@NotNull Player player){
-        double baseCastRange = getBaseCastRange();
-        if (baseCastRange <= 0) return 0;
-        return Attributes.CAST_RANGE.calculateWithBase(player, baseCastRange);
-    }
-
-    @Override
-    default double getBaseAreaOfEffect(){return 0;}
-    default double getAreaOfEffect(@NotNull Player player){
-        double baseAreaOfEffect = getBaseAreaOfEffect();
-        if (baseAreaOfEffect <= 0) return 0;
-        return Attributes.AREA_OF_EFFECT.calculateWithBase(player, baseAreaOfEffect);
-    }
-
-    @Override
-    default int getBaseCastTime(){return 0;}
-
-    default void addLoreLines(@NotNull ActiveAbilityLorePart componentable){
-        addDamageLine(componentable);
-        addCooldownLine(componentable);
-        addCastRangeLine(componentable);
-        addCastTimeLine(componentable);
-        addAreaOfEffectLine(componentable);
-    }
-    default void addCooldownLine(@NotNull ActiveAbilityLorePart componentable){
-        Utils.consumeIfPositive(getBaseCooldown(), value ->
-                componentable.addWithFormat(Component.translatable("active_ability.rpgu.cooldown", Component.text(me.udnek.itemscoreu.util.Utils.roundToTwoDigits(value/20d)))));
-    }
-    default void addAreaOfEffectLine(@NotNull ActiveAbilityLorePart componentable){
-        Utils.consumeIfPositive(getBaseAreaOfEffect(), value ->
-                componentable.addWithFormat(Component.translatable("active_ability.rpgu.area_of_effect", Component.text(me.udnek.itemscoreu.util.Utils.roundToTwoDigits(value)))));
-    }
-    default void addCastRangeLine(@NotNull ActiveAbilityLorePart componentable){
-        Utils.consumeIfPositive(getBaseCastRange(), value ->
-            componentable.addWithFormat(Component.translatable("active_ability.rpgu.cast_range", Component.text(me.udnek.itemscoreu.util.Utils.roundToTwoDigits(value)))));
-    }
-    default void addCastTimeLine(@NotNull ActiveAbilityLorePart componentable){
-        Utils.consumeIfPositive(getBaseCastTime(), value ->
-                componentable.addWithFormat(Component.translatable("active_ability.rpgu.cast_time", Component.text(me.udnek.itemscoreu.util.Utils.roundToTwoDigits(value/20d)))));
-    }
-    default void addDamageLine(@NotNull ActiveAbilityLorePart componentable){
-        me.udnek.itemscoreu.util.Utils.consumeIfNotNull(getDamage(), value ->
-                value.description(componentable::addWithFormat));
-    }
-
-    @Override
-    default void getLore(@NotNull LoreBuilder loreBuilder){
+    public void getLore(@NotNull LoreBuilder loreBuilder){
         ActiveAbilityLorePart componentable = new ActiveAbilityLorePart();
         loreBuilder.set(55, componentable);
         componentable.addEmptyAboveHeader();
@@ -90,20 +33,19 @@ public interface ConstructableActiveAbilityComponent<ActivationContext, DamageCo
     }
 
     @Override
-    default void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext){
+    public void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext){
         if (customItem.hasCooldown(player)) return;
         ActionResult result = action(customItem, player, activationContext);
         if (result == ActionResult.FULL_COOLDOWN || result == ActionResult.PENALTY_COOLDOWN){
-            int cooldown = getCooldown(player);
-            if (result == ActionResult.PENALTY_COOLDOWN) cooldown = (int) (cooldown * getMissUsageCooldownPenalty());
-            if (cooldown > 0) customItem.setCooldown(player, cooldown);
+            double cooldown = getComponents().getOrDefault(ComponentTypes.ABILITY_COOLDOWN).get(player);
+            if (result == ActionResult.PENALTY_COOLDOWN) cooldown = cooldown * getComponents().getOrDefault(ComponentTypes.ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER).get(player);
+            if (cooldown > 0) customItem.setCooldown(player, (int) cooldown);
         }
-
     }
 
-    @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext);
+    public abstract @NotNull ConstructableActiveAbilityComponent.ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext);
 
-    enum ActionResult {
+    public enum ActionResult {
         FULL_COOLDOWN,
         PENALTY_COOLDOWN,
         NO_COOLDOWN

@@ -15,7 +15,7 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        setComponent(ComponentTypes.TECHNICAL_ITEM.getDefault());
+        getComponents().set(ComponentTypes.TECHNICAL_ITEM.getDefault());
     }
 
     @Override

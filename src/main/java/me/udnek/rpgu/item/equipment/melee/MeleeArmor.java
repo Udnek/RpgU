@@ -33,7 +33,7 @@ public abstract class MeleeArmor extends ConstructableCustomItem {
 
         CustomAttributeModifier MP = new CustomAttributeModifier(3, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup()));
         CustomAttributeModifier MD = new CustomAttributeModifier(1, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup()));
-        setComponent(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, MP).add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, MD).build()));
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, MP).add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, MD).build()));
     }
 
 

@@ -44,7 +44,7 @@ public class PlayerEquipment {
     public void setItem(@Nullable CustomItem customItem, @NotNull SingleSlot equipmentSlot){
         if (
                 customItem != null &&
-                customItem.getComponentOrDefault(ComponentTypes.EQUIPPABLE_ITEM).isAppropriateSlot(equipmentSlot)
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).isAppropriateSlot(equipmentSlot)
         ) {
             put(equipmentSlot, customItem);
             return;

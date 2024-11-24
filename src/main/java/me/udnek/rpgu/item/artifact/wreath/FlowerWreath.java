@@ -113,7 +113,7 @@ public class FlowerWreath extends ConstructableCustomItem implements RpgUCustomI
     public void initializeComponents() {
         super.initializeComponents();
 
-        setComponent(new FlowerWreathComponent());
+        getComponents().set(new FlowerWreathComponent());
     }
 
     public static class FlowerWreathComponent implements ArtifactComponent {

@@ -1,5 +1,7 @@
 package me.udnek.rpgu.component.ability.property;
 
+import org.jetbrains.annotations.NotNull;
+
 public abstract class AbstractAbilityProperty<Context, Value> implements AbilityProperty<Context, Value> {
 
     protected Value base;
@@ -9,6 +11,6 @@ public abstract class AbstractAbilityProperty<Context, Value> implements Ability
     }
 
     @Override
-    public Value getBase() {return base;}
+    public @NotNull Value getBase() {return base;}
 
 }
