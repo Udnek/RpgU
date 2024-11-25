@@ -11,14 +11,19 @@ public interface MagicPotentialBasedFormula extends Function<Double, Double>{
 
     MagicPotentialBasedFormula ZERO = new MagicPotentialBasedFormula() {
         @Override
-        public @NotNull Component getDescription() {return Component.text(0);}
+        public @NotNull Component getDescriptionWithNumberModifier(@NotNull Function<@NotNull Double, @NotNull Double> function) {
+            return Component.text(function.apply(0d));
+        }
         @Override
         public boolean isAlwaysZero() {return true;}
         @Override
         public @NotNull Double apply(@NotNull Double mp) {return 0d;}
     };
 
-    @NotNull Component getDescription();
+    @NotNull Component getDescriptionWithNumberModifier(@NotNull Function<@NotNull Double, @NotNull Double> function);
+    default @NotNull Component getDescription(){
+        return getDescriptionWithNumberModifier(Function.identity());
+    }
 
     boolean isAlwaysZero();
 

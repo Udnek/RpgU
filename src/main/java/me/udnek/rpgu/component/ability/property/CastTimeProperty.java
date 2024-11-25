@@ -23,7 +23,7 @@ public class CastTimeProperty extends AbstractAbilityProperty<Player, Integer> {
     @Override
     public void describe(@NotNull ActiveAbilityLorePart componentable) {
         Utils.consumeIfNotNull(getBase(), value ->
-                componentable.addWithFormat(Component.translatable("ability.rpgu.cast_time", Component.text(Utils.roundToTwoDigits((double) value /20)))));
+                componentable.addWithFormat(Component.translatable("ability.rpgu.cast_time", Component.text(Utils.roundToTwoDigits(value/20d)))));
     }
 
     @Override

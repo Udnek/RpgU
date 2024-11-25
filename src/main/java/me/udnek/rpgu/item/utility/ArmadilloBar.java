@@ -83,12 +83,13 @@ public class ArmadilloBar extends ConstructableCustomItem {
                             player.removePotionEffect(activePotionEffect.getType());
                         }
                     }
+
                     count++;
                     if (count == duration/PERIOD) cancel();
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, PERIOD);
 
-            Effects.MAGICAL_RESISTANCE.applyInvisible(player, DURATION, 8);
+            Effects.MAGICAL_RESISTANCE.apply(player, DURATION, 8);
 
             return ActionResult.FULL_COOLDOWN;
         }

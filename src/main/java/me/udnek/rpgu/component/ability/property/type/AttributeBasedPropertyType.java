@@ -7,7 +7,7 @@ import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
-public class AttributeBasedPropertyType extends SelfDescribedPropertyType<AttributeBasedProperty> {
+public class AttributeBasedPropertyType extends SelfDescribedPropertyType<Double, AttributeBasedProperty> {
 
     protected CustomAttribute attribute;
     protected String translation;
@@ -29,11 +29,15 @@ public class AttributeBasedPropertyType extends SelfDescribedPropertyType<Attrib
     }
 
     @Override
-    public void describe(@NotNull AttributeBasedProperty component, @NotNull ActiveAbilityLorePart componentable) {
-        double base = component.getBase();
+    public void describe(@NotNull Component text, @NotNull ActiveAbilityLorePart componentable) {
+        componentable.addWithFormat(Component.translatable(translation, text));
+    }
+
+    @Override
+    public void describe(@NotNull Double base, @NotNull ActiveAbilityLorePart componentable) {
         if (base < attribute.getMinimum()) return;
         if (divideValueBy20) base /= 20d;
-        componentable.addWithFormat(Component.translatable(translation, Component.text(Utils.roundToTwoDigits(base))));
+        describe(Component.text(Utils.roundToTwoDigits(base)), componentable);
     }
 }
 

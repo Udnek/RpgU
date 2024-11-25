@@ -1,12 +1,18 @@
 package me.udnek.rpgu;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
+import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.util.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -129,10 +135,22 @@ public class TestListener extends SelfRegisteringListener {
         if (event.getInventory().getType() == InventoryType.WORKBENCH &&
             event.getView().title().toString().equals(Component.translatable("container.crafting").toString()))
         {
-            event.titleOverride(Component.text("//TODO REPLACE"));
+            event.titleOverride(Component.translatable(Material.CRAFTING_TABLE.translationKey()));
         }
 
     }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void itemGenerates(CustomItemGeneratedEvent event){
+        AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
+        event.getCustomItem().getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
+        if (VanillaItemManager.isReplaced(event.getCustomItem())){
+            ItemAttributeModifiers attributeModifiers = event.getItemStack().getData(DataComponentTypes.ATTRIBUTE_MODIFIERS);
+            if (attributeModifiers == null) return;
+            event.getItemStack().setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, attributeModifiers.showInTooltip(false));
+        }
+    }
+
 
     @EventHandler
     public void recipeInitialization(InitializationEvent event){

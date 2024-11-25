@@ -36,7 +36,8 @@ public class RootEffect extends ConstructableCustomEffect {
 
     @Override
     public void addAttributes(@NotNull AttributeConsumer consumer) {
-        consumer.accept(Attribute.MOVEMENT_SPEED,  new NamespacedKey(RpgU.getInstance(), "movement_speed_" + getRawId()),-1, AttributeModifier.Operation.ADD_NUMBER);
-        consumer.accept(Attribute.JUMP_STRENGTH,  new NamespacedKey(RpgU.getInstance(), "jump_strength_" + getRawId()),-1, AttributeModifier.Operation.ADD_NUMBER);
+        consumer.accept(Attribute.MOVEMENT_SPEED,  new NamespacedKey(RpgU.getInstance(), "movement_speed_" + getRawId()),-100, AttributeModifier.Operation.ADD_NUMBER);
+        consumer.accept(Attribute.JUMP_STRENGTH,  new NamespacedKey(RpgU.getInstance(), "jump_strength_" + getRawId()),-100, AttributeModifier.Operation.ADD_NUMBER);
+        consumer.accept(Attribute.KNOCKBACK_RESISTANCE,  new NamespacedKey(RpgU.getInstance(), "knockback_resistance_" + getRawId()),100, AttributeModifier.Operation.ADD_NUMBER);
     }
 }

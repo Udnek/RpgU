@@ -29,11 +29,14 @@ public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Doub
     @Override
     public @NotNull Double getBase() {return base;}
 
+    public double getWithBase(@NotNull Player player, double base){
+        if (base < getType().getAttribute().getMinimum()) return 0d;
+        return getType().getAttribute().calculateWithBase(player, base);
+    }
+
     @Override
     public @NotNull Double get(@NotNull Player player) {
-        double base = getBase();
-        if (base < type.getAttribute().getMinimum()) return 0d;
-        return type.getAttribute().calculateWithBase(player, base);
+        return getWithBase(player, getBase());
     }
 
     @Override
@@ -43,6 +46,6 @@ public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Doub
 
     @Override
     public void describe(@NotNull ActiveAbilityLorePart componentable) {
-        type.describe(this, componentable);
+        getType().describe(this, componentable);
     }
 }
