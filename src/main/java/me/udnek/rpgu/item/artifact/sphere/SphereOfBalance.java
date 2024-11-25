@@ -10,7 +10,6 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -22,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class SphereOfBalance extends ConstructableCustomItem implements RpgUCustomItem {
+public class SphereOfBalance extends ConstructableCustomItem {
 
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}

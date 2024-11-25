@@ -9,7 +9,6 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -22,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class PhantomChestplate extends ConstructableCustomItem implements RpgUCustomItem {
+public class PhantomChestplate extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "phantom_chestplate";}
 

@@ -7,7 +7,6 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -16,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class CeremonialDagger extends ConstructableCustomItem implements RpgUCustomItem {
+public class CeremonialDagger extends ConstructableCustomItem {
 
     public static final double BACKSTAB_DAMAGE_MULTIPLIER = 2;
     public static final double BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT =  0.75;

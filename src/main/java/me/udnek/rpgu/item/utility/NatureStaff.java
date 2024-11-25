@@ -4,26 +4,21 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.magicpotential.LinearMPFormula;
-import me.udnek.rpgu.particle.ParticleUtils;
-import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -62,7 +57,7 @@ public class NatureStaff extends ConstructableCustomItem {
         getComponents().set(new NatureStaffComponent());
     }
 
-    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
+    public class NatureStaffComponent extends RayTraceActiveAbility {
 
         public static double BASE_RADIUS = 2.5;
         public static double BASE_DURATION = 2 * 20;
@@ -102,16 +97,12 @@ public class NatureStaff extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            RayTraceResult rayTraceResult = player.rayTraceBlocks(getComponents().get(ComponentTypes.ABILITY_CAST_RANGE).get(player));
-            if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
-            Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
-            final double radius = getComponents().get(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
-            Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
-            ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.GREEN).location(location), radius, 5);
+            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN), 5);
             final int duration = getComponents().get(ComponentTypes.ABILITY_DURATION).get(player).intValue();
 
-            if (nearbyLivingEntities.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
-            for (LivingEntity livingEntity : nearbyLivingEntities) {
+            if (livingEntitiesInRayTraceRadius == null) return ActionResult.NO_COOLDOWN;
+            if (livingEntitiesInRayTraceRadius.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
+            for (LivingEntity livingEntity : livingEntitiesInRayTraceRadius) {
                 Effects.ROOT_EFFECT.apply(livingEntity, duration, 0);
             }
 

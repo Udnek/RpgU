@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
@@ -16,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class MagnetiteIngot extends ConstructableCustomItem implements RpgUCustomItem {
+public class MagnetiteIngot extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "magnetite_ingot";}
     @Override

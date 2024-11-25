@@ -1,7 +1,6 @@
 package me.udnek.rpgu.item.ingredients;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class IngotMold extends ConstructableCustomItem implements RpgUCustomItem {
+public class IngotMold extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "ingot_mold";}
     @Override

@@ -5,12 +5,9 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
-import me.udnek.rpgu.particle.ParticleUtils;
-import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -24,7 +21,6 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,7 +61,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         getComponents().set(new AirElementalTomeComponent());
     }
 
-    public class AirElementalTomeComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
+    public class AirElementalTomeComponent extends RayTraceActiveAbility {
 
         public static double AOE_RADIUS = 2.5;
         public static double DURATION = 4 * 20;
@@ -81,15 +77,11 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            RayTraceResult rayTraceResult = player.rayTraceBlocks(getComponents().get(ComponentTypes.ABILITY_CAST_RANGE).get(player));
-            if (rayTraceResult == null) return ActionResult.NO_COOLDOWN;
-            Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
-            final double radius = getComponents().get(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
-            Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
-            ParticleUtils.circle(new ParticleBuilder(Particle.SMALL_GUST).location(location), radius, 5);
+            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.SMALL_GUST), 5);
 
-            if (nearbyLivingEntities.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
-            for (LivingEntity livingEntity : nearbyLivingEntities) {
+            if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
+            if (livingEntitiesInRadius.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
+            for (LivingEntity livingEntity : livingEntitiesInRadius) {
                 new BukkitRunnable() {
                     int count = 0;
                     @Override

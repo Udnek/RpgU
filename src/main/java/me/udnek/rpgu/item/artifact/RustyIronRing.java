@@ -11,7 +11,6 @@ import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -19,7 +18,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
-public class RustyIronRing extends ConstructableCustomItem implements RpgUCustomItem {
+public class RustyIronRing extends ConstructableCustomItem {
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
     @Override

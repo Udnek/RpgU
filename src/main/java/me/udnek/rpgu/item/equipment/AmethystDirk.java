@@ -7,7 +7,6 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -16,9 +15,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class AmethystDirk extends ConstructableCustomItem implements RpgUCustomItem {
+public class AmethystDirk extends ConstructableCustomItem {
 
-    private static final double MELEE_MAGICAL_DAMAGE_MULTIPLIER = 0.25;
+    private static final double MELEE_MAGICAL_DAMAGE_MULTIPLIER = 0.2;
 
     @Override
     public @NotNull Material getMaterial() {

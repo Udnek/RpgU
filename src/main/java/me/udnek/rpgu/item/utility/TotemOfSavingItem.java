@@ -1,7 +1,6 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -13,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class TotemOfSavingItem extends ConstructableCustomItem implements RpgUCustomItem {
+public class TotemOfSavingItem extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "totem_of_saving";}
 

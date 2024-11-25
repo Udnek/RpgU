@@ -11,7 +11,6 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -23,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class SphereOfDiscord extends ConstructableCustomItem implements RpgUCustomItem {
+public class SphereOfDiscord extends ConstructableCustomItem {
 
     private static final double MAGICAL_POTENTIAL = 8;
     private static final double ATTACK_DAMAGE = -0.8;
