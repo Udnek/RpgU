@@ -1,7 +1,6 @@
 package me.udnek.rpgu.item.ingredients;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class EsotericSalve extends ConstructableCustomItem implements RpgUCustomItem {
+public class EsotericSalve extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "esoteric_salve";}
 

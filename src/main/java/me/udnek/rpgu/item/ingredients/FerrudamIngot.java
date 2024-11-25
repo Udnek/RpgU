@@ -3,7 +3,6 @@ package me.udnek.rpgu.item.ingredients;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class FerrudamIngot extends ConstructableCustomItem implements RpgUCustomItem {
+public class FerrudamIngot extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "ferrudam_ingot";}
     @Override

@@ -7,7 +7,6 @@ import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -18,7 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
-public class ShinyAxe extends ConstructableCustomItem implements RpgUCustomItem {
+public class ShinyAxe extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "shiny_axe";}
     @Override

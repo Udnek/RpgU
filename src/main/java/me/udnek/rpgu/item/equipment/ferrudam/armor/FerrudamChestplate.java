@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -26,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamChestplate extends ConstructableCustomItem implements RpgUCustomItem, FerrudamArmorItemProperties {
+public class FerrudamChestplate extends ConstructableCustomItem implements FerrudamArmorItemProperties {
     @Override
     public @NotNull String getRawId() {return "ferrudam_chestplate";}
     @Override
@@ -60,7 +59,7 @@ public class FerrudamChestplate extends ConstructableCustomItem implements RpgUC
     }
 
     @Override
-    protected void modifyFinalItemMeta(ItemMeta itemMeta) {
+    protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
         super.modifyFinalItemMeta(itemMeta);
         AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_chestplate"), 4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);

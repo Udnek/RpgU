@@ -9,11 +9,10 @@ import me.udnek.itemscoreu.nms.loot.entry.NmsSingletonEntryContainer;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.table.NmsLootTableContainer;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
-public class RawMagnetite extends ConstructableCustomItem implements RpgUCustomItem {
+public class RawMagnetite extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "raw_magnetite";}
     @Override

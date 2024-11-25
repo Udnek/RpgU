@@ -8,7 +8,6 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.particle.ParticleUtils;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -26,7 +25,7 @@ import java.util.function.Consumer;
 
 
 
-public class PhantomBow extends ConstructableCustomItem implements RpgUCustomItem, Listener {
+public class PhantomBow extends ConstructableCustomItem implements Listener {
 
     public static final double SPEED_BUFF = 0.25;
 

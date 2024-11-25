@@ -3,7 +3,6 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -21,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
-public class Wrench extends ConstructableCustomItem implements RpgUCustomItem {
+public class Wrench extends ConstructableCustomItem {
     @Override
     public @NotNull Material getMaterial() {
         return Material.FISHING_ROD;

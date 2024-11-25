@@ -26,10 +26,10 @@ public class ParticleUtils {
         circle(particleBuilder, size, 1);
     }
 
-    public static void circle(@NotNull ParticleBuilder particleBuilder, double size, int angle) {
+    public static void circle(@NotNull ParticleBuilder particleBuilder, double size, double angle) {
         Location location = particleBuilder.location();
         Preconditions.checkArgument(location != null, "Location must be not null");
-        for (int d = 0; d <= 360; d += angle) {
+        for (double d = 0; d <= 360; d += angle) {
             Location particleLoc = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ());
             particleLoc.setX(location.getX() + Math.cos(Math.toRadians(d)) * size);
             particleLoc.setZ(location.getZ() + Math.sin(Math.toRadians(d)) * size);

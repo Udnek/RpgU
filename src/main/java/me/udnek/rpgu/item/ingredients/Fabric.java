@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.Recipe;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class Fabric extends ConstructableCustomItem implements RpgUCustomItem {
+public class Fabric extends ConstructableCustomItem {
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
     @Override

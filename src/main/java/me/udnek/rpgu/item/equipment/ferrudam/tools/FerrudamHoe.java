@@ -4,7 +4,6 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamHoe extends ConstructableCustomItem implements RpgUCustomItem {
+public class FerrudamHoe extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "ferrudam_hoe";}
     @Override

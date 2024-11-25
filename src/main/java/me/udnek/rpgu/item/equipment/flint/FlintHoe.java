@@ -2,7 +2,6 @@ package me.udnek.rpgu.item.equipment.flint;
 
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.Recipe;
@@ -12,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class FlintHoe extends ConstructableCustomItem implements RpgUCustomItem {
+public class FlintHoe extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "flint_hoe";}
     @Override

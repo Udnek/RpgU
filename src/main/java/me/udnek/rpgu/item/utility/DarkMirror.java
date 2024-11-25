@@ -3,7 +3,6 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -16,7 +15,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class DarkMirror extends ConstructableCustomItem implements RpgUCustomItem {
+public class DarkMirror extends ConstructableCustomItem {
 
     @Override
     public @NotNull String getRawId() {

@@ -8,7 +8,6 @@ import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.item.RpgUCustomItem;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -29,7 +28,7 @@ import java.util.EnumMap;
 import java.util.Random;
 import java.util.function.Consumer;
 
-public class FlowerWreath extends ConstructableCustomItem implements RpgUCustomItem {
+public class FlowerWreath extends ConstructableCustomItem {
 
     private final EnumMap<Material, Integer> flowerColors = new EnumMap<>(Material.class);
 
