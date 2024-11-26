@@ -37,6 +37,11 @@
 	"item.rpgu.ferrudam_leggings": "Ferrudam Leggings",
 	"item.rpgu.ferrudam_boots": "Ferrudam Boots",
 
+	"item.rpgu.wolf_helmet": "Wolf Helmet",
+	"item.rpgu.wolf_chestplate": "Wolf Chestplate",
+	"item.rpgu.wolf_leggings": "Wolf Leggings",
+	"item.rpgu.wolf_boots": "Wolf Boots",
+
 	"item.rpgu.blaze_blade": "Blaze Blade",
 
 	"item.rpgu.shiny_axe": "Shiny Axe",
@@ -58,8 +63,6 @@
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
 	"item.rpgu.shaman_tambourine": "Shaman Tambourine",
-	"item.rpgu.shaman_helmet": "Shaman Helmet",
-	"item.rpgu.shaman_boots": "Shaman Boots",
 
 	"item.rpgu.ferrudam_sword": "Ferrudam Sword",
 	"item.rpgu.ferrudam_pickaxe": "Ferrudam Pickaxe",
