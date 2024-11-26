@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.equipment.shaman;
+package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;

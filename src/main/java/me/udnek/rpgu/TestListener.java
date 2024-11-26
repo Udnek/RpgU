@@ -6,7 +6,6 @@ import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.VanillaBasedCustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
@@ -112,21 +111,18 @@ public class TestListener extends SelfRegisteringListener {
     @EventHandler
     public void abilityRightClick(PlayerInteractEvent event){
         if (!event.getAction().isRightClick()) return;
-        CustomItem.consumeIfCustom(event.getItem(), customItem -> {
-            customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event);
-        });
+        CustomItem.consumeIfCustom(event.getItem(), customItem ->
+                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event));
     }
     @EventHandler
     public void abilityStopUsing(PlayerStopUsingItemEvent event){
-        CustomItem.consumeIfCustom(event.getItem(), customItem -> {
-            customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event);
-        });
+        CustomItem.consumeIfCustom(event.getItem(), customItem ->
+                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event));
     }
     @EventHandler
     public void abilityConsume(PlayerItemConsumeEvent event){
-        CustomItem.consumeIfCustom(event.getItem(), customItem -> {
-            customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event);
-        });
+        CustomItem.consumeIfCustom(event.getItem(), customItem ->
+                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event));
     }
 
 
