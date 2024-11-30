@@ -1,17 +1,12 @@
-package me.udnek.rpgu.item.equipment.shaman;
+package me.udnek.rpgu.item.equipment.wolf;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.lore.AttributesLorePart;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemFlag;
@@ -19,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ShamanArmor extends ConstructableCustomItem {
+public abstract class WolfArmor extends ConstructableCustomItem {
 
     @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
@@ -28,26 +23,15 @@ public abstract class ShamanArmor extends ConstructableCustomItem {
     public @Nullable EquippableComponent getEquippable() {
         EquippableComponent equippable = new ItemStack(getMaterial()).getItemMeta().getEquippable();
         equippable.setSlot(getMaterial().getEquipmentSlot());
-        equippable.setModel(new NamespacedKey(RpgU.getInstance(), "shaman"));
+        equippable.setModel(new NamespacedKey(RpgU.getInstance(), "wolf"));
         return equippable;
-    }
-
-    public @Nullable LoreBuilder getLoreBuilder(CustomEquipmentSlot slot) {
-        LoreBuilder loreBuilder = new LoreBuilder();
-        AttributesLorePart attributesLorePart = new AttributesLorePart();
-        loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.0").color(CustomAttribute.PLUS_COLOR));
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.1").color(NamedTextColor.GRAY));
-        return loreBuilder;
     }
 
     @Override
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomAttributeModifier attributeModifier = new CustomAttributeModifier(2, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup()));
+        CustomAttributeModifier attributeModifier = new CustomAttributeModifier(1, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup()));
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
     }
-
-
 }

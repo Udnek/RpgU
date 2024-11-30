@@ -23,9 +23,10 @@ import me.udnek.rpgu.item.equipment.melee.MeleeBoots;
 import me.udnek.rpgu.item.equipment.melee.MeleeChestplate;
 import me.udnek.rpgu.item.equipment.melee.MeleeHelmet;
 import me.udnek.rpgu.item.equipment.melee.MeleeLeggings;
-import me.udnek.rpgu.item.equipment.shaman.ShamanBoots;
-import me.udnek.rpgu.item.equipment.shaman.ShamanHelmet;
-import me.udnek.rpgu.item.equipment.shaman.ShamanTambourine;
+import me.udnek.rpgu.item.equipment.wolf.WolfBoots;
+import me.udnek.rpgu.item.equipment.wolf.WolfChestplate;
+import me.udnek.rpgu.item.equipment.wolf.WolfHelmet;
+import me.udnek.rpgu.item.equipment.wolf.WolfLeggings;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 import me.udnek.rpgu.item.utility.*;
@@ -64,8 +65,10 @@ public class Items {
     public static final CustomItem HUNGRY_HORROR_HELMET = register(new HungryHorrorHelmet());
     public static final CustomItem HUNGRY_HORROR_CHESTPLATE = register(new HungryHorrorChestplate());
 
-    public static final CustomItem SHAMAN_HELMET = register(new ShamanHelmet());
-    public static final CustomItem SHAMAN_BOOTS = register(new ShamanBoots());
+    public static final CustomItem WOLF_HELMET = register(new WolfHelmet());
+    public static final CustomItem WOLF_CHESTPLATE = register(new WolfChestplate());
+    public static final CustomItem WOLF_LEGGINGS = register(new WolfLeggings());
+    public static final CustomItem WOLF_BOOTS = register(new WolfBoots());
 
     public static final CustomItem MELEE_HELMET = register(new MeleeHelmet());
     public static final CustomItem MELEE_CHESTPLATE = register(new MeleeChestplate());
