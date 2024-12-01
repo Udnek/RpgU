@@ -5,6 +5,8 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.jeiu.component.ComponentTypes;
+import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -38,6 +40,7 @@ public class ArcaneAccumulator extends ConstructableCustomItem {
         super.initializeComponents();
 
         getComponents().set(new ArcaneAccumulatorComponent());
+        getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
     public static class ArcaneAccumulatorComponent implements ArtifactComponent {

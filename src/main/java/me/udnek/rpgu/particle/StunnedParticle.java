@@ -1,55 +1,57 @@
 package me.udnek.rpgu.particle;
 
 import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
-import org.bukkit.Location;
+import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Display;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Transformation;
+import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
 
 public class StunnedParticle extends CustomFlatParticle {
-    public LivingEntity targetEntity;
+    protected LivingEntity targetEntity;
+    protected int duration;
 
-    public StunnedParticle(@NotNull Location location, @NotNull LivingEntity entity) {
-        super(location);
-        targetEntity = entity;
+    public StunnedParticle(@NotNull LivingEntity target, @Positive int duration) {
+        targetEntity = target;
+        this.duration = duration;
+    }
+
+    public StunnedParticle(@NotNull LivingEntity target){
+        this(target, 15);
     }
 
     @Override
-    public double getXScale() {
-        return 0.6;
+    public @Positive int getFrameTime() {return duration;}
+    @Override
+    public @Positive int getFramesAmount() {return 1;}
+    @Override
+    public double getScale() {return 0.6;}
+    @Override
+    protected @NotNull ItemStack createDisplayItem() {
+        return new ItemStack(Material.GUNPOWDER);
+    }
+    @Override
+    protected @NotNull NamespacedKey getCurrentModelPath() {
+        return new NamespacedKey(RpgU.getInstance(), "particle/stunned");
     }
 
     @Override
-    public double getYScale() {
-        return 0.6;
-    }
-
-    @Override
-    protected ItemStack getItemStack() {
-        ItemStack itemStack = new ItemStack(Material.FEATHER);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(4000);
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
-    }
-
-    @Override
-    public int getDuration() {
-        return 15;
+    public void setStartTransformation() {
+        Transformation transformation = display.getTransformation();
+        transformation.getTranslation().set(0, targetEntity.getEyeHeight()/2f + 0.2, 0);
+        display.setTransformation(transformation);
+        display.setBrightness(new Display.Brightness(15, 15));
     }
 
     @Override
     protected void nextFrame() {}
-
     @Override
-    protected void afterSpawned() {
-        super.afterSpawned();
+    protected void spawn() {
+        super.spawn();
         targetEntity.addPassenger(display);
-        Transformation transformation = display.getTransformation();
-        transformation.getTranslation().set(0, targetEntity.getEyeHeight()/2f + 0.2, 0);
-        display.setTransformation(transformation);
     }
 }
