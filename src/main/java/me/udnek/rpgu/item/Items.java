@@ -84,6 +84,7 @@ public class Items {
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
     public final static CustomItem AMETHYST_DIRK = register(new AmethystDirk());
+    public final static CustomItem GRATE_AMETHYST_SWORD = register(new GreatAmethystSword());
 
 
     // INGREDIENT

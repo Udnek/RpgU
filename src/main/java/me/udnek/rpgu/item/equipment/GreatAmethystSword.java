@@ -24,6 +24,7 @@ import me.udnek.rpgu.particle.AmethystSpikeParticle;
 import me.udnek.rpgu.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -63,6 +64,11 @@ public class GreatAmethystSword extends ConstructableCustomItem {
 
     @Override
     public boolean getAddDefaultAttributes() {return true;}
+
+    @Override
+    public @Nullable NamespacedKey getItemModel() {
+        return null;
+    }
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
@@ -121,7 +127,6 @@ public class GreatAmethystSword extends ConstructableCustomItem {
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
             Location location = player.getLocation();
             Vector direction = location.getDirection();
-            location.setY(Utils.rayTraceBlockUnder(player).getY());
             direction.setY(0).normalize();
             double aoe = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
             double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
@@ -131,7 +136,7 @@ public class GreatAmethystSword extends ConstructableCustomItem {
                 @Override
                 public void run() {
                     location.add(direction);
-                    new AmethystSpikeParticle(location).play();
+                    new AmethystSpikeParticle((float) aoe*2).play(location);
                     showRadius(new ParticleBuilder(Particle.SMALL_GUST).location(location), aoe, 5);
                     Collection<LivingEntity> nearbyLivingEntities = location.getNearbyLivingEntities(aoe);
 
@@ -147,7 +152,7 @@ public class GreatAmethystSword extends ConstructableCustomItem {
                     count++;
                     if (1 + 2 * aoe * count > castRange) cancel();
                 }
-            }.runTaskTimer(RpgU.getInstance(), 0, 1);
+            }.runTaskTimer(RpgU.getInstance(), 0, 2);
 
 
             return ActionResult.FULL_COOLDOWN;
