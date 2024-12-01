@@ -99,7 +99,7 @@ public class NatureStaff extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN), 5, true);
+            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
             final int duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player).intValue();
 
             if (livingEntitiesInRayTraceRadius == null) return ActionResult.NO_COOLDOWN;

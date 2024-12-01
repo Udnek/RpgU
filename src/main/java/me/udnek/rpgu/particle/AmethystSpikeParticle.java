@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class AmethystSpikeParticle extends ConstructableCustomParticle<BlockDisplay> {
 
     public static final int UP_DURATION = 3;
-    public static final int DOWN_DURATION = 3;
+    public static final int DOWN_DURATION = 10;
 
     protected float size;
 
@@ -35,13 +35,13 @@ public class AmethystSpikeParticle extends ConstructableCustomParticle<BlockDisp
             display.setInterpolationDelay(-1);
             display.setInterpolationDuration(UP_DURATION);
             Transformation transformation = display.getTransformation();
-            transformation.getTranslation().add(0, 1, 0);
+            transformation.getTranslation().add(0, size/2, 0);
             display.setTransformation(transformation);
         } else if (frameNumber == getFramesAmount() - DOWN_DURATION - 1) {
             display.setInterpolationDelay(-1);
             display.setInterpolationDuration(DOWN_DURATION);
             Transformation transformation = display.getTransformation();
-            transformation.getTranslation().add(0, -1, 0);
+            transformation.getTranslation().add(0, -size, 0);
             display.setTransformation(transformation);
         }
     }
@@ -52,7 +52,7 @@ public class AmethystSpikeParticle extends ConstructableCustomParticle<BlockDisp
         display.setBlock(Material.AMETHYST_CLUSTER.createBlockData());
         Transformation transformation = display.getTransformation();
         transformation.getScale().set(size, size, size);
-        transformation.getTranslation().add(-size/2, -1f, -size/2);
+        transformation.getTranslation().add(-size/2, -size, -size/2);
         display.setTransformation(transformation);
     }
 }

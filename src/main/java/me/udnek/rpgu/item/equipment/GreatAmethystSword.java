@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.equipment;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import jdk.jshell.execution.Util;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -21,11 +22,9 @@ import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
 import me.udnek.rpgu.particle.AmethystSpikeParticle;
+import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
@@ -111,7 +110,7 @@ public class GreatAmethystSword extends ConstructableCustomItem {
         getComponents().set(new GreatAmethystSwordComponent());
     }
 
-    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> implements RayTraceActiveAbility<PlayerItemConsumeEvent> {
+    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
 
         public static double BASE_RADIUS = 0.5;
         public static double BASE_DAMAGE = 1.5;
@@ -125,34 +124,36 @@ public class GreatAmethystSword extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
-            Location location = player.getLocation();
-            Vector direction = location.getDirection();
-            direction.setY(0).normalize();
-            double aoe = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
-            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
+            Location location = Utils.rayTraceBlockUnder(player);
+
+            if (location == null) return ActionResult.PENALTY_COOLDOWN;
+
+            final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
+            final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
+
+            Vector direction = player.getLocation().getDirection();
+            direction.setY(0).normalize().multiply(radius*2);
+
+            Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player));
 
             new BukkitRunnable(){
                 int count = 0;
                 @Override
                 public void run() {
+                    count++;
                     location.add(direction);
-                    new AmethystSpikeParticle((float) aoe*2).play(location);
-                    showRadius(new ParticleBuilder(Particle.SMALL_GUST).location(location), aoe, 5);
-                    Collection<LivingEntity> nearbyLivingEntities = location.getNearbyLivingEntities(aoe);
+                    new AmethystSpikeParticle((float) radius*2f).play(location);
+                    ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.FUCHSIA).location(location), radius);
+                    Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
 
-
-                    for (LivingEntity livingEntity : nearbyLivingEntities){
-                        System.out.println(livingEntity);
-                        Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity));
-                        DamageUtils.damage(livingEntity, damage, player);
-
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 2 * 20, 0));
+                    for (LivingEntity entity : nearbyLivingEntities){
+                        DamageUtils.damage(entity, damage, player);
+                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 2 * 20, 0));
                     }
 
-                    count++;
-                    if (1 + 2 * aoe * count > castRange) cancel();
+                    if (2*radius*count > castRange) cancel();
                 }
-            }.runTaskTimer(RpgU.getInstance(), 0, 2);
+            }.runTaskTimer(RpgU.getInstance(), 0, 1);
 
 
             return ActionResult.FULL_COOLDOWN;

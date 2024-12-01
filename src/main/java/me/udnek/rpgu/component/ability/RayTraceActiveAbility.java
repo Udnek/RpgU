@@ -15,18 +15,21 @@ import java.util.Collection;
 
 public interface RayTraceActiveAbility<Context> extends ActiveAbilityComponent<Context> {
 
-    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull Player player, @NotNull ParticleBuilder particleBuilder, double angle, boolean showRadius){
+    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull Player player, @Nullable ParticleBuilder particle){
         RayTraceResult rayTraceResult = Utils.rayTraceBlockOrEntity(player, getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player));
         if (rayTraceResult == null) return null;
         Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
         final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
         Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
-        if (showRadius) showRadius(particleBuilder.location(location), radius, angle);
-
+        if (particle != null) showRadius(particle.location(location), radius);
         return nearbyLivingEntities;
     }
 
-    default void showRadius(@NotNull ParticleBuilder particleBuilder, double size, double angle){
-        ParticleUtils.circle(particleBuilder, size, angle);
+    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull Player player){
+        return findLivingEntitiesInRayTraceRadius(player, null);
+    }
+
+    default void showRadius(@NotNull ParticleBuilder particleBuilder, double size){
+        ParticleUtils.circle(particleBuilder, size);
     }
 }
