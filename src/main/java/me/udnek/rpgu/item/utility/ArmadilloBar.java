@@ -71,7 +71,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            final double duration = getComponents().get(ComponentTypes.ABILITY_DURATION).get(player);
+            final double duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player);
             final int PERIOD = 10;
             new BukkitRunnable() {
                 int count = 0;
