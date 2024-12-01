@@ -3,7 +3,6 @@
 	"item.modifiers.first_artifact": "When equipped as First Artifact:",
 	"item.modifiers.second_artifact": "When equipped as Second Artifact:",
 	"item.modifiers.third_artifact": "When equipped as Third Artifact:",
-	"item.modifiers.shot": "When Shoots:",
 
 	"equipment.rpgu.description_line": " %s",
 
@@ -74,22 +73,18 @@
 	"item.rpgu.rusty_iron_ring": "Rusty Iron Ring",
 
 	"item.rpgu.arcane_accumulator": "Arcane Accumulator",
-	"item.rpgu.arcane_accumulator.description.0": "Applies for %s seconds:",
-	"item.rpgu.arcane_accumulator.description.1": "  Removes negative effects.",
-	"item.rpgu.arcane_accumulator.description.2": "  Applies 90% magical resistance.",
 
 	"item.rpgu.armadillo_bar": "Armadillo Bar",
-	"item.rpgu.armadillo_bar.ability.0": "Applies for %s seconds:",
-	"item.rpgu.armadillo_bar.ability.1": "  Removes negative effects.",
-	"item.rpgu.armadillo_bar.ability.2": "  Applies 90% magical resistance.",
+	"item.rpgu.armadillo_bar.ability.0": "Dispels negative effects while active",
+	"item.rpgu.armadillo_bar.ability.1": "Applies Magical Resistance IX",
 
 	"item.rpgu.totem_of_saving": "Totem of Saving",
 	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
 	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
 
 	"item.rpgu.air_elemental_tome": "Air Elemental Tome",
-	"item.rpgu.air_elemental_tome.description.0": "",
-	"item.rpgu.air_elemental_tome.description.1": "",
+	"item.rpgu.air_elemental_tome.ability.0": "Raise targets into the air",
+	"item.rpgu.air_elemental_tome.ability.1": "and makes them fall with increased damage",
 
 	"item.rpgu.flint_sword": "Flint Sword",
 	"item.rpgu.flint_pickaxe": "Flint Pickaxe",
@@ -103,10 +98,10 @@
 
 	"item.rpgu.hungry_horror_helmet": "Mask of Hungry Horror",
 	"item.rpgu.hungry_horror_helmet.description.0": "On Attack:",
-	"item.rpgu.hungry_horror_helmet.description.1": "  Reapplies Strength effect with increased",
-	"item.rpgu.hungry_horror_helmet.description.2": "  by one amplifier and 2 seconds duration.",
-	"item.rpgu.hungry_horror_helmet.description.3": "  Max effect level: V.",
-	"item.rpgu.hungry_horror_helmet.description.4": "  If you don't have effect, applies Strength I for 2 seconds.",
+	"item.rpgu.hungry_horror_helmet.description.1": " Reapplies Strength effect with increased",
+	"item.rpgu.hungry_horror_helmet.description.2": " by one amplifier and 2 seconds duration.",
+	"item.rpgu.hungry_horror_helmet.description.3": " Max effect level: V.",
+	"item.rpgu.hungry_horror_helmet.description.4": " If you don't have effect, applies Strength I for 2 seconds.",
 
 	"item.rpgu.hungry_horror_chestplate": "Aegis of Hungry Horror",
 	"item.rpgu.hungry_horror_chestplate.description.0": "On Attack:",

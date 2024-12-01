@@ -98,7 +98,6 @@ public class ArmadilloBar extends ConstructableCustomItem {
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
             componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            componentable.add(Component.translatable(getRawItemName() + ".ability.2").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
             super.addLoreLines(componentable);
         }
 

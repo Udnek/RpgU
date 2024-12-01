@@ -1,0 +1,126 @@
+{
+  "item.modifiers.artifacts": "При экипировке как артефакт:",
+  "item.modifiers.first_artifact": "При экипировке в качестве первого артефакта:",
+  "item.modifiers.second_artifact": "При экипировке в качестве второго артефакта:",
+  "item.modifiers.third_artifact": "При экипировке в качестве третьего артефакта:",
+
+  "active_ability.rpgu.title": "Активная способность:",
+  "ability.rpgu.cast_range": "Дальность применения: %s блок(а)(ов)",
+  "ability.rpgu.area_of_effect": "Область действия заклинания: %s блок(а)(ов)",
+  "ability.rpgu.cooldown": "Откат: %s секунд(а)(ы)",
+  "ability.rpgu.cast_time": "Время применения: %s секунд(а)(ы)",
+  "ability.rpgu.duration": "Длительность: %s секунд(а)(ы)",
+
+  "damage_formula.rpgu.magical": "Магический урон: %s",
+  "damage_formula.rpgu.physical": "Физический урон: %s",
+  "magical_potential_formula.rpgu.linear": "%s + %s*МП",
+
+  "attribute.rpgu.name.physical_damage": "Физический урон",
+  "attribute.rpgu.name.attack_speed": "Ударов в секунду",
+  "attribute.rpgu.name.melee_magical_damage_multiplier": "Магический урон в ближнем бою за еденицу потенциала",
+  "attribute.rpgu.name.magical_potential": "Магический потенциал (МП)",
+  "attribute.rpgu.name.magical_defense_multiplier": "Магическая защита за еденицу потенциала",
+  "attribute.rpgu.name.cast_range": "Дальность применения",
+  "attribute.rpgu.name.cooldown_time": "Время отката",
+  "attribute.rpgu.name.projectile_damage_multiplier": "Урон снаряда",
+  "attribute.rpgu.name.projectile_speed": "Скорость снаряда",
+  "attribute.rpgu.name.backstab_damage_multiplier": "Урон со спины",
+  "attribute.rpgu.name.area_of_effect": "Область действия эффекта",
+
+  "gui.rpgu.alloy_forge": "Металлургическая печь",
+
+  "item.rpgu.ferrudam_helmet": "Ферродамовый шлем",
+  "item.rpgu.ferrudam_chestplate": "Ферродамовый нагрудник",
+  "item.rpgu.ferrudam_leggings": "Ферродамовые поножи",
+  "item.rpgu.ferrudam_boots": "Ферродамовые ботинки",
+
+  "item.rpgu.wolf_helmet": "Волчья шапка",
+  "item.rpgu.wolf_chestplate": "Волчья куртка",
+  "item.rpgu.wolf_leggings": "Волчьи штаны",
+  "item.rpgu.wolf_boots": "Волчьи сапоги",
+
+  "item.rpgu.shiny_axe": "Блестящий топор",
+  "item.rpgu.phantom_bow": "Фантомный лук",
+
+  "item.rpgu.ceremonial_dagger": "Церемониальный кинжал",
+
+  "item.rpgu.fabric": "Ткань",
+  "item.rpgu.ferrudam_ingot": "Ферродамовый слиток",
+  "item.rpgu.blast_coal": "Металлургический уголь",
+  "item.rpgu.ingot_mold": "Изложница",
+  "item.rpgu.raw_magnetite": "Блок рудного магнетита",
+  "item.rpgu.magnetite_ingot": "Магнетитовый слиток",
+  "item.rpgu.phantom_wing": "Крыло фантома",
+  "item.rpgu.esoteric_salve": "Эзотерическая мазь",
+  "item.rpgu.wolf_pelt": "Волчья шкура",
+
+  "item.rpgu.wrench": "Гаечный ключ",
+  "item.rpgu.wrench.description.0": "Вращает блоки при взаимодействии",
+
+  "item.rpgu.shaman_tambourine": "Шаманский бубен",
+
+  "item.rpgu.ferrudam_sword": "Ферродамовый меч",
+  "item.rpgu.ferrudam_pickaxe": "Ферродамовая кирка",
+  "item.rpgu.ferrudam_axe": "Ферродамовый топор",
+  "item.rpgu.ferrudam_shovel": "Ферродамовая лопата",
+  "item.rpgu.ferrudam_hoe": "ферродамовая мотыга",
+
+  "item.rpgu.rusty_iron_ring": "Ржавое железное кольцо",
+
+  "item.rpgu.armadillo_bar": "Посох броненосца",
+  "item.rpgu.armadillo_bar.ability.0": "Накладывает Сопротивление магии IX",
+  "item.rpgu.armadillo_bar.ability.1": "Снимает все негативные эффекты во время действия",
+
+  "item.rpgu.totem_of_saving": "Тотем сохранения",
+  "item.rpgu.totem_of_saving.description.0": "Сохраняет вещи после смерти в себе,",
+  "item.rpgu.totem_of_saving.description.1": " если в момент смерти он находился в инвентаре",
+
+  "item.rpgu.air_elemental_tome": "Фолиант элементаля воздуха",
+  "item.rpgu.air_elemental_tome.ability.0": "Поднимает цели в воздух",
+  "item.rpgu.air_elemental_tome.ability.1": "и ударяет о землю с увеличенным уроном",
+
+  "item.rpgu.flint_sword": "Кремневый меч",
+  "item.rpgu.flint_pickaxe": "Кремневая кирка",
+  "item.rpgu.flint_axe": "Кремневый топор",
+  "item.rpgu.flint_shovel": "Кремневая лопата",
+  "item.rpgu.flint_hoe": "Кремневая мотыга",
+
+  "item.rpgu.amethyst_dirk": "Аметистовый кортик",
+
+  "item.rpgu.phantom_chestplate": "Фантомная мантия",
+
+  "item.rpgu.hungry_horror_helmet": "Маска Голодного Ужаса",
+  "item.rpgu.hungry_horror_helmet.description.0": "При атаке:",
+  "item.rpgu.hungry_horror_helmet.description.1": " Повторно применяет эффект силы с увеличением",
+  "item.rpgu.hungry_horror_helmet.description.2": " на один уровень и длительностью 2 секунды.",
+  "item.rpgu.hungry_horror_helmet.description.3": " Максимальный уровень эффекта: V.",
+  "item.rpgu.hungry_horror_helmet.description.4": " Если у вас нет эффекта, применяется Сила I на 2 секунды",
+
+  "item.rpgu.hungry_horror_chestplate": "Эгида Голодного Ужаса",
+  "item.rpgu.hungry_horror_chestplate.description.0": "При атаке:",
+  "item.rpgu.hungry_horror_chestplate.description.1": " Повторно применяет эффект поглощения с увеличением",
+  "item.rpgu.hungry_horror_chestplate.description.2": " на один уровень и длительностью 2 секунды.",
+  "item.rpgu.hungry_horror_chestplate.description.3": " Максимальный уровень эффекта: V.",
+  "item.rpgu.hungry_horror_chestplate.description.4": " Если эффекта нет, применяется Поглощение I на 2 секунды",
+
+  "item.rpgu.flower_wreath": "Цветочный венок",
+  "item.rpgu.flower_wreath.description.0": "Восстанавливает здоровье в лесу",
+
+  "item.rpgu.wither_wreath": "Увядший венок",
+  "item.rpgu.wither_wreath.description.0": "Накладывает Иссушение II при атаке",
+
+  "item.rpgu.nautilus_core": "Ядро Наутилуса",
+  "item.rpgu.nautilus_core.description.0": "Критические удары применяются к магическому урону",
+
+  "item.rpgu.sphere_of_balance": "Сфера баланса",
+  "item.rpgu.sphere_of_discord": "Сфера раздора",
+
+  "item.rpgu.fisherman_snorkel": "Рыбацкая трубка",
+  "item.rpgu.fisherman_snorkel.description.0": "Позволяет дышать под водой,",
+  "item.rpgu.fisherman_snorkel.description.1": " если у поплавка есть доступ к воздуху",
+
+  "item.rpgu.blaze_blade": "Пылающий клинок",
+  "item.rpgu.dark_mirror": "Тёмное зеркало",
+  "item.rpgu.arcane_accumulator": "Загадочный накопитель"
+
+}
