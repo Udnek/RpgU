@@ -5,6 +5,8 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
@@ -61,7 +63,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         getComponents().set(new AirElementalTomeComponent());
     }
 
-    public class AirElementalTomeComponent extends RayTraceActiveAbility {
+    public class AirElementalTomeComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
 
         public static double AOE_RADIUS = 2.5;
         public static double DURATION = 4 * 20;
@@ -77,7 +79,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.SMALL_GUST), 5);
+            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.SMALL_GUST), 5, true);
 
             if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
             if (livingEntitiesInRadius.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}

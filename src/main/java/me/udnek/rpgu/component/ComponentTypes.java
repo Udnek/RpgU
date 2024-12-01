@@ -40,9 +40,9 @@ public class ComponentTypes {
         ABILITY_CAST_RANGE = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cooldown", -1, Attributes.CAST_RANGE, "ability.rpgu.cast_range"));
         ABILITY_AREA_OF_EFFECT = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_area_of_effect", -1, Attributes.AREA_OF_EFFECT, "ability.rpgu.area_of_effect"));
         ABILITY_DURATION = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_duration", -1, Attributes.ABILITY_DURATION, "ability.rpgu.duration", true));
-        ABILITY_CAST_TIME = new AbilityPropertyType<>("ability_cast_time", new CastTimeProperty(-1));
-        ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER = new AbilityPropertyType<>("ability_miss_usage_cooldown_multiplier", new MissUsageCooldownMultiplierProperty(0.3));
-        ABILITY_DAMAGE = new AbilityPropertyType<>("ability_damage", new DamageProperty(new MPBasedDamageFormula(null, null)));
+        ABILITY_CAST_TIME = (AbilityPropertyType<AbilityProperty<Player, Integer>>) register(new AbilityPropertyType<>("ability_cast_time", new CastTimeProperty(-1)));
+        ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER = (AbilityPropertyType<AbilityProperty<Player, Double>>) register(new AbilityPropertyType<>("ability_miss_usage_cooldown_multiplier", new MissUsageCooldownMultiplierProperty(0.3)));
+        ABILITY_DAMAGE = (AbilityPropertyType<AbilityProperty<Double, Damage>>) register(new AbilityPropertyType<>("ability_damage", new DamageProperty(new MPBasedDamageFormula(null, null))));
     }
 
     private static CustomComponentType register(CustomComponentType type){

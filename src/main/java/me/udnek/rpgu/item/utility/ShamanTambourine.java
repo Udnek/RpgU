@@ -85,7 +85,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
             RayTraceResult rayTraceResult = player.getWorld().rayTraceEntities(
                     player.getEyeLocation(),
                     player.getLocation().getDirection(),
-                    getComponents().get(ComponentTypes.ABILITY_CAST_RANGE).get(player),
+                    getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player),
                     1,
                     entity -> entity!=player);
             if (!(rayTraceResult != null && rayTraceResult.getHitEntity() instanceof LivingEntity living)) {
@@ -95,7 +95,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
                 return ActionResult.NO_COOLDOWN;
             }
             living.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 0));
-            DamageUtils.damage(living, getComponents().get(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player)), player);
+            DamageUtils.damage(living, getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player)), player);
             new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(player.getWorld())).spawn();
             return ActionResult.FULL_COOLDOWN;
         }
