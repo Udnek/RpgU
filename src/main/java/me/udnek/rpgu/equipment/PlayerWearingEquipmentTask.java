@@ -12,7 +12,7 @@ public class PlayerWearingEquipmentTask extends TickingTask {
     public void run(){
         for (Player player : Bukkit.getOnlinePlayers()) {
             PlayerEquipment.get(player).getEquipment((slot, customItem) -> {
-                customItem.getComponents().get(ComponentTypes.EQUIPPABLE_ITEM).tickBeingEquipped(customItem, player, slot);
+                customItem.getComponents().getOrException(ComponentTypes.EQUIPPABLE_ITEM).tickBeingEquipped(customItem, player, slot);
             });
         }
     }

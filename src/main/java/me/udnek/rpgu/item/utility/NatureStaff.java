@@ -4,6 +4,8 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.effect.Effects;
@@ -57,7 +59,7 @@ public class NatureStaff extends ConstructableCustomItem {
         getComponents().set(new NatureStaffComponent());
     }
 
-    public class NatureStaffComponent extends RayTraceActiveAbility {
+    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
 
         public static double BASE_RADIUS = 2.5;
         public static double BASE_DURATION = 2 * 20;
@@ -97,8 +99,8 @@ public class NatureStaff extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN), 5);
-            final int duration = getComponents().get(ComponentTypes.ABILITY_DURATION).get(player).intValue();
+            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN), 5, true);
+            final int duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player).intValue();
 
             if (livingEntitiesInRayTraceRadius == null) return ActionResult.NO_COOLDOWN;
             if (livingEntitiesInRayTraceRadius.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
