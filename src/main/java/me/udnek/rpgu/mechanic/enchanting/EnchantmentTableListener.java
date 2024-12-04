@@ -13,7 +13,7 @@ public class EnchantmentTableListener extends SelfRegisteringListener {
         super(plugin);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+/*    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerClicksEnchantmentTable(PlayerInteractEvent event){
         if (event.isCancelled()) return;
         if (event.getAction() == Action.LEFT_CLICK_BLOCK) return;
@@ -22,6 +22,6 @@ public class EnchantmentTableListener extends SelfRegisteringListener {
         if (event.getClickedBlock().getType() != Material.ENCHANTING_TABLE) return;
         event.setCancelled(true);
         new EnchantmentTableInventory().open(event.getPlayer());
-    }
+    }*/
 
 }

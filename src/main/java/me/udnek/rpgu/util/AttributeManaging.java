@@ -33,47 +33,47 @@ public class AttributeManaging extends SelfRegisteringListener {
     @EventHandler
     public void onInit(InitializationEvent event){
         if (event.getStep() == InitializationProcess.Step.BEFORE_VANILLA_MANAGER){
-            for (Material item : itemsArmor.keySet()){VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : armorStats.keySet()){VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : diamondTools){VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
         }
     }
 
-    public static final EnumMap<Material, HpAndArmor> itemsArmor = new EnumMap<>(Material.class);
+    public static final EnumMap<Material, Stats> armorStats = new EnumMap<>(Material.class);
     private static final Set<Material> leatherArmor = new HashSet<>();
     private static final Set<Material> chainmailArmor = new HashSet<>();
     private static final Set<Material> diamondArmor = new HashSet<>();
     private static final Set<Material> diamondTools = new HashSet<>();
 
      static {
-         itemsArmor.put(Material.LEATHER_HELMET, new HpAndArmor(1, 0, 0));
-         itemsArmor.put(Material.LEATHER_CHESTPLATE, new HpAndArmor(1, 0, 0));
-         itemsArmor.put(Material.LEATHER_LEGGINGS, new HpAndArmor(1, 0, 0));
-         itemsArmor.put(Material.LEATHER_BOOTS, new HpAndArmor(1, 0, 0));
+        armorStats.put(Material.LEATHER_HELMET, new Stats(1, 0, 0));
+        armorStats.put(Material.LEATHER_CHESTPLATE, new Stats(1, 0, 0));
+        armorStats.put(Material.LEATHER_LEGGINGS, new Stats(1, 0, 0));
+        armorStats.put(Material.LEATHER_BOOTS, new Stats(1, 0, 0));
 
-         itemsArmor.put(Material.IRON_HELMET, new HpAndArmor(1, 1, 0.025));
-         itemsArmor.put(Material.IRON_CHESTPLATE, new HpAndArmor(2, 1, 0.025));
-         itemsArmor.put(Material.IRON_LEGGINGS, new HpAndArmor(2, 1, 0.025));
-         itemsArmor.put(Material.IRON_BOOTS, new HpAndArmor(1, 1, 0.025));
+        armorStats.put(Material.IRON_HELMET, new Stats(1, 1, 0.025));
+        armorStats.put(Material.IRON_CHESTPLATE, new Stats(2, 1, 0.025));
+        armorStats.put(Material.IRON_LEGGINGS, new Stats(2, 1, 0.025));
+        armorStats.put(Material.IRON_BOOTS, new Stats(1, 1, 0.025));
 
-        itemsArmor.put(Material.CHAINMAIL_HELMET, itemsArmor.get(Material.IRON_HELMET));
-        itemsArmor.put(Material.CHAINMAIL_CHESTPLATE, itemsArmor.get(Material.IRON_CHESTPLATE));
-        itemsArmor.put(Material.CHAINMAIL_LEGGINGS, itemsArmor.get(Material.IRON_LEGGINGS));
-        itemsArmor.put(Material.CHAINMAIL_BOOTS, itemsArmor.get(Material.IRON_BOOTS));
+        armorStats.put(Material.CHAINMAIL_HELMET, armorStats.get(Material.IRON_HELMET));
+        armorStats.put(Material.CHAINMAIL_CHESTPLATE, armorStats.get(Material.IRON_CHESTPLATE));
+        armorStats.put(Material.CHAINMAIL_LEGGINGS, armorStats.get(Material.IRON_LEGGINGS));
+        armorStats.put(Material.CHAINMAIL_BOOTS, armorStats.get(Material.IRON_BOOTS));
 
-        itemsArmor.put(Material.GOLDEN_HELMET, itemsArmor.get(Material.IRON_HELMET));
-        itemsArmor.put(Material.GOLDEN_CHESTPLATE, itemsArmor.get(Material.IRON_CHESTPLATE));
-        itemsArmor.put(Material.GOLDEN_LEGGINGS, itemsArmor.get(Material.IRON_LEGGINGS));
-        itemsArmor.put(Material.GOLDEN_BOOTS, itemsArmor.get(Material.IRON_BOOTS));
+        armorStats.put(Material.GOLDEN_HELMET, armorStats.get(Material.IRON_HELMET));
+        armorStats.put(Material.GOLDEN_CHESTPLATE, armorStats.get(Material.IRON_CHESTPLATE));
+        armorStats.put(Material.GOLDEN_LEGGINGS, armorStats.get(Material.IRON_LEGGINGS));
+        armorStats.put(Material.GOLDEN_BOOTS, armorStats.get(Material.IRON_BOOTS));
 
-        itemsArmor.put(Material.DIAMOND_HELMET, new HpAndArmor(2, 2, 0.05));
-        itemsArmor.put(Material.DIAMOND_CHESTPLATE, new HpAndArmor(4, 5, 0.05));
-        itemsArmor.put(Material.DIAMOND_LEGGINGS, new HpAndArmor(2, 4, 0.05));
-        itemsArmor.put(Material.DIAMOND_BOOTS, new HpAndArmor(2, 1, 0.05));
+        armorStats.put(Material.DIAMOND_HELMET, new Stats(2, 2, 0.05));
+        armorStats.put(Material.DIAMOND_CHESTPLATE, new Stats(4, 5, 0.05));
+        armorStats.put(Material.DIAMOND_LEGGINGS, new Stats(2, 4, 0.05));
+        armorStats.put(Material.DIAMOND_BOOTS, new Stats(2, 1, 0.05));
 
-        itemsArmor.put(Material.NETHERITE_HELMET, itemsArmor.get(Material.DIAMOND_HELMET));
-        itemsArmor.put(Material.NETHERITE_CHESTPLATE, itemsArmor.get(Material.DIAMOND_CHESTPLATE));
-        itemsArmor.put(Material.NETHERITE_LEGGINGS, itemsArmor.get(Material.DIAMOND_LEGGINGS));
-        itemsArmor.put(Material.NETHERITE_BOOTS, itemsArmor.get(Material.DIAMOND_BOOTS));
+        armorStats.put(Material.NETHERITE_HELMET, armorStats.get(Material.DIAMOND_HELMET));
+        armorStats.put(Material.NETHERITE_CHESTPLATE, armorStats.get(Material.DIAMOND_CHESTPLATE));
+        armorStats.put(Material.NETHERITE_LEGGINGS, armorStats.get(Material.DIAMOND_LEGGINGS));
+        armorStats.put(Material.NETHERITE_BOOTS, armorStats.get(Material.DIAMOND_BOOTS));
 
         leatherArmor.add(Material.LEATHER_HELMET);
         leatherArmor.add(Material.LEATHER_CHESTPLATE);
@@ -105,7 +105,7 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (!VanillaItemManager.isReplaced(itemStack))return;
 
-        if (itemsArmor.containsKey(material)){
+        if (armorStats.containsKey(material)){
 
             applyDefaultArmorAttribute(itemStack, material);
         }
@@ -134,15 +134,14 @@ public class AttributeManaging extends SelfRegisteringListener {
 
     public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source, boolean addArmor, boolean addAttackDamage) {
         EquipmentSlotGroup slot = source.getEquipmentSlot().getGroup();
-        AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), itemsArmor.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
+        AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), armorStats.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
         if (addArmor) {
-            AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), itemsArmor.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
+            AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), armorStats.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
         }
         if (addAttackDamage) {
-            AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), itemsArmor.get(source).attack, AttributeModifier.Operation.ADD_SCALAR, slot);
+            AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), armorStats.get(source).damage, AttributeModifier.Operation.ADD_SCALAR, slot);
         }
     }
 
-    public record HpAndArmor(double hp, double armor, double attack) {
-    }
+    public record Stats(double hp, double armor, double damage){}
 }

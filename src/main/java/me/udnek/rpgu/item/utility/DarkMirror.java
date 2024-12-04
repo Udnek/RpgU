@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.jeiu.component.HiddenItemComponent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -31,6 +32,7 @@ public class DarkMirror extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(new DarkMirror.MagicalMirrorComponent());
+        getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
     static class MagicalMirrorComponent implements RightClickableItem {

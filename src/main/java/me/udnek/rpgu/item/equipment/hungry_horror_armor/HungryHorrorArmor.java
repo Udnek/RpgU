@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import net.kyori.adventure.text.Component;
@@ -27,6 +28,12 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
         equippable.setSlot(getMaterial().getEquipmentSlot());
         equippable.setModel(new NamespacedKey(RpgU.getInstance(), "hungry_horror"));
         return equippable;
+    }
+
+    @Override
+    public void initializeComponents() {
+        super.initializeComponents();
+        getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
     public @Nullable LoreBuilder getLoreBuilder(CustomEquipmentSlot slot) {

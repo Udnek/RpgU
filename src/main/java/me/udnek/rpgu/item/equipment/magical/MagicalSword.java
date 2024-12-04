@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -31,8 +32,9 @@ public class MagicalSword extends ConstructableCustomItem {
     }
 
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void initializeComponents() {
+        super.initializeComponents();
+        getComponents().set(HiddenItemComponent.INSTANCE);
         getComponents().set(new CustomItemAttributesComponent(
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND)

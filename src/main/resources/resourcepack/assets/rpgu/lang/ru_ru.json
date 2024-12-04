@@ -109,7 +109,7 @@
   "item.rpgu.wither_wreath": "Увядший венок",
   "item.rpgu.wither_wreath.description.0": "Накладывает Иссушение II при атаке",
 
-  "item.rpgu.nautilus_core": "Ядро Наутилуса",
+  "item.rpgu.nautilus_core": "Ядро наутилуса",
   "item.rpgu.nautilus_core.description.0": "Критические удары применяются к магическому урону",
 
   "item.rpgu.sphere_of_balance": "Сфера баланса",
@@ -121,6 +121,12 @@
 
   "item.rpgu.blaze_blade": "Пылающий клинок",
   "item.rpgu.dark_mirror": "Тёмное зеркало",
-  "item.rpgu.arcane_accumulator": "Загадочный накопитель"
+  "item.rpgu.arcane_accumulator": "Загадочный накопитель",
+
+  "item.rpgu.evocation_robe": "Мантия заклинателя",
+  "item.rpgu.grim_helmet": "Мрачный шлем",
+  "item.rpgu.grim_chestplate": "Мрачный нагрудник",
+  "item.rpgu.amethyst_doloire": "Аметистовый долуар",
+  "item.rpgu.heavy_amethyst_doloire": "Тяжёлый аметистовый долуар"
 
 }

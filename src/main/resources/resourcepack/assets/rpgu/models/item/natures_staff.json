@@ -1,0 +1,7 @@
+{
+	"parent": "itemscoreu:item/handheld_20x20",
+	"textures": {
+		"layer0": "rpgu:item/natures_staff"
+	}
+
+}

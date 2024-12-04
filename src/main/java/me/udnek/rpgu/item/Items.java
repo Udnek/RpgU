@@ -9,20 +9,20 @@ import me.udnek.rpgu.item.artifact.sphere.SphereOfDiscord;
 import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
 import me.udnek.rpgu.item.equipment.*;
+import me.udnek.rpgu.item.equipment.doloire.AmethystDoloire;
+import me.udnek.rpgu.item.equipment.doloire.HeavyAmethystDoloire;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmet;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamLeggings;
 import me.udnek.rpgu.item.equipment.ferrudam.tools.*;
 import me.udnek.rpgu.item.equipment.flint.*;
+import me.udnek.rpgu.item.equipment.grim.GrimChestplate;
+import me.udnek.rpgu.item.equipment.grim.GrimHelmet;
 import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorChestplate;
 import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorHelmet;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
-import me.udnek.rpgu.item.equipment.melee.MeleeBoots;
-import me.udnek.rpgu.item.equipment.melee.MeleeChestplate;
-import me.udnek.rpgu.item.equipment.melee.MeleeHelmet;
-import me.udnek.rpgu.item.equipment.melee.MeleeLeggings;
 import me.udnek.rpgu.item.equipment.wolf.WolfBoots;
 import me.udnek.rpgu.item.equipment.wolf.WolfChestplate;
 import me.udnek.rpgu.item.equipment.wolf.WolfHelmet;
@@ -70,10 +70,8 @@ public class Items {
     public static final CustomItem WOLF_LEGGINGS = register(new WolfLeggings());
     public static final CustomItem WOLF_BOOTS = register(new WolfBoots());
 
-    public static final CustomItem MELEE_HELMET = register(new MeleeHelmet());
-    public static final CustomItem MELEE_CHESTPLATE = register(new MeleeChestplate());
-    public static final CustomItem MELEE_LEGGINGS = register(new MeleeLeggings());
-    public static final CustomItem MELEE_BOOTS = register(new MeleeBoots());
+    public static final CustomItem GRIM_HELMET = register(new GrimHelmet());
+    public static final CustomItem GRIM_CHESTPLATE = register(new GrimChestplate());
 
     public static final CustomItem FLINT_SWORD = register(new FlintSword());
     public static final CustomItem FLINT_PICKAXE = register(new FlintPickaxe());
@@ -84,8 +82,10 @@ public class Items {
     public static final CustomItem PHANTOM_CHESTPLATE = register(new PhantomChestplate());
 
     public final static CustomItem AMETHYST_DIRK = register(new AmethystDirk());
-    public final static CustomItem GRATE_AMETHYST_SWORD = register(new GreatAmethystSword());
+    public final static CustomItem AMETHYST_DOLOIRE = register(new AmethystDoloire());
+    public final static CustomItem HEAVY_AMETHYST_DOLOIRE = register(new HeavyAmethystDoloire());
 
+    public static final CustomItem EVOCATION_ROBE = register(new EvocationRobe());
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
@@ -108,7 +108,7 @@ public class Items {
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
     public static final CustomItem AIR_ELEMENTAL_TOME = register(new AirElementalTome());
     public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
-    public static final CustomItem NATURE_STAFF = register(new NatureStaff());
+    public static final CustomItem NATURES_STAFF = register(new NaturesStaff());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
