@@ -1,65 +1,58 @@
 package me.udnek.rpgu.particle;
 
-import me.udnek.itemscoreu.customparticle.CustomFlatAnimatedParticle;
-import org.bukkit.Location;
+import me.udnek.itemscoreu.customparticle.ConstructableCustomParticle;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Display;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.entity.BlockDisplay;
+import org.bukkit.entity.EntityType;
 import org.bukkit.util.Transformation;
+import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
 
-public class AmethystSpikeParticle extends CustomFlatAnimatedParticle {
+public class AmethystSpikeParticle extends ConstructableCustomParticle<BlockDisplay> {
 
-    public AmethystSpikeParticle(@NotNull Location location) {
-        super(location);
-    }
+    public static final int UP_DURATION = 3;
+    public static final int DOWN_DURATION = 10;
+
+    protected float size;
+
+    public AmethystSpikeParticle(float size){this.size = size;}
+
+    public AmethystSpikeParticle(){this(1);}
 
     @Override
-    public int getDuration() {
+    public @Positive int getFramesAmount() {
         return 20;
     }
 
     @Override
-    public int frameTime() {
-        return 1;
-    }
-
-    @Override
-    public double getXScale() {
-        return 1;
-    }
-    public double getYScale() {
-        return 1;
-    }
-
-    @Override
-    protected ItemStack getItemStack() {
-        return new ItemStack(Material.GUNPOWDER);
-    }
-
-    @Override
-    protected void afterSpawned() {
-        super.afterSpawned();
-
-        display.setBrightness(new Display.Brightness(15, 15));
+    public @NotNull EntityType getType() {
+        return EntityType.BLOCK_DISPLAY;
     }
 
     @Override
     protected void nextFrame() {
-        super.nextFrame();
-
         if (frameNumber == 1) {
             display.setInterpolationDelay(-1);
-            display.setInterpolationDuration(20);
+            display.setInterpolationDuration(UP_DURATION);
             Transformation transformation = display.getTransformation();
-            transformation.getTranslation().add(0, 2, 0);
+            transformation.getTranslation().add(0, size/2, 0);
+            display.setTransformation(transformation);
+        } else if (frameNumber == getFramesAmount() - DOWN_DURATION - 1) {
+            display.setInterpolationDelay(-1);
+            display.setInterpolationDuration(DOWN_DURATION);
+            Transformation transformation = display.getTransformation();
+            transformation.getTranslation().add(0, -size, 0);
             display.setTransformation(transformation);
         }
     }
-
     @Override
-    protected @NotNull NamespacedKey getCurrentModelPath() {
-        return NamespacedKey.minecraft("amethyst_shard");
+    protected void spawn() {
+        super.spawn();
+        display.setRotation(0, 0);
+        display.setBlock(Material.AMETHYST_CLUSTER.createBlockData());
+        Transformation transformation = display.getTransformation();
+        transformation.getScale().set(size, size, size);
+        transformation.getTranslation().add(-size/2, -size, -size/2);
+        display.setTransformation(transformation);
     }
 }

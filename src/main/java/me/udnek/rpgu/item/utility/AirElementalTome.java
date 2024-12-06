@@ -79,7 +79,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.SMALL_GUST), 5, true);
+            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.SMALL_GUST));
 
             if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
             if (livingEntitiesInRadius.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}

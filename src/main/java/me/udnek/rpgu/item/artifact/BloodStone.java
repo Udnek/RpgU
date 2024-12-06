@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -21,8 +22,8 @@ public class BloodStone extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(ArtifactComponent.DEFAULT);
 
+        getComponents().set(HiddenItemComponent.INSTANCE);
         CustomAttributeModifier attribute = new CustomAttributeModifier(1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.AREA_OF_EFFECT, attribute).build()));
     }

@@ -1,5 +1,6 @@
 package me.udnek.rpgu.util;
 
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -24,19 +25,15 @@ public class Utils {
     public static @Nullable RayTraceResult rayTraceBlockOrEntity(@NotNull Player player, double castRange, double raySize){
         Location location = player.getEyeLocation();
         World world = player.getWorld();
-        RayTraceResult rayTraceResult = null;
-        RayTraceResult rayTraceResultBlocks = world.rayTraceBlocks(location, location.getDirection(), castRange);
 
-        if (rayTraceResultBlocks != null) {rayTraceResult = rayTraceResultBlocks;}
-        else if (world.rayTraceEntities(location, location.getDirection(), castRange, raySize) != null) {
-            rayTraceResult = world.rayTraceEntities(location, location.getDirection(), castRange, raySize);
-        }
+        RayTraceResult rayTraceResultBlocks = world.rayTraceBlocks(location, location.getDirection(), castRange, FluidCollisionMode.NEVER, true);
 
-        return rayTraceResult;
+        if (rayTraceResultBlocks != null) return rayTraceResultBlocks;
+        return world.rayTraceEntities(location, location.getDirection(), castRange, raySize);
     }
 
     public static @NotNull Collection<LivingEntity> livingEntitiesInRadius(@NotNull Location location, double radius){
-        return location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> !(livingEntity.getLocation().distance(location) > radius));
+        return location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> livingEntity.getLocation().distance(location) <= radius);
     }
 
     public static @Nullable Location rayTraceBlockUnder(@NotNull Player player){
@@ -44,9 +41,9 @@ public class Utils {
     }
     public static @Nullable Location rayTraceBlockUnder(@NotNull Location location){
         World world = location.getWorld();
-        RayTraceResult rayTraceResult = world.rayTraceBlocks(location.add(0 , 1, 0), new Vector().setY(-1), 10000);
+        RayTraceResult rayTraceResult = world.rayTraceBlocks(location.add(0 , 1, 0), new Vector().setY(-1), 10000, FluidCollisionMode.NEVER, true);
 
         if (rayTraceResult == null) return null;
-        return rayTraceResult.getHitBlock().getLocation();
+        return rayTraceResult.getHitPosition().toLocation(location.getWorld());
     }
 }

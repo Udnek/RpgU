@@ -21,16 +21,18 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.function.Consumer;
 
-public class NatureStaff extends ConstructableCustomItem {
+public class NaturesStaff extends ConstructableCustomItem {
 
     @Override
     public @NotNull String getRawId() {
-        return "nature_staff";
+        return "natures_staff";
     }
 
     @Override
@@ -40,32 +42,33 @@ public class NatureStaff extends ConstructableCustomItem {
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        /*ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
+        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
-                " R ",
-                "RBR",
-                " R ");
+                " RS",
+                " BS",
+                "SR ");
 
-        recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.BOOK));
-        recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.BREEZE_ROD));
+        recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.GLOW_BERRIES));
+        recipe.setIngredient('R', new RecipeChoice.MaterialChoice(Material.HANGING_ROOTS));
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
 
-        consumer.accept(recipe);*/
+        consumer.accept(recipe);
     }
 
 
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(new NatureStaffComponent());
+        getComponents().set(new NaturesStaffComponent());
     }
 
-    public class NatureStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
+    public class NaturesStaffComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
 
         public static double BASE_RADIUS = 2.5;
         public static double BASE_DURATION = 2 * 20;
         public static double DURATION_PER_MP = 10;
 
-        public NatureStaffComponent() {
+        public NaturesStaffComponent() {
             getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
@@ -99,7 +102,7 @@ public class NatureStaff extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN), 5, true);
+            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
             final int duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player).intValue();
 
             if (livingEntitiesInRayTraceRadius == null) return ActionResult.NO_COOLDOWN;

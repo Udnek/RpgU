@@ -1,6 +1,7 @@
-package me.udnek.rpgu.item.equipment;
+package me.udnek.rpgu.item.equipment.doloire;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -11,17 +12,17 @@ import me.udnek.itemscoreu.nms.ConsumableAnimation;
 import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
 import me.udnek.rpgu.particle.AmethystSpikeParticle;
+import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -31,6 +32,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -41,46 +43,47 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.function.Consumer;
 
-public class GreatAmethystSword extends ConstructableCustomItem {
+public class AmethystDoloire extends ConstructableCustomItem {
 
     public static int CAST_TIME = (int) (0.75 * 20);
-    private static final double MELEE_MAGICAL_DAMAGE_MULTIPLIER = 0.4;
+    public static final double MELEE_MAGICAL_DAMAGE_MULTIPLIER = 0.4;
 
     @Override
     public @NotNull Material getMaterial() {
         return Material.STONE_SWORD;
     }
-
     @Override
-    public @NotNull String getRawId() {
-        return "great_amethyst_sword";
-    }
-
+    public @NotNull String getRawId() {return "amethyst_doloire";}
     @Override
     public ItemFlag[] getTooltipHides() {
         return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
     }
 
     @Override
+    public @Nullable ItemRarity getRarity() {return ItemRarity.UNCOMMON;}
+
+    @Override
     public boolean getAddDefaultAttributes() {return true;}
 
     @Override
-    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
-        super.modifyFinalItemStack(itemStack);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1);
+    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
+        super.initializeAttributes(itemMeta);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
-                " A ",
-                "AСA",
-                " B ");
+                "CA ",
+                "ASN",
+                "S  ");
 
+        recipe.setIngredient('C', new RecipeChoice.MaterialChoice(Material.AMETHYST_CLUSTER));
         recipe.setIngredient('A', new RecipeChoice.MaterialChoice(Material.AMETHYST_SHARD));
-        recipe.setIngredient('B', new RecipeChoice.MaterialChoice(Material.BONE));
-        recipe.setIngredient('С', new RecipeChoice.MaterialChoice(Material.GUNPOWDER));
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
+        recipe.setIngredient('N', new RecipeChoice.MaterialChoice(Material.NAUTILUS_SHELL));
 
         consumer.accept(recipe);
     }
@@ -105,7 +108,7 @@ public class GreatAmethystSword extends ConstructableCustomItem {
         getComponents().set(new GreatAmethystSwordComponent());
     }
 
-    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> implements RayTraceActiveAbility<PlayerItemConsumeEvent> {
+    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
 
         public static double BASE_RADIUS = 0.5;
         public static double BASE_DAMAGE = 1.5;
@@ -119,33 +122,34 @@ public class GreatAmethystSword extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
-            Location location = player.getLocation();
-            Vector direction = location.getDirection();
-            location.setY(Utils.rayTraceBlockUnder(player).getY());
-            direction.setY(0).normalize();
-            double aoe = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
-            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
+            Location location = Utils.rayTraceBlockUnder(player);
+
+            if (location == null) return ActionResult.PENALTY_COOLDOWN;
+
+            final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
+            final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
+
+            Vector direction = player.getLocation().getDirection();
+            direction.setY(0).normalize().multiply(radius*2);
+
+            Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player));
 
             new BukkitRunnable(){
                 int count = 0;
                 @Override
                 public void run() {
+                    count++;
                     location.add(direction);
-                    new AmethystSpikeParticle(location).play();
-                    showRadius(new ParticleBuilder(Particle.SMALL_GUST).location(location), aoe, 5);
-                    Collection<LivingEntity> nearbyLivingEntities = location.getNearbyLivingEntities(aoe);
+                    new AmethystSpikeParticle((float) radius*2f).play(location);
+                    ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.FUCHSIA).location(location), radius);
+                    Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
 
-
-                    for (LivingEntity livingEntity : nearbyLivingEntities){
-                        System.out.println(livingEntity);
-                        Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity));
-                        DamageUtils.damage(livingEntity, damage, player);
-
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 2 * 20, 0));
+                    for (LivingEntity entity : nearbyLivingEntities){
+                        DamageUtils.damage(entity, damage, player);
+                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 2 * 20, 0));
                     }
 
-                    count++;
-                    if (1 + 2 * aoe * count > castRange) cancel();
+                    if (2*radius*count > castRange) cancel();
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, 1);
 

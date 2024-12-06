@@ -24,8 +24,8 @@ import java.util.function.Consumer;
 
 public class SphereOfDiscord extends ConstructableCustomItem {
 
-    private static final double MAGICAL_POTENTIAL = 8;
-    private static final double ATTACK_DAMAGE = -0.8;
+    private static final double MAGICAL_POTENTIAL = 6;
+    private static final double ATTACK_DAMAGE = -0.6;
 
     @Override
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}

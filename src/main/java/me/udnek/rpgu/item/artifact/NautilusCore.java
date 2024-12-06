@@ -52,7 +52,7 @@ public class NautilusCore extends ConstructableCustomItem {
     public void initializeComponents() {
         getComponents().set(new NautilusCoreComponent());
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
-                .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS)
+                .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.15, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS)
                 .build()
         ));
     }
