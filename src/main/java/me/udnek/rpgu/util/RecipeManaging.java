@@ -70,6 +70,23 @@ public class RecipeManaging {
         replaceRecipeMaterial(Material.GOLDEN_HELMET, "golden_helmet", new String[]{"GGG", "GLG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_HELMET));
         replaceRecipeMaterial(Material.GOLDEN_LEGGINGS, "golden_leggings", new String[]{"GGG", "GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_LEGGINGS));
         replaceRecipeMaterial(Material.GOLDEN_BOOTS, "golden_boots", new String[]{"GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_BOOTS));
+        //////////////////////////////////////////////
+        replaceRecipeBed(Material.BLACK_BED, "black_bed", Material.BLACK_WOOL);
+        replaceRecipeBed(Material.GRAY_BED, "gray_bed", Material.GRAY_WOOL);
+        replaceRecipeBed(Material.LIGHT_GRAY_BED, "light_gray_bed", Material.LIGHT_GRAY_BED);
+        replaceRecipeBed(Material.BLUE_BED, "blue_bed", Material.BLUE_WOOL);
+        replaceRecipeBed(Material.LIGHT_BLUE_BED, "light_blue_bed", Material.LIGHT_BLUE_WOOL);//
+        replaceRecipeBed(Material.BROWN_BED, "brown_bed", Material.BROWN_BED);
+        replaceRecipeBed(Material.CYAN_BED, "cyan_bed", Material.CYAN_BED);
+        replaceRecipeBed(Material.GREEN_BED, "green_bed", Material.GREEN_WOOL);
+        replaceRecipeBed(Material.LIME_BED, "lime_bed", Material.LIME_WOOL);
+        replaceRecipeBed(Material.MAGENTA_BED, "magenta_bed", Material.MAGENTA_WOOL);//
+        replaceRecipeBed(Material.ORANGE_BED, "orange_bed", Material.ORANGE_WOOL);//
+        replaceRecipeBed(Material.PINK_BED, "pink_bed", Material.PINK_WOOL);
+        replaceRecipeBed(Material.PURPLE_BED, "purple_bed", Material.PURPLE_WOOL);
+        replaceRecipeBed(Material.WHITE_BED, "white_bed", Material.WHITE_WOOL);//
+        replaceRecipeBed(Material.YELLOW_BED, "yellow_bed", Material.YELLOW_WOOL);
+        replaceRecipeBed(Material.RED_BED, "red_bed", Material.RED_WOOL);
 
         unregister();
     }
@@ -169,6 +186,19 @@ public class RecipeManaging {
         for (Map.Entry<Character, CustomItem> customItem : customItems.entrySet()) {
             recipe.setIngredient(customItem.getKey(), new RecipeChoice.ExactChoice(customItem.getValue().getItem()));
         }
+
+        RecipeManager.getInstance().register(recipe);
+    }
+
+    private static void replaceRecipeBed(@NotNull Material materialCraft, @NotNull String key, @NotNull Material wool){
+        RecipeManager.getInstance().unregister(NamespacedKey.minecraft(key));
+
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(RpgU.getInstance(), key), new ItemStack(materialCraft));
+        recipe.shape("FFW", "PPP");
+
+        recipe.setIngredient('W', new RecipeChoice.MaterialChoice(wool));
+        recipe.setIngredient('F', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
+        recipe.setIngredient('P', new RecipeChoice.MaterialChoice(Tag.PLANKS));
 
         RecipeManager.getInstance().register(recipe);
     }
