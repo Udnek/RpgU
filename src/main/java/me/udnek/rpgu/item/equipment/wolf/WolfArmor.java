@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment.wolf;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -25,6 +26,11 @@ public abstract class WolfArmor extends ConstructableCustomItem {
         equippable.setSlot(getMaterial().getEquipmentSlot());
         equippable.setModel(new NamespacedKey(RpgU.getInstance(), "wolf"));
         return equippable;
+    }
+
+    @Override
+    public @Nullable Integer getMaxDamage() {
+        return (int) (getMaterial().getDefaultData(DataComponentTypes.MAX_DAMAGE) / 3.7);
     }
 
     @Override

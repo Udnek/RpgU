@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -27,6 +28,9 @@ public class PhantomChestplate extends ConstructableCustomItem {
 
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
+
+    @Override
+    public @Nullable Integer getMaxDamage() {return 150;}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

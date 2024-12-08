@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class FlintHoe extends ConstructableCustomItem {
+public class FlintHoe extends FlintTool {
     @Override
     public @NotNull String getRawId() {return "flint_hoe";}
     @Override

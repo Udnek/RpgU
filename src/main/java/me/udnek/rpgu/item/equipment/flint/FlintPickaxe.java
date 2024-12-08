@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class FlintPickaxe extends ConstructableCustomItem {
+public class FlintPickaxe extends FlintTool {
     @Override
     public @NotNull String getRawId() {return "flint_pickaxe";}
     @Override
