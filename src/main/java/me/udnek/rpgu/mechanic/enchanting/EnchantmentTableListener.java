@@ -1,11 +1,6 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
-import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EnchantmentTableListener extends SelfRegisteringListener {

@@ -1,6 +1,5 @@
 package me.udnek.rpgu.item.equipment.grim;
 
-import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
