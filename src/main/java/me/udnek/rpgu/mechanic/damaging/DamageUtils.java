@@ -1,5 +1,6 @@
 package me.udnek.rpgu.mechanic.damaging;
 
+import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Entity;
@@ -16,6 +17,15 @@ public class DamageUtils {
     public static final int PHYSICAL_DAMAGE_BUFFER = 100_000;
     public static final int PHYSICAL_DAMAGE_PRECISION = 100;
     public static final int MAGICAL_DAMAGE_PRECISION = 100;
+
+    public static double difficultyMultiplier(@Nullable Difficulty difficulty){
+        if (difficulty == null) difficulty = Difficulty.NORMAL;
+        return switch (difficulty){
+            case PEACEFUL, EASY -> 0.8;
+            case NORMAL -> 1;
+            case HARD -> 1.2;
+        };
+    }
 
 
     public static double serializeToVanillaDamage(@NotNull Damage damage){
