@@ -65,8 +65,6 @@ public class DamageInstance {
     public void invoke(){
         if (victim == null) return;
 
-        /*System.out.println(handlerEvent.getCause() + ", " + handlerEvent.getDamageSource().getDamageType().getTranslationKey());*/
-
         attackCalculations();
 
         DamageEvent event = new DamageEvent(this);
@@ -184,6 +182,9 @@ public class DamageInstance {
                 }
                 default -> {}
             }
+        }
+        if (handlerEvent.getDamageSource().scalesWithDifficulty()){
+            damage.multiply(DamageUtils.difficultyMultiplier(victim.getWorld().getDifficulty()));
         }
     }
 
