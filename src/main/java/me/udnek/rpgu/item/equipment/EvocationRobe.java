@@ -1,6 +1,5 @@
 package me.udnek.rpgu.item.equipment;
 
-import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -9,7 +8,6 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

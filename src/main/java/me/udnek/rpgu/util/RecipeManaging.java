@@ -34,7 +34,7 @@ public class RecipeManaging {
         replaceRecipe(Material.LEATHER_CHESTPLATE, "leather_chestplate", new String[]{"L L", "FLF", "LFL"}, Map.of( 'L', Material.LEATHER), Map.of('F', Items.FABRIC));
         replaceRecipe(Material.LEATHER_HELMET, "leather_helmet", new String[]{"FLF", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
         replaceRecipe(Material.LEATHER_LEGGINGS, "leather_leggings", new String[]{"LFL", "F F", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
-        replaceRecipe(Material.LEATHER_BOOTS, "leather_boots", new String[]{"LFL", "F F", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
+        replaceRecipe(Material.LEATHER_BOOTS, "leather_boots", new String[]{"F F", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
         ////////////////////////////////////////////////////
         replaceRecipeMaterial(Material.BLAST_FURNACE, "blast_furnace", new String[]{"SSS", "FFA", "BBB"}, Map.of('F', Material.FURNACE,'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK));
         ////////////////////////////////////////////////////

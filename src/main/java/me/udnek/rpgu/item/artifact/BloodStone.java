@@ -6,7 +6,6 @@ import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponen
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
