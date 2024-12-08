@@ -59,7 +59,7 @@ public class WitherWreath extends ConstructableCustomItem {
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName() + ".description.0").color(CustomAttribute.PLUS_COLOR));
+        attributesLorePart.addFullDescription(EquipmentSlots.ARTIFACTS, this, 1);
 
         return loreBuilder;
     }

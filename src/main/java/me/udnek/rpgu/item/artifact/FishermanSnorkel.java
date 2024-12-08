@@ -37,8 +37,7 @@ public class FishermanSnorkel extends ConstructableCustomItem {
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.0").color(CustomAttribute.PLUS_COLOR));
-        attributesLorePart.addAttribute(EquipmentSlots.ARTIFACTS, Component.translatable(getRawItemName()+".description.1").color(CustomAttribute.PLUS_COLOR));
+        attributesLorePart.addFullDescription(EquipmentSlots.ARTIFACTS, this, 2);
         return loreBuilder;
     }
 

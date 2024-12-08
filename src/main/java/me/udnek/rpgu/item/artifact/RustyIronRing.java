@@ -11,6 +11,7 @@ import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -37,6 +38,8 @@ public class RustyIronRing extends ConstructableCustomItem {
         Nms.get().getLootTableContainer(LootTables.ZOMBIE.getLootTable()).addPool(lootPoolBuilder);
         Nms.get().getLootTableContainer(LootTables.HUSK.getLootTable()).addPool(lootPoolBuilder);
         Nms.get().getLootTableContainer(LootTables.DROWNED.getLootTable()).addPool(lootPoolBuilder);
+        Nms.get().getLootTableContainer(LootTables.STRAY.getLootTable()).addPool(lootPoolBuilder);
+        Nms.get().getLootTableContainer(Bukkit.getLootTable(NamespacedKey.minecraft("entities/bogged"))).addPool(lootPoolBuilder);
     }
 
     @Override

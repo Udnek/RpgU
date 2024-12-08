@@ -1,7 +1,11 @@
 package me.udnek.rpgu.lore;
 
+import com.google.common.base.Preconditions;
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,12 +42,25 @@ public class AttributesLorePart implements LoreBuilder.Componentable {
     public void addAttribute(@NotNull CustomEquipmentSlot slot, Component component){
         addLine(slot, AttributeLoreGenerator.addTab(component), false);
     }
+
+    public void addFullDescription(@NotNull CustomEquipmentSlot slot, @NotNull ConstructableCustomItem customItem, int linesAmount){
+        for (int i = 0; i < linesAmount; i++) addDescription(slot, customItem, i);
+    }
+    public void addDescription(@NotNull CustomEquipmentSlot slot, @NotNull ConstructableCustomItem customItem, int line){
+        Preconditions.checkArgument(customItem.getRawItemName() != null, "CustomItem raw name can not be null!");
+        addDescription(slot, customItem.getRawItemName(), line);
+    }
+    public void addDescription(@NotNull CustomEquipmentSlot slot, @NotNull String rawItemName, int line){
+        addLine(slot, AttributeLoreGenerator.addTab(Component.translatable(rawItemName + ".description." + line)).color(CustomAttribute.PLUS_COLOR), false);
+    }
+
     public void addLine(@NotNull CustomEquipmentSlot slot, Component component, boolean asFirst){
         Simple componentable = data.getOrDefault(slot, new Simple());
         if (asFirst) componentable.addFirst(component);
         else componentable.add(component);
         data.put(slot, componentable);
     }
+
     public void remove(@NotNull CustomEquipmentSlot slot){
         data.remove(slot);
     }

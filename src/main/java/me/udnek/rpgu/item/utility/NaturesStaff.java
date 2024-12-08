@@ -9,12 +9,16 @@ import me.udnek.rpgu.component.ability.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.effect.Effects;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.magicpotential.LinearMPFormula;
+import me.udnek.rpgu.particle.RootParticle;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
@@ -69,7 +73,7 @@ public class NaturesStaff extends ConstructableCustomItem {
         public static double DURATION_PER_MP = 10;
 
         public NaturesStaffComponent() {
-            getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(20*20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
             getComponents().set(new AttributeBasedProperty(0){
@@ -105,10 +109,10 @@ public class NaturesStaff extends ConstructableCustomItem {
             Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
             final int duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player).intValue();
 
-            if (livingEntitiesInRayTraceRadius == null) return ActionResult.NO_COOLDOWN;
-            if (livingEntitiesInRayTraceRadius.isEmpty()) {return ActionResult.FULL_COOLDOWN;}
+            if (livingEntitiesInRayTraceRadius == null || livingEntitiesInRayTraceRadius.isEmpty()) return ActionResult.PENALTY_COOLDOWN;
             for (LivingEntity livingEntity : livingEntitiesInRayTraceRadius) {
                 Effects.ROOT_EFFECT.apply(livingEntity, duration, 0);
+                new RootParticle(livingEntity).play();
             }
 
             return ActionResult.FULL_COOLDOWN;
@@ -116,9 +120,7 @@ public class NaturesStaff extends ConstructableCustomItem {
 
         @Override
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            componentable.add(Component.translatable(getRawItemName() + ".ability.2").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
+            componentable.addFullAbilityDescription(NaturesStaff.this, 1);
             super.addLoreLines(componentable);
         }
 

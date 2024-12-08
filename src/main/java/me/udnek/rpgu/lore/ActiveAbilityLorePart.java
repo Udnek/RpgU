@@ -1,5 +1,9 @@
 package me.udnek.rpgu.lore;
 
+import com.google.common.base.Preconditions;
+import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.CustomItemProperties;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -27,6 +31,18 @@ public class ActiveAbilityLorePart implements LoreBuilder.Componentable {
 
     public void setHeader(@NotNull Component component){header = component;}
     public void addEmptyAboveHeader(){addEmptyAboveHeader = true;}
+
+
+    public void addFullAbilityDescription(@NotNull ConstructableCustomItem customItem, int linesAmount){
+        for (int i = 0; i < linesAmount; i++) addAbilityDescription(customItem, i);
+    }
+    public void addAbilityDescription(@NotNull ConstructableCustomItem customItem, int line){
+        Preconditions.checkArgument(customItem.getRawItemName() != null, "CustomItem raw name can not be null!");
+        addAbilityDescription(customItem.getRawItemName(), line);
+    }
+    public void addAbilityDescription(@NotNull String rawItemName, int line){
+       addWithFormat(Component.translatable(rawItemName + ".ability." + line));
+    }
 
     public void addWithFormat(@NotNull Component component){
         add(component.color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));

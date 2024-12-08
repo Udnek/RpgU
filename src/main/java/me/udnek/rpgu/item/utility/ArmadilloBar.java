@@ -41,9 +41,9 @@ public class ArmadilloBar extends ConstructableCustomItem {
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
-                " A ",
-                "ANA",
-                " A ");
+                " AA",
+                " NA",
+                "A  ");
 
         recipe.setIngredient('A', new RecipeChoice.MaterialChoice(Material.ARMADILLO_SCUTE));
         recipe.setIngredient('N', new RecipeChoice.MaterialChoice(Material.NETHER_STAR));
@@ -96,8 +96,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
 
         @Override
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
+            componentable.addFullAbilityDescription(ArmadilloBar.this, 2);
             super.addLoreLines(componentable);
         }
 
