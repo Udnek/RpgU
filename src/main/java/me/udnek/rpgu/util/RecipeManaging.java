@@ -194,7 +194,7 @@ public class RecipeManaging {
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft(key));
 
         ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(RpgU.getInstance(), key), new ItemStack(materialCraft));
-        recipe.shape("FWF", "PPP");
+        recipe.shape("FFW", "PPP");
 
         recipe.setIngredient('W', new RecipeChoice.MaterialChoice(wool));
         recipe.setIngredient('F', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
