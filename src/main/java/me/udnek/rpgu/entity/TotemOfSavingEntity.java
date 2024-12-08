@@ -44,6 +44,7 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
         entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
         entity.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(0.8);
         entity.setPersistent(true);
+        entity.setRemoveWhenFarAway(false);
         entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0, false, false, false));
     }
 
