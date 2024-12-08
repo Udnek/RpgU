@@ -12,6 +12,7 @@ import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.CastTimeProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
 import org.bukkit.Material;
@@ -71,13 +72,19 @@ public class ShamanTambourine extends ConstructableCustomItem{
         getComponents().set(new ShamanTambourineComponent());
     }
 
-    public static class ShamanTambourineComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
+    public class ShamanTambourineComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
 
         public ShamanTambourineComponent(){
             getComponents().set(new DamageProperty(MPBasedDamageFormula.linearMageOnly(3, 1)));
-            getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(20*10, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(new CastTimeProperty(CAST_TIME));
+        }
+
+        @Override
+        public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
+            componentable.addFullAbilityDescription(ShamanTambourine.this, 1);
+            super.addLoreLines(componentable);
         }
 
         @Override
@@ -94,8 +101,10 @@ public class ShamanTambourine extends ConstructableCustomItem{
                 builder.spawn();
                 return ActionResult.NO_COOLDOWN;
             }
-            living.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 0));
-            DamageUtils.damage(living, getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player)), player);
+            DamageUtils.damage(
+                    living,
+                    getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player)),
+                    player);
             new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(player.getWorld())).spawn();
             return ActionResult.FULL_COOLDOWN;
         }

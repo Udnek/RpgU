@@ -8,6 +8,8 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
@@ -46,7 +48,9 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
         CustomAttributeModifier attribute = new CustomAttributeModifier(0.6,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
 
-        getComponents().set(new GreatAmethystSwordComponent());
+        GreatAmethystSwordComponent swordComponent = new GreatAmethystSwordComponent();
+        swordComponent.getComponents().set(AttributeBasedProperty.from(20*7, ComponentTypes.ABILITY_COOLDOWN));
+        getComponents().set(swordComponent);
     }
 
     @Override

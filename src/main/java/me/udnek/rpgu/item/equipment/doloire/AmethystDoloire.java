@@ -16,6 +16,8 @@ import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
+import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.lore.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
@@ -108,16 +110,23 @@ public class AmethystDoloire extends ConstructableCustomItem {
         getComponents().set(new GreatAmethystSwordComponent());
     }
 
-    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
+    public class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
 
-        public static double BASE_RADIUS = 0.5;
+        public static double BASE_RADIUS = 0.8;
         public static double BASE_DAMAGE = 1.5;
 
         public GreatAmethystSwordComponent() {
-            getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(AttributeBasedProperty.from(20*15, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(10, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(AttributeBasedProperty.from(20*3, ComponentTypes.ABILITY_DURATION));
             getComponents().set(new DamageProperty(MPBasedDamageFormula.linearMageOnly(BASE_DAMAGE, 0.2)));
+        }
+
+        @Override
+        public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
+            componentable.addFullAbilityDescription((ConstructableCustomItem) Items.AMETHYST_DOLOIRE, 2);
+            super.addLoreLines(componentable);
         }
 
         @Override
@@ -128,6 +137,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
             final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
             final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
+            final int duration = (int) Math.ceil(getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player));
 
             Vector direction = player.getLocation().getDirection();
             direction.setY(0).normalize().multiply(radius*2);
@@ -144,9 +154,10 @@ public class AmethystDoloire extends ConstructableCustomItem {
                     ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.FUCHSIA).location(location), radius);
                     Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
 
+
                     for (LivingEntity entity : nearbyLivingEntities){
                         DamageUtils.damage(entity, damage, player);
-                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 2 * 20, 0));
+                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, duration, 2));
                     }
 
                     if (2*radius*count > castRange) cancel();
@@ -160,7 +171,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
         @Override
         public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
             event.setCancelled(true);
-            action(customItem, event.getPlayer(), event);
+            activate(customItem, event.getPlayer(), event);
         }
     }
 }

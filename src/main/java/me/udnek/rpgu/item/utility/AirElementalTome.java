@@ -72,7 +72,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
 
         public AirElementalTomeComponent(){
-            getComponents().set(AttributeBasedProperty.from(20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(AttributeBasedProperty.from(20*20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(AttributeBasedProperty.from(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
         }
@@ -116,8 +116,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.add(Component.translatable(getRawItemName() + ".ability.0").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
-            componentable.add(Component.translatable(getRawItemName() + ".ability.1").color(NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false));
+            componentable.addFullAbilityDescription(AirElementalTome.this, 2);
             super.addLoreLines(componentable);
         }
 
