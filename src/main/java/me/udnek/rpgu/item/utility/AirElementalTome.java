@@ -96,7 +96,7 @@ public class AirElementalTome extends ConstructableCustomItem {
                             new ParticleBuilder(Particle.GUST).count(4).location(locationEntity).offset(1,0,1).spawn();
                         } else if (count == DURATION) {
                             if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
-                            else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 1);
+                            else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 2);
                             livingEntity.setVelocity(new Vector(0, -4, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
                         } else if (count > DURATION) cancel();

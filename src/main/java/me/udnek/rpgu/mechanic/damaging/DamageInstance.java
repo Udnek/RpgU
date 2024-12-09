@@ -1,6 +1,7 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
+import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.instance.MagicalDefenseMultiplierAttribute;
@@ -30,6 +31,7 @@ import static org.bukkit.event.entity.EntityDamageEvent.DamageCause.*;
 public class DamageInstance {
 
     public static final double NARROW_ENCHANTMENTS_DAMAGE_BONUS = 2.5;
+    private static final double PROJECTILE_GLOBAL_DAMAGE_MULTIPLIER = 0.70;
 
     private final List<ExtraFlag> extraFlags = new ArrayList<>();
     private Damage damage;
@@ -171,7 +173,10 @@ public class DamageInstance {
                 }
                 case Projectile projectile -> {
                     if (projectile instanceof AbstractArrow arrow){
-                        damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1), 0);
+                        damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1) * PROJECTILE_GLOBAL_DAMAGE_MULTIPLIER, 0);
+                        Utils.consumeIfNotNull(arrow.getWeapon(), bow ->
+                                damage.multiplyPhysical(1 + bow.getEnchantmentLevel(Enchantment.POWER)*0.1)
+                        );
                         int impaling = arrow.getItemStack().getEnchantmentLevel(Enchantment.IMPALING);
                         if (impaling != 0 && victim.isInWaterOrRain()) damage.addMagical(impaling * NARROW_ENCHANTMENTS_DAMAGE_BONUS);
                     }

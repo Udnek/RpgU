@@ -23,11 +23,4 @@ public class DamageListener extends SelfRegisteringListener {
         }
         new DamageInstance(event).invoke();
     }
-    @EventHandler
-    public void onEntityShootBow(EntityShootBowEvent event){
-        if (!CUSTOM_DAMAGE_SYSTEM) return;
-        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
-        if (event.getBow() == null) return;
-        arrow.setDamage(arrow.getDamage() + event.getBow().getEnchantmentLevel(Enchantment.POWER));
-    }
 }

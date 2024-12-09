@@ -23,7 +23,7 @@ public class IncreasedFallDamage extends ConstructableCustomEffect {
 
     @Override
     public void addAttributes(@NotNull AttributeConsumer consumer) {
-        consumer.accept(Attribute.FALL_DAMAGE_MULTIPLIER, new NamespacedKey(RpgU.getInstance(), "fall_damage_multiplier_" + getRawId()), 1, AttributeModifier.Operation.ADD_NUMBER);
+        consumer.accept(Attribute.FALL_DAMAGE_MULTIPLIER, new NamespacedKey(RpgU.getInstance(), "fall_damage_multiplier_" + getRawId()), 0.1, AttributeModifier.Operation.ADD_NUMBER);
     }
 
 
