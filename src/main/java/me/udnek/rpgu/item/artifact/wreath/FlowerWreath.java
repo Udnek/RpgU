@@ -1,20 +1,20 @@
 package me.udnek.rpgu.item.artifact.wreath;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ArtifactComponent;
+import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
+import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
-import net.kyori.adventure.text.Component;
+import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Tag;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
@@ -99,45 +99,84 @@ public class FlowerWreath extends ConstructableCustomItem {
     public int getColorByFlower(Material flower){return flowerColors.getOrDefault(flower, 0);}
 
     @Override
-    public @Nullable LoreBuilder getLoreBuilder() {
-        LoreBuilder loreBuilder = new LoreBuilder();
-        AttributesLorePart attributesLorePart = new AttributesLorePart();
-        loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addFullDescription(EquipmentSlots.ARTIFACTS, this, 1);
-
-        return loreBuilder;
-    }
-
-    @Override
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new FlowerWreathComponent());
+        getComponents().set(new Artifact());
+        getComponents().set(new PassiveAbility());
     }
 
-    public static class FlowerWreathComponent implements ArtifactComponent {
-        public static final float xRange = 7;
-        public static final float yRange = 4;
+    public class PassiveAbility extends ConstructablePassiveAbilityComponent<Object>{
+
         public static final float yOffset = 4;
-        public static final int duration = 20*20;
+        public static final int DURATION = 20*20;
 
         @Override
-        public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot) {
-            Material material = player.getLocation().getWorld().getBlockAt(randomOffset(player.getLocation())).getType();
-            boolean isInForest = isForestMaterial(material);
-            if (isInForest) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, duration, 0));
-            }
+        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
+            componentable.addFullAbilityDescription(FlowerWreath.this, 1);
+            super.addLoreLines(componentable);
         }
 
-        public Location randomOffset(Location location) {
+        public PassiveAbility(){
+            getComponents().set(AttributeBasedProperty.from(6, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(AttributeBasedProperty.from(DURATION, ComponentTypes.ABILITY_DURATION));
+        }
+
+        public @NotNull Location randomOffset(@NotNull Player player) {
             Random random = new Random();
-            location.add((random.nextFloat() - 0.5f) * 2 * xRange, (random.nextFloat() - 0.5f) * 2 * yRange + yOffset, (random.nextFloat() - 0.5f) * 2 * xRange);
+            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
+            Location location = player.getLocation();
+            location.add((random.nextFloat() - 0.5f) * 2 * castRange, (random.nextFloat() - 0.5f) * 2 * castRange + yOffset, (random.nextFloat() - 0.5f) * 2 * castRange);
             return location;
         }
 
         public boolean isForestMaterial(Material material) {
             return Tag.LOGS.isTagged(material) || Tag.LEAVES.isTagged(material);
         }
+
+        @Override
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return EquipmentSlots.ARTIFACTS;
+        }
+
+        @Override
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @Nullable Object o) {
+            boolean isInForest = isForestMaterial(randomOffset(player).getBlock().getType());
+            if (isInForest) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, DURATION, 0));
+                return ActionResult.FULL_COOLDOWN;
+            }
+            return ActionResult.NO_COOLDOWN;
+        }
+
+    }
+
+    public static class Artifact implements ArtifactComponent {
+        @Override
+        public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot) {
+            if (Bukkit.getCurrentTick() % 10 != 0) return;
+            PassiveAbilityComponent<?> passive = item.getComponents().get(ComponentTypes.PASSIVE_ABILITY_ITEM);
+            if (passive instanceof PassiveAbility passiveAbility){
+                passiveAbility.activate(item, player, new Object());
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

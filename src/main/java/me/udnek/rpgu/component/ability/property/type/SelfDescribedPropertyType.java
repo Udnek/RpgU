@@ -1,7 +1,8 @@
 package me.udnek.rpgu.component.ability.property.type;
 
 import me.udnek.rpgu.component.ability.property.AbilityProperty;
-import me.udnek.rpgu.lore.ActiveAbilityLorePart;
+import me.udnek.rpgu.lore.ability.AbilityLorePart;
+import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class SelfDescribedPropertyType<Value, Component extends AbilityProperty<?, Value>> extends AbilityPropertyType<Component> {
@@ -10,9 +11,9 @@ public abstract class SelfDescribedPropertyType<Value, Component extends Ability
         super(rawId, defaultComponent);
     }
 
-    abstract public void describe(@NotNull net.kyori.adventure.text.Component text, @NotNull ActiveAbilityLorePart componentable);
-    abstract public void describe(@NotNull Value component, @NotNull ActiveAbilityLorePart componentable);
-    public void describe(@NotNull Component component, @NotNull ActiveAbilityLorePart componentable){
+    abstract public void describe(@NotNull net.kyori.adventure.text.Component text, @NotNull AbilityLorePart componentable);
+    abstract public void describe(@NotNull Value component, @NotNull AbilityLorePart componentable);
+    public void describe(@NotNull Component component, @NotNull AbilityLorePart componentable){
         describe(component.getBase(), componentable);
     }
 }

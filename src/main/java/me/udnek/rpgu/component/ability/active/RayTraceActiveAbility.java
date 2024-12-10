@@ -1,4 +1,4 @@
-package me.udnek.rpgu.component.ability;
+package me.udnek.rpgu.component.ability.active;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.rpgu.component.ComponentTypes;

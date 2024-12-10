@@ -1,4 +1,4 @@
-package me.udnek.rpgu;
+package me.udnek.rpgu.util;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
@@ -12,7 +12,6 @@ import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
-import me.udnek.rpgu.util.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -34,8 +33,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 
-public class TestListener extends SelfRegisteringListener {
-    public TestListener(JavaPlugin plugin) {
+public class GeneralListener extends SelfRegisteringListener {
+    public GeneralListener(JavaPlugin plugin) {
         super(plugin);
     }
 
@@ -138,8 +137,9 @@ public class TestListener extends SelfRegisteringListener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void itemGenerates(CustomItemGeneratedEvent event){
-        AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
         event.getCustomItem().getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
+        event.getCustomItem().getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
+        AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
         if (VanillaItemManager.isReplaced(event.getCustomItem())){
             ItemAttributeModifiers attributeModifiers = event.getItemStack().getData(DataComponentTypes.ATTRIBUTE_MODIFIERS);
             if (attributeModifiers == null) return;

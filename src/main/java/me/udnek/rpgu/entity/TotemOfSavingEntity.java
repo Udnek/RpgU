@@ -46,6 +46,9 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
         entity.setPersistent(true);
         entity.setRemoveWhenFarAway(false);
         entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0, false, false, false));
+        if (entity.getLocation().getBlock().getLightFromSky() < 13){
+            entity.setGlowing(true);
+        }
     }
 
     public void setItems(@Nullable List<ItemStack> items){

@@ -3,7 +3,7 @@ package me.udnek.rpgu.component.ability.property.type;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.lore.ActiveAbilityLorePart;
+import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,6 +18,7 @@ public class AttributeBasedPropertyType extends SelfDescribedPropertyType<Double
         this.attribute = attribute;
         this.translation = translation;
         this.divideValueBy20 = divideValueBy20;
+        this.defaultComponent.setType(this);
     }
 
     public AttributeBasedPropertyType(@NotNull String rawId, double defaultValue, @NotNull CustomAttribute attribute, @NotNull String translation) {
@@ -29,12 +30,12 @@ public class AttributeBasedPropertyType extends SelfDescribedPropertyType<Double
     }
 
     @Override
-    public void describe(@NotNull Component text, @NotNull ActiveAbilityLorePart componentable) {
-        componentable.addWithFormat(Component.translatable(translation, text));
+    public void describe(@NotNull Component text, @NotNull AbilityLorePart componentable) {
+        componentable.addAbilityStat(Component.translatable(translation, text));
     }
 
     @Override
-    public void describe(@NotNull Double base, @NotNull ActiveAbilityLorePart componentable) {
+    public void describe(@NotNull Double base, @NotNull AbilityLorePart componentable) {
         if (base < attribute.getMinimum()) return;
         if (divideValueBy20) base /= 20d;
         describe(Component.text(Utils.roundToTwoDigits(base)), componentable);

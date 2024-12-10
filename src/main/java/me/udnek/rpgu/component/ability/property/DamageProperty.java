@@ -2,8 +2,8 @@ package me.udnek.rpgu.component.ability.property;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.ActiveAbilityComponent;
-import me.udnek.rpgu.lore.ActiveAbilityLorePart;
+import me.udnek.rpgu.component.ability.AbilityComponent;
+import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.formula.DamageFormula;
 import org.jetbrains.annotations.NotNull;
@@ -27,12 +27,12 @@ public class DamageProperty implements AbilityProperty<Double, Damage> {
     }
 
     @Override
-    public @NotNull CustomComponentType<ActiveAbilityComponent<?>, ?> getType() {
+    public @NotNull CustomComponentType<AbilityComponent<?>, ?> getType() {
         return ComponentTypes.ABILITY_DAMAGE;
     }
 
     @Override
-    public void describe(@NotNull ActiveAbilityLorePart componentable) {
-        formula.description(componentable::addWithFormat);
+    public void describe(@NotNull AbilityLorePart componentable) {
+        formula.description(componentable::addAbilityStat);
     }
 }

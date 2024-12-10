@@ -1,7 +1,8 @@
 package me.udnek.rpgu.component.ability.property;
 
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
-import me.udnek.rpgu.lore.ActiveAbilityLorePart;
+import me.udnek.rpgu.lore.ability.AbilityLorePart;
+import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +46,7 @@ public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Doub
     }
 
     @Override
-    public void describe(@NotNull ActiveAbilityLorePart componentable) {
+    public void describe(@NotNull AbilityLorePart componentable) {
         getType().describe(this, componentable);
     }
 }

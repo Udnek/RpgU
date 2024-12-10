@@ -7,6 +7,7 @@
 	"equipment.rpgu.description_line": " %s",
 
 	"active_ability.rpgu.title": "Active Ability:",
+	"passive_ability.rpgu.title": "Passive Ability:",
 	"ability.rpgu.cast_range": "Cast Range: %s blocks",
 	"ability.rpgu.area_of_effect": "AOE: %s blocks",
 	"ability.rpgu.cooldown": "Cooldown: %s seconds",
@@ -62,7 +63,7 @@
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
 	"item.rpgu.shaman_tambourine": "Shaman Tambourine",
-	"item.rpgu.shaman_tambourine.ability.0": "Damages chosen target",
+	"item.rpgu.shaman_tambourine.active_ability.0": "Damages chosen target",
 
 	"item.rpgu.ferrudam_sword": "Ferrudam Sword",
 	"item.rpgu.ferrudam_pickaxe": "Ferrudam Pickaxe",
@@ -76,16 +77,16 @@
 	"item.rpgu.arcane_accumulator": "Arcane Accumulator",
 
 	"item.rpgu.armadillo_bar": "Armadillo Bar",
-	"item.rpgu.armadillo_bar.ability.0": "Dispels negative effects while active",
-	"item.rpgu.armadillo_bar.ability.1": "Applies Magical Resistance IX",
+	"item.rpgu.armadillo_bar.active_ability.0": "Dispels negative effects while active",
+	"item.rpgu.armadillo_bar.active_ability.1": "Applies Magical Resistance IX",
 
 	"item.rpgu.totem_of_saving": "Totem of Saving",
 	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
 	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
 
 	"item.rpgu.air_elemental_tome": "Air Elemental Tome",
-	"item.rpgu.air_elemental_tome.ability.0": "Raises targets into the air",
-	"item.rpgu.air_elemental_tome.ability.1": "and makes them fall with increased damage",
+	"item.rpgu.air_elemental_tome.active_ability.0": "Raises targets into the air",
+	"item.rpgu.air_elemental_tome.active_ability.1": " and makes them fall with increased damage",
 
 	"item.rpgu.evocation_robe": "Evocation Robe",
 
@@ -103,12 +104,12 @@
 	"item.rpgu.phantom_chestplate": "Phantom Cloak",
 
 	"item.rpgu.amethyst_doloire": "Amethyst Doloire",
-	"item.rpgu.amethyst_doloire.ability.0": "Strikes spikes from the ground",
-	"item.rpgu.amethyst_doloire.ability.1": " and slows target on hit",
+	"item.rpgu.amethyst_doloire.active_ability.0": "Strikes spikes from the ground",
+	"item.rpgu.amethyst_doloire.active_ability.1": " and slows target on hit",
 	"item.rpgu.heavy_amethyst_doloire": "Heavy Amethyst Doloire",
 
 	"item.rpgu.natures_staff": "Nature's Staff",
-	"item.rpgu.natures_staff.ability.0": "Roots targets to the ground",
+	"item.rpgu.natures_staff.active_ability.0": "Roots targets to the ground",
 
 
 	"item.rpgu.hungry_horror_helmet": "Mask of Hungry Horror",
@@ -126,7 +127,7 @@
 	"item.rpgu.hungry_horror_chestplate.description.4": " If you don't have effect, applies Absorption I for 2 seconds.",
 
 	"item.rpgu.flower_wreath": "Flower Wreath",
-	"item.rpgu.flower_wreath.description.0": "Applies Regeneration near trees",
+	"item.rpgu.flower_wreath.passive_ability.0": "Applies Regeneration near trees",
 
 	"item.rpgu.wither_wreath": "Wither Wreath",
 	"item.rpgu.wither_wreath.description.0": "Applies Wither II on attack",

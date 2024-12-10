@@ -4,21 +4,16 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.ConstructableActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.RayTraceActiveAbility;
+import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
+import me.udnek.rpgu.component.ability.active.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.effect.Effects;
-import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.lore.ActiveAbilityLorePart;
+import me.udnek.rpgu.lore.ability.AbilityLorePart;
+import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.magicpotential.LinearMPFormula;
 import me.udnek.rpgu.particle.RootParticle;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Color;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
@@ -81,7 +76,7 @@ public class NaturesStaff extends ConstructableCustomItem {
                 final LinearMPFormula formula = new LinearMPFormula(BASE_DURATION, DURATION_PER_MP);
 
                 @Override
-                public void describe(@NotNull ActiveAbilityLorePart componentable) {
+                public void describe(@NotNull AbilityLorePart componentable) {
                     ComponentTypes.ABILITY_DURATION.describe(formula.getDescriptionWithNumberModifier(value -> value/20d), componentable);
                 }
 

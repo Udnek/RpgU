@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class PlayerWearingEquipmentTask extends TickingTask {
 
-    public static final int DELAY = 10;
+    public static final int DELAY = 1;
 
     public void run(){
         for (Player player : Bukkit.getOnlinePlayers()) {

@@ -58,27 +58,27 @@
   "item.rpgu.wrench.description.0": "Вращает блоки при взаимодействии",
 
   "item.rpgu.shaman_tambourine": "Шаманский бубен",
-  "item.rpgu.shaman_tambourine.ability.0": "Наносит урон по выбранной цели",
+  "item.rpgu.shaman_tambourine.active_ability.0": "Наносит урон по выбранной цели",
 
   "item.rpgu.ferrudam_sword": "Ферродамовый меч",
   "item.rpgu.ferrudam_pickaxe": "Ферродамовая кирка",
   "item.rpgu.ferrudam_axe": "Ферродамовый топор",
   "item.rpgu.ferrudam_shovel": "Ферродамовая лопата",
-  "item.rpgu.ferrudam_hoe": "ферродамовая мотыга",
+  "item.rpgu.ferrudam_hoe": "Ферродамовая мотыга",
 
   "item.rpgu.rusty_iron_ring": "Ржавое железное кольцо",
 
   "item.rpgu.armadillo_bar": "Посох броненосца",
-  "item.rpgu.armadillo_bar.ability.0": "Накладывает Сопротивление магии IX",
-  "item.rpgu.armadillo_bar.ability.1": "Снимает все негативные эффекты во время действия",
+  "item.rpgu.armadillo_bar.active_ability.0": "Накладывает Сопротивление магии IX",
+  "item.rpgu.armadillo_bar.active_ability.1": "Снимает все негативные эффекты во время действия",
 
   "item.rpgu.totem_of_saving": "Тотем сохранения",
   "item.rpgu.totem_of_saving.description.0": "Сохраняет вещи после смерти в себе,",
   "item.rpgu.totem_of_saving.description.1": " если в момент смерти он находился в инвентаре",
 
   "item.rpgu.air_elemental_tome": "Фолиант элементаля воздуха",
-  "item.rpgu.air_elemental_tome.ability.0": "Поднимает цели в воздух",
-  "item.rpgu.air_elemental_tome.ability.1": "и ударяет о землю с увеличенным уроном",
+  "item.rpgu.air_elemental_tome.active_ability.0": "Поднимает цели в воздух",
+  "item.rpgu.air_elemental_tome.active_ability.1": " и ударяет о землю с увеличенным уроном",
 
   "item.rpgu.flint_sword": "Кремневый меч",
   "item.rpgu.flint_pickaxe": "Кремневая кирка",
@@ -105,7 +105,6 @@
   "item.rpgu.hungry_horror_chestplate.description.4": " Если эффекта нет, применяется Поглощение I на 2 секунды",
 
   "item.rpgu.flower_wreath": "Цветочный венок",
-  "item.rpgu.flower_wreath.description.0": "Восстанавливает здоровье в деревьях",
 
   "item.rpgu.wither_wreath": "Увядший венок",
   "item.rpgu.wither_wreath.description.0": "Накладывает Иссушение II при атаке",
@@ -128,10 +127,11 @@
   "item.rpgu.grim_helmet": "Мрачный шлем",
   "item.rpgu.grim_chestplate": "Мрачный нагрудник",
   "item.rpgu.amethyst_doloire": "Аметистовый долуар",
-  "item.rpgu.amethyst_doloire.ability.0": "Вызывает шипы из земли",
-  "item.rpgu.amethyst_doloire.ability.1": " и замедляет цель при попадании",
+  "item.rpgu.amethyst_doloire.active_ability.0": "Вызывает шипы из земли",
+  "item.rpgu.amethyst_doloire.active_ability.1": " и замедляет цель при попадании",
   "item.rpgu.heavy_amethyst_doloire": "Тяжёлый аметистовый долуар",
 
   "item.rpgu.natures_staff": "Посох природы",
-  "item.rpgu.natures_staff.ability.0": "Привязывает цели к земле"
+  "item.rpgu.natures_staff.active_ability.0": "Привязывает цели к земле"
+
 }
