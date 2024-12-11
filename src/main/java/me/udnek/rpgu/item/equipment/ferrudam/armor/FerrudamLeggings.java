@@ -25,13 +25,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamLeggings extends ConstructableCustomItem implements FerrudamArmorItemProperties {
+public class FerrudamLeggings extends FerrudamArmor {
     @Override
     public @NotNull String getRawId() {return "ferrudam_leggings";}
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_LEGGINGS;}
-    @Override
-    public @Nullable EquippableComponent getEquippable() {return FerrudamArmorItemProperties.super.getEquippable();}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
@@ -57,9 +55,10 @@ public class FerrudamLeggings extends ConstructableCustomItem implements Ferruda
 
         consumer.accept(recipeAlloy);
     }
+
     @Override
-    protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
+    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
+        super.initializeAttributes(itemMeta);
         AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);
         AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_leggings"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS);

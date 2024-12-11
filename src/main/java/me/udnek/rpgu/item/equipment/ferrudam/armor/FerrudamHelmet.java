@@ -25,13 +25,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamHelmet extends ConstructableCustomItem implements FerrudamArmorItemProperties {
+public class FerrudamHelmet extends FerrudamArmor {
     @Override
     public @NotNull String getRawId() {return "ferrudam_helmet";}
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
-    @Override
-    public @Nullable EquippableComponent getEquippable() {return FerrudamArmorItemProperties.super.getEquippable();}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
@@ -58,8 +56,8 @@ public class FerrudamHelmet extends ConstructableCustomItem implements FerrudamA
     }
 
     @Override
-    protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
+    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
+        super.initializeAttributes(itemMeta);
         AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
         itemMeta.removeAttributeModifier(Attribute.ARMOR);
         AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
