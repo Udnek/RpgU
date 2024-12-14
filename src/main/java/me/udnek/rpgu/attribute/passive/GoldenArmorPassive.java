@@ -32,7 +32,7 @@ public class GoldenArmorPassive {
     public static void applyPassive(Material material){
         EquipmentSlot equipmentSlot = material.getEquipmentSlot();
         CustomComponentMap<CustomItem> components = VanillaItemManager.getReplaced(material).getComponents();
-        int duration = 8 * 20;
+        int duration = 3 * 20;
 
         if (equipmentSlot == EquipmentSlot.HEAD) {
             components.set(new Ability(CustomEquipmentSlot.HEAD));
@@ -51,7 +51,7 @@ public class GoldenArmorPassive {
             passiveAbility.getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.REGENERATION,
                     duration,
-                    1
+                    0
             )));
         }
         if (equipmentSlot == EquipmentSlot.LEGS) {
