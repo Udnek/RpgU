@@ -1,14 +1,12 @@
 package me.udnek.rpgu.item.artifact;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
 import org.bukkit.Particle;

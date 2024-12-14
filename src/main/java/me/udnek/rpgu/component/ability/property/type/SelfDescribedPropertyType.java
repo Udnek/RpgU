@@ -2,7 +2,6 @@ package me.udnek.rpgu.component.ability.property.type;
 
 import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
-import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.jetbrains.annotations.NotNull;
 
 public interface SelfDescribedPropertyType<Value, Component extends AbilityProperty<?, Value>> extends AbilityPropertyType<Component> {

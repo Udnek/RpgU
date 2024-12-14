@@ -106,7 +106,6 @@
   "item.rpgu.flower_wreath": "Цветочный венок",
 
   "item.rpgu.wither_wreath": "Увядший венок",
-  "item.rpgu.wither_wreath.description.0": "Накладывает Иссушение II при атаке",
 
   "item.rpgu.nautilus_core": "Ядро наутилуса",
   "item.rpgu.nautilus_core.description.0": "Критические удары применяются к магическому урону",
@@ -133,6 +132,20 @@
   "item.rpgu.natures_staff": "Посох природы",
   "item.rpgu.natures_staff.active_ability.0": "Привязывает цели к земле",
   "passive_ability.rpgu.title": "Пассивная способность:",
-  "item.rpgu.flower_wreath.passive_ability.0": "Накладывает регенерацию возле деревьев"
+  "item.rpgu.flower_wreath.passive_ability.0": "Накладывает регенерацию возле деревьев",
+
+  "ability.rpgu.damage": "Урон: %s",
+  "ability.rpgu.effects": "Эффекты: %s",
+  "ability.rpgu.effects.with_amplifier_with_duration": "%s %s (%s секунд)",
+
+  "ability.rpgu.effects.no_amplifier_with_duration": "%s (%s секунд)",
+
+  "effect.rpgu.root": "Оцепенение",
+  "item.rpgu.wither_wreath.passive_ability.0": "Применяет дебафы к существу при атаке",
+
+  "passive_ability.rpgu.golden_armor.passive_ability.0": "Усиливает ближайших прирученных существ",
+
+  "effect.rpgu.mire_touch": "Вязкое прикосновение"
+
 
 }

@@ -12,8 +12,6 @@ import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ConstructablePassiveAbilityComponent<ActivationContext> extends AbstractAbilityComponent<ActivationContext> implements PassiveAbilityComponent<ActivationContext> {
