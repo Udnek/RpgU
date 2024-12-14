@@ -27,6 +27,7 @@
 
 	"effect.rpgu.root": "Root",
 
+	"effect.rpgu.mire_touch": "Mire Touch",
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",
@@ -140,6 +141,8 @@
 
 	"item.rpgu.wither_wreath": "Wither Wreath",
 	"item.rpgu.wither_wreath.passive_ability.0": "Debuffs victim on attack",
+
+	"passive_ability.rpgu.golden_armor.passive_ability.0": "Buffs nearby tamed creatures",
 
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",

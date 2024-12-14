@@ -7,13 +7,12 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.active.RayTraceActiveAbility;
-import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
-import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.particle.RootParticle;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -24,11 +23,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class NaturesStaff extends ConstructableCustomItem {

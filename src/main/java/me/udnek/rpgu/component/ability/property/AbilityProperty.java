@@ -2,7 +2,6 @@ package me.udnek.rpgu.component.ability.property;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.rpgu.component.ability.AbilityComponent;
-import me.udnek.rpgu.component.ability.property.function.PropertyFunction;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import org.jetbrains.annotations.NotNull;
 

@@ -11,10 +11,10 @@ import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponen
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.CastTimeProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
+import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
-import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
@@ -94,7 +94,8 @@ public class ShamanTambourine extends ConstructableCustomItem{
                     1,
                     entity -> entity!=player);
             if (!(rayTraceResult != null && rayTraceResult.getHitEntity() instanceof LivingEntity living)) {
-                ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1).location(player.getLocation().add(player.getLocation().getDirection().multiply(getComponents().get(ComponentTypes.ABILITY_CAST_RANGE).get(player))).add(0, 1, 0));
+                ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1).location(player.getLocation().add(player.getLocation().getDirection().
+                        multiply(getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player))).add(0, 1, 0));
                 builder.data(0);
                 builder.spawn();
                 return ActionResult.NO_COOLDOWN;

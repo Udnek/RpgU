@@ -3,7 +3,6 @@ package me.udnek.rpgu.component.ability;
 import me.udnek.itemscoreu.customcomponent.OptimizedComponentHolder;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

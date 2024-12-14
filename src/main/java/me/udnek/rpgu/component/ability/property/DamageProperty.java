@@ -3,9 +3,9 @@ package me.udnek.rpgu.component.ability.property;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
+import me.udnek.rpgu.component.ability.property.function.DamageFunction;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
-import me.udnek.rpgu.component.ability.property.function.DamageFunction;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 

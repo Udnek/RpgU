@@ -1,13 +1,14 @@
 package me.udnek.rpgu.item.artifact.wreath;
 
-import me.udnek.itemscoreu.customattribute.*;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
+import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
+import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customattribute.CustomKeyedAttributeModifier;
+import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ArtifactComponent;
@@ -16,23 +17,19 @@ import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityCompon
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 

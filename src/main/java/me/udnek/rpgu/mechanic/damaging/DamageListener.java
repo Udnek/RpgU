@@ -1,11 +1,8 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DamageListener extends SelfRegisteringListener {

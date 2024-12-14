@@ -19,12 +19,11 @@ import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
 import me.udnek.rpgu.component.ability.property.function.Functions;
-import me.udnek.rpgu.effect.Effects;
+import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
-import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.particle.AmethystSpikeParticle;
 import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
@@ -115,7 +114,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
         getComponents().set(new GreatAmethystSwordComponent());
     }
 
-    public class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
+    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
 
         public static double BASE_RADIUS = 0.8;
         public static double BASE_DAMAGE = 1.5;

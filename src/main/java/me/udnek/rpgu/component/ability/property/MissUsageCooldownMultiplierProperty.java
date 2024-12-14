@@ -4,7 +4,6 @@ import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
-import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
