@@ -1,48 +1,49 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
 import org.bukkit.enchantments.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class EnchantmentsContainer {
 
-    private List<Enchantment> enchantments = new ArrayList<>();
+    protected final Set<Enchantment> enchantments = new HashSet<>();
 
-    public EnchantmentsContainer(Enchantment ...enchantments){
-        for (Enchantment enchantment : enchantments) {
+    public EnchantmentsContainer(@NotNull Enchantment ...enchantments){
+        for (@NotNull Enchantment enchantment : enchantments) {
             add(enchantment);
         }
     }
 
-    public List<Enchantment> getAll(){
-        List<Enchantment> clone = new ArrayList<>(enchantments.size());
-        clone.addAll(enchantments);
-        return clone;
+    public void get(@NotNull Consumer<Enchantment> consumer){
+        enchantments.forEach(consumer);
+    }
+    public @NotNull Set<Enchantment> get(){
+        return new HashSet<>(enchantments);
     }
 
-    public void add(Enchantment ...toAddEnchantments){
-        for (Enchantment enchantment : toAddEnchantments) {
-            if (!enchantments.contains(enchantment)){
-                enchantments.add(enchantment);
-            }
+
+    public void add(@NotNull Enchantment enchantment){
+        enchantments.add(enchantment);
+    }
+
+    public void add(@NotNull EnchantmentsContainer container){
+        container.get(enchantments::add);
+    }
+
+    public boolean isEmpty(){return enchantments.isEmpty();}
+
+    public static @NotNull HashMap<Enchantment, Integer> mix(@NotNull Iterable<EnchantmentsContainer> containers){
+        HashMap<Enchantment, Integer> map = new HashMap<>();
+        for (EnchantmentsContainer container : containers) {
+            container.get(new Consumer<Enchantment>() {
+                @Override
+                public void accept(Enchantment enchantment) {
+                    map.put(enchantment, Math.clamp(map.getOrDefault(enchantment, 0)+1, 1, enchantment.getMaxLevel()));
+                }
+            });
         }
+        return map;
     }
-
-    public void add(EnchantmentsContainer enchantmentsContainer){
-        for (Enchantment enchantment : enchantmentsContainer.getAll()) {
-            if (!enchantments.contains(enchantment)){
-                enchantments.add(enchantment);
-            }
-        }
-    }
-
-    public void remove(Enchantment enchantment){
-        enchantments.remove(enchantment);
-    }
-
-    public boolean contains(Enchantment enchantment){
-        return enchantments.contains(enchantment);
-    }
-
 }

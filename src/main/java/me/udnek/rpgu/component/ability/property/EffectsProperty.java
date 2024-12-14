@@ -1,8 +1,10 @@
 package me.udnek.rpgu.component.ability.property;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
+import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.Modifiers;
 import me.udnek.rpgu.component.ability.property.function.PropertyFunction;
@@ -122,7 +124,7 @@ public class EffectsProperty implements AbilityProperty<Player, List<PotionEffec
         }
 
         public PotionData(@NotNull PotionEffectType type, int duration, int amplifier){
-            this(type, Functions.CONSTANT(duration), Functions.CONSTANT(amplifier));
+            this(type, Functions.CEIL(new AttributeFunction(Attributes.ABILITY_DURATION, duration)), Functions.CONSTANT(amplifier));
         }
     }
 }

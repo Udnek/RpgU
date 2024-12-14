@@ -25,6 +25,7 @@ import java.util.function.Consumer;
 public class SphereOfDiscord extends ConstructableCustomItem {
 
     private static final double MAGICAL_POTENTIAL = 6;
+    private static final double MEELE_MULTIPLIER = -0.2;
     private static final double ATTACK_DAMAGE = -0.6;
 
     @Override
@@ -58,8 +59,9 @@ public class SphereOfDiscord extends ConstructableCustomItem {
         CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_" + getRawId()), ATTACK_DAMAGE, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
         getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
 
-        CustomAttributeModifier attributeMP = new CustomAttributeModifier(MAGICAL_POTENTIAL, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeMP).build()));
+        CustomAttributeModifier magicalPotential = new CustomAttributeModifier(MAGICAL_POTENTIAL, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        CustomAttributeModifier meeleMultiplier = new CustomAttributeModifier(MEELE_MULTIPLIER, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, magicalPotential).add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, meeleMultiplier).build()));
     }
 
 }

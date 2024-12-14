@@ -75,7 +75,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     public boolean canTakeItem(@Nullable ItemStack itemStack, int slot) {
         return !FILLER.isThisItem(inventory.getItem(slot));
     }
-    public void iterateTroughAllInputSlots(Consumer<Integer> consumer){
+    public void iterateTroughAllInputSlots(@NotNull Consumer<Integer> consumer){
         for (int alloysSlot : ALLOYS_SLOTS) {
             consumer.accept(alloysSlot);
         }
