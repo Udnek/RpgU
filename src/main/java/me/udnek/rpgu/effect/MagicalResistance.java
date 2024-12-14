@@ -1,8 +1,10 @@
 package me.udnek.rpgu.effect;
 
 import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
+import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Particle;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionEffectTypeCategory;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +23,11 @@ public class MagicalResistance extends ConstructableCustomEffect {
     @Override
     public @Nullable Particle getParticle() {
         return Particle.DUST_COLOR_TRANSITION;
+    }
+
+    @Override
+    public @NotNull String translationKey() {
+        return "effect.minecraft.luck";
     }
 
     @Override

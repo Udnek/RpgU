@@ -5,11 +5,16 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
+import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
@@ -118,8 +123,13 @@ public class FlowerWreath extends ConstructableCustomItem {
         }
 
         public PassiveAbility(){
-            getComponents().set(AttributeBasedProperty.from(6, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(AttributeBasedProperty.from(DURATION, ComponentTypes.ABILITY_DURATION));
+            getComponents().set(new AttributeBasedProperty(6, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(new AttributeBasedProperty(DURATION, ComponentTypes.ABILITY_DURATION));
+            getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
+                    PotionEffectType.REGENERATION,
+                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, DURATION)),
+                    Functions.CONSTANT(0)
+            )));
         }
 
         public @NotNull Location randomOffset(@NotNull Player player) {
@@ -143,7 +153,7 @@ public class FlowerWreath extends ConstructableCustomItem {
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @Nullable Object o) {
             boolean isInForest = isForestMaterial(randomOffset(player).getBlock().getType());
             if (isInForest) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, DURATION, 0));
+                getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, player);
                 return ActionResult.FULL_COOLDOWN;
             }
             return ActionResult.NO_COOLDOWN;

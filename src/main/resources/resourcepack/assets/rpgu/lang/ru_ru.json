@@ -69,8 +69,7 @@
   "item.rpgu.rusty_iron_ring": "Ржавое железное кольцо",
 
   "item.rpgu.armadillo_bar": "Посох броненосца",
-  "item.rpgu.armadillo_bar.active_ability.0": "Накладывает Сопротивление магии IX",
-  "item.rpgu.armadillo_bar.active_ability.1": "Снимает все негативные эффекты во время действия",
+  "item.rpgu.armadillo_bar.active_ability.0": "Снимает все негативные эффекты во время действия",
 
   "item.rpgu.totem_of_saving": "Тотем сохранения",
   "item.rpgu.totem_of_saving.description.0": "Сохраняет вещи после смерти в себе,",
@@ -132,6 +131,8 @@
   "item.rpgu.heavy_amethyst_doloire": "Тяжёлый аметистовый долуар",
 
   "item.rpgu.natures_staff": "Посох природы",
-  "item.rpgu.natures_staff.active_ability.0": "Привязывает цели к земле"
+  "item.rpgu.natures_staff.active_ability.0": "Привязывает цели к земле",
+  "passive_ability.rpgu.title": "Пассивная способность:",
+  "item.rpgu.flower_wreath.passive_ability.0": "Накладывает регенерацию возле деревьев"
 
 }

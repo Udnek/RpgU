@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.artifact.wreath;
 
 import me.udnek.itemscoreu.customattribute.*;
+import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
@@ -10,10 +11,14 @@ import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ArtifactComponent;
+import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
+import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -55,16 +60,6 @@ public class WitherWreath extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable LoreBuilder getLoreBuilder() {
-        LoreBuilder loreBuilder = new LoreBuilder();
-        AttributesLorePart attributesLorePart = new AttributesLorePart();
-        loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addFullDescription(EquipmentSlots.ARTIFACTS, this, 1);
-
-        return loreBuilder;
-    }
-
-    @Override
     public void initializeComponents() {
         super.initializeComponents();
 
@@ -75,16 +70,45 @@ public class WitherWreath extends ConstructableCustomItem {
         CustomAttributeModifier attribute = new CustomAttributeModifier(5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
 
-        getComponents().set(new WitherWreathComponent());
+        getComponents().set(new Artifact());
+        getComponents().set(new Passive());
     }
 
-    public static class WitherWreathComponent implements ArtifactComponent {
+    public class Passive extends ConstructablePassiveAbilityComponent<DamageInstance>{
+
+        public Passive(){
+            getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
+                    PotionEffectType.WITHER,
+                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, 20*2)),
+                    Functions.CONSTANT(1)
+            )));
+        }
+
+        @Override
+        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
+            componentable.addFullAbilityDescription(WitherWreath.this, 1);
+            super.addLoreLines(componentable);
+        }
+
+        @Override
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return EquipmentSlots.ARTIFACTS;
+        }
+
+        @Override
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull DamageInstance damageInstance) {
+            if (!(damageInstance.getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
+            getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, livingVictim);
+            return ActionResult.FULL_COOLDOWN;
+        }
+    }
+
+    public static class Artifact implements ArtifactComponent {
         @Override
         public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
-            Entity victim = damageInstance.getVictim();
-
-            if (!(victim instanceof LivingEntity livingEntity)) return;
-            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20*2,1));
+            if (item.getComponents().getOrException(ComponentTypes.PASSIVE_ABILITY_ITEM) instanceof Passive passive){
+                passive.action(item, player, damageInstance);
+            }
         }
     }
 }

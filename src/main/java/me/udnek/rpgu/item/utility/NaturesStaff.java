@@ -3,15 +3,17 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.active.RayTraceActiveAbility;
+import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
+import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.effect.Effects;
-import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
-import me.udnek.rpgu.mechanic.magicpotential.LinearMPFormula;
+import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.particle.RootParticle;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -22,9 +24,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class NaturesStaff extends ConstructableCustomItem {
@@ -68,33 +72,14 @@ public class NaturesStaff extends ConstructableCustomItem {
         public static double DURATION_PER_MP = 10;
 
         public NaturesStaffComponent() {
-            getComponents().set(AttributeBasedProperty.from(20*20, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
-            getComponents().set(new AttributeBasedProperty(0){
-
-                final LinearMPFormula formula = new LinearMPFormula(BASE_DURATION, DURATION_PER_MP);
-
-                @Override
-                public void describe(@NotNull AbilityLorePart componentable) {
-                    ComponentTypes.ABILITY_DURATION.describe(formula.getDescriptionWithNumberModifier(value -> value/20d), componentable);
-                }
-
-                @Override
-                public @NotNull AttributeBasedPropertyType getType() {
-                    return ComponentTypes.ABILITY_DURATION;
-                }
-
-                @Override
-                public @NotNull Double getBase() {
-                    return formula.apply(0d);
-                }
-
-                @Override
-                public @NotNull Double get(@NotNull Player player) {
-                    return super.getWithBase(player, formula.apply(player));
-                }
-            });
+            getComponents().set(new AttributeBasedProperty(20 * 20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(new AttributeBasedProperty(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
+                    Effects.ROOT_EFFECT.getBukkitType(),
+                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, Functions.APPLY_MP(new LinearMPFunction(BASE_DURATION, DURATION_PER_MP)))),
+                    Functions.CONSTANT(0)))
+            );
         }
 
 
@@ -102,11 +87,13 @@ public class NaturesStaff extends ConstructableCustomItem {
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
             Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
-            final int duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player).intValue();
+
+            EffectsProperty effects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS);
 
             if (livingEntitiesInRayTraceRadius == null || livingEntitiesInRayTraceRadius.isEmpty()) return ActionResult.PENALTY_COOLDOWN;
+
+            effects.applyOn(player, livingEntitiesInRayTraceRadius);
             for (LivingEntity livingEntity : livingEntitiesInRayTraceRadius) {
-                Effects.ROOT_EFFECT.apply(livingEntity, duration, 0);
                 new RootParticle(livingEntity).play();
             }
 

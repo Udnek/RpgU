@@ -7,7 +7,7 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,9 +16,9 @@ import java.util.function.Consumer;
 
 public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbilityLorePart {
 
-    protected HashMap<CustomEquipmentSlot, LoreBuilder.Componentable.Simple> data = new HashMap<>();
-    protected CustomEquipmentSlot abilitySlot = CustomEquipmentSlot.ANY_VANILLA;
-    protected boolean addEmptyHeader = false;
+    protected HashMap<CustomEquipmentSlot, LoreBuilder.Componentable.Simple> attributeData = new HashMap<>();
+    protected HashMap<CustomEquipmentSlot, LoreBuilder.Componentable.Simple> passiveData = new HashMap<>();
+    protected CustomEquipmentSlot abilitySlot;
 
     @Override
     public void toComponents(@NotNull Consumer<Component> consumer) {
@@ -31,7 +31,20 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
                 return Integer.compare(o1.getId().hashCode(), o2.getId().hashCode());
             }
         });
-        sorted.putAll(data);
+        if (!attributeData.isEmpty() && !passiveData.isEmpty()){
+            addLine(abilitySlot, Component.empty(), true, Position.PASSIVE);
+        }
+        for (Map.Entry<CustomEquipmentSlot, Simple> entry : passiveData.entrySet()) {
+            Simple simple = entry.getValue();
+            simple.toComponents(new Consumer<Component>() {
+                @Override
+                public void accept(Component component) {
+                    addLine(entry.getKey(), component, false, Position.ATTRIBUTE);
+                }
+            });
+        }
+        
+        sorted.putAll(attributeData);
 
         for (Map.Entry<CustomEquipmentSlot, Simple> entry : sorted.entrySet()) {
             consumer.accept(Component.empty());
@@ -39,14 +52,11 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
             CustomEquipmentSlot slot = entry.getKey();
 
             consumer.accept(AttributeLoreGenerator.getHeader(slot));
-            if (abilitySlot == slot && addEmptyHeader){
-                consumer.accept(Component.empty());
-            }
             componentable.toComponents(consumer);
         }
     }
     public void addAttribute(@NotNull CustomEquipmentSlot slot, @NotNull Component component){
-        addLine(slot, AttributeLoreGenerator.addTab(component), false);
+        addLine(slot, AttributeLoreGenerator.addTab(component), false, Position.ATTRIBUTE);
     }
 
     public void addFullDescription(@NotNull CustomEquipmentSlot slot, @NotNull ConstructableCustomItem customItem, int linesAmount){
@@ -57,24 +67,33 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
         addDescription(slot, customItem.getRawItemName(), line);
     }
     public void addDescription(@NotNull CustomEquipmentSlot slot, @NotNull String rawItemName, int line){
-        addLine(slot, AttributeLoreGenerator.addTab(Component.translatable(rawItemName + ".description." + line)).color(CustomAttribute.PLUS_COLOR), false);
+        addLine(slot, AttributeLoreGenerator.addTab(Component.translatable(rawItemName + ".description." + line)).color(CustomAttribute.PLUS_COLOR), false, Position.ATTRIBUTE);
+    }
+    
+
+    public void addLine(@NotNull CustomEquipmentSlot slot, @NotNull Component component, boolean asFirst, @NotNull Position position){
+        if (position == Position.ATTRIBUTE){
+            Simple componentable = attributeData.getOrDefault(slot, new Simple());
+            if (asFirst) componentable.addFirst(component);
+            else componentable.add(component);
+            attributeData.put(slot, componentable);
+        } else {
+            Simple componentable = passiveData.getOrDefault(slot, new Simple());
+            if (asFirst) componentable.addFirst(component);
+            else componentable.add(component);
+            passiveData.put(slot, componentable);
+        }
     }
 
-    public void addLine(@NotNull CustomEquipmentSlot slot, @NotNull Component component, boolean asFirst){
-        Simple componentable = data.getOrDefault(slot, new Simple());
-        if (asFirst) componentable.addFirst(component);
-        else componentable.add(component);
-        data.put(slot, componentable);
-    }
 
     public void remove(@NotNull CustomEquipmentSlot slot){
-        data.remove(slot);
+        attributeData.remove(slot);
     }
     public @Nullable LoreBuilder.Componentable get(@NotNull CustomEquipmentSlot slot){
-        return data.get(slot);
+        return attributeData.get(slot);
     }
     @Override
-    public boolean isEmpty() {return data.isEmpty();}
+    public boolean isEmpty() {return attributeData.isEmpty() && passiveData.isEmpty();}
     @Override
     @Deprecated
     public void add(@NotNull Component component) {}
@@ -84,11 +103,8 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
 
     @Override
     public void setHeader(@NotNull Component component) {
-        addAttribute(abilitySlot, component.color(PASSIVE_HEADER_COLOR));
+        addLine(abilitySlot,  AttributeLoreGenerator.addTab(component.color(PASSIVE_HEADER_COLOR).decoration(TextDecoration.ITALIC, false)), true, Position.PASSIVE);
     }
-
-    @Override
-    public void addEmptyAboveHeader() {addEmptyHeader = true;}
 
     @Override
     public void addAbilityStat(@NotNull Component component) {
@@ -107,11 +123,16 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
 
     @Override
     public void addWithAbilityFormat(@NotNull Component component) {
-        addAttribute(abilitySlot, AttributeLoreGenerator.addTab(component));
+        addLine(abilitySlot, AttributeLoreGenerator.addTab(AttributeLoreGenerator.addTab(component)), false, Position.PASSIVE);
     }
 
     @Override
     public void setEquipmentSlot(@NotNull CustomEquipmentSlot slot) {
         abilitySlot = slot;
+    }
+
+    public enum Position{
+        ATTRIBUTE,
+        PASSIVE
     }
 }

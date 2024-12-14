@@ -8,9 +8,17 @@ import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class MissUsageCooldownMultiplierProperty extends AbstractAbilityProperty<Player, Double>{
+public class MissUsageCooldownMultiplierProperty implements AbilityProperty<Player, Double> {
+
+    protected double base;
+
     public MissUsageCooldownMultiplierProperty(@NotNull Double base) {
-        super(base);
+        this.base = base;
+    }
+
+    @Override
+    public @NotNull Double getBase() {
+        return base;
     }
 
     @Override

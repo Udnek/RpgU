@@ -1,48 +1,37 @@
 package me.udnek.rpgu.component.ability.property;
 
+import me.udnek.itemscoreu.customattribute.CustomAttribute;
+import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
+import me.udnek.rpgu.component.ability.property.function.PropertyFunction;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
-import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Double> {
 
-    protected AttributeBasedPropertyType type;
+    protected @NotNull AttributeBasedPropertyType type;
 
-
-    public static AttributeBasedProperty from(double base, @NotNull AttributeBasedPropertyType type){
-        return new AttributeBasedProperty(base).setType(type);
-    }
-
-    @ApiStatus.Internal
-    public AttributeBasedProperty(double base) {
-        super(base);
-    }
-
-    @ApiStatus.Internal
-    public @NotNull AttributeBasedProperty setType(@NotNull AttributeBasedPropertyType type){
+    public AttributeBasedProperty(@NotNull AttributeFunction function, @NotNull AttributeBasedPropertyType type) {
+        super(function);
         this.type = type;
-        return this;
     }
 
-    @Override
-    public @NotNull Double getBase() {return base;}
-
-    public double getWithBase(@NotNull Player player, double base){
-        if (base < getType().getAttribute().getMinimum()) return 0d;
-        return getType().getAttribute().calculateWithBase(player, base);
-    }
-
-    @Override
-    public @NotNull Double get(@NotNull Player player) {
-        return getWithBase(player, getBase());
+    public AttributeBasedProperty(double base, @NotNull AttributeBasedPropertyType type) {
+        this(new AttributeFunction(type.getAttribute(), base), type);
     }
 
     @Override
     public @NotNull AttributeBasedPropertyType getType() {
         return type;
+    }
+
+    @Override
+    public @NotNull Double get(@NotNull Player player) {
+        if (getFunction().getBase() < getType().getAttribute().getMinimum()) return getType().getAttribute().getMinimum();
+        return getFunction().apply(player);
     }
 
     @Override

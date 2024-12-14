@@ -25,7 +25,6 @@ public abstract class ConstructableActiveAbilityComponent<ActivationContext> ext
     public void getLore(@NotNull LoreBuilder loreBuilder){
         ActiveAbilityLorePart lorePart = new ActiveAbilityLorePart();
         loreBuilder.set(55, lorePart);
-        lorePart.addEmptyAboveHeader();
         lorePart.setHeader(Component.translatable("active_ability.rpgu.title"));
         addLoreLines(lorePart);
     }

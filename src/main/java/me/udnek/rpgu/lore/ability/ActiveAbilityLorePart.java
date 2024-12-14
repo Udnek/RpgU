@@ -1,10 +1,7 @@
 package me.udnek.rpgu.lore.ability;
 
-import com.google.common.base.Preconditions;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.rpgu.lore.TranslationKeys;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +12,6 @@ import java.util.function.Consumer;
 
 public class ActiveAbilityLorePart implements AbilityLorePart {
 
-    boolean addEmptyAboveHeader = false;
     @Nullable Component header;
     List<@NotNull Component> data = new ArrayList<>();
 
@@ -31,8 +27,6 @@ public class ActiveAbilityLorePart implements AbilityLorePart {
     public void setHeader(@NotNull Component component){
         header = component.color(ACTIVE_HEADER_COLOR).decoration(TextDecoration.ITALIC, false);
     }
-    @Override
-    public void addEmptyAboveHeader(){addEmptyAboveHeader = true;}
 
     @Override
     public void addAbilityStat(@NotNull Component component) {

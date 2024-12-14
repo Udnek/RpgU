@@ -8,15 +8,16 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.active.ActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
-import me.udnek.rpgu.component.ability.property.AbilityProperty;
-import me.udnek.rpgu.component.ability.property.CastTimeProperty;
-import me.udnek.rpgu.component.ability.property.DamageProperty;
-import me.udnek.rpgu.component.ability.property.MissUsageCooldownMultiplierProperty;
+import me.udnek.rpgu.component.ability.property.*;
 import me.udnek.rpgu.component.ability.property.type.AbilityPropertyType;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
+import me.udnek.rpgu.component.ability.property.type.ConstructableAbilityPropertyType;
 import me.udnek.rpgu.mechanic.damaging.Damage;
-import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
+import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+
+import java.util.List;
 
 public class ComponentTypes {
 
@@ -31,6 +32,7 @@ public class ComponentTypes {
     public static final AbilityPropertyType<AbilityProperty<Player, Integer>> ABILITY_CAST_TIME;
     public static final AbilityPropertyType<AbilityProperty<Player, Double>> ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER;
     public static final AbilityPropertyType<AbilityProperty<Double, Damage>> ABILITY_DAMAGE;
+    public static final AbilityPropertyType<EffectsProperty> ABILITY_EFFECTS;
 
 
     static {
@@ -38,13 +40,14 @@ public class ComponentTypes {
         ACTIVE_ABILITY_ITEM = register(new ConstructableComponentType("active_ability_item",ActiveAbilityComponent.DEFAULT));
         PASSIVE_ABILITY_ITEM = register(new ConstructableComponentType("passive_ability_item", PassiveAbilityComponent.DEFAULT));
 
-        ABILITY_COOLDOWN = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cooldown", -1, Attributes.COOLDOWN_TIME, "ability.rpgu.cooldown", true));
-        ABILITY_CAST_RANGE = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cooldown", -1, Attributes.CAST_RANGE, "ability.rpgu.cast_range"));
-        ABILITY_AREA_OF_EFFECT = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_area_of_effect", -1, Attributes.AREA_OF_EFFECT, "ability.rpgu.area_of_effect"));
-        ABILITY_DURATION = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_duration", -1, Attributes.ABILITY_DURATION, "ability.rpgu.duration", true));
-        ABILITY_CAST_TIME = (AbilityPropertyType<AbilityProperty<Player, Integer>>) register(new AbilityPropertyType<>("ability_cast_time", new CastTimeProperty(-1)));
-        ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER = (AbilityPropertyType<AbilityProperty<Player, Double>>) register(new AbilityPropertyType<>("ability_miss_usage_cooldown_multiplier", new MissUsageCooldownMultiplierProperty(0.3)));
-        ABILITY_DAMAGE = (AbilityPropertyType<AbilityProperty<Double, Damage>>) register(new AbilityPropertyType<>("ability_damage", new DamageProperty(new MPBasedDamageFormula(null, null))));
+        ABILITY_COOLDOWN = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cooldown", Attributes.COOLDOWN_TIME, -1, "ability.rpgu.cooldown", true));
+        ABILITY_CAST_RANGE = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cooldown", Attributes.CAST_RANGE, -1, "ability.rpgu.cast_range"));
+        ABILITY_AREA_OF_EFFECT = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_area_of_effect", Attributes.AREA_OF_EFFECT, -1, "ability.rpgu.area_of_effect"));
+        ABILITY_DURATION = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_duration", Attributes.ABILITY_DURATION, -1, "ability.rpgu.duration", true));
+        ABILITY_CAST_TIME = (AbilityPropertyType<AbilityProperty<Player, Integer>>) register(new ConstructableAbilityPropertyType("ability_cast_time", new CastTimeProperty(-1)));
+        ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER = (AbilityPropertyType<AbilityProperty<Player, Double>>) register(new ConstructableAbilityPropertyType("ability_miss_usage_cooldown_multiplier", new MissUsageCooldownMultiplierProperty(0.3)));
+        ABILITY_DAMAGE = (AbilityPropertyType<AbilityProperty<Double, Damage>>) register(new ConstructableAbilityPropertyType("ability_damage", new DamageProperty(new MPBasedDamageFunction(null, null))));
+        ABILITY_EFFECTS = (AbilityPropertyType<EffectsProperty>) register(new ConstructableAbilityPropertyType("ability_effects", EffectsProperty.DEFAULT));
     }
 
     private static CustomComponentType register(CustomComponentType type){

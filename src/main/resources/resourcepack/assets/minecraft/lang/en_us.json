@@ -12,6 +12,12 @@
 	"attribute.modifier.take.1": "-%s%%(+) %s",
 	"attribute.modifier.take.2": "-%s%%(*) %s",
 
+	"potion.potency.6": "VII",
+	"potion.potency.7": "VIII",
+	"potion.potency.8": "IX",
+	"potion.potency.9": "X",
+	"potion.potency.10": "XI",
+
 	"effect.minecraft.luck": "Magical Resistance",
 	"effect.minecraft.resistance": "Physical Resistance"
 }

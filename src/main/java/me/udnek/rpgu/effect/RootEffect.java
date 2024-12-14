@@ -6,8 +6,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionEffectTypeCategory;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +29,11 @@ public class RootEffect extends ConstructableCustomEffect {
         return "root";
     }
 
-
+    @Override
+    public void apply(@NotNull LivingEntity bukkit, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
+        super.apply(bukkit, duration, amplifier, ambient, showParticles, showIcon);
+        bukkit.setVelocity(new Vector());
+    }
 
     @Override
     public @Nullable Particle getParticle() {

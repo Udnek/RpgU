@@ -16,11 +16,15 @@ import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
+import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
+import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
-import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
+import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.particle.AmethystSpikeParticle;
 import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
@@ -43,6 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class AmethystDoloire extends ConstructableCustomItem {
@@ -116,11 +121,13 @@ public class AmethystDoloire extends ConstructableCustomItem {
         public static double BASE_DAMAGE = 1.5;
 
         public GreatAmethystSwordComponent() {
-            getComponents().set(AttributeBasedProperty.from(20*15, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(AttributeBasedProperty.from(10, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(AttributeBasedProperty.from(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
-            getComponents().set(AttributeBasedProperty.from(20*3, ComponentTypes.ABILITY_DURATION));
-            getComponents().set(new DamageProperty(MPBasedDamageFormula.linearMageOnly(BASE_DAMAGE, 0.2)));
+            getComponents().set(new AttributeBasedProperty(20*15, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(new AttributeBasedProperty(10, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(new AttributeBasedProperty(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new DamageProperty(MPBasedDamageFunction.linearMageOnly(BASE_DAMAGE, 0.2)));
+            getComponents().set(new EffectsProperty(
+                    new EffectsProperty.PotionData(PotionEffectType.SLOWNESS, Functions.CEIL(new AttributeFunction(Attributes.ABILITY_DURATION, 20d*3d)), Functions.CONSTANT(2))
+            ));
         }
 
         @Override
@@ -137,7 +144,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
             final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
             final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
-            final int duration = (int) Math.ceil(getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player));
+            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(player);
 
             Vector direction = player.getLocation().getDirection();
             direction.setY(0).normalize().multiply(radius*2);
@@ -154,10 +161,9 @@ public class AmethystDoloire extends ConstructableCustomItem {
                     ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.FUCHSIA).location(location), radius);
                     Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
 
-
                     for (LivingEntity entity : nearbyLivingEntities){
+                        potionEffects.forEach(entity::addPotionEffect);
                         DamageUtils.damage(entity, damage, player);
-                        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, duration, 2));
                     }
 
                     if (2*radius*count > castRange) cancel();

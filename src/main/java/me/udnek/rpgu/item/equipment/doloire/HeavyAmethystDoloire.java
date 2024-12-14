@@ -49,7 +49,7 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
 
         GreatAmethystSwordComponent swordComponent = new GreatAmethystSwordComponent();
-        swordComponent.getComponents().set(AttributeBasedProperty.from(20*7, ComponentTypes.ABILITY_COOLDOWN));
+        swordComponent.getComponents().set(new AttributeBasedProperty(20*7, ComponentTypes.ABILITY_COOLDOWN));
         getComponents().set(swordComponent);
     }
 

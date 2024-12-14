@@ -69,9 +69,9 @@ public class AirElementalTome extends ConstructableCustomItem {
 
 
         public AirElementalTomeComponent(){
-            getComponents().set(AttributeBasedProperty.from(20*20, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(AttributeBasedProperty.from(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new AttributeBasedProperty(20*20, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(new AttributeBasedProperty(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
         }
 
         @Override

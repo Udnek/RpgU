@@ -39,8 +39,6 @@ public abstract class ConstructablePassiveAbilityComponent<ActivationContext> ex
         }
 
         lorePart.setEquipmentSlot(getSlot());
-
-        if (!lorePart.isEmpty()) lorePart.addEmptyAboveHeader();
         lorePart.setHeader(Component.translatable("passive_ability.rpgu.title"));
         addLoreLines(lorePart);
     }

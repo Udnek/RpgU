@@ -9,10 +9,17 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CastTimeProperty extends AbstractAbilityProperty<Player, Integer> {
+public class CastTimeProperty implements AbilityProperty<Player, Integer> {
 
-    public CastTimeProperty(int time){
-        super(time);
+    protected int time;
+
+    public CastTimeProperty(int base){
+        this.time = base;
+    }
+
+    @Override
+    public @NotNull Integer getBase() {
+        return time;
     }
 
     @Override

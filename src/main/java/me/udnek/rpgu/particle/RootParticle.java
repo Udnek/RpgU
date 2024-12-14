@@ -1,5 +1,6 @@
 package me.udnek.rpgu.particle;
 
+import io.papermc.paper.entity.TeleportFlag;
 import me.udnek.itemscoreu.customparticle.ConstructableCustomParticle;
 import me.udnek.rpgu.effect.Effects;
 import org.bukkit.Location;
@@ -7,8 +8,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Transformation;
+import org.bukkit.util.Vector;
 import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,6 +48,7 @@ public class RootParticle extends ConstructableCustomParticle<BlockDisplay> {
     protected void nextFrame() {
         if (!Effects.ROOT_EFFECT.has(target)){
             stop();
+            return;
         }
         else if (frameNumber == 1) {
             display.setInterpolationDelay(-1);
@@ -59,6 +63,10 @@ public class RootParticle extends ConstructableCustomParticle<BlockDisplay> {
             transformation.getTranslation().add(0, -SIZE, 0);
             display.setTransformation(transformation);
         }
+        Location tp = target.getLocation();
+        tp.setYaw(0);
+        tp.setPitch(0);
+        display.teleport(tp);
     }
     @Override
     protected void spawn() {

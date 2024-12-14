@@ -21,7 +21,6 @@ public interface AbilityLorePart extends LoreBuilder.Componentable{
 
 
     void setHeader(@NotNull Component component);
-    void addEmptyAboveHeader();
 
     void addAbilityStat(@NotNull Component component);
 

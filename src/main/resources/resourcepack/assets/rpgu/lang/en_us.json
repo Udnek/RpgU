@@ -8,15 +8,25 @@
 
 	"active_ability.rpgu.title": "Active Ability:",
 	"passive_ability.rpgu.title": "Passive Ability:",
+
 	"ability.rpgu.cast_range": "Cast Range: %s blocks",
 	"ability.rpgu.area_of_effect": "AOE: %s blocks",
 	"ability.rpgu.cooldown": "Cooldown: %s seconds",
 	"ability.rpgu.cast_time": "Cast Time: %s seconds",
 	"ability.rpgu.duration": "Duration: %s seconds",
+	"ability.rpgu.damage": "Damage: %s",
+	"ability.rpgu.effects": "Effects: %s",
+	"ability.rpgu.effects.with_amplifier_with_duration": "%s %s (%s seconds)",
+	"ability.rpgu.effects.with_amplifier_no_duration": "%s %s",
+	"ability.rpgu.effects.no_amplifier_with_duration": "%s (%s seconds)",
+	"ability.rpgu.effects.no_amplifier_no_duration": "%s",
 
-	"damage_formula.rpgu.magical": "Magical Damage: %s",
-	"damage_formula.rpgu.physical": "Physical Damage: %s",
+	"damage_formula.rpgu.magical": "Magical: %s",
+	"damage_formula.rpgu.physical": "Physical: %s",
 	"magical_potential_formula.rpgu.linear": "%s + %s*MP",
+
+	"effect.rpgu.root": "Root",
+
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
 	"attribute.rpgu.name.attack_speed": "Attacks per Second",
@@ -78,7 +88,6 @@
 
 	"item.rpgu.armadillo_bar": "Armadillo Bar",
 	"item.rpgu.armadillo_bar.active_ability.0": "Dispels negative effects while active",
-	"item.rpgu.armadillo_bar.active_ability.1": "Applies Magical Resistance IX",
 
 	"item.rpgu.totem_of_saving": "Totem of Saving",
 	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
@@ -127,10 +136,10 @@
 	"item.rpgu.hungry_horror_chestplate.description.4": " If you don't have effect, applies Absorption I for 2 seconds.",
 
 	"item.rpgu.flower_wreath": "Flower Wreath",
-	"item.rpgu.flower_wreath.passive_ability.0": "Applies Regeneration near trees",
+	"item.rpgu.flower_wreath.passive_ability.0": "Buffs near trees",
 
 	"item.rpgu.wither_wreath": "Wither Wreath",
-	"item.rpgu.wither_wreath.description.0": "Applies Wither II on attack",
+	"item.rpgu.wither_wreath.passive_ability.0": "Debuffs victim on attack",
 
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",

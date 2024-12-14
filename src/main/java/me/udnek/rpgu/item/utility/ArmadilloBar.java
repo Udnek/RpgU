@@ -3,9 +3,13 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Material;
@@ -20,6 +24,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class ArmadilloBar extends ConstructableCustomItem {
@@ -62,8 +67,13 @@ public class ArmadilloBar extends ConstructableCustomItem {
         private static final int DURATION = 7*20;
 
         public ArmadilloBarComponent(){
-            getComponents().set(AttributeBasedProperty.from(COOLDOWN, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(AttributeBasedProperty.from(DURATION, ComponentTypes.ABILITY_DURATION));
+            getComponents().set(new AttributeBasedProperty(COOLDOWN, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(new AttributeBasedProperty(DURATION, ComponentTypes.ABILITY_DURATION));
+            getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
+                    Effects.MAGICAL_RESISTANCE.getBukkitType(),
+                    Functions.CONSTANT(0),
+                    Functions.CONSTANT(8)
+            )));
         }
 
         @Override
@@ -86,14 +96,17 @@ public class ArmadilloBar extends ConstructableCustomItem {
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, PERIOD);
 
-            Effects.MAGICAL_RESISTANCE.apply(player, DURATION, 8);
+            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(player);
+            for (PotionEffect effect : potionEffects) {
+                player.addPotionEffect(effect.withDuration((int) duration));
+            }
 
             return ActionResult.FULL_COOLDOWN;
         }
 
         @Override
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(ArmadilloBar.this, 2);
+            componentable.addFullAbilityDescription(ArmadilloBar.this, 1);
             super.addLoreLines(componentable);
         }
 

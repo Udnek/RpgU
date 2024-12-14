@@ -7,6 +7,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.instance.MagicalDefenseMultiplierAttribute;
 import me.udnek.rpgu.attribute.instance.PhysicalArmorAttribute;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.equipment.PlayerEquipment;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -222,10 +223,15 @@ public class DamageInstance {
             double levels = Attributes.FALLING_PROTECTION.calculate(victim);
             damage.multiply(getDamageType(), 1-(levels/4/2));
         }
-        PotionEffect effect = victim.getPotionEffect(PotionEffectType.RESISTANCE);
-        if (effect != null){
-            double absorb = (effect.getAmplifier() + 1) * 0.2;
+        PotionEffect physResistance = victim.getPotionEffect(PotionEffectType.RESISTANCE);
+        if (physResistance != null){
+            double absorb = (physResistance.getAmplifier() + 1) * 0.1;
             damage.multiplyPhysical(1-absorb);
+        }
+        int mageResistance = Effects.MAGICAL_RESISTANCE.getAppliedLevel(victim);
+        if (mageResistance != -1){
+            double absorb = (mageResistance + 1) * 0.1;
+            damage.multiplyMagical(1-absorb);
         }
 
 

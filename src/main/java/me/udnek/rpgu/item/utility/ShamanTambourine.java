@@ -14,7 +14,7 @@ import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
-import me.udnek.rpgu.mechanic.damaging.formula.MPBasedDamageFormula;
+import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
@@ -73,9 +73,9 @@ public class ShamanTambourine extends ConstructableCustomItem{
     public class ShamanTambourineComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
 
         public ShamanTambourineComponent(){
-            getComponents().set(new DamageProperty(MPBasedDamageFormula.linearMageOnly(3, 1)));
-            getComponents().set(AttributeBasedProperty.from(20*10, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(AttributeBasedProperty.from(15, ComponentTypes.ABILITY_CAST_RANGE));
+            getComponents().set(new DamageProperty(MPBasedDamageFunction.linearMageOnly(3, 1)));
+            getComponents().set(new AttributeBasedProperty(20*10, ComponentTypes.ABILITY_COOLDOWN));
+            getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(new CastTimeProperty(CAST_TIME));
         }
 
