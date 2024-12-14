@@ -11,6 +11,7 @@ public class Effects {
     public static final CustomEffect NO_GRAVITY = register(new NoGravity());
     public static final CustomEffect BONUS_AREA_OF_EFFECT = register(new BonusAreaOfEffect());
     public static final CustomEffect ROOT_EFFECT = register(new RootEffect());
+    public static final CustomEffect MIRE_TOUCH = register(new MireTouch());
 
     private static CustomEffect register(CustomEffect customEffect){
         return CustomRegistries.EFFECT.register(RpgU.getInstance(), customEffect);

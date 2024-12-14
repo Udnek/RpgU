@@ -7,8 +7,6 @@ import me.udnek.rpgu.component.ability.AbstractAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ConstructableActiveAbilityComponent<ActivationContext> extends AbstractAbilityComponent<ActivationContext> implements ActiveAbilityComponent<ActivationContext>{

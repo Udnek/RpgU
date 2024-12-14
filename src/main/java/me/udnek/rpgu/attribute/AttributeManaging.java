@@ -1,4 +1,4 @@
-package me.udnek.rpgu.util;
+package me.udnek.rpgu.attribute;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.passive.GoldenArmorPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -41,6 +42,7 @@ public class AttributeManaging extends SelfRegisteringListener {
     public static final EnumMap<Material, Stats> armorStats = new EnumMap<>(Material.class);
     private static final Set<Material> leatherArmor = new HashSet<>();
     private static final Set<Material> chainmailArmor = new HashSet<>();
+    private static final Set<Material> goldenArmor = new HashSet<>();
     private static final Set<Material> diamondArmor = new HashSet<>();
     private static final Set<Material> diamondTools = new HashSet<>();
 
@@ -60,10 +62,10 @@ public class AttributeManaging extends SelfRegisteringListener {
         armorStats.put(Material.CHAINMAIL_LEGGINGS, armorStats.get(Material.IRON_LEGGINGS));
         armorStats.put(Material.CHAINMAIL_BOOTS, armorStats.get(Material.IRON_BOOTS));
 
-        armorStats.put(Material.GOLDEN_HELMET, armorStats.get(Material.IRON_HELMET));
-        armorStats.put(Material.GOLDEN_CHESTPLATE, armorStats.get(Material.IRON_CHESTPLATE));
-        armorStats.put(Material.GOLDEN_LEGGINGS, armorStats.get(Material.IRON_LEGGINGS));
-        armorStats.put(Material.GOLDEN_BOOTS, armorStats.get(Material.IRON_BOOTS));
+        armorStats.put(Material.GOLDEN_HELMET, new Stats(2, 1, 0));
+        armorStats.put(Material.GOLDEN_CHESTPLATE, new Stats(4, 1, 0));
+        armorStats.put(Material.GOLDEN_LEGGINGS, new Stats(2, 1, 0));
+        armorStats.put(Material.GOLDEN_BOOTS, new Stats(2, 1, 0));
 
         armorStats.put(Material.DIAMOND_HELMET, new Stats(2, 2, 0.05));
         armorStats.put(Material.DIAMOND_CHESTPLATE, new Stats(4, 5, 0.05));
@@ -85,6 +87,11 @@ public class AttributeManaging extends SelfRegisteringListener {
         chainmailArmor.add(Material.CHAINMAIL_LEGGINGS);
         chainmailArmor.add(Material.CHAINMAIL_BOOTS);
 
+        goldenArmor.add(Material.GOLDEN_HELMET);
+        goldenArmor.add(Material.GOLDEN_CHESTPLATE);
+        goldenArmor.add(Material.GOLDEN_LEGGINGS);
+        goldenArmor.add(Material.GOLDEN_BOOTS);
+
         diamondArmor.add(Material.DIAMOND_HELMET);
         diamondArmor.add(Material.DIAMOND_CHESTPLATE);
         diamondArmor.add(Material.DIAMOND_LEGGINGS);
@@ -97,6 +104,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         diamondTools.add(Material.DIAMOND_SHOVEL);
      }
 
+    public record Stats(double hp, double armor, double damage){}
 
     @EventHandler
     public void onItemGenerates(CustomItemGeneratedEvent event){
@@ -105,14 +113,16 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (!VanillaItemManager.isReplaced(itemStack))return;
 
-        if (armorStats.containsKey(material)){
-
-            applyDefaultArmorAttribute(itemStack, material);
-        }
+        if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
 
         if (leatherArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));}
 
         if (chainmailArmor.contains(material)) {itemStack.editMeta(itemMeta -> itemMeta.setRarity(ItemRarity.COMMON));}
+
+        if (goldenArmor.contains(material)){
+            itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 15 / 7d * 0.9)));
+            GoldenArmorPassive.applyPassive(material);
+        }
 
         if (diamondArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage(material.getMaxDurability() * 37 / 33));}
 
@@ -124,6 +134,8 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
     }
 
+
+
     public static void applyDefaultArmorAttribute(@NotNull ItemStack target, @NotNull Material source) {
         target.editMeta((itemMeta) -> applyDefaultArmorAttribute(itemMeta, source));
     }
@@ -134,14 +146,17 @@ public class AttributeManaging extends SelfRegisteringListener {
 
     public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source, boolean addArmor, boolean addAttackDamage) {
         EquipmentSlotGroup slot = source.getEquipmentSlot().getGroup();
-        AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot), armorStats.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
+        AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot),
+                armorStats.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
         if (addArmor) {
-            AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot), armorStats.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
+            AttributeUtils.appendAttribute(target, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + slot),
+                    armorStats.get(source).armor, AttributeModifier.Operation.ADD_NUMBER, slot);
         }
         if (addAttackDamage) {
-            AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot), armorStats.get(source).damage, AttributeModifier.Operation.ADD_SCALAR, slot);
+            AttributeUtils.appendAttribute(target, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + slot),
+                    armorStats.get(source).damage, AttributeModifier.Operation.ADD_SCALAR, slot);
         }
     }
 
-    public record Stats(double hp, double armor, double damage){}
+
 }

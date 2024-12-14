@@ -9,15 +9,12 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.active.ActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.*;
+import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.component.ability.property.type.AbilityPropertyType;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.component.ability.property.type.ConstructableAbilityPropertyType;
 import me.udnek.rpgu.mechanic.damaging.Damage;
-import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-
-import java.util.List;
 
 public class ComponentTypes {
 

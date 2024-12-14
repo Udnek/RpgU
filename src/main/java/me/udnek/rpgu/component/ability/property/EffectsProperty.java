@@ -10,18 +10,15 @@ import me.udnek.rpgu.component.ability.property.function.Modifiers;
 import me.udnek.rpgu.component.ability.property.function.PropertyFunction;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class EffectsProperty implements AbilityProperty<Player, List<PotionEffect>> {
 

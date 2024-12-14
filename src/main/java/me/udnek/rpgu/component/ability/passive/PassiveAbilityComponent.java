@@ -1,6 +1,5 @@
 package me.udnek.rpgu.component.ability.passive;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -21,6 +20,7 @@ public interface PassiveAbilityComponent<ActivationContext> extends AbilityCompo
         @Override
         public @NotNull CustomComponentMap<AbilityComponent<?>> getComponents() {return components;}
     };
+
 
     @Override
     default @NotNull CustomComponentType<CustomItem, ?> getType(){

@@ -1,6 +1,5 @@
 package me.udnek.rpgu.item.equipment;
 
-import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;

@@ -1,6 +1,5 @@
 package me.udnek.rpgu.item.artifact;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -11,7 +10,6 @@ import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;

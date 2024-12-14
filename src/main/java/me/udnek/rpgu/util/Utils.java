@@ -3,7 +3,6 @@ package me.udnek.rpgu.util;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
@@ -13,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class Utils {
     public static <T extends Number> void consumeIfPositive(@NotNull T t, @NotNull Consumer<T> consumer){

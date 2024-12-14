@@ -4,27 +4,24 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.ItemUtils;
-import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.PassiveAbilityActivatorComponent;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
-import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
-import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
-import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -85,7 +82,7 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     @Override
-    public ItemStack getItemFromCraftingMatrix(ItemStack result, ItemStack[] matrix, Recipe recipe) {
+    public ItemStack getItemFromCraftingMatrix(ItemStack result, ItemStack[] matrix, @NotNull Recipe recipe) {
         Color finalColor = Color.fromRGB(255, 255, 255);
         Color[] colors = new Color[8];
         int i = 0;
@@ -124,7 +121,6 @@ public class FlowerWreath extends ConstructableCustomItem {
 
         public PassiveAbility(){
             getComponents().set(new AttributeBasedProperty(6, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(new AttributeBasedProperty(DURATION, ComponentTypes.ABILITY_DURATION));
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.REGENERATION,
                     Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, DURATION)),
@@ -161,15 +157,12 @@ public class FlowerWreath extends ConstructableCustomItem {
 
     }
 
-    public static class Artifact implements ArtifactComponent {
+    public static class Artifact extends PassiveAbilityActivatorComponent {
         @Override
-        public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot) {
-            if (Bukkit.getCurrentTick() % 10 != 0) return;
-            PassiveAbilityComponent<?> passive = item.getComponents().get(ComponentTypes.PASSIVE_ABILITY_ITEM);
-            if (passive instanceof PassiveAbility passiveAbility){
-                passiveAbility.activate(item, player, new Object());
-            }
-        }
+        public int getTickRate() {return 10;}
+
+        @Override
+        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {return EquipmentSlots.ARTIFACTS.test(slot);}
     }
 }
 

@@ -1,14 +1,10 @@
 package me.udnek.rpgu.component.ability.property;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
-import me.udnek.rpgu.component.ability.property.function.PropertyFunction;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Double> {
 

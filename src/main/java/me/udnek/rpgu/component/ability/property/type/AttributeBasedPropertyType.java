@@ -2,14 +2,10 @@ package me.udnek.rpgu.component.ability.property.type;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customregistry.AbstractRegistrable;
-import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.Modifiers;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import net.kyori.adventure.text.Component;
-import org.bukkit.plugin.Plugin;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;

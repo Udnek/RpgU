@@ -2,7 +2,6 @@ package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
 import me.udnek.itemscoreu.customcomponent.instance.RepairableWithCustomItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItemProperties;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
@@ -13,7 +12,6 @@ import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
