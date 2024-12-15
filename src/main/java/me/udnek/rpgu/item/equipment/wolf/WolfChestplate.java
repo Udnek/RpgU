@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class WolfChestplate extends WolfArmor {
+public class WolfChestplate extends AbstractWolfArmor {
     @Override
     public @NotNull String getRawId() {return "wolf_chestplate";}
 

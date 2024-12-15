@@ -69,6 +69,7 @@ public class Items {
     public static final CustomItem WOLF_CHESTPLATE = register(new WolfChestplate());
     public static final CustomItem WOLF_LEGGINGS = register(new WolfLeggings());
     public static final CustomItem WOLF_BOOTS = register(new WolfBoots());
+    public static final CustomItem WOLF_ARMOR = register(new WolfArmor());
 
     public static final CustomItem GRIM_HELMET = register(new GrimHelmet());
     public static final CustomItem GRIM_CHESTPLATE = register(new GrimChestplate());
