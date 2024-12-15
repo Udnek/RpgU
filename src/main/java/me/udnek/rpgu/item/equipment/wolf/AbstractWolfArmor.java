@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class WolfArmor extends ConstructableCustomItem {
+public abstract class AbstractWolfArmor extends ConstructableCustomItem {
 
     @Override
     public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}

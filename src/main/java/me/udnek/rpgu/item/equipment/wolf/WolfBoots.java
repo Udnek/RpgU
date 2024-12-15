@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class WolfBoots extends WolfArmor {
+public class WolfBoots extends AbstractWolfArmor {
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_BOOTS;}
 
