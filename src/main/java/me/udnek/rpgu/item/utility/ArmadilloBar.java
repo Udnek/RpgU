@@ -13,6 +13,7 @@ import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -20,6 +21,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,6 +53,8 @@ public class ArmadilloBar extends ConstructableCustomItem {
         consumer.accept(recipe);
     }
 
+    @Override
+    public @Nullable ItemRarity getRarity() {return ItemRarity.RARE;}
 
     @Override
     public void initializeComponents() {
@@ -61,7 +65,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
 
     public class ArmadilloBarComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
-        private static final int COOLDOWN = 70*20;
+        private static final int COOLDOWN = 40*20;
         private static final int DURATION = 7*20;
 
         public ArmadilloBarComponent(){

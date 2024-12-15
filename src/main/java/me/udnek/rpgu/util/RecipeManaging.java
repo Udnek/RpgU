@@ -110,6 +110,8 @@ public class RecipeManaging {
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
 
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.TURTLE_HELMET);
+
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.WOLF_ARMOR);
     }
 
     private static @NotNull List<CustomSingleRecipeChoice> getCustomSingleRecipeChoices(@NotNull Map<Material, Integer> materials, @NotNull Map<CustomItem, Integer> customItems) {
