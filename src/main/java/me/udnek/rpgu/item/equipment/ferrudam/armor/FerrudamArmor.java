@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
 import me.udnek.itemscoreu.customcomponent.instance.RepairableWithCustomItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
@@ -23,8 +24,8 @@ public abstract class FerrudamArmor extends ConstructableCustomItem {
     public boolean getAddDefaultAttributes() {return true;}
 
     @Override
-    public void getRepairMaterials(@NotNull Consumer<Material> consumer) {
-        consumer.accept(Material.DIAMOND);
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Items.FERRUDAM_INGOT);
     }
 
     @Override

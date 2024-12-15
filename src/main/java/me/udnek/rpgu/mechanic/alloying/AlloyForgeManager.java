@@ -26,7 +26,7 @@ import java.util.List;
 
 public class AlloyForgeManager extends TickingTask implements Listener {
 
-    public static final int TICK_DELAY = 1;
+    public static final int TICK_DELAY = 5;
     private static AlloyForgeManager instance;
     private final HashMap<String, AlloyForgeMachine> machines = new HashMap<>();
     private final List<Block> unloadTickets = new ArrayList<>();
@@ -95,7 +95,7 @@ public class AlloyForgeManager extends TickingTask implements Listener {
     public void onChuckUnload(ChunkUnloadEvent event){
         for (BlockState tileEntity : event.getChunk().getTileEntities()) {
             if (!(tileEntity instanceof BlastFurnace)) return;
-            unload(tileEntity.getBlock());
+            addUnloadTicket(tileEntity.getBlock());
         }
     }
 /*    @EventHandler
