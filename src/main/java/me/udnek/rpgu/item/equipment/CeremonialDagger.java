@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -12,7 +13,9 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class CeremonialDagger extends ConstructableCustomItem {
@@ -63,6 +66,11 @@ public class CeremonialDagger extends ConstructableCustomItem {
         recipe.setIngredient('T', new RecipeChoice.MaterialChoice(Material.STICK));
 
         consumer.accept(recipe);
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Set.of(), Set.of(Material.COBBLESTONE, Material.GOLD_INGOT, Material.DIAMOND));
     }
 }
 

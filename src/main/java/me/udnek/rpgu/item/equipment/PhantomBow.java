@@ -6,6 +6,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.particle.ParticleUtils;
@@ -20,7 +21,9 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
 
@@ -71,5 +74,10 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
         particleBuilder.offset(0.3, 0.3, 0.3);
 
         ParticleUtils.playUntilGround(arrow, particleBuilder);
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Set.of(Items.PHANTOM_WING), Set.of(Material.PHANTOM_MEMBRANE));
     }
 }

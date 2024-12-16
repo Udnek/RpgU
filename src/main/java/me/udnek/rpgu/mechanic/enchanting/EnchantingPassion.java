@@ -2,14 +2,12 @@ package me.udnek.rpgu.mechanic.enchanting;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.item.Items;
-import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 public class EnchantingPassion {
 

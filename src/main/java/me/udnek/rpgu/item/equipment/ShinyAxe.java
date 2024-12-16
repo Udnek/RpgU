@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.equipment;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ShinyAxe extends ConstructableCustomItem {
     @Override
@@ -49,5 +51,10 @@ public class ShinyAxe extends ConstructableCustomItem {
                                         new ItemStackCreator.Custom(Items.SHINY_AXE)
                                 )
                         ));
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Material.GOLD_INGOT);
     }
 }

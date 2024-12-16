@@ -89,8 +89,10 @@ public class NaturesStaff extends ConstructableCustomItem {
 
             if (livingEntitiesInRayTraceRadius == null || livingEntitiesInRayTraceRadius.isEmpty()) return ActionResult.PENALTY_COOLDOWN;
 
-            effects.applyOn(player, livingEntitiesInRayTraceRadius);
+
             for (LivingEntity livingEntity : livingEntitiesInRayTraceRadius) {
+                if (livingEntity == player) continue;
+                effects.applyOn(player, livingEntity);
                 new RootParticle(livingEntity).play();
             }
 

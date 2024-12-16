@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -64,6 +66,11 @@ public class AmethystDirk extends ConstructableCustomItem {
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(MELEE_MAGICAL_DAMAGE_MULTIPLIER,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Material.AMETHYST_SHARD);
     }
 }
 

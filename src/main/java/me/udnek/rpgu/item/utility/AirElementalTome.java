@@ -4,10 +4,13 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.active.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Location;
@@ -66,12 +69,19 @@ public class AirElementalTome extends ConstructableCustomItem {
         public static double DURATION = 4 * 20;
         public static double HEIGHT = 15;
         public static double UP_DURATION = DURATION / 5;
+        public static double EFFECT_DURATION = 10;
+
 
 
         public AirElementalTomeComponent(){
             getComponents().set(new AttributeBasedProperty(20*20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(new AttributeBasedProperty(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
+                    Effects.INCREASED_FALL_DAMAGE.getBukkitType(),
+                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, Functions.CONSTANT(EFFECT_DURATION))),
+                    Functions.CONSTANT(2)))
+            );
         }
 
         @Override

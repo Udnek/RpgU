@@ -6,6 +6,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
@@ -19,6 +20,7 @@ import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class PhantomChestplate extends ConstructableCustomItem {
@@ -70,6 +72,11 @@ public class PhantomChestplate extends ConstructableCustomItem {
         super.initializeComponents();
         CustomAttributeModifier attributeModifier = new CustomAttributeModifier(2, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST);
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeModifier).build()));
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Set.of(Items.PHANTOM_WING), Set.of(Material.PHANTOM_MEMBRANE));
     }
 }
 

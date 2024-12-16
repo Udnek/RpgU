@@ -3,7 +3,9 @@ package me.udnek.rpgu.mechanic.enchanting;
 import org.bukkit.enchantments.Enchantment;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class EnchantmentsContainer {
@@ -37,10 +39,10 @@ public class EnchantmentsContainer {
     public static @NotNull HashMap<Enchantment, Integer> mix(@NotNull Iterable<EnchantmentsContainer> containers){
         HashMap<Enchantment, Integer> map = new HashMap<>();
         for (EnchantmentsContainer container : containers) {
-            container.get(new Consumer<Enchantment>() {
+            container.get(new Consumer<>() {
                 @Override
                 public void accept(Enchantment enchantment) {
-                    map.put(enchantment, Math.clamp(map.getOrDefault(enchantment, 0)+1, 1, enchantment.getMaxLevel()));
+                    map.put(enchantment, Math.clamp(map.getOrDefault(enchantment, 0) + 1, 1, enchantment.getMaxLevel()));
                 }
             });
         }

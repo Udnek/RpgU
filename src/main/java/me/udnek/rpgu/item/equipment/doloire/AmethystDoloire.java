@@ -8,6 +8,7 @@ import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponen
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.nms.ConsumableAnimation;
 import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.rpgu.RpgU;
@@ -112,6 +113,11 @@ public class AmethystDoloire extends ConstructableCustomItem {
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
 
         getComponents().set(new GreatAmethystSwordComponent());
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Material.AMETHYST_SHARD);
     }
 
     public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{

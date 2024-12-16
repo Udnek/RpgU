@@ -6,6 +6,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
@@ -19,6 +20,7 @@ import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class EvocationRobe extends ConstructableCustomItem {
@@ -59,6 +61,11 @@ public class EvocationRobe extends ConstructableCustomItem {
         recipe.setIngredient('L', new RecipeChoice.MaterialChoice(Material.LEATHER_CHESTPLATE));
 
         consumer.accept(recipe);
+    }
+
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Set.of(Items.FABRIC), Set.of(Material.IRON_INGOT));
     }
 
     @Override

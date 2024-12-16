@@ -1,13 +1,11 @@
 package me.udnek.rpgu.item.equipment.ferrudam.tools;
 
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.Tag;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -17,15 +15,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamHoe extends ConstructableCustomItem {
+public class FerrudamHoe extends FerrudamTools {
     @Override
     public @NotNull String getRawId() {return "ferrudam_hoe";}
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_HOE;}
-    @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
-    @Override
-    public boolean getAddDefaultAttributes() {return true;}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
