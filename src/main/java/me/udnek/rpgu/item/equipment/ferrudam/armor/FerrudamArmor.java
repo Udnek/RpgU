@@ -1,20 +1,14 @@
 package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
-import me.udnek.itemscoreu.customcomponent.instance.RepairableWithCustomItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.components.EquippableComponent;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
-import java.util.function.Consumer;
 
 public abstract class FerrudamArmor extends ConstructableCustomItem {
 
@@ -28,11 +22,6 @@ public abstract class FerrudamArmor extends ConstructableCustomItem {
         return new RepairData(Items.FERRUDAM_INGOT);
     }
 
-    @Override
-    public void initializeComponents() {
-        super.initializeComponents();
-        getComponents().set(new RepairableWithCustomItem(Set.of(Items.FERRUDAM_INGOT)));
-    }
 
     @Override
     @Nullable

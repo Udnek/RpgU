@@ -2,7 +2,6 @@ package me.udnek.rpgu.item.equipment.flint;
 
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -15,10 +14,7 @@ public class FlintShovel extends FlintTool {
     public @NotNull String getRawId() {return "flint_shovel";}
     @Override
     public @NotNull Material getMaterial() {return Material.STONE_SHOVEL;}
-    @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
-    @Override
-    public boolean getAddDefaultAttributes() {return true;}
+
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());

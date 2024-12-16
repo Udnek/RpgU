@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
@@ -66,4 +67,8 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
         consumer.accept(recipe);
     }
 
+    @Override
+    public @Nullable RepairData getRepairData() {
+        return new RepairData(Material.HEAVY_CORE);
+    }
 }
