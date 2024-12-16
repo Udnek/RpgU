@@ -20,7 +20,7 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
 
     @Override
     public @Nullable NamespacedKey getItemModel() {
-        return new NamespacedKey(RpgU.getInstance(), "blast_coal");
+        return new NamespacedKey(RpgU.getInstance(), "empty");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
         return "technical_inventory_filler";
     }
     @Override
-    public boolean getHideTooltip() {return false;}
+    public boolean getHideTooltip() {return true;}
     @Override
     public @NotNull Material getMaterial() {
         return Material.LEATHER_HELMET;

@@ -18,10 +18,12 @@ public class BlastCoal extends ConstructableCustomItem {
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
-        ShapelessRecipe recipe = new ShapelessRecipe(getNewRecipeKey(), getItem());
+        ShapelessRecipe recipe = new ShapelessRecipe(getNewRecipeKey(), getItem().add(2));
 
         RecipeChoice.MaterialChoice coal = new RecipeChoice.MaterialChoice(Tag.ITEMS_COALS);
         RecipeChoice.MaterialChoice gunpowder = new RecipeChoice.MaterialChoice(Material.GUNPOWDER);
+        recipe.addIngredient(coal);
+        recipe.addIngredient(coal);
         recipe.addIngredient(coal);
         recipe.addIngredient(gunpowder);
         recipe.addIngredient(gunpowder);

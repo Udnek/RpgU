@@ -37,12 +37,11 @@ import java.util.function.Consumer;
 public class AlloyForgeInventory extends ConstructableCustomInventory implements AlloyForgeMachine, SmartIntractableCustomInventory {
 
     public static final TextColor COLOR = TextColor.color(91, 100, 118);
-    public static final int CRAFT_DURATION = 20*20;
+    public static final int CRAFT_DURATION = 20*20 / AlloyForgeManager.TICK_DELAY;
     public static final NamespacedKey SERIALIZE_RECIPE_KEY = new NamespacedKey(RpgU.getInstance(), "alloy_forge_recipe");
     public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
-    public static final int[] ALLOYS_SLOTS = new int[]
-            {
+    public static final int[] ALLOYS_SLOTS = new int[]{
             9*0+0, 9*0+1, 9*0+2,
             9*1+0, 9*1+1, 9*1+2
             };
