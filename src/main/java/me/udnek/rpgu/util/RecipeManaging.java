@@ -9,9 +9,12 @@ import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.enchanting.EnchantingRecipe;
+import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -26,17 +29,17 @@ public class RecipeManaging {
         replaceRecipe(Material.POWERED_RAIL, "powered_rail", new String[]{"M M", "MSM", "MRM"}, Map.of('S', Material.STICK, 'R', Material.REDSTONE), Map.of('M', Items.MAGNETITE_INGOT));
         replaceRecipe(Material.COMPASS, "compass", new String[]{" I ", "IMI", " I "}, Map.of('I', Material.IRON_INGOT), Map.of('M', Items.MAGNETITE_INGOT));
         ////////////////////////////////////////////////////////////////////////////////////////////
-        replaceRecipeMaterial(Material.IRON_CHESTPLATE, "iron_chestplate", new String[]{"ILI", "III", "III"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_CHESTPLATE));
-        replaceRecipeMaterial(Material.IRON_HELMET, "iron_helmet", new String[]{"III", "ILI"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_HELMET));
-        replaceRecipeMaterial(Material.IRON_LEGGINGS, "iron_leggings", new String[]{"III", "ILI", "I I"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_LEGGINGS));
-        replaceRecipeMaterial(Material.IRON_BOOTS, "iron_boots", new String[]{"ILI", "I I"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_BOOTS));
+        replaceMaterialRecipe(Material.IRON_CHESTPLATE, "iron_chestplate", new String[]{"ILI", "III", "III"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_CHESTPLATE));
+        replaceMaterialRecipe(Material.IRON_HELMET, "iron_helmet", new String[]{"III", "ILI"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_HELMET));
+        replaceMaterialRecipe(Material.IRON_LEGGINGS, "iron_leggings", new String[]{"III", "ILI", "I I"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_LEGGINGS));
+        replaceMaterialRecipe(Material.IRON_BOOTS, "iron_boots", new String[]{"ILI", "I I"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_BOOTS));
         ////////////////////////////////////////////////////////////////////////////////////////////
         replaceRecipe(Material.LEATHER_CHESTPLATE, "leather_chestplate", new String[]{"L L", "FLF", "LFL"}, Map.of( 'L', Material.LEATHER), Map.of('F', Items.FABRIC));
         replaceRecipe(Material.LEATHER_HELMET, "leather_helmet", new String[]{"FLF", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
         replaceRecipe(Material.LEATHER_LEGGINGS, "leather_leggings", new String[]{"LFL", "F F", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
         replaceRecipe(Material.LEATHER_BOOTS, "leather_boots", new String[]{"F F", "L L"}, Map.of('L', Material.LEATHER), Map.of('F', Items.FABRIC));
         ////////////////////////////////////////////////////
-        replaceRecipeMaterial(Material.BLAST_FURNACE, "blast_furnace", new String[]{"SSS", "FFA", "BBB"}, Map.of('F', Material.FURNACE,'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK));
+        replaceMaterialRecipe(Material.BLAST_FURNACE, "blast_furnace", new String[]{"SSS", "FFA", "BBB"}, Map.of('F', Material.FURNACE,'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK));
         ////////////////////////////////////////////////////
         alloyingRecipe(Material.NETHERITE_INGOT, "netherite_ingot", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_SCRAP, 3), Map.of(Items.MAGNETITE_INGOT, 3)),
                 getCustomRecipeChoice(Set.of(Items.BLAST_COAL), Set.of()), getCustomRecipeChoice(Set.of(Items.INGOT_MOLD), Set.of()));
@@ -61,32 +64,41 @@ public class RecipeManaging {
         alloyingRecipe(Material.NETHERITE_SWORD, "netherite_sword_smithing", getCustomSingleRecipeChoices(Map.of(Material.NETHERITE_INGOT, 1), Map.of()),
                 getCustomRecipeChoiceMaterialTag(Set.of(), Set.of(), Tag.ITEMS_COALS), getCustomRecipeChoice(Set.of(Items.FERRUDAM_SWORD), Set.of()));
         ////////////////////////////////////////////
-        replaceRecipeMaterial(Material.CHAINMAIL_CHESTPLATE, "chainmail_chestplate", new String[]{"C C", "CCC", "CCC"}, Map.of('C', Material.CHAIN));
-        replaceRecipeMaterial(Material.CHAINMAIL_HELMET, "chainmail_helmet", new String[]{"CCC", "C C"}, Map.of('C', Material.CHAIN));
-        replaceRecipeMaterial(Material.CHAINMAIL_LEGGINGS, "chainmail_leggings", new String[]{"CCC", "C C", "C C"}, Map.of('C', Material.CHAIN));
-        replaceRecipeMaterial(Material.CHAINMAIL_BOOTS, "chainmail_boots", new String[]{"C C", "C C"}, Map.of('C', Material.CHAIN));
+        replaceMaterialRecipe(Material.CHAINMAIL_CHESTPLATE, "chainmail_chestplate", new String[]{"C C", "CCC", "CCC"}, Map.of('C', Material.CHAIN));
+        replaceMaterialRecipe(Material.CHAINMAIL_HELMET, "chainmail_helmet", new String[]{"CCC", "C C"}, Map.of('C', Material.CHAIN));
+        replaceMaterialRecipe(Material.CHAINMAIL_LEGGINGS, "chainmail_leggings", new String[]{"CCC", "C C", "C C"}, Map.of('C', Material.CHAIN));
+        replaceMaterialRecipe(Material.CHAINMAIL_BOOTS, "chainmail_boots", new String[]{"C C", "C C"}, Map.of('C', Material.CHAIN));
         /////////////////////////////////////////////////
-        replaceRecipeMaterial(Material.GOLDEN_CHESTPLATE, "golden_chestplate", new String[]{"GLG", "GGG", "GGG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_CHESTPLATE));
-        replaceRecipeMaterial(Material.GOLDEN_HELMET, "golden_helmet", new String[]{"GGG", "GLG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_HELMET));
-        replaceRecipeMaterial(Material.GOLDEN_LEGGINGS, "golden_leggings", new String[]{"GGG", "GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_LEGGINGS));
-        replaceRecipeMaterial(Material.GOLDEN_BOOTS, "golden_boots", new String[]{"GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_BOOTS));
+        replaceMaterialRecipe(Material.GOLDEN_CHESTPLATE, "golden_chestplate", new String[]{"GLG", "GGG", "GGG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_CHESTPLATE));
+        replaceMaterialRecipe(Material.GOLDEN_HELMET, "golden_helmet", new String[]{"GGG", "GLG"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_HELMET));
+        replaceMaterialRecipe(Material.GOLDEN_LEGGINGS, "golden_leggings", new String[]{"GGG", "GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_LEGGINGS));
+        replaceMaterialRecipe(Material.GOLDEN_BOOTS, "golden_boots", new String[]{"GLG", "G G"}, Map.of('G', Material.GOLD_INGOT, 'L', Material.LEATHER_BOOTS));
         //////////////////////////////////////////////
-        replaceRecipeBed(Material.BLACK_BED, "black_bed", Material.BLACK_WOOL);
-        replaceRecipeBed(Material.GRAY_BED, "gray_bed", Material.GRAY_WOOL);
-        replaceRecipeBed(Material.LIGHT_GRAY_BED, "light_gray_bed", Material.LIGHT_GRAY_BED);
-        replaceRecipeBed(Material.BLUE_BED, "blue_bed", Material.BLUE_WOOL);
-        replaceRecipeBed(Material.LIGHT_BLUE_BED, "light_blue_bed", Material.LIGHT_BLUE_WOOL);//
-        replaceRecipeBed(Material.BROWN_BED, "brown_bed", Material.BROWN_BED);
-        replaceRecipeBed(Material.CYAN_BED, "cyan_bed", Material.CYAN_BED);
-        replaceRecipeBed(Material.GREEN_BED, "green_bed", Material.GREEN_WOOL);
-        replaceRecipeBed(Material.LIME_BED, "lime_bed", Material.LIME_WOOL);
-        replaceRecipeBed(Material.MAGENTA_BED, "magenta_bed", Material.MAGENTA_WOOL);//
-        replaceRecipeBed(Material.ORANGE_BED, "orange_bed", Material.ORANGE_WOOL);//
-        replaceRecipeBed(Material.PINK_BED, "pink_bed", Material.PINK_WOOL);
-        replaceRecipeBed(Material.PURPLE_BED, "purple_bed", Material.PURPLE_WOOL);
-        replaceRecipeBed(Material.WHITE_BED, "white_bed", Material.WHITE_WOOL);//
-        replaceRecipeBed(Material.YELLOW_BED, "yellow_bed", Material.YELLOW_WOOL);
-        replaceRecipeBed(Material.RED_BED, "red_bed", Material.RED_WOOL);
+        replaceBedRecipe(Material.BLACK_BED, "black_bed", Material.BLACK_WOOL);
+        replaceBedRecipe(Material.GRAY_BED, "gray_bed", Material.GRAY_WOOL);
+        replaceBedRecipe(Material.LIGHT_GRAY_BED, "light_gray_bed", Material.LIGHT_GRAY_BED);
+        replaceBedRecipe(Material.BLUE_BED, "blue_bed", Material.BLUE_WOOL);
+        replaceBedRecipe(Material.LIGHT_BLUE_BED, "light_blue_bed", Material.LIGHT_BLUE_WOOL);//
+        replaceBedRecipe(Material.BROWN_BED, "brown_bed", Material.BROWN_BED);
+        replaceBedRecipe(Material.CYAN_BED, "cyan_bed", Material.CYAN_BED);
+        replaceBedRecipe(Material.GREEN_BED, "green_bed", Material.GREEN_WOOL);
+        replaceBedRecipe(Material.LIME_BED, "lime_bed", Material.LIME_WOOL);
+        replaceBedRecipe(Material.MAGENTA_BED, "magenta_bed", Material.MAGENTA_WOOL);//
+        replaceBedRecipe(Material.ORANGE_BED, "orange_bed", Material.ORANGE_WOOL);//
+        replaceBedRecipe(Material.PINK_BED, "pink_bed", Material.PINK_WOOL);
+        replaceBedRecipe(Material.PURPLE_BED, "purple_bed", Material.PURPLE_WOOL);
+        replaceBedRecipe(Material.WHITE_BED, "white_bed", Material.WHITE_WOOL);//
+        replaceBedRecipe(Material.YELLOW_BED, "yellow_bed", Material.YELLOW_WOOL);
+        replaceBedRecipe(Material.RED_BED, "red_bed", Material.RED_WOOL);
+        //////////////////////////////////////////////
+        RecipeManager.getInstance().register(
+                new EnchantingRecipe(
+                        new NamespacedKey(RpgU.getInstance(), "test"),
+                        Enchantment.SHARPNESS,
+                        List.of(new CustomSingleRecipeChoice(Material.NETHERITE_INGOT)),
+                        Set.of(EnchantingTableUpgrade.SCULK)
+                )
+        );
 
         unregister();
     }
@@ -167,7 +179,7 @@ public class RecipeManaging {
         RecipeManager.getInstance().register(recipe);
     }
 
-    private static void replaceRecipeMaterial(@NotNull Material materialCraft, @NotNull String key, @NotNull String[] shape, @NotNull Map<Character, Material> materials){
+    private static void replaceMaterialRecipe(@NotNull Material materialCraft, @NotNull String key, @NotNull String[] shape, @NotNull Map<Character, Material> materials){
         replaceRecipe(materialCraft, key, shape, materials, Map.of());
     }
 
@@ -192,7 +204,7 @@ public class RecipeManaging {
         RecipeManager.getInstance().register(recipe);
     }
 
-    private static void replaceRecipeBed(@NotNull Material materialCraft, @NotNull String key, @NotNull Material wool){
+    private static void replaceBedRecipe(@NotNull Material materialCraft, @NotNull String key, @NotNull Material wool){
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft(key));
 
         ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(RpgU.getInstance(), key), new ItemStack(materialCraft));

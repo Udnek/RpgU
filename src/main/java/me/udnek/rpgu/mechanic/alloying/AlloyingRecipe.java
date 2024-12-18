@@ -44,16 +44,16 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
         this(key, alloys, fuel, addition, result, true);
     }
 
-    public CustomRecipeChoice getFuel() {return fuel;}
-    public CustomRecipeChoice getAddition() {return addition;}
-    public List<CustomSingleRecipeChoice> getAlloys() {return new ArrayList<>(alloys);}
+    public @NotNull CustomRecipeChoice getFuel() {return fuel;}
+    public @NotNull CustomRecipeChoice getAddition() {return addition;}
+    public @NotNull List<CustomSingleRecipeChoice> getAlloys() {return new ArrayList<>(alloys);}
     public boolean isKeepEnchantments() {return keepEnchantments;}
 
     @Override
     public @NotNull Visualizer getVisualizer() {
         return new AlloyingRecipeVisualizer(this);
     }
-    public boolean matches(List<ItemStack> alloysInput, ItemStack fuelInput, ItemStack additionInput) {
+    public boolean test(@NotNull List<ItemStack> alloysInput, @NotNull ItemStack fuelInput, @NotNull ItemStack additionInput) {
         if (!fuel.test(fuelInput)) return false;
         if (!addition.test(additionInput)) return false;
         List<CustomSingleRecipeChoice> alloysLeft = new ArrayList<>(alloys);
