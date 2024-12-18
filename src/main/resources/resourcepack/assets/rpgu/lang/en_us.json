@@ -26,7 +26,7 @@
 	"magical_potential_formula.rpgu.linear": "%s + %s*MP",
 
 	"effect.rpgu.root": "Root",
-
+	"effect.rpgu.heavy_falling": "Heavy Falling",
 	"effect.rpgu.mire_touch": "Mire Touch",
 
 	"attribute.rpgu.name.physical_damage": "Physical Damage",
