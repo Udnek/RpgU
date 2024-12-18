@@ -98,14 +98,7 @@ public class AlloyForgeManager extends TickingTask implements Listener {
             addUnloadTicket(tileEntity.getBlock());
         }
     }
-/*    @EventHandler
-    public void onRightClick(PlayerInteractEvent event){
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (event.getClickedBlock().getType() != Material.BLAST_FURNACE) return;
-        AlloyForgeMachine machine = getMachine(event.getClickedBlock());
-        if (machine == null) machine = load(event.getClickedBlock());
-        machine.onRightClick(event);
-    }*/
+
     @EventHandler
     public void onPlayerOpensInventory(InventoryOpenEvent event){
         InventoryHolder holder = event.getInventory().getHolder();

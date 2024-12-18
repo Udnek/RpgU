@@ -22,7 +22,6 @@ public class EnchantingTableListener extends SelfRegisteringListener {
         if (event.getPlayer().isSneaking()) return;
         if (event.getClickedBlock().getType() != Material.ENCHANTING_TABLE) return;
         event.setCancelled(true);
-        new EnchantingTableInventory().open(event.getPlayer());
+        new EnchantingTableInventory(event.getClickedBlock().getLocation()).open(event.getPlayer());
     }
-
 }

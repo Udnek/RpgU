@@ -5,13 +5,17 @@ import io.papermc.paper.datacomponent.item.ItemEnchantments;
 import me.udnek.itemscoreu.custominventory.ConstructableCustomInventory;
 import me.udnek.itemscoreu.custominventory.SmartIntractableCustomInventory;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customrecipe.RecipeManager;
 import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryAction;
@@ -23,37 +27,50 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class EnchantingTableInventory extends ConstructableCustomInventory implements SmartIntractableCustomInventory {
 
+    public static final int UPGRADE_RADIUS_XZ = 2;
+    public static final int UPGRADE_RADIUS_Y = 3;
+
     public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
-    private static final int LAPIS_SLOT = 9*3;
-    private static final int BOOK_SLOT = 9*3+1;
+    private static final int LAPIS_SLOT = 0;
+    private static final int BOOK_SLOT = 1;
 
     private static final int[] PASSION_SLOTS = new int[]{
-            0,1,
-            9,10
+            2,   3,   4,
+            9+2, 9+3, 9+4
     };
 
-    private static final int[] INPUT_SLOTS = new int[]{
-            0,1,
-            9,10,
-            LAPIS_SLOT, BOOK_SLOT
-    };
+    private static final int[] INPUT_SLOTS = ArrayUtils.addAll(PASSION_SLOTS, LAPIS_SLOT, BOOK_SLOT);
 
     private static final int[] ENCHANTED_BOOKS_SLOTS = new int[]{
-            3,  4,  5,  6,  7,  8,
-            12, 13, 14, 15, 16, 17,
-            21, 22, 23, 24, 25, 26,
-            30, 31, 32, 33, 34, 35,
-            39, 40, 41, 42, 43, 44,
+            9*3+0, 9*3+1, 9*3+2, 9*3+3, 9*3+4,
+            9*4+0, 9*4+1, 9*4+2, 9*4+3, 9*4+4,
     };
+
+    private static final int[] UPGRADE_SLOTS = new int[]{
+            9*0+6, 9*0+7, 9*0+8,
+            9*1+6, 9*1+7, 9*1+8,
+            9*2+6, 9*2+7, 9*2+8,
+            9*3+6, 9*3+7, 9*3+8,
+            9*4+6, 9*4+7, 9*4+8
+    };
+
+    public static final int PASSION_SLOTS_AMOUNT = PASSION_SLOTS.length;
+
+
+    protected final @NotNull Location tableLocation;
+    protected Set<EnchantingTableUpgrade> upgrades;
+
+    public EnchantingTableInventory(@NotNull Location tableLocation){
+        this.tableLocation = tableLocation;
+        recalculateUpgrades();
+    }
 
     public boolean hasBook(){
         ItemStack item = inventory.getItem(BOOK_SLOT);
@@ -71,8 +88,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         List<ItemStack> passionItems = new ArrayList<>();
         for (int slot : PASSION_SLOTS) {
             ItemStack itemStack = inventory.getItem(slot);
-            if (itemStack == null) continue;
-            passionItems.add(itemStack);
+            if (itemStack != null) passionItems.add(itemStack);
         }
         return passionItems;
     }
@@ -82,24 +98,20 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
             inventory.setItem(slot, FILLER.getItem());
         }
     }
-    
-    public void showEnchantedBooks(@NotNull Map<Enchantment, Integer> map, int maxLevel){
-        int index = -1;
-        for (Map.Entry<Enchantment, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > maxLevel) continue;
 
-            index ++;
-            if (index > map.size()-1) return;
-
-            ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
-            book.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments().add(
-                    entry.getKey(),
-                    Math.clamp(entry.getValue(), 1, maxLevel))
-                    .build());
-
-            inventory.setItem(ENCHANTED_BOOKS_SLOTS[index], book);
+    public void recalculateUpgrades(){
+        this.upgrades = EnchantingTableUpgrade.REGISTRY.getAll().stream().filter(upgrade -> upgrade.test(tableLocation)).collect(Collectors.toSet());
+        ArrayList<EnchantingTableUpgrade> upgradeList = new ArrayList<>(upgrades);
+        for (int i = 0; i < UPGRADE_SLOTS.length; i++) {
+            int slot = UPGRADE_SLOTS[i];
+            if (i >= this.upgrades.size()) {
+                inventory.setItem(slot, FILLER.getItem());
+            } else {
+                inventory.setItem(slot, upgradeList.get(i).getIcon());
+            }
         }
     }
+
 
     public void recalculate(){
         Bukkit.getLogger().info("CALLED RECALCULATE");
@@ -107,13 +119,31 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
             clearEnchantedBooks();
             return;
         }
-        List<EnchantmentsContainer> containers = new ArrayList<>();
-        for (@NotNull ItemStack passionItem : getPassionItems()) {
-            containers.add(EnchantingPassion.instance().get(passionItem));
+        List<EnchantingRecipe> recipes = RecipeManager.getInstance().getByType(EnchantingRecipeType.INSTANCE);
+        EnchantingRecipe enchantingRecipe = null;
+        for (EnchantingRecipe recipe : recipes) {
+            if (recipe.test(getPassionItems(), upgrades)) {
+                enchantingRecipe = recipe;
+                break;
+            }
         }
-        clearEnchantedBooks();
-        showEnchantedBooks(EnchantmentsContainer.mix(containers), inventory.getItem(LAPIS_SLOT).getAmount());
+        if (enchantingRecipe == null) clearEnchantedBooks();
+        else proceedRecipe(enchantingRecipe);
     }
+
+    public void proceedRecipe(@NotNull EnchantingRecipe recipe){
+        Enchantment enchantment = recipe.getEnchantment();
+        int startLevel =  Math.max(enchantment.getMaxLevel() - ENCHANTED_BOOKS_SLOTS.length, 0)+1;
+        for (int i = 0; i < Math.min(ENCHANTED_BOOKS_SLOTS.length, enchantment.getMaxLevel()); i++) {
+            ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+            book.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments(
+                    Map.of(enchantment, startLevel+i), true)
+            );
+            inventory.setItem(ENCHANTED_BOOKS_SLOTS[i], book);
+        }
+    }
+
+    // BASES
 
     public void iterateTroughAllInputSlots(@NotNull Consumer<Integer> consumer){
         Arrays.stream(INPUT_SLOTS).forEach(consumer::accept);
@@ -124,11 +154,10 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         recalculate();
     }
 
-
-
     @Override
     public void onPlayerClicksItem(InventoryClickEvent event) {
         SmartIntractableCustomInventory.super.onPlayerClicksItem(event);
+
         // TODO: 8/26/2024 REMOVE WHEN FIXED IN ITEMSCOREU
         if (event.getClickedInventory() != this.getInventory() && event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY){
             event.setCancelled(false);
@@ -136,12 +165,16 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
         if (event.isCancelled()) return;
 
+        if (event.getSlot() < 0) return;
         ItemStack book = inventory.getItem(event.getSlot());
         if (book != null && event.getClickedInventory() == event.getInventory()){
             if (ItemUtils.isVanillaMaterial(book, Material.ENCHANTED_BOOK)) {
                 if (Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> slot == event.getSlot())) {
                     takeItem(LAPIS_SLOT, new ArrayList<>(book.getData(DataComponentTypes.STORED_ENCHANTMENTS).enchantments().values()).getFirst());
                     takeItem(BOOK_SLOT, 1);
+                    for (int slot : INPUT_SLOTS) {
+                        takeItem(slot, 1);
+                    }
                 }
             }
         }

@@ -167,7 +167,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         if (currentRecipe != null) return;
         List<AlloyingRecipe> recipes = RecipeManager.getInstance().getByType(AlloyingRecipeType.getInstance());
         for (AlloyingRecipe recipe : recipes) {
-            boolean matches = recipe.matches(alloys, fuel, addition);
+            boolean matches = recipe.test(alloys, fuel, addition);
             if (!matches) continue;
             foundRecipe(recipe);
             return;
