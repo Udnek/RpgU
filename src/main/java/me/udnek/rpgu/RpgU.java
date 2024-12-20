@@ -23,7 +23,7 @@ import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
-import me.udnek.rpgu.mechanic.enchanting.EnchantingTableListener;
+import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.util.GeneralListener;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -50,7 +50,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         new DamageListener(this);
         new EquipmentListener(this);
-        new EnchantingTableListener(this);
+        new EnchantingListener(this);
         new ModifiedEntitySpawnListener(this);
         new GeneralListener(this);
         new AttributeManaging(this);

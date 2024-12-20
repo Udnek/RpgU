@@ -6,6 +6,8 @@ import io.papermc.paper.datacomponent.item.ItemEnchantments;
 import me.udnek.itemscoreu.customrecipe.CustomRecipe;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.itemscoreu.util.ItemUtils;
+import me.udnek.jeiu.visualizer.abstraction.Visualizable;
+import me.udnek.jeiu.visualizer.abstraction.Visualizer;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -15,11 +17,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType> {
+public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType>, Visualizable {
 
     protected final @NotNull NamespacedKey key;
     protected final @NotNull Enchantment enchantment;
-    protected final @NotNull List<CustomSingleRecipeChoice> input;
+    protected final @NotNull List<CustomSingleRecipeChoice> passion;
     protected final @NotNull Set<EnchantingTableUpgrade> upgrades;
 
     @Override
@@ -27,24 +29,32 @@ public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType> {
         return Collections.singleton(getResult());
     }
 
-    public EnchantingRecipe(@NotNull NamespacedKey key, @NotNull Enchantment enchantment, @NotNull List<CustomSingleRecipeChoice> input, @NotNull Set<EnchantingTableUpgrade> upgrades){
-        Preconditions.checkArgument(input.size() <= EnchantingTableInventory.PASSION_SLOTS_AMOUNT, 
+    public EnchantingRecipe(@NotNull NamespacedKey key, @NotNull Enchantment enchantment, @NotNull List<CustomSingleRecipeChoice> passions, @NotNull Set<EnchantingTableUpgrade> upgrades){
+        Preconditions.checkArgument(passions.size() <= EnchantingTableInventory.PASSION_SLOTS_AMOUNT,
                 "Input must be <= " + EnchantingTableInventory.PASSION_SLOTS_AMOUNT);
         this.key = key;
         this.enchantment = enchantment;
-        this.input = input;
+        this.passion = passions;
         this.upgrades = upgrades;
     }
 
-    public EnchantingRecipe(@NotNull NamespacedKey key, @NotNull Enchantment enchantment, @NotNull List<CustomSingleRecipeChoice> input){
-        this(key, enchantment, input, Set.of());
+    public EnchantingRecipe(@NotNull NamespacedKey key, @NotNull Enchantment enchantment, @NotNull List<CustomSingleRecipeChoice> passion){
+        this(key, enchantment, passion, Set.of());
+    }
+
+    public @NotNull List<CustomSingleRecipeChoice> getPassions() {
+        return new ArrayList<>(passion);
+    }
+
+    public @NotNull Set<EnchantingTableUpgrade> getUpgrades() {
+        return new HashSet<>(upgrades);
     }
 
     public @NotNull Enchantment getEnchantment() {return enchantment;}
 
     public boolean test(@NotNull List<ItemStack> itemStacks, @NotNull Set<EnchantingTableUpgrade> ups){
         if (!ups.containsAll(upgrades)) return false;
-        List<CustomSingleRecipeChoice> left = new ArrayList<>(input);
+        List<CustomSingleRecipeChoice> left = new ArrayList<>(passion);
         CustomSingleRecipeChoice toRemove = null;
         for (ItemStack itemStack : itemStacks) {
             if (left.isEmpty()) return false;
@@ -70,20 +80,20 @@ public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType> {
 
     @Override
     public boolean isIngredient(@NotNull ItemStack itemStack) {
-        for (CustomSingleRecipeChoice choice : input) if (choice.test(itemStack)) return true;
+        for (CustomSingleRecipeChoice choice : passion) if (choice.test(itemStack)) return true;
         return ItemUtils.isVanillaMaterial(itemStack, Material.LAPIS_LAZULI) || ItemUtils.isVanillaMaterial(itemStack, Material.BOOK);
     }
     
 
     @Override
     public void replaceItem(@NotNull ItemStack old, @NotNull ItemStack newI) {
-        for (CustomSingleRecipeChoice choice : input) {choice.replaceItem(old, newI);}
+        for (CustomSingleRecipeChoice choice : passion) {choice.replaceItem(old, newI);}
         
     }
 
     @Override
     public @NotNull ItemStack getResult() {
-        ItemStack itemStack = new ItemStack(Material.BOOK);
+        ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
         itemStack.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments(Map.of(enchantment, 1), true));
         return itemStack;
     }
@@ -96,5 +106,10 @@ public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType> {
     @Override
     public @NotNull EnchantingRecipeType getType() {
         return EnchantingRecipeType.INSTANCE;
+    }
+
+    @Override
+    public @NotNull Visualizer getVisualizer() {
+        return new EnchantingRecipeVisualizer(this);
     }
 }
