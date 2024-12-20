@@ -41,19 +41,19 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     private static final int LAPIS_SLOT = 0;
     private static final int BOOK_SLOT = 1;
 
-    private static final int[] PASSION_SLOTS = new int[]{
+    public static final int[] PASSION_SLOTS = new int[]{
             2,   3,   4,
             9+2, 9+3, 9+4
     };
 
-    private static final int[] INPUT_SLOTS = ArrayUtils.addAll(PASSION_SLOTS, LAPIS_SLOT, BOOK_SLOT);
+    public static final int[] ALL_INPUT_SLOTS = ArrayUtils.addAll(PASSION_SLOTS, LAPIS_SLOT, BOOK_SLOT);
 
     private static final int[] ENCHANTED_BOOKS_SLOTS = new int[]{
             9*3+0, 9*3+1, 9*3+2, 9*3+3, 9*3+4,
             9*4+0, 9*4+1, 9*4+2, 9*4+3, 9*4+4,
     };
 
-    private static final int[] UPGRADE_SLOTS = new int[]{
+    public static final int[] UPGRADE_SLOTS = new int[]{
             9*0+6, 9*0+7, 9*0+8,
             9*1+6, 9*1+7, 9*1+8,
             9*2+6, 9*2+7, 9*2+8,
@@ -146,7 +146,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     // BASES
 
     public void iterateTroughAllInputSlots(@NotNull Consumer<Integer> consumer){
-        Arrays.stream(INPUT_SLOTS).forEach(consumer::accept);
+        Arrays.stream(ALL_INPUT_SLOTS).forEach(consumer::accept);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
                 if (Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> slot == event.getSlot())) {
                     takeItem(LAPIS_SLOT, new ArrayList<>(book.getData(DataComponentTypes.STORED_ENCHANTMENTS).enchantments().values()).getFirst());
                     takeItem(BOOK_SLOT, 1);
-                    for (int slot : INPUT_SLOTS) {
+                    for (int slot : ALL_INPUT_SLOTS) {
                         takeItem(slot, 1);
                     }
                 }
@@ -182,7 +182,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
     @Override
     public boolean canPlaceItem(@Nullable ItemStack itemStack, int i) {
-        return Arrays.stream(INPUT_SLOTS).anyMatch(slot -> i == slot);
+        return Arrays.stream(ALL_INPUT_SLOTS).anyMatch(slot -> i == slot);
     }
 
     @Override

@@ -18,8 +18,8 @@ import java.util.List;
 public class AlloyingRecipeVisualizer extends AbstractVisualizer {
     public static final int OFFSET = 9;
 
-    protected AlloyingRecipe recipe;
-    public AlloyingRecipeVisualizer(AlloyingRecipe recipe){
+    protected @NotNull AlloyingRecipe recipe;
+    public AlloyingRecipeVisualizer(@NotNull AlloyingRecipe recipe){
         this.recipe = recipe;
     }
     @Override
@@ -41,7 +41,7 @@ public class AlloyingRecipeVisualizer extends AbstractVisualizer {
         banner.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "gui/alloying/banner")));
         menu.setThemedItem(RecipesMenu.getBannerPosition(), banner);
     }
-    public void setAlloy(int index, CustomRecipeChoice choice){
+    public void setAlloy(int index, @NotNull CustomRecipeChoice choice){
         setChoice(AlloyForgeInventory.ALLOYS_SLOTS[index] + OFFSET, choice);
     }
     @Override

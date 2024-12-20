@@ -1,0 +1,6 @@
+{
+	"parent": "jeiu:item/banner_template",
+	"textures": {
+		"layer0": "rpgu:item/gui/enchanting/banner"
+	}
+}
