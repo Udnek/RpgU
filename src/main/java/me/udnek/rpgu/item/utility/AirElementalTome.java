@@ -11,6 +11,7 @@ import me.udnek.rpgu.component.ability.active.RayTraceActiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Location;
@@ -78,10 +79,10 @@ public class AirElementalTome extends ConstructableCustomItem {
             getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(new AttributeBasedProperty(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
-                    Effects.INCREASED_FALL_DAMAGE.getBukkitType(),
+                    Effects.HEAVY_FALLING.getBukkitType(),
                     Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, Functions.CONSTANT(EFFECT_DURATION))),
-                    Functions.CONSTANT(2)))
-            );
+                    Functions.FLOOR(Functions.APPLY_MP(new LinearMPFunction(2, 0.2)))
+            )));
         }
 
         @Override
@@ -100,11 +101,10 @@ public class AirElementalTome extends ConstructableCustomItem {
                             livingEntity.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
                         } else if (count >= UP_DURATION && count < DURATION && (count % 5 == 0)) {
-                            new ParticleBuilder(Particle.GUST).count(4).location(locationEntity).offset(1,0,1).spawn();
+                            new ParticleBuilder(Particle.GUST).count(3).location(locationEntity).offset(1,0,1).spawn();
                         } else if (count == DURATION) {
                             if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
-                            else Effects.INCREASED_FALL_DAMAGE.applyInvisible(livingEntity, 10, 2);
-                            livingEntity.setVelocity(new Vector(0, -4, 0));
+                            else getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, livingEntity);
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
                         } else if (count > DURATION) cancel();
 
