@@ -1,10 +1,6 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
-import me.udnek.itemscoreu.customrecipe.RecipeManager;
-import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
-import me.udnek.jeiu.util.MenuQuery;
-import me.udnek.jeiu.util.MenuQueryEvent;
 import org.bukkit.Material;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
