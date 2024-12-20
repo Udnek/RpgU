@@ -39,7 +39,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
     private static final int LAPIS_SLOT = 0;
-    private static final int BOOK_SLOT = 1;
+    private static final int BOOK_SLOT = 9;
 
     public static final int[] PASSION_SLOTS = new int[]{
             2,   3,   4,
