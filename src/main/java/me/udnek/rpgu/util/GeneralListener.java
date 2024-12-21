@@ -12,6 +12,8 @@ import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
+import me.udnek.rpgu.vanila.EnchantManaging;
+import me.udnek.rpgu.vanila.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -152,5 +154,6 @@ public class GeneralListener extends SelfRegisteringListener {
     public void recipeInitialization(InitializationEvent event){
         if (event.getStep() != InitializationProcess.Step.AFTER_REGISTRIES_INITIALIZATION) return;
         RecipeManaging.run();
+        EnchantManaging.run();
     }
 }
