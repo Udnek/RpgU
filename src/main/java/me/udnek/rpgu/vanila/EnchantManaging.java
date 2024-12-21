@@ -18,83 +18,77 @@ import java.util.Set;
 
 public class EnchantManaging {
     public static void run(){
-        addEnchantingRecipeMaterial("aqua_affinity", Enchantment.AQUA_AFFINITY, List.of(Material.SEAGRASS));
-        addEnchantingRecipeMaterial("bane_of_arthropods", Enchantment.BANE_OF_ARTHROPODS, List.of(Material.STRING));
-        addEnchantingRecipeCustomItem("blast_protection", Enchantment.BLAST_PROTECTION, List.of(Items.BLAST_COAL));
-        addEnchantingRecipeMaterial("breach", Enchantment.BREACH, List.of(Material.BREEZE_ROD, Material.IRON_AXE), Set.of(EnchantingTableUpgrade.TRIAL_CHAMBER));
-        addEnchantingRecipeMaterial("channeling", Enchantment.CHANNELING, List.of(Material.LIGHTNING_ROD), Set.of(EnchantingTableUpgrade.WATER));
-        addEnchantingRecipeMaterial("curse_of_binding", Enchantment.BINDING_CURSE, List.of(Material.NETHER_BRICK));
-        addEnchantingRecipeMaterial("curse_of_vanishing", Enchantment.VANISHING_CURSE, List.of());//TODO
-        addEnchantingRecipeMaterial("density", Enchantment.DENSITY, List.of(Material.BREEZE_ROD, Material.LADDER), Set.of(EnchantingTableUpgrade.TRIAL_CHAMBER));
-        addEnchantingRecipeMaterial("depth_strider", Enchantment.DEPTH_STRIDER, List.of(Material.SOUL_SAND), Set.of(EnchantingTableUpgrade.NETHER));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("feather_falling", Enchantment.FEATHER_FALLING, List.of(Material.FEATHER));
-        addEnchantingRecipeMaterial("fire_aspect", Enchantment.FIRE_ASPECT, List.of(Material.TORCHFLOWER, Material.STICK));
-        addEnchantingRecipeMaterial("fire_protection", Enchantment.FIRE_PROTECTION, List.of(Material.MAGMA_CREAM));
-        addEnchantingRecipeMaterial("flame", Enchantment.FLAME, List.of(Material.TORCHFLOWER, Material.FLINT));
-        addEnchantingRecipeMaterial("fortune", Enchantment.FORTUNE, List.of(Material.RABBIT_FOOT));
-        addEnchantingRecipeMaterial("frost_walker", Enchantment.FROST_WALKER, List.of(Material.ICE, Material.PACKED_ICE));
-        addEnchantingRecipeMaterial("impaling", Enchantment.IMPALING, List.of(Material.KELP), Set.of(EnchantingTableUpgrade.WATER));
-        addEnchantingRecipeMaterial("infinity", Enchantment.INFINITY, List.of(Material.WATER_BUCKET, Material.LAVA_BUCKET));
-        addEnchantingRecipeMaterial("knockback", Enchantment.KNOCKBACK, List.of(Material.PISTON, Material.STICK));
-        addEnchantingRecipeMaterial("looting", Enchantment.LOOTING, List.of(Material.ENDER_EYE));
-        addEnchantingRecipeCustomItem("loyalty", Enchantment.LOYALTY, List.of(Items.WOLF_PELT), Set.of(EnchantingTableUpgrade.WATER));
-        addEnchantingRecipeMaterial("luck_of_the_sea", Enchantment.LUCK_OF_THE_SEA, List.of(Material.TROPICAL_FISH));
-        addEnchantingRecipeMaterial("lure", Enchantment.LURE, List.of(Material.PUFFERFISH));
-        addEnchantingRecipeMaterial("mending", Enchantment.MENDING, List.of(Material.NETHER_STAR));
-        addEnchantingRecipeMaterial("multishot", Enchantment.MULTISHOT, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
-        addEnchantingRecipeMaterial("efficiency", Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
+        addEnchantingRecipeMaterial(Enchantment.AQUA_AFFINITY, List.of(Material.SEAGRASS));
+        addEnchantingRecipeMaterial(Enchantment.BANE_OF_ARTHROPODS, List.of(Material.STRING));
+        addEnchantingRecipeCustomItem(Enchantment.BLAST_PROTECTION, List.of(Items.BLAST_COAL));
+        addEnchantingRecipeMaterial(Enchantment.BREACH, List.of(Material.BREEZE_ROD, Material.IRON_AXE), Set.of(EnchantingTableUpgrade.TRIAL_CHAMBER));
+        addEnchantingRecipeMaterial(Enchantment.CHANNELING, List.of(Material.LIGHTNING_ROD), Set.of(EnchantingTableUpgrade.WATER));
+        addEnchantingRecipeMaterial(Enchantment.BINDING_CURSE, List.of(Material.NETHER_BRICK));
+        addEnchantingRecipeMaterial(Enchantment.VANISHING_CURSE, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.DENSITY, List.of(Material.BREEZE_ROD, Material.LADDER), Set.of(EnchantingTableUpgrade.TRIAL_CHAMBER));
+        addEnchantingRecipeMaterial(Enchantment.DEPTH_STRIDER, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.EFFICIENCY, List.of(Material.GOLDEN_PICKAXE));
+        addEnchantingRecipeMaterial(Enchantment.FEATHER_FALLING, List.of(Material.FEATHER));
+        addEnchantingRecipeMaterial(Enchantment.FIRE_ASPECT, List.of(Material.TORCHFLOWER, Material.STICK));
+        addEnchantingRecipeMaterial(Enchantment.FIRE_PROTECTION, List.of(Material.MAGMA_CREAM));
+        addEnchantingRecipeMaterial(Enchantment.FLAME, List.of(Material.TORCHFLOWER, Material.FLINT));
+        addEnchantingRecipeMaterial( Enchantment.FORTUNE, List.of(Material.RABBIT_FOOT));
+        addEnchantingRecipeMaterial(Enchantment.FROST_WALKER, List.of(Material.ICE, Material.PACKED_ICE));
+        addEnchantingRecipeMaterial(Enchantment.IMPALING, List.of(Material.KELP), Set.of(EnchantingTableUpgrade.WATER));
+        addEnchantingRecipeMaterial(Enchantment.INFINITY, List.of(Material.WATER_BUCKET, Material.LAVA_BUCKET));
+        addEnchantingRecipeMaterial(Enchantment.KNOCKBACK, List.of(Material.PISTON, Material.STICK));
+        addEnchantingRecipeMaterial(Enchantment.LOOTING, List.of(Material.ENDER_EYE));
+        addEnchantingRecipeCustomItem(Enchantment.LOYALTY, List.of(Items.WOLF_PELT), Set.of(EnchantingTableUpgrade.WATER));
+        addEnchantingRecipeMaterial(Enchantment.LUCK_OF_THE_SEA, List.of(Material.TROPICAL_FISH));
+        addEnchantingRecipeMaterial(Enchantment.LURE, List.of(Material.PUFFERFISH));
+        addEnchantingRecipeMaterial(Enchantment.MENDING, List.of(Material.NETHER_STAR));
+        addEnchantingRecipeMaterial(Enchantment.MULTISHOT, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.POWER, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.PROJECTILE_PROTECTION, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.PROTECTION, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.PUNCH, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.QUICK_CHARGE, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.RESPIRATION, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.RIPTIDE, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.SHARPNESS, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.SILK_TOUCH, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.SMITE, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.SOUL_SPEED, List.of(Material.SOUL_SAND), Set.of(EnchantingTableUpgrade.NETHER));
+        addEnchantingRecipeMaterial(Enchantment.SWEEPING_EDGE, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.SWIFT_SNEAK, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.THORNS, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.UNBREAKING, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.WIND_BURST, List.of());//TODO
     }
 
-    private static void addEnchantingRecipeMaterial(@NotNull String key, @NotNull Enchantment enchantment, @NotNull List<Material> materials){
-        addEnchantingRecipe(key, enchantment, materials, List.of());
+    private static void addEnchantingRecipeMaterial(@NotNull Enchantment enchantment, @NotNull List<Material> materials){
+        addEnchantingRecipe(enchantment, materials, List.of());
     }
 
-    private static void addEnchantingRecipeMaterial(@NotNull String key, @NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
-        addEnchantingRecipe(key, enchantment, materials, List.of(), tableUpgradeSet);
+    private static void addEnchantingRecipeMaterial(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
+        addEnchantingRecipe(enchantment, materials, List.of(), tableUpgradeSet);
     }
 
-    private static void addEnchantingRecipeCustomItem(@NotNull String key, @NotNull Enchantment enchantment, @NotNull List<CustomItem> customItems){
-        addEnchantingRecipe(key, enchantment, List.of(), customItems);
+    private static void addEnchantingRecipeCustomItem(@NotNull Enchantment enchantment, @NotNull List<CustomItem> customItems){
+        addEnchantingRecipe(enchantment, List.of(), customItems);
     }
 
-    private static void addEnchantingRecipeCustomItem(@NotNull String key, @NotNull Enchantment enchantment, @NotNull List<CustomItem> customItems, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
-        addEnchantingRecipe(key, enchantment, List.of(), customItems, tableUpgradeSet);
+    private static void addEnchantingRecipeCustomItem(@NotNull Enchantment enchantment, @NotNull List<CustomItem> customItems, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
+        addEnchantingRecipe(enchantment, List.of(), customItems, tableUpgradeSet);
     }
 
-    private static void addEnchantingRecipe(@NotNull String key, @NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> customItems){
-        addEnchantingRecipe(key, enchantment, materials, customItems, Set.of());
+    private static void addEnchantingRecipe(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> customItems){
+        addEnchantingRecipe(enchantment, materials, customItems, Set.of());
     }
 
-    private static void addEnchantingRecipe(@NotNull String key, @NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> customItems, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet, CustomSingleRecipeChoice ... customSingleRecipeChoices ){
+    private static void addEnchantingRecipe(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> customItems, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet, CustomSingleRecipeChoice ... customSingleRecipeChoices ){
         List<CustomSingleRecipeChoice> recipeChoices = new ArrayList<>();
         for (Material material : materials){recipeChoices.add(new CustomSingleRecipeChoice(material));}
         for (CustomItem customItem : customItems){recipeChoices.add(new CustomSingleRecipeChoice(customItem));}
 
         RecipeManager.getInstance().register(
-                new EnchantingRecipe(new NamespacedKey(RpgU.getInstance(), key), enchantment, recipeChoices, tableUpgradeSet)
+                new EnchantingRecipe(new NamespacedKey(RpgU.getInstance(), enchantment.key().asMinimalString()), enchantment, recipeChoices, tableUpgradeSet)
         );
     }
 

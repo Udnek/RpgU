@@ -1,6 +1,9 @@
 package me.udnek.rpgu.vanila;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
+import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -8,6 +11,8 @@ import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.vanila.components.GoldenArmorPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -39,6 +44,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
         }
     }
 
@@ -140,6 +146,13 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         //if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
+
+        if (Material.SPYGLASS == material) {
+            customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+                    .add(Attributes.CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
+                    .add(Attributes.CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                    .build()));
+        }
     }
 
 
