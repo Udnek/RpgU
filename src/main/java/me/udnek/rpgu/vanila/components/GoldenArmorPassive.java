@@ -1,9 +1,8 @@
-package me.udnek.rpgu.attribute.passive;
+package me.udnek.rpgu.vanila.components;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.PassiveAbilityActivatorComponent;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
@@ -26,9 +25,9 @@ import java.util.Collection;
 
 public class GoldenArmorPassive {
 
-    public static void applyPassive(Material material){
+    public static void applyPassive(@NotNull Material material, @NotNull CustomItem customItem){
         EquipmentSlot equipmentSlot = material.getEquipmentSlot();
-        CustomComponentMap<CustomItem> components = VanillaItemManager.getReplaced(material).getComponents();
+        CustomComponentMap<CustomItem> components = customItem.getComponents();
         int duration = 3 * 20;
 
         if (equipmentSlot == EquipmentSlot.HEAD) {
