@@ -1,15 +1,22 @@
-package me.udnek.rpgu.attribute;
+package me.udnek.rpgu.vanila;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
+import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.attribute.passive.GoldenArmorPassive;
+import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.vanila.components.GoldenArmorPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.event.EventHandler;
@@ -34,8 +41,10 @@ public class AttributeManaging extends SelfRegisteringListener {
     @EventHandler
     public void onInit(InitializationEvent event){
         if (event.getStep() == InitializationProcess.Step.BEFORE_VANILLA_MANAGER){
-            for (Material item : armorStats.keySet()){VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            for (Material item : diamondTools){VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
         }
     }
 
@@ -109,9 +118,11 @@ public class AttributeManaging extends SelfRegisteringListener {
     @EventHandler
     public void onItemGenerates(CustomItemGeneratedEvent event){
         ItemStack itemStack = event.getItemStack();
-        Material material = itemStack.getType();
 
         if (!VanillaItemManager.isReplaced(itemStack))return;
+
+        Material material = itemStack.getType();
+        CustomItem customItem = event.getCustomItem();
 
         if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
 
@@ -119,9 +130,10 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (chainmailArmor.contains(material)) {itemStack.editMeta(itemMeta -> itemMeta.setRarity(ItemRarity.COMMON));}
 
+
         if (goldenArmor.contains(material)){
             itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 15 / 7d * 0.9)));
-            GoldenArmorPassive.applyPassive(material);
+            GoldenArmorPassive.applyPassive(material, customItem);
         }
 
         if (diamondArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage(material.getMaxDurability() * 37 / 33));}
@@ -131,6 +143,15 @@ public class AttributeManaging extends SelfRegisteringListener {
 
             AttributeUtils.addDefaultAttributes(itemStack);
             itemStack.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        }
+
+        //if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
+
+        if (Material.SPYGLASS == material) {
+            customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+                    .add(Attributes.CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
+                    .add(Attributes.CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                    .build()));
         }
     }
 

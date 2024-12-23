@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class IncreasedFallDamage extends ConstructableCustomEffect {
+public class HeavyFalling extends ConstructableCustomEffect {
     @Override
     public @NotNull PotionEffectTypeCategory getCategory() {return PotionEffectTypeCategory.HARMFUL;}
 
@@ -19,11 +19,12 @@ public class IncreasedFallDamage extends ConstructableCustomEffect {
     public @Nullable PotionEffectType getVanillaDisguise() {return null;}
 
     @Override
-    public @NotNull String getRawId() {return "increased_fall_damage";}
+    public @NotNull String getRawId() {return "heavy_falling";}
 
     @Override
     public void addAttributes(@NotNull AttributeConsumer consumer) {
         consumer.accept(Attribute.FALL_DAMAGE_MULTIPLIER, new NamespacedKey(RpgU.getInstance(), "fall_damage_multiplier_" + getRawId()), 0.1, AttributeModifier.Operation.ADD_NUMBER);
+        consumer.accept(Attribute.GRAVITY, new NamespacedKey(RpgU.getInstance(), "gravity_" + getRawId()), 0.5, AttributeModifier.Operation.ADD_SCALAR);
     }
 
 

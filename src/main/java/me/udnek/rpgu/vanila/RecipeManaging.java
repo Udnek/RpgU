@@ -1,4 +1,4 @@
-package me.udnek.rpgu.util;
+package me.udnek.rpgu.vanila;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customrecipe.RecipeManager;
@@ -9,12 +9,9 @@ import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
-import me.udnek.rpgu.mechanic.enchanting.EnchantingRecipe;
-import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -76,29 +73,21 @@ public class RecipeManaging {
         //////////////////////////////////////////////
         replaceBedRecipe(Material.BLACK_BED, "black_bed", Material.BLACK_WOOL);
         replaceBedRecipe(Material.GRAY_BED, "gray_bed", Material.GRAY_WOOL);
-        replaceBedRecipe(Material.LIGHT_GRAY_BED, "light_gray_bed", Material.LIGHT_GRAY_BED);
+        replaceBedRecipe(Material.LIGHT_GRAY_BED, "light_gray_bed", Material.LIGHT_GRAY_WOOL);
         replaceBedRecipe(Material.BLUE_BED, "blue_bed", Material.BLUE_WOOL);
-        replaceBedRecipe(Material.LIGHT_BLUE_BED, "light_blue_bed", Material.LIGHT_BLUE_WOOL);//
+        replaceBedRecipe(Material.LIGHT_BLUE_BED, "light_blue_bed", Material.LIGHT_BLUE_WOOL);
         replaceBedRecipe(Material.BROWN_BED, "brown_bed", Material.BROWN_BED);
         replaceBedRecipe(Material.CYAN_BED, "cyan_bed", Material.CYAN_BED);
         replaceBedRecipe(Material.GREEN_BED, "green_bed", Material.GREEN_WOOL);
         replaceBedRecipe(Material.LIME_BED, "lime_bed", Material.LIME_WOOL);
-        replaceBedRecipe(Material.MAGENTA_BED, "magenta_bed", Material.MAGENTA_WOOL);//
-        replaceBedRecipe(Material.ORANGE_BED, "orange_bed", Material.ORANGE_WOOL);//
+        replaceBedRecipe(Material.MAGENTA_BED, "magenta_bed", Material.MAGENTA_WOOL);
+        replaceBedRecipe(Material.ORANGE_BED, "orange_bed", Material.ORANGE_WOOL);
         replaceBedRecipe(Material.PINK_BED, "pink_bed", Material.PINK_WOOL);
         replaceBedRecipe(Material.PURPLE_BED, "purple_bed", Material.PURPLE_WOOL);
-        replaceBedRecipe(Material.WHITE_BED, "white_bed", Material.WHITE_WOOL);//
+        replaceBedRecipe(Material.WHITE_BED, "white_bed", Material.WHITE_WOOL);
         replaceBedRecipe(Material.YELLOW_BED, "yellow_bed", Material.YELLOW_WOOL);
         replaceBedRecipe(Material.RED_BED, "red_bed", Material.RED_WOOL);
         //////////////////////////////////////////////
-        RecipeManager.getInstance().register(
-                new EnchantingRecipe(
-                        new NamespacedKey(RpgU.getInstance(), "test"),
-                        Enchantment.SHARPNESS,
-                        List.of(new CustomSingleRecipeChoice(Material.NETHERITE_INGOT)),
-                        Set.of(EnchantingTableUpgrade.SCULK)
-                )
-        );
 
         unregister();
     }
