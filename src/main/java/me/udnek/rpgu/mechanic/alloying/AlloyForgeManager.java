@@ -18,6 +18,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.InventoryHolder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class AlloyForgeManager extends TickingTask implements Listener {
         if (instance == null) instance = new AlloyForgeManager();
         return instance;
     }
-    private AlloyForgeMachine load(Block block){
+    private AlloyForgeMachine load(@NotNull Block block){
         String serialized = serializeLocation(block);
         AlloyForgeMachine machine = machines.get(serialized);
         if (machine != null) return machine;
@@ -54,7 +55,7 @@ public class AlloyForgeManager extends TickingTask implements Listener {
         unloadTickets.add(block);
     }
 
-    private void unload(Block block){
+    private void unload(@NotNull Block block){
         String serialized = serializeLocation(block);
         AlloyForgeMachine machine = machines.get(serialized);
         if (machine == null) return;
@@ -72,14 +73,14 @@ public class AlloyForgeManager extends TickingTask implements Listener {
         }
     }
 
-    public String serializeLocation(Block block){
+    public @NotNull String serializeLocation(@NotNull Block block){
         return (block.getX()+","+
                 block.getY()+","+
                 block.getZ()+","+
                 block.getWorld().getName()
         );
     }
-    public @Nullable AlloyForgeMachine getMachine(Block block){
+    public @Nullable AlloyForgeMachine getMachine(@NotNull Block block){
         return machines.get(serializeLocation(block));
     }
 
