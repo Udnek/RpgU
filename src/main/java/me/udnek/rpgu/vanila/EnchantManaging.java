@@ -20,48 +20,48 @@ import static me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade.*
 
 public class EnchantManaging {
     public static void run(){
-        addEnchantingRecipeMaterial(Enchantment.AQUA_AFFINITY, List.of(Material.SEAGRASS));//DONE
-        addEnchantingRecipeMaterial(Enchantment.BANE_OF_ARTHROPODS, List.of(Material.SPIDER_EYE));//DONE
-        addEnchantingRecipeCustomItem(Enchantment.BLAST_PROTECTION, List.of(Items.BLAST_COAL), Set.of(DECENT_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.BREACH, List.of(Material.BREEZE_ROD, Material.IRON_AXE), Set.of(TRIAL_CHAMBER));//DONE
-        addEnchantingRecipeMaterial(Enchantment.CHANNELING, List.of(Material.LIGHTNING_ROD), Set.of(WATER));//DONE
-        addEnchantingRecipeMaterial(Enchantment.BINDING_CURSE, List.of(Material.NETHER_BRICK), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.VANISHING_CURSE, List.of(Material.LAVA_BUCKET, Material.CACTUS));//DONE
-        addEnchantingRecipeMaterial(Enchantment.DENSITY, List.of(Material.BREEZE_ROD, Material.LADDER), Set.of(TRIAL_CHAMBER));//DONE
-        addEnchantingRecipeMaterial(Enchantment.DEPTH_STRIDER, List.of(Material.GOLD_BLOCK));//DONE
-        addEnchantingRecipeMaterial(Enchantment.EFFICIENCY, List.of(Material.GOLD_INGOT, Material.GOLD_INGOT), Set.of(LOTS_OF_BOOKSHELF, NETHER, AMETHYST));//DONE
-        addEnchantingRecipeMaterial(Enchantment.FEATHER_FALLING, List.of(Material.FEATHER, Material.FEATHER, Material.FEATHER), Set.of(LOTS_OF_BOOKSHELF, AMETHYST));//DONE
-        addEnchantingRecipeMaterial(Enchantment.FIRE_ASPECT, List.of(Material.TORCHFLOWER, Material.STICK), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.FIRE_PROTECTION, List.of(Material.MAGMA_CREAM), Set.of(DECENT_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.FLAME, List.of(Material.TORCHFLOWER, Material.FLINT), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.FORTUNE, List.of(Material.RABBIT_FOOT), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.FROST_WALKER, List.of(Material.ICE, Material.PACKED_ICE));//DONE
-        addEnchantingRecipeMaterial(Enchantment.IMPALING, List.of(Material.KELP), Set.of(WATER));//DONE
-        addEnchantingRecipeMaterial(Enchantment.INFINITY, List.of(Material.WATER_BUCKET, Material.LAVA_BUCKET), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.KNOCKBACK, List.of(Material.PISTON, Material.STICK));//DONE
-        addEnchantingRecipeMaterial(Enchantment.LOOTING, List.of(Material.ENDER_EYE), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeCustomItem(Enchantment.LOYALTY, List.of(Items.WOLF_PELT), Set.of(WATER, LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.LUCK_OF_THE_SEA, List.of(Material.TROPICAL_FISH));//DONE
-        addEnchantingRecipeMaterial(Enchantment.LURE, List.of(Material.PUFFERFISH));//DONE
-        addEnchantingRecipeMaterial(Enchantment.MENDING, List.of(Material.NETHER_STAR), Set.of(LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.MULTISHOT, List.of());//TODO ножницы
-        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of());//TODO свечка
-        addEnchantingRecipeMaterial(Enchantment.POWER, List.of(Material.TARGET), Set.of(LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.PROJECTILE_PROTECTION, List.of(Material.DEEPSLATE,  Material.IRON_INGOT), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.PROTECTION, List.of(Material.IRON_BLOCK), Set.of(LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.PUNCH, List.of(Material.PISTON, Material.STRING), Set.of(LITTLE_BOOKSHELF));//DONE
-        addEnchantingRecipe(Enchantment.QUICK_CHARGE, List.of(Material.TRIPWIRE_HOOK), List.of(Items.ESOTERIC_SALVE));//DONE
-        addEnchantingRecipeCustomItem(Enchantment.RESPIRATION, List.of(Items.FISHERMAN_SNORKEL), Set.of(DECENT_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.RIPTIDE, List.of(Material.NAUTILUS_SHELL));//DONE
-        addEnchantingRecipeMaterial(Enchantment.SHARPNESS, List.of(Material.GRINDSTONE, Material.DIAMOND), Set.of(LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.SILK_TOUCH, List.of(Material.BRUSH), Set.of(LOTS_OF_BOOKSHELF, AMETHYST));//DONE
-        addEnchantingRecipeMaterial(Enchantment.SMITE, List.of(Material.GLISTERING_MELON_SLICE));//DONE
-        addEnchantingRecipeMaterial(Enchantment.SOUL_SPEED, List.of(Material.SOUL_SAND, Material.SOUL_SOIL), Set.of(NETHER, LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.SWEEPING_EDGE, List.of(Material.REDSTONE), Set.of(AMETHYST, DECENT_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.SWIFT_SNEAK, List.of(Material.MINECART), Set.of(LOTS_OF_BOOKSHELF, SCULK));//DONE
-        addEnchantingRecipeMaterial(Enchantment.THORNS, List.of(Material.IRON_NUGGET, Material.CACTUS));//DONE
-        addEnchantingRecipeMaterial(Enchantment.UNBREAKING, List.of(Material.IRON_INGOT, Material.DIAMOND), Set.of(LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.WIND_BURST, List.of(Material.WIND_CHARGE));//DONE
+        addEnchantingRecipeMaterial(Enchantment.AQUA_AFFINITY, List.of(Material.SEAGRASS));
+        addEnchantingRecipeMaterial(Enchantment.BANE_OF_ARTHROPODS, List.of(Material.SPIDER_EYE));
+        addEnchantingRecipeCustomItem(Enchantment.BLAST_PROTECTION, List.of(Items.BLAST_COAL), Set.of(DECENT_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.BREACH, List.of(Material.BREEZE_ROD, Material.IRON_AXE), Set.of(TRIAL_CHAMBER));
+        addEnchantingRecipeMaterial(Enchantment.CHANNELING, List.of(Material.LIGHTNING_ROD), Set.of(WATER));
+        addEnchantingRecipeMaterial(Enchantment.BINDING_CURSE, List.of(Material.NETHER_BRICK), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.VANISHING_CURSE, List.of(Material.LAVA_BUCKET, Material.CACTUS));
+        addEnchantingRecipeMaterial(Enchantment.DENSITY, List.of(Material.BREEZE_ROD, Material.LADDER), Set.of(TRIAL_CHAMBER));
+        addEnchantingRecipeMaterial(Enchantment.DEPTH_STRIDER, List.of(Material.GOLD_BLOCK));
+        addEnchantingRecipeMaterial(Enchantment.EFFICIENCY, List.of(Material.GOLD_INGOT, Material.GOLD_INGOT), Set.of(LOTS_OF_BOOKSHELF, NETHER, AMETHYST));
+        addEnchantingRecipeMaterial(Enchantment.FEATHER_FALLING, List.of(Material.FEATHER, Material.FEATHER, Material.FEATHER), Set.of(LOTS_OF_BOOKSHELF, AMETHYST));
+        addEnchantingRecipeMaterial(Enchantment.FIRE_ASPECT, List.of(Material.TORCHFLOWER, Material.STICK), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.FIRE_PROTECTION, List.of(Material.MAGMA_CREAM), Set.of(DECENT_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.FLAME, List.of(Material.TORCHFLOWER, Material.FLINT), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.FORTUNE, List.of(Material.RABBIT_FOOT), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.FROST_WALKER, List.of(Material.ICE, Material.PACKED_ICE));
+        addEnchantingRecipeMaterial(Enchantment.IMPALING, List.of(Material.KELP), Set.of(WATER));
+        addEnchantingRecipeMaterial(Enchantment.INFINITY, List.of(Material.WATER_BUCKET, Material.LAVA_BUCKET), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.KNOCKBACK, List.of(Material.PISTON, Material.STICK));
+        addEnchantingRecipeMaterial(Enchantment.LOOTING, List.of(Material.ENDER_EYE), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeCustomItem(Enchantment.LOYALTY, List.of(Items.WOLF_PELT), Set.of(WATER, LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.LUCK_OF_THE_SEA, List.of(Material.TROPICAL_FISH));
+        addEnchantingRecipeMaterial(Enchantment.LURE, List.of(Material.PUFFERFISH));
+        addEnchantingRecipeMaterial(Enchantment.MENDING, List.of(Material.NETHER_STAR), Set.of(LOTS_OF_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.MULTISHOT, List.of(Material.SHEARS));
+        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of(Material.CANDLE));
+        addEnchantingRecipeMaterial(Enchantment.POWER, List.of(Material.TARGET), Set.of(LOTS_OF_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.PROJECTILE_PROTECTION, List.of(Material.DEEPSLATE,  Material.IRON_INGOT), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.PROTECTION, List.of(Material.IRON_BLOCK), Set.of(LOTS_OF_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.PUNCH, List.of(Material.PISTON, Material.STRING), Set.of(LITTLE_BOOKSHELF));
+        addEnchantingRecipe(Enchantment.QUICK_CHARGE, List.of(Material.TRIPWIRE_HOOK), List.of(Items.ESOTERIC_SALVE));
+        addEnchantingRecipeCustomItem(Enchantment.RESPIRATION, List.of(Items.FISHERMAN_SNORKEL), Set.of(DECENT_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.RIPTIDE, List.of(Material.NAUTILUS_SHELL));
+        addEnchantingRecipeMaterial(Enchantment.SHARPNESS, List.of(Material.GRINDSTONE, Material.DIAMOND), Set.of(LOTS_OF_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.SILK_TOUCH, List.of(Material.BRUSH), Set.of(LOTS_OF_BOOKSHELF, AMETHYST));
+        addEnchantingRecipeMaterial(Enchantment.SMITE, List.of(Material.GLISTERING_MELON_SLICE));
+        addEnchantingRecipeMaterial(Enchantment.SOUL_SPEED, List.of(Material.SOUL_SAND, Material.SOUL_SOIL), Set.of(NETHER, LOTS_OF_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.SWEEPING_EDGE, List.of(Material.REDSTONE), Set.of(AMETHYST, DECENT_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.SWIFT_SNEAK, List.of(Material.MINECART), Set.of(LOTS_OF_BOOKSHELF, SCULK));
+        addEnchantingRecipeMaterial(Enchantment.THORNS, List.of(Material.IRON_NUGGET, Material.CACTUS));
+        addEnchantingRecipeMaterial(Enchantment.UNBREAKING, List.of(Material.IRON_INGOT, Material.DIAMOND), Set.of(LOTS_OF_BOOKSHELF));
+        addEnchantingRecipeMaterial(Enchantment.WIND_BURST, List.of(Material.WIND_CHARGE));
     }
 
     private static void addEnchantingRecipeMaterial(@NotNull Enchantment enchantment, @NotNull List<Material> materials){
