@@ -20,8 +20,6 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
 
     @Override
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
-    @Override
-    public boolean addDefaultAttributes() {return true;}
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {

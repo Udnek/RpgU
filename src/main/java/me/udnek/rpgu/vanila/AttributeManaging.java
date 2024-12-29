@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
@@ -44,6 +45,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
         }
     }
 
@@ -144,9 +146,13 @@ public class AttributeManaging extends SelfRegisteringListener {
             itemStack.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         }
 
-        /*if (Tag.ITEMS_NETHERITE_TOOL_MATERIALS.isTagged(material)){
-            material.
-        }*/
+        if (Tag.ITEMS_NETHERITE_TOOL_MATERIALS.isTagged(material)){
+            event.setRepairData(new RepairData(Material.DIAMOND, Material.NETHERITE_INGOT));
+        }
+
+        if (material == Material.BOW){
+            event.setRepairData(new RepairData(Material.STRING));
+        }
 
         //if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
 
