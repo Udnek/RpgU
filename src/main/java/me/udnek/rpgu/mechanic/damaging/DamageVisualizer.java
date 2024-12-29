@@ -3,6 +3,7 @@ package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.entity.EntityTypes;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -12,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Transformation;
+import org.jetbrains.annotations.NotNull;
 
 public class DamageVisualizer {
 
@@ -26,8 +28,8 @@ public class DamageVisualizer {
     public static final TextColor ZERO_DAMAGE_COLOR = TextColor.color(0.7f, 0.7f, 0.7f);
     public static final TextColor SUB_LINE_DAMAGE_COLOR = TextColor.color(0.7f, 0.7f, 0.7f);
 
-    public static void visualize(Damage damage, Location location){
-        TextDisplay display = (TextDisplay) location.getWorld().spawnEntity(location, EntityType.TEXT_DISPLAY);
+    public static void visualize(@NotNull Damage damage, @NotNull Location location){
+        TextDisplay display = EntityTypes.DAMAGE_DISPLAY.spawn(location).getEntity();
 
         new BukkitRunnable() {
             @Override
@@ -56,7 +58,7 @@ public class DamageVisualizer {
         }.runTaskLater(RpgU.getInstance(), STAY_DURATION);
     }
 
-    public static void visualize(Damage damage, Entity entity){
+    public static void visualize(@NotNull Damage damage, @NotNull Entity entity){
         if (entity instanceof LivingEntity livingEntity){
             visualize(damage, livingEntity.getEyeLocation().add(0, 0.4, 0));
             return;
@@ -66,7 +68,7 @@ public class DamageVisualizer {
     }
 
 
-    public static Component generateText(Damage damage){
+    public static @NotNull Component generateText(@NotNull Damage damage){
         double physicalDamage = damage.getPhysical();
         double magicalDamage = damage.getMagical();
         double mainDamage = damage.getTotal();
@@ -85,7 +87,7 @@ public class DamageVisualizer {
         return text;
     }
 
-    private static TextColor getDamageColor(double mainDamage) {
+    private static @NotNull TextColor getDamageColor(double mainDamage) {
         float red, green, blue;
         if (mainDamage == 0) return ZERO_DAMAGE_COLOR;
         if (mainDamage <= RED_DAMAGE_BAR){

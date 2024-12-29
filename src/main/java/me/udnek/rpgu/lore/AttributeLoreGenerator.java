@@ -15,6 +15,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
@@ -67,7 +68,7 @@ public class AttributeLoreGenerator {
             EquipmentSlotGroup vanillaSlot = slot.getVanillaGroup();
             if (vanillaSlot != null){
 
-                Multimap<Attribute, AttributeModifier> attributesBySlot = me.udnek.itemscoreu.customattribute.AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);
+                Multimap<Attribute, AttributeModifier> attributesBySlot = AttributeUtils.getAttributesBySlot(vanillaAttributes, vanillaSlot);
                 Attribute[] sorted = sortAttributes(attributesBySlot);
 
                 for (Attribute attribute : sorted) {

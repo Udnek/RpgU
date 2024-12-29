@@ -18,6 +18,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -39,7 +40,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
     private static final int LAPIS_SLOT = 0;
-    private static final int BOOK_SLOT = 1;
+    private static final int BOOK_SLOT = 9;
 
     public static final int[] PASSION_SLOTS = new int[]{
             2,   3,   4,
@@ -70,6 +71,10 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public EnchantingTableInventory(@NotNull Location tableLocation){
         this.tableLocation = tableLocation;
         recalculateUpgrades();
+    }
+
+    public @NotNull Player getPlayer(){
+        return (Player) inventory.getViewers().getFirst();
     }
 
     public boolean hasBook(){
@@ -114,11 +119,8 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
 
     public void recalculate(){
-        Bukkit.getLogger().info("CALLED RECALCULATE");
-        if (!(hasLapis() && hasBook())){
-            clearEnchantedBooks();
-            return;
-        }
+        clearEnchantedBooks();
+        if (!(hasLapis() && hasBook())){return;}
         List<EnchantingRecipe> recipes = RecipeManager.getInstance().getByType(EnchantingRecipeType.INSTANCE);
         EnchantingRecipe enchantingRecipe = null;
         for (EnchantingRecipe recipe : recipes) {
@@ -133,8 +135,16 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
     public void proceedRecipe(@NotNull EnchantingRecipe recipe){
         Enchantment enchantment = recipe.getEnchantment();
-        int startLevel =  Math.max(enchantment.getMaxLevel() - ENCHANTED_BOOKS_SLOTS.length, 0)+1;
-        for (int i = 0; i < Math.min(ENCHANTED_BOOKS_SLOTS.length, enchantment.getMaxLevel()); i++) {
+        int playerLvl = getPlayer().getLevel();
+        ItemStack lapis = inventory.getItem(LAPIS_SLOT);
+        int lapisAmount = lapis == null ? 0 : lapis.getAmount();
+        int bookMaxLvl = enchantment.getMaxLevel()-3;
+        if (upgrades.contains(EnchantingTableUpgrade.LOTS_OF_BOOKSHELF)) bookMaxLvl +=3;
+        else if (upgrades.contains(EnchantingTableUpgrade.DECENT_BOOKSHELF)) bookMaxLvl += 2;
+        else if (upgrades.contains(EnchantingTableUpgrade.LITTLE_BOOKSHELF)) bookMaxLvl += 1;
+        int maxLevel =  Math.min(Math.min(Math.min(enchantment.getMaxLevel(), playerLvl), bookMaxLvl), lapisAmount);
+        int startLevel =  Math.max(maxLevel - ENCHANTED_BOOKS_SLOTS.length, 0)+1;
+        for (int i = 0; i < maxLevel; i++) {
             ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
             book.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments(
                     Map.of(enchantment, startLevel+i), true)
@@ -170,11 +180,13 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         if (book != null && event.getClickedInventory() == event.getInventory()){
             if (ItemUtils.isVanillaMaterial(book, Material.ENCHANTED_BOOK)) {
                 if (Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> slot == event.getSlot())) {
-                    takeItem(LAPIS_SLOT, new ArrayList<>(book.getData(DataComponentTypes.STORED_ENCHANTMENTS).enchantments().values()).getFirst());
+                    Integer enchantmentLvl = new ArrayList<>(book.getData(DataComponentTypes.STORED_ENCHANTMENTS).enchantments().values()).getFirst();
+                    takeItem(LAPIS_SLOT, enchantmentLvl);
                     takeItem(BOOK_SLOT, 1);
-                    for (int slot : ALL_INPUT_SLOTS) {
+                    for (int slot : PASSION_SLOTS) {
                         takeItem(slot, 1);
                     }
+                    getPlayer().giveExpLevels(-enchantmentLvl);
                 }
             }
         }
@@ -191,6 +203,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         return canPlaceItem(itemStack, i) || Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> i == slot);
     }
 
+    @Override
     public void generateInventory(int size, @NotNull Component title) {
         inventory = Bukkit.createInventory(this, size, title);
         for (int i = 0; i < size; i++) {
