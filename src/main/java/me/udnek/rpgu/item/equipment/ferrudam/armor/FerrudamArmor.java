@@ -40,6 +40,6 @@ public abstract class FerrudamArmor extends ConstructableCustomItem {
     public void initializeAttributes(@NotNull ItemMeta itemMeta) {
         super.initializeAttributes(itemMeta);
         AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_DAMAGE, new NamespacedKey(RpgU.getInstance(), "base_attack_damage_" + itemMeta.getEquippable().getSlot()),
-                4, AttributeModifier.Operation.ADD_SCALAR, itemMeta.getEquippable().getSlot().getGroup());
+                0.04, AttributeModifier.Operation.ADD_SCALAR, itemMeta.getEquippable().getSlot().getGroup());
     }
 }
