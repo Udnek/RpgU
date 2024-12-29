@@ -23,7 +23,7 @@ import java.util.*;
 public class RecipeManaging {
     public static void run(){
         replaceRecipe(Material.LODESTONE, "lodestone", new String[]{ "BBB", "BMB", "BBB"}, Map.of('B', Material.STONE_BRICKS), Map.of('M', Items.MAGNETITE_INGOT));
-        replaceRecipe(new ItemStack(Material.POWERED_RAIL).add(5), "powered_rail", new String[]{"M M", "MSM", "MRM"}, Map.of('S', Material.STICK, 'R', Material.REDSTONE), Map.of('M', Items.MAGNETITE_INGOT), Map.of());
+        replaceRecipe(new ItemStack(Material.POWERED_RAIL).add(5), "powered_rail", new String[]{"M M", "ISI", "MRM"}, Map.of('S', Material.STICK, 'R', Material.REDSTONE, 'I', Material.IRON_INGOT), Map.of('M', Items.MAGNETITE_INGOT), Map.of());
         replaceRecipe(Material.COMPASS, "compass", new String[]{" I ", "IMI", " I "}, Map.of('I', Material.IRON_INGOT), Map.of('M', Items.MAGNETITE_INGOT));
         ////////////////////////////////////////////////////////////////////////////////////////////
         replaceRecipeMaterial(Material.IRON_CHESTPLATE, "iron_chestplate", new String[]{"ILI", "III", "III"}, Map.of('I', Material.IRON_INGOT, 'L', Material.LEATHER_CHESTPLATE));
