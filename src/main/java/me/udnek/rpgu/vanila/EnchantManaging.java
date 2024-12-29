@@ -44,8 +44,8 @@ public class EnchantManaging {
         addEnchantingRecipeMaterial(Enchantment.LUCK_OF_THE_SEA, List.of(Material.TROPICAL_FISH));//DONE
         addEnchantingRecipeMaterial(Enchantment.LURE, List.of(Material.PUFFERFISH));//DONE
         addEnchantingRecipeMaterial(Enchantment.MENDING, List.of(Material.NETHER_STAR), Set.of(LOTS_OF_BOOKSHELF));//DONE
-        addEnchantingRecipeMaterial(Enchantment.MULTISHOT, List.of());//TODO
-        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of());//TODO
+        addEnchantingRecipeMaterial(Enchantment.MULTISHOT, List.of());//TODO ножницы
+        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of());//TODO свечка
         addEnchantingRecipeMaterial(Enchantment.POWER, List.of(Material.TARGET), Set.of(LOTS_OF_BOOKSHELF));//DONE
         addEnchantingRecipeMaterial(Enchantment.PROJECTILE_PROTECTION, List.of(Material.DEEPSLATE,  Material.IRON_INGOT), Set.of(LITTLE_BOOKSHELF));//DONE
         addEnchantingRecipeMaterial(Enchantment.PROTECTION, List.of(Material.IRON_BLOCK), Set.of(LOTS_OF_BOOKSHELF));//DONE

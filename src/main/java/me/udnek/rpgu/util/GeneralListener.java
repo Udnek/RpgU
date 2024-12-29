@@ -9,6 +9,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
+import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
@@ -17,6 +18,7 @@ import me.udnek.rpgu.vanila.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -32,6 +34,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Map;
 
@@ -42,9 +45,16 @@ public class GeneralListener extends SelfRegisteringListener {
 
     @EventHandler
     public void setBasePlayerHealth(PlayerJoinEvent event){
-        Player player = event.getPlayer();
-
-        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
+        double basePlayerHealth = 10;
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                Player player = event.getPlayer();
+                AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
+                if (attribute.getValue() != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
+                if (attribute.getValue() >= basePlayerHealth) player.setHealth(basePlayerHealth);
+            }
+        }.runTaskLater(RpgU.getInstance(), 5);
     }
 
     @EventHandler
