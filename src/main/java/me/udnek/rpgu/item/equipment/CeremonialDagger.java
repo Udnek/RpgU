@@ -15,6 +15,7 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -32,11 +33,11 @@ public class CeremonialDagger extends ConstructableCustomItem {
         return "ceremonial_dagger";
     }
     @Override
-    public ItemFlag[] getTooltipHides() {
-        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
-    }
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
+
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
+
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
@@ -69,7 +70,7 @@ public class CeremonialDagger extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Set.of(), Set.of(Material.COBBLESTONE, Material.GOLD_INGOT, Material.DIAMOND));
     }
 }

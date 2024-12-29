@@ -54,7 +54,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable ItemRarity getRarity() {return ItemRarity.RARE;}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.RARE);}
 
     @Override
     public void initializeComponents() {

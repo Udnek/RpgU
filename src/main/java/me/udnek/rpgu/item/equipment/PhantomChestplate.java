@@ -1,6 +1,8 @@
 package me.udnek.rpgu.item.equipment;
 
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.Equippable;
+import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -15,11 +17,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -31,7 +32,7 @@ public class PhantomChestplate extends ConstructableCustomItem {
     public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
 
     @Override
-    public @Nullable Integer getMaxDamage() {return 150;}
+    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(150);}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -51,20 +52,20 @@ public class PhantomChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
-    public @Nullable EquippableComponent getEquippable() {
-        EquippableComponent equippable = new ItemStack(getMaterial()).getItemMeta().getEquippable();
-        equippable.setSlot(getMaterial().getEquipmentSlot());
-        equippable.setModel(new NamespacedKey(RpgU.getInstance(), "phantom"));
-        return equippable;
+    public @Nullable DataSupplier<Equippable> getEquippable() {
+        Equippable equippable = new ItemStack(getMaterial()).getData(DataComponentTypes.EQUIPPABLE);
+        equippable = equippable.toBuilder().model(new NamespacedKey(RpgU.getInstance(), "phantom")).build();
+        return DataSupplier.of(equippable);
     }
 
     @Override
-    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
-        super.initializeAttributes(itemMeta);
-        AttributeUtils.addAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_chestplate"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+    public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {
+        AttributeModifier modifier = new AttributeModifier(new NamespacedKey(RpgU.getInstance(), "max_health_chestplate"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+        ItemAttributeModifiers modifiers = ItemAttributeModifiers.itemAttributes().addModifier(Attribute.MAX_HEALTH, modifier).build();
+        return DataSupplier.of(modifiers);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class PhantomChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Set.of(Items.PHANTOM_WING), Set.of(Material.PHANTOM_MEMBRANE));
     }
 }

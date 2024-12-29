@@ -1,13 +1,13 @@
 package me.udnek.rpgu.item.techincal;
 
+import io.papermc.paper.datacomponent.item.DyedItemColor;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.jeiu.component.ComponentTypes;
 import me.udnek.rpgu.RpgU;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,13 +19,13 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     }
 
     @Override
-    public @Nullable NamespacedKey getItemModel() {
-        return new NamespacedKey(RpgU.getInstance(), "empty");
+    public @Nullable DataSupplier<Key> getItemModel() {
+        return DataSupplier.of(new NamespacedKey(RpgU.getInstance(), "empty"));
     }
 
     @Override
-    protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
-        ((LeatherArmorMeta) itemMeta).setColor(Color.WHITE);
+    public @Nullable DataSupplier<DyedItemColor> getDyedColor() {
+        return DataSupplier.of(DyedItemColor.dyedItemColor(Color.WHITE, false));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
         return "technical_inventory_filler";
     }
     @Override
-    public boolean getHideTooltip() {return true;}
+    public @Nullable Boolean getHideTooltip() {return true;}
     @Override
     public @NotNull Material getMaterial() {
         return Material.LEATHER_HELMET;

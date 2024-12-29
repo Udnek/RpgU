@@ -7,17 +7,21 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public abstract class FlintTool extends ConstructableCustomItem {
 
     @Override
-    public @Nullable Integer getMaxDamage() {
-        return (int) (getMaterial().getDefaultData(DataComponentTypes.MAX_DAMAGE) * 1.3);
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of((int) (getMaterial().getDefaultData(DataComponentTypes.MAX_DAMAGE) * 1.3));
     }
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
-    @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
-    public @Nullable RepairData getRepairData() {return new RepairData(Material.FLINT);}
+    public boolean addDefaultAttributes() {return true;}
+
+
+    @Override
+    public @Nullable RepairData initializeRepairData() {return new RepairData(Material.FLINT);}
 }

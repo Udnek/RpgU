@@ -61,7 +61,7 @@ public class BlazeBlade extends ConstructableCustomItem implements MainHandItem,
     }
 
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
 
     @Override
     protected void modifyFinalItemStack(ItemStack itemStack) {

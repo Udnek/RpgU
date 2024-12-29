@@ -2,13 +2,11 @@ package me.udnek.rpgu.vanila;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.util.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.itemscoreu.util.VanillaItemManager;
@@ -27,15 +25,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class AttributeManaging extends SelfRegisteringListener {
      public AttributeManaging(JavaPlugin plugin) {
@@ -163,17 +158,11 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
     }
 
-
-
     public static void applyDefaultArmorAttribute(@NotNull ItemStack target, @NotNull Material source) {
-        target.editMeta((itemMeta) -> applyDefaultArmorAttribute(itemMeta, source));
-    }
-
-    public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source) {
         applyDefaultArmorAttribute(target, source, true, true);
     }
 
-    public static void applyDefaultArmorAttribute(@NotNull ItemMeta target, @NotNull Material source, boolean addArmor, boolean addAttackDamage) {
+    public static void applyDefaultArmorAttribute(@NotNull ItemStack target, @NotNull Material source, boolean addArmor, boolean addAttackDamage) {
         EquipmentSlotGroup slot = source.getEquipmentSlot().getGroup();
         AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot),
                 armorStats.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
@@ -186,6 +175,4 @@ public class AttributeManaging extends SelfRegisteringListener {
                     armorStats.get(source).damage, AttributeModifier.Operation.ADD_SCALAR, slot);
         }
     }
-
-
 }

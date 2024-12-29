@@ -77,7 +77,7 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Set.of(Items.PHANTOM_WING), Set.of(Material.PHANTOM_MEMBRANE));
     }
 }

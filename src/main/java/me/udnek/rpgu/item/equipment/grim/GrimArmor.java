@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment.grim;
 
+import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -15,37 +16,35 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public abstract class GrimArmor extends ConstructableCustomItem {
 
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
-    public @NotNull EquippableComponent getEquippable() {
-        EquippableComponent equippable = new ItemStack(getMaterial()).getItemMeta().getEquippable();
-        equippable.setSlot(getMaterial().getEquipmentSlot());
-        equippable.setModel(new NamespacedKey(RpgU.getInstance(), "grim"));
-        return equippable;
+    public @Nullable DataSupplier<Equippable> getEquippable() {
+        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).model(new NamespacedKey(RpgU.getInstance(), "grim")).build();
+        return DataSupplier.of(build);
     }
     public abstract @NotNull Stats getStats();
 
     @Override
-    public @Nullable ItemRarity getRarity() {
-        return ItemRarity.UNCOMMON;
+    public @Nullable DataSupplier<ItemRarity> getRarity() {
+        return DataSupplier.of(ItemRarity.UNCOMMON);
     }
 
     @Override
-    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
-        super.initializeAttributes(itemMeta);
+    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
+        super.initializeAdditionalAttributes(itemStack);
         Stats stats = getStats();
-        EquipmentSlotGroup slot = getEquippable().getSlot().getGroup();
-        AttributeUtils.addAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), slot+"_max_health"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
-        AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), slot+"_armor"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
+        EquipmentSlotGroup slot = getEquippable().get().slot().getGroup();
+        AttributeUtils.addAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), slot+"_max_health"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
+        AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), slot+"_armor"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
     }
 
     @Override
@@ -54,7 +53,7 @@ public abstract class GrimArmor extends ConstructableCustomItem {
 
         Stats stats = getStats();
 
-        CustomEquipmentSlot slot = CustomEquipmentSlot.getFromVanilla(getEquippable().getSlot().getGroup());
+        CustomEquipmentSlot slot = CustomEquipmentSlot.getFromVanilla(getEquippable().get().slot().getGroup());
         CustomAttributeModifier MP = new CustomAttributeModifier(stats.magicalPotential, AttributeModifier.Operation.ADD_NUMBER, slot);
         CustomAttributeModifier MD = new CustomAttributeModifier(stats.magicalDefense, AttributeModifier.Operation.ADD_NUMBER, slot);
         CustomAttributeModifier DM = new CustomAttributeModifier(stats.damageMultiplier, AttributeModifier.Operation.ADD_NUMBER, slot);

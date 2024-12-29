@@ -15,6 +15,7 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class AmethystDirk extends ConstructableCustomItem {
@@ -32,12 +33,10 @@ public class AmethystDirk extends ConstructableCustomItem {
     }
 
     @Override
-    public ItemFlag[] getTooltipHides() {
-        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
-    }
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
@@ -69,7 +68,7 @@ public class AmethystDirk extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Material.AMETHYST_SHARD);
     }
 }
