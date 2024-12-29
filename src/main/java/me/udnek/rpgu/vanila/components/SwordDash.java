@@ -4,8 +4,6 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.nms.ConsumableAnimation;
-import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
@@ -29,14 +27,7 @@ public class SwordDash {
     public static int CAST_TIME = (int) (0.75 * 20);
 
     public static void applyAbility(@NotNull ItemStack itemStack, @NotNull CustomItem customItem){
-
-        ConsumableComponent component = new ConsumableComponent();
-        component.setConsumeTicks(CAST_TIME);
-        component.setAnimation(ConsumableAnimation.SPEAR);
-        component.setHasConsumeParticles(false);
-        component.setSound(null);
-
-        Consumable build =  Consumable.consumable().animation(ItemUseAnimation.SPEAR).consumeSeconds((float) CAST_TIME / 20).hasConsumeParticles(false)
+        Consumable build =  Consumable.consumable().animation(ItemUseAnimation.SPEAR).consumeSeconds(CAST_TIME / 20f).hasConsumeParticles(false)
                 .sound(Registry.SOUNDS.getKeyOrThrow(Sound.INTENTIONALLY_EMPTY).key()).build();
 
         itemStack.setData(DataComponentTypes.CONSUMABLE, build);

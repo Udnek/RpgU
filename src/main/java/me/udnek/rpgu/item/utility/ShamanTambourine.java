@@ -1,10 +1,10 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import io.papermc.paper.datacomponent.item.Consumable;
+import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.nms.ConsumableAnimation;
-import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
@@ -17,6 +17,8 @@ import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
+import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -39,13 +41,10 @@ public class ShamanTambourine extends ConstructableCustomItem{
     public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
 
     @Override
-    public @Nullable ConsumableComponent getConsumable() {
-        ConsumableComponent component = new ConsumableComponent();
-        component.setConsumeTicks(CAST_TIME);
-        component.setAnimation(ConsumableAnimation.BOW);
-        component.setHasConsumeParticles(false);
-        component.setSound(null);
-        return component;
+    public @Nullable DataSupplier<Consumable> getConsumable() {
+        Consumable build = Consumable.consumable().consumeSeconds(CAST_TIME / 20f).animation(ItemUseAnimation.BOW).hasConsumeParticles(false)
+                .sound(Registry.SOUNDS.getKeyOrThrow(Sound.INTENTIONALLY_EMPTY).key()).build();
+        return DataSupplier.of(build);
     }
 
     @Override

@@ -14,10 +14,12 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ShinyAxe extends ConstructableCustomItem {
     @Override
@@ -25,19 +27,19 @@ public class ShinyAxe extends ConstructableCustomItem {
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_AXE;}
     @Override
-    public Integer getMaxDamage() {return 300;}
+    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(300);}
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
     @Override
-    public ItemRarity getRarity() {return ItemRarity.UNCOMMON;}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
 
     @Override
-    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
-        super.initializeAttributes(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_DAMAGE, null, 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_SPEED, null, -0.3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
+        super.initializeAdditionalAttributes(itemStack);
+        AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+        AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class ShinyAxe extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Material.GOLD_INGOT);
     }
 }

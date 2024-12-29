@@ -6,8 +6,8 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
+import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.AttributeModifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +21,7 @@ public class MagicalChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable NamespacedKey getItemModel() {return null;}
+    public @Nullable DataSupplier<Key> getItemModel() {return null;}
 
     @Override
     public @NotNull Material getMaterial() {
@@ -29,7 +29,7 @@ public class MagicalChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
 
     @Override
     public void initializeComponents() {

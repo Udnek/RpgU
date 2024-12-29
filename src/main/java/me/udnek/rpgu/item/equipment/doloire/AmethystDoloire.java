@@ -1,6 +1,8 @@
 package me.udnek.rpgu.item.equipment.doloire;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import io.papermc.paper.datacomponent.item.Consumable;
+import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -9,8 +11,6 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RepairData;
-import me.udnek.itemscoreu.nms.ConsumableAnimation;
-import me.udnek.itemscoreu.nms.ConsumableComponent;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
@@ -28,17 +28,13 @@ import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.particle.AmethystSpikeParticle;
 import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -62,22 +58,23 @@ public class AmethystDoloire extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "amethyst_doloire";}
     @Override
-    public ItemFlag[] getTooltipHides() {
-        return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};
+    public @Nullable List<ItemFlag> getTooltipHides() {
+        return List.of(new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES});
     }
 
     @Override
-    public @Nullable ItemRarity getRarity() {return ItemRarity.UNCOMMON;}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
 
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
 
     @Override
-    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
-        super.initializeAttributes(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
+        super.initializeAdditionalAttributes(itemStack);
+        AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+        AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
+
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -96,13 +93,10 @@ public class AmethystDoloire extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable ConsumableComponent getConsumable() {
-        ConsumableComponent component = new ConsumableComponent();
-        component.setConsumeTicks(CAST_TIME);
-        component.setAnimation(ConsumableAnimation.SPEAR);
-        component.setHasConsumeParticles(false);
-        component.setSound(null);
-        return component;
+    public @Nullable DataSupplier<Consumable> getConsumable() {
+        Consumable build = Consumable.consumable().consumeSeconds(CAST_TIME / 20f).animation(ItemUseAnimation.SPEAR).hasConsumeParticles(false)
+                .sound(Registry.SOUNDS.getKeyOrThrow(Sound.INTENTIONALLY_EMPTY).key()).build();
+        return DataSupplier.of(build);
     }
 
     @Override
@@ -116,7 +110,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Material.AMETHYST_SHARD);
     }
 

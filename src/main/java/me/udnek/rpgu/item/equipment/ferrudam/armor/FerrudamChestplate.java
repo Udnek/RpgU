@@ -11,11 +11,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlotGroup;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -54,11 +50,11 @@ public class FerrudamChestplate extends FerrudamArmor {
     }
 
     @Override
-    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
-        super.initializeAttributes(itemMeta);
-        AttributeUtils.appendAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_chestplate"), 4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
-        itemMeta.removeAttributeModifier(Attribute.ARMOR);
-        AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_chestplate"), 3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
-        itemMeta.removeAttributeModifier(Attribute.ARMOR_TOUGHNESS);
+    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
+        super.initializeAdditionalAttributes(itemStack);
+        AttributeUtils.appendAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_chestplate"), 4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+        AttributeUtils.removeAttribute(itemStack, Attribute.ARMOR);
+        AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_chestplate"), 3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+        AttributeUtils.removeAttribute(itemStack, Attribute.ARMOR_TOUGHNESS);
     }
 }

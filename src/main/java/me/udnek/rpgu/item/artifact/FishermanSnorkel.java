@@ -26,9 +26,9 @@ public class FishermanSnorkel extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "fisherman_snorkel";}
     @Override
-    public MusicInstrument getMusicInstrument() {return MusicInstrument.DREAM_GOAT_HORN;}
+    public @Nullable DataSupplier<MusicInstrument> getMusicInstrument() {return DataSupplier.of(MusicInstrument.DREAM_GOAT_HORN);}
     @Override
-    public @Nullable ItemRarity getRarity() {return ItemRarity.COMMON;}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.COMMON);}
 
     @Override
     public @Nullable LoreBuilder getLoreBuilder() {

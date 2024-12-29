@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
+import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -11,23 +12,21 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public abstract class HungryHorrorArmor extends ConstructableCustomItem {
 
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
     @Override
-    public boolean getAddDefaultAttributes() {return true;}
+    public boolean addDefaultAttributes() {return true;}
 
     @Override
-    public @Nullable EquippableComponent getEquippable() {
-        EquippableComponent equippable = new ItemStack(getMaterial()).getItemMeta().getEquippable();
-        equippable.setSlot(getMaterial().getEquipmentSlot());
-        equippable.setModel(new NamespacedKey(RpgU.getInstance(), "hungry_horror"));
-        return equippable;
+    public @Nullable DataSupplier<Equippable> getEquippable() {
+        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).model(new NamespacedKey(RpgU.getInstance(), "hungry_horror")).build();
+        return DataSupplier.of(build);
     }
 
     @Override

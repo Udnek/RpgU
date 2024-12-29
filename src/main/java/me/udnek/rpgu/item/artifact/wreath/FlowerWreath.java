@@ -20,13 +20,12 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.FireworkEffectMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -73,12 +72,12 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     @Override
-    public ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ADDITIONAL_TOOLTIP};}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);}
 
     @Override
-    protected void modifyFinalItemMeta(@NotNull ItemMeta itemMeta) {
-        super.modifyFinalItemMeta(itemMeta);
-        ItemUtils.setFireworkColor((FireworkEffectMeta) itemMeta, Color.fromRGB(getColorByFlower(Material.DANDELION)));
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
+        ItemUtils.setFireworkColor(itemStack, Color.fromRGB(getColorByFlower(Material.DANDELION)));
     }
 
     @Override
@@ -92,10 +91,8 @@ public class FlowerWreath extends ConstructableCustomItem {
                 i++;
             }
         }
-        ItemMeta itemMeta = result.getItemMeta();
-        ItemUtils.setFireworkColor((FireworkEffectMeta) itemMeta, finalColor.mixColors(colors));
-        itemStack.setItemMeta(itemMeta);
-        return itemStack;
+        ItemUtils.setFireworkColor(result, finalColor.mixColors(colors));
+        return result;
     }
 
     public int getColorByFlower(Material flower){return flowerColors.getOrDefault(flower, 0);}

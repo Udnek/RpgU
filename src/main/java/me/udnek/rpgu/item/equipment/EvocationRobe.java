@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment;
 
+import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -15,11 +16,10 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -28,22 +28,18 @@ public class EvocationRobe extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "evocation_robe";}
 
     @Override
-    public @Nullable ItemRarity getRarity() {
-        return ItemRarity.UNCOMMON;
-    }
+    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
 
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
 
     @Override
-    public @Nullable ItemFlag[] getTooltipHides() {return new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES};}
+    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES});}
 
     @Override
-    public @Nullable EquippableComponent getEquippable() {
-        EquippableComponent equippable = new ItemStack(Material.DIAMOND_CHESTPLATE).getItemMeta().getEquippable();
-        equippable.setModel(new NamespacedKey(RpgU.getInstance(), "evocation_robe"));
-        equippable.setSlot(EquipmentSlot.CHEST);
-        return equippable;
+    public @Nullable DataSupplier<Equippable> getEquippable() {
+        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).model(new NamespacedKey(RpgU.getInstance(), "evocation_robe")).build();
+        return DataSupplier.of(build);
     }
 
     @Override
@@ -64,7 +60,7 @@ public class EvocationRobe extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable RepairData getRepairData() {
+    public @Nullable RepairData initializeRepairData() {
         return new RepairData(Set.of(Items.FABRIC), Set.of(Material.IRON_INGOT));
     }
 
@@ -79,9 +75,9 @@ public class EvocationRobe extends ConstructableCustomItem {
     }
 
     @Override
-    public void initializeAttributes(@NotNull ItemMeta itemMeta) {
-        super.initializeAttributes(itemMeta);
-        AttributeUtils.addAttribute(itemMeta, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "chestplate_max_health"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
-        AttributeUtils.addAttribute(itemMeta, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "chestplate_armor"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
+        super.initializeAdditionalAttributes(itemStack);
+        AttributeUtils.addAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "chestplate_max_health"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
+        AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "chestplate_armor"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
     }
 }
