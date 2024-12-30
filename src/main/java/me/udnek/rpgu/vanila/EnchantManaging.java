@@ -45,7 +45,7 @@ public class EnchantManaging {
         addEnchantingRecipeMaterial(Enchantment.LURE, List.of(Material.PUFFERFISH));
         addEnchantingRecipeMaterial(Enchantment.MENDING, List.of(Material.NETHER_STAR), Set.of(LOTS_OF_BOOKSHELF));
         addEnchantingRecipeMaterial(Enchantment.MULTISHOT, List.of(Material.SHEARS));
-        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of(Material.CANDLE));
+        addEnchantingRecipeMaterial(Enchantment.PIERCING, List.of(Material.HONEYCOMB));
         addEnchantingRecipeMaterial(Enchantment.POWER, List.of(Material.TARGET), Set.of(LOTS_OF_BOOKSHELF));
         addEnchantingRecipeMaterial(Enchantment.PROJECTILE_PROTECTION, List.of(Material.DEEPSLATE,  Material.IRON_INGOT), Set.of(LITTLE_BOOKSHELF));
         addEnchantingRecipeMaterial(Enchantment.PROTECTION, List.of(Material.IRON_BLOCK), Set.of(LOTS_OF_BOOKSHELF));
