@@ -13,8 +13,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class EnchantingListener extends SelfRegisteringListener {
-    public EnchantingListener(JavaPlugin plugin) {
+public class EnchantingAndRepairListener extends SelfRegisteringListener {
+    public EnchantingAndRepairListener(JavaPlugin plugin) {
         super(plugin);
     }
 
