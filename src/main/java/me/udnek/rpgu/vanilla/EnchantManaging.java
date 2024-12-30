@@ -1,4 +1,4 @@
-package me.udnek.rpgu.vanila;
+package me.udnek.rpgu.vanilla;
 
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customrecipe.RecipeManager;

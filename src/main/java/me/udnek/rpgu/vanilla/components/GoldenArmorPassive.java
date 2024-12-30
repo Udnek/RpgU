@@ -1,4 +1,4 @@
-package me.udnek.rpgu.vanila.components;
+package me.udnek.rpgu.vanilla.components;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;

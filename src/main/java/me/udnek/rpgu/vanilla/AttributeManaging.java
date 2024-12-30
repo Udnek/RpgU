@@ -1,4 +1,4 @@
-package me.udnek.rpgu.vanila;
+package me.udnek.rpgu.vanilla;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -14,7 +14,8 @@ import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.vanila.components.GoldenArmorPassive;
+import me.udnek.rpgu.vanilla.components.GoldenArmorPassive;
+import me.udnek.rpgu.vanilla.components.SwordDash;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
@@ -154,7 +155,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             event.setRepairData(new RepairData(Material.STRING));
         }
 
-        //if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
+        if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
 
         if (Material.SPYGLASS == material) {
             customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()

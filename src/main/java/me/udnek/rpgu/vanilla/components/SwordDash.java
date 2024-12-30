@@ -1,4 +1,4 @@
-package me.udnek.rpgu.vanila.components;
+package me.udnek.rpgu.vanilla.components;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;

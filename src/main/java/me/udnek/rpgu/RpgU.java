@@ -24,7 +24,7 @@ import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingAndRepairListener;
 import me.udnek.rpgu.util.GeneralListener;
-import me.udnek.rpgu.vanila.AttributeManaging;
+import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
