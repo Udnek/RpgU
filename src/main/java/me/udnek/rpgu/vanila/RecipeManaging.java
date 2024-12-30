@@ -73,16 +73,16 @@ public class RecipeManaging {
         //////////////////////////////////////////////
         for (Material material: Tag.BEDS.getValues()){
             String key = material.getKey().getKey();
-            Material wool = Material.getMaterial((key.substring(0, key.lastIndexOf("_")) + "_wool").toUpperCase());
-            replaceRecipe(new ItemStack(material).add(5), key, new String[]{"FFW", "PPP"}, Map.of('W', wool), Map.of('F', Items.FABRIC), Map.of('P', Tag.PLANKS));
+            replaceRecipe(new ItemStack(material).add(5), key, new String[]{"FFW", "PPP"}, Map.of('W', mergeMaterialWithSufix(key, "_wool")),
+                    Map.of('F', Items.FABRIC), Map.of('P', Tag.PLANKS));
         }
         //////////////////////////////////////////////
         for (Material material: Tag.WOODEN_TRAPDOORS.getValues()){
             String key = material.getKey().getKey();
-            Material planks = Material.getMaterial((key.substring(0, key.lastIndexOf("_")) + "_planks").toUpperCase());
-            replaceRecipe(new ItemStack(material).add(5), key, new String[]{"PPP", "PPP"}, Map.of('P', planks), Map.of(), Map.of());
+            replaceRecipe(new ItemStack(material).add(5), key, new String[]{"PPP", "PPP"}, Map.of('P', mergeMaterialWithSufix(key, "_planks")), Map.of(), Map.of());
         }
-        replaceRecipe(new ItemStack(Material.COPPER_TRAPDOOR).add(5), "copper_trapdoor", new String[]{"PPP", "PPP"}, Map.of('P', Material.COPPER_INGOT), Map.of(), Map.of());
+        replaceRecipe(new ItemStack(Material.COPPER_TRAPDOOR).add(5), "copper_trapdoor", new String[]{"PPP", "PPP"}, Map.of('P', Material.COPPER_INGOT),
+                Map.of(), Map.of());
 
         unregister();
     }
@@ -192,5 +192,9 @@ public class RecipeManaging {
         }
 
         RecipeManager.getInstance().register(recipe);
+    }
+
+    public static Material mergeMaterialWithSufix(@NotNull String key, @NotNull String string){
+        return Material.getMaterial((key.substring(0, key.lastIndexOf("_")) + string).toUpperCase());
     }
 }
