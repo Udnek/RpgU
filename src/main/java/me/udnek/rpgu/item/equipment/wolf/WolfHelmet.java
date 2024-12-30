@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.equipment.wolf;
 
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.vanila.AttributeManaging;
+import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;

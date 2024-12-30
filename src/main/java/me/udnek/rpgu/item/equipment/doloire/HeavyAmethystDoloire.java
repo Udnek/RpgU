@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment.doloire;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
@@ -66,6 +67,11 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
                 getItem()
         );
         consumer.accept(recipe);
+    }
+
+    @Override
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of(Material.DIAMOND_SWORD.getDefaultData(DataComponentTypes.MAX_DAMAGE));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.equipment.doloire;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
@@ -75,6 +76,10 @@ public class AmethystDoloire extends ConstructableCustomItem {
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
 
+    @Override
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of(Material.IRON_SWORD.getDefaultData(DataComponentTypes.MAX_DAMAGE));
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
