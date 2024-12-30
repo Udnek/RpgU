@@ -168,11 +168,6 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public void onPlayerClicksItem(InventoryClickEvent event) {
         SmartIntractableCustomInventory.super.onPlayerClicksItem(event);
 
-        // TODO: 8/26/2024 REMOVE WHEN FIXED IN ITEMSCOREU
-        if (event.getClickedInventory() != this.getInventory() && event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY){
-            event.setCancelled(false);
-        }
-
         if (event.isCancelled()) return;
 
         if (event.getSlot() < 0) return;
@@ -210,7 +205,6 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
             inventory.setItem(i, FILLER.getItem());
         }
         iterateTroughAllInputSlots(integer -> inventory.setItem(integer, null));
-
     }
 
     @Override
