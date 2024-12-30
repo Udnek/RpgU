@@ -15,7 +15,6 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.vanilla.components.GoldenArmorPassive;
-import me.udnek.rpgu.vanilla.components.SwordDash;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
@@ -44,7 +43,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (event.getStep() == InitializationProcess.Step.BEFORE_VANILLA_MANAGER){
             for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
         }
@@ -155,7 +154,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             event.setRepairData(new RepairData(Material.STRING));
         }
 
-        if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
+        /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}*/
 
         if (Material.SPYGLASS == material) {
             customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()

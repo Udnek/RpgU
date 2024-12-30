@@ -7,8 +7,10 @@ import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -65,7 +67,10 @@ public abstract class GrimArmor extends ConstructableCustomItem {
         );
     }
 
-
+    @Override
+    public @Nullable RepairData initializeRepairData() {
+        return new RepairData(Material.BONE);
+    }
 
     public record Stats(double magicalPotential, double magicalDefense, double damageMultiplier, double maxHp, double armor){}
 
