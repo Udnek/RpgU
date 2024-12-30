@@ -13,7 +13,6 @@ import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
-import me.udnek.rpgu.particle.RootParticle;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
