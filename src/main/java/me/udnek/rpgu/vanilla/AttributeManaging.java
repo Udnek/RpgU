@@ -17,7 +17,6 @@ import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.vanilla.components.GoldenArmorPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.event.EventHandler;
@@ -44,6 +43,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
+            for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
         }
@@ -55,6 +55,8 @@ public class AttributeManaging extends SelfRegisteringListener {
     private static final Set<Material> goldenArmor = new HashSet<>();
     private static final Set<Material> diamondArmor = new HashSet<>();
     private static final Set<Material> diamondTools = new HashSet<>();
+    private static final Set<Material> netheriteArmor = new HashSet<>();
+    private static final Set<Material> netheriteTools = new HashSet<>();
 
      static {
         armorStats.put(Material.LEATHER_HELMET, new Stats(1, 0, 0));
@@ -112,6 +114,17 @@ public class AttributeManaging extends SelfRegisteringListener {
         diamondTools.add(Material.DIAMOND_PICKAXE);
         diamondTools.add(Material.DIAMOND_SWORD);
         diamondTools.add(Material.DIAMOND_SHOVEL);
+
+        netheriteArmor.add(Material.NETHERITE_HELMET);
+        netheriteArmor.add(Material.NETHERITE_CHESTPLATE);
+        netheriteArmor.add(Material.NETHERITE_LEGGINGS);
+        netheriteArmor.add(Material.NETHERITE_BOOTS);
+
+        netheriteTools.add(Material.NETHERITE_AXE);
+        netheriteTools.add(Material.NETHERITE_HOE);
+        netheriteTools.add(Material.NETHERITE_PICKAXE);
+        netheriteTools.add(Material.NETHERITE_SWORD);
+        netheriteTools.add(Material.NETHERITE_SHOVEL);
      }
 
     public record Stats(double hp, double armor, double damage){}
@@ -146,7 +159,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             itemStack.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         }
 
-        if (Tag.ITEMS_NETHERITE_TOOL_MATERIALS.isTagged(material)){
+        if (netheriteArmor.contains(material) || netheriteTools.contains(material)){
             event.setRepairData(new RepairData(Material.DIAMOND, Material.NETHERITE_INGOT));
         }
 
