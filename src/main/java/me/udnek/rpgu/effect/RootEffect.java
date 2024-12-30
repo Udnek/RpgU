@@ -2,6 +2,7 @@ package me.udnek.rpgu.effect;
 
 import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.particle.RootParticle;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
@@ -33,6 +34,7 @@ public class RootEffect extends ConstructableCustomEffect {
     public void apply(@NotNull LivingEntity bukkit, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
         super.apply(bukkit, duration, amplifier, ambient, showParticles, showIcon);
         bukkit.setVelocity(new Vector());
+        new RootParticle(bukkit).play();
     }
 
     @Override

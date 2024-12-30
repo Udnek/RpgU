@@ -1,6 +1,7 @@
 package me.udnek.rpgu.component.ability.property;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
+import me.udnek.itemscoreu.customeffect.CustomEffect;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
@@ -91,14 +92,18 @@ public class EffectsProperty implements AbilityProperty<Player, List<PotionEffec
 
     public void applyOn(@NotNull Player source, @NotNull LivingEntity target){
         for (PotionEffect effect : get(source)) {
-            target.addPotionEffect(effect);
+            CustomEffect customEffect = CustomEffect.get(effect.getType());
+            if (customEffect == null) target.addPotionEffect(effect);
+            else customEffect.apply(target, effect);
         }
     }
 
     public void applyOn(@NotNull Player source, @NotNull Iterable<LivingEntity> targets){
         for (PotionEffect effect : get(source)) {
+            CustomEffect customEffect = CustomEffect.get(effect.getType());
             for (LivingEntity target : targets) {
-                target.addPotionEffect(effect);
+                if (customEffect == null) target.addPotionEffect(effect);
+                else customEffect.apply(target, effect);
             }
         }
     }

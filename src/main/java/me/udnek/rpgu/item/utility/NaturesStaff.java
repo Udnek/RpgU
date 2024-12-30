@@ -93,7 +93,6 @@ public class NaturesStaff extends ConstructableCustomItem {
             for (LivingEntity livingEntity : livingEntitiesInRayTraceRadius) {
                 if (livingEntity == player) continue;
                 effects.applyOn(player, livingEntity);
-                new RootParticle(livingEntity).play();
             }
 
             return ActionResult.FULL_COOLDOWN;

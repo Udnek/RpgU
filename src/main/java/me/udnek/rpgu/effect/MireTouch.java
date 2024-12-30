@@ -30,7 +30,7 @@ public class MireTouch extends ConstructableCustomEffect implements Listener {
     public @Nullable PotionEffectType getVanillaDisguise() {return null;}
 
     @EventHandler
-    public void setBasePlayerHealth(EntityDamageByEntityEvent event){
+    public void onDamage(EntityDamageByEntityEvent event){
         if (!(event.getDamager() instanceof LivingEntity damager && event.getEntity() instanceof LivingEntity victim)) return;
         if (Effects.MIRE_TOUCH.has(damager)){
             PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOWNESS, DEBUFF_DURATION, getAppliedLevel(damager), false,  true, true);
