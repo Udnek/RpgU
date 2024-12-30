@@ -47,7 +47,7 @@ public class FishermanSnorkel extends ConstructableCustomItem {
             static {
                 particleBuilder.offset(0.2, 0.2, 0.2);
                 particleBuilder.extra(0);
-                particleBuilder.count(3);
+                particleBuilder.count(1);
             }
             @Override
             public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, me.udnek.itemscoreu.customequipmentslot.@NotNull CustomEquipmentSlot slot) {
