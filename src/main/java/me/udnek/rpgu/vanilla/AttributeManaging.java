@@ -155,7 +155,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             event.setRepairData(new RepairData(Material.STRING));
         }
 
-        if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}
+        /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}*/
 
         if (Material.SPYGLASS == material) {
             customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
