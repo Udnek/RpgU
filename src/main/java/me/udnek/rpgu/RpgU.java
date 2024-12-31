@@ -22,7 +22,7 @@ import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
-import me.udnek.rpgu.mechanic.enchanting.EnchantingAndRepairListener;
+import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.NamespacedKey;
@@ -50,7 +50,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
         new DamageListener(this);
         new EquipmentListener(this);
-        new EnchantingAndRepairListener(this);
+        new EnchantingListener(this);
         new ModifiedEntitySpawnListener(this);
         new GeneralListener(this);
         new AttributeManaging(this);
@@ -64,29 +64,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         wearingEquipmentTask.start(this);
 
         new Hud().register();
-
-        editEnchantments();
-    }
-    
-    // TODO MOVE SOMEWHERE ELSE
-    public void editEnchantments(){
-        NmsEnchantmentContainer enchantment = Nms.get().getEnchantment(Enchantment.PROTECTION);
-        enchantment.clearEffects();
-        enchantment.addEffect(
-                new NamespacedKey(RpgU.getInstance(), "enchantment.protection"),
-                Attribute.ARMOR,
-                1/4f, 1/4f,
-                AttributeModifier.Operation.ADD_NUMBER
-        );
-
-        enchantment = Nms.get().getEnchantment(Enchantment.SHARPNESS);
-        enchantment.clearEffects();
-        enchantment.addEffect(
-                new NamespacedKey(RpgU.getInstance(), "enchantment.sharpness"),
-                Attribute.ATTACK_DAMAGE,
-                1f, 0.5f,
-                AttributeModifier.Operation.ADD_NUMBER
-        );
     }
 
     @Override

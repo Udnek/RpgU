@@ -84,8 +84,11 @@ public class DamageInstance {
         if(victim.getNoDamageTicks() > 0 && victim.getLastDamage() >= damage.getTotal()){
             handlerEvent.setCancelled(true);
         } else {
-            handlerEvent.setDamage(0);
-            handlerEvent.setDamage(damage.getTotal());
+            for (EntityDamageEvent.DamageModifier modifier : EntityDamageEvent.DamageModifier.values()) {
+                if (handlerEvent.isApplicable(modifier)) handlerEvent.setDamage(modifier, 0);
+            }
+            handlerEvent.setDamage(EntityDamageEvent.DamageModifier.BASE, damage.getTotal());
+            System.out.println(damage.getTotal() + " " +handlerEvent.getFinalDamage());
 
             DamageVisualizer.visualize(damage, victim);
 
