@@ -9,7 +9,7 @@ public class Damage {
 
     public Damage(){}
 
-    public Damage(Type type, double amount) {
+    public Damage(@NotNull Type type, double amount) {
         add(type, amount);
     }
 

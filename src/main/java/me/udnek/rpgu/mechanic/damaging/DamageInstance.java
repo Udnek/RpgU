@@ -1,6 +1,9 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 
+import com.google.common.base.Function;
+import com.google.common.base.Functions;
+import me.udnek.itemscoreu.util.Reflex;
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
@@ -9,6 +12,7 @@ import me.udnek.rpgu.attribute.instance.PhysicalArmorAttribute;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.equipment.PlayerEquipment;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
@@ -25,7 +29,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.bukkit.event.entity.EntityDamageEvent.DamageCause.*;
 
@@ -33,6 +39,8 @@ public class DamageInstance {
 
     public static final double NARROW_ENCHANTMENTS_DAMAGE_BONUS = 2.5;
     private static final double PROJECTILE_GLOBAL_DAMAGE_MULTIPLIER = 0.70;
+
+    private static final Function<? super Double, Double> ZERO_FUNCTION = Functions.constant(0d);
 
     private final List<ExtraFlag> extraFlags = new ArrayList<>();
     private Damage damage;
@@ -84,11 +92,27 @@ public class DamageInstance {
         if(victim.getNoDamageTicks() > 0 && victim.getLastDamage() >= damage.getTotal()){
             handlerEvent.setCancelled(true);
         } else {
-            for (EntityDamageEvent.DamageModifier modifier : EntityDamageEvent.DamageModifier.values()) {
-                if (handlerEvent.isApplicable(modifier)) handlerEvent.setDamage(modifier, 0);
+            Map<EntityDamageEvent.DamageModifier, Function<? super Double, Double>> modifierMap = (Map<EntityDamageEvent.DamageModifier, Function<? super Double, Double>>) Reflex.getFieldValue(handlerEvent, "modifierFunctions");
+            EntityDamageEvent.DamageModifier[] toNullify = new EntityDamageEvent.DamageModifier[]{
+                    EntityDamageEvent.DamageModifier.FREEZING,
+                    EntityDamageEvent.DamageModifier.HARD_HAT,
+                    EntityDamageEvent.DamageModifier.ARMOR,
+                    EntityDamageEvent.DamageModifier.RESISTANCE,
+                    EntityDamageEvent.DamageModifier.MAGIC
+            };
+            double baseDamage = damage.getTotal();
+            for (Map.Entry<EntityDamageEvent.DamageModifier, Function<? super Double, Double>> entry : modifierMap.entrySet()) {
+                EntityDamageEvent.DamageModifier modifier = entry.getKey();
+                Function<? super Double, Double> function = entry.getValue();
+                if (ArrayUtils.contains(toNullify, modifier)) handlerEvent.setDamage(modifier, 0);
+                else {
+                    Double absorbed = -function.apply(damage.getTotal());
+                    System.out.println(modifier + " " + absorbed);
+                    handlerEvent.setDamage(modifier, -absorbed);
+                    baseDamage -= absorbed;
+                }
             }
-            handlerEvent.setDamage(EntityDamageEvent.DamageModifier.BASE, damage.getTotal());
-            System.out.println(damage.getTotal() + " " +handlerEvent.getFinalDamage());
+            handlerEvent.setDamage(EntityDamageEvent.DamageModifier.BASE, baseDamage);
 
             DamageVisualizer.visualize(damage, victim);
 
