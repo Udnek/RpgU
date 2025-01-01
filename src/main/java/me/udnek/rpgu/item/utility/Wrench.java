@@ -16,15 +16,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class Wrench extends ConstructableCustomItem {
-    @Override
-    public @NotNull Material getMaterial() {
-        return Material.FISHING_ROD;
-    }
+
     @Override
     public @NotNull String getRawId() {
         return "wrench";
@@ -66,25 +64,24 @@ public class Wrench extends ConstructableCustomItem {
                 block.setBlockData(blockData, true);
                 event.getPlayer().damageItemStack(event.getHand(), 1);
             }
+            public boolean isBlockAcceptable(Block block){
+                Material material = block.getType();
+                if (Tag.BEDS.isTagged(material)) return false;
+                return switch (material) {
+                    case CHEST, TRAPPED_CHEST -> {
+                        Chest blockData = (Chest) block.getBlockData();
+                        yield blockData.getType() == Chest.Type.SINGLE;
+                    }
+                    case SMALL_AMETHYST_BUD, MEDIUM_AMETHYST_BUD, LARGE_AMETHYST_BUD, AMETHYST_CLUSTER -> false;
+                    default -> true;
+                };
+            }
         });
     }
 
-
-    public boolean isBlockAcceptable(Block block){
-        Material material = block.getType();
-        if (Tag.BEDS.isTagged(material)) return false;
-        switch (material){
-            case CHEST:
-            case TRAPPED_CHEST:
-                Chest blockData = (Chest) block.getBlockData();
-                return blockData.getType() == Chest.Type.SINGLE;
-            case SMALL_AMETHYST_BUD:
-            case MEDIUM_AMETHYST_BUD:
-            case LARGE_AMETHYST_BUD:
-            case AMETHYST_CLUSTER:
-                return false;
-        }
-        return true;
+    @Override
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of(128);
     }
 
     @Override
