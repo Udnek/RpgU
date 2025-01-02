@@ -22,3 +22,9 @@ commands:
     aliases: [ ]
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"
+  set_food:
+    description: "set_food"
+    usage: "/set_food"
+    aliases: [ ]
+    permission: rpgu.admin
+    permission-message: "You do not have permission to use this command"

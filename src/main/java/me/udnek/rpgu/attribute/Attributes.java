@@ -25,6 +25,7 @@ public class Attributes{
     public static final CustomAttribute PROJECTILE_DAMAGE_MULTIPLIER;
     public static final CustomAttribute PROJECTILE_SPEED;
     public static final CustomAttribute BACKSTAB_DAMAGE_MULTIPLIER;
+    public static final CustomAttribute HEALTH_REGENERATION;
 
     public static final CustomAttribute PROJECTILE_PROTECTION;
     public static final CustomAttribute BLAST_PROTECTION;
@@ -46,6 +47,7 @@ public class Attributes{
         BACKSTAB_DAMAGE_MULTIPLIER = register(new BackstabDamageAttribute("backstab_damage_multiplier"));
         AREA_OF_EFFECT = register(new ConstructableCustomAttribute("area_of_effect",1,0, 1024));
         ABILITY_DURATION = register(new ConstructableCustomAttribute("ability_duration",1,0, 1024));
+        HEALTH_REGENERATION = register(new HealthRegenerationAttribute("health_regeneration"));
 
         PROJECTILE_PROTECTION = register(new EnchantmentCalculatorAttribute("projectile_protection", Enchantment.PROJECTILE_PROTECTION));
         BLAST_PROTECTION = register(new EnchantmentCalculatorAttribute("blast_protection", Enchantment.BLAST_PROTECTION));
