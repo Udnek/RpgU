@@ -147,5 +147,7 @@
 
   "effect.rpgu.mire_touch": "Вязкое прикосновение",
 
-  "effect.rpgu.heavy_falling": "Тяжёлое падение"
+  "effect.rpgu.heavy_falling": "Тяжёлое падение",
+
+  "attribute.rpgu.name.health_regeneration": "Восстановление здоровья"
 }

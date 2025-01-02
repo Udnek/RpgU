@@ -3,15 +3,14 @@ package me.udnek.rpgu;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customeffect.CustomEffect;
-import me.udnek.itemscoreu.customenchantment.NmsEnchantmentContainer;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.command.CustomDamageSystemCommand;
 import me.udnek.rpgu.command.DebugEquipmentCommand;
 import me.udnek.rpgu.command.ResetCooldownCommand;
+import me.udnek.rpgu.command.SetFoodCommand;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -25,10 +24,6 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.vanilla.AttributeManaging;
-import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
@@ -59,6 +54,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
         getCommand("customdamagesystem").setExecutor(new CustomDamageSystemCommand());
         getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
+        getCommand("set_food").setExecutor(new SetFoodCommand());
 
         wearingEquipmentTask = new PlayerWearingEquipmentTask();
         wearingEquipmentTask.start(this);

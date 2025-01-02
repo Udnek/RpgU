@@ -40,6 +40,7 @@
 	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
 	"attribute.rpgu.name.backstab_damage_multiplier": "Backstab damage",
 	"attribute.rpgu.name.area_of_effect": "Area of Effect",
+	"attribute.rpgu.name.health_regeneration": "Health Regeneration",
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 
