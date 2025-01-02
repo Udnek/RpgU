@@ -106,8 +106,7 @@ public class DamageInstance {
                 Function<? super Double, Double> function = entry.getValue();
                 if (ArrayUtils.contains(toNullify, modifier)) handlerEvent.setDamage(modifier, 0);
                 else {
-                    Double absorbed = -function.apply(damage.getTotal());
-                    System.out.println(modifier + " " + absorbed);
+                    double absorbed = -function.apply(damage.getTotal());
                     handlerEvent.setDamage(modifier, -absorbed);
                     baseDamage -= absorbed;
                 }
