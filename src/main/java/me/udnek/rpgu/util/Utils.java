@@ -2,6 +2,7 @@ package me.udnek.rpgu.util;
 
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -39,11 +40,17 @@ public class Utils {
     public static @Nullable Location rayTraceBlockUnder(@NotNull Player player){
         return rayTraceBlockUnder(player.getLocation());
     }
+
     public static @Nullable Location rayTraceBlockUnder(@NotNull Location location){
         World world = location.getWorld();
         RayTraceResult rayTraceResult = world.rayTraceBlocks(location.add(0 , 1, 0), new Vector().setY(-1), 10000, FluidCollisionMode.NEVER, true);
 
         if (rayTraceResult == null) return null;
         return rayTraceResult.getHitPosition().toLocation(location.getWorld());
+    }
+
+    public static Material mergeMaterialWithSufix(@NotNull Material material, @NotNull String string){
+        String key = material.getKey().getKey();
+        return Material.getMaterial((key.substring(0, key.lastIndexOf("_")) + string).toUpperCase());
     }
 }
