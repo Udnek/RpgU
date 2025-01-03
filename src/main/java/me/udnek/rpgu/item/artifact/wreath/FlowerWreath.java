@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.artifact.wreath;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -14,10 +15,7 @@ import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Tag;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.potion.PotionEffectType;
@@ -50,7 +48,7 @@ public class FlowerWreath extends ConstructableCustomItem {
         put(Material.SUNFLOWER,  TextColor.color(245,186,39));
     }
 
-    protected void put(Material material, TextColor color){flowerColors.put(material,  color.value());}
+    protected void put(@NotNull Material material, @NotNull TextColor color){flowerColors.put(material, color.value());}
 
     @Override
     public @NotNull Material getMaterial() {return Material.FIREWORK_STAR;}
@@ -72,12 +70,11 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);}
+    public @Nullable Boolean getHideAdditionalTooltip() {return true;}
 
     @Override
-    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
-        super.modifyFinalItemStack(itemStack);
-        ItemUtils.setFireworkColor(itemStack, Color.fromRGB(getColorByFlower(Material.DANDELION)));
+    public @Nullable DataSupplier<FireworkEffect> getFireworkExplosion() {
+        return DataSupplier.of(FireworkEffect.builder().withColor(getColorByFlower(Material.DANDELION)).build());
     }
 
     @Override
@@ -87,15 +84,22 @@ public class FlowerWreath extends ConstructableCustomItem {
         int i = 0;
         for (ItemStack flower : matrix) {
             if (flower != null){
-                colors[i] = Color.fromRGB(getColorByFlower(flower.getType()));
+                colors[i] = getColorByFlower(flower.getType());
                 i++;
             }
         }
-        ItemUtils.setFireworkColor(result, finalColor.mixColors(colors));
+        setColor(result, finalColor.mixColors(colors));
         return result;
     }
 
-    public int getColorByFlower(Material flower){return flowerColors.getOrDefault(flower, 0);}
+    public void setColor(@NotNull ItemStack itemStack, @NotNull Color color){
+        itemStack.setData(DataComponentTypes.FIREWORK_EXPLOSION, FireworkEffect.builder().withColor(color).build());
+    }
+
+    public int getIntColorByFlower(@NotNull Material flower){return flowerColors.getOrDefault(flower, 0);}
+    public @NotNull Color getColorByFlower(@NotNull Material flower){
+        return Color.fromRGB(getIntColorByFlower(flower));
+    }
 
     @Override
     public void initializeComponents() {

@@ -1,0 +1,42 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/defense/background.png",
+			"ascent": -16,
+			"height": 9,
+			"chars": ["b"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/defense/icon.png",
+			"ascent": -16,
+			"height": 9,
+			"chars": ["i"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/defense/unit.png",
+			"ascent": -17,
+			"height": 3,
+			"chars": ["u"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/defense/overlay.png",
+			"ascent": -16,
+			"height": 9,
+			"chars": ["o"]
+		},
+		{
+			"type": "space",
+			"advances": {
+				"+": 1,
+				"-": -1,
+				"n": -82,
+				"j": 9,
+				"k": -9
+			}
+		}
+	]
+}

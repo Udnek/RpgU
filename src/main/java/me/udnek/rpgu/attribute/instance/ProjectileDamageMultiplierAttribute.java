@@ -9,8 +9,9 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class ProjectileDamageMultiplierAttribute extends ConstructableCustomAttribute implements Listener {
-    public ProjectileDamageMultiplierAttribute(@NotNull String rawId) {
-        super(rawId,1, 0, 100);
+
+    public ProjectileDamageMultiplierAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
+        super(rawId, defaultValue, min, max);
     }
 
     @EventHandler

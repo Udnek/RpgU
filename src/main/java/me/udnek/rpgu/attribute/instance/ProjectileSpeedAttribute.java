@@ -8,8 +8,8 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class ProjectileSpeedAttribute extends ConstructableCustomAttribute implements Listener {
-    public ProjectileSpeedAttribute(@NotNull String rawId) {
-        super(rawId, 1, 0, 100);
+    public ProjectileSpeedAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
+        super(rawId, defaultValue, min, max);
     }
 
     @EventHandler

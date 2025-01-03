@@ -227,12 +227,9 @@ public class DamageInstance {
     }
 
     private void equipmentReceives() {
-        double armor = Attributes.PHYSICAL_ARMOR.calculate(victim);
-        double magical_defense_mul = Attributes.MAGICAL_DEFENSE_MULTIPLIER.calculate(victim);
-        double potential = Attributes.MAGICAL_POTENTIAL.calculate(victim);
 
-        damage.multiplyPhysical(1- PhysicalArmorAttribute.calculateAbsorption(armor));
-        damage.multiplyMagical(1- MagicalDefenseMultiplierAttribute.calculateAbsorption(magical_defense_mul*potential));
+        damage.multiplyPhysical(1 - Attributes.PHYSICAL_RESISTANCE.calculate(victim));
+        damage.multiplyMagical(1 - Attributes.MAGICAL_RESISTANCE.calculate(victim));
 
         final List<EntityDamageEvent.DamageCause> fireCauses = List.of(CAMPFIRE, FIRE, HOT_FLOOR, LAVA);
         if (damager instanceof Projectile){
@@ -248,18 +245,6 @@ public class DamageInstance {
             double levels = Attributes.FALLING_PROTECTION.calculate(victim);
             damage.multiply(getDamageType(), 1-(levels/4/2));
         }
-        PotionEffect physResistance = victim.getPotionEffect(PotionEffectType.RESISTANCE);
-        if (physResistance != null){
-            double absorb = (physResistance.getAmplifier() + 1) * 0.1;
-            damage.multiplyPhysical(1-absorb);
-        }
-        int mageResistance = Effects.MAGICAL_RESISTANCE.getAppliedLevel(victim);
-        if (mageResistance != -1){
-            double absorb = (mageResistance + 1) * 0.1;
-            damage.multiplyMagical(1-absorb);
-        }
-
-
 
         if (!(victim instanceof Player player)) return;
         PlayerEquipment.get(player).getEquipment((slot, customItem) ->

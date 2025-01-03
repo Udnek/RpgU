@@ -17,10 +17,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 public class BackstabDamageAttribute extends ConstructableCustomAttribute implements Listener {
-    public BackstabDamageAttribute(@NotNull String rawId) {
-        super(rawId,1, 1, 1024);
-    }
 
+
+    public BackstabDamageAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
+        super(rawId, defaultValue, min, max);
+    }
 
     @EventHandler
     public void onDamage(DamageEvent event){

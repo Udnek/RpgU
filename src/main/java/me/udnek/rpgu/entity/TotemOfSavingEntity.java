@@ -23,7 +23,7 @@ import java.util.List;
 
 public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> implements Listener {
     @Override
-    public EntityType getVanillaEntityType() {
+    public @NotNull EntityType getVanillaEntityType() {
         return EntityType.PIGLIN;
     }
 

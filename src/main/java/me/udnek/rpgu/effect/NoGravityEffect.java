@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class NoGravity extends ConstructableCustomEffect {
+public class NoGravityEffect extends ConstructableCustomEffect {
     @Override
     public @NotNull PotionEffectTypeCategory getCategory() {return PotionEffectTypeCategory.HARMFUL;}
 

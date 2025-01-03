@@ -1,0 +1,42 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/health/background.png",
+			"ascent": -26,
+			"height": 9,
+			"chars": ["b"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/health/icon.png",
+			"ascent": -26,
+			"height": 9,
+			"chars": ["i"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/health/unit.png",
+			"ascent": -27,
+			"height": 7,
+			"chars": ["u"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/health/overlay.png",
+			"ascent": -26,
+			"height": 9,
+			"chars": ["o"]
+		},
+		{
+			"type": "space",
+			"advances": {
+				"+": 1,
+				"-": -1,
+				"n": -82,
+				"j": 6,
+				"k": -6
+			}
+		}
+	]
+}

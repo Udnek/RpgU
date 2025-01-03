@@ -8,8 +8,9 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class HealthRegenerationAttribute extends ConstructableCustomAttribute implements Listener {
-    public HealthRegenerationAttribute(@NotNull String rawId) {
-        super(rawId,1, 0, 1024);
+
+    public HealthRegenerationAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
+        super(rawId, defaultValue, min, max);
     }
 
     @EventHandler

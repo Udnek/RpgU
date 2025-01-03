@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
-public class MireTouch extends ConstructableCustomEffect implements Listener {
+public class MireTouchEffect extends ConstructableCustomEffect implements Listener {
 
     public static final int DEBUFF_DURATION = 8 * 20;
 

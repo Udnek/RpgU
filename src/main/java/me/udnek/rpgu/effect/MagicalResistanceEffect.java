@@ -1,14 +1,17 @@
 package me.udnek.rpgu.effect;
 
 import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
+import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Particle;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionEffectTypeCategory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicalResistance extends ConstructableCustomEffect {
+public class MagicalResistanceEffect extends ConstructableCustomEffect {
     @Override
     public @NotNull PotionEffectTypeCategory getCategory() {return PotionEffectTypeCategory.BENEFICIAL;}
 
@@ -31,5 +34,10 @@ public class MagicalResistance extends ConstructableCustomEffect {
     @Override
     public void modifyParticleIfNotDefault(@NotNull ModifyParticleConsumer consumer) {
         consumer.dustTransition(TextColor.fromHexString("#fac2e4").value(), TextColor.fromHexString("#7d4a89").value(), 10);
+    }
+
+    @Override
+    public void getCustomAttributes(@NotNull PotionEffect context, @NotNull CustomAttributeConsumer consumer) {
+        consumer.accept(Attributes.MAGICAL_RESISTANCE, (context.getAmplifier()+1)*0.1, AttributeModifier.Operation.ADD_NUMBER);
     }
 }

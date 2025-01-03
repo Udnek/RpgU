@@ -12,10 +12,12 @@ public class Attributes{
     public static final CustomAttribute PHYSICAL_DAMAGE;
     public static final CustomAttribute ATTACK_SPEED;
     public static final CustomAttribute PHYSICAL_ARMOR;
+    public static final CustomAttribute PHYSICAL_RESISTANCE;
 
     public static final CustomAttribute MAGICAL_POTENTIAL;
     public static final CustomAttribute MELEE_MAGICAL_DAMAGE_MULTIPLIER;
     public static final CustomAttribute MAGICAL_DEFENSE_MULTIPLIER;
+    public static final CustomAttribute MAGICAL_RESISTANCE;
 
     public static final CustomAttribute CAST_RANGE;
     public static final CustomAttribute COOLDOWN_TIME;
@@ -42,12 +44,14 @@ public class Attributes{
         MAGICAL_DEFENSE_MULTIPLIER = register(new MagicalDefenseMultiplierAttribute("magical_defense_multiplier"));
         CAST_RANGE = register(new ConstructableCustomAttribute("cast_range",1,0, 1024));
         COOLDOWN_TIME = register(new ConstructableCustomAttribute("cooldown_time",1,0, 1024, false));
-        PROJECTILE_DAMAGE_MULTIPLIER = register(new ProjectileDamageMultiplierAttribute("projectile_damage_multiplier"));
-        PROJECTILE_SPEED = register(new ProjectileSpeedAttribute("projectile_speed"));
-        BACKSTAB_DAMAGE_MULTIPLIER = register(new BackstabDamageAttribute("backstab_damage_multiplier"));
+        PROJECTILE_DAMAGE_MULTIPLIER = register(new ProjectileDamageMultiplierAttribute("projectile_damage_multiplier", 1, 0, 1024));
+        PROJECTILE_SPEED = register(new ProjectileSpeedAttribute("projectile_speed", 1, 0, 1024));
+        BACKSTAB_DAMAGE_MULTIPLIER = register(new BackstabDamageAttribute("backstab_damage_multiplier", 1, 1, 1024));
         AREA_OF_EFFECT = register(new ConstructableCustomAttribute("area_of_effect",1,0, 1024));
         ABILITY_DURATION = register(new ConstructableCustomAttribute("ability_duration",1,0, 1024));
-        HEALTH_REGENERATION = register(new HealthRegenerationAttribute("health_regeneration"));
+        HEALTH_REGENERATION = register(new HealthRegenerationAttribute("health_regeneration", 1, 0, 1024));
+        PHYSICAL_RESISTANCE = register(new PhysicalResistanceAttribute("physical_resistance", 0, 0, 1));
+        MAGICAL_RESISTANCE = register(new MagicalResistanceAttribute("magical_resistance", 0, 0, 1));
 
         PROJECTILE_PROTECTION = register(new EnchantmentCalculatorAttribute("projectile_protection", Enchantment.PROJECTILE_PROTECTION));
         BLAST_PROTECTION = register(new EnchantmentCalculatorAttribute("blast_protection", Enchantment.BLAST_PROTECTION));
