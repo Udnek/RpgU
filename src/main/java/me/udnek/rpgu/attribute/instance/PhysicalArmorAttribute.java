@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class PhysicalArmorAttribute extends AttributeWrapperAttribute {
 
     public static final double MAX = 30;
-    public static final double MAX_ABSORPTION = 0.75;
+    public static final double MAX_ABSORPTION = 0.90;
 
 
 
