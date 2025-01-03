@@ -1,14 +1,15 @@
 package me.udnek.rpgu.item.artifact.wreath;
 
+import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.PassiveAbilityActivatorComponent;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.component.ability.passive.EquippableActivatablePassiveComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
@@ -17,13 +18,15 @@ import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -109,7 +112,7 @@ public class FlowerWreath extends ConstructableCustomItem {
         getComponents().set(new PassiveAbility());
     }
 
-    public class PassiveAbility extends ConstructablePassiveAbilityComponent<Object>{
+    public class PassiveAbility extends ConstructablePassiveAbilityComponent<Object> implements EquippableActivatablePassiveComponent {
 
         public static final float yOffset = 4;
         public static final int DURATION = 20*20;
@@ -148,8 +151,12 @@ public class FlowerWreath extends ConstructableCustomItem {
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @Nullable Object o) {
-            boolean isInForest = isForestMaterial(randomOffset(player).getBlock().getType());
+            Location location = randomOffset(player);
+            boolean isInForest = isForestMaterial(location.getBlock().getType());
             if (isInForest) {
+                ParticleBuilder offset = Particle.TRAIL.builder().location(player.getEyeLocation()).count(56).offset(1, 1, 1);
+                offset.data(new Particle.TargetColor(location, Color.fromRGB(92, 169, 4))).spawn();
+                offset.data(new Particle.TargetColor(location, Color.fromRGB(128, 128, 128))).spawn();
                 getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, player);
                 return ActionResult.FULL_COOLDOWN;
             }

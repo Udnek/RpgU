@@ -31,7 +31,7 @@ public class RecipeManaging {
         new RecipeBuilder(Material.BUCKET).recipeShape(new String[]{"C C", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build();
         new RecipeBuilder(Material.CROSSBOW).recipeShape(new String[]{"SCS", "GTG", " S "}).materialIngredients(Map.of('S', Material.STICK, 'C',
                 Material.COPPER_INGOT, 'G', Material.STRING, 'T', Material.TRIPWIRE_HOOK)).build();
-        new RecipeBuilder(Material.SHEARS).recipeShape(new String[]{"C ", " C"}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build();
+        new RecipeBuilder(Material.SHEARS).recipeShape(new String[]{" C", "C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build();
         new RecipeBuilder(Material.SHIELD).recipeShape(new String[]{"CPC", "CPC", "CPC"}).materialIngredients(Map.of('C', Material.COPPER_INGOT))
                 .tagIngredients(Map.of('P', Tag.PLANKS)).build();
         new RecipeBuilder(Material.CLOCK).recipeShape(new String[]{" C ", "CRC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT,

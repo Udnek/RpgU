@@ -2,7 +2,6 @@ package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.effect.Effects;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
