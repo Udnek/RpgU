@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
 import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
+import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -39,7 +40,7 @@ public class Fabric extends ConstructableCustomItem {
         NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(
                         LootTables.BLAZE.getLootTable(),
-                        itemStack -> itemStack.getType() == Material.BLAZE_ROD,
+                        itemStack -> ItemUtils.isVanillaMaterial(itemStack, Material.BLAZE_ROD),
                         new ItemStackCreator.Custom(Items.FABRIC)
                 )
         );

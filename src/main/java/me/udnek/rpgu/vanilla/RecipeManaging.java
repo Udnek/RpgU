@@ -6,6 +6,7 @@ import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
 import me.udnek.itemscoreu.nms.Nms;
+import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
@@ -138,7 +139,7 @@ public class RecipeManaging {
 
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.WOLF_ARMOR);
 
-        Nms.get().removeAllEntriesContains(LootTables.RUINED_PORTAL.getLootTable(), itemStack -> itemStack.getType() == Material.CLOCK);
+        Nms.get().removeAllEntriesContains(LootTables.RUINED_PORTAL.getLootTable(), itemStack -> ItemUtils.isVanillaMaterial(itemStack,Material.CLOCK));
     }
 
     public static class AlloyingRecipeBuilder{
