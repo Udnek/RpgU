@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customrecipe.RecipeManager;
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.util.VanillaItemManager;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
@@ -16,6 +17,7 @@ import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -135,6 +137,8 @@ public class RecipeManaging {
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.TURTLE_HELMET);
 
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.WOLF_ARMOR);
+
+        Nms.get().removeAllEntriesContains(LootTables.RUINED_PORTAL.getLootTable(), itemStack -> itemStack.getType() == Material.CLOCK);
     }
 
     public static class AlloyingRecipeBuilder{
