@@ -40,6 +40,7 @@ public class Items {
     public final static CustomItem BLOOD_STONE = register(new BloodStone());
     public final static CustomItem HEALTH_STONE = register(new HealthStone());
     public final static CustomItem ARCANE_ACCUMULATOR = register(new ArcaneAccumulator());
+    public final static CustomItem SPELL_PRISM = register(new SpellPrism());
 
     public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
     public static final CustomItem WITHER_WREATH = register(new WitherWreath());

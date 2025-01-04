@@ -46,13 +46,14 @@ public class GeneralListener extends SelfRegisteringListener {
     @EventHandler
     public void setBasePlayerHealth(PlayerJoinEvent event){
         double basePlayerHealth = 10;
+        Player player = event.getPlayer();
         new BukkitRunnable(){
             @Override
             public void run() {
-                Player player = event.getPlayer();
                 AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
-                if (attribute.getValue() != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
-                if (attribute.getValue() >= basePlayerHealth) player.setHealth(basePlayerHealth);
+                double value = attribute.getValue();
+                if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
+                if (value >= basePlayerHealth) player.setHealth(basePlayerHealth);
             }
         }.runTaskLater(RpgU.getInstance(), 5);
     }

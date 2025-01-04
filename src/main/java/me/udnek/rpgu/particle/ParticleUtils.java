@@ -4,8 +4,11 @@ import com.destroystokyo.paper.ParticleBuilder;
 import com.google.common.base.Preconditions;
 import me.udnek.itemscoreu.ItemsCoreU;
 import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 public class ParticleUtils {
@@ -21,6 +24,18 @@ public class ParticleUtils {
             }
         }.runTaskTimer(ItemsCoreU.getInstance(), 0, 1);
     }
+    
+    public static void drawLine(@NotNull Particle particle, @NotNull Location from, @NotNull Location to, double space) {
+        World world = from.getWorld();
+        double distance = from.distance(to);
+        Vector pointFrom = from.toVector();
+        Vector pointTo = to.toVector();
+        Vector vector = pointTo.clone().subtract(pointFrom).normalize().multiply(space);
+        for (double length = 0; length < distance; pointFrom.add(vector)) {
+            world.spawnParticle(particle, pointFrom.getX(), pointFrom.getY(), pointFrom.getZ(), 1);
+            length += space;
+        }
+    }
 
     public static void circle(@NotNull ParticleBuilder particleBuilder, double radius) {
         circleWithDensity(particleBuilder, radius, 0.5);
@@ -29,7 +44,6 @@ public class ParticleUtils {
     public static void circleWithDensity(@NotNull ParticleBuilder particleBuilder, double radius, double distanceBetweenParticles) {
         circleWithAngle(particleBuilder, radius, 360d/(2d*Math.PI*radius/distanceBetweenParticles));
     }
-
 
     public static void circleWithAngle(@NotNull ParticleBuilder particleBuilder, double radius, double angleDegrees) {
         Location location = particleBuilder.location();
