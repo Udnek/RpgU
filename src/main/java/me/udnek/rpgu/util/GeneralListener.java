@@ -51,8 +51,9 @@ public class GeneralListener extends SelfRegisteringListener {
             public void run() {
                 Player player = event.getPlayer();
                 AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
-                if (attribute.getValue() != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
-                if (attribute.getValue() >= basePlayerHealth) player.setHealth(basePlayerHealth);
+                double value = attribute.getValue();
+                if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
+                if (value >= basePlayerHealth) player.setHealth(basePlayerHealth);
             }
         }.runTaskLater(RpgU.getInstance(), 5);
     }
