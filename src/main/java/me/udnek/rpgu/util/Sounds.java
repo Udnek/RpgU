@@ -20,6 +20,10 @@ public class Sounds {
         public void play(@NotNull Player player){
             player.playSound(player, soundName, category, volume, pitch);
         }
+
+        public void play(@NotNull Player player, @NotNull Location location){
+            player.playSound(location, soundName, category, volume, pitch);
+        }
     }
 
 
