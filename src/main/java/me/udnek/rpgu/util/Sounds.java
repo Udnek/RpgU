@@ -9,7 +9,7 @@ public class Sounds {
     public static final PlayableSound BACKSTAB;
 
     static {
-        BACKSTAB = new PlayableSound("rpgu:backstab_damage_sound", SoundCategory.PLAYERS, 100, 1);
+        BACKSTAB = new PlayableSound("rpgu:backstab", SoundCategory.PLAYERS, 100, 1);
     }
 
     public record PlayableSound(@NotNull String soundName, @NotNull SoundCategory category, float volume, float pitch) {
