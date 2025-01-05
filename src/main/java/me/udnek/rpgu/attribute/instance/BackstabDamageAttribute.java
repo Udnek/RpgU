@@ -36,8 +36,7 @@ public class BackstabDamageAttribute extends ConstructableCustomAttribute implem
         if (amount == 1) return;
         damageInstance.getDamage().multiplyPhysical(amount);
         if (damageInstance.getVictim() instanceof LivingEntity livingVictim){
-            Sounds.playSound(Sounds.BACKSTAB, livingVictim.getEyeLocation());
-            //livingVictim.getWorld().playSound(livingVictim.getEyeLocation(), "rpgu:test", 100, 1);
+            Sounds.BACKSTAB.play(livingVictim.getEyeLocation());
             livingVictim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*5, 0, false));
             playParticles(livingVictim.getEyeLocation().add((livingVictim.getLocation())).multiply(0.5));
         }
