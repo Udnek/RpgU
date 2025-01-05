@@ -121,18 +121,19 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
             currentRecipe = null;
             setLit(false);
             updateProgressAnimation();
+            updateItemsTickLater();
         } else {
             progress += 1f/CRAFT_DURATION;
         }
     }
 
-    public void setLit(boolean b){
+    public void setLit(boolean lit){
         Furnace blockData = (Furnace) block.getBlockData();
-        blockData.setLit(b);
+        blockData.setLit(lit);
         block.setBlockData(blockData, true);
     }
 
-    public void foundRecipe(AlloyingRecipe recipe){
+    public void foundRecipe(@NotNull AlloyingRecipe recipe){
         if (currentRecipe != null) return;
         if (!canFit(RESULT_SLOT, recipe.getResult())) return;
 
@@ -174,7 +175,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         }
     }
 
-    public boolean canFit(int slot, ItemStack addItem){
+    public boolean canFit(int slot, @NotNull ItemStack addItem){
         ItemStack item = inventory.getItem(slot);
         if (item == null) return true;
         if (slot == RESULT_SLOT && FILLER.isThisItem(item)) return true;
@@ -182,7 +183,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         return item.getAmount() + addItem.getAmount() <= item.getMaxStackSize();
     }
 
-    public void addItem(int slot, ItemStack addItem){
+    public void addItem(int slot, @NotNull ItemStack addItem){
         ItemStack item = inventory.getItem(slot);
         if (item == null || (slot == RESULT_SLOT && FILLER.isThisItem(item))) {
             inventory.setItem(slot, addItem);
