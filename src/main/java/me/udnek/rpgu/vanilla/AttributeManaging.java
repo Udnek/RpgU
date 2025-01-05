@@ -49,7 +49,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
     }
 
-    public static final EnumMap<Material, Stats> armorStats = new EnumMap<>(Material.class);
+    private static final EnumMap<Material, Stats> armorStats = new EnumMap<>(Material.class);
     private static final Set<Material> leatherArmor = new HashSet<>();
     private static final Set<Material> chainmailArmor = new HashSet<>();
     private static final Set<Material> goldenArmor = new HashSet<>();
@@ -127,7 +127,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         netheriteTools.add(Material.NETHERITE_SHOVEL);
      }
 
-    public record Stats(double hp, double armor, double damage){}
+    private record Stats(double hp, double armor, double damage){}
 
     @EventHandler
     public void onItemGenerates(CustomItemGeneratedEvent event){
