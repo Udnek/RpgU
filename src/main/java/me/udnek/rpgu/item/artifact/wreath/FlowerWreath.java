@@ -153,15 +153,16 @@ public class FlowerWreath extends ConstructableCustomItem {
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @Nullable Object o) {
             Location location = randomOffset(player);
             boolean isInForest = isForestMaterial(location.getBlock().getType());
-            if (isInForest) {
-                ParticleBuilder particle = Particle.TRAIL.builder().location(location).count(32).offset(1, 1, 1);
-                Location eyeLocation = player.getEyeLocation();
-                particle.data(new Particle.TargetColor(eyeLocation, Color.fromRGB(92, 169, 4))).spawn();
-                particle.data(new Particle.TargetColor(eyeLocation, Color.fromRGB(139,69,19))).spawn();
-                getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, player);
-                return ActionResult.FULL_COOLDOWN;
-            }
-            return ActionResult.NO_COOLDOWN;
+            if (!isInForest) return ActionResult.NO_COOLDOWN;
+
+            Location from = player.getEyeLocation().add(0, -0.8, 0);
+            Location to =location.toCenterLocation();
+
+            ParticleBuilder particle = Particle.TRAIL.builder().location(from).count(16).offset(0.2, 0.2, 0.2);
+            particle.data(new Particle.TargetColor(to, Color.fromRGB(92, 169, 4))).spawn();
+            particle.data(new Particle.TargetColor(to, Color.fromRGB(139,69,19))).spawn();
+            getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, player);
+            return ActionResult.FULL_COOLDOWN;
         }
 
     }
