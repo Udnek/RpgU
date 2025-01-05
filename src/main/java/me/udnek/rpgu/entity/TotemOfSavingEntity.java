@@ -28,7 +28,7 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
     }
 
     @Override
-    public void onSpawn() {
+    public void afterSpawn() {
         ItemStack head = new ItemStack(Material.GUNPOWDER);
         head.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "entity/totem_of_saving")));
         EntityEquipment equipment = entity.getEquipment();

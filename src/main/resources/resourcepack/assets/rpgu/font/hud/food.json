@@ -2,40 +2,40 @@
 	"providers": [
 		{
 			"type": "bitmap",
-			"file": "rpgu:font/hud/health/background.png",
-			"ascent": -26,
+			"file": "rpgu:font/hud/food/background.png",
+			"ascent": -16,
 			"height": 9,
 			"chars": ["b"]
 		},
 		{
 			"type": "bitmap",
-			"file": "rpgu:font/hud/health/icon.png",
-			"ascent": -26,
+			"file": "rpgu:font/hud/food/icon.png",
+			"ascent": -16,
 			"height": 9,
 			"chars": ["i"]
 		},
 		{
 			"type": "bitmap",
-			"file": "rpgu:font/hud/health/unit.png",
-			"ascent": -27,
+			"file": "rpgu:font/hud/food/unit.png",
+			"ascent": -17,
 			"height": 7,
 			"chars": ["u"]
 		},
 		{
 			"type": "bitmap",
-			"file": "rpgu:font/hud/health/overlay.png",
-			"ascent": -26,
+			"file": "rpgu:font/hud/food/overlay.png",
+			"ascent": -16,
 			"height": 9,
 			"chars": ["o"]
 		},
 		{
 			"type": "space",
 			"advances": {
-				"+": -1,
-				"-": -1,
+				"+": -3,
+				"-": 1,
 				"n": -82,
-				"j": 6,
-				"k": -6
+				"j": 74,
+				"k": -74
 			}
 		}
 	]

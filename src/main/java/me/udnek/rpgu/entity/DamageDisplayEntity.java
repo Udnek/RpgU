@@ -17,9 +17,7 @@ public class DamageDisplayEntity extends ConstructableCustomEntity<TextDisplay> 
     }
 
     @Override
-    public void onSpawn() {
-
-    }
+    public void afterSpawn() {}
 
     @Override
     public void unload() {

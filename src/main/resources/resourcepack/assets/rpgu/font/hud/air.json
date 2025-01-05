@@ -1,0 +1,18 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/air.png",
+			"ascent": 4,
+			"height": 17,
+			"chars": ["0123456789abcd"]
+		},
+		{
+			"type": "space",
+			"advances": {
+				"n": -7,
+				"p": -11
+			}
+		}
+	]
+}
