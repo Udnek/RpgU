@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import me.udnek.rpgu.particle.BackstabParticle;
+import me.udnek.rpgu.util.Sounds;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -35,7 +36,8 @@ public class BackstabDamageAttribute extends ConstructableCustomAttribute implem
         if (amount == 1) return;
         damageInstance.getDamage().multiplyPhysical(amount);
         if (damageInstance.getVictim() instanceof LivingEntity livingVictim){
-            livingVictim.getWorld().playSound(livingVictim.getEyeLocation(), "rpgu:test", 100, 1);
+            Sounds.playSound(livingVictim.getEyeLocation(), Sounds.BACKSTAB_DAMAGE_ATTRIBUTE);
+            //livingVictim.getWorld().playSound(livingVictim.getEyeLocation(), "rpgu:test", 100, 1);
             livingVictim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*5, 0, false));
             playParticles(livingVictim.getEyeLocation().add((livingVictim.getLocation())).multiply(0.5));
         }

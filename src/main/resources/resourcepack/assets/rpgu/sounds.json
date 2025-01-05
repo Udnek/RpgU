@@ -1,7 +1,5 @@
 {
-  "test": {
-    "sounds": [
-      "rpgu:test"
-    ]
+  "backstab_damage_sound": {
+    "sounds": ["rpgu:backstab_damage_sound"]
   }
 }
