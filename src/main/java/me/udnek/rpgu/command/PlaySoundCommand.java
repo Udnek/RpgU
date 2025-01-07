@@ -19,22 +19,10 @@ public class PlaySoundCommand implements CommandExecutor {
         }
 
         String soundReason;
-        Player playerTo = null;
+        Player playerTo;
         switch (strings.length){
-            case 1 -> soundReason = "location";
-            case 2 -> soundReason = strings[1];
-            case 3 -> {
-                playerTo = Bukkit.getPlayerExact(strings[2]);
-                if (playerTo == null) {
-                    Commands.sendError(commandSender,"There is no such player");
-                    return true;
-                }
-                if (!(strings[1].equals("toPlayerLocation"))){
-                    Commands.sendError(commandSender,"Wrong arguments", "For the three arguments use toPlayerLocation'");
-                    return true;
-                }
-                soundReason = "toPlayerLocation";
-            }
+            case 1 -> soundReason = "toLocation";
+            case 2 -> soundReason = "toTrol";
             default -> {
                 Commands.sendError(commandSender, "Incorrect number of arguments");
                 return true;
@@ -52,11 +40,13 @@ public class PlaySoundCommand implements CommandExecutor {
                 playableSound.play(player.getEyeLocation());
                 return true;
             }
-            case "toPlayer" -> {
-                playableSound.play(player);
-                return true;
-            }
-            case "toPlayerLocation" -> {
+            case "toTrol" -> {
+                playerTo = Bukkit.getPlayerExact(strings[1]);
+                if (playerTo == null) {
+                    Commands.sendError(commandSender,"There is no such player");
+                    return true;
+                }
+
                 playableSound.play(Objects.requireNonNull(playerTo), player.getEyeLocation());
                 return true;
             }
