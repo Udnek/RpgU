@@ -149,5 +149,9 @@
 
   "effect.rpgu.heavy_falling": "Тяжёлое падение",
 
-  "attribute.rpgu.name.health_regeneration": "Восстановление здоровья"
+  "attribute.rpgu.name.health_regeneration": "Восстановление здоровья",
+
+  "item.rpgu.spell_prism": "Призма заклинателя",
+
+  "subtitles.rpgu.backstab": "Удар в спину"
 }
