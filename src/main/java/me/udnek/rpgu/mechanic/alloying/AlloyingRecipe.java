@@ -1,10 +1,10 @@
 package me.udnek.rpgu.mechanic.alloying;
 
 import com.google.common.base.Preconditions;
+import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.itemscoreu.customrecipe.CustomRecipe;
 import me.udnek.itemscoreu.customrecipe.choice.CustomRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
-import me.udnek.itemscoreu.util.ItemUtils;
 import me.udnek.jeiu.visualizer.abstraction.Visualizable;
 import me.udnek.jeiu.visualizer.abstraction.Visualizer;
 import org.bukkit.NamespacedKey;

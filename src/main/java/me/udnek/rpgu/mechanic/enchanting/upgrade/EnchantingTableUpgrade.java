@@ -13,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public interface EnchantingTableUpgrade extends Registrable{
 
-    CustomRegistry<EnchantingTableUpgrade> REGISTRY = CustomRegistries.addRegistry(new NamespacedKey(RpgU.getInstance(), "enchanting_table_upgrade"), new MappedCustomRegistry<>("EnchantingTableUpgrade"));
+    CustomRegistry<EnchantingTableUpgrade> REGISTRY = CustomRegistries.addRegistry(
+            RpgU.getInstance(), new MappedCustomRegistry<>("enchanting_table_upgrade"));
 
     EnchantingTableUpgrade LITTLE_BOOKSHELF = register(new BookShelfUpgrade("little_bookshelf", 5));
     EnchantingTableUpgrade DECENT_BOOKSHELF = register(new BookShelfUpgrade("decent_bookshelf", 10));
