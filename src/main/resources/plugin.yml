@@ -28,3 +28,9 @@ commands:
     aliases: [ ]
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"
+  play_sound:
+    description: "play_sound"
+    usage: "/play_sound"
+    aliases: [ ]
+    permission: rpgu.admin
+    permission-message: "You do not have permission to use this command"
