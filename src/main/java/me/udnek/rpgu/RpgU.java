@@ -7,10 +7,7 @@ import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.command.CustomDamageSystemCommand;
-import me.udnek.rpgu.command.DebugEquipmentCommand;
-import me.udnek.rpgu.command.ResetCooldownCommand;
-import me.udnek.rpgu.command.SetFoodCommand;
+import me.udnek.rpgu.command.*;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -51,10 +48,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new AttributeManaging(this);
         AlloyForgeManager.getInstance();
 
-        getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
-        getCommand("customdamagesystem").setExecutor(new CustomDamageSystemCommand());
-        getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
-        getCommand("set_food").setExecutor(new SetFoodCommand());
+        Commands.declareCommands();
 
         wearingEquipmentTask = new PlayerWearingEquipmentTask();
         wearingEquipmentTask.start(this);
