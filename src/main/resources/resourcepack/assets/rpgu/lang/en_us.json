@@ -36,11 +36,12 @@
 	"attribute.rpgu.name.magical_defense_multiplier": "Magical Defense per Potential",
 	"attribute.rpgu.name.cast_range": "Cast Range",
 	"attribute.rpgu.name.cooldown_time": "Cooldown Time",
-	"attribute.rpgu.name.projectile_damage_multiplier": "Projectile Damage",
+	"attribute.rpgu.name.projectile_damage": "Projectile Damage",
 	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
-	"attribute.rpgu.name.backstab_damage_multiplier": "Backstab damage",
+	"attribute.rpgu.name.backstab_damage": "Backstab damage",
 	"attribute.rpgu.name.area_of_effect": "Area of Effect",
 	"attribute.rpgu.name.health_regeneration": "Health Regeneration",
+	"attribute.rpgu.name.critical_damage": "Critical Damage",
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 

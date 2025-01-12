@@ -30,23 +30,25 @@ import me.udnek.rpgu.item.equipment.wolf.WolfLeggings;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 import me.udnek.rpgu.item.utility.*;
+import org.jetbrains.annotations.NotNull;
 
 public class Items {
 
     // ARTIFACTS
-    public final static CustomItem NAUTILUS_CORE = register(new NautilusCore());
-    public final static CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
-    public final static CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
-    public final static CustomItem BLOOD_STONE = register(new BloodStone());
-    public final static CustomItem HEALTH_STONE = register(new HealthStone());
-    public final static CustomItem ARCANE_ACCUMULATOR = register(new ArcaneAccumulator());
-    public final static CustomItem SPELL_PRISM = register(new SpellPrism());
+    public static final CustomItem NAUTILUS_CORE = register(new NautilusCore());
+    public static final CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
+    public static final CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
+    public static final CustomItem BLOOD_STONE = register(new BloodStone());
+    public static final CustomItem HEALTH_STONE = register(new HealthStone());
+    public static final CustomItem CRITICAL_STONE = register(new CriticalStone());
+    public static final CustomItem ARCANE_ACCUMULATOR = register(new ArcaneAccumulator());
+    public static final CustomItem SPELL_PRISM = register(new SpellPrism());
 
-    public final static CustomItem FLOWER_WREATH = register(new FlowerWreath());
+    public static final CustomItem FLOWER_WREATH = register(new FlowerWreath());
     public static final CustomItem WITHER_WREATH = register(new WitherWreath());
 
-    public final static CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
-    public final static CustomItem SPHERE_OF_DISCORD = register(new SphereOfDiscord());
+    public static final CustomItem SPHERE_OF_BALANCE = register(new SphereOfBalance());
+    public static final CustomItem SPHERE_OF_DISCORD = register(new SphereOfDiscord());
 
     // EQUIPMENT
     public static final CustomItem SHINY_AXE = register(new ShinyAxe());
@@ -105,7 +107,7 @@ public class Items {
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
 
     // UTILITY
-    public final static CustomItem WRENCH = register(new Wrench());
+    public static final  CustomItem WRENCH = register(new Wrench());
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());
@@ -118,7 +120,7 @@ public class Items {
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
 
 
-    private static CustomItem register(CustomItem customItem){
+    private static @NotNull CustomItem register(@NotNull CustomItem customItem){
         return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);
     }
 }

@@ -19,6 +19,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,8 +34,6 @@ public class DamageInstance {
 
     public static final double NARROW_ENCHANTMENTS_DAMAGE_BONUS = 2.5;
     private static final double PROJECTILE_GLOBAL_DAMAGE_MULTIPLIER = 0.70;
-
-    private static final Function<? super Double, Double> ZERO_FUNCTION = Functions.constant(0d);
 
     private final List<ExtraFlag> extraFlags = new ArrayList<>();
     private Damage damage;
@@ -83,10 +82,10 @@ public class DamageInstance {
         event.setState(DamageEvent.State.AFTER_EQUIPMENT_RECEIVES);
         event.callEvent();
 
-        if(victim.getNoDamageTicks() > 0 && victim.getLastDamage() >= damage.getTotal()){
+        if(victim.getNoDamageTicks() > 0 && victim.getLastDamage() > damage.getTotal()){
             handlerEvent.setCancelled(true);
         } else {
-            Map<EntityDamageEvent.DamageModifier, Function<? super Double, Double>> modifierMap = (Map<EntityDamageEvent.DamageModifier, Function<? super Double, Double>>) Reflex.getFieldValue(handlerEvent, "modifierFunctions");
+            Map<EntityDamageEvent.DamageModifier, Function<? super Double, Double>> modifierMap = Reflex.getFieldValue(handlerEvent, "modifierFunctions");
             EntityDamageEvent.DamageModifier[] toNullify = new EntityDamageEvent.DamageModifier[]{
                     EntityDamageEvent.DamageModifier.FREEZING,
                     EntityDamageEvent.DamageModifier.HARD_HAT,
@@ -133,7 +132,7 @@ public class DamageInstance {
                     damage = new Damage();
                     double potential = Attributes.MAGICAL_POTENTIAL.calculate(livingDamager);
                     AttributeInstance attribute = livingDamager.getAttribute(Attribute.ATTACK_DAMAGE);
-                    damage.addPhysical((attribute == null ? 0 : attribute.getValue()) * (isCritical() ? 1.5 : 1));
+                    damage.addPhysical((attribute == null ? 0 : attribute.getValue()) * (isCritical() ? Attributes.CRITICAL_DAMAGE.calculate(livingDamager) : 1));
                     damage.addMagical(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER.calculate(livingDamager) * potential);
 
 
@@ -194,9 +193,15 @@ public class DamageInstance {
                 }
                 case Projectile projectile -> {
                     if (projectile instanceof AbstractArrow arrow){
-                        damage = new Damage(arrow.getDamage() * arrow.getVelocity().length() * (arrow.isCritical() ? 1.5 : 1) * PROJECTILE_GLOBAL_DAMAGE_MULTIPLIER, 0);
+                        damage = new Damage(arrow.getDamage() * arrow.getVelocity().length()  * PROJECTILE_GLOBAL_DAMAGE_MULTIPLIER, 0);
+                        if (arrow.isCritical()){
+                            if (arrow.getShooter() instanceof LivingEntity livingShooter)
+                                damage.multiplyPhysical(Attributes.CRITICAL_DAMAGE.calculate(livingShooter));
+                            else damage.multiplyPhysical(Attributes.CRITICAL_DAMAGE.getDefaultValue());
+                        }
+
                         Utils.consumeIfNotNull(arrow.getWeapon(), bow ->
-                                damage.multiplyPhysical(1 + bow.getEnchantmentLevel(Enchantment.POWER)*0.1)
+                                damage.multiplyPhysical(1 + bow.getEnchantmentLevel(Enchantment.POWER)*0.3)
                         );
                         int impaling = arrow.getItemStack().getEnchantmentLevel(Enchantment.IMPALING);
                         if (impaling != 0 && victim.isInWaterOrRain()) damage.addMagical(impaling * NARROW_ENCHANTMENTS_DAMAGE_BONUS);

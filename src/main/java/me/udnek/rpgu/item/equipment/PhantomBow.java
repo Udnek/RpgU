@@ -60,7 +60,7 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
 
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                 .add(Attributes.PROJECTILE_SPEED, projectileSpeedAttribute)
-                .add(Attributes.PROJECTILE_DAMAGE_MULTIPLIER, projectileDamageMultiplierAttribute).build()));
+                .add(Attributes.PROJECTILE_DAMAGE, projectileDamageMultiplierAttribute).build()));
     }
 
     @EventHandler

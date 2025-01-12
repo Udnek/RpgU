@@ -7,13 +7,12 @@ import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
 import org.jetbrains.annotations.NotNull;
 
-public class BloodStone extends ConstructableCustomItem {
+public class CriticalStone extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "blood_stone";}
+    public @NotNull String getRawId() {return "critical_stone";}
 
 
     @Override
@@ -21,7 +20,7 @@ public class BloodStone extends ConstructableCustomItem {
         super.initializeComponents();
 
         getComponents().set(HiddenItemComponent.INSTANCE);
-        CustomAttributeModifier attribute = new CustomAttributeModifier(1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.AREA_OF_EFFECT, attribute).build()));
+        CustomAttributeModifier attribute = new CustomAttributeModifier(0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS);
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.CRITICAL_DAMAGE, attribute).build()));
     }
 }

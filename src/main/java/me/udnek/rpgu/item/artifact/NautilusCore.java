@@ -22,8 +22,6 @@ import java.util.function.Consumer;
 
 public class NautilusCore extends ConstructableCustomItem {
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-    @Override
     public @NotNull String getRawId() {return "nautilus_core";}
 
     @Override
@@ -48,6 +46,7 @@ public class NautilusCore extends ConstructableCustomItem {
 
     @Override
     public void initializeComponents() {
+        super.initializeComponents();
         getComponents().set(new NautilusCoreComponent());
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                 .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.15, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS)
@@ -62,7 +61,7 @@ public class NautilusCore extends ConstructableCustomItem {
             if (!damageInstance.isCritical()) return;
             if (damageInstance.containsExtraFlag(new isMagicalCriticalApplied())) return;
 
-            damageInstance.getDamage().multiplyMagical(1.5);
+            damageInstance.getDamage().multiplyMagical(Attributes.CRITICAL_DAMAGE.calculate(player));
             damageInstance.addExtraFlag(new isMagicalCriticalApplied());
         }
     }

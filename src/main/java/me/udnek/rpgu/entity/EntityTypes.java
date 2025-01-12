@@ -16,8 +16,8 @@ public class EntityTypes {
         }
     });
 
-    private static <T extends CustomEntityType<?>> T register(T customEntityType){
-        return (T) CustomRegistries.ENTITY_TYPE.register(RpgU.getInstance(), customEntityType);
+    private static @NotNull <T extends CustomEntityType<?>> T register(@NotNull T customEntityType){
+        return CustomRegistries.ENTITY_TYPE.register(RpgU.getInstance(), customEntityType);
     }
 
 }

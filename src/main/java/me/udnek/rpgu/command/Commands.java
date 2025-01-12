@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 public class Commands {
     public static void declareCommands() {
         RpgU instance = RpgU.getInstance();
-        instance.getCommand("debugequipment").setExecutor(new DebugEquipmentCommand());
-        instance.getCommand("customdamagesystem").setExecutor(new CustomDamageSystemCommand());
+        instance.getCommand("debug_equipment").setExecutor(new DebugEquipmentCommand());
+        instance.getCommand("custom_damage_system").setExecutor(new CustomDamageSystemCommand());
         instance.getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
         instance.getCommand("set_food").setExecutor(new SetFoodCommand());
         instance.getCommand("play_sound").setExecutor(new PlaySoundCommand());

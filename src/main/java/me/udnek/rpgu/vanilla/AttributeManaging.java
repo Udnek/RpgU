@@ -14,7 +14,7 @@ import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.vanilla.components.GoldenArmorPassive;
+import me.udnek.rpgu.vanilla.component.GoldenArmorPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -25,7 +25,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -33,21 +33,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AttributeManaging extends SelfRegisteringListener {
-     public AttributeManaging(JavaPlugin plugin) {
-        super(plugin);
-    }
-
-    @EventHandler
-    public void onInit(InitializationEvent event){
-        if (event.getStep() == InitializationProcess.Step.BEFORE_VANILLA_MANAGER){
-            for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
-            for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
-            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
-        }
-    }
 
     private static final EnumMap<Material, Stats> armorStats = new EnumMap<>(Material.class);
     private static final Set<Material> leatherArmor = new HashSet<>();
@@ -58,7 +43,7 @@ public class AttributeManaging extends SelfRegisteringListener {
     private static final Set<Material> netheriteArmor = new HashSet<>();
     private static final Set<Material> netheriteTools = new HashSet<>();
 
-     static {
+    static {
         armorStats.put(Material.LEATHER_HELMET, new Stats(1, 0, 0));
         armorStats.put(Material.LEATHER_CHESTPLATE, new Stats(1, 0, 0));
         armorStats.put(Material.LEATHER_LEGGINGS, new Stats(1, 0, 0));
@@ -127,7 +112,21 @@ public class AttributeManaging extends SelfRegisteringListener {
         netheriteTools.add(Material.NETHERITE_SHOVEL);
      }
 
-    private record Stats(double hp, double armor, double damage){}
+    public AttributeManaging(@NotNull Plugin plugin) {
+        super(plugin);
+    }
+
+    @EventHandler
+    public void onInit(InitializationEvent event){
+        if (event.getStep() == InitializationProcess.Step.BEFORE_VANILLA_MANAGER){
+            for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
+            for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
+        }
+    }
 
     @EventHandler
     public void onItemGenerates(CustomItemGeneratedEvent event){
@@ -194,4 +193,6 @@ public class AttributeManaging extends SelfRegisteringListener {
                     armorStats.get(source).damage, AttributeModifier.Operation.ADD_SCALAR, slot);
         }
     }
+
+    private record Stats(double hp, double armor, double damage){}
 }
