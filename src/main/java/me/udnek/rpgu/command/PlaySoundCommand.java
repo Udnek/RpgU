@@ -21,7 +21,7 @@ public class PlaySoundCommand implements CommandExecutor {
             case 1 -> playMethod = PlayMethod.TO_LOCATION;
             case 2 -> playMethod = PlayMethod.FROM_LOCATION_TO_PLAYER;
             default -> {
-                Commands.sendError(commandSender, "Incorrect number of arguments", "dsasa", "DSasa");
+                Commands.sendError(commandSender, "Incorrect number of arguments");
                 return true;
             }
         }
