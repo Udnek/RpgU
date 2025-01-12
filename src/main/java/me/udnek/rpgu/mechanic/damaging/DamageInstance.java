@@ -2,7 +2,6 @@ package me.udnek.rpgu.mechanic.damaging;
 
 
 import com.google.common.base.Function;
-import com.google.common.base.Functions;
 import me.udnek.itemscoreu.util.Reflex;
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
@@ -19,7 +18,6 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

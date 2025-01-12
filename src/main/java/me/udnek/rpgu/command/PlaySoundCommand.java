@@ -8,8 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class PlaySoundCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -17,12 +15,11 @@ public class PlaySoundCommand implements CommandExecutor {
             Commands.sendError(commandSender, "Only the player can execute this command");
             return true;
         }
-
-        String soundReason;
+        PlayMethod playMethod;
         Player playerTo;
         switch (strings.length){
-            case 1 -> soundReason = "toLocation";
-            case 2 -> soundReason = "toTrol";
+            case 1 -> playMethod = PlayMethod.TO_LOCATION;
+            case 2 -> playMethod = PlayMethod.FROM_LOCATION_TO_PLAYER;
             default -> {
                 Commands.sendError(commandSender, "Incorrect number of arguments");
                 return true;
@@ -35,19 +32,19 @@ public class PlaySoundCommand implements CommandExecutor {
             return true;
         }
 
-        switch (soundReason){
-            case "toLocation" -> {
+        switch (playMethod){
+            case PlayMethod.TO_LOCATION -> {
                 playableSound.play(player.getEyeLocation());
                 return true;
             }
-            case "toTrol" -> {
+            case PlayMethod.FROM_LOCATION_TO_PLAYER -> {
                 playerTo = Bukkit.getPlayerExact(strings[1]);
                 if (playerTo == null) {
                     Commands.sendError(commandSender,"There is no such player");
                     return true;
                 }
 
-                playableSound.play(Objects.requireNonNull(playerTo), player.getEyeLocation());
+                playableSound.play(playerTo, player.getEyeLocation());
                 return true;
             }
             default -> {
@@ -55,5 +52,9 @@ public class PlaySoundCommand implements CommandExecutor {
                 return true;
             }
         }
+    }
+    public enum PlayMethod {
+        TO_LOCATION,
+        FROM_LOCATION_TO_PLAYER
     }
 }
