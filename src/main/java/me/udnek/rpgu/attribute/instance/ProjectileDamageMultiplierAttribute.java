@@ -17,9 +17,9 @@ public class ProjectileDamageMultiplierAttribute extends ConstructableCustomAttr
     @EventHandler
     public void onFire(EntityShootBowEvent event) {
         if (!DamageListener.CUSTOM_DAMAGE_SYSTEM) return;
+        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
         double amount = calculate(event.getEntity());
         if (amount == getDefaultValue()) return;
-        if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
         arrow.setDamage(arrow.getDamage() * amount);
     }
 }

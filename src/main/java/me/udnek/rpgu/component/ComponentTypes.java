@@ -37,17 +37,17 @@ public class ComponentTypes {
         ACTIVE_ABILITY_ITEM = register(new ConstructableComponentType("active_ability_item",ActiveAbilityComponent.DEFAULT));
         PASSIVE_ABILITY_ITEM = register(new ConstructableComponentType("passive_ability_item", PassiveAbilityComponent.DEFAULT));
 
-        ABILITY_COOLDOWN = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cooldown", Attributes.COOLDOWN_TIME, -1, "ability.rpgu.cooldown", true));
-        ABILITY_CAST_RANGE = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_cast_range", Attributes.CAST_RANGE, -1, "ability.rpgu.cast_range"));
-        ABILITY_AREA_OF_EFFECT = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_area_of_effect", Attributes.AREA_OF_EFFECT, -1, "ability.rpgu.area_of_effect"));
-        ABILITY_DURATION = (AttributeBasedPropertyType) register(new AttributeBasedPropertyType("ability_duration", Attributes.ABILITY_DURATION, -1, "ability.rpgu.duration", true));
+        ABILITY_COOLDOWN = register(new AttributeBasedPropertyType("ability_cooldown", Attributes.COOLDOWN_TIME, -1, "ability.rpgu.cooldown", true));
+        ABILITY_CAST_RANGE = register(new AttributeBasedPropertyType("ability_cast_range", Attributes.CAST_RANGE, -1, "ability.rpgu.cast_range"));
+        ABILITY_AREA_OF_EFFECT = register(new AttributeBasedPropertyType("ability_area_of_effect", Attributes.AREA_OF_EFFECT, -1, "ability.rpgu.area_of_effect"));
+        ABILITY_DURATION = register(new AttributeBasedPropertyType("ability_duration", Attributes.ABILITY_DURATION, -1, "ability.rpgu.duration", true));
         ABILITY_CAST_TIME = (AbilityPropertyType<AbilityProperty<Player, Integer>>) register(new ConstructableAbilityPropertyType("ability_cast_time", new CastTimeProperty(-1)));
         ABILITY_MISS_USAGE_COOLDOWN_MULTIPLIER = (AbilityPropertyType<AbilityProperty<Player, Double>>) register(new ConstructableAbilityPropertyType("ability_miss_usage_cooldown_multiplier", new MissUsageCooldownMultiplierProperty(0.3)));
         ABILITY_DAMAGE = (AbilityPropertyType<AbilityProperty<Double, Damage>>) register(new ConstructableAbilityPropertyType("ability_damage", new DamageProperty(new MPBasedDamageFunction(null, null))));
         ABILITY_EFFECTS = (AbilityPropertyType<EffectsProperty>) register(new ConstructableAbilityPropertyType("ability_effects", EffectsProperty.DEFAULT));
     }
 
-    private static CustomComponentType register(CustomComponentType type){
+    private static <T extends CustomComponentType<?, ?>> T register(T type){
         return CustomRegistries.COMPONENT_TYPE.register(RpgU.getInstance(), type);
     }
 }

@@ -48,8 +48,8 @@ public class CeremonialDagger extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
-                .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, BACKSTAB_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
-                .add(Attributes.BACKSTAB_DAMAGE_MULTIPLIER, BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                .add(Attributes.BACKSTAB_DAMAGE, BACKSTAB_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
+                .add(Attributes.BACKSTAB_DAMAGE, BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                 .build()));
     }
 

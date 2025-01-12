@@ -21,8 +21,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class RustyIronRing extends ConstructableCustomItem {
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-    @Override
     public @NotNull String getRawId() {return "rusty_iron_ring";}
 
     @Override

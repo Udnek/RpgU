@@ -24,9 +24,10 @@ public class Attributes{
     public static final CustomAttribute AREA_OF_EFFECT;
     public static final CustomAttribute ABILITY_DURATION;
 
-    public static final CustomAttribute PROJECTILE_DAMAGE_MULTIPLIER;
+    public static final CustomAttribute PROJECTILE_DAMAGE;
+    public static final CustomAttribute BACKSTAB_DAMAGE;
     public static final CustomAttribute PROJECTILE_SPEED;
-    public static final CustomAttribute BACKSTAB_DAMAGE_MULTIPLIER;
+    public static final CustomAttribute CRITICAL_DAMAGE;
     public static final CustomAttribute HEALTH_REGENERATION;
 
     public static final CustomAttribute PROJECTILE_PROTECTION;
@@ -44,14 +45,15 @@ public class Attributes{
         MAGICAL_DEFENSE_MULTIPLIER = register(new MagicalDefenseMultiplierAttribute("magical_defense_multiplier"));
         CAST_RANGE = register(new ConstructableCustomAttribute("cast_range",1,0, 1024));
         COOLDOWN_TIME = register(new ConstructableCustomAttribute("cooldown_time",1,0, 1024, false));
-        PROJECTILE_DAMAGE_MULTIPLIER = register(new ProjectileDamageMultiplierAttribute("projectile_damage_multiplier", 1, 0, 1024));
+        PROJECTILE_DAMAGE = register(new ProjectileDamageMultiplierAttribute("projectile_damage", 1, 0, 1024));
         PROJECTILE_SPEED = register(new ProjectileSpeedAttribute("projectile_speed", 1, 0, 1024));
-        BACKSTAB_DAMAGE_MULTIPLIER = register(new BackstabDamageAttribute("backstab_damage_multiplier", 1, 1, 1024));
+        BACKSTAB_DAMAGE = register(new BackstabDamageAttribute("backstab_damage", 1, 1, 1024, true, true));
         AREA_OF_EFFECT = register(new ConstructableCustomAttribute("area_of_effect",1,0, 1024));
         ABILITY_DURATION = register(new ConstructableCustomAttribute("ability_duration",1,0, 1024));
         HEALTH_REGENERATION = register(new HealthRegenerationAttribute("health_regeneration", 1, 0, 1024));
         PHYSICAL_RESISTANCE = register(new PhysicalResistanceAttribute("physical_resistance", 0, 0, 1));
         MAGICAL_RESISTANCE = register(new MagicalResistanceAttribute("magical_resistance", 0, 0, 1));
+        CRITICAL_DAMAGE = register(new ConstructableCustomAttribute("critical_damage", 1.5, 0, 1024, true, true));
 
         PROJECTILE_PROTECTION = register(new EnchantmentCalculatorAttribute("projectile_protection", Enchantment.PROJECTILE_PROTECTION));
         BLAST_PROTECTION = register(new EnchantmentCalculatorAttribute("blast_protection", Enchantment.BLAST_PROTECTION));

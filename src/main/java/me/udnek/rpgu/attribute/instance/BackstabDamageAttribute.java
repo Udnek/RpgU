@@ -6,6 +6,7 @@ import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import me.udnek.rpgu.particle.BackstabParticle;
 import me.udnek.rpgu.util.Sounds;
 import org.bukkit.Location;
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -19,22 +20,21 @@ import java.util.Random;
 
 public class BackstabDamageAttribute extends ConstructableCustomAttribute implements Listener {
 
-
-    public BackstabDamageAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
-        super(rawId, defaultValue, min, max);
+    public BackstabDamageAttribute(@NotNull String rawId, double defaultValue, double min, double max, boolean beneficial, boolean numberAsPercentageLore) {
+        super(rawId, defaultValue, min, max, beneficial, numberAsPercentageLore);
     }
 
     @EventHandler
     public void onDamage(DamageEvent event){
         if (event.getState() != DamageEvent.State.AFTER_EQUIPMENT_ATTACKS) return;
+        if (!(event.getDamageInstance().getHandler().getDamageSource().getCausingEntity() instanceof LivingEntity damager)) return;
         DamageInstance damageInstance = event.getDamageInstance();
-        if (!(damageInstance.getDamager() instanceof LivingEntity damager)) return;
         if (damageInstance.getCooledAttackStrength() < 0.848) return;
         if (!isBackstab(damager, damageInstance.getVictim())) return;
 
         double amount = calculate(damager);
         if (amount == 1) return;
-        damageInstance.getDamage().multiplyPhysical(amount);
+        damageInstance.getDamage().multiply(amount);
         if (damageInstance.getVictim() instanceof LivingEntity livingVictim){
             Sounds.BACKSTAB.play(livingVictim.getEyeLocation());
             livingVictim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*5, 0, false));
@@ -43,9 +43,9 @@ public class BackstabDamageAttribute extends ConstructableCustomAttribute implem
     }
 
     public boolean isBackstab(@NotNull Entity damager, @NotNull Entity victim){
-        Vector damagerDirection = damager.getLocation().getDirection();
-        Vector victimDir = victim.getLocation().getDirection();
-        return damagerDirection.angle(victimDir) <= Math.toRadians(45);
+        Vector victimDirection = victim.getLocation().getDirection();
+        Vector positionDiff = victim.getLocation().toVector().subtract(damager.getLocation().toVector());
+        return victimDirection.angle(positionDiff) <= Math.toRadians(45);
     }
 
     public void playParticles(@NotNull Location location){
