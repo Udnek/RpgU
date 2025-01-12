@@ -15,13 +15,13 @@ public class PlaySoundCommand implements CommandExecutor {
             Commands.sendError(commandSender, "Only the player can execute this command");
             return true;
         }
-        SoundReason soundReason;
+        PlayMethod playMethod;
         Player playerTo;
         switch (strings.length){
-            case 1 -> soundReason = SoundReason.TO_LOCATION;
-            case 2 -> soundReason = SoundReason.FROM_LOCATION_TO_PLAYER;
+            case 1 -> playMethod = PlayMethod.TO_LOCATION;
+            case 2 -> playMethod = PlayMethod.FROM_LOCATION_TO_PLAYER;
             default -> {
-                Commands.sendError(commandSender, "Incorrect number of arguments");
+                Commands.sendError(commandSender, "Incorrect number of arguments", "dsasa", "DSasa");
                 return true;
             }
         }
@@ -32,12 +32,12 @@ public class PlaySoundCommand implements CommandExecutor {
             return true;
         }
 
-        switch (soundReason){
-            case SoundReason.TO_LOCATION -> {
+        switch (playMethod){
+            case PlayMethod.TO_LOCATION -> {
                 playableSound.play(player.getEyeLocation());
                 return true;
             }
-            case SoundReason.FROM_LOCATION_TO_PLAYER -> {
+            case PlayMethod.FROM_LOCATION_TO_PLAYER -> {
                 playerTo = Bukkit.getPlayerExact(strings[1]);
                 if (playerTo == null) {
                     Commands.sendError(commandSender,"There is no such player");
@@ -53,7 +53,7 @@ public class PlaySoundCommand implements CommandExecutor {
             }
         }
     }
-    public enum SoundReason{
+    public enum PlayMethod {
         TO_LOCATION,
         FROM_LOCATION_TO_PLAYER
     }
