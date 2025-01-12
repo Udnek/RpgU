@@ -6,7 +6,6 @@ import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import me.udnek.rpgu.particle.BackstabParticle;
 import me.udnek.rpgu.util.Sounds;
 import org.bukkit.Location;
-import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;

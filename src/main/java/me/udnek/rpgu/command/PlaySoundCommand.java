@@ -8,8 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class PlaySoundCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
@@ -20,8 +18,8 @@ public class PlaySoundCommand implements CommandExecutor {
         SoundReason soundReason;
         Player playerTo;
         switch (strings.length){
-            case 1 -> soundReason = SoundReason.LOCATION;
-            case 2 -> soundReason = SoundReason.TROLL;
+            case 1 -> soundReason = SoundReason.TO_LOCATION;
+            case 2 -> soundReason = SoundReason.FROM_LOCATION_TO_PLAYER;
             default -> {
                 Commands.sendError(commandSender, "Incorrect number of arguments");
                 return true;
@@ -35,18 +33,18 @@ public class PlaySoundCommand implements CommandExecutor {
         }
 
         switch (soundReason){
-            case SoundReason.LOCATION -> {
+            case SoundReason.TO_LOCATION -> {
                 playableSound.play(player.getEyeLocation());
                 return true;
             }
-            case SoundReason.TROLL -> {
+            case SoundReason.FROM_LOCATION_TO_PLAYER -> {
                 playerTo = Bukkit.getPlayerExact(strings[1]);
                 if (playerTo == null) {
                     Commands.sendError(commandSender,"There is no such player");
                     return true;
                 }
 
-                playableSound.play(Objects.requireNonNull(playerTo), player.getEyeLocation());
+                playableSound.play(playerTo, player.getEyeLocation());
                 return true;
             }
             default -> {
@@ -56,7 +54,7 @@ public class PlaySoundCommand implements CommandExecutor {
         }
     }
     public enum SoundReason{
-        LOCATION,
-        TROLL
+        TO_LOCATION,
+        FROM_LOCATION_TO_PLAYER
     }
 }

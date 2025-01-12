@@ -4,7 +4,6 @@ import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public class DamageListener extends SelfRegisteringListener {
