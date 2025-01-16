@@ -3,9 +3,11 @@ package me.udnek.rpgu.command;
 import me.udnek.rpgu.RpgU;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Commands {
     public static void declareCommands() {
@@ -18,8 +20,12 @@ public class Commands {
     }
 
     public static void sendError(@NotNull CommandSender commandSender, @NotNull String ...strings){
+        sendError(commandSender, null,  strings);
+    }
+    public static void sendError(@NotNull CommandSender commandSender, @Nullable TextColor textColor,  @NotNull String ...strings){
         StringBuilder string = new StringBuilder();
+        if (textColor == null) textColor = NamedTextColor.RED;
         for (String world : strings) string.append(world).append("\n");
-        commandSender.sendMessage(Component.text(string.substring(0, string.length() - 1)).color(NamedTextColor.RED).decorate(TextDecoration.BOLD));
+        commandSender.sendMessage(Component.text(string.substring(0, string.length() - 1)).color(textColor).decorate(TextDecoration.BOLD));
     }
 }

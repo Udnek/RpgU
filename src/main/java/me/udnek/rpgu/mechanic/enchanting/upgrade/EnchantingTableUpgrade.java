@@ -7,7 +7,6 @@ import me.udnek.itemscoreu.customregistry.Registrable;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
