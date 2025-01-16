@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,30 +28,36 @@ public class BackstabDamageAttribute extends ConstructableCustomAttribute implem
     @EventHandler
     public void onDamage(DamageEvent event){
         if (event.getState() != DamageEvent.State.AFTER_EQUIPMENT_ATTACKS) return;
-        if (!(event.getDamageInstance().getHandler().getDamageSource().getCausingEntity() instanceof LivingEntity damager)) return;
         DamageInstance damageInstance = event.getDamageInstance();
-        if (damageInstance.getCooledAttackStrength() < 0.848) return;
-        if (!isBackstab(damager, damageInstance.getVictim())) return;
 
-        double amount = calculate(damager);
+        if (damageInstance.getDamager() == null) return;
+        Entity damager = damageInstance.getDamager();
+        if (!(event.getDamageInstance().getCausingDamager() instanceof LivingEntity causingDamager)) return;
+        if (damageInstance.getCooledAttackStrength() < 0.848) return;
+        if (!(isBackstab(damager, damageInstance.getVictim()) || isBackstab(causingDamager, damageInstance.getVictim()))) return;
+
+        double amount = calculate(causingDamager);
         if (amount == 1) return;
         damageInstance.getDamage().multiply(amount);
         if (damageInstance.getVictim() instanceof LivingEntity livingVictim){
             Sounds.BACKSTAB.play(livingVictim.getEyeLocation());
             livingVictim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*5, 0, false));
-            playParticles(livingVictim.getEyeLocation().add((livingVictim.getLocation())).multiply(0.5));
+            playParticles(livingVictim);
         }
     }
 
     public boolean isBackstab(@NotNull Entity damager, @NotNull Entity victim){
         Vector victimDirection = victim.getLocation().getDirection();
-        Vector positionDiff = victim.getLocation().toVector().subtract(damager.getLocation().toVector());
+        Vector positionDiff = victim.getLocation().toVector().subtract(damager.getLocation().toVector()).setY(0);
         return victimDirection.angle(positionDiff) <= Math.toRadians(45);
     }
 
-    public void playParticles(@NotNull Location location){
+    public void playParticles(@NotNull LivingEntity victim){
         Random random = new Random();
-        BackstabParticle particle = new BackstabParticle();
-        particle.play(location.add(random.nextFloat()-0.5, random.nextFloat()-0.5, random.nextFloat()-0.5));
+        BoundingBox boundingBox = victim.getBoundingBox();
+        double scale = (boundingBox.getWidthX() + boundingBox.getHeight());
+        BackstabParticle particle = new BackstabParticle(scale);
+        particle.play(victim.getEyeLocation().add((victim.getLocation())).multiply(0.5)
+                .add(new Vector(random.nextFloat()-0.5, random.nextFloat()-0.5, random.nextFloat()-0.5).multiply(scale/2d)));
     }
 }

@@ -2,7 +2,6 @@ package me.udnek.rpgu.mechanic.damaging;
 
 
 import com.google.common.base.Function;
-import com.google.common.base.Functions;
 import me.udnek.itemscoreu.util.Reflex;
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
@@ -19,7 +18,6 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -61,6 +59,7 @@ public class DamageInstance {
     public @NotNull Damage.Type getDamageType(){return DamageUtils.getDamageType(handlerEvent);}
     public @NotNull Damage getDamage() {return this.damage;}
     public @Nullable Entity getDamager() {return damager;}
+    public @Nullable Entity getCausingDamager(){return handlerEvent.getDamageSource().getCausingEntity();}
     public @NotNull Entity getVictim() {return victim;}
     public float getCooledAttackStrength() {return (damager instanceof Player player ? player.getCooledAttackStrength(0) : 1);}
     public @NotNull EntityDamageEvent getHandler() {return this.handlerEvent;}
@@ -68,6 +67,11 @@ public class DamageInstance {
     public boolean isCritical() {return isCritical;}
     public void invoke(){
         if (victim == null) return;
+
+        if (!DamageUtils.canDamageThisTick(handlerEvent.getDamageSource().getDamageType())){
+            handlerEvent.setCancelled(true);
+            return;
+        }
 
         attackCalculations();
 
@@ -82,7 +86,7 @@ public class DamageInstance {
         event.setState(DamageEvent.State.AFTER_EQUIPMENT_RECEIVES);
         event.callEvent();
 
-        if(victim.getNoDamageTicks() > 0 && victim.getLastDamage() > damage.getTotal()){
+        if (victim.getNoDamageTicks() > 0 && victim.getLastDamage() > damage.getTotal()){
             handlerEvent.setCancelled(true);
         } else {
             Map<EntityDamageEvent.DamageModifier, Function<? super Double, Double>> modifierMap = Reflex.getFieldValue(handlerEvent, "modifierFunctions");

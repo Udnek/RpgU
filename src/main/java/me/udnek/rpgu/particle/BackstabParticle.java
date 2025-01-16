@@ -8,18 +8,27 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Transformation;
 import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
 
 public class BackstabParticle extends CustomFlatParticle {
     private final static Color color = Color.fromRGB(255, 10, 10);
+    protected double scale;
+
+    public BackstabParticle(){
+        this(2);
+    }
+    public BackstabParticle(double scale){
+        this.scale = scale;
+    }
 
     @Override
     public @Positive int getFramesAmount() {return 8;}
     @Override
     public int getFrameTime() {return 1;}
     @Override
-    public double getScale() {return 2;}
+    public double getScale() {return scale;}
 
     @Override
     protected @NotNull ItemStack createDisplayItem() {
