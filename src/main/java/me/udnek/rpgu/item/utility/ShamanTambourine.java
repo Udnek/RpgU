@@ -37,8 +37,6 @@ public class ShamanTambourine extends ConstructableCustomItem{
 
     @Override
     public @NotNull String getRawId() {return "shaman_tambourine";}
-    @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
 
     @Override
     public @Nullable DataSupplier<Consumable> getConsumable() {

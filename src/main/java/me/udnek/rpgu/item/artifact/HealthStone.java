@@ -16,9 +16,6 @@ public class HealthStone extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "health_stone";}
 
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
-    @Override
     public void initializeComponents() {
         super.initializeComponents();
 

@@ -15,8 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class RawMagnetite extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "raw_magnetite";}
-    @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
+
     @Override
     public void afterInitialization() {
         super.afterInitialization();

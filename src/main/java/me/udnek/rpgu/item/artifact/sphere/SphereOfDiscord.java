@@ -29,9 +29,6 @@ public class SphereOfDiscord extends ConstructableCustomItem {
     private static final double ATTACK_DAMAGE = -0.6;
 
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
-    @Override
     public @NotNull String getRawId() {return "sphere_of_discord";}
 
     @Override

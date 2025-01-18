@@ -3,16 +3,19 @@ package me.udnek.rpgu.hud;
 import me.udnek.itemscoreu.customhud.CustomHud;
 import me.udnek.itemscoreu.customhud.CustomHudManager;
 import me.udnek.itemscoreu.util.ComponentU;
+import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class Hud implements CustomHud {
@@ -43,11 +46,12 @@ public class Hud implements CustomHud {
 
     @Override
     public @NotNull Component getText(@NotNull Player player) {
+        if (player.getGameMode().isInvulnerable()) return Component.empty();
         return ComponentU.textWithNoSpaceDefaultFont(
-                -90,
+                -91,
                 health(player).append(defense(player)),
                 0)
-                .append(ComponentU.textWithNoSpaceDefaultFont(11, food(player), 0))
+                .append(ComponentU.textWithNoSpaceDefaultFont(10, food(player), 0))
                 .append(air(player));
     }
 
@@ -97,15 +101,18 @@ public class Hud implements CustomHud {
             absorptionImage = Component.translatable(BASE_PREFIX+((int) (Math.ceil(player.getAbsorptionAmount()/maxAbsorption*74))));
         } else absorptionImage = Component.empty();
 
-        String rawText = ((int) Math.ceil(health)) + "/" + ((int) Math.ceil(maxHealth) + "+" + ((int) Math.ceil(Attributes.HEALTH_REGENERATION.calculate(player))));
-        int size = rawText.length()*4-1;
+        String rawText = Utils.roundToTwoDigits(health) + "/" + Utils.roundToTwoDigits(maxHealth) + "+" + Utils.roundToTwoDigits(Attributes.HEALTH_REGENERATION.calculate(player));
+
+        int dots = StringUtils.countMatches(rawText, ".");
+        int size = (rawText.length()-dots)*4 + dots*2 -1;
+
         Component text = ComponentU.textWithNoSpaceDefaultFont(
                 40-size/2,
                 Component.text(rawText).font(HEALTH_NUMBER_FONT).color(NamedTextColor.WHITE),
                 size);
 
         TextColor color;
-        if (player.getNoDamageTicks() > 0) color = NamedTextColor.WHITE;
+        if (player.getNoDamageTicks() > 0) color = TextColor.fromHexString("#ff6e6e");
         else if (player.getFreezeTicks() > 0) color = TextColor.fromHexString("#84bcff");
         else if (player.hasPotionEffect(PotionEffectType.POISON)) color = TextColor.fromHexString("#947818");
         else if (player.hasPotionEffect(PotionEffectType.WITHER)) color = TextColor.fromHexString("#341a1a");

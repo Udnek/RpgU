@@ -18,8 +18,6 @@ import java.util.function.Consumer;
 public class MagnetiteIngot extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "magnetite_ingot";}
-    @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

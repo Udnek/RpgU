@@ -17,9 +17,6 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "totem_of_saving";}
 
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
-    @Override
     public void getLore(@NotNull Consumer<Component> consumer) {
         consumer.accept(Component.translatable(getRawItemName() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
         consumer.accept(Component.translatable(getRawItemName() + ".description.1").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));

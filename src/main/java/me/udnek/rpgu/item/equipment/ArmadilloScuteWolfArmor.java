@@ -20,9 +20,6 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "armadillo_scute_wolf_armor";}
 
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
-    @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
         super.initializeAdditionalAttributes(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + getRawId()),

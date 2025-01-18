@@ -22,9 +22,6 @@ public class ArcaneAccumulator extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "arcane_accumulator";}
 
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
-    @Override
     public @Nullable LoreBuilder getLoreBuilder() {
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();

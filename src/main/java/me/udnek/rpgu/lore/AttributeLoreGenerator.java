@@ -108,7 +108,7 @@ public class AttributeLoreGenerator {
         }
     }
 
-    public static Attribute[] sortAttributes(Multimap<Attribute, AttributeModifier> multimap){
+    public static @NotNull Attribute[] sortAttributes(@NotNull Multimap<Attribute, AttributeModifier> multimap){
         Attribute[] keys = new Attribute[multimap.keys().size()];
         multimap.keys().toArray(keys);
         Arrays.sort(keys, new Comparator<Attribute>() {
@@ -155,12 +155,12 @@ public class AttributeLoreGenerator {
         return Component.translatable(key, Component.text(Utils.roundToTwoDigits(Math.abs(amount))), Component.translatable(attribute.translationKey())).color(color);
     }
 
-    public static Component getHeader(CustomEquipmentSlot slot){
+    public static @NotNull Component getHeader(@NotNull CustomEquipmentSlot slot){
         String line = slot.translationKey();
         return Component.translatable(line).color(HEADER_COLOR).decoration(TextDecoration.ITALIC, false);
     }
 
-    public static Component addTab(Component noOuter){
+    public static @NotNull Component addTab(@NotNull Component noOuter){
         return ComponentU.translatableWithInsertion(TranslationKeys.equipmentDescriptionLine, noOuter).decoration(TextDecoration.ITALIC, false);
     }
 

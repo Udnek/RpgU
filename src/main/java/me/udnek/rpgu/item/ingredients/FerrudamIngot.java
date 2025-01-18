@@ -16,8 +16,6 @@ public class FerrudamIngot extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "ferrudam_ingot";}
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-    @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
         CustomSingleRecipeChoice ironIngot = new CustomSingleRecipeChoice(Material.IRON_INGOT);

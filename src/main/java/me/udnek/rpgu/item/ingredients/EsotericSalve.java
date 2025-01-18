@@ -14,9 +14,6 @@ public class EsotericSalve extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "esoteric_salve";}
 
     @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
-    @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapelessRecipe recipe = new ShapelessRecipe(getNewRecipeKey(), getItem());
 

@@ -14,10 +14,12 @@ public class HealthRegenerationAttribute extends ConstructableCustomAttribute im
     }
 
     @EventHandler
-    public void onHeal(EntityRegainHealthEvent event){
+    public void onRegeneration(EntityRegainHealthEvent event){
         EntityRegainHealthEvent.RegainReason regainReason = event.getRegainReason();
-        if (regainReason != EntityRegainHealthEvent.RegainReason.SATIATED) return;
-        if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
-        event.setAmount(calculate(livingEntity));
+        if (!(event.getEntity() instanceof LivingEntity entity)) return;
+        switch (regainReason) {
+            case SATIATED -> event.setAmount(calculate(entity));
+            case MAGIC_REGEN, REGEN -> event.setAmount(event.getAmount() + calculate(entity));
+        }
     }
 }

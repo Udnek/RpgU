@@ -22,10 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class SphereOfBalance extends ConstructableCustomItem {
-
-    @Override
-    public @NotNull Material getMaterial() {return Material.GUNPOWDER;}
-
     @Override
     public @NotNull String getRawId() {return "sphere_of_balance";}
 

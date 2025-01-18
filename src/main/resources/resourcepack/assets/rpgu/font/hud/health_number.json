@@ -5,7 +5,7 @@
 			"file": "rpgu:font/hud/number.png",
 			"ascent": -28,
 			"height": 5,
-			"chars": ["0123456789/+"]
+			"chars": ["0123456789/+."]
 		}
 	]
 }
