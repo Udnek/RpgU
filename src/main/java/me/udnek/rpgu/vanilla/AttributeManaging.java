@@ -178,7 +178,7 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (material == Material.HEAVY_CORE){
             customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
-                    .add(Attributes.BACKSTAB_DAMAGE, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                    .add(Attributes.CRITICAL_DAMAGE, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
     }
