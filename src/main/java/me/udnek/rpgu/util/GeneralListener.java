@@ -11,6 +11,7 @@ import me.udnek.itemscoreu.customregistry.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.vanilla.EnchantManaging;
@@ -56,6 +57,7 @@ public class GeneralListener extends SelfRegisteringListener {
                 if (value >= basePlayerHealth) player.setHealth(basePlayerHealth);
             }
         }.runTaskLater(RpgU.getInstance(), 5);
+        player.sendMessage( Component.text("dsadasdadada").append(Hud.getInstance().getText(player)));
     }
 
     @EventHandler

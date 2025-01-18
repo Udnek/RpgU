@@ -125,6 +125,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
         }
     }
 
@@ -168,10 +169,16 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}*/
 
-        if (Material.SPYGLASS == material) {
+        if (material == Material.SPYGLASS) {
             customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                     .add(Attributes.CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
                     .add(Attributes.CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                    .build()));
+        }
+
+        if (material == Material.HEAVY_CORE){
+            customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+                    .add(Attributes.BACKSTAB_DAMAGE, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
     }

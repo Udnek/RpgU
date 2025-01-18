@@ -18,6 +18,7 @@ import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 
@@ -113,6 +114,11 @@ public class RecipeManaging {
         }
         new RecipeBuilder(Material.COPPER_TRAPDOOR).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
                 .materialIngredients(Map.of('P', Material.COPPER_INGOT)).build();
+        //////////////////////////////////////////////
+        new ShapelessRecipeBuilder(Material.ANVIL).addIngredient(Material.IRON_INGOT, 3).
+                addIngredient(Material.CHIPPED_ANVIL, 1).build();
+        new ShapelessRecipeBuilder(Material.CHIPPED_ANVIL).addIngredient(Material.IRON_INGOT, 3).
+                addIngredient(Material.DAMAGED_ANVIL, 1).build();
 
         unregister();
     }
@@ -140,6 +146,52 @@ public class RecipeManaging {
         VanillaItemManager.getInstance().disableVanillaMaterial(Material.WOLF_ARMOR);
 
         Nms.get().removeAllEntriesContains(LootTables.RUINED_PORTAL.getLootTable(), itemStack -> ItemUtils.isVanillaMaterial(itemStack,Material.CLOCK));
+    }
+
+    public static class ShapelessRecipeBuilder {
+        private final ItemStack replace;
+        private String recipeKey;
+        private final List<RecipeChoice> recipeChoices = new ArrayList<>();
+
+        public ShapelessRecipeBuilder(@NotNull Material recipeMaterial) {
+            this.replace = new ItemStack(recipeMaterial);
+            this.recipeKey = recipeMaterial.getKey().getKey();
+        }
+
+        public ShapelessRecipeBuilder(@NotNull CustomItem recipeCustomItem) {
+            this.replace = recipeCustomItem.getItem();
+            this.recipeKey = recipeCustomItem.getNewRecipeKey().getKey();
+        }
+
+        public ShapelessRecipeBuilder recipeKey(@NotNull String recipeKey){
+            this.recipeKey = recipeKey;
+            return this;
+        }
+
+        public ShapelessRecipeBuilder addIngredient(@NotNull CustomItem customItemAlloy, int amount){
+            for (int i = 0; i < amount; i++){this.recipeChoices.add(new RecipeChoice.ExactChoice(customItemAlloy.getItem()));}
+            return this;
+        }
+
+        public ShapelessRecipeBuilder addIngredient(@NotNull Material materialAlloy, int amount){
+            for (int i = 0; i < amount; i++){this.recipeChoices.add(new RecipeChoice.MaterialChoice(materialAlloy));}
+            return this;
+        }
+
+        public ShapelessRecipeBuilder addIngredient(@NotNull Tag<Material> materialAddition, int amount){
+            for (int i = 0; i < amount; i++){this.recipeChoices.add(new RecipeChoice.MaterialChoice(materialAddition));}
+            return this;
+        }
+
+        public ShapelessRecipeBuilder build(){
+            ShapelessRecipe recipe = new ShapelessRecipe(new NamespacedKey(RpgU.getInstance(), recipeKey), replace);
+
+            for (RecipeChoice recipeChoice : recipeChoices){recipe.addIngredient(recipeChoice);}
+
+            RecipeManager.getInstance().register(recipe);
+
+            return this;
+        }
     }
 
     public static class AlloyingRecipeBuilder{
@@ -172,14 +224,12 @@ public class RecipeManaging {
         }
 
         public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem customItemAlloy, int amount){
-            CustomSingleRecipeChoice alloy = new CustomSingleRecipeChoice(customItemAlloy);
-            for (int i = 0; i < amount; i++){this.alloys.add(alloy);}
+            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(customItemAlloy));}
             return this;
         }
 
         public AlloyingRecipeBuilder addMaterialAlloy(@NotNull Material materialAlloy, int amount){
-            CustomSingleRecipeChoice alloy = new CustomSingleRecipeChoice(materialAlloy);
-            for (int i = 0; i < amount; i++){this.alloys.add(alloy);}
+            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(materialAlloy));}
             return this;
         }
 
