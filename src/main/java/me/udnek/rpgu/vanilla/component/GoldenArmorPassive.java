@@ -98,7 +98,7 @@ public class GoldenArmorPassive {
 
         @Override
         public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
-            componentable.addAbilityDescription(Component.translatable("passive_ability.rpgu.golden_armor.passive_ability.0"));
+            componentable.addAbilityDescription(Component.translatable("item.minecraft.golden_armor.passive_ability.0"));
             super.addLoreLines(componentable);
         }
 
