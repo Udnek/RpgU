@@ -153,5 +153,7 @@
 
   "item.rpgu.spell_prism": "Призма заклинателя",
 
-  "subtitles.rpgu.backstab": "Удар в спину"
+  "subtitles.rpgu.backstab": "Удар в спину",
+
+  "attribute.rpgu.name.critical_damage": "Критический урон"
 }
