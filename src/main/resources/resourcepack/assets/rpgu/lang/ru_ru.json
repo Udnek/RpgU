@@ -22,9 +22,9 @@
   "attribute.rpgu.name.magical_defense_multiplier": "Магическая защита за еденицу МП",
   "attribute.rpgu.name.cast_range": "Дальность применения",
   "attribute.rpgu.name.cooldown_time": "Время отката",
-  "attribute.rpgu.name.projectile_damage_multiplier": "Урон снаряда",
+  "attribute.rpgu.name.projectile_damage": "Урон снаряда",
   "attribute.rpgu.name.projectile_speed": "Скорость снаряда",
-  "attribute.rpgu.name.backstab_damage_multiplier": "Урон со спины",
+  "attribute.rpgu.name.backstab_damage": "Урон со спины",
   "attribute.rpgu.name.area_of_effect": "Область действия эффекта",
 
   "gui.rpgu.alloy_forge": "Металлургическая печь",
