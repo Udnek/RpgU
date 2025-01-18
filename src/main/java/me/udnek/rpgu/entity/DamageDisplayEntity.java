@@ -12,6 +12,9 @@ public class DamageDisplayEntity extends ConstructableCustomEntity<TextDisplay> 
         return EntityType.TEXT_DISPLAY;
     }
 
+    @Override
+    public void delayedTick() {}
+
     public @NotNull TextDisplay getEntity(){
         return entity;
     }
@@ -23,9 +26,6 @@ public class DamageDisplayEntity extends ConstructableCustomEntity<TextDisplay> 
     public void unload() {
         remove();
     }
-
-    @Override
-    public void tick() {}
 
     @Override
     public @NotNull CustomEntityType<?> getType() {

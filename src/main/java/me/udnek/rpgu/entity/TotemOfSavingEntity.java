@@ -1,10 +1,12 @@
 package me.udnek.rpgu.entity;
 
+import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customentity.ConstructableCustomEntity;
 import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Piglin;
@@ -25,6 +27,12 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
     @Override
     public @NotNull EntityType getVanillaEntityType() {
         return EntityType.PIGLIN;
+    }
+
+    @Override
+    public void delayedTick() {
+        if (entity.isOnGround()) return;
+        new ParticleBuilder(Particle.GUST).location(entity.getLocation()).offset(0.2, 0, 0.2).spawn();
     }
 
     @Override
@@ -79,8 +87,6 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
 
     @Override
     public void unload() {}
-    @Override
-    public void tick() {}
 
     @Override
     public @NotNull CustomEntityType<?> getType() {

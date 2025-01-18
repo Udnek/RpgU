@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customentity.CustomEntityType;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -26,7 +30,7 @@ class TotemOfSavingEntityType extends CustomEntityType<TotemOfSavingEntity> impl
     }
 
     @Override
-    protected TotemOfSavingEntity getNewCustomEntityClass() {
+    protected @NotNull TotemOfSavingEntity getNewCustomEntityClass() {
         return new TotemOfSavingEntity();
     }
 
@@ -44,8 +48,18 @@ class TotemOfSavingEntityType extends CustomEntityType<TotemOfSavingEntity> impl
         drops.remove(foundTotem);
         foundTotem.subtract(1);
         if (foundTotem.getAmount() > 0) drops.add(foundTotem);
-        EntityTypes.TOTEM_OF_SAVING.spawn(player.getLocation()).setItems(drops);
+        Location location = player.getLocation();
+        TotemOfSavingEntity totem = EntityTypes.TOTEM_OF_SAVING.spawn(location);
+        totem.setItems(drops);
         drops.clear();
+
+        if (location.getY() > location.getWorld().getMinHeight()) return;
+
+        location.setY(location.getWorld().getMinHeight());
+        location.setPitch(0);
+        totem.getRealEntity().teleport(location);
+        totem.getRealEntity().getAttribute(Attribute.GRAVITY).setBaseValue(0);
+        totem.getRealEntity().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20*10, 0));
     }
 
     @EventHandler
