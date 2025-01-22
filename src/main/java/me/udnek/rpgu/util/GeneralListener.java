@@ -6,6 +6,7 @@ import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.itemscoreu.customitem.VanillaItemManager;
 import me.udnek.itemscoreu.customregistry.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
@@ -27,7 +28,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.VillagerAcquireTradeEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -53,61 +53,41 @@ public class GeneralListener extends SelfRegisteringListener {
                 AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
                 double value = attribute.getValue();
                 if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
-                if (value >= basePlayerHealth) player.setHealth(basePlayerHealth);
+                if (value >= basePlayerHealth) player.setHealth(value);
             }
         }.runTaskLater(RpgU.getInstance(), 5);
     }
 
-    @EventHandler
-    public void disableLibrarian(PlayerInteractEntityEvent event){
-        if (!(event.getRightClicked() instanceof Villager villager)) return;
-        if (villager.getProfession() == Villager.Profession.LIBRARIAN) event.setCancelled(true);
-    }
-
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH)
     public void villagerTrades(VillagerAcquireTradeEvent event){
-        if (!(event.getEntity() instanceof Villager villager)) return;
+        if (!(event.getEntity() instanceof Villager)) return;
         MerchantRecipe recipe = event.getRecipe();
         Material material = recipe.getResult().getType();
+        if (CustomItem.isCustom(recipe.getResult())) return;
+        if (ItemUtils.isSameIds(recipe.getResult(), new ItemStack(Material.ENCHANTED_BOOK))) event.setCancelled(true);
 
-        if (villager.getProfession() == Villager.Profession.TOOLSMITH) {
-            ItemStack itemStack = switch (material) {
-                case Material.STONE_AXE -> Items.FLINT_AXE.getItem();
-                case Material.STONE_PICKAXE -> Items.FLINT_PICKAXE.getItem();
-                case Material.STONE_SHOVEL -> Items.FLINT_SHOVEL.getItem();
-                case Material.STONE_HOE -> Items.FLINT_HOE.getItem();
-                case Material.STONE_SWORD -> Items.FLINT_SWORD.getItem();
-                case Material.DIAMOND_AXE -> Items.FERRUDAM_AXE.getItem();
-                case Material.DIAMOND_PICKAXE -> Items.FERRUDAM_PICKAXE.getItem();
-                case Material.DIAMOND_SHOVEL -> Items.FERRUDAM_SHOVEL.getItem();
-                case Material.DIAMOND_HOE -> Items.FERRUDAM_HOE.getItem();
-                default -> null;
-            };
-            if (itemStack == null) return;
-            event.setRecipe(replaceRecipe(recipe, itemStack));
-        }
+        ItemStack itemStack = switch (material) {
+            case Material.STONE_AXE -> Items.FLINT_AXE.getItem();
+            case Material.STONE_PICKAXE -> Items.FLINT_PICKAXE.getItem();
+            case Material.STONE_SHOVEL -> Items.FLINT_SHOVEL.getItem();
+            case Material.STONE_HOE -> Items.FLINT_HOE.getItem();
+            case Material.STONE_SWORD -> Items.FLINT_SWORD.getItem();
 
-        if (villager.getProfession() == Villager.Profession.ARMORER) {
-            ItemStack itemStack = switch (material) {
-                case Material.DIAMOND_HELMET -> Items.FERRUDAM_HELMET.getItem();
-                case Material.DIAMOND_CHESTPLATE -> Items.FERRUDAM_CHESTPLATE.getItem();
-                case Material.DIAMOND_LEGGINGS -> Items.FERRUDAM_LEGGINGS.getItem();
-                case Material.DIAMOND_BOOTS -> Items.FERRUDAM_BOOTS.getItem();
-                default -> null;
-            };
-            if (itemStack == null) return;
-            event.setRecipe(replaceRecipe(recipe, itemStack));
-        }
+            case Material.DIAMOND_AXE -> Items.FERRUDAM_AXE.getItem();
+            case Material.DIAMOND_PICKAXE -> Items.FERRUDAM_PICKAXE.getItem();
+            case Material.DIAMOND_SHOVEL -> Items.FERRUDAM_SHOVEL.getItem();
+            case Material.DIAMOND_HOE -> Items.FERRUDAM_HOE.getItem();
+            case Material.DIAMOND_SWORD -> Items.FERRUDAM_SWORD.getItem();
 
-        if (villager.getProfession() == Villager.Profession.WEAPONSMITH) {
-            ItemStack itemStack = switch (material) {
-                case Material.DIAMOND_AXE -> Items.FERRUDAM_AXE.getItem();
-                case Material.DIAMOND_SWORD -> Items.FERRUDAM_SWORD.getItem();
-                default -> null;
-            };
-            if (itemStack == null) return;
-            event.setRecipe(replaceRecipe(recipe, itemStack));
-        }
+            case Material.DIAMOND_HELMET -> Items.FERRUDAM_HELMET.getItem();
+            case Material.DIAMOND_CHESTPLATE -> Items.FERRUDAM_CHESTPLATE.getItem();
+            case Material.DIAMOND_LEGGINGS -> Items.FERRUDAM_LEGGINGS.getItem();
+            case Material.DIAMOND_BOOTS -> Items.FERRUDAM_BOOTS.getItem();
+
+            default -> null;
+        };
+        if (itemStack == null) return;
+        event.setRecipe(replaceRecipe(recipe, itemStack));
     }
 
     public MerchantRecipe replaceRecipe(MerchantRecipe recipe, ItemStack newItem){
