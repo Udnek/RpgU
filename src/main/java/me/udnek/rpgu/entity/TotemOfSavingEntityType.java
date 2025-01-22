@@ -44,6 +44,7 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         EntityEquipment equipment = entity.getEquipment();
         equipment.clear();
         equipment.setItem(EquipmentSlot.HEAD, head);
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, PotionEffect.INFINITE_DURATION, 1, true, false, true));
         entity.setImmuneToZombification(true);
         entity.setAdult();
         entity.setSilent(true);
