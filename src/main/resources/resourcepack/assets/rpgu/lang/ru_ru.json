@@ -143,7 +143,7 @@
   "effect.rpgu.root": "Оцепенение",
   "item.rpgu.wither_wreath.passive_ability.0": "Применяет дебафы к существу при атаке",
 
-  "passive_ability.rpgu.golden_armor.passive_ability.0": "Усиливает ближайших прирученных существ",
+  "item.minecraft.golden_armor.passive_ability.0": "Усиливает ближайших прирученных существ",
 
   "effect.rpgu.mire_touch": "Вязкое прикосновение",
 
