@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -30,7 +31,12 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
-    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of((int) Material.WOLF_ARMOR.getMaxDurability());}
+    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(Material.WOLF_ARMOR.getDefaultData(DataComponentTypes.MAX_DAMAGE));}
+
+    @Override
+    public @Nullable DataSupplier<Integer> getMaxStackSize() {
+        return DataSupplier.of(null);
+    }
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {

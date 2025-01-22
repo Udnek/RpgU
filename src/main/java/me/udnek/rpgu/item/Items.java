@@ -107,7 +107,7 @@ public class Items {
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
 
     // UTILITY
-    public static final  CustomItem WRENCH = register(new Wrench());
+    public static final CustomItem WRENCH = register(new Wrench());
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
     public static final CustomItem ARMADILLO_BAR = register(new ArmadilloBar());

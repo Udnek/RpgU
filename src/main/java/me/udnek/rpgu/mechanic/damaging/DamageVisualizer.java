@@ -32,7 +32,7 @@ public class DamageVisualizer {
     public static final TextColor SUB_LINE_DAMAGE_COLOR = TextColor.color(0.7f, 0.7f, 0.7f);
 
     public static void visualize(@NotNull Damage damage, @NotNull Location location){
-        TextDisplay display = EntityTypes.DAMAGE_DISPLAY.spawn(location).getEntity();
+        TextDisplay display = (TextDisplay) EntityTypes.DAMAGE_DISPLAY.spawn(location);
 
         new BukkitRunnable() {
             @Override

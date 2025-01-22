@@ -3,11 +3,13 @@ package me.udnek.rpgu;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customeffect.CustomEffect;
-import me.udnek.itemscoreu.customentity.CustomEntityType;
+import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
+import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.block.BlockTypes;
 import me.udnek.rpgu.command.Commands;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
@@ -37,10 +39,11 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         instance = this;
 
         CustomItem blazeBlade = Items.SHINY_AXE;
-        CustomEntityType<TotemOfSavingEntity> totemOfSaving = EntityTypes.TOTEM_OF_SAVING;
+        CustomEntityType totemOfSaving = EntityTypes.TOTEM_OF_SAVING;
         SingleSlot artifacts = EquipmentSlots.FIRST_ARTIFACT;
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
         CustomEffect magicalResistance = Effects.MAGICAL_RESISTANCE;
+        CustomBlockType soulBinder = BlockTypes.SOUL_BINDER;
 
         new DamageListener(this);
         new EquipmentListener(this);

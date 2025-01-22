@@ -1,12 +1,12 @@
 package me.udnek.rpgu.component.ability;
 
-import me.udnek.itemscoreu.customcomponent.OptimizedComponentHolder;
+import me.udnek.itemscoreu.customcomponent.AbstractComponentHolder;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractAbilityComponent<ActivationContext> extends OptimizedComponentHolder<AbilityComponent<?>> implements AbilityComponent<ActivationContext>{
+public abstract class AbstractAbilityComponent<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>> implements AbilityComponent<ActivationContext>{
 
     @Override
     public void activate(@NotNull CustomItem customItem, @NotNull Player player, @NotNull ActivationContext activationContext){

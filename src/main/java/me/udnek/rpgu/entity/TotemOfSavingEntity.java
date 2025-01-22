@@ -1,62 +1,35 @@
 package me.udnek.rpgu.entity;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customentity.ConstructableCustomEntity;
-import me.udnek.itemscoreu.customentity.CustomEntityType;
+import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntity;
+import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Piglin;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> implements Listener {
+
     @Override
-    public @NotNull EntityType getVanillaEntityType() {
-        return EntityType.PIGLIN;
+    public @Positive int getTickDelay() {
+        return 10;
     }
 
     @Override
     public void delayedTick() {
         if (entity.isOnGround()) return;
         new ParticleBuilder(Particle.GUST).location(entity.getLocation()).offset(0.2, 0, 0.2).spawn();
-    }
-
-    @Override
-    public void afterSpawn() {
-        ItemStack head = new ItemStack(Material.GUNPOWDER);
-        head.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "entity/totem_of_saving")));
-        EntityEquipment equipment = entity.getEquipment();
-        equipment.clear();
-        equipment.setItem(EquipmentSlot.HEAD, head);
-        entity.setImmuneToZombification(true);
-        entity.setAdult();
-        entity.setSilent(true);
-        entity.setInvisible(true);
-        entity.setAware(false);
-        entity.clearLootTable();
-        entity.setRotation(entity.getYaw(), 0);
-        entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
-        entity.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(0.8);
-        entity.setPersistent(true);
-        entity.setRemoveWhenFarAway(false);
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0, false, false, false));
-        if (entity.getLocation().getBlock().getLightFromSky() < 13){
-            entity.setGlowing(true);
-        }
     }
 
     public void setItems(@Nullable List<ItemStack> items){
@@ -86,14 +59,9 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
     }
 
     @Override
-    public void unload() {}
-
-    @Override
-    public @NotNull CustomEntityType<?> getType() {
+    public @NotNull CustomTickingEntityType<?> getType() {
         return EntityTypes.TOTEM_OF_SAVING;
     }
-
-
 }
 
 

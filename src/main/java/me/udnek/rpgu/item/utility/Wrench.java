@@ -1,8 +1,12 @@
 package me.udnek.rpgu.item.utility;
 
+import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
+import io.papermc.paper.datacomponent.item.Tool;
 import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
+import me.udnek.rpgu.RpgU;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -13,8 +17,10 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.type.Chest;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +28,26 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class Wrench extends ConstructableCustomItem {
+
+    @Override
+    public @NotNull Material getMaterial() {
+        return Material.STONE_PICKAXE;
+    }
+
+    @Override
+    public @Nullable DataSupplier<Tool> getTool() {
+        return DataSupplier.of(null);
+    }
+
+    @Override
+    public @Nullable RepairData initializeRepairData() {
+        return new RepairData(Material.COPPER_INGOT);
+    }
+
+    @Override
+    public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {
+        return DataSupplier.of(null);
+    }
 
     @Override
     public @NotNull String getRawId() {
@@ -36,11 +62,8 @@ public class Wrench extends ConstructableCustomItem {
             public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
                 event.setCancelled(true);
                 if (event.getClickedBlock() == null) return;
-
                 Block block = event.getClickedBlock();
-
                 if (!(block.getBlockData() instanceof Directional blockData)) return;
-
                 if (!isBlockAcceptable(block)) return;
 
                 BlockFace[] faces = Arrays.copyOf(blockData.getFaces().toArray(), blockData.getFaces().size(), BlockFace[].class);
@@ -64,6 +87,7 @@ public class Wrench extends ConstructableCustomItem {
                 block.setBlockData(blockData, true);
                 event.getPlayer().damageItemStack(event.getHand(), 1);
             }
+
             public boolean isBlockAcceptable(Block block){
                 Material material = block.getType();
                 if (Tag.BEDS.isTagged(material)) return false;
