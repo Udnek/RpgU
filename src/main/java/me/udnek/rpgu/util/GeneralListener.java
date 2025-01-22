@@ -53,7 +53,7 @@ public class GeneralListener extends SelfRegisteringListener {
                 AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
                 double value = attribute.getValue();
                 if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
-                if (value >= basePlayerHealth) player.setHealth(basePlayerHealth);
+                if (value >= basePlayerHealth) player.setHealth(value);
             }
         }.runTaskLater(RpgU.getInstance(), 5);
     }
@@ -69,7 +69,7 @@ public class GeneralListener extends SelfRegisteringListener {
         if (!(event.getEntity() instanceof Villager)) return;
         MerchantRecipe recipe = event.getRecipe();
         Material material = recipe.getResult().getType();
-
+        if (CustomItem.isCustom(recipe.getResult())) return;
 
         ItemStack itemStack = switch (material) {
             case Material.STONE_AXE -> Items.FLINT_AXE.getItem();
