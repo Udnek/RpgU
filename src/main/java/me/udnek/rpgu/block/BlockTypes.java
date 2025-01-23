@@ -3,7 +3,6 @@ package me.udnek.rpgu.block;
 import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
-import org.bukkit.persistence.PersistentDataHolder;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockTypes {
