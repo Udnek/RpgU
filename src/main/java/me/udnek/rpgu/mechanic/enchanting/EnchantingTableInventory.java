@@ -216,8 +216,8 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         iterateTroughAllInputSlots(slot -> {
             ItemStack itemStack = eventInventory.getItem(slot);
             if (itemStack != null){
-                if (playerInventory.contains(Material.AIR)) playerInventory.addItem(itemStack);
-                else player.getWorld().dropItemNaturally(player.getLocation(), itemStack);
+                HashMap<Integer, ItemStack> dropItem = playerInventory.addItem(itemStack);
+                player.getWorld().dropItemNaturally(player.getLocation(), dropItem.get(0));
             }
         });
     }
