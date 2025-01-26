@@ -18,6 +18,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -208,12 +209,16 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
     @Override
     public void onPlayerClosesInventory(InventoryCloseEvent event) {
-        PlayerInventory playerInventory = event.getPlayer().getInventory();
+        HumanEntity player = event.getPlayer();
+        PlayerInventory playerInventory = player.getInventory();
         Inventory eventInventory = event.getInventory();
 
         iterateTroughAllInputSlots(slot -> {
             ItemStack itemStack = eventInventory.getItem(slot);
-            if (itemStack != null){playerInventory.addItem(itemStack);}
+            if (itemStack != null){
+                HashMap<Integer, ItemStack> dropItem = playerInventory.addItem(itemStack);
+                player.getWorld().dropItemNaturally(player.getLocation(), dropItem.get(0));
+            }
         });
     }
 
