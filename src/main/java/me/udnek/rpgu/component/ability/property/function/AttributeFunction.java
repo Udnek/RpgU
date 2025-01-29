@@ -2,17 +2,17 @@ package me.udnek.rpgu.component.ability.property.function;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import net.kyori.adventure.text.Component;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-public class AttributeFunction implements PropertyFunction<Player, Double> {
+public class AttributeFunction implements PropertyFunction<LivingEntity, Double> {
 
     protected CustomAttribute attribute;
-    protected PropertyFunction<Player, Double> base;
+    protected PropertyFunction<LivingEntity, Double> base;
 
-    public AttributeFunction(@NotNull CustomAttribute attribute, @NotNull PropertyFunction<Player, Double> base){
+    public AttributeFunction(@NotNull CustomAttribute attribute, @NotNull PropertyFunction<LivingEntity, Double> base){
         this.attribute = attribute;
         this.base = base;
     }
@@ -37,8 +37,8 @@ public class AttributeFunction implements PropertyFunction<Player, Double> {
     }
 
     @Override
-    public @NotNull Double apply(@NotNull Player player) {
-        return attribute.calculateWithBase(player, base.apply(player));
+    public @NotNull Double apply(@NotNull LivingEntity livingEntity) {
+        return attribute.calculateWithBase(livingEntity, base.apply(livingEntity));
     }
 
     @Override

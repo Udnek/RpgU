@@ -3,10 +3,10 @@ package me.udnek.rpgu.component.ability.property;
 import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Double> {
+public class AttributeBasedProperty extends AbstractAbilityProperty<LivingEntity, Double> {
 
     protected @NotNull AttributeBasedPropertyType type;
 
@@ -25,9 +25,9 @@ public class AttributeBasedProperty extends AbstractAbilityProperty<Player, Doub
     }
 
     @Override
-    public @NotNull Double get(@NotNull Player player) {
+    public @NotNull Double get(@NotNull LivingEntity livingEntity) {
         if (getFunction().getBase() < getType().getAttribute().getMinimum()) return getType().getAttribute().getMinimum();
-        return getFunction().apply(player);
+        return getFunction().apply(livingEntity);
     }
 
     @Override

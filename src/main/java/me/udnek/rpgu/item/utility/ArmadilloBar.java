@@ -11,7 +11,7 @@ import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.Recipe;
@@ -77,17 +77,17 @@ public class ArmadilloBar extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            final double duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(player);
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerInteractEvent event) {
+            final double duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(livingEntity);
             final int PERIOD = 10;
             new BukkitRunnable() {
                 int count = 0;
                 @Override
                 public void run() {
-                    Collection<PotionEffect> activePotionEffects = player.getActivePotionEffects();
+                    Collection<PotionEffect> activePotionEffects = livingEntity.getActivePotionEffects();
                     for (PotionEffect activePotionEffect : activePotionEffects) {
                         if (activePotionEffect.getType().getEffectCategory() == PotionEffectType.Category.HARMFUL){
-                            player.removePotionEffect(activePotionEffect.getType());
+                            livingEntity.removePotionEffect(activePotionEffect.getType());
                         }
                     }
 
@@ -96,9 +96,9 @@ public class ArmadilloBar extends ConstructableCustomItem {
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, PERIOD);
 
-            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(player);
+            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(livingEntity);
             for (PotionEffect effect : potionEffects) {
-                player.addPotionEffect(effect.withDuration((int) duration));
+                livingEntity.addPotionEffect(effect.withDuration((int) duration));
             }
 
             return ActionResult.FULL_COOLDOWN;

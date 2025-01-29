@@ -14,7 +14,6 @@ import me.udnek.rpgu.command.Commands;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
-import me.udnek.rpgu.entity.TotemOfSavingEntity;
 import me.udnek.rpgu.equipment.EquipmentListener;
 import me.udnek.rpgu.equipment.PlayerWearingEquipmentTask;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -23,6 +22,7 @@ import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
+import me.udnek.rpgu.util.AbilityListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -50,6 +50,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new EnchantingListener(this);
         new ModifiedEntitySpawnListener(this);
         new GeneralListener(this);
+        new AbilityListener(this);
         new AttributeManaging(this);
         AlloyForgeManager.getInstance();
 

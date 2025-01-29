@@ -1,12 +1,9 @@
 package me.udnek.rpgu.block;
 
-import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customentitylike.block.constructabletype.DisplayBasedConstructableBlockType;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.ShulkerBox;
 import org.bukkit.block.TileState;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

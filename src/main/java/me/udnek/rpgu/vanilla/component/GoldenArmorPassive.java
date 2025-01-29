@@ -15,7 +15,6 @@ import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Tameable;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffectType;
@@ -106,12 +105,12 @@ public class GoldenArmorPassive {
         public @NotNull CustomEquipmentSlot getSlot() {return slot;}
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull Object object) {
-            Collection<LivingEntity> livingEntities = Utils.livingEntitiesInRadius(player.getLocation(), getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player));
-            for (LivingEntity livingEntity: livingEntities){
-                if (!(livingEntity instanceof Tameable tameable)) continue;
-                if (player == tameable.getOwner()) {
-                    getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, tameable);
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Object object) {
+            Collection<LivingEntity> livingEntitiesInRadius = Utils.livingEntitiesInRadius(livingEntity.getLocation(), getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity));
+            for (LivingEntity livingEntityInRadius: livingEntitiesInRadius){
+                if (!(livingEntityInRadius instanceof Tameable tameable)) continue;
+                if (livingEntity == tameable.getOwner()) {
+                    getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, tameable);
                 }
             }
             return ActionResult.FULL_COOLDOWN;

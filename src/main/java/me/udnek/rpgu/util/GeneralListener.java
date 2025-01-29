@@ -2,7 +2,6 @@ package me.udnek.rpgu.util;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
-import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -28,8 +27,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.VillagerAcquireTradeEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
@@ -106,24 +103,6 @@ public class GeneralListener extends SelfRegisteringListener {
         customRecipe.setIngredients(recipe.getIngredients());
         return customRecipe;
     }
-
-    @EventHandler
-    public void abilityRightClick(PlayerInteractEvent event){
-        if (!event.getAction().isRightClick()) return;
-        CustomItem.consumeIfCustom(event.getItem(), customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event));
-    }
-    @EventHandler
-    public void abilityStopUsing(PlayerStopUsingItemEvent event){
-        CustomItem.consumeIfCustom(event.getItem(), customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event));
-    }
-    @EventHandler
-    public void abilityConsume(PlayerItemConsumeEvent event){
-        CustomItem.consumeIfCustom(event.getItem(), customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event));
-    }
-
 
     @EventHandler
     public void craftingTableInventoryRename(InventoryOpenEvent event){

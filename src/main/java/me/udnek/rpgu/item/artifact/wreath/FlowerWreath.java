@@ -17,7 +17,7 @@ import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -132,10 +132,10 @@ public class FlowerWreath extends ConstructableCustomItem {
             )));
         }
 
-        public @NotNull Location randomOffset(@NotNull Player player) {
+        public @NotNull Location randomOffset(@NotNull LivingEntity livingEntity) {
             Random random = new Random();
-            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
-            Location location = player.getLocation();
+            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
+            Location location = livingEntity.getLocation();
             location.add((random.nextFloat() - 0.5f) * 2 * castRange, (random.nextFloat() - 0.5f) * 2 * castRange + yOffset, (random.nextFloat() - 0.5f) * 2 * castRange);
             return location;
         }
@@ -150,18 +150,18 @@ public class FlowerWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @Nullable Object o) {
-            Location location = randomOffset(player);
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @Nullable Object o) {
+            Location location = randomOffset(livingEntity);
             boolean isInForest = isForestMaterial(location.getBlock().getType());
             if (!isInForest) return ActionResult.NO_COOLDOWN;
 
-            Location from = player.getEyeLocation().add(0, -0.8, 0);
+            Location from = livingEntity.getEyeLocation().add(0, -0.8, 0);
             Location to =location.toCenterLocation();
 
             ParticleBuilder particle = Particle.TRAIL.builder().location(from).count(16).offset(0.2, 0.2, 0.2);
             particle.data(new Particle.TargetColor(to, Color.fromRGB(92, 169, 4))).spawn();
             particle.data(new Particle.TargetColor(to, Color.fromRGB(139,69,19))).spawn();
-            getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, player);
+            getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingEntity);
             return ActionResult.FULL_COOLDOWN;
         }
 

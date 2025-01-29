@@ -20,7 +20,6 @@ import org.bukkit.Particle;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -83,25 +82,25 @@ public class ShamanTambourine extends ConstructableCustomItem{
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent event) {
-            RayTraceResult rayTraceResult = player.getWorld().rayTraceEntities(
-                    player.getEyeLocation(),
-                    player.getLocation().getDirection(),
-                    getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player),
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerItemConsumeEvent event) {
+            RayTraceResult rayTraceResult = livingEntity.getWorld().rayTraceEntities(
+                    livingEntity.getEyeLocation(),
+                    livingEntity.getLocation().getDirection(),
+                    getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity),
                     1,
-                    entity -> entity!=player);
+                    entity -> entity!=livingEntity);
             if (!(rayTraceResult != null && rayTraceResult.getHitEntity() instanceof LivingEntity living)) {
-                ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1).location(player.getLocation().add(player.getLocation().getDirection().
-                        multiply(getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player))).add(0, 1, 0));
+                ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1).location(livingEntity.getLocation().add(livingEntity.getLocation().getDirection().
+                        multiply(getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity))).add(0, 1, 0));
                 builder.data(0);
                 builder.spawn();
                 return ActionResult.NO_COOLDOWN;
             }
             DamageUtils.damage(
                     living,
-                    getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player)),
-                    player);
-            new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(player.getWorld())).spawn();
+                    getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity)),
+                    livingEntity);
+            new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(livingEntity.getWorld())).spawn();
             return ActionResult.FULL_COOLDOWN;
         }
 
