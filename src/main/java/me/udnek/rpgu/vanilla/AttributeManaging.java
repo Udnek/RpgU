@@ -1,5 +1,7 @@
 package me.udnek.rpgu.vanilla;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.Repairable;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -14,6 +16,7 @@ import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.vanilla.component.GoldenArmorPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -140,7 +143,10 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
 
-        if (leatherArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));}
+        if (leatherArmor.contains(material)) {
+            itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));
+            event.setRepairData(new RepairData(Set.of(Items.FABRIC), Set.of(Material.LEATHER)));
+        }
 
         if (chainmailArmor.contains(material)) {itemStack.editMeta(itemMeta -> itemMeta.setRarity(ItemRarity.COMMON));}
 
