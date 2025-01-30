@@ -15,7 +15,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class Hud implements CustomHud {

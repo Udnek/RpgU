@@ -18,7 +18,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -81,31 +80,31 @@ public class AirElementalTome extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.SMALL_GUST));
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerInteractEvent event) {
+            Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.SMALL_GUST));
 
             if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
             if (livingEntitiesInRadius.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
-            for (LivingEntity livingEntity : livingEntitiesInRadius) {
+            for (LivingEntity livingEntityInRadius : livingEntitiesInRadius) {
                 new BukkitRunnable() {
                     int count = 0;
                     @Override
                     public void run() {
-                        Location locationEntity = livingEntity.getLocation();
+                        Location locationEntity = livingEntityInRadius.getLocation();
                         if (count >= 0 && count < UP_DURATION) {
-                            livingEntity.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
+                            livingEntityInRadius.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
                         } else if (count >= UP_DURATION && count < DURATION && (count % 5 == 0)) {
                             new ParticleBuilder(Particle.GUST).count(3).location(locationEntity).offset(1,0,1).spawn();
                         } else if (count == DURATION) {
-                            if (livingEntity == player) Effects.NO_FALL_DAMAGE.applyInvisible(player, 10, 0);
-                            else getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(player, livingEntity);
+                            if (livingEntityInRadius == livingEntity) Effects.NO_FALL_DAMAGE.applyInvisible(livingEntity, 10, 0);
+                            else getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingEntityInRadius);
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
                         } else if (count > DURATION) cancel();
 
                         if (count == UP_DURATION) {
-                            Effects.NO_GRAVITY.applyInvisible(livingEntity, (int) (UP_DURATION * 4), 0);
-                            livingEntity.setVelocity(new Vector());
+                            Effects.NO_GRAVITY.applyInvisible(livingEntityInRadius, (int) (UP_DURATION * 4), 0);
+                            livingEntityInRadius.setVelocity(new Vector());
                         }
 
                         count++;

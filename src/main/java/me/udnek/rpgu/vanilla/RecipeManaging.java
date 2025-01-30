@@ -119,6 +119,9 @@ public class RecipeManaging {
                 addIngredient(Material.CHIPPED_ANVIL, 1).build();
         new ShapelessRecipeBuilder(Material.CHIPPED_ANVIL).addIngredient(Material.IRON_INGOT, 3).
                 addIngredient(Material.DAMAGED_ANVIL, 1).build();
+        //////////////////////////////////////////////
+        new RecipeBuilder(Material.MINECART).recipeShape(new String[]{"I I", "MMM"}).materialIngredients(Map.of('I', Material.IRON_INGOT)).
+                customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build();
 
         unregister();
     }
@@ -266,6 +269,7 @@ public class RecipeManaging {
         private final ItemStack replace;
         private String recipeKey;
         private String[] recipeShape;
+        private boolean rewriteRecipe = true;
         private Map<Character, Material> materialIngredients = new HashMap<>();
         private Map<Character, CustomItem> customItemIngredients = new HashMap<>();
         private Map<Character, Tag<Material>> tagIngredients = new HashMap<>();
@@ -305,8 +309,15 @@ public class RecipeManaging {
             return this;
         }
 
+        public RecipeBuilder rewriteRecipe(boolean rewriteRecipe) {
+            this.rewriteRecipe = rewriteRecipe;
+            return this;
+        }
+
         public RecipeBuilder build(){
-            RecipeManager.getInstance().unregister(NamespacedKey.minecraft(recipeKey));
+            if (rewriteRecipe){
+                RecipeManager.getInstance().unregister(NamespacedKey.minecraft(recipeKey));
+            }
 
             ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(RpgU.getInstance(), recipeKey), replace);
             recipe.shape(recipeShape);

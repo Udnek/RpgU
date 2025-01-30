@@ -155,5 +155,7 @@
 
   "subtitles.rpgu.backstab": "Удар в спину",
 
-  "attribute.rpgu.name.critical_damage": "Критический урон"
-}
+  "attribute.rpgu.name.critical_damage": "Критический урон",
+
+  "item.minecraft.totem_of_undying.passive_ability.0": "Спасает от смерти"
+  }

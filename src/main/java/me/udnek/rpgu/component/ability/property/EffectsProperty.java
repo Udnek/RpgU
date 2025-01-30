@@ -12,7 +12,6 @@ import me.udnek.rpgu.component.ability.property.function.PropertyFunction;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EffectsProperty implements AbilityProperty<Player, List<PotionEffect>> {
+public class EffectsProperty implements AbilityProperty<LivingEntity, List<PotionEffect>> {
 
     public static EffectsProperty DEFAULT = new EffectsProperty(){
         @Override
-        public void add(@NotNull PotionData data) {}
+        public void add(@NotNull PotionData data) {throw new RuntimeException("Cannot add effects to a default component");}
     };
 
     protected List<PotionData> effects = new ArrayList<>();
@@ -43,18 +42,18 @@ public class EffectsProperty implements AbilityProperty<Player, List<PotionEffec
     public @NotNull List<PotionEffect> getBase() {
         List<PotionEffect> potionEffects = new ArrayList<>();
         for (PotionData data : effects) {
-            PropertyFunction<Player, Integer> duration = data.duration;
+            PropertyFunction<LivingEntity, Integer> duration = data.duration;
             potionEffects.add(new PotionEffect(data.type, duration.getBase(), data.amplifier.getBase(), data.ambient, data.particles, data.icon));
         }
         return potionEffects;
     }
 
     @Override
-    public @NotNull List<PotionEffect> get(@NotNull Player player) {
+    public @NotNull List<PotionEffect> get(@NotNull LivingEntity livingEntity) {
         List<PotionEffect> potionEffects = new ArrayList<>();
         for (PotionData data : effects) {
-            PropertyFunction<Player, Integer> duration = data.duration;
-            potionEffects.add(new PotionEffect(data.type, duration.apply(player), data.amplifier.apply(player), data.ambient, data.particles, data.icon));
+            PropertyFunction<LivingEntity, Integer> duration = data.duration;
+            potionEffects.add(new PotionEffect(data.type, duration.apply(livingEntity), data.amplifier.apply(livingEntity), data.ambient, data.particles, data.icon));
         }
         return potionEffects;
     }
@@ -90,7 +89,7 @@ public class EffectsProperty implements AbilityProperty<Player, List<PotionEffec
         componentable.addAbilityStat(Component.translatable("ability.rpgu.effects", List.of(text)));
     }
 
-    public void applyOn(@NotNull Player source, @NotNull LivingEntity target){
+    public void applyOn(@NotNull LivingEntity source, @NotNull LivingEntity target){
         for (PotionEffect effect : get(source)) {
             CustomEffect customEffect = CustomEffect.get(effect.getType());
             if (customEffect == null) target.addPotionEffect(effect);
@@ -98,7 +97,7 @@ public class EffectsProperty implements AbilityProperty<Player, List<PotionEffec
         }
     }
 
-    public void applyOn(@NotNull Player source, @NotNull Iterable<LivingEntity> targets){
+    public void applyOn(@NotNull LivingEntity source, @NotNull Iterable<LivingEntity> targets){
         for (PotionEffect effect : get(source)) {
             CustomEffect customEffect = CustomEffect.get(effect.getType());
             for (LivingEntity target : targets) {
@@ -115,13 +114,17 @@ public class EffectsProperty implements AbilityProperty<Player, List<PotionEffec
 
     public record PotionData(
             @NotNull PotionEffectType type,
-            @NotNull PropertyFunction<Player, Integer> duration,
-            @NotNull PropertyFunction<Player, Integer> amplifier,
+            @NotNull PropertyFunction<LivingEntity, Integer> duration,
+            @NotNull PropertyFunction<LivingEntity, Integer> amplifier,
             boolean ambient,
             boolean particles,
             boolean icon
     ){
-        public PotionData(@NotNull PotionEffectType type, @NotNull PropertyFunction<Player, Integer> duration, @NotNull PropertyFunction<Player, Integer> amplifier){
+        public PotionData(@NotNull PotionEffect effect){
+            this(effect.getType(), Functions.CONSTANT(effect.getDuration()), Functions.CONSTANT(effect.getAmplifier()), effect.isAmbient()
+                    , effect.hasParticles(), effect.hasIcon());
+        }
+        public PotionData(@NotNull PotionEffectType type, @NotNull PropertyFunction<LivingEntity, Integer> duration, @NotNull PropertyFunction<LivingEntity, Integer> amplifier){
             this(type, duration, amplifier, false, true, true);
         }
 

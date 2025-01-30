@@ -33,7 +33,6 @@ import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.potion.PotionEffect;
@@ -141,19 +140,19 @@ public class AmethystDoloire extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
-            Location location = Utils.rayTraceBlockUnder(player);
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
+            Location location = Utils.rayTraceBlockUnder(livingEntity);
 
             if (location == null) return ActionResult.PENALTY_COOLDOWN;
 
-            final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
-            final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player);
-            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(player);
+            final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity);
+            final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
+            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(livingEntity);
 
-            Vector direction = player.getLocation().getDirection();
+            Vector direction = livingEntity.getLocation().getDirection();
             direction.setY(0).normalize().multiply(radius*2);
 
-            Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player));
+            Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity));
 
             new BukkitRunnable(){
                 int count = 0;
@@ -167,7 +166,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
                     for (LivingEntity entity : nearbyLivingEntities){
                         potionEffects.forEach(entity::addPotionEffect);
-                        DamageUtils.damage(entity, damage, player);
+                        DamageUtils.damage(entity, damage, livingEntity);
                     }
 
                     if (2*radius*count > castRange) cancel();

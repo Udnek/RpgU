@@ -17,7 +17,6 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -76,17 +75,17 @@ public class NaturesStaff extends ConstructableCustomItem {
 
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull Player player, @NotNull PlayerInteractEvent event) {
-            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(player, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerInteractEvent event) {
+            Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
 
             EffectsProperty effects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS);
 
             if (livingEntitiesInRayTraceRadius == null || livingEntitiesInRayTraceRadius.isEmpty()) return ActionResult.PENALTY_COOLDOWN;
 
 
-            for (LivingEntity livingEntity : livingEntitiesInRayTraceRadius) {
-                if (livingEntity == player) continue;
-                effects.applyOn(player, livingEntity);
+            for (LivingEntity livingEntitieInRayTraceRadius : livingEntitiesInRayTraceRadius) {
+                if (livingEntitieInRayTraceRadius == livingEntity) continue;
+                effects.applyOn(livingEntity, livingEntitieInRayTraceRadius);
             }
 
             return ActionResult.FULL_COOLDOWN;

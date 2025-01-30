@@ -4,7 +4,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.text.Component;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
@@ -13,7 +13,7 @@ public class Functions {
 
     public static final boolean IS_DEBUG = false;
 
-    public static @NotNull PropertyFunction<Player, Double> APPLY_MP(@NotNull PropertyFunction<Double, Double> function){
+    public static @NotNull PropertyFunction<LivingEntity, Double> APPLY_MP(@NotNull PropertyFunction<Double, Double> function){
         return new PropertyFunction<>() {
             @Override
             public boolean isConstant() {return function.isConstant();}
@@ -27,8 +27,8 @@ public class Functions {
             }
 
             @Override
-            public @NotNull Double apply(@NotNull Player player) {
-                return function.apply(Attributes.MAGICAL_POTENTIAL.calculate(player));
+            public @NotNull Double apply(@NotNull LivingEntity livingEntity) {
+                return function.apply(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity));
             }
 
             @Override
@@ -38,7 +38,7 @@ public class Functions {
             }
         };
     }
-    public static @NotNull AttributeFunction ATTRIBUTE(@NotNull CustomAttribute attribute, @NotNull PropertyFunction<Player, Double> base){
+    public static @NotNull AttributeFunction ATTRIBUTE(@NotNull CustomAttribute attribute, @NotNull PropertyFunction<LivingEntity, Double> base){
         return new AttributeFunction(attribute, base);
     }
     public static @NotNull AttributeFunction ATTRIBUTE(@NotNull CustomAttribute attribute,double base){

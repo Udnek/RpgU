@@ -1,5 +1,6 @@
 package me.udnek.rpgu.vanilla;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -14,7 +15,9 @@ import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.vanilla.component.GoldenArmorPassive;
+import me.udnek.rpgu.vanilla.component.TotemOfUndyingPassive;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -126,6 +129,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TOTEM_OF_UNDYING);
         }
     }
 
@@ -140,7 +144,10 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
 
-        if (leatherArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));}
+        if (leatherArmor.contains(material)) {
+            itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));
+            event.setRepairData(new RepairData(Set.of(Items.FABRIC), Set.of(Material.LEATHER)));
+        }
 
         if (chainmailArmor.contains(material)) {itemStack.editMeta(itemMeta -> itemMeta.setRarity(ItemRarity.COMMON));}
 
@@ -180,6 +187,10 @@ public class AttributeManaging extends SelfRegisteringListener {
             customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                     .add(Attributes.CRITICAL_DAMAGE, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
+        }
+
+        if (material == Material.TOTEM_OF_UNDYING) {
+            customItem.getComponents().set(new TotemOfUndyingPassive(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION)));
         }
     }
 

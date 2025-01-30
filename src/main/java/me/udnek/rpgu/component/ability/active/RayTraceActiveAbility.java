@@ -15,11 +15,11 @@ import java.util.Collection;
 
 public interface RayTraceActiveAbility<Context> extends ActiveAbilityComponent<Context> {
 
-    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull Player player, @Nullable ParticleBuilder particle){
-        RayTraceResult rayTraceResult = Utils.rayTraceBlockOrEntity(player, getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(player));
+    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull LivingEntity livingEntity, @Nullable ParticleBuilder particle){
+        RayTraceResult rayTraceResult = Utils.rayTraceBlockOrEntity(livingEntity, getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity));
         if (rayTraceResult == null) return null;
-        Location location = rayTraceResult.getHitPosition().toLocation(player.getWorld());
-        final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(player);
+        Location location = rayTraceResult.getHitPosition().toLocation(livingEntity.getWorld());
+        final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity);
         Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
         if (particle != null) showRadius(particle.location(location), radius);
         return nearbyLivingEntities;
