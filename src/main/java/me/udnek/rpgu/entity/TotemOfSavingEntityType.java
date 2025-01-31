@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType
 import me.udnek.itemscoreu.customentitylike.entity.CustomEntity;
 import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
+import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
@@ -44,7 +45,6 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         EntityEquipment equipment = entity.getEquipment();
         equipment.clear();
         equipment.setItem(EquipmentSlot.HEAD, head);
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, PotionEffect.INFINITE_DURATION, 1, true, false, true));
         entity.setImmuneToZombification(true);
         entity.setAdult();
         entity.setSilent(true);
@@ -57,6 +57,7 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         entity.setPersistent(true);
         entity.setRemoveWhenFarAway(false);
         entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0, false, false, false));
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, PotionEffect.INFINITE_DURATION, 0, true, false, true));
         if (entity.getLocation().getBlock().getLightFromSky() < 13){
             entity.setGlowing(true);
         }
@@ -104,7 +105,6 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         CustomEntity customEntity = CustomEntityType.getTicking(event.getRightClicked());
         if (!(customEntity instanceof TotemOfSavingEntity totemOfSavingEntity)) return;
         PlayerInventory inventory = event.getPlayer().getInventory();
-        Location location = event.getPlayer().getLocation();
         totemOfSavingEntity.getItems().forEach(new Consumer<ItemStack>() {
             @Override
             public void accept(ItemStack itemStack) {
@@ -113,12 +113,9 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
                 else slot = itemStack.getType().getEquipmentSlot();
                 if (slot != EquipmentSlot.HAND && inventory.getItem(slot).getType() == Material.AIR){
                     inventory.setItem(slot, itemStack);
-                } else if (inventory.firstEmpty() != -1){
-                    inventory.addItem(itemStack);
                 } else {
-                    location.getWorld().dropItem(location, itemStack);
+                    ItemUtils.giveAndDropLeftover(event.getPlayer(), itemStack);
                 }
-
             }
         });
         customEntity.remove();

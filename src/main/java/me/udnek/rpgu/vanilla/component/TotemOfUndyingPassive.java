@@ -31,7 +31,7 @@ public class TotemOfUndyingPassive extends ConstructablePassiveAbilityComponent<
 
     @Override
     public @NotNull CustomEquipmentSlot getSlot() {
-        return CustomEquipmentSlot.ANY_VANILLA;///TODO ВСЕ СЛОТЫ
+        return CustomEquipmentSlot.HAND; //TODO ВСЕ СЛОТЫ
     }
 
     @Override

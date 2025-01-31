@@ -36,7 +36,7 @@ public class AbilityListener extends SelfRegisteringListener {
     }
 
     @EventHandler
-    public void abilityConsume(EntityResurrectEvent event){
+    public void entityResurrect(EntityResurrectEvent event){
         EquipmentSlot hand = event.getHand();
         if (hand == null) return;
         ItemStack item = event.getEntity().getEquipment().getItem(hand);

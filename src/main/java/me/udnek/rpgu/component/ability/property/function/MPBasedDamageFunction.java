@@ -1,5 +1,6 @@
 package me.udnek.rpgu.component.ability.property.function;
 
+import com.fasterxml.jackson.databind.type.LogicalType;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -51,15 +52,15 @@ public class MPBasedDamageFunction implements DamageFunction<Double> {
     }
 
     @Override
-    public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-        TextComponent component = Component.empty();
+    public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+        MultiLineDescription description = new MultiLineDescription();
         if (!physical.isZeroConstant()){
-            component = component.append(Component.translatable("damage_formula.rpgu.physical", List.of(physical.describeWithModifier(modifier))));
+            description.addLine(Component.translatable("damage_formula.rpgu.physical", List.of(physical.describeWithModifier(modifier).join())));
         }
         if (!magical.isZeroConstant()) {
-            component = component.append(Component.translatable("damage_formula.rpgu.magical", List.of(magical.describeWithModifier(modifier))));
+            description.addLine(Component.translatable("damage_formula.rpgu.magical", List.of(magical.describeWithModifier(modifier).join())));
         }
-        return component;
+        return description;
     }
 }
 

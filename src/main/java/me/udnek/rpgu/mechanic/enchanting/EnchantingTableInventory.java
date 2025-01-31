@@ -209,15 +209,13 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
     @Override
     public void onPlayerClosesInventory(InventoryCloseEvent event) {
-        HumanEntity player = event.getPlayer();
-        PlayerInventory playerInventory = player.getInventory();
+        Player player = (Player) event.getPlayer();
         Inventory eventInventory = event.getInventory();
 
         iterateTroughAllInputSlots(slot -> {
             ItemStack itemStack = eventInventory.getItem(slot);
             if (itemStack != null){
-                HashMap<Integer, ItemStack> dropItem = playerInventory.addItem(itemStack);
-                player.getWorld().dropItemNaturally(player.getLocation(), dropItem.get(0));
+                ItemUtils.giveAndDropLeftover(player, itemStack);
             }
         });
     }

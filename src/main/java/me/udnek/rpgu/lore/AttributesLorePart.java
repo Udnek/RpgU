@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
@@ -59,12 +60,11 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
         addLine(slot, AttributeLoreGenerator.addTab(component), false, Position.ATTRIBUTE);
     }
 
-    public void addFullDescription(@NotNull CustomEquipmentSlot slot, @NotNull ConstructableCustomItem customItem, int linesAmount){
+    public void addFullDescription(@NotNull CustomEquipmentSlot slot, @NotNull CustomItem customItem, int linesAmount){
         for (int i = 0; i < linesAmount; i++) addDescription(slot, customItem, i);
     }
-    public void addDescription(@NotNull CustomEquipmentSlot slot, @NotNull ConstructableCustomItem customItem, int line){
-        Preconditions.checkArgument(customItem.getRawItemName() != null, "CustomItem raw name can not be null!");
-        addDescription(slot, customItem.getRawItemName(), line);
+    public void addDescription(@NotNull CustomEquipmentSlot slot, @NotNull CustomItem customItem, int line){
+        addDescription(slot, customItem.translationKey(), line);
     }
     public void addDescription(@NotNull CustomEquipmentSlot slot, @NotNull String rawItemName, int line){
         addLine(slot, AttributeLoreGenerator.addTab(Component.translatable(rawItemName + ".description." + line)).color(CustomAttribute.PLUS_COLOR), false, Position.ATTRIBUTE);
@@ -109,6 +109,11 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
     @Override
     public void addAbilityStat(@NotNull Component component) {
         addWithAbilityFormat(component.color(PASSIVE_STATS_COLOR));
+    }
+
+    @Override
+    public void addAbilityStatDoubleTab(@NotNull Component component) {
+        addAbilityStat(AttributeLoreGenerator.addTab(component));
     }
 
     @Override

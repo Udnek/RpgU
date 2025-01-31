@@ -58,35 +58,43 @@ public class EffectsProperty implements AbilityProperty<LivingEntity, List<Potio
         return potionEffects;
     }
 
+    public @NotNull Component describeSingle(int index){
+        PotionData data = effects.get(index);
+
+        List<Component> args = new ArrayList<>();
+        args.add(Component.translatable(data.type.translationKey()));
+
+        String translation = "ability.rpgu.effects.";
+        if (!data.amplifier.isZeroConstant()) {
+            translation += "with_amplifier";
+            args.add(data.amplifier.isConstant() ? Component.translatable("potion.potency." + data.amplifier.getBase()) : data.amplifier.describe().join());
+        }
+        else translation += "no_amplifier";
+
+        if (!data.duration.isZeroConstant()) {
+            translation += "_with_duration";
+            args.add(data.duration.describeWithModifier(Modifiers.TICKS_TO_SECONDS()).join());
+        }
+        else translation += "_no_duration";
+
+        return Component.translatable(translation, args);
+    }
+
     @Override
     public void describe(@NotNull AbilityLorePart componentable) {
-        Component text = Component.empty();
-        for (int i = 0; i < effects.size(); i++) {
-            PotionData data = effects.get(i);
-
-            List<Component> args = new ArrayList<>();
-
-            args.add(Component.translatable(data.type.translationKey()));
-
-            String translation = "ability.rpgu.effects.";
-            if (!data.amplifier.isZeroConstant()) {
-                translation += "with_amplifier";
-                args.add(data.amplifier.isConstant() ? Component.translatable("potion.potency." + data.amplifier.getBase()) : data.amplifier.describe());
+        if (effects.size() > 1){
+            componentable.addAbilityStat(Component.translatable("ability.rpgu.effects", Component.empty()));
+            for (int i = 0; i < effects.size(); i++) {
+                componentable.addAbilityStatDoubleTab(describeSingle(i));
             }
-            else translation += "no_amplifier";
-
-            if (!data.duration.isZeroConstant()) {
-                translation += "_with_duration";
-                args.add(data.duration.describeWithModifier(Modifiers.TICKS_TO_SECONDS()));
+        } else {
+            Component text = Component.empty();
+            for (int i = 0; i < effects.size(); i++) {
+                text = text.append(describeSingle(i));
+                if (i != effects.size()-1) text = text.append(Component.text(", "));
             }
-            else translation += "_no_duration";
-
-            text = text.append(Component.translatable(translation, args));
-
-            if (i != effects.size()-1) text = text.append(Component.text(", "));
+            componentable.addAbilityStat(Component.translatable("ability.rpgu.effects", List.of(text)));
         }
-
-        componentable.addAbilityStat(Component.translatable("ability.rpgu.effects", List.of(text)));
     }
 
     public void applyOn(@NotNull LivingEntity source, @NotNull LivingEntity target){

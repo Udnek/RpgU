@@ -16,14 +16,13 @@ public interface PassiveAbilityComponent<ActivationContext> extends AbilityCompo
         final CustomComponentMap<AbilityComponent<?>> components = new CustomComponentMap<>();
         @Override
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
-
         @Override
-        public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Object object, boolean canselIfCooldown) {
-
-        }
-
+        public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Object object, boolean canselIfCooldown) {}
         @Override
         public @NotNull CustomComponentMap<AbilityComponent<?>> getComponents() {return components;}
+
+        @Override
+        public void onDeath(@NotNull CustomItem customItem, @NotNull EntityResurrectEvent event) {event.setCancelled(true);}
     };
 
     default void onDeath(@NotNull CustomItem customItem, @NotNull EntityResurrectEvent event){}

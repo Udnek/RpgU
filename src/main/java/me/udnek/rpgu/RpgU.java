@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.customsound.CustomSound;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.BlockTypes;
@@ -24,6 +25,7 @@ import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.util.AbilityListener;
 import me.udnek.rpgu.util.GeneralListener;
+import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +46,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
         CustomEffect magicalResistance = Effects.MAGICAL_RESISTANCE;
         CustomBlockType soulBinder = BlockTypes.SOUL_BINDER;
+        CustomSound backstab = Sounds.BACKSTAB;
 
         new DamageListener(this);
         new EquipmentListener(this);

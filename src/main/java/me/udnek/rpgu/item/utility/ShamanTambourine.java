@@ -69,7 +69,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
     public class ShamanTambourineComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
 
         public ShamanTambourineComponent(){
-            getComponents().set(new DamageProperty(MPBasedDamageFunction.linearMageOnly(3, 1)));
+            getComponents().set(new DamageProperty(MPBasedDamageFunction.linear(3, 1, 1, 0)));
             getComponents().set(new AttributeBasedProperty(20*10, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(new CastTimeProperty(CAST_TIME));

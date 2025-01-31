@@ -42,8 +42,26 @@ public class AttributeFunction implements PropertyFunction<LivingEntity, Double>
     }
 
     @Override
-    public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-        if (Functions.IS_DEBUG) return Component.text("attr(").append(base.describeWithModifier(modifier)).append(Component.text(")"));
+    public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+        if (Functions.IS_DEBUG) return base.describeWithModifier(modifier).addToBeginning(Component.text("attr(")).add(Component.text(")"));
         return base.describeWithModifier(modifier);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

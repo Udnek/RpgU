@@ -18,16 +18,20 @@ public class LinearMPFunction implements MagicPotentialBasedFunction {
     }
 
     @Override
-    public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-        return Component.translatable("magical_potential_formula.rpgu.linear",
-                List.of(Component.text(Utils.roundToTwoDigits(modifier.apply(base))), Component.text(Utils.roundToTwoDigits(modifier.apply(perMp)))));
+    public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+        return new MultiLineDescription().add(
+                Component.translatable("magical_potential_formula.rpgu.linear",
+                        List.of(Component.text(Utils.roundToTwoDigits(modifier.apply(base))),
+                                Component.text(Utils.roundToTwoDigits(modifier.apply(perMp)))
+                        )
+                )
+        );
     }
 
     @Override
     public boolean isZeroConstant() {
         return base == 0 && perMp == 0;
     }
-
 
     @Override
     public boolean isConstant() {

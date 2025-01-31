@@ -16,7 +16,6 @@ public class Commands {
         instance.getCommand("custom_damage_system").setExecutor(new CustomDamageSystemCommand());
         instance.getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
         instance.getCommand("set_food").setExecutor(new SetFoodCommand());
-        instance.getCommand("play_sound").setExecutor(new PlaySoundCommand());
     }
 
     public static void sendError(@NotNull CommandSender commandSender, @NotNull String ...strings){

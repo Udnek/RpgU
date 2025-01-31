@@ -119,6 +119,10 @@ public class Items {
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
 
+    // BLOCKS
+
+    public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
+
 
     private static @NotNull CustomItem register(@NotNull CustomItem customItem){
         return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);

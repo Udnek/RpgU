@@ -1,18 +1,23 @@
 package me.udnek.rpgu.block;
 
 import me.udnek.itemscoreu.customentitylike.block.constructabletype.DisplayBasedConstructableBlockType;
-import org.bukkit.Location;
+import me.udnek.itemscoreu.util.Either;
+import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.block.TileState;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class SoulBinderBlock extends DisplayBasedConstructableBlockType {
+import java.util.List;
+
+public class SoulBinderBlock extends DisplayBasedConstructableBlockType{
+
 
     @Override
-    public @NotNull ItemStack getVisualItem() {
-        return new ItemStack(Material.STRIPPED_PALE_OAK_LOG);
+    public @NotNull ItemStack getFakeDisplay() {
+        return Items.SOUL_BINDER.getItem();
     }
 
     @Override
@@ -21,33 +26,18 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType {
     }
 
     @Override
-    public @NotNull Material getMaterial() {
-        return Material.SPAWNER;
-    }
-
-
-    @Override
-    public void place(@NotNull Location location) {
-        super.place(location);
-/*        ShulkerBox state = (ShulkerBox) location.getBlock().getState();
-        ItemStack lockItem = new ItemStack(Material.BARRIER);
-        lockItem.setData(DataComponentTypes.ITEM_NAME, Component.text("LOCK"));
-        state.setLockItem(lockItem);
-        state.update(true, false);*/
+    public @Nullable Either<LootTable, List<ItemStack>> getLoot() {
+        return new Either<>(null, List.of(Items.SOUL_BINDER.getItem()));
     }
 
     @Override
-    public void onDestroy(@NotNull Block block) {
-        super.onDestroy(block);
+    public @NotNull Material getBreakSpeedBaseBlock() {
+        return Material.IRON_BARS;
     }
 
     @Override
-    public void load(@NotNull TileState tileState) {
-
-    }
+    public void load(@NotNull TileState tileState) {}
 
     @Override
-    public void unload(@NotNull TileState tileState) {
-
-    }
+    public void unload(@NotNull TileState tileState) {}
 }

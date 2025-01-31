@@ -1,5 +1,7 @@
 package me.udnek.rpgu.lore.ability;
 
+import me.udnek.rpgu.lore.AttributeLoreGenerator;
+import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.lore.TranslationKeys;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -34,6 +36,11 @@ public class ActiveAbilityLorePart implements AbilityLorePart {
     }
 
     @Override
+    public void addAbilityStatDoubleTab(@NotNull Component component) {
+        addAbilityStat(AttributeLoreGenerator.addTab(component));
+    }
+
+    @Override
     public void addAbilityDescription(@NotNull Component component) {
         addWithAbilityFormat(component.color(ACTIVE_DESCRIPTION_COLOR));
     }
@@ -45,7 +52,7 @@ public class ActiveAbilityLorePart implements AbilityLorePart {
 
     @Override
     public void addWithAbilityFormat(@NotNull Component component){
-        data.add(Component.translatable(TranslationKeys.equipmentDescriptionLine, component).decoration(TextDecoration.ITALIC, false));
+        data.add(AttributeLoreGenerator.addTab(component).decoration(TextDecoration.ITALIC, false));
     }
 
     @Deprecated

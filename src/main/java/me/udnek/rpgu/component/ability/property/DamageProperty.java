@@ -4,6 +4,7 @@ import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import me.udnek.rpgu.component.ability.property.function.DamageFunction;
+import me.udnek.rpgu.component.ability.property.function.MultiLineDescription;
 import me.udnek.rpgu.lore.ability.AbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
@@ -36,6 +37,15 @@ public class DamageProperty implements AbilityProperty<Double, Damage> {
 
     @Override
     public void describe(@NotNull AbilityLorePart componentable) {
-        componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", List.of(formula.describe())));
+        MultiLineDescription description = formula.describe();
+        if (description.getComponents().size() > 1){
+            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", Component.empty()));
+            for (Component component : description.getComponents()) {
+                componentable.addAbilityStatDoubleTab(component);
+            }
+        } else {
+            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", description.join()));
+        }
+
     }
 }

@@ -32,8 +32,8 @@ public class Functions {
             }
 
             @Override
-            public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-                if (IS_DEBUG) return Component.text("wrapMP(").append(function.describeWithModifier(modifier)).append(Component.text(")"));
+            public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+                if (IS_DEBUG) return function.describeWithModifier(modifier).addToBeginning(Component.text("getMP(")).add(Component.text(")"));
                 return function.describeWithModifier(modifier);
             }
         };
@@ -65,9 +65,9 @@ public class Functions {
             }
 
             @Override
-            public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-                if(IS_DEBUG) return Component.text("const(" + modifier.apply(modifier.apply(value.doubleValue())) + ")");
-                return Component.text(Utils.roundToTwoDigits(modifier.apply(value.doubleValue())));
+            public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+                if (IS_DEBUG) return new MultiLineDescription().add(Component.text("const(" + modifier.apply(modifier.apply(value.doubleValue())) + ")"));
+                return new MultiLineDescription().add(Component.text(Utils.roundToTwoDigits(modifier.apply(value.doubleValue()))));
             }
 
         };
@@ -91,8 +91,8 @@ public class Functions {
             }
 
             @Override
-            public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-                if (IS_DEBUG) return Component.text("ceil(").append(function.describeWithModifier(modifier)).append(Component.text(")"));
+            public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+                if (IS_DEBUG) return function.describeWithModifier(modifier).addToBeginning(Component.text("ceil(")).add(Component.text(")"));
                 return function.describeWithModifier(modifier);
             }
         };
@@ -117,8 +117,8 @@ public class Functions {
             }
 
             @Override
-            public @NotNull Component describeWithModifier(@NotNull Function<Double, Double> modifier) {
-                if (IS_DEBUG) return Component.text("floor(").append(function.describeWithModifier(modifier)).append(Component.text(")"));
+            public @NotNull MultiLineDescription describeWithModifier(@NotNull Function<Double, Double> modifier) {
+                if (IS_DEBUG) return function.describeWithModifier(modifier).addToBeginning(Component.text("floor(")).add(Component.text(")"));
                 return function.describeWithModifier(modifier);
             }
         };
