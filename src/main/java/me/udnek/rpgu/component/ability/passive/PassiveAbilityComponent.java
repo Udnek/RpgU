@@ -8,6 +8,7 @@ import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityResurrectEvent;
+import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.jetbrains.annotations.NotNull;
 
 public interface PassiveAbilityComponent<ActivationContext> extends AbilityComponent<ActivationContext> {
@@ -26,6 +27,7 @@ public interface PassiveAbilityComponent<ActivationContext> extends AbilityCompo
     };
 
     default void onDeath(@NotNull CustomItem customItem, @NotNull EntityResurrectEvent event){}
+    default void onGlide(@NotNull CustomItem customItem, @NotNull EntityToggleGlideEvent event){}
 
     @Override
     default @NotNull CustomComponentType<CustomItem, ?> getType(){

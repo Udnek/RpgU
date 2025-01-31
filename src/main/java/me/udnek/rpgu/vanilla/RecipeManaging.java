@@ -104,13 +104,13 @@ public class RecipeManaging {
                 'L', Material.LEATHER_BOOTS)).build();
         //////////////////////////////////////////////
         for (Material material: Tag.BEDS.getValues()){
-            new RecipeBuilder(material).recipeShape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.mergeMaterialWithSufix(material,
+            new RecipeBuilder(material).recipeShape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.replaceSufix(material,
                     "_wool"))).customItemIngredients(Map.of('F', Items.FABRIC)).tagIngredients(Map.of('P', Tag.PLANKS)).build();
         }
         //////////////////////////////////////////////
         for (Material material: Tag.WOODEN_TRAPDOORS.getValues()){
             new RecipeBuilder(material).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
-                    .materialIngredients(Map.of('P', Utils.mergeMaterialWithSufix(material, "_planks"))).build();
+                    .materialIngredients(Map.of('P', Utils.replaceSufix(material, "_planks"))).build();
         }
         new RecipeBuilder(Material.COPPER_TRAPDOOR).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
                 .materialIngredients(Map.of('P', Material.COPPER_INGOT)).build();

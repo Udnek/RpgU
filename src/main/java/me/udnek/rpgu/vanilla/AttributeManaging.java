@@ -14,10 +14,13 @@ import me.udnek.itemscoreu.customregistry.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.component.instance.DeathProtectionPassive;
+import me.udnek.rpgu.component.instance.ElytraActivator;
+import me.udnek.rpgu.component.instance.GliderComponent;
+import me.udnek.rpgu.component.instance.GoldenArmorPassive;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.vanilla.component.GoldenArmorPassive;
-import me.udnek.rpgu.vanilla.component.TotemOfUndyingPassive;
+import me.udnek.rpgu.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -33,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class AttributeManaging extends SelfRegisteringListener {
@@ -130,6 +134,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TOTEM_OF_UNDYING);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.ELYTRA);
         }
     }
 
@@ -162,7 +167,8 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (diamondTools.contains(material)) {
             itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage(2031));
 
-            AttributeUtils.addDefaultAttributes(itemStack);
+            itemStack.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, Objects.requireNonNull(new ItemStack(Utils.replacePrefix
+                    (material, "netherite_")).getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)));
             itemStack.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         }
 
@@ -190,8 +196,12 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.TOTEM_OF_UNDYING) {
-            customItem.getComponents().set(new TotemOfUndyingPassive(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION)));
-            itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 64);
+            customItem.getComponents().set(new DeathProtectionPassive(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION)));
+        }
+
+        if (material == Material.ELYTRA) {
+            customItem.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 7 * 20));
+            customItem.getComponents().set(new GliderComponent());
         }
     }
 

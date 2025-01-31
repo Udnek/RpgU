@@ -10,8 +10,6 @@ import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class DamageProperty implements AbilityProperty<Double, Damage> {
 
     protected DamageFunction<Double> formula;

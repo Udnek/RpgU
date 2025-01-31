@@ -1,7 +1,5 @@
 package me.udnek.rpgu.lore.ability;
 
-import com.google.common.base.Preconditions;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import net.kyori.adventure.text.Component;
