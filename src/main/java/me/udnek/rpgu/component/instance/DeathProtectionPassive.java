@@ -1,4 +1,4 @@
-package me.udnek.rpgu.vanilla.component;
+package me.udnek.rpgu.component.instance;
 
 import io.papermc.paper.datacomponent.item.DeathProtection;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
@@ -15,9 +15,9 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
-public class TotemOfUndyingPassive extends ConstructablePassiveAbilityComponent<EntityResurrectEvent> {
+public class DeathProtectionPassive extends ConstructablePassiveAbilityComponent<EntityResurrectEvent> {
 
-    public TotemOfUndyingPassive(DeathProtection deathProtection){
+    public DeathProtectionPassive(DeathProtection deathProtection){
         for (ConsumeEffect consumeEffect : deathProtection.deathEffects()) {
             if (!(consumeEffect instanceof ConsumeEffect.ApplyStatusEffects statusEffects)) continue;
             EffectsProperty effectsProperty = new EffectsProperty();

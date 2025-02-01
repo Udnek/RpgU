@@ -1,11 +1,14 @@
 package me.udnek.rpgu.util;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityResurrectEvent;
+import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -42,5 +45,21 @@ public class AbilityListener extends SelfRegisteringListener {
         ItemStack item = event.getEntity().getEquipment().getItem(hand);
         CustomItem.consumeIfCustom(item, customItem ->
                 customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
+    }
+
+    @EventHandler
+    public void abilityGlide(EntityToggleGlideEvent event){
+        if (!(event.isGliding())) return;
+        if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
+        ItemStack item = null;
+        for (ItemStack armorContent : livingEntity.getEquipment().getArmorContents()) {
+            if (armorContent.hasData(DataComponentTypes.GLIDER)){
+                item = armorContent;
+                break;
+            }
+        }
+        if (item == null) return;
+        CustomItem.consumeIfCustom(item, customItem ->
+                customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onGlide(customItem, event));
     }
 }

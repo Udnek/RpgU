@@ -34,6 +34,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class GeneralListener extends SelfRegisteringListener {
     public GeneralListener(JavaPlugin plugin) {
@@ -48,7 +49,7 @@ public class GeneralListener extends SelfRegisteringListener {
             @Override
             public void run() {
                 AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
-                double value = attribute.getValue();
+                double value = Objects.requireNonNull(attribute).getValue();
                 if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
                 if (value >= basePlayerHealth) player.setHealth(value);
             }
