@@ -1,9 +1,7 @@
 package me.udnek.rpgu.lore;
 
-import com.google.common.base.Preconditions;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;

@@ -148,6 +148,7 @@
 
 	"item.minecraft.golden_armor.passive_ability.0": "Buffs nearby tamed creatures",
 	"item.minecraft.totem_of_undying.passive_ability.0": "Saves from death",
+	"item.minecraft.elytra.passive_ability.0": "Allows you to fly",
 
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",

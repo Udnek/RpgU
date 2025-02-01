@@ -1,8 +1,6 @@
 package me.udnek.rpgu.lore.ability;
 
 import me.udnek.rpgu.lore.AttributeLoreGenerator;
-import me.udnek.rpgu.lore.AttributesLorePart;
-import me.udnek.rpgu.lore.TranslationKeys;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.NotNull;

@@ -1,9 +1,7 @@
 package me.udnek.rpgu.component.ability.property.function;
 
-import com.fasterxml.jackson.databind.type.LogicalType;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

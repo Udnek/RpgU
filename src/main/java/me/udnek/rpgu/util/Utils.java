@@ -1,5 +1,6 @@
 package me.udnek.rpgu.util;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -48,8 +49,15 @@ public class Utils {
         return rayTraceResult.getHitPosition().toLocation(location.getWorld());
     }
 
-    public static Material mergeMaterialWithSufix(@NotNull Material material, @NotNull String string){
+    public static @NotNull Material replaceSufix(@NotNull Material material, @NotNull String string){
         String key = material.getKey().getKey();
-        return Material.getMaterial((key.substring(0, key.lastIndexOf("_")) + string).toUpperCase());
+        String name = (key.substring(0, key.lastIndexOf("_")) + string).toUpperCase();
+        return Preconditions.checkNotNull(Material.getMaterial(name), "There is no such material", name);
+    }
+
+    public static @NotNull Material replacePrefix(@NotNull Material material, @NotNull String string){
+        String key = material.getKey().getKey();
+        String name = (string + key.substring(key.indexOf("_") + 1)).toUpperCase();
+        return Preconditions.checkNotNull(Material.getMaterial(name), "There is no such material", name);
     }
 }
