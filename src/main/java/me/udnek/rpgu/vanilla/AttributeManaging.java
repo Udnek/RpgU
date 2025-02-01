@@ -27,7 +27,6 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.EquipmentSlotGroup;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -165,11 +164,13 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (diamondArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage(material.getMaxDurability() * 37 / 33));}
 
         if (diamondTools.contains(material)) {
-            itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage(2031));
+            ItemStack netheriteTool = new ItemStack(Utils.replacePrefix(material, "netherite_"));
 
-            itemStack.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, Objects.requireNonNull(new ItemStack(Utils.replacePrefix
-                    (material, "netherite_")).getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)));
-            itemStack.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(netheriteTool.
+                    getData(DataComponentTypes.MAX_DAMAGE)));
+            itemStack.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, Objects.requireNonNull(netheriteTool.
+                    getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)));
+            itemStack.setData(DataComponentTypes.HIDE_TOOLTIP);
         }
 
         if (netheriteArmor.contains(material) || netheriteTools.contains(material)){
@@ -196,7 +197,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.TOTEM_OF_UNDYING) {
-            customItem.getComponents().set(new DeathProtectionPassive(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION)));
+            customItem.getComponents().set(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
         }
 
         if (material == Material.ELYTRA) {
