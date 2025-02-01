@@ -11,6 +11,7 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -52,7 +53,10 @@ public class AbilityListener extends SelfRegisteringListener {
         if (!(event.isGliding())) return;
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
         ItemStack item = null;
-        for (ItemStack armorContent : livingEntity.getEquipment().getArmorContents()) {
+        EntityEquipment equipment = livingEntity.getEquipment();
+        if (equipment == null) return;
+        for (ItemStack armorContent : equipment.getArmorContents()) {
+            if (armorContent == null) continue;
             if (armorContent.hasData(DataComponentTypes.GLIDER)){
                 item = armorContent;
                 break;

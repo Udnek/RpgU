@@ -201,8 +201,8 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.ELYTRA) {
-            customItem.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 7 * 20));
-            customItem.getComponents().set(new GliderComponent());
+            customItem.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 15 * 20));
+            customItem.getComponents().set(new GliderComponent(itemStack, 15 * 20));
         }
     }
 
