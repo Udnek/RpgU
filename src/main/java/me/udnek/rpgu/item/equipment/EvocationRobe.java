@@ -38,7 +38,7 @@ public class EvocationRobe extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
-        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).model(new NamespacedKey(RpgU.getInstance(), "evocation_robe")).build();
+        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).assetId(new NamespacedKey(RpgU.getInstance(), "evocation_robe")).build();
         return DataSupplier.of(build);
     }
 

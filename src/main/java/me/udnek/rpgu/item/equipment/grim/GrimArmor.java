@@ -30,7 +30,7 @@ public abstract class GrimArmor extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
-        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).model(new NamespacedKey(RpgU.getInstance(), "grim")).build();
+        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).assetId(new NamespacedKey(RpgU.getInstance(), "grim")).build();
         return DataSupplier.of(build);
     }
     public abstract @NotNull Stats getStats();

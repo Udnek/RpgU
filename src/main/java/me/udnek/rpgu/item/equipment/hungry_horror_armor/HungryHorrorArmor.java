@@ -23,7 +23,7 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
-        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).model(new NamespacedKey(RpgU.getInstance(), "hungry_horror")).build();
+        Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).assetId(new NamespacedKey(RpgU.getInstance(), "hungry_horror")).build();
         return DataSupplier.of(build);
     }
 

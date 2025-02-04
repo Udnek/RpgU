@@ -40,7 +40,7 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
-        Equippable build = Equippable.equippable(Material.WOLF_ARMOR.getEquipmentSlot()).model(new NamespacedKey(NamespacedKey.MINECRAFT, "armadillo_scute")).build();
+        Equippable build = Equippable.equippable(Material.WOLF_ARMOR.getEquipmentSlot()).assetId(new NamespacedKey(NamespacedKey.MINECRAFT, "armadillo_scute")).build();
         return DataSupplier.of(build);
     }
 
