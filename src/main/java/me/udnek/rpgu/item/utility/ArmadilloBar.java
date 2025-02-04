@@ -63,8 +63,8 @@ public class ArmadilloBar extends ConstructableCustomItem {
 
     public class ArmadilloBarComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
 
-        private static final int COOLDOWN = 40*20;
-        private static final int DURATION = 7*20;
+        private static final int COOLDOWN = 25*20;
+        private static final int DURATION = 10*20;
 
         public ArmadilloBarComponent(){
             getComponents().set(new AttributeBasedProperty(COOLDOWN, ComponentTypes.ABILITY_COOLDOWN));
@@ -72,7 +72,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     Effects.MAGICAL_RESISTANCE.getBukkitType(),
                     Functions.CONSTANT(0),
-                    Functions.CONSTANT(8)
+                    Functions.CONSTANT(6)
             )));
         }
 

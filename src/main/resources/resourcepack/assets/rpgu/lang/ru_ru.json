@@ -76,6 +76,7 @@
   "item.rpgu.totem_of_saving.description.1": " если в момент смерти он находился в инвентаре",
 
   "item.rpgu.air_elemental_tome": "Фолиант элементаля воздуха",
+  "item.rpgu.air_elemental_tome.active_ability.height": "Высота подъёма: %s блоков",
   "item.rpgu.air_elemental_tome.active_ability.0": "Поднимает цели в воздух",
   "item.rpgu.air_elemental_tome.active_ability.1": " и ударяет о землю с увеличенным уроном",
 

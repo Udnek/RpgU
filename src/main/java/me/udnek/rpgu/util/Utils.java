@@ -19,10 +19,10 @@ public class Utils {
         if (t.doubleValue() > 0) consumer.accept(t);
     }
 
+    // RAYTRACE
     public static @Nullable RayTraceResult rayTraceBlockOrEntity(@NotNull LivingEntity livingEntity, double castRange){
         return rayTraceBlockOrEntity(livingEntity, castRange, 0);
     }
-
     public static @Nullable RayTraceResult rayTraceBlockOrEntity(@NotNull LivingEntity livingEntity, double castRange, double raySize){
         Location location = livingEntity.getEyeLocation();
         World world = livingEntity.getWorld();
@@ -32,15 +32,9 @@ public class Utils {
         if (rayTraceResultBlocks != null) return rayTraceResultBlocks;
         return world.rayTraceEntities(location, location.getDirection(), castRange, raySize, entity -> entity != livingEntity);
     }
-
-    public static @NotNull Collection<LivingEntity> livingEntitiesInRadius(@NotNull Location location, double radius){
-        return location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> livingEntity.getLocation().distance(location) <= radius);
-    }
-
     public static @Nullable Location rayTraceBlockUnder(@NotNull LivingEntity livingEntity){
         return rayTraceBlockUnder(livingEntity.getLocation());
     }
-
     public static @Nullable Location rayTraceBlockUnder(@NotNull Location location){
         World world = location.getWorld();
         RayTraceResult rayTraceResult = world.rayTraceBlocks(location.add(0 , 1, 0), new Vector().setY(-1), 10000, FluidCollisionMode.NEVER, true);
@@ -48,6 +42,16 @@ public class Utils {
         if (rayTraceResult == null) return null;
         return rayTraceResult.getHitPosition().toLocation(location.getWorld());
     }
+
+    // NEARBY
+    public static @NotNull Collection<LivingEntity> livingEntitiesInRadius(@NotNull Location location, double radius){
+        return location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> livingEntity.getLocation().distance(location) <= radius);
+    }
+    public static @NotNull Collection<LivingEntity> livingEntitiesInRadiusIntersects(@NotNull Location location, double radius){
+        return location.getWorld().getNearbyLivingEntities(location, radius+15,
+                entity -> entity.getBoundingBox().expand(radius).contains(location.toVector()));
+    }
+
 
     public static @NotNull Material replaceSufix(@NotNull Material material, @NotNull String string){
         String key = material.getKey().getKey();

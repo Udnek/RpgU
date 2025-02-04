@@ -26,7 +26,9 @@ public class AttributeBasedProperty extends AbstractAbilityProperty<LivingEntity
 
     @Override
     public @NotNull Double get(@NotNull LivingEntity livingEntity) {
-        if (getFunction().getBase() < getType().getAttribute().getMinimum()) return getType().getAttribute().getMinimum();
+        if (getFunction().getBase() < getType().getAttribute().getMin()) {
+            return getType().getAttribute().getMin();
+        }
         return getFunction().apply(livingEntity);
     }
 

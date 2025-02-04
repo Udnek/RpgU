@@ -19,7 +19,7 @@ public class ProjectileDamageMultiplierAttribute extends ConstructableCustomAttr
         if (!DamageListener.CUSTOM_DAMAGE_SYSTEM) return;
         if (!(event.getProjectile() instanceof AbstractArrow arrow)) return;
         double amount = calculate(event.getEntity());
-        if (amount == getDefaultValue()) return;
+        if (amount == getDefault()) return;
         arrow.setDamage(arrow.getDamage() * amount);
     }
 }

@@ -15,16 +15,14 @@ import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Registry;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +67,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
     public class ShamanTambourineComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
 
         public ShamanTambourineComponent(){
-            getComponents().set(new DamageProperty(MPBasedDamageFunction.linear(3, 1, 1, 0)));
+            getComponents().set(new DamageProperty(MPBasedDamageFunction.linearMageOnly(3, 1)));
             getComponents().set(new AttributeBasedProperty(20*10, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
             getComponents().set(new CastTimeProperty(CAST_TIME));
@@ -83,15 +81,26 @@ public class ShamanTambourine extends ConstructableCustomItem{
 
         @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerItemConsumeEvent event) {
+
+            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
+            Location eyeLocation = livingEntity.getEyeLocation();
+            Vector direction = livingEntity.getLocation().getDirection();
+
             RayTraceResult rayTraceResult = livingEntity.getWorld().rayTraceEntities(
-                    livingEntity.getEyeLocation(),
-                    livingEntity.getLocation().getDirection(),
-                    getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity),
-                    1,
+                    eyeLocation, direction, castRange,
                     entity -> entity!=livingEntity);
+
+            // WITH BIGGER RADIUS
+            if (rayTraceResult == null || rayTraceResult.getHitEntity() == null){
+                rayTraceResult = livingEntity.getWorld().rayTraceEntities(
+                        eyeLocation, direction, castRange,
+                        1,
+                        entity -> entity!=livingEntity);
+            }
+
             if (!(rayTraceResult != null && rayTraceResult.getHitEntity() instanceof LivingEntity living)) {
-                ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1).location(livingEntity.getLocation().add(livingEntity.getLocation().getDirection().
-                        multiply(getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity))).add(0, 1, 0));
+                ParticleBuilder builder = new ParticleBuilder(Particle.SHRIEK).count(1).location(livingEntity.getLocation().add(direction.
+                        multiply(castRange)).add(0, 1, 0));
                 builder.data(0);
                 builder.spawn();
                 return ActionResult.NO_COOLDOWN;

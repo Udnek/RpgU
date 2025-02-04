@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
@@ -14,6 +15,7 @@ import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -27,6 +29,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class AirElementalTome extends ConstructableCustomItem {
@@ -60,18 +63,14 @@ public class AirElementalTome extends ConstructableCustomItem {
 
     public class AirElementalTomeComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
 
-        public static double AOE_RADIUS = 2.5;
-        public static double DURATION = 4 * 20;
         public static double HEIGHT = 15;
-        public static double UP_DURATION = DURATION / 5;
         public static double EFFECT_DURATION = 10;
-
-
 
         public AirElementalTomeComponent(){
             getComponents().set(new AttributeBasedProperty(20*20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(new AttributeBasedProperty(AOE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new AttributeBasedProperty(2.5, ComponentTypes.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new AttributeBasedProperty(4*20, ComponentTypes.ABILITY_DURATION));
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     Effects.HEAVY_FALLING.getBukkitType(),
                     Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, Functions.CONSTANT(EFFECT_DURATION))),
@@ -88,22 +87,27 @@ public class AirElementalTome extends ConstructableCustomItem {
             for (LivingEntity livingEntityInRadius : livingEntitiesInRadius) {
                 new BukkitRunnable() {
                     int count = 0;
+                    final int duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(livingEntity).intValue();
+                    final int upDuration = duration/5;
                     @Override
                     public void run() {
                         Location locationEntity = livingEntityInRadius.getLocation();
-                        if (count >= 0 && count < UP_DURATION) {
-                            livingEntityInRadius.setVelocity(new Vector(0, HEIGHT / UP_DURATION, 0));
+                        if (count < upDuration) {
+                            livingEntityInRadius.setVelocity(new Vector(0, HEIGHT / upDuration, 0));
                             new ParticleBuilder(Particle.GUST_EMITTER_SMALL).count(0).location(locationEntity).spawn();
-                        } else if (count >= UP_DURATION && count < DURATION && (count % 5 == 0)) {
+                        } else if (count < duration && (count % 5 == 0)) {
                             new ParticleBuilder(Particle.GUST).count(3).location(locationEntity).offset(1,0,1).spawn();
-                        } else if (count == DURATION) {
-                            if (livingEntityInRadius == livingEntity) Effects.NO_FALL_DAMAGE.applyInvisible(livingEntity, 10, 0);
-                            else getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingEntityInRadius);
+                        } else if (count >= duration) {
+                            if (livingEntityInRadius == livingEntity)
+                                Effects.NO_FALL_DAMAGE.applyInvisible(livingEntity, 20 * 2, 0);
+                            else
+                                getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingEntityInRadius);
                             new ParticleBuilder(Particle.GUST_EMITTER_LARGE).count(4).location(locationEntity.add(0, 2, 0)).spawn();
-                        } else if (count > DURATION) cancel();
+                            cancel();
+                        }
 
-                        if (count == UP_DURATION) {
-                            Effects.NO_GRAVITY.applyInvisible(livingEntityInRadius, (int) (UP_DURATION * 4), 0);
+                        if (count == upDuration) {
+                            Effects.NO_GRAVITY.applyInvisible(livingEntityInRadius, upDuration * 4, 0);
                             livingEntityInRadius.setVelocity(new Vector());
                         }
 
@@ -118,6 +122,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         @Override
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
             componentable.addFullAbilityDescription(AirElementalTome.this, 2);
+            componentable.addAbilityStat(Component.translatable(AirElementalTome.this.translationKey() + ".active_ability.height", Component.text(Utils.roundToTwoDigits(HEIGHT))));
             super.addLoreLines(componentable);
         }
 

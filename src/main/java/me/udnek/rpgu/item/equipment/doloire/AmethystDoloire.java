@@ -135,7 +135,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
         @Override
         public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription((ConstructableCustomItem) Items.AMETHYST_DOLOIRE, 2);
+            componentable.addFullAbilityDescription(Items.AMETHYST_DOLOIRE, 2);
             super.addLoreLines(componentable);
         }
 
@@ -162,7 +162,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
                     location.add(direction);
                     new AmethystSpikeParticle((float) radius*2f).play(location);
                     ParticleUtils.circle(new ParticleBuilder(Particle.DUST).color(Color.FUCHSIA).location(location), radius);
-                    Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
+                    Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadiusIntersects(location, radius);
 
                     for (LivingEntity entity : nearbyLivingEntities){
                         potionEffects.forEach(entity::addPotionEffect);

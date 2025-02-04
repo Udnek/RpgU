@@ -99,6 +99,7 @@
 	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
 
 	"item.rpgu.air_elemental_tome": "Air Elemental Tome",
+	"item.rpgu.air_elemental_tome.active_ability.height": "Lift Height: %s blocks",
 	"item.rpgu.air_elemental_tome.active_ability.0": "Raises targets into the air",
 	"item.rpgu.air_elemental_tome.active_ability.1": " and makes them fall with increased damage",
 
@@ -148,7 +149,7 @@
 
 	"item.minecraft.golden_armor.passive_ability.0": "Buffs nearby tamed creatures",
 	"item.minecraft.totem_of_undying.passive_ability.0": "Saves from death",
-	"item.minecraft.elytra.passive_ability.0": "Allows you to fly",
+	"item.minecraft.elytra.passive_ability.0": "Allows to fly",
 
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",

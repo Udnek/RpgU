@@ -76,7 +76,7 @@ public class WitherWreath extends ConstructableCustomItem {
         public Passive(){
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.WITHER,
-                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, 20*2)),
+                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, 20*2.5)),
                     Functions.CONSTANT(1)
             )));
         }

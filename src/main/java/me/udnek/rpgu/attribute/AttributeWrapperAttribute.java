@@ -22,7 +22,7 @@ public class AttributeWrapperAttribute extends ConstructableCustomAttribute {
     @Override
     public double calculate(@NotNull LivingEntity entity) {
         AttributeInstance attribute = entity.getAttribute(target);
-        if (attribute == null) return getDefaultValue();
+        if (attribute == null) return getDefault();
         return Math.clamp(attribute.getValue(), 0, 20);
     }
 }

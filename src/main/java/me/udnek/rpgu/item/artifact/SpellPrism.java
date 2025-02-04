@@ -39,7 +39,9 @@ public class SpellPrism extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomAttributeModifier attribute = new CustomAttributeModifier(-0.15, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.COOLDOWN_TIME, attribute).build()));
+        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+                .add(Attributes.COOLDOWN_TIME, new CustomAttributeModifier(-0.15, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS))
+                .add(Attributes.MAGICAL_POTENTIAL, new CustomAttributeModifier(0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS))
+                .build()));
     }
 }

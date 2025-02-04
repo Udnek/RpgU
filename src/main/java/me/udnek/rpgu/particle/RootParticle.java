@@ -14,17 +14,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class RootParticle extends ConstructableCustomParticle<BlockDisplay> {
 
-    public static final float SIZE = 1;
     public static final int UP_DURATION = 3;
     public static final int DOWN_DURATION = 10;
 
     protected int duration;
     protected LivingEntity target;
+    protected float size;
 
-    public RootParticle(@NotNull LivingEntity target){
+    public RootParticle(@NotNull LivingEntity target, float size){
         PotionEffect effect = Effects.ROOT_EFFECT.get(target);
         this.duration = effect == null ? 0 : effect.getDuration();
         this.target = target;
+        this.size = size;
     }
 
     @Override
@@ -51,13 +52,13 @@ public class RootParticle extends ConstructableCustomParticle<BlockDisplay> {
             display.setInterpolationDelay(-1);
             display.setInterpolationDuration(UP_DURATION);
             Transformation transformation = display.getTransformation();
-            transformation.getTranslation().add(0, SIZE, 0);
+            transformation.getTranslation().add(0, size, 0);
             display.setTransformation(transformation);
         } else if (frameNumber == getFramesAmount() - DOWN_DURATION - 1) {
             display.setInterpolationDelay(-1);
             display.setInterpolationDuration(DOWN_DURATION);
             Transformation transformation = display.getTransformation();
-            transformation.getTranslation().add(0, -SIZE, 0);
+            transformation.getTranslation().add(0, -size, 0);
             display.setTransformation(transformation);
         }
         Location tp = target.getLocation();
@@ -71,8 +72,8 @@ public class RootParticle extends ConstructableCustomParticle<BlockDisplay> {
         display.setRotation(0, 0);
         display.setBlock(Material.HANGING_ROOTS.createBlockData());
         Transformation transformation = display.getTransformation();
-        transformation.getScale().set(SIZE, -SIZE, SIZE);
-        transformation.getTranslation().add(-SIZE/2, 0, -SIZE/2);
+        transformation.getScale().set(size, -size, size);
+        transformation.getTranslation().add(-size/2, 0, -size/2);
         display.setTransformation(transformation);
     }
 

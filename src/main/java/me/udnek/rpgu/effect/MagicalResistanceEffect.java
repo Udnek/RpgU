@@ -1,5 +1,7 @@
 package me.udnek.rpgu.effect;
 
+import me.udnek.itemscoreu.customattribute.CustomAttributeConsumer;
+import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.text.format.TextColor;
@@ -38,6 +40,6 @@ public class MagicalResistanceEffect extends ConstructableCustomEffect {
 
     @Override
     public void getCustomAttributes(@NotNull PotionEffect context, @NotNull CustomAttributeConsumer consumer) {
-        consumer.accept(Attributes.MAGICAL_RESISTANCE, (context.getAmplifier()+1)*0.1, AttributeModifier.Operation.ADD_NUMBER);
+        consumer.accept(Attributes.MAGICAL_RESISTANCE, new CustomAttributeModifier((context.getAmplifier()+1)*0.1, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
     }
 }

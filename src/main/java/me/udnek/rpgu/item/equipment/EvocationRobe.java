@@ -71,6 +71,7 @@ public class EvocationRobe extends ConstructableCustomItem {
                 .add(Attributes.MAGICAL_POTENTIAL, new CustomAttributeModifier(5,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST))
                 .add(Attributes.COOLDOWN_TIME, new CustomAttributeModifier(-0.3,  AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.CHEST))
                 .add(Attributes.CAST_RANGE, new CustomAttributeModifier(0.5,  AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.CHEST))
+                .add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, new CustomAttributeModifier(0.5,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST))
         .build()));
     }
 

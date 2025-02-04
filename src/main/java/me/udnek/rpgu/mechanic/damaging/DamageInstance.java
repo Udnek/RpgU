@@ -201,7 +201,7 @@ public class DamageInstance {
                         if (arrow.isCritical()){
                             if (arrow.getShooter() instanceof LivingEntity livingShooter)
                                 damage.multiplyPhysical(Attributes.CRITICAL_DAMAGE.calculate(livingShooter));
-                            else damage.multiplyPhysical(Attributes.CRITICAL_DAMAGE.getDefaultValue());
+                            else damage.multiplyPhysical(Attributes.CRITICAL_DAMAGE.getDefault());
                         }
 
                         Utils.consumeIfNotNull(arrow.getWeapon(), bow ->
