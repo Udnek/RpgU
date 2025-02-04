@@ -34,7 +34,7 @@ public abstract class FerrudamArmor extends ConstructableCustomItem {
     public @Nullable DataSupplier<Equippable> getEquippable() {
         Equippable equippable = Equippable
                 .equippable(getMaterial().getEquipmentSlot())
-                .model(new NamespacedKey(RpgU.getInstance(), "ferrudam")).build();
+                .assetId(new NamespacedKey(RpgU.getInstance(), "ferrudam")).build();
         return DataSupplier.of(equippable);
     }
 

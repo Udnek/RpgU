@@ -27,7 +27,7 @@ public abstract class AbstractWolfArmor extends ConstructableCustomItem {
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
         Equippable build = new ItemStack(getMaterial()).getData(DataComponentTypes.EQUIPPABLE).toBuilder()
-                .model(new NamespacedKey(RpgU.getInstance(), "wolf")).build();
+                .assetId(new NamespacedKey(RpgU.getInstance(), "wolf")).build();
         return DataSupplier.of(build);
     }
 

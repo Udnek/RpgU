@@ -159,8 +159,8 @@ public class FlowerWreath extends ConstructableCustomItem {
             Location to =location.toCenterLocation();
 
             ParticleBuilder particle = Particle.TRAIL.builder().location(from).count(16).offset(0.2, 0.2, 0.2);
-            particle.data(new Particle.TargetColor(to, Color.fromRGB(92, 169, 4))).spawn();
-            particle.data(new Particle.TargetColor(to, Color.fromRGB(139,69,19))).spawn();
+            particle.data(new Particle.Trail(to, Color.fromRGB(92, 169, 4), 10)).spawn();
+            particle.data(new Particle.Trail(to, Color.fromRGB(139,69,19),10)).spawn();
             getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingEntity);
             return ActionResult.FULL_COOLDOWN;
         }

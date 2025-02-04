@@ -1,11 +1,14 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.itemscoreu.customattribute.ConstructableReversedCustomAttribute;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class MagicalResistanceAttribute extends ConstructableCustomAttribute {
+public class MagicalResistanceAttribute extends ConstructableReversedCustomAttribute {
+
+    public static final double MAX_DEFENSE_ABSORPTION = 0.8;
 
     public MagicalResistanceAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
         super(rawId, defaultValue, min, max);
@@ -15,7 +18,9 @@ public class MagicalResistanceAttribute extends ConstructableCustomAttribute {
     public double calculateWithBase(@NotNull LivingEntity entity, double base) {
         double magicalDefenseMul = Attributes.MAGICAL_DEFENSE_MULTIPLIER.calculate(entity);
         double potential = Attributes.MAGICAL_POTENTIAL.calculate(entity);
-        base += MagicalDefenseMultiplierAttribute.calculateAbsorption(magicalDefenseMul*potential);
+
+        base += (magicalDefenseMul*potential)/Attributes.MAGICAL_DEFENSE_MULTIPLIER.getMax() * MAX_DEFENSE_ABSORPTION;
+
         return super.calculateWithBase(entity, base);
     }
 }

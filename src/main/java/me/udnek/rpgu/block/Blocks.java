@@ -5,7 +5,7 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import org.jetbrains.annotations.NotNull;
 
-public class BlockTypes {
+public class Blocks {
 
     public static final CustomBlockType SOUL_BINDER = register(new SoulBinderBlock());
 

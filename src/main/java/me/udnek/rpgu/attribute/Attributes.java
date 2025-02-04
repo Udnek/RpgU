@@ -1,6 +1,7 @@
 package me.udnek.rpgu.attribute;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.itemscoreu.customattribute.ConstructableReversedCustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
@@ -40,9 +41,9 @@ public class Attributes{
         PHYSICAL_DAMAGE = register(new AttributeWrapperAttribute("physical_damage",0, 1024, Attribute.ATTACK_DAMAGE));
         ATTACK_SPEED = register(new AttributeWrapperAttribute("attack_speed", 0, 1024, Attribute.ATTACK_SPEED));
         PHYSICAL_ARMOR = register(new PhysicalArmorAttribute("physical_armor"));
-        MAGICAL_POTENTIAL = register(new ConstructableCustomAttribute("magical_potential",0, 1024));
-        MELEE_MAGICAL_DAMAGE_MULTIPLIER = register(new ConstructableCustomAttribute("melee_magical_damage_multiplier",0, 1024));
-        MAGICAL_DEFENSE_MULTIPLIER = register(new MagicalDefenseMultiplierAttribute("magical_defense_multiplier"));
+        MAGICAL_POTENTIAL = register(new ConstructableCustomAttribute("magical_potential",0,0, 1024));
+        MELEE_MAGICAL_DAMAGE_MULTIPLIER = register(new ConstructableCustomAttribute("melee_magical_damage_multiplier",0, 0, 1024));
+        MAGICAL_DEFENSE_MULTIPLIER = register(new ConstructableCustomAttribute("magical_defense_multiplier", 0, 0, 20));
         CAST_RANGE = register(new ConstructableCustomAttribute("cast_range",1,0, 1024));
         COOLDOWN_TIME = register(new ConstructableCustomAttribute("cooldown_time",1,0, 1024, false));
         PROJECTILE_DAMAGE = register(new ProjectileDamageMultiplierAttribute("projectile_damage", 1, 0, 1024));

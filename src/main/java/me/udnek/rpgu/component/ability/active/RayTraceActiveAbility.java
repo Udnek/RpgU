@@ -20,12 +20,12 @@ public interface RayTraceActiveAbility<Context> extends ActiveAbilityComponent<C
         if (rayTraceResult == null) return null;
         Location location = rayTraceResult.getHitPosition().toLocation(livingEntity.getWorld());
         final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity);
-        Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadius(location, radius);
+        Collection<LivingEntity> nearbyLivingEntities = Utils.livingEntitiesInRadiusIntersects(location, radius);
         if (particle != null) showRadius(particle.location(location), radius);
         return nearbyLivingEntities;
     }
 
-    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull Player player){
+    default @Nullable Collection<LivingEntity> findLivingEntitiesInRayTraceRadius(@NotNull LivingEntity player){
         return findLivingEntitiesInRayTraceRadius(player, null);
     }
 

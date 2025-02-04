@@ -31,10 +31,10 @@ public class RootEffect extends ConstructableCustomEffect {
     }
 
     @Override
-    public void apply(@NotNull LivingEntity bukkit, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
-        super.apply(bukkit, duration, amplifier, ambient, showParticles, showIcon);
-        bukkit.setVelocity(new Vector());
-        new RootParticle(bukkit).play();
+    public void apply(@NotNull LivingEntity livingEntity, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
+        super.apply(livingEntity, duration, amplifier, ambient, showParticles, showIcon);
+        livingEntity.setVelocity(new Vector());
+        new RootParticle(livingEntity, (float) livingEntity.getBoundingBox().getWidthX()*1.5f).play();
     }
 
     @Override

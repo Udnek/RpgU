@@ -57,7 +57,7 @@ public class PhantomChestplate extends ConstructableCustomItem {
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
         Equippable equippable = new ItemStack(getMaterial()).getData(DataComponentTypes.EQUIPPABLE);
-        equippable = equippable.toBuilder().model(new NamespacedKey(RpgU.getInstance(), "phantom")).build();
+        equippable = equippable.toBuilder().assetId(new NamespacedKey(RpgU.getInstance(), "phantom")).build();
         return DataSupplier.of(equippable);
     }
 

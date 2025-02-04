@@ -17,8 +17,6 @@ public class AmethystSpikeParticle extends ConstructableCustomParticle<BlockDisp
 
     public AmethystSpikeParticle(float size){this.size = size;}
 
-    public AmethystSpikeParticle(){this(1);}
-
     @Override
     public @Positive int getFramesAmount() {
         return 20;
@@ -35,7 +33,7 @@ public class AmethystSpikeParticle extends ConstructableCustomParticle<BlockDisp
             display.setInterpolationDelay(-1);
             display.setInterpolationDuration(UP_DURATION);
             Transformation transformation = display.getTransformation();
-            transformation.getTranslation().add(0, size/2, 0);
+            transformation.getTranslation().add(0, size*(4f/3f)/2, 0);
             display.setTransformation(transformation);
         } else if (frameNumber == getFramesAmount() - DOWN_DURATION - 1) {
             display.setInterpolationDelay(-1);

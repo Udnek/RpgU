@@ -1,13 +1,14 @@
 package me.udnek.rpgu.attribute.instance;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.itemscoreu.customattribute.ConstructableReversedCustomAttribute;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-public class PhysicalResistanceAttribute extends ConstructableCustomAttribute {
+public class PhysicalResistanceAttribute extends ConstructableReversedCustomAttribute {
 
     public PhysicalResistanceAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
         super(rawId, defaultValue, min, max);

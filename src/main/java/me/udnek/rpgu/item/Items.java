@@ -8,6 +8,7 @@ import me.udnek.rpgu.item.artifact.sphere.SphereOfBalance;
 import me.udnek.rpgu.item.artifact.sphere.SphereOfDiscord;
 import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
+import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.doloire.AmethystDoloire;
 import me.udnek.rpgu.item.equipment.doloire.HeavyAmethystDoloire;

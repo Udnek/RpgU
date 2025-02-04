@@ -76,6 +76,7 @@
   "item.rpgu.totem_of_saving.description.1": " если в момент смерти он находился в инвентаре",
 
   "item.rpgu.air_elemental_tome": "Фолиант элементаля воздуха",
+  "item.rpgu.air_elemental_tome.active_ability.height": "Высота подъёма: %s блоков",
   "item.rpgu.air_elemental_tome.active_ability.0": "Поднимает цели в воздух",
   "item.rpgu.air_elemental_tome.active_ability.1": " и ударяет о землю с увеличенным уроном",
 
@@ -158,5 +159,8 @@
   "attribute.rpgu.name.critical_damage": "Критический урон",
 
   "item.minecraft.totem_of_undying.passive_ability.0": "Спасает от смерти",
-  "item.minecraft.elytra.passive_ability.0": "Позволяет летать"
+  "item.minecraft.elytra.passive_ability.0": "Позволяет летать",
+
+  "item.rpgu.soul_binder": "Связыватель души",
+  "item.rpgu.soul_binder.description.0": "Игрок возродится на нём, если других приоритетных мест нет"
 }
