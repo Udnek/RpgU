@@ -198,6 +198,7 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (material == Material.TOTEM_OF_UNDYING) {
             customItem.getComponents().set(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
+            itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 64);
         }
 
         if (material == Material.ELYTRA) {
