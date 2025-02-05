@@ -45,7 +45,9 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable String getRawItemName() {return Material.WOLF_ARMOR.translationKey();}
+    public @NotNull String translationKey() {
+        return Material.WOLF_ARMOR.translationKey();
+    }
     
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

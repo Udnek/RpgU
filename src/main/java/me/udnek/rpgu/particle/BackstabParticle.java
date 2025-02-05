@@ -1,7 +1,7 @@
 package me.udnek.rpgu.particle;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import io.papermc.paper.datacomponent.item.DyedItemColor;
+import io.papermc.paper.datacomponent.item.CustomModelData;
 import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Color;
@@ -12,12 +12,9 @@ import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
 
 public class BackstabParticle extends CustomFlatParticle {
-    private final static Color color = Color.fromRGB(255, 10, 10);
+    public final static Color COLOR = Color.fromRGB(255, 10, 10);
     protected double scale;
 
-    public BackstabParticle(){
-        this(2);
-    }
     public BackstabParticle(double scale){
         this.scale = scale;
     }
@@ -32,7 +29,7 @@ public class BackstabParticle extends CustomFlatParticle {
     @Override
     protected @NotNull ItemStack createDisplayItem() {
         ItemStack itemStack = new ItemStack(Material.LEATHER_HELMET);
-        itemStack.setData(DataComponentTypes.DYED_COLOR, DyedItemColor.dyedItemColor(color, true));
+        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addColor(COLOR).build());
         return itemStack;
     }
 

@@ -120,7 +120,7 @@ public class Wrench extends ConstructableCustomItem {
 
     @Override
     public void getLore(@NotNull Consumer<Component> consumer) {
-        consumer.accept(Component.translatable(getRawItemName() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
+        consumer.accept(Component.translatable(translationKey() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
     }
 }
 

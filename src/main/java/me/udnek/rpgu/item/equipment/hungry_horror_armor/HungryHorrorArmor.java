@@ -37,11 +37,11 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
         LoreBuilder loreBuilder = new LoreBuilder();
         AttributesLorePart attributesLorePart = new AttributesLorePart();
         loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.0").color(CustomAttribute.PLUS_COLOR));
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.1").color(NamedTextColor.GRAY));
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.2").color(NamedTextColor.GRAY));
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.3").color(NamedTextColor.GRAY));
-        attributesLorePart.addAttribute(slot, Component.translatable(getRawItemName()+".description.4").color(NamedTextColor.GRAY));
+        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.0").color(CustomAttribute.PLUS_COLOR));
+        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.1").color(NamedTextColor.GRAY));
+        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.2").color(NamedTextColor.GRAY));
+        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.3").color(NamedTextColor.GRAY));
+        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.4").color(NamedTextColor.GRAY));
         return loreBuilder;
     }
 }

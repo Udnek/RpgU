@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.artifact.wreath;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.CustomModelData;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -26,6 +27,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Random;
 import java.util.function.Consumer;
@@ -54,8 +56,6 @@ public class FlowerWreath extends ConstructableCustomItem {
     protected void put(@NotNull Material material, @NotNull TextColor color){flowerColors.put(material, color.value());}
 
     @Override
-    public @NotNull Material getMaterial() {return Material.FIREWORK_STAR;}
-    @Override
     public @NotNull String getRawId() {return "flower_wreath";}
 
     @Override
@@ -66,19 +66,19 @@ public class FlowerWreath extends ConstructableCustomItem {
                 "A A",
                 "AAA");
 
-        RecipeChoice.MaterialChoice choices = new RecipeChoice.MaterialChoice(flowerColors.keySet().toArray(new Material[0]));
+        RecipeChoice.MaterialChoice choices = new RecipeChoice.MaterialChoice(new ArrayList<>(flowerColors.keySet()));
         recipe.setIngredient('A', choices);
 
         consumer.accept(recipe);
     }
 
     @Override
-    public @Nullable Boolean getHideAdditionalTooltip() {return true;}
+    public @Nullable DataSupplier<CustomModelData> getCustomModelData() {
+        return DataSupplier.of(CustomModelData.customModelData().addColor(Color.fromRGB(flowerColors.get(Material.DANDELION))).build());
+    }
 
     @Override
-    public @Nullable DataSupplier<FireworkEffect> getFireworkExplosion() {
-        return DataSupplier.of(FireworkEffect.builder().withColor(getColorByFlower(Material.DANDELION)).build());
-    }
+    public @Nullable Boolean getHideAdditionalTooltip() {return true;}
 
     @Override
     public ItemStack getItemFromCraftingMatrix(ItemStack result, ItemStack[] matrix, @NotNull Recipe recipe) {
@@ -96,7 +96,7 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     public void setColor(@NotNull ItemStack itemStack, @NotNull Color color){
-        itemStack.setData(DataComponentTypes.FIREWORK_EXPLOSION, FireworkEffect.builder().withColor(color).build());
+        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addColor(color).build());
     }
 
     public int getIntColorByFlower(@NotNull Material flower){return flowerColors.getOrDefault(flower, 0);}
@@ -128,7 +128,8 @@ public class FlowerWreath extends ConstructableCustomItem {
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.REGENERATION,
                     Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, DURATION)),
-                    Functions.CONSTANT(0)
+                    Functions.CONSTANT(0),
+                    true, true, true
             )));
         }
 
@@ -158,9 +159,9 @@ public class FlowerWreath extends ConstructableCustomItem {
             Location from = livingEntity.getEyeLocation().add(0, -0.8, 0);
             Location to =location.toCenterLocation();
 
-            ParticleBuilder particle = Particle.TRAIL.builder().location(from).count(16).offset(0.2, 0.2, 0.2);
-            particle.data(new Particle.Trail(to, Color.fromRGB(92, 169, 4), 10)).spawn();
-            particle.data(new Particle.Trail(to, Color.fromRGB(139,69,19),10)).spawn();
+            ParticleBuilder particle = Particle.TRAIL.builder().location(from).count(10).offset(0.2, 0.2, 0.2);
+            particle.data(new Particle.Trail(to, Color.fromRGB(92, 169, 4), 50)).spawn();
+            particle.data(new Particle.Trail(to, Color.fromRGB(139,69,19),50)).spawn();
             getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingEntity);
             return ActionResult.FULL_COOLDOWN;
         }

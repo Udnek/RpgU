@@ -1,6 +1,0 @@
-{
-	"parent": "rpgu:item/backpack/liquid_template",
-	"textures": {
-		"0": "block/lava_still"
-	}
-}
