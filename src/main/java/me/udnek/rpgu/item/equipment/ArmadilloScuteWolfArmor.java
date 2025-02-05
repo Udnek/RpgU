@@ -18,6 +18,9 @@ import java.util.function.Consumer;
 
 public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     @Override
+    public @NotNull Material getMaterial() {return Material.LEATHER_HELMET;}
+
+    @Override
     public @NotNull String getRawId() {return "armadillo_scute_wolf_armor";}
 
     @Override
