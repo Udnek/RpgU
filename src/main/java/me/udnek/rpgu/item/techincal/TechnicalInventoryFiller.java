@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.techincal;
 
 import io.papermc.paper.datacomponent.item.DyedItemColor;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.jeiu.component.ComponentTypes;
+import me.udnek.jeiu.component.Components;
 import me.udnek.rpgu.RpgU;
 import net.kyori.adventure.key.Key;
 import org.bukkit.Color;
@@ -15,12 +15,12 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(ComponentTypes.TECHNICAL_ITEM.getDefault());
+        getComponents().set(Components.TECHNICAL_ITEM.getDefault());
     }
 
     @Override
     public @Nullable DataSupplier<Key> getItemModel() {
-        return DataSupplier.of(new NamespacedKey(RpgU.getInstance(), "empty"));
+        return DataSupplier.of(null);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.equipment.ferrudam.tools;
+package me.udnek.rpgu.item.equipment.ferrudam.tool;
 
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
@@ -15,18 +15,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamHoe extends FerrudamTools {
+public class FerrudamShovel extends FerrudamTool {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_hoe";}
+    public @NotNull String getRawId() {return "ferrudam_shovel";}
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_HOE;}
+    public @NotNull Material getMaterial() {return Material.DIAMOND_SHOVEL;}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
-                "FF",
-                " S",
-                " S");
+                "F",
+                "S",
+                "S");
 
         RecipeChoice.ExactChoice ferrudam = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
         RecipeChoice.MaterialChoice stick = new RecipeChoice.MaterialChoice(Material.STICK);
@@ -40,7 +40,7 @@ public class FerrudamHoe extends FerrudamTools {
                 getNewRecipeKey(),
                 List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT)),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
-                new CustomSingleRecipeChoice(Material.IRON_HOE),
+                new CustomSingleRecipeChoice(Material.IRON_SHOVEL),
                 getItem()
         );
 

@@ -4,6 +4,7 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
+import me.udnek.itemscoreu.customevent.ResourcepackInitializationEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.itemscoreu.customitem.VanillaItemManager;
@@ -32,6 +33,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Objects;
@@ -88,7 +90,7 @@ public class GeneralListener extends SelfRegisteringListener {
         event.setRecipe(replaceRecipe(recipe, itemStack));
     }
 
-    public MerchantRecipe replaceRecipe(MerchantRecipe recipe, ItemStack newItem){
+    public @NotNull MerchantRecipe replaceRecipe(@NotNull MerchantRecipe recipe, @NotNull ItemStack newItem){
         Map<Enchantment, Integer> oldItemEnchants = recipe.getResult().getEnchantments();
         newItem.addEnchantments(oldItemEnchants);
         MerchantRecipe customRecipe = new MerchantRecipe(

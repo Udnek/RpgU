@@ -94,10 +94,14 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
     public boolean isEmpty() {return attributeData.isEmpty() && passiveData.isEmpty();}
     @Override
     @Deprecated
-    public void add(@NotNull Component component) {}
+    public void add(@NotNull Component component) {
+        throw new RuntimeException("Can not use add on AttributesLorePart");
+    }
     @Override
     @Deprecated
-    public void addFirst(@NotNull Component component) {}
+    public void addFirst(@NotNull Component component) {
+        throw new RuntimeException("Can not use add on AttributesLorePart");
+    }
 
     @Override
     public void setHeader(@NotNull Component component) {

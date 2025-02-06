@@ -2,6 +2,7 @@ package me.udnek.rpgu.mechanic.enchanting;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customenchantment.NmsEnchantmentContainer;
+import me.udnek.itemscoreu.customevent.ResourcepackInitializationEvent;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
@@ -20,6 +21,7 @@ import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public class EnchantingListener extends SelfRegisteringListener {
     public EnchantingListener(JavaPlugin plugin) {
