@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.equipment;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -55,6 +56,7 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.BOW_20X20);
         CustomAttributeModifier projectileSpeedAttribute = new CustomAttributeModifier(SPEED_BUFF, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.ACTIVE_HAND);
         CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(1/(1+SPEED_BUFF)-1, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.ACTIVE_HAND);
 

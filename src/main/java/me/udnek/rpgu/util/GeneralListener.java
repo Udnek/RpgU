@@ -1,7 +1,9 @@
 package me.udnek.rpgu.util;
 
+import com.google.gson.JsonParser;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
 import me.udnek.itemscoreu.customevent.InitializationEvent;
 import me.udnek.itemscoreu.customevent.ResourcepackInitializationEvent;
@@ -9,6 +11,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.itemscoreu.customitem.VanillaItemManager;
 import me.udnek.itemscoreu.customregistry.InitializationProcess;
+import me.udnek.itemscoreu.resourcepack.path.VirtualRpJsonFile;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
@@ -18,6 +21,7 @@ import me.udnek.rpgu.vanilla.EnchantManaging;
 import me.udnek.rpgu.vanilla.RecipeManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
@@ -57,6 +61,35 @@ public class GeneralListener extends SelfRegisteringListener {
             }
         }.runTaskLater(RpgU.getInstance(), 5);
     }
+
+    @EventHandler
+    public void onResourcepackInitialization(ResourcepackInitializationEvent event){
+        String model = """
+                {
+                	"parent": "rpgu:item/gui/alloying/progress/template",
+                	"textures": {
+                		"layer0": "rpgu:item/gui/alloying/progress/%lvl%"
+                	}
+                }""";
+        for (int i = 0; i <= 29; i++) {
+            event.addFile(new VirtualRpJsonFile(
+                    JsonParser.parseString(model.replace("%lvl%", String.valueOf(i))).getAsJsonObject(),
+                    AutoGeneratingFilesItem.GENERATED.getModelPath(new NamespacedKey(RpgU.getInstance(), "gui/alloying/progress/"+i))));
+        }
+        String definition = """
+                {
+                	"model": {
+                		"type": "minecraft:model",
+                		"model": "rpgu:item/gui/alloying/progress/%lvl%"
+                	}
+                }""";
+        for (int i = 0; i <= 29; i++) {
+            event.addFile(new VirtualRpJsonFile(
+                    JsonParser.parseString(definition.replace("%lvl%", String.valueOf(i))).getAsJsonObject(),
+                    AutoGeneratingFilesItem.GENERATED.getDefinitionPath(new NamespacedKey(RpgU.getInstance(), "gui/alloying/progress/"+i))));
+        }
+    }
+
 
     @EventHandler(priority = EventPriority.HIGH)
     public void villagerTrades(VillagerAcquireTradeEvent event){

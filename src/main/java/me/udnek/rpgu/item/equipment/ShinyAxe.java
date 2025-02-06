@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.equipment;
 
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.nms.Nms;
@@ -40,6 +41,12 @@ public class ShinyAxe extends ConstructableCustomItem {
         super.initializeAdditionalAttributes(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+    }
+
+    @Override
+    public void initializeComponents() {
+        super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD);
     }
 
     @Override
