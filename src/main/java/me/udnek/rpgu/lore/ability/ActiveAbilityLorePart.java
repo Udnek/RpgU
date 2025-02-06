@@ -56,10 +56,12 @@ public class ActiveAbilityLorePart implements AbilityLorePart {
     @Deprecated
     @Override
     public void add(@NotNull Component component) {
+        throw new RuntimeException("Can not use add on ActiveAbilityLorePart");
     }
     @Deprecated
     @Override
     public void addFirst(@NotNull Component component) {
+        throw new RuntimeException("Can not use add on ActiveAbilityLorePart");
     }
 
     @Override

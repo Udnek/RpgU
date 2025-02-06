@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.equipment.flint;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.RepairData;
 import org.bukkit.Material;
@@ -17,6 +18,13 @@ public abstract class FlintTool extends ConstructableCustomItem {
     }
     @Override
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
+
+
+    @Override
+    public void initializeComponents() {
+        super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD);
+    }
 
     @Override
     public boolean addDefaultAttributes() {return true;}

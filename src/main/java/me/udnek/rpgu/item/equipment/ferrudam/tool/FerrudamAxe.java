@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.equipment.ferrudam.tools;
+package me.udnek.rpgu.item.equipment.ferrudam.tool;
 
 import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class FerrudamAxe extends FerrudamTools {
+public class FerrudamAxe extends FerrudamTool {
     @Override
     public @NotNull String getRawId() {return "ferrudam_axe";}
     @Override

@@ -16,7 +16,7 @@ import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamChestplate;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamHelmet;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamLeggings;
-import me.udnek.rpgu.item.equipment.ferrudam.tools.*;
+import me.udnek.rpgu.item.equipment.ferrudam.tool.*;
 import me.udnek.rpgu.item.equipment.flint.*;
 import me.udnek.rpgu.item.equipment.grim.GrimChestplate;
 import me.udnek.rpgu.item.equipment.grim.GrimHelmet;
