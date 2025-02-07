@@ -1,6 +1,7 @@
 package me.udnek.rpgu.mechanic.alloying;
 
 import com.destroystokyo.paper.event.block.BlockDestroyEvent;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.custominventory.ConstructableCustomInventory;
 import me.udnek.itemscoreu.custominventory.SmartIntractableCustomInventory;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -98,11 +99,10 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         ItemStack icon = Items.TECHNICAL_INVENTORY_FILLER.getItem();
         icon.editMeta(ColorableArmorMeta.class, itemMeta -> itemMeta.setColor(Color.fromRGB(COLOR.value())));
 
-        String model = "rpgu:gui/alloying/progress/";
+        String model = "gui/alloying/progress/";
         if (progress == 0) model += "empty";
         else model += (int) (progress*29);
-        String finalModel = model;
-        icon.editMeta(itemMeta -> itemMeta.setItemModel(NamespacedKey.fromString(finalModel)));
+        icon.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), model));
         inventory.setItem(PROGRESS_SLOT, icon);
     }
 

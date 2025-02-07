@@ -1,11 +1,11 @@
 package me.udnek.rpgu.entity;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.BundleContents;
 import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntity;
 import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
-import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.entity.Piglin;
 import org.bukkit.event.Listener;
@@ -38,10 +38,8 @@ public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> imple
             container = null;
         } else {
             container = new ItemStack(Material.BUNDLE);
-            container.editMeta(BundleMeta.class, bundleMeta -> {
-                bundleMeta.setItems(items);
-                bundleMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "empty"));
-            });
+            container.unsetData(DataComponentTypes.ITEM_MODEL);
+            container.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(items));
         }
 
         entity.getEquipment().setItem(EquipmentSlot.HAND, container);
