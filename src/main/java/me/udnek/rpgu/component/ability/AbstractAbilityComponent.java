@@ -9,10 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractAbilityComponent<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>> implements AbilityComponent<ActivationContext>{
+public abstract class AbstractAbilityComponent<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>>       implements AbilityComponent<ActivationContext>{
 
     @Override
-    public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, boolean canselIfCooldown, UniversalInventorySlot slot, @NotNull ActivationContext activationContext){
+    public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, boolean canselIfCooldown,
+                         @NotNull UniversalInventorySlot slot, @NotNull ActivationContext activationContext){
         if (!(livingEntity instanceof Player player)) {
             action(customItem, livingEntity, slot, activationContext);
             return;

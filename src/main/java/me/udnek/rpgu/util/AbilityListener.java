@@ -10,6 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.EntityEquipment;
@@ -46,12 +47,21 @@ public class AbilityListener extends SelfRegisteringListener {
     public void entityResurrect(EntityResurrectEvent event){
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
         BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
-            if (itemStack == null || !(itemStack.hasData(DataComponentTypes.DEATH_PROTECTION))) return;
-            CustomItem.consumeIfCustom(itemStack, customItem -> {
-                customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onResurrect(
-                        customItem, slot, activatedBefore.get(), event);
-            });
+            if (itemStack == null) return;
+            CustomItem.consumeIfCustom(itemStack, customItem ->
+                    customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onResurrect(
+                            customItem, slot, activatedBefore.get(), event));
             if (!(event.isCancelled())) activatedBefore.set(true);
+        };
+        Utils.applyConsumer(consumer, event.getEntity());
+    }
+
+    @EventHandler
+    public void playerDeath(PlayerDeathEvent event){
+        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
+            if (itemStack == null) return;
+            CustomItem.consumeIfCustom(itemStack, customItem ->
+                    customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
         };
         Utils.applyConsumer(consumer, event.getEntity());
     }

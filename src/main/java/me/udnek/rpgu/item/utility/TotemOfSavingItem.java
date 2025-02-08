@@ -4,27 +4,31 @@ import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.entity.EntityTypes;
+import me.udnek.rpgu.entity.TotemOfSavingEntity;
 import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
-import net.kyori.adventure.text.Component;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class TotemOfSavingItem extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "totem_of_saving";}
-
-   /* @Override
-    public void getLore(@NotNull Consumer<Component> consumer) {
-        consumer.accept(Component.translatable(translationKey() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
-        consumer.accept(Component.translatable(translationKey() + ".description.1").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
-    }*/
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -47,10 +51,10 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new TotemOfSavingLore());
+        getComponents().set(new TotemOfSavingComponent());
     }
 
-    public class TotemOfSavingLore extends ConstructablePassiveAbilityComponent<Object> {
+    public class TotemOfSavingComponent extends ConstructablePassiveAbilityComponent<PlayerDeathEvent> {
 
         @Override
         public @NotNull CustomEquipmentSlot getSlot() {
@@ -59,13 +63,42 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
 
         @Override
         public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
-            componentable.addAbilityDescription(Component.translatable(translationKey() + ".description.0"));
+            componentable.addFullAbilityDescription(TotemOfSavingItem.this, 1);
             super.addLoreLines(componentable);
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull Object object) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
+            Player player = event.getPlayer();
+            ItemStack foundTotem = null;
+            List<ItemStack> drops = event.getDrops();
+            for (ItemStack itemStack : drops) {
+                if (!(customItem.isThisItem(itemStack))) continue;
+                foundTotem = itemStack;
+                break;
+            }
+            if (foundTotem == null) return ActionResult.NO_COOLDOWN;
+            drops.remove(foundTotem);
+            foundTotem.subtract(1);
+            if (foundTotem.getAmount() > 0) drops.add(foundTotem);
+            Location location = player.getLocation();
+            TotemOfSavingEntity totem = EntityTypes.TOTEM_OF_SAVING.spawnAndGet(location);
+            totem.setItems(drops);
+            drops.clear();
+
+            if (location.getY() > location.getWorld().getMinHeight()) return ActionResult.NO_COOLDOWN;
+
+            location.setY(location.getWorld().getMinHeight());
+            location.setPitch(0);
+            totem.getReal().teleport(location);
+            Objects.requireNonNull(totem.getReal().getAttribute(Attribute.GRAVITY)).setBaseValue(0);
+            totem.getReal().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20*10, 0));
             return ActionResult.NO_COOLDOWN;
+        }
+
+        @Override
+        public void onDeath(@NotNull CustomItem customItem, @NotNull PlayerDeathEvent event) {
+            activate(customItem, event.getPlayer(), event);
         }
     }
 }

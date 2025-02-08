@@ -10,6 +10,7 @@ import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
 public interface PassiveAbilityComponent<ActivationContext> extends AbilityComponent<ActivationContext> {
@@ -23,17 +24,14 @@ public interface PassiveAbilityComponent<ActivationContext> extends AbilityCompo
                              @NotNull UniversalInventorySlot slot, @NotNull Object object) {}
         @Override
         public @NotNull CustomComponentMap<AbilityComponent<?>> getComponents() {return components;}
-
-        @Override
-        public void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
-                                @NotNull EntityResurrectEvent event) {
-            if (!activatedBefore) event.setCancelled(true);
-        }
     };
 
     default void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
-                             @NotNull EntityResurrectEvent event){}
+                             @NotNull EntityResurrectEvent event){
+        if (!activatedBefore) event.setCancelled(true);
+    }
     default void onGlide(@NotNull CustomItem customItem, @NotNull EntityToggleGlideEvent event){}
+    default void onDeath(@NotNull CustomItem customItem, @NotNull PlayerDeathEvent event){}
 
     @Override
     default @NotNull CustomComponentType<CustomItem, ?> getType(){
