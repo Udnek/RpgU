@@ -53,7 +53,7 @@ public class AbilityListener extends SelfRegisteringListener {
                             customItem, slot, activatedBefore.get(), event));
             if (!(event.isCancelled())) activatedBefore.set(true);
         };
-        Utils.applyConsumer(consumer, event.getEntity());
+        Utils.iterateThroughAllSlots(consumer, event.getEntity());
     }
 
     @EventHandler
@@ -63,7 +63,7 @@ public class AbilityListener extends SelfRegisteringListener {
             CustomItem.consumeIfCustom(itemStack, customItem ->
                     customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
         };
-        Utils.applyConsumer(consumer, event.getEntity());
+        Utils.iterateThroughAllSlots(consumer, event.getEntity());
     }
 
     @EventHandler

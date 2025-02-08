@@ -71,7 +71,7 @@ public class Utils {
         return Preconditions.checkNotNull(Material.getMaterial(name), "There is no such material", name);
     }
 
-    public static void applyConsumer(@NotNull BiConsumer<UniversalInventorySlot, ItemStack> consumer, @NotNull LivingEntity entity){
+    public static void iterateThroughAllSlots(@NotNull BiConsumer<UniversalInventorySlot, ItemStack> consumer, @NotNull LivingEntity entity){
         if (entity instanceof InventoryHolder inventoryHolder){
             @Nullable ItemStack[] contents = inventoryHolder.getInventory().getContents();
             for (int i = 0; i < contents.length; i++) {
