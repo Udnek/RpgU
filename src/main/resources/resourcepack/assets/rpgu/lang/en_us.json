@@ -95,8 +95,7 @@
 	"item.rpgu.armadillo_bar.active_ability.0": "Dispels negative effects while active",
 
 	"item.rpgu.totem_of_saving": "Totem of Saving",
-	"item.rpgu.totem_of_saving.description.0": "Saves inventory on death in container",
-	"item.rpgu.totem_of_saving.description.1": " if totem was stored in any part of inventory",
+	"item.rpgu.totem_of_saving.passive_ability.0": "Saves inventory on death in container",
 
 	"item.rpgu.air_elemental_tome": "Air Elemental Tome",
 	"item.rpgu.air_elemental_tome.active_ability.height": "Lift Height: %s blocks",

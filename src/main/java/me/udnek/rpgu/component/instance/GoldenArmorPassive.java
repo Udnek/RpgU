@@ -10,6 +10,7 @@ import me.udnek.rpgu.component.ability.passive.EquippableActivatablePassiveCompo
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.effect.Effects;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;
@@ -105,7 +106,8 @@ public class GoldenArmorPassive {
         public @NotNull CustomEquipmentSlot getSlot() {return slot;}
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Object object) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+                                            @NotNull Object object) {
             Collection<LivingEntity> livingEntitiesInRadius = Utils.livingEntitiesInRadius(livingEntity.getLocation(), getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity));
             for (LivingEntity livingEntityInRadius: livingEntitiesInRadius){
                 if (!(livingEntityInRadius instanceof Tameable tameable)) continue;

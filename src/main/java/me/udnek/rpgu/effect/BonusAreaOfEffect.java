@@ -3,7 +3,6 @@ package me.udnek.rpgu.effect;
 import me.udnek.itemscoreu.customattribute.CustomAttributeConsumer;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
-import me.udnek.itemscoreu.customenchantment.CustomEnchantment;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.potion.PotionEffect;

@@ -12,6 +12,7 @@ import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.CastTimeProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
@@ -80,7 +81,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerItemConsumeEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerItemConsumeEvent event) {
 
             double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
             Location eyeLocation = livingEntity.getEyeLocation();

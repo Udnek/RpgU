@@ -6,17 +6,18 @@ import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
 import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Piglin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
@@ -26,8 +27,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.Objects;
 
 class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> implements CustomTickingEntityType<TotemOfSavingEntity>, Listener {
 
@@ -52,8 +52,8 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         entity.setAware(false);
         entity.clearLootTable();
         entity.setRotation(entity.getYaw(), 0);
-        entity.getAttribute(Attribute.MAX_HEALTH).setBaseValue(10);
-        entity.getAttribute(Attribute.KNOCKBACK_RESISTANCE).setBaseValue(0.8);
+        Objects.requireNonNull(entity.getAttribute(Attribute.MAX_HEALTH)).setBaseValue(10);
+        Objects.requireNonNull(entity.getAttribute(Attribute.KNOCKBACK_RESISTANCE)).setBaseValue(0.8);
         entity.setPersistent(true);
         entity.setRemoveWhenFarAway(false);
         entity.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, PotionEffect.INFINITE_DURATION, 0, false, false, false));
@@ -63,34 +63,6 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         }
 
         return entity;
-    }
-
-    @EventHandler
-    public void playerDeath(PlayerDeathEvent event) {
-        Player player = event.getPlayer();
-        ItemStack foundTotem = null;
-        List<ItemStack> drops = event.getDrops();
-        for (ItemStack itemStack : drops) {
-            if (!Items.TOTEM_OF_SAVING.isThisItem(itemStack)) continue;
-            foundTotem = itemStack;
-            break;
-        }
-        if (foundTotem == null) return;
-        drops.remove(foundTotem);
-        foundTotem.subtract(1);
-        if (foundTotem.getAmount() > 0) drops.add(foundTotem);
-        Location location = player.getLocation();
-        TotemOfSavingEntity totem = EntityTypes.TOTEM_OF_SAVING.spawnAndGet(location);
-        totem.setItems(drops);
-        drops.clear();
-
-        if (location.getY() > location.getWorld().getMinHeight()) return;
-
-        location.setY(location.getWorld().getMinHeight());
-        location.setPitch(0);
-        totem.getReal().teleport(location);
-        totem.getReal().getAttribute(Attribute.GRAVITY).setBaseValue(0);
-        totem.getReal().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20*10, 0));
     }
 
     @EventHandler
@@ -105,17 +77,14 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         CustomEntity customEntity = CustomEntityType.getTicking(event.getRightClicked());
         if (!(customEntity instanceof TotemOfSavingEntity totemOfSavingEntity)) return;
         PlayerInventory inventory = event.getPlayer().getInventory();
-        totemOfSavingEntity.getItems().forEach(new Consumer<ItemStack>() {
-            @Override
-            public void accept(ItemStack itemStack) {
-                EquipmentSlot slot;
-                if (itemStack.getItemMeta().hasEquippable()) slot = itemStack.getItemMeta().getEquippable().getSlot();
-                else slot = itemStack.getType().getEquipmentSlot();
-                if (slot != EquipmentSlot.HAND && inventory.getItem(slot).getType() == Material.AIR){
-                    inventory.setItem(slot, itemStack);
-                } else {
-                    ItemUtils.giveAndDropLeftover(event.getPlayer(), itemStack);
-                }
+        totemOfSavingEntity.getItems().forEach(itemStack -> {
+            EquipmentSlot slot;
+            if (itemStack.getItemMeta().hasEquippable()) slot = itemStack.getItemMeta().getEquippable().getSlot();
+            else slot = itemStack.getType().getEquipmentSlot();
+            if (slot != EquipmentSlot.HAND && inventory.getItem(slot).getType() == Material.AIR){
+                inventory.setItem(slot, itemStack);
+            } else {
+                ItemUtils.giveAndDropLeftover(event.getPlayer(), itemStack);
             }
         });
         customEntity.remove();

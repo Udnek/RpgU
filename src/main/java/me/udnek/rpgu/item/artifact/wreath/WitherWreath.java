@@ -17,6 +17,7 @@ import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityCompon
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.Material;
@@ -31,6 +32,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class WitherWreath extends ConstructableCustomItem {
@@ -89,7 +91,8 @@ public class WitherWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull DamageInstance damageInstance) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+                                            @NotNull DamageInstance damageInstance) {
             if (!(damageInstance.getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
             getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
             return ActionResult.FULL_COOLDOWN;
@@ -100,7 +103,7 @@ public class WitherWreath extends ConstructableCustomItem {
         @Override
         public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
             if (item.getComponents().getOrException(ComponentTypes.PASSIVE_ABILITY_ITEM) instanceof Passive passive){
-                passive.action(item, player, damageInstance);
+                passive.action(item, player, new UniversalInventorySlot(Objects.requireNonNull(slot.getVanillaSlot())), damageInstance);
             }
         }
     }

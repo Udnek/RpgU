@@ -5,17 +5,21 @@ import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiConsumer;
 
 public class AbilityListener extends SelfRegisteringListener {
     public AbilityListener(@NotNull Plugin plugin) {super(plugin);}
@@ -41,11 +45,22 @@ public class AbilityListener extends SelfRegisteringListener {
 
     @EventHandler
     public void entityResurrect(EntityResurrectEvent event){
-        EquipmentSlot hand = event.getHand();
-        if (hand == null) return;
-        ItemStack item = event.getEntity().getEquipment().getItem(hand);
-        CustomItem.consumeIfCustom(item, customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
+        AtomicBoolean activatedBefore = new AtomicBoolean(false);
+        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
+            CustomItem.consumeIfCustom(itemStack, customItem ->
+                    customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onResurrect(
+                            customItem, slot, activatedBefore.get(), event));
+            if (!(event.isCancelled())) activatedBefore.set(true);
+        };
+        Utils.iterateThroughNotNullSlots(consumer, event.getEntity());
+    }
+
+    @EventHandler
+    public void playerDeath(PlayerDeathEvent event){
+        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
+                CustomItem.consumeIfCustom(itemStack, customItem ->
+                        customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
+        Utils.iterateThroughNotNullSlots(consumer, event.getEntity());
     }
 
     @EventHandler

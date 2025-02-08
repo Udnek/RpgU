@@ -72,8 +72,7 @@
   "item.rpgu.armadillo_bar.active_ability.0": "Снимает все негативные эффекты во время действия",
 
   "item.rpgu.totem_of_saving": "Тотем сохранения",
-  "item.rpgu.totem_of_saving.description.0": "Сохраняет вещи после смерти в себе,",
-  "item.rpgu.totem_of_saving.description.1": " если в момент смерти он находился в инвентаре",
+  "item.rpgu.totem_of_saving.passive_ability.0": "Сохраняет вещи после смерти в себе",
 
   "item.rpgu.air_elemental_tome": "Фолиант элементаля воздуха",
   "item.rpgu.air_elemental_tome.active_ability.height": "Высота подъёма: %s блоков",

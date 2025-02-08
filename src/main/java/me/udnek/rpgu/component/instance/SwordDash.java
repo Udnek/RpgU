@@ -11,6 +11,7 @@ import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponen
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
@@ -54,7 +55,8 @@ public class SwordDash {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+                                            @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
             if (!(livingEntity instanceof  Player player)) return ActionResult.FULL_COOLDOWN;
             Location locationStart = player.getLocation();
 

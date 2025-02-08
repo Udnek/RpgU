@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -21,7 +22,8 @@ public interface ActiveAbilityComponent<ActivationContext> extends AbilityCompon
         @Override
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
         @Override
-        public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Object object, boolean canselIfCooldown) {}
+        public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, boolean canselIfCooldown,
+                             UniversalInventorySlot slot, @NotNull Object object) {}
     };
 
     default void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event){}

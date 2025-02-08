@@ -12,6 +12,7 @@ import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -75,7 +76,7 @@ public class NaturesStaff extends ConstructableCustomItem {
 
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerInteractEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerInteractEvent event) {
             Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
 
             EffectsProperty effects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS);
