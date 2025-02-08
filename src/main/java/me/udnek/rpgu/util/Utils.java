@@ -71,6 +71,13 @@ public class Utils {
         return Preconditions.checkNotNull(Material.getMaterial(name), "There is no such material", name);
     }
 
+    public static void iterateThroughNotNullSlots(@NotNull BiConsumer<UniversalInventorySlot, ItemStack> consumer, @NotNull LivingEntity entity){
+        iterateThroughAllSlots((universalInventorySlot, itemStack) -> {
+            if (itemStack == null || itemStack.isEmpty()) return;
+            consumer.accept(universalInventorySlot, itemStack);
+        }, entity);
+    }
+
     public static void iterateThroughAllSlots(@NotNull BiConsumer<UniversalInventorySlot, ItemStack> consumer, @NotNull LivingEntity entity){
         if (entity instanceof InventoryHolder inventoryHolder){
             @Nullable ItemStack[] contents = inventoryHolder.getInventory().getContents();
@@ -80,7 +87,6 @@ public class Utils {
             }
         }else {
             EntityEquipment equipment = entity.getEquipment();
-            if (equipment == null) return;
             consumer.accept(new UniversalInventorySlot(EquipmentSlot.HAND), equipment.getItemInMainHand());
             consumer.accept(new UniversalInventorySlot(EquipmentSlot.OFF_HAND), equipment.getItemInOffHand());
             consumer.accept(new UniversalInventorySlot(EquipmentSlot.HEAD), equipment.getHelmet());

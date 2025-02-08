@@ -47,23 +47,20 @@ public class AbilityListener extends SelfRegisteringListener {
     public void entityResurrect(EntityResurrectEvent event){
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
         BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
-            if (itemStack == null) return;
             CustomItem.consumeIfCustom(itemStack, customItem ->
                     customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onResurrect(
                             customItem, slot, activatedBefore.get(), event));
             if (!(event.isCancelled())) activatedBefore.set(true);
         };
-        Utils.iterateThroughAllSlots(consumer, event.getEntity());
+        Utils.iterateThroughNotNullSlots(consumer, event.getEntity());
     }
 
     @EventHandler
     public void playerDeath(PlayerDeathEvent event){
-        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
-            if (itemStack == null) return;
-            CustomItem.consumeIfCustom(itemStack, customItem ->
-                    customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
-        };
-        Utils.iterateThroughAllSlots(consumer, event.getEntity());
+        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
+                CustomItem.consumeIfCustom(itemStack, customItem ->
+                        customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
+        Utils.iterateThroughNotNullSlots(consumer, event.getEntity());
     }
 
     @EventHandler
