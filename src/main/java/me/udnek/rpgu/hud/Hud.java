@@ -9,6 +9,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.ShadowColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.NamespacedKey;
@@ -51,7 +52,7 @@ public class Hud implements CustomHud {
                 health(player).append(defense(player)),
                 0)
                 .append(ComponentU.textWithNoSpaceDefaultFont(10, food(player), 0))
-                .append(air(player));
+                .append(air(player)).shadowColor(ShadowColor.none());
     }
 
     public @NotNull Component food(@NotNull Player player){
