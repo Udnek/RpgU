@@ -8,6 +8,7 @@ import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.LivingEntity;
@@ -31,7 +32,7 @@ public class DeathProtectionPassive extends ConstructablePassiveAbilityComponent
 
     @Override
     public @NotNull CustomEquipmentSlot getSlot() {
-        return CustomEquipmentSlot.HAND; //TODO ВСЕ СЛОТЫ
+        return CustomEquipmentSlot.DUMB_INVENTORY;
     }
 
     @Override
@@ -42,12 +43,16 @@ public class DeathProtectionPassive extends ConstructablePassiveAbilityComponent
 
 
     @Override
-    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull EntityResurrectEvent entityResurrectEvent) {
+    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+                                        @NotNull EntityResurrectEvent entityResurrectEvent) {
+        if (entityResurrectEvent.isCancelled()) {slot.addItem(-1, livingEntity);}
+        entityResurrectEvent.setCancelled(false);
         return ActionResult.FULL_COOLDOWN;
     }
 
     @Override
-    public void onDeath(@NotNull CustomItem customItem, @NotNull EntityResurrectEvent event) {
-        activate(customItem, event.getEntity(), event, true);
+    public void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
+                            @NotNull EntityResurrectEvent event) {
+        if (!activatedBefore) activate(customItem, event.getEntity(), true, slot, event);
     }
 }

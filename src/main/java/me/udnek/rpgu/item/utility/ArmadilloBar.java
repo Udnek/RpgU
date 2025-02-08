@@ -9,6 +9,7 @@ import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.effect.Effects;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -77,7 +78,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerInteractEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerInteractEvent event) {
             final double duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(livingEntity);
             final int PERIOD = 10;
             new BukkitRunnable() {

@@ -1,17 +1,23 @@
 package me.udnek.rpgu.util;
 
 import com.google.common.base.Preconditions;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class Utils {
@@ -63,5 +69,24 @@ public class Utils {
         String key = material.getKey().getKey();
         String name = (string + key.substring(key.indexOf("_") + 1)).toUpperCase();
         return Preconditions.checkNotNull(Material.getMaterial(name), "There is no such material", name);
+    }
+
+    public static void applyConsumer(@NotNull BiConsumer<UniversalInventorySlot, ItemStack> consumer, @NotNull LivingEntity entity){
+        if (entity instanceof InventoryHolder inventoryHolder){
+            @Nullable ItemStack[] contents = inventoryHolder.getInventory().getContents();
+            for (int i = 0; i < contents.length; i++) {
+                ItemStack content = contents[i];
+                consumer.accept(new UniversalInventorySlot(i), content);
+            }
+        }else {
+            EntityEquipment equipment = entity.getEquipment();
+            if (equipment == null) return;
+            consumer.accept(new UniversalInventorySlot(EquipmentSlot.HAND), equipment.getItemInMainHand());
+            consumer.accept(new UniversalInventorySlot(EquipmentSlot.OFF_HAND), equipment.getItemInOffHand());
+            consumer.accept(new UniversalInventorySlot(EquipmentSlot.HEAD), equipment.getHelmet());
+            consumer.accept(new UniversalInventorySlot(EquipmentSlot.CHEST), equipment.getChestplate());
+            consumer.accept(new UniversalInventorySlot(EquipmentSlot.LEGS), equipment.getLeggings());
+            consumer.accept(new UniversalInventorySlot(EquipmentSlot.FEET), equipment.getBoots());
+        }
     }
 }

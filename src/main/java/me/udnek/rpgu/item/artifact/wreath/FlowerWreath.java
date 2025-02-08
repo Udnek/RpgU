@@ -15,6 +15,7 @@ import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
@@ -129,7 +130,7 @@ public class FlowerWreath extends ConstructableCustomItem {
                     PotionEffectType.REGENERATION,
                     Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, DURATION)),
                     Functions.CONSTANT(0),
-                    true, true, true
+                    false, true, true
             )));
         }
 
@@ -151,7 +152,8 @@ public class FlowerWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @Nullable Object o) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+                                            @Nullable Object o) {
             Location location = randomOffset(livingEntity);
             boolean isInForest = isForestMaterial(location.getBlock().getType());
             if (!isInForest) return ActionResult.NO_COOLDOWN;

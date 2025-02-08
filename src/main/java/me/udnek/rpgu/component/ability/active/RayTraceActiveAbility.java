@@ -6,7 +6,6 @@ import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

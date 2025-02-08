@@ -1,10 +1,14 @@
 package me.udnek.rpgu.item.utility;
 
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
+import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -16,11 +20,11 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "totem_of_saving";}
 
-    @Override
+   /* @Override
     public void getLore(@NotNull Consumer<Component> consumer) {
         consumer.accept(Component.translatable(translationKey() + ".description.0").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
         consumer.accept(Component.translatable(translationKey() + ".description.1").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.GRAY));
-    }
+    }*/
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -37,5 +41,31 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         recipe.setIngredient('P', pumpkin);
 
         consumer.accept(recipe);
+    }
+
+    @Override
+    public void initializeComponents() {
+        super.initializeComponents();
+
+        getComponents().set(new TotemOfSavingLore());
+    }
+
+    public class TotemOfSavingLore extends ConstructablePassiveAbilityComponent<Object> {
+
+        @Override
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return CustomEquipmentSlot.DUMB_INVENTORY;
+        }
+
+        @Override
+        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
+            componentable.addAbilityDescription(Component.translatable(translationKey() + ".description.0"));
+            super.addLoreLines(componentable);
+        }
+
+        @Override
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull Object object) {
+            return ActionResult.NO_COOLDOWN;
+        }
     }
 }

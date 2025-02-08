@@ -7,12 +7,15 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class GliderComponent extends ConstructablePassiveAbilityComponent<EntityToggleGlideEvent> {
     String name;
@@ -36,12 +39,14 @@ public class GliderComponent extends ConstructablePassiveAbilityComponent<Entity
     }
 
     @Override
-    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull EntityToggleGlideEvent entityToggleGlideEvent) {
+    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+                                        @NotNull EntityToggleGlideEvent entityToggleGlideEvent) {
         return ActionResult.NO_COOLDOWN;
     }
 
     @Override
     public void onGlide(@NotNull CustomItem customItem, @NotNull EntityToggleGlideEvent event) {
-        activate(customItem, (LivingEntity) event.getEntity(), event, true);
+        activate(customItem, (LivingEntity) event.getEntity(), true,
+                new UniversalInventorySlot(Objects.requireNonNull(slot.getVanillaSlot())), event);
     }
 }

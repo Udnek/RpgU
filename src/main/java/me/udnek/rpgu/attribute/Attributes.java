@@ -1,7 +1,6 @@
 package me.udnek.rpgu.attribute;
 
 import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
-import me.udnek.itemscoreu.customattribute.ConstructableReversedCustomAttribute;
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;

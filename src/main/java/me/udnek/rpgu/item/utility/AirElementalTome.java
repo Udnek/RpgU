@@ -14,6 +14,7 @@ import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
+import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
@@ -29,7 +30,6 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class AirElementalTome extends ConstructableCustomItem {
@@ -79,7 +79,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull PlayerInteractEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerInteractEvent event) {
             Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.SMALL_GUST));
 
             if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
