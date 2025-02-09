@@ -169,8 +169,8 @@ public class AttributeManaging extends SelfRegisteringListener {
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(netheriteTool.
                     getData(DataComponentTypes.MAX_DAMAGE)));
             itemStack.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, Objects.requireNonNull(netheriteTool.
-                    getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)));
-            itemStack.setData(DataComponentTypes.HIDE_TOOLTIP);
+                    getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)).showInTooltip(false));
+            itemStack.setData(DataComponentTypes.TOOL, Objects.requireNonNull(netheriteTool.getData(DataComponentTypes.TOOL)));
         }
 
         if (netheriteArmor.contains(material) || netheriteTools.contains(material)){
