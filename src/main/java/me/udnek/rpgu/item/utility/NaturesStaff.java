@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
@@ -53,6 +54,7 @@ public class NaturesStaff extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD_20X20);
         getComponents().set(new NaturesStaffComponent());
     }
 

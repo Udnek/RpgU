@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.utility;
 
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import io.papermc.paper.datacomponent.item.Tool;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -54,6 +55,7 @@ public class Wrench extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD);
         getComponents().set(new RightClickableItem() {
             @Override
             public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {

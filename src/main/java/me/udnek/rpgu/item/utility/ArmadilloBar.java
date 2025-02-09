@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.utility;
 
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
@@ -58,7 +59,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD);
         getComponents().set(new ArmadilloBarComponent());
     }
 
