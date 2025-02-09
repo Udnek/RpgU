@@ -130,7 +130,7 @@ public class FlowerWreath extends ConstructableCustomItem {
                     PotionEffectType.REGENERATION,
                     Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, DURATION)),
                     Functions.CONSTANT(0),
-                    false, true, true
+                    true, true, true
             )));
         }
 
