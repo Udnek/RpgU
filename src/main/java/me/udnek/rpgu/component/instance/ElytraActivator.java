@@ -1,6 +1,7 @@
 package me.udnek.rpgu.component.instance;
 
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.entity.Player;
@@ -12,7 +13,7 @@ public class ElytraActivator extends CloseActivator{
     }
 
     @Override
-    public void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
+    public void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
         super.onPlayerReceivesDamageWhenEquipped(item, player, slot, damageInstance);
         if (player.isGliding()){
             player.setGliding(false);

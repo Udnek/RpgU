@@ -5,6 +5,7 @@ import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import net.kyori.adventure.text.Component;
@@ -40,10 +41,10 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
             }
         });
     }
-    default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot){}
-    default void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance){}
-    default void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance){}
-    default void onPlayerHitsWithProjectileWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance){}
+    default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot){}
+    default void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
+    default void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
+    default void onPlayerHitsWithProjectileWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
     default @Nullable Component getHudImage(@NotNull CustomItem item, @NotNull Player player){return null;}
 
 

@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
@@ -24,7 +25,7 @@ public class HungryHorrorComponent implements EquippableItemComponent {
     }
 
     @Override
-    public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
+    public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
         if (!damageInstance.isCritical()) return;
 
         PotionEffect potionEffect = player.getPotionEffect(effectType);

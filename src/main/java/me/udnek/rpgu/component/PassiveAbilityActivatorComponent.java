@@ -1,6 +1,6 @@
 package me.udnek.rpgu.component;
 
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ability.passive.EquippableActivatablePassiveComponent;
 import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
@@ -13,7 +13,7 @@ public abstract class PassiveAbilityActivatorComponent implements EquippableItem
     public abstract int getTickRate();
 
     @Override
-    public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot) {
+    public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot) {
         if (Bukkit.getCurrentTick() % getTickRate() != 0) return;
         PassiveAbilityComponent<?> passive = item.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM);
         if (passive instanceof EquippableActivatablePassiveComponent equippable){

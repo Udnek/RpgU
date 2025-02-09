@@ -1,6 +1,7 @@
 package me.udnek.rpgu.component.instance;
 
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
@@ -21,7 +22,7 @@ public class CloseActivator implements EquippableItemComponent {
     }
 
     @Override
-    public void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
+    public void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
         item.setCooldown(player, cooldown);
     }
 }

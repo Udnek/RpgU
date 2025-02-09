@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
@@ -32,7 +33,6 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public class WitherWreath extends ConstructableCustomItem {
@@ -101,9 +101,9 @@ public class WitherWreath extends ConstructableCustomItem {
 
     public static class Artifact implements ArtifactComponent {
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull DamageInstance damageInstance) {
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
             if (item.getComponents().getOrException(ComponentTypes.PASSIVE_ABILITY_ITEM) instanceof Passive passive){
-                passive.action(item, player, new UniversalInventorySlot(Objects.requireNonNull(slot.getVanillaSlot())), damageInstance);
+                passive.action(item, player, new UniversalInventorySlot(slot.getSlot(player)), damageInstance);
             }
         }
     }
