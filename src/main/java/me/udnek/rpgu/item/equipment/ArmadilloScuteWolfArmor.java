@@ -4,6 +4,7 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -28,6 +29,11 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
         super.initializeAdditionalAttributes(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + getRawId()),
                 11, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.BODY);
+    }
+
+    @Override
+    public @Nullable RepairData initializeRepairData() {
+        return new RepairData(Material.ARMADILLO_SCUTE);
     }
 
     @Override

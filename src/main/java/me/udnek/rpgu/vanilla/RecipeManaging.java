@@ -122,6 +122,9 @@ public class RecipeManaging {
         //////////////////////////////////////////////
         new RecipeBuilder(Material.MINECART).recipeShape(new String[]{"I I", "MMM"}).materialIngredients(Map.of('I', Material.IRON_INGOT)).
                 customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build();
+        new RecipeBuilder(Material.PISTON).recipeShape(new String[]{"WWW", "CMC", "CRC"}).materialIngredients(Map.of('C', Material.COBBLESTONE,
+                'R', Material.REDSTONE)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).tagIngredients(Map.of('W', Tag.PLANKS))
+                        .build();
 
         unregister();
     }
