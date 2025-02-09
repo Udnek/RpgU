@@ -2,10 +2,10 @@ package me.udnek.rpgu.util;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -52,7 +52,7 @@ public class AbilityListener extends SelfRegisteringListener {
                             customItem, slot, activatedBefore.get(), event));
             if (!(event.isCancelled())) activatedBefore.set(true);
         };
-        Utils.iterateThroughNotNullSlots(consumer, event.getEntity());
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
     @EventHandler
@@ -60,7 +60,7 @@ public class AbilityListener extends SelfRegisteringListener {
         BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
                 CustomItem.consumeIfCustom(itemStack, customItem ->
                         customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
-        Utils.iterateThroughNotNullSlots(consumer, event.getEntity());
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
     @EventHandler

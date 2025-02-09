@@ -3,11 +3,11 @@ package me.udnek.rpgu.component.instance;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.LivingEntity;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class GliderComponent extends ConstructablePassiveAbilityComponent<EntityToggleGlideEvent> {
     String name;
     CustomEquipmentSlot slot;
-    public GliderComponent(ItemStack itemStack, int cooldown){
+    public GliderComponent(@NotNull ItemStack itemStack, int cooldown){
         getComponents().set(new AttributeBasedProperty(cooldown, ComponentTypes.ABILITY_COOLDOWN));
         this.name = itemStack.translationKey();
         this.slot = CustomEquipmentSlot.getFromVanilla(Preconditions.checkNotNull(itemStack.getData(DataComponentTypes.EQUIPPABLE),

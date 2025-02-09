@@ -2,9 +2,9 @@ package me.udnek.rpgu.component.ability;
 
 import me.udnek.itemscoreu.customcomponent.ComponentHolder;
 import me.udnek.itemscoreu.customcomponent.CustomComponent;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;

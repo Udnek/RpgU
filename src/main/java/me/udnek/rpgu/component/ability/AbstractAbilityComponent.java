@@ -1,15 +1,15 @@
 package me.udnek.rpgu.component.ability;
 
 import me.udnek.itemscoreu.customcomponent.AbstractComponentHolder;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractAbilityComponent<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>>       implements AbilityComponent<ActivationContext>{
+public abstract class AbstractAbilityComponent<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>> implements AbilityComponent<ActivationContext>{
 
     @Override
     public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, boolean canselIfCooldown,

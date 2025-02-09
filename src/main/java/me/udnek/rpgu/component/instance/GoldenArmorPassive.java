@@ -2,6 +2,7 @@ package me.udnek.rpgu.component.instance;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.PassiveAbilityActivatorComponent;
@@ -10,7 +11,6 @@ import me.udnek.rpgu.component.ability.passive.EquippableActivatablePassiveCompo
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.effect.Effects;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.util.Utils;
 import net.kyori.adventure.text.Component;

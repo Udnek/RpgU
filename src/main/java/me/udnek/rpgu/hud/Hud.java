@@ -18,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class Hud implements CustomHud {
 
     private static final Key HEALTH_FONT = new NamespacedKey(RpgU.getInstance(), "hud/health");
@@ -63,10 +65,10 @@ public class Hud implements CustomHud {
         TextColor barColor;
         if (player.hasPotionEffect(PotionEffectType.HUNGER)) barColor = TextColor.fromHexString("#374b1f");
         else barColor = TextColor.fromHexString("#9d6d43");
-        return BACKGROUND.color(ComponentU.NO_SHADOW_COLOR).font(FOOD_FONT)
+        return BACKGROUND.color(NamedTextColor.WHITE).font(FOOD_FONT)
                 .append(food.color(barColor).font(FOOD_FONT))
                 .append(saturation.color(NamedTextColor.WHITE).font(SATURATION_FONT))
-                .append(ICON.color(iconColor)).append(OVERLAY).color(ComponentU.NO_SHADOW_COLOR).font(FOOD_FONT);
+                .append(ICON.color(iconColor)).append(OVERLAY).color(NamedTextColor.WHITE).font(FOOD_FONT);
     }
 
     private @NotNull Component air(@NotNull Player player){
@@ -74,10 +76,10 @@ public class Hud implements CustomHud {
         int remainingAir = Math.max(player.getRemainingAir(), 0);
         if (remainingAir >= maximumAir) return Component.empty();
         Component text = Component.translatable("hud.rpgu.air.level."+
-                ((int) (Math.ceil((double) (maximumAir-remainingAir) /maximumAir*13d))));
-        return text.font(AIR_FONT).color(ComponentU.NO_SHADOW_COLOR);
+                ((int) (Math.floor((double) (maximumAir-remainingAir) /maximumAir*8d))));
+        return text.font(AIR_FONT).color(NamedTextColor.WHITE);
     }
-    
+
     private @NotNull Component defense(@NotNull Player player){
         double mr = Attributes.MAGICAL_RESISTANCE.calculate(player);
         Component magical = Component.translatable(BASE_PREFIX+((int) (Math.ceil(mr*72))));
@@ -85,10 +87,10 @@ public class Hud implements CustomHud {
         double pr = Attributes.PHYSICAL_RESISTANCE.calculate(player);
         Component physical = Component.translatable(BASE_PREFIX+((int) (Math.ceil(pr*71))));
 
-        return BACKGROUND.color(ComponentU.NO_SHADOW_COLOR).font(PHYSICAL_DEFENSE_FONT)
+        return BACKGROUND.color(NamedTextColor.WHITE).font(PHYSICAL_DEFENSE_FONT)
                 .append(physical.color(PHYSICAL_DEFENSE_COLOR).font(PHYSICAL_DEFENSE_FONT))
                 .append(magical.color(MAGICAL_DEFENSE_COLOR).font(MAGICAL_DEFENSE_FONT))
-                .append(ICON.append(OVERLAY).color(ComponentU.NO_SHADOW_COLOR).font(PHYSICAL_DEFENSE_FONT));
+                .append(ICON.append(OVERLAY).color(NamedTextColor.WHITE).font(PHYSICAL_DEFENSE_FONT));
     }
 
     private @NotNull Component health(@NotNull Player player){
@@ -118,13 +120,13 @@ public class Hud implements CustomHud {
         else if (player.hasPotionEffect(PotionEffectType.WITHER)) color = TextColor.fromHexString("#341a1a");
         else color = TextColor.color(1f, 0f, 0f);
 
-        return wrap(healthImage.append(absorptionImage.font(HEALTH_ABSORPTION_FONT).color(ComponentU.NO_SHADOW_COLOR)), HEALTH_FONT, color).append(text);
+        return wrap(healthImage.append(absorptionImage.font(HEALTH_ABSORPTION_FONT).color(NamedTextColor.WHITE)), HEALTH_FONT, color).append(text);
     }
 
     private @NotNull Component wrap(@NotNull Component text, @NotNull Key font, @NotNull TextColor color){
-        return BACKGROUND.color(ComponentU.NO_SHADOW_COLOR)
+        return BACKGROUND.color(NamedTextColor.WHITE)
                 .append(text.append(ICON).color(color))
-                .append(OVERLAY.color(ComponentU.NO_SHADOW_COLOR))
+                .append(OVERLAY.color(NamedTextColor.WHITE))
                 .font(font);
     }
 

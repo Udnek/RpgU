@@ -2,11 +2,11 @@ package me.udnek.rpgu.component.ability.passive;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;

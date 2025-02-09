@@ -18,16 +18,14 @@ public class FlintAxe extends FlintTool{
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
-                "FF ",
-                "FSK",
+                "FC ",
+                "FSA",
                 " S ");
 
-        RecipeChoice.MaterialChoice flint = new RecipeChoice.MaterialChoice(Material.FLINT);
-        RecipeChoice.MaterialChoice stick = new RecipeChoice.MaterialChoice(Material.STICK);
-        RecipeChoice.ExactChoice fabric = new RecipeChoice.ExactChoice(Items.FABRIC.getItem());
-        recipe.setIngredient('K', fabric);
-        recipe.setIngredient('F', flint);
-        recipe.setIngredient('S', stick);
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
+        recipe.setIngredient('A', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
+        recipe.setIngredient('F', new RecipeChoice.MaterialChoice(Material.FLINT));
+        recipe.setIngredient('C', new RecipeChoice.MaterialChoice(Material.COBBLESTONE));
 
         consumer.accept(recipe);
     }

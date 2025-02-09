@@ -4,14 +4,14 @@
 			"type": "bitmap",
 			"file": "rpgu:font/hud/air.png",
 			"ascent": 4,
-			"height": 17,
-			"chars": ["0123456789abcd"]
+			"height": 16,
+			"chars": ["012345678"]
 		},
 		{
 			"type": "space",
 			"advances": {
 				"n": -8,
-				"p": -10
+				"p": -9
 			}
 		}
 	]

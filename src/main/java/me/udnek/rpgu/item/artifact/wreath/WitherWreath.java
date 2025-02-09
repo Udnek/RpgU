@@ -17,7 +17,7 @@ import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityCompon
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.Material;

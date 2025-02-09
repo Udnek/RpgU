@@ -148,7 +148,7 @@
 
 	"item.minecraft.golden_armor.passive_ability.0": "Buffs nearby tamed creatures",
 	"item.minecraft.totem_of_undying.passive_ability.0": "Saves from death",
-	"item.minecraft.elytra.passive_ability.0": "Allows to fly",
+	"item.minecraft.elytra.passive_ability.0": "Allows to fly. Cooldowns on taken damage",
 
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",
@@ -174,11 +174,6 @@
 	"hud.rpgu.air.level.6": "n6p",
 	"hud.rpgu.air.level.7": "n7p",
 	"hud.rpgu.air.level.8": "n8p",
-	"hud.rpgu.air.level.9": "n9p",
-	"hud.rpgu.air.level.10": "nap",
-	"hud.rpgu.air.level.11": "nbp",
-	"hud.rpgu.air.level.12": "ncp",
-	"hud.rpgu.air.level.13": "ndp",
 
 	"hud.rpgu.stat.background": "bn",
 	"hud.rpgu.stat.overlay": "on",

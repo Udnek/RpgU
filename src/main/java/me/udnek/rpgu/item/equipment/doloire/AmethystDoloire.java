@@ -22,7 +22,7 @@ import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;

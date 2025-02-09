@@ -3,6 +3,7 @@ package me.udnek.rpgu.component.instance;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.rpgu.attribute.Attributes;
@@ -11,7 +12,6 @@ import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponen
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
-import me.udnek.rpgu.equipment.slot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
