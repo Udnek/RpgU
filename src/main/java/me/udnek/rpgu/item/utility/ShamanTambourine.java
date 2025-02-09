@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.attribute.Attributes;
@@ -62,6 +63,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD);
         getComponents().set(new ShamanTambourineComponent());
     }
 

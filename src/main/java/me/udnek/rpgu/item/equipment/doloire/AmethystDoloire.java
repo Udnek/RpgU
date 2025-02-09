@@ -7,6 +7,7 @@ import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
+import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
@@ -72,6 +73,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
     @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
         super.initializeAdditionalAttributes(itemStack);
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD_20X20);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
