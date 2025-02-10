@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class CloseActivator implements EquippableItemComponent {
     CustomEquipmentSlot equipmentSlot;
-    int cooldown = 2 * 20;
-    public CloseActivator(CustomEquipmentSlot equipmentSlot, int cooldown){
+    int cooldown;
+    public CloseActivator(@NotNull CustomEquipmentSlot equipmentSlot, int cooldown){
         this.equipmentSlot = equipmentSlot;
         this.cooldown = cooldown;
     }
