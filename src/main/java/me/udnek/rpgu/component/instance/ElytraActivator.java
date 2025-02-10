@@ -14,6 +14,7 @@ public class ElytraActivator extends CloseActivator{
 
     @Override
     public void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
+        if (!(damageInstance.getDamager() instanceof Player || damageInstance.getCausingDamager() instanceof Player)) return;
         super.onPlayerReceivesDamageWhenEquipped(item, player, slot, damageInstance);
         if (player.isGliding()){
             player.setGliding(false);
