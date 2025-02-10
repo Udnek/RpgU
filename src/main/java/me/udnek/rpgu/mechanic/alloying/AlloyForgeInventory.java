@@ -345,13 +345,13 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         updateItemsTickLater();
     }
     @Override
-    public void onPlayerDragsItem(InventoryDragEvent event) {
+    public void onPlayerDragsItem(@NotNull InventoryDragEvent event) {
         SmartIntractableCustomInventory.super.onPlayerDragsItem(event);
         updateItemsTickLater();
     }
 
     @Override
-    public Component getDisplayName() {
+    public @Nullable Component getTitle() {
         return ComponentU.textWithNoSpace(
                 -8,
                 Component.text(0).color(COLOR).font(Key.key("rpgu", "alloying")),
