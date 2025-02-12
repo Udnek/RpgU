@@ -8,6 +8,7 @@ import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponen
 import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
@@ -18,7 +19,6 @@ import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityCompon
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.Material;

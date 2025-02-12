@@ -5,10 +5,13 @@ import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.RepairData;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class FlintTool extends ConstructableCustomItem {
 
@@ -31,5 +34,9 @@ public abstract class FlintTool extends ConstructableCustomItem {
 
 
     @Override
-    public @Nullable RepairData initializeRepairData() {return new RepairData(Material.FLINT);}
+    public @Nullable RepairData initializeRepairData() {
+        HashSet<Material> materials = new HashSet<>(Set.of(Material.FLINT));
+        materials.addAll(Tag.ITEMS_STONE_TOOL_MATERIALS.getValues());
+        return new RepairData(Set.of(), materials);
+    }
 }

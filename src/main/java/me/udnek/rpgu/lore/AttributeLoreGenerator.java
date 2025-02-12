@@ -114,8 +114,10 @@ public class AttributeLoreGenerator {
         Arrays.sort(keys, new Comparator<Attribute>() {
             @Override
             public int compare(Attribute a1, Attribute a2) {
-                if (a1 == Attribute.ATTACK_DAMAGE) return -1;
-                if (a2 == Attribute.ATTACK_DAMAGE) return 1;
+                if      (a1 == Attribute.ATTACK_DAMAGE) return -1;
+                else if (a2 == Attribute.ATTACK_DAMAGE) return 1;
+                else if (a1 == Attribute.ATTACK_SPEED) return -1;
+                else if (a2 == Attribute.ATTACK_SPEED) return 1;
                 return 0;
             }
         });

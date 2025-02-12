@@ -86,7 +86,7 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
     }
     @Override
     public @NotNull Collection<ItemStack> getResults() {
-        return Collections.singleton(result);
+        return Collections.singleton(getResult());
     }
     @Override
     public boolean isResult(@NotNull ItemStack itemStack) {
@@ -105,7 +105,7 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
     }
     @Override
     public @NotNull ItemStack getResult() {
-        return result;
+        return result.clone();
     }
     @Override
     public @NotNull NamespacedKey getKey() {
