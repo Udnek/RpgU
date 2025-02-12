@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.equipment.flint;
 
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -26,7 +27,7 @@ public class FlintHoe extends FlintTool {
         recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.STICK));
         recipe.setIngredient('A', new RecipeChoice.ExactChoice(Items.FABRIC.getItem()));
         recipe.setIngredient('F', new RecipeChoice.MaterialChoice(Material.FLINT));
-        recipe.setIngredient('C', new RecipeChoice.MaterialChoice(Material.COBBLESTONE));
+        recipe.setIngredient('C', new RecipeChoice.MaterialChoice(Tag.ITEMS_STONE_TOOL_MATERIALS));
 
         consumer.accept(recipe);
     }
