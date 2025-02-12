@@ -18,8 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-
 public class Hud implements CustomHud {
 
     private static final Key HEALTH_FONT = new NamespacedKey(RpgU.getInstance(), "hud/health");

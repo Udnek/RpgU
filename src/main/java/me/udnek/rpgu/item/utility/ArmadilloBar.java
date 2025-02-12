@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.RpgU;
@@ -10,7 +11,6 @@ import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.effect.Effects;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;

@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.Utils;
@@ -14,7 +15,6 @@ import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.component.ability.property.function.LinearMPFunction;
 import me.udnek.rpgu.effect.Effects;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;

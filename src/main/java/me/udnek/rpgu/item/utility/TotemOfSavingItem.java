@@ -1,12 +1,12 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.TotemOfSavingEntity;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -29,7 +29,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -149,23 +148,31 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
 
         if (leatherArmor.contains(material)) {
-            itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 1.7)));
-            event.setRepairData(new RepairData(Set.of(Items.FABRIC), Set.of(Material.LEATHER)));
+            itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(itemStack.getData(DataComponentTypes.MAX_DAMAGE)) * 17 / 10);
+            event.setRepairData(new RepairData(Set.of(Items.FABRIC, Items.WOLF_PELT), Set.of(Material.LEATHER)));
         }
 
-        if (chainmailArmor.contains(material)) {itemStack.editMeta(itemMeta -> itemMeta.setRarity(ItemRarity.COMMON));}
+        if (chainmailArmor.contains(material)) {itemStack.setData(DataComponentTypes.RARITY, ItemRarity.COMMON);}
 
 
         if (goldenArmor.contains(material)){
-            itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage((int) (material.getMaxDurability() * 15 / 7d * 0.9)));
+            ItemStack ironArmor = new ItemStack(Utils.replacePrefix(material, "iron_"));
+
+            itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(ironArmor.getData(DataComponentTypes.MAX_DAMAGE)) * 9 / 10);
             GoldenArmorPassive.applyPassive(material, customItem);
         }
 
-        if (diamondArmor.contains(material)) {itemStack.editMeta(Damageable.class, itemMeta -> itemMeta.setMaxDamage(material.getMaxDurability() * 37 / 33));}
+        if (diamondArmor.contains(material)) {
+            ItemStack netheriteArmor = new ItemStack(Utils.replacePrefix(material, "netherite_"));
+
+            itemStack.setData(DataComponentTypes.RARITY, ItemRarity.UNCOMMON);
+            itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(netheriteArmor.getData(DataComponentTypes.MAX_DAMAGE)));
+        }
 
         if (diamondTools.contains(material)) {
             ItemStack netheriteTool = new ItemStack(Utils.replacePrefix(material, "netherite_"));
 
+            itemStack.setData(DataComponentTypes.RARITY, ItemRarity.UNCOMMON);
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(netheriteTool.
                     getData(DataComponentTypes.MAX_DAMAGE)));
             itemStack.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, Objects.requireNonNull(netheriteTool.
