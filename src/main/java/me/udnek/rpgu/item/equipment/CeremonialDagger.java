@@ -9,6 +9,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
@@ -63,7 +64,7 @@ public class CeremonialDagger extends ConstructableCustomItem {
 
         recipe.setIngredient('D', new RecipeChoice.MaterialChoice(Material.DIAMOND));
         recipe.setIngredient('G', new RecipeChoice.MaterialChoice(Material.GOLD_INGOT));
-        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Material.COBBLESTONE));
+        recipe.setIngredient('S', new RecipeChoice.MaterialChoice(Tag.ITEMS_STONE_TOOL_MATERIALS));
         recipe.setIngredient('T', new RecipeChoice.MaterialChoice(Material.STICK));
 
         consumer.accept(recipe);
@@ -71,7 +72,7 @@ public class CeremonialDagger extends ConstructableCustomItem {
 
     @Override
     public @Nullable RepairData initializeRepairData() {
-        return new RepairData(Set.of(), Set.of(Material.COBBLESTONE, Material.GOLD_INGOT, Material.DIAMOND));
+        return new RepairData(Set.of(), Set.of(Material.DEEPSLATE ,Material.COBBLESTONE, Material.GOLD_INGOT, Material.DIAMOND));
     }
 }
 

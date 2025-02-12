@@ -18,9 +18,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.loot.LootTables;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -53,14 +50,14 @@ public class RecipeManaging {
         new ShapedRecipeBuilder(Material.IRON_BOOTS).recipeShape(new String[]{"ILI", "I I"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
                 'L', Material.LEATHER_BOOTS)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.LEATHER_CHESTPLATE).recipeShape(new String[]{"L L", "FLF", "LFL"}).materialIngredients(Map.of( 'L', Material.LEATHER))
-                .customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.LEATHER_HELMET).recipeShape(new String[]{"FLF", "L L"}).materialIngredients(Map.of( 'L', Material.LEATHER))
-                .customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.LEATHER_LEGGINGS).recipeShape(new String[]{"LFL", "F F", "L L"}).materialIngredients(Map.of( 'L', Material.LEATHER))
-                .customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.LEATHER_BOOTS).recipeShape(new String[]{"F F", "L L"}).materialIngredients(Map.of( 'L', Material.LEATHER))
-                .customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.LEATHER_CHESTPLATE).recipeShape(new String[]{"L L", "FLF", "LFL"}).stackIngredients(Map.of( 'L',
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.LEATHER_HELMET).recipeShape(new String[]{"FLF", "L L"}).stackIngredients(Map.of( 'L',
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.LEATHER_LEGGINGS).recipeShape(new String[]{"LFL", "F F", "L L"}).stackIngredients(Map.of( 'L',
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.LEATHER_BOOTS).recipeShape(new String[]{"F F", "L L"}).stackIngredients(Map.of( 'L',
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.BLAST_FURNACE).recipeShape(new String[]{"SSS", "FFA", "BBB"}).materialIngredients(Map.of('F', Material.FURNACE,
                 'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK)).build(RpgU.getInstance());
