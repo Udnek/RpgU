@@ -222,7 +222,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public int getInventorySize() {return 9*6;}
 
     @Override
-    public Component getDisplayName() {
+    public @Nullable Component getTitle() {
         return ComponentU.textWithNoSpace(
                 -8,
                 Component.text("0").font(Key.key("rpgu:enchanting")).color(NamedTextColor.WHITE),

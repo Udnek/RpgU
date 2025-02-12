@@ -158,7 +158,7 @@
   "attribute.rpgu.name.critical_damage": "Критический урон",
 
   "item.minecraft.totem_of_undying.passive_ability.0": "Спасает от смерти",
-  "item.minecraft.elytra.passive_ability.0": "Позволяет летать. Отправляется на перезарядку при получении урона",
+  "item.minecraft.elytra.passive_ability.0": "Позволяет летать. Отправляется на перезарядку при получении урона от игроков",
 
   "item.rpgu.soul_binder": "Связыватель души",
   "item.rpgu.soul_binder.description.0": "Игрок возродится на нём, если других приоритетных мест нет"

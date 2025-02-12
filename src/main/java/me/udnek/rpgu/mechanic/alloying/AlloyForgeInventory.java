@@ -58,7 +58,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
     protected final Block block;
 
-    public AlloyForgeInventory(Block block){
+    public AlloyForgeInventory(@NotNull Block block){
         this.block = block;
     }
 
@@ -112,11 +112,11 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
         if (progress >= 1){
             ItemStack result = currentRecipe.getResult();
-            if (!canFit(RESULT_SLOT, result)) return;
-            progress = 0;
             if (currentRecipe.isKeepEnchantments() && currentAddition != null){
                 result.addEnchantments(currentAddition.getEnchantments());
             }
+            if (!canFit(RESULT_SLOT, result)) return;
+            progress = 0;
             addItem(RESULT_SLOT, result);
             currentRecipe = null;
             setLit(false);
@@ -345,13 +345,13 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         updateItemsTickLater();
     }
     @Override
-    public void onPlayerDragsItem(InventoryDragEvent event) {
+    public void onPlayerDragsItem(@NotNull InventoryDragEvent event) {
         SmartIntractableCustomInventory.super.onPlayerDragsItem(event);
         updateItemsTickLater();
     }
 
     @Override
-    public Component getDisplayName() {
+    public @Nullable Component getTitle() {
         return ComponentU.textWithNoSpace(
                 -8,
                 Component.text(0).color(COLOR).font(Key.key("rpgu", "alloying")),
