@@ -64,8 +64,6 @@ public class AirElementalTome extends ConstructableCustomItem {
     public class AirElementalTomeComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
 
         public static double HEIGHT = 15;
-        public static double EFFECT_DURATION = 10;
-
         public AirElementalTomeComponent(){
             getComponents().set(new AttributeBasedProperty(20*20, ComponentTypes.ABILITY_COOLDOWN));
             getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
@@ -73,7 +71,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             getComponents().set(new AttributeBasedProperty(4*20, ComponentTypes.ABILITY_DURATION));
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     Effects.HEAVY_FALLING.getBukkitType(),
-                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, Functions.CONSTANT(EFFECT_DURATION))),
+                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, Functions.CONSTANT(20*4d))),
                     Functions.FLOOR(Functions.APPLY_MP(new LinearMPFunction(2, 0.2)))
             )));
         }
