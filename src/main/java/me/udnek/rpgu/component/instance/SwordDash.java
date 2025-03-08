@@ -3,9 +3,11 @@ package me.udnek.rpgu.component.instance;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.nms.Nms;
+import me.udnek.itemscoreu.util.Either;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
@@ -55,7 +57,7 @@ public class SwordDash {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
                                             @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
             if (!(livingEntity instanceof  Player player)) return ActionResult.FULL_COOLDOWN;
             Location locationStart = player.getLocation();
@@ -79,7 +81,7 @@ public class SwordDash {
         @Override
         public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
             event.setCancelled(true);
-            activate(customItem, event.getPlayer(), event);
+            activate(customItem, event.getPlayer(), new Either<>(new UniversalInventorySlot(event.getHand()), null), event);
         }
     }
 }

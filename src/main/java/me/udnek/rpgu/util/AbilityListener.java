@@ -6,6 +6,8 @@ import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -48,18 +50,30 @@ public class AbilityListener extends SelfRegisteringListener {
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
         BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
             CustomItem.consumeIfCustom(itemStack, customItem ->
-                    customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onResurrect(
-                            customItem, slot, activatedBefore.get(), event));
+                     customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
+                             component.onResurrect(customItem, slot, activatedBefore.get(), event)));
             if (!(event.isCancelled())) activatedBefore.set(true);
         };
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
     @EventHandler
+    public void onDamage(DamageEvent event){
+        Entity damager = event.getDamageInstance().getDamager();
+        if (damager == null) return;
+        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
+                CustomItem.consumeIfCustom(itemStack, customItem ->
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
+                                component.onDamage(customItem, slot, event)));
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, (LivingEntity) damager);
+    }
+
+    @EventHandler
     public void playerDeath(PlayerDeathEvent event){
         BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
                 CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onDeath(customItem, event));
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
+                                component.onDeath(customItem, slot, event)));
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
@@ -79,6 +93,7 @@ public class AbilityListener extends SelfRegisteringListener {
         }
         if (item == null) return;
         CustomItem.consumeIfCustom(item, customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).onGlide(customItem, event));
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
+                        component.onGlide(customItem, event)));
     }
 }

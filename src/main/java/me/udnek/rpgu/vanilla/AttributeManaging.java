@@ -14,6 +14,7 @@ import me.udnek.itemscoreu.customregistry.InitializationProcess;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
+import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.instance.DeathProtectionPassive;
 import me.udnek.rpgu.component.instance.ElytraActivator;
 import me.udnek.rpgu.component.instance.GliderComponent;
@@ -204,13 +205,13 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.TOTEM_OF_UNDYING) {
-            customItem.getComponents().set(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
+            customItem.getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
             itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 64);
         }
 
         if (material == Material.ELYTRA) {
             customItem.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 15 * 20));
-            customItem.getComponents().set(new GliderComponent(itemStack, 15 * 20));
+            customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new GliderComponent(itemStack, 15 * 20));
         }
     }
 

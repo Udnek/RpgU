@@ -1,12 +1,13 @@
 package me.udnek.rpgu.item.artifact;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.jeiu.component.HiddenItemComponent;
-import me.udnek.rpgu.component.ArtifactComponent;
+import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
@@ -38,7 +39,12 @@ public class ArcaneAccumulator extends ConstructableCustomItem {
         getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
-    public static class ArcaneAccumulatorComponent implements ArtifactComponent {
+    public static class ArcaneAccumulatorComponent extends ConstructableEquippableItemComponent {
+
+        @Override
+        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
+            return false;
+        }
 
         @Override
         public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {

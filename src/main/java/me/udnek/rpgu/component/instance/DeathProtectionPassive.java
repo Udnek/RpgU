@@ -3,10 +3,12 @@ package me.udnek.rpgu.component.instance;
 import io.papermc.paper.datacomponent.item.DeathProtection;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.Either;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
@@ -16,7 +18,7 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
-public class DeathProtectionPassive extends ConstructablePassiveAbilityComponent<EntityResurrectEvent> {
+public class DeathProtectionPassive extends ConstructablePassiveAbility<EntityResurrectEvent> {
 
     public DeathProtectionPassive(DeathProtection deathProtection){
         for (ConsumeEffect consumeEffect : deathProtection.deathEffects()) {
@@ -43,9 +45,9 @@ public class DeathProtectionPassive extends ConstructablePassiveAbilityComponent
 
 
     @Override
-    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
                                         @NotNull EntityResurrectEvent entityResurrectEvent) {
-        if (entityResurrectEvent.isCancelled()) {slot.addItem(-1, livingEntity);}
+        if (entityResurrectEvent.isCancelled()) {slot.getLeft().addItem(-1, livingEntity);}
         entityResurrectEvent.setCancelled(false);
         return ActionResult.FULL_COOLDOWN;
     }
@@ -53,6 +55,6 @@ public class DeathProtectionPassive extends ConstructablePassiveAbilityComponent
     @Override
     public void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
                             @NotNull EntityResurrectEvent event) {
-        if (!activatedBefore) activate(customItem, event.getEntity(), true, slot, event);
+        if (!activatedBefore) activate(customItem, event.getEntity(), true, new Either<>(slot, null), event);
     }
 }

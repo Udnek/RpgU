@@ -57,6 +57,11 @@ public class AttributeBasedPropertyType extends AbstractRegistrable implements S
     }
 
     @Override
+    public @NotNull AttributeBasedProperty createNewDefault() {
+        return defaultComponent;
+    }
+
+    @Override
     @NotNull
     public String getRawId() {
         return rawId;

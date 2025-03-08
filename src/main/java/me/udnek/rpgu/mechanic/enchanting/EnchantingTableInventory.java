@@ -7,6 +7,7 @@ import me.udnek.itemscoreu.custominventory.SmartIntractableCustomInventory;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.itemscoreu.customrecipe.RecipeManager;
+import me.udnek.itemscoreu.nms.Nms;
 import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
@@ -179,7 +180,9 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
                     for (int slot : PASSION_SLOTS) {
                         takeItem(slot, 1);
                     }
-                    getPlayer().giveExpLevels(-enchantmentLvl);
+                    Player player = getPlayer();
+                    player.giveExpLevels(-enchantmentLvl);
+                    Nms.get().triggerEnchantedItem(player, book, enchantmentLvl);
                 }
             }
         }

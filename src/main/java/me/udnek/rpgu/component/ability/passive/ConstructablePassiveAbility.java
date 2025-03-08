@@ -1,20 +1,17 @@
 package me.udnek.rpgu.component.ability.passive;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
-import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.AbilityActivationHandler;
 import me.udnek.rpgu.component.ability.AbilityComponent;
-import me.udnek.rpgu.component.ability.AbstractAbilityComponent;
 import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ConstructablePassiveAbilityComponent<ActivationContext> extends AbstractAbilityComponent<ActivationContext> implements PassiveAbilityComponent<ActivationContext> {
+public abstract class ConstructablePassiveAbility<ActivationContext> extends AbilityActivationHandler<ActivationContext> implements PassiveAbility {
+
 
     public void addLoreLines(@NotNull PassiveAbilityLorePart componentable){
         for (CustomComponent<AbilityComponent<?>> component : getComponents()) {
@@ -39,12 +36,5 @@ public abstract class ConstructablePassiveAbilityComponent<ActivationContext> ex
         lorePart.setEquipmentSlot(getSlot());
         lorePart.setHeader(Component.translatable("passive_ability.rpgu.title"));
         addLoreLines(lorePart);
-    }
-
-    public abstract @NotNull CustomEquipmentSlot getSlot();
-
-    @Override
-    public @NotNull CustomComponentType<CustomItem, ?> getType() {
-        return ComponentTypes.PASSIVE_ABILITY_ITEM;
     }
 }

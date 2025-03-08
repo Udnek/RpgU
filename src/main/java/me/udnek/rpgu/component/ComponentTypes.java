@@ -7,7 +7,6 @@ import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.active.ActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.passive.PassiveAbilityComponent;
 import me.udnek.rpgu.component.ability.property.*;
 import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
 import me.udnek.rpgu.component.ability.property.type.AbilityPropertyType;
@@ -20,7 +19,6 @@ public class ComponentTypes {
 
     public static final CustomComponentType<CustomItem, EquippableItemComponent> EQUIPPABLE_ITEM;
     public static final CustomComponentType<CustomItem, ActiveAbilityComponent<?>> ACTIVE_ABILITY_ITEM;
-    public static final CustomComponentType<CustomItem, PassiveAbilityComponent<?>> PASSIVE_ABILITY_ITEM;
 
     public static final AttributeBasedPropertyType ABILITY_COOLDOWN;
     public static final AttributeBasedPropertyType ABILITY_CAST_RANGE;
@@ -33,9 +31,8 @@ public class ComponentTypes {
 
 
     static {
-        EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.EMPTY));
-        ACTIVE_ABILITY_ITEM = register(new ConstructableComponentType("active_ability_item",ActiveAbilityComponent.DEFAULT));
-        PASSIVE_ABILITY_ITEM = register(new ConstructableComponentType("passive_ability_item", PassiveAbilityComponent.DEFAULT));
+        EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.EMPTY, ConstructableEquippableItemComponent::new));
+        ACTIVE_ABILITY_ITEM = register(new ConstructableComponentType("active_ability_item", ActiveAbilityComponent.DEFAULT));
 
         ABILITY_COOLDOWN = register(new AttributeBasedPropertyType("ability_cooldown", Attributes.COOLDOWN_TIME, -1, "ability.rpgu.cooldown", true));
         ABILITY_CAST_RANGE = register(new AttributeBasedPropertyType("ability_cast_range", Attributes.CAST_RANGE, -1, "ability.rpgu.cast_range"));

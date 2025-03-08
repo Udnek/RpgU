@@ -2,12 +2,13 @@ package me.udnek.rpgu.item.artifact;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ArtifactComponent;
+import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
@@ -55,7 +56,12 @@ public class NautilusCore extends ConstructableCustomItem {
         ));
     }
 
-    public static class NautilusCoreComponent implements ArtifactComponent {
+    public static class NautilusCoreComponent extends ConstructableEquippableItemComponent {
+
+        @Override
+        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
+            return EquipmentSlots.ARTIFACTS.test(slot);
+        }
 
         @Override
         public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
