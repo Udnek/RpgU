@@ -153,7 +153,8 @@ public class GeneralListener extends SelfRegisteringListener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void itemGenerates(CustomItemGeneratedEvent event){
         event.getCustomItem().getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
-        event.getCustomItem().getComponents().getOrDefault(ComponentTypes.PASSIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
+        event.getCustomItem().getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
+                component.getLore(event.getLoreBuilder()));
         AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
         if (VanillaItemManager.isReplaced(event.getCustomItem())){
             ItemAttributeModifiers attributeModifiers = event.getItemStack().getData(DataComponentTypes.ATTRIBUTE_MODIFIERS);

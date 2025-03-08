@@ -7,6 +7,8 @@ import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.rpgu.component.ability.passive.PassiveAbility;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import net.kyori.adventure.text.Component;
 import org.bukkit.attribute.Attribute;
@@ -19,10 +21,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface EquippableItemComponent extends CustomComponent<CustomItem> {
-
-    EquippableItemComponent EMPTY = slot -> false;
+    EquippableItemComponent EMPTY = new EquippableItemComponent() {
+        @Override
+        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {return false;}
+        @Override
+        public void addPassive(@NotNull PassiveAbility passive) {
+            throw new RuntimeException("Can not add passive to default empty component");
+        }
+        @Override
+        public @NotNull List<PassiveAbility> getPassives() {
+            return List.of();
+        }
+        @Override
+        public void getPassives(@NotNull Consumer<PassiveAbility> consumer) {}
+    };
 
     boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot);
     default void onEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack){
@@ -41,7 +56,9 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
             }
         });
     }
-    default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot){}
+    default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot){
+        getPassives(passiveAbility -> passiveAbility.tick(item, player, slot));
+    }
     default void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
     default void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
     default void onPlayerHitsWithProjectileWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
@@ -63,6 +80,13 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
             }
         }
     }
+    default void getLore(@NotNull LoreBuilder loreBuilder) {}
+
+    void addPassive(@NotNull PassiveAbility passive);
+
+    @NotNull List<PassiveAbility> getPassives();
+
+    void getPassives(@NotNull Consumer<PassiveAbility> consumer);
 
     interface AttributeConsumer{
         void accept(AttributeInstance attributeInstance, CustomKeyedAttributeModifier modifier);

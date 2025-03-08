@@ -1,10 +1,13 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.itemscoreu.util.Either;
+import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.TotemOfSavingEntity;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
@@ -51,15 +54,17 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new TotemOfSavingComponent());
+        getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new TotemOfSavingComponent());
     }
 
-    public class TotemOfSavingComponent extends ConstructablePassiveAbilityComponent<PlayerDeathEvent> {
+
+    public class TotemOfSavingComponent extends ConstructablePassiveAbility<PlayerDeathEvent> {
 
         @Override
         public @NotNull CustomEquipmentSlot getSlot() {
             return CustomEquipmentSlot.DUMB_INVENTORY;
         }
+
 
         @Override
         public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
@@ -68,7 +73,7 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerDeathEvent event) {
             Player player = event.getPlayer();
             ItemStack foundTotem = null;
             List<ItemStack> drops = event.getDrops();
@@ -97,8 +102,8 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         }
 
         @Override
-        public void onDeath(@NotNull CustomItem customItem, @NotNull PlayerDeathEvent event) {
-            activate(customItem, event.getPlayer(), event);
+        public void onDeath(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
+            activate(customItem, event.getPlayer(), new Either<>(slot, null), event);
         }
     }
 }

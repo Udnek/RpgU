@@ -2,12 +2,12 @@ package me.udnek.rpgu.component.instance;
 
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.Either;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.PassiveAbilityActivatorComponent;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
-import me.udnek.rpgu.component.ability.passive.EquippableActivatablePassiveComponent;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.effect.Effects;
@@ -31,9 +31,8 @@ public class GoldenArmorPassive {
         int duration = 3 * 20;
 
         if (equipmentSlot == EquipmentSlot.HEAD) {
-            components.set(new Ability(CustomEquipmentSlot.HEAD));
             PassiveAbilityGoldenArmor passiveAbility = new PassiveAbilityGoldenArmor(CustomEquipmentSlot.HEAD);
-            components.set(passiveAbility);
+            components.getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(passiveAbility);
             passiveAbility.getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     Effects.MIRE_TOUCH.getBukkitType(),
                     duration,
@@ -41,9 +40,8 @@ public class GoldenArmorPassive {
             )));
         }
         if (equipmentSlot == EquipmentSlot.CHEST) {
-            components.set(new Ability(CustomEquipmentSlot.CHEST));
             PassiveAbilityGoldenArmor passiveAbility = new PassiveAbilityGoldenArmor(CustomEquipmentSlot.CHEST);
-            components.set(passiveAbility);
+            components.getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(passiveAbility);
             passiveAbility.getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.REGENERATION,
                     duration,
@@ -51,9 +49,8 @@ public class GoldenArmorPassive {
             )));
         }
         if (equipmentSlot == EquipmentSlot.LEGS) {
-            components.set(new Ability(CustomEquipmentSlot.LEGS));
             PassiveAbilityGoldenArmor passiveAbility = new PassiveAbilityGoldenArmor(CustomEquipmentSlot.LEGS);
-            components.set(passiveAbility);
+            components.getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(passiveAbility);
             passiveAbility.getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     Effects.MAGICAL_RESISTANCE.getBukkitType(),
                     duration,
@@ -65,9 +62,8 @@ public class GoldenArmorPassive {
             )));
         }
         if (equipmentSlot == EquipmentSlot.FEET) {
-            components.set(new Ability(CustomEquipmentSlot.FEET));
             PassiveAbilityGoldenArmor passiveAbility = new PassiveAbilityGoldenArmor(CustomEquipmentSlot.FEET);
-            components.set(passiveAbility);
+            components.getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(passiveAbility);
             passiveAbility.getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.SPEED,
                     duration,
@@ -76,18 +72,7 @@ public class GoldenArmorPassive {
         }
     }
 
-    static class Ability extends PassiveAbilityActivatorComponent{
-        CustomEquipmentSlot equipmentSlot;
-        Ability(CustomEquipmentSlot equipmentSlot) {this.equipmentSlot = equipmentSlot;}
-
-        @Override
-        public int getTickRate() {return 10;}
-
-        @Override
-        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {return equipmentSlot.test(slot);}
-    }
-
-    static class PassiveAbilityGoldenArmor extends ConstructablePassiveAbilityComponent<Object> implements EquippableActivatablePassiveComponent {
+    static class PassiveAbilityGoldenArmor extends ConstructablePassiveAbility<Object>  {
         CustomEquipmentSlot slot;
 
         PassiveAbilityGoldenArmor(@NotNull CustomEquipmentSlot slots){
@@ -106,7 +91,7 @@ public class GoldenArmorPassive {
         public @NotNull CustomEquipmentSlot getSlot() {return slot;}
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
                                             @NotNull Object object) {
             Collection<LivingEntity> livingEntitiesInRadius = Utils.livingEntitiesInRadius(livingEntity.getLocation(), getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity));
             for (LivingEntity livingEntityInRadius: livingEntitiesInRadius){
@@ -116,6 +101,11 @@ public class GoldenArmorPassive {
                 }
             }
             return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public void tick(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull SingleSlot slot) {
+            activate(customItem, livingEntity, new Either<>(null,  slot), new Object());
         }
     }
 }

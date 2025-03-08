@@ -1,9 +1,11 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.Either;
 import me.udnek.itemscoreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
@@ -77,7 +79,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerInteractEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerInteractEvent event) {
             Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.SMALL_GUST));
 
             if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
@@ -126,9 +128,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
-            activate(customItem, event.getPlayer(), event);
+            activate(customItem, event.getPlayer(), new Either<>(new UniversalInventorySlot(event.getHand()) ,null), event);
         }
-
-
     }
 }

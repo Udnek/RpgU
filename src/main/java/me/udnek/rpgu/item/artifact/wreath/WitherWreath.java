@@ -11,28 +11,28 @@ import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.Either;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ArtifactComponent;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
-import me.udnek.rpgu.mechanic.damaging.DamageInstance;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class WitherWreath extends ConstructableCustomItem {
@@ -58,18 +58,20 @@ public class WitherWreath extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_" + getRawId()), -0.3, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
-        CustomKeyedAttributeModifier attributeHealth = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "max_health_" + getRawId()), -2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).add(Attribute.MAX_HEALTH, attributeHealth).build()));
+        CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_"
+                + getRawId()), -0.3, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
+        CustomKeyedAttributeModifier attributeHealth = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "max_health_"
+                + getRawId()), -2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage)
+                .add(Attribute.MAX_HEALTH, attributeHealth).build()));
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
 
-        getComponents().set(new Artifact());
-        getComponents().set(new Passive());
+        getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new Passive());
     }
 
-    public class Passive extends ConstructablePassiveAbilityComponent<DamageInstance>{
+    public class Passive extends ConstructablePassiveAbility<DamageEvent> {
 
         public Passive(){
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
@@ -91,20 +93,16 @@ public class WitherWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
-                                            @NotNull DamageInstance damageInstance) {
-            if (!(damageInstance.getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity,
+                                            @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull DamageEvent damageEvent) {
+            if (!(damageEvent.getDamageInstance().getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
             getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
             return ActionResult.FULL_COOLDOWN;
         }
-    }
 
-    public static class Artifact implements ArtifactComponent {
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
-            if (item.getComponents().getOrException(ComponentTypes.PASSIVE_ABILITY_ITEM) instanceof Passive passive){
-                passive.action(item, player, new UniversalInventorySlot(slot.getSlot(player)), damageInstance);
-            }
+        public void onDamage(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
+            activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), new Either<>(slot, null), event);
         }
     }
 }

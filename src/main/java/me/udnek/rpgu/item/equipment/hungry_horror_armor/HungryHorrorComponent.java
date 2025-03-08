@@ -3,14 +3,14 @@ package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.rpgu.component.EquippableItemComponent;
+import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-public class HungryHorrorComponent implements EquippableItemComponent {
+public class HungryHorrorComponent extends ConstructableEquippableItemComponent {
     protected final PotionEffectType effectType;
     protected final CustomEquipmentSlot slot;
 

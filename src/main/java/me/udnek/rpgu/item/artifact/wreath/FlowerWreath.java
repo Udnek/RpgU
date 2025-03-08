@@ -4,18 +4,19 @@ import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
 import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.itemscoreu.util.Either;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.PassiveAbilityActivatorComponent;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbilityComponent;
-import me.udnek.rpgu.component.ability.passive.EquippableActivatablePassiveComponent;
+import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.rpgu.component.ability.property.function.Functions;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
@@ -109,20 +110,13 @@ public class FlowerWreath extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new Artifact());
-        getComponents().set(new PassiveAbility());
+        getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new PassiveAbility());
     }
 
-    public class PassiveAbility extends ConstructablePassiveAbilityComponent<Object> implements EquippableActivatablePassiveComponent {
+    public static class PassiveAbility extends ConstructablePassiveAbility<Object> {
 
         public static final float yOffset = 4;
         public static final int DURATION = 20*20;
-
-        @Override
-        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(FlowerWreath.this, 1);
-            super.addLoreLines(componentable);
-        }
 
         public PassiveAbility(){
             getComponents().set(new AttributeBasedProperty(6, ComponentTypes.ABILITY_CAST_RANGE));
@@ -132,6 +126,12 @@ public class FlowerWreath extends ConstructableCustomItem {
                     Functions.CONSTANT(0),
                     true, true, true
             )));
+        }
+
+        @Override
+        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
+            componentable.addFullAbilityDescription(Items.FLOWER_WREATH, 1);
+            super.addLoreLines(componentable);
         }
 
         public @NotNull Location randomOffset(@NotNull LivingEntity livingEntity) {
@@ -152,7 +152,7 @@ public class FlowerWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot,
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
                                             @Nullable Object o) {
             Location location = randomOffset(livingEntity);
             boolean isInForest = isForestMaterial(location.getBlock().getType());
@@ -168,14 +168,10 @@ public class FlowerWreath extends ConstructableCustomItem {
             return ActionResult.FULL_COOLDOWN;
         }
 
-    }
-
-    public static class Artifact extends PassiveAbilityActivatorComponent {
         @Override
-        public int getTickRate() {return 10;}
-
-        @Override
-        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {return EquipmentSlots.ARTIFACTS.test(slot);}
+        public void tick(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull SingleSlot slot) {
+            activate(customItem, livingEntity, new Either<>(null, slot) , new Object());
+        }
     }
 }
 

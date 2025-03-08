@@ -1,11 +1,12 @@
 package me.udnek.rpgu.item.artifact;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
-import me.udnek.rpgu.component.ArtifactComponent;
+import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;
 import org.bukkit.Material;
@@ -43,13 +44,19 @@ public class FishermanSnorkel extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(new ArtifactComponent() {
+        getComponents().set(new ConstructableEquippableItemComponent() {
             static final ParticleBuilder particleBuilder = new ParticleBuilder(Particle.BUBBLE_COLUMN_UP);
             static {
                 particleBuilder.offset(0.2, 0.2, 0.2);
                 particleBuilder.extra(0);
                 particleBuilder.count(1);
             }
+
+            @Override
+            public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
+                return EquipmentSlots.ARTIFACTS.test(slot);
+            }
+
             @Override
             public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot) {
                 if (player.getMaximumAir() == player.getRemainingAir()) return;
