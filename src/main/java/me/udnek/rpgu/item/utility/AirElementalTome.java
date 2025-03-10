@@ -1,8 +1,9 @@
 package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.Either;
@@ -128,7 +129,7 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
-            activate(customItem, event.getPlayer(), new Either<>(new UniversalInventorySlot(event.getHand()) ,null), event);
+            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()) ,null), event);
         }
     }
 }

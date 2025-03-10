@@ -2,7 +2,8 @@ package me.udnek.rpgu.util;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
@@ -48,12 +49,15 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void entityResurrect(EntityResurrectEvent event){
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
-        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->  {
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->  {
             CustomItem.consumeIfCustom(itemStack, customItem ->
-                     customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
-                             component.onResurrect(customItem, slot, activatedBefore.get(), event)));
+                     customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                             if (!passive.getSlot().intersects(slot)) return;
+                             passive.onResurrect(customItem, slot, activatedBefore.get(), event);
+                     }));
             if (!(event.isCancelled())) activatedBefore.set(true);
         };
+
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
@@ -61,19 +65,28 @@ public class AbilityListener extends SelfRegisteringListener {
     public void onDamage(DamageEvent event){
         Entity damager = event.getDamageInstance().getDamager();
         if (damager == null) return;
-        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
                 CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
-                                component.onDamage(customItem, slot, event)));
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                            if (!passive.getSlot().intersects(slot)) return;
+                            System.out.println(slot);
+                            System.out.println(passive.getSlot());
+                            System.out.println(passive.getSlot().intersects(slot));
+                            passive.onDamage(customItem, slot, event);
+                        }));
+
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, (LivingEntity) damager);
     }
 
     @EventHandler
     public void playerDeath(PlayerDeathEvent event){
-        BiConsumer<UniversalInventorySlot, ItemStack> consumer =  (slot, itemStack) ->
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
                 CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
-                                component.onDeath(customItem, slot, event)));
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                            if (!passive.getSlot().intersects(slot)) return;
+                            passive.onDeath(customItem, slot, event);
+                        }));
+
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
@@ -93,7 +106,10 @@ public class AbilityListener extends SelfRegisteringListener {
         }
         if (item == null) return;
         CustomItem.consumeIfCustom(item, customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
-                        component.onGlide(customItem, event)));
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                    passive.onGlide(customItem, event);
+                }));
+
+
     }
 }

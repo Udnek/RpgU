@@ -1,6 +1,7 @@
 package me.udnek.rpgu.component;
 
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.rpgu.component.ability.passive.PassiveAbility;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +15,9 @@ public class ConstructableEquippableItemComponent implements EquippableItemCompo
     @Override
     public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
         for (PassiveAbility passive : getPassives()) {
-            if (slot.test(passive.getSlot()))return true;
+            if (slot.intersects(passive.getSlot())) {
+                return true;
+            }
         }
         return false;
     }

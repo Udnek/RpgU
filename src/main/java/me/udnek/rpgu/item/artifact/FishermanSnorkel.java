@@ -1,8 +1,8 @@
 package me.udnek.rpgu.item.artifact;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
@@ -54,7 +54,7 @@ public class FishermanSnorkel extends ConstructableCustomItem {
 
             @Override
             public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-                return EquipmentSlots.ARTIFACTS.test(slot);
+                return EquipmentSlots.ARTIFACTS.intersects(slot);
             }
 
             @Override

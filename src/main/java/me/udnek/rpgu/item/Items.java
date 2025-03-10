@@ -93,6 +93,8 @@ public class Items {
 
     public static final CustomItem EVOCATION_ROBE = register(new EvocationRobe());
 
+    public static final CustomItem QUIVER = register(new Quiver());
+
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
     public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());

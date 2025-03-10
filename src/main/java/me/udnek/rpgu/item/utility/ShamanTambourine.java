@@ -4,8 +4,9 @@ import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.Either;
@@ -121,7 +122,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
         @Override
         public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
             event.setCancelled(true);
-            activate(customItem, event.getPlayer(), new Either<>(new UniversalInventorySlot(event.getHand()), null), event);
+            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
         }
     }
 }
