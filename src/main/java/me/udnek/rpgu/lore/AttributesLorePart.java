@@ -1,7 +1,7 @@
 package me.udnek.rpgu.lore;
 
 import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
@@ -22,25 +22,17 @@ public class AttributesLorePart implements LoreBuilder.Componentable, PassiveAbi
     @Override
     public void toComponents(@NotNull Consumer<Component> consumer) {
         if (isEmpty()) return;
-        SortedMap<CustomEquipmentSlot, Simple> sorted = new TreeMap<>(new Comparator<CustomEquipmentSlot>() {
-            @Override
-            public int compare(CustomEquipmentSlot o1, CustomEquipmentSlot o2) {
-                if (o1 == CustomEquipmentSlot.MAIN_HAND) return -1;
-                if (o2 == CustomEquipmentSlot.MAIN_HAND) return 1;
-                return Integer.compare(o1.getId().hashCode(), o2.getId().hashCode());
-            }
+        SortedMap<CustomEquipmentSlot, Simple> sorted = new TreeMap<>((o1, o2) -> {
+            if (o1 == CustomEquipmentSlot.MAIN_HAND) return -1;
+            if (o2 == CustomEquipmentSlot.MAIN_HAND) return 1;
+            return Integer.compare(o1.getId().hashCode(), o2.getId().hashCode());
         });
         if (!attributeData.isEmpty() && !passiveData.isEmpty()){
             addLine(abilitySlot, Component.empty(), true, Position.PASSIVE);
         }
         for (Map.Entry<CustomEquipmentSlot, Simple> entry : passiveData.entrySet()) {
             Simple simple = entry.getValue();
-            simple.toComponents(new Consumer<Component>() {
-                @Override
-                public void accept(Component component) {
-                    addLine(entry.getKey(), component, false, Position.ATTRIBUTE);
-                }
-            });
+            simple.toComponents(component -> addLine(entry.getKey(), component, false, Position.ATTRIBUTE));
         }
         
         sorted.putAll(attributeData);

@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
@@ -21,7 +21,7 @@ public class HungryHorrorComponent extends ConstructableEquippableItemComponent 
 
     @Override
     public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-        return this.slot.test(slot);
+        return this.slot.intersects(slot);
     }
 
     @Override

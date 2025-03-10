@@ -1,6 +1,6 @@
 package me.udnek.rpgu.lore.ability;
 
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import org.jetbrains.annotations.NotNull;
 
 public interface PassiveAbilityLorePart extends AbilityLorePart{

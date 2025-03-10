@@ -1,7 +1,9 @@
-package me.udnek.rpgu.equipment.slot;
+/*package me.udnek.rpgu.equipment.slot;
 
-import me.udnek.itemscoreu.customequipmentslot.AbstractCustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
+
+import me.udnek.itemscoreu.customequipmentslot.slot.AbstractCustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.rpgu.lore.TranslationKeys;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
@@ -29,4 +31,9 @@ public class OriginSlot extends AbstractCustomEquipmentSlot implements SingleSlo
     }
     @Override
     public @Nullable Integer getSlot(@NotNull LivingEntity entity) {return null;}
-}
+
+    @Override
+    public @Nullable UniversalInventorySlot getUniversal() {
+        return null;
+    }
+}*/

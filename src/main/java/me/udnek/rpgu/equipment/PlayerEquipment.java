@@ -1,8 +1,9 @@
 package me.udnek.rpgu.equipment;
 
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.GroupSlot;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
+
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.GroupSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import org.bukkit.entity.Player;
@@ -57,7 +58,7 @@ public class PlayerEquipment {
             return equipment.get(slot) == customItem;
         } else {
             List<SingleSlot> slots = new ArrayList<>();
-            groupSlot.getAllSubSlots(slots::add);
+            groupSlot.getAllSingle(slots::add);
             return slots.stream().anyMatch(equipmentSlot -> equipment.get(equipmentSlot) == customItem);
         }
     }

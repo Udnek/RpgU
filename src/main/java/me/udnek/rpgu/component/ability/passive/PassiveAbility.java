@@ -1,9 +1,9 @@
 package me.udnek.rpgu.component.ability.passive;
 
 import me.udnek.itemscoreu.customcomponent.ComponentHolder;
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.UniversalInventorySlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ability.AbilityComponent;

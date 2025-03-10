@@ -3,7 +3,7 @@ package me.udnek.rpgu.lore;
 import com.google.common.collect.Multimap;
 import me.udnek.itemscoreu.customattribute.*;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.itemscoreu.util.ComponentU;
@@ -111,15 +111,12 @@ public class AttributeLoreGenerator {
     public static @NotNull Attribute[] sortAttributes(@NotNull Multimap<Attribute, AttributeModifier> multimap){
         Attribute[] keys = new Attribute[multimap.keys().size()];
         multimap.keys().toArray(keys);
-        Arrays.sort(keys, new Comparator<Attribute>() {
-            @Override
-            public int compare(Attribute a1, Attribute a2) {
-                if      (a1 == Attribute.ATTACK_DAMAGE) return -1;
-                else if (a2 == Attribute.ATTACK_DAMAGE) return 1;
-                else if (a1 == Attribute.ATTACK_SPEED) return -1;
-                else if (a2 == Attribute.ATTACK_SPEED) return 1;
-                return 0;
-            }
+        Arrays.sort(keys, (a1, a2) -> {
+            if      (a1 == Attribute.ATTACK_DAMAGE) return -1;
+            else if (a2 == Attribute.ATTACK_DAMAGE) return 1;
+            else if (a1 == Attribute.ATTACK_SPEED) return -1;
+            else if (a2 == Attribute.ATTACK_SPEED) return 1;
+            return 0;
         });
 
         return keys;

@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.equipment.magical;
 
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
-import me.udnek.itemscoreu.customequipmentslot.CustomEquipmentSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;

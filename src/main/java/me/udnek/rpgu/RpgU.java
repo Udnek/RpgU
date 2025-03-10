@@ -5,7 +5,7 @@ import me.udnek.itemscoreu.customattribute.CustomAttribute;
 import me.udnek.itemscoreu.customeffect.CustomEffect;
 import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customequipmentslot.SingleSlot;
+import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customsound.CustomSound;
 import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
