@@ -1,0 +1,41 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:bundle/fullness",
+    "scale": 0.25,
+    "entries": [
+      {
+        "threshold": 0.000000001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "rpgu:item/quiver_filled_0"
+        }
+      },
+      {
+        "threshold": 0.25000000001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "rpgu:item/quiver_filled_1"
+        }
+      },
+      {
+        "threshold": 0.5000000001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "rpgu:item/quiver_filled_2"
+        }
+      },
+      {
+        "threshold": 0.75000000001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "rpgu:item/quiver_filled_3"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "rpgu:item/quiver"
+    }
+  }
+}

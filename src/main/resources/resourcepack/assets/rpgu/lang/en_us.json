@@ -77,6 +77,8 @@
 	"item.rpgu.wrench": "Wrench",
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
+	"item.rpgu.quiver": "Quiver",
+
 	"item.rpgu.shaman_tambourine": "Shaman Tambourine",
 	"item.rpgu.shaman_tambourine.active_ability.0": "Damages chosen target",
 
