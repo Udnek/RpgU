@@ -5,28 +5,28 @@
     "scale": 0.25,
     "entries": [
       {
-        "threshold": 0.000000001,
+        "threshold": 0.00001,
         "model": {
           "type": "minecraft:model",
           "model": "rpgu:item/quiver_filled_0"
         }
       },
       {
-        "threshold": 0.25000000001,
+        "threshold": 0.25001,
         "model": {
           "type": "minecraft:model",
           "model": "rpgu:item/quiver_filled_1"
         }
       },
       {
-        "threshold": 0.5000000001,
+        "threshold": 0.50001,
         "model": {
           "type": "minecraft:model",
           "model": "rpgu:item/quiver_filled_2"
         }
       },
       {
-        "threshold": 0.75000000001,
+        "threshold": 0.750001,
         "model": {
           "type": "minecraft:model",
           "model": "rpgu:item/quiver_filled_3"

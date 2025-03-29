@@ -1,6 +1,8 @@
 package me.udnek.rpgu.vanilla;
 
+import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.PotionContents;
 import me.udnek.itemscoreu.customattribute.AttributeUtils;
 import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
 import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
@@ -11,22 +13,28 @@ import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customitem.RepairData;
 import me.udnek.itemscoreu.customitem.VanillaItemManager;
 import me.udnek.itemscoreu.customregistry.InitializationProcess;
+import me.udnek.itemscoreu.nms.Nms;
+import me.udnek.itemscoreu.util.ComponentU;
 import me.udnek.itemscoreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.instance.DeathProtectionPassive;
-import me.udnek.rpgu.component.instance.ElytraActivator;
-import me.udnek.rpgu.component.instance.GliderComponent;
-import me.udnek.rpgu.component.instance.GoldenArmorPassive;
+import me.udnek.rpgu.component.instance.*;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.util.Utils;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.entity.Arrow;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
@@ -134,6 +142,10 @@ public class AttributeManaging extends SelfRegisteringListener {
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TOTEM_OF_UNDYING);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.ELYTRA);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.ARROW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPECTRAL_ARROW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TIPPED_ARROW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.FIREWORK_ROCKET);
         }
     }
 
@@ -212,6 +224,63 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (material == Material.ELYTRA) {
             customItem.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 15 * 20));
             customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new GliderComponent(itemStack, 15 * 20));
+        }
+
+        if (material == Material.ARROW) {
+            customItem.getComponents().set(new ArrowComponent() {
+                @Override
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                    return Component.text("0").font(Key.key("rpgu:arrow")).color(NamedTextColor.WHITE).
+                            decoration(TextDecoration.ITALIC, false);
+                }
+            });
+        }
+
+        if (material == Material.TIPPED_ARROW) {
+            customItem.getComponents().set(new ArrowComponent() {
+                @Override
+                public void onBeingShoot(@NotNull CustomItem customItem, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {
+                    Arrow arrow = (Arrow) event.getProjectile();
+                    PotionContents dataFirst = itemStack.getData(DataComponentTypes.POTION_CONTENTS);
+                    if (dataFirst != null) {
+                        arrow.setBasePotionType(dataFirst.potion());
+                        if (dataFirst.customColor() != null) arrow.setColor(dataFirst.customColor());
+                    }
+                }
+                @Override
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                    TextColor color = TextColor.color(Nms.get().getColorByEffects(Objects.requireNonNull(Objects.requireNonNull(
+                            itemStack.getData(DataComponentTypes.POTION_CONTENTS)).potion()).getPotionEffects()).orElse(0));
+                    return ComponentU.textWithNoSpace(-1, Component.text("3").color(color),16)
+                            .append(Component.text("2").color(TextColor.color(-1)))
+                            .decoration(TextDecoration.ITALIC, false).font(Key.key("rpgu:arrow"));
+                }
+            });
+        }
+
+        if (material == Material.SPECTRAL_ARROW) {
+            customItem.getComponents().set(new ArrowComponent() {
+                @Override
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                    return Component.text("1").font(Key.key("rpgu:arrow")).decoration(TextDecoration.ITALIC, false)
+                            .color(TextColor.color(-1));
+                }
+            });
+        }
+
+        if (material == Material.FIREWORK_ROCKET) {
+            customItem.getComponents().set(new ArrowComponent() {
+                @Override
+                public @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem customItem, @NotNull PlayerReadyArrowEvent event) {
+                    return event.getBow().getType() != Material.CROSSBOW ? ChoseArrowResult.DENY : ChoseArrowResult.ALLOW;
+                }
+
+                @Override
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                    return Component.text("4").font(Key.key("rpgu:arrow")).decoration(TextDecoration.ITALIC, false)
+                            .color(TextColor.color(-1));
+                }
+            });
         }
     }
 

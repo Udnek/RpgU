@@ -2,6 +2,7 @@ package me.udnek.rpgu.util;
 
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
 import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
@@ -114,6 +115,18 @@ public class AbilityListener extends SelfRegisteringListener {
     }
 
     @EventHandler
+    public void arrowLoad(EntityLoadCrossbowEvent event){
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
+                CustomItem.consumeIfCustom(itemStack, customItem ->
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                            if (!passive.getSlot().intersects(slot)) return;
+                            passive.onLoadToCrossbow(customItem, slot, event);
+                        }));
+
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
+    }
+
+    @EventHandler
     public void abilityGlide(EntityToggleGlideEvent event){
         if (!(event.isGliding())) return;
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
@@ -129,8 +142,7 @@ public class AbilityListener extends SelfRegisteringListener {
         }
         if (item == null) return;
         CustomItem.consumeIfCustom(item, customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
-                    passive.onGlide(customItem, event);
-                }));
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive ->
+                        passive.onGlide(customItem, event)));
     }
 }

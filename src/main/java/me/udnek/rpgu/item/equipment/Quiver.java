@@ -3,9 +3,11 @@ package me.udnek.rpgu.item.equipment;
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.BundleContents;
-import io.papermc.paper.datacomponent.item.PotionContents;
+import io.papermc.paper.datacomponent.item.ChargedProjectiles;
+import io.papermc.paper.datacomponent.item.ItemLore;
+import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
+import me.udnek.itemscoreu.customcomponent.instance.DispensableItem;
 import me.udnek.itemscoreu.customcomponent.instance.InventoryInteractableItem;
-import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
 import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
@@ -13,23 +15,33 @@ import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.Either;
-import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import org.bukkit.Tag;
-import org.bukkit.entity.*;
+import me.udnek.rpgu.component.instance.ArrowComponent;
+import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Material;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Quiver extends ConstructableCustomItem {
     @Override
@@ -58,6 +70,7 @@ public class Quiver extends ConstructableCustomItem {
 
         getComponents().set(new QuiverRightClickableItem());
         getComponents().set(new QuiverInventoryInteractable());
+        getComponents().set(DispensableItem.ALWAYS_DROP);
         getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new QuiverEntityShootBow());
     }
 
@@ -67,41 +80,50 @@ public class Quiver extends ConstructableCustomItem {
         }
 
         @Override
+        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
+            componentable.addFullAbilityDescription(Items.QUIVER, 1);
+            super.addLoreLines(componentable);
+        }
+
+        @Override
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return CustomEquipmentSlot.DUMB_INVENTORY;
+        }
+
+        @Override
         public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull EntityShootBowEvent event) {
             ItemStack item = slot.getLeft().getItem(livingEntity);
             if (item == null) throw new RuntimeException("Ебать как ты выбил это еблан!!!! Это говнокод");
+            if (!item.isSimilar(event.getConsumable())) return ActionResult.NO_COOLDOWN;
             BundleContents data = item.getData(DataComponentTypes.BUNDLE_CONTENTS);
             if (data == null) return ActionResult.NO_COOLDOWN;
             List<ItemStack> contents = new ArrayList<>(data.contents());
             if (contents.isEmpty()) return ActionResult.NO_COOLDOWN;
 
             ItemStack first = contents.getFirst();
-            first.add(-1);
-            if (first.getAmount() == 0) contents.removeFirst();
-            else contents.set(0, first);
-            item.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+            CustomItem arrow = Objects.requireNonNull(CustomItem.get(first));
+            arrow.getComponents().getOrDefault(ComponentTypes.ARROW_ITEM).onBeingShoot(arrow, first, event);
+
+            if (Objects.requireNonNull(event.getBow()).getType() == Material.BOW) {
+                first.add(-1);
+                if (first.getAmount() == 0) {
+                    contents.removeFirst();
+                    item.unsetData(DataComponentTypes.BUNDLE_CONTENTS);
+                    slot.getLeft().setItem(item.withType(Quiver.DEFAULT_MATERIAL), livingEntity);
+                } else contents.set(0, first);
+                item.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+
+                List<Component> lines = generateLore(Objects.requireNonNull(customItem.getItem().lore()), contents);
+                item.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
+            }
+
+
 
             AbstractArrow projectile = (AbstractArrow) event.getProjectile();
             first.setAmount(1);
             projectile.setItemStack(first);
 
-            if (projectile.getType() == EntityType.ARROW) {
-                Arrow arrow = (Arrow) projectile;
-                PotionContents dataFirst = first.getData(DataComponentTypes.POTION_CONTENTS);
-                if (dataFirst != null) {
-                    arrow.setBasePotionType(dataFirst.potion());
-                    if (dataFirst.customColor() != null) arrow.setColor(dataFirst.customColor());
-                }
-            }
-
-
-
             return ActionResult.FULL_COOLDOWN;
-        }
-
-        @Override
-        public @NotNull CustomEquipmentSlot getSlot() {
-            return CustomEquipmentSlot.DUMB_INVENTORY;
         }
 
         @Override
@@ -116,18 +138,50 @@ public class Quiver extends ConstructableCustomItem {
             if (item == null) throw new RuntimeException("Ебать как ты выбил это еблан!!!! Это говнокод");
             BundleContents data = item.getData(DataComponentTypes.BUNDLE_CONTENTS);
             if (data == null || data.contents().isEmpty()) return;
+            CustomItem arrow = CustomItem.get(data.contents().getFirst());
+            if (arrow == null) throw new RuntimeException("Quiver onChooseArrow arrow == null");
+            if (arrow.getComponents().getOrDefault(ComponentTypes.ARROW_ITEM).onChooseArrow(arrow, event) == ArrowComponent.ChoseArrowResult.DENY) {
+                 return;
+            }
             if (customItem.isThisItem(event.getArrow())) {
-                if (slot.equals(new BaseUniversalSlot(40))) new BukkitRunnable(){
+                /*if (slot.equals(new BaseUniversalSlot(40)) || slot.equals(new BaseUniversalSlot(EquipmentSlot.HAND))) new BukkitRunnable(){
                     @Override
                     public void run() {
-                        slot.setItem(event.getArrow(), player);
+                        System.out.println("dsada");
+                        slot.setItem(item, player);
                     }
-                }.runTaskLater(RpgU.getInstance(), 1);
-                slot.addItem(1, player);
+                }.runTaskLater(RpgU.getInstance(), 1);*/
+                slot.setItem(item, player);
                 return;
             }
+            event.setCancelled(true);
+        }
+
+        @Override
+        public void onLoadToCrossbow(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull EntityLoadCrossbowEvent event) {
+            ItemStack quiver = slot.getItem(event.getEntity());
+            if (quiver == null) throw new RuntimeException("Ебать как ты выбил это еблан!!!! Это говнокод");
+            BundleContents data = quiver.getData(DataComponentTypes.BUNDLE_CONTENTS);
+            if (data == null || data.contents().isEmpty()) return;
+            List<ItemStack> contents = new ArrayList<>(data.contents());
+            ItemStack first = contents.getFirst().clone();
+
+            first.add(-1);
+            if (first.getAmount() == 0) {
+                contents.removeFirst();
+                quiver.unsetData(DataComponentTypes.BUNDLE_CONTENTS);
+                slot.setItem(quiver.withType(Quiver.DEFAULT_MATERIAL), event.getEntity());
+            } else contents.set(0, first);
+            quiver.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+
+            List<Component> lines = generateLore(Objects.requireNonNull(customItem.getItem().lore()), contents);
+            quiver.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
+            first.setAmount(1);
 
             event.setCancelled(true);
+
+            first.setData(DataComponentTypes.ITEM_NAME, Objects.requireNonNull(first.getType().getDefaultData(DataComponentTypes.ITEM_NAME)));
+            event.getCrossbow().setData(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectiles.chargedProjectiles(List.of(first)));
         }
     }
 
@@ -143,8 +197,9 @@ public class Quiver extends ConstructableCustomItem {
                 case LEFT -> {
                     if (event.getAction() == InventoryAction.PICKUP_ALL) return;
                     ItemStack arrow = event.getCursor();
+                    CustomItem customItem = CustomItem.get(arrow);
 
-                    if (!Tag.ITEMS_ARROWS.isTagged(arrow.getType())) {
+                    if (customItem == null || !(customItem.getComponents().has(ComponentTypes.ARROW_ITEM))) {
                         event.setCancelled(true);
                         return;
                     }
@@ -168,8 +223,13 @@ public class Quiver extends ConstructableCustomItem {
                         player.setItemOnCursor(toPlayer);
                     } else player.setItemOnCursor(null);
 
+                    List<Component> lines = generateLore(Objects.requireNonNull(item.getItem().lore()),
+                            new ArrayList<>(Objects.requireNonNull(quiver.getData(DataComponentTypes.BUNDLE_CONTENTS)).contents()));
+                    quiver.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
+
                     ItemStack stack = quiver.withType(arrow.getType());
                     stack.unsetData(DataComponentTypes.POTION_CONTENTS);
+                    stack.unsetData(DataComponentTypes.FIREWORKS);
                     event.setCurrentItem(stack);
                     event.setCancelled(true);
                 }
@@ -183,6 +243,9 @@ public class Quiver extends ConstructableCustomItem {
                     if (contents.isEmpty()) return;
                     ItemStack arrow = contents.removeFirst();
                     quiver.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+
+                    List<Component> lines = generateLore(Objects.requireNonNull(item.getItem().lore()), contents);
+                    quiver.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
 
                     if (contents.isEmpty()) {
                         quiver.unsetData(DataComponentTypes.BUNDLE_CONTENTS);
@@ -203,7 +266,9 @@ public class Quiver extends ConstructableCustomItem {
                 case LEFT -> {
                     ItemStack arrow = event.getCurrentItem();
                     if (arrow == null || arrow.isEmpty()) return;
-                    if (!Tag.ITEMS_ARROWS.isTagged(arrow.getType())) {
+                    CustomItem customItem = CustomItem.get(arrow);
+
+                    if (customItem == null || !(customItem.getComponents().has(ComponentTypes.ARROW_ITEM))) {
                         event.setCancelled(true);
                         return;
                     }
@@ -227,6 +292,10 @@ public class Quiver extends ConstructableCustomItem {
                         event.setCurrentItem(toPlayer);
                     } else event.setCurrentItem(null);
 
+                    List<Component> lines = generateLore(Objects.requireNonNull(item.getItem().lore()),
+                            new ArrayList<>(Objects.requireNonNull(quiver.getData(DataComponentTypes.BUNDLE_CONTENTS)).contents()));
+                    quiver.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
+
                     ItemStack stack = quiver.withType(arrow.getType());
                     stack.unsetData(DataComponentTypes.POTION_CONTENTS);
                     player.setItemOnCursor(stack);
@@ -242,6 +311,9 @@ public class Quiver extends ConstructableCustomItem {
                     if (contents.isEmpty()) return;
                     ItemStack arrow = contents.removeFirst();
                     quiver.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+
+                    List<Component> lines = generateLore(Objects.requireNonNull(item.getItem().lore()), contents);
+                    quiver.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
 
                     if (contents.isEmpty()) {
                         quiver.unsetData(DataComponentTypes.BUNDLE_CONTENTS);
@@ -269,25 +341,57 @@ public class Quiver extends ConstructableCustomItem {
             }
             if (itemAmount != 0) {
                 item.setAmount(itemAmount);
-                newContents.add(item);
+                newContents.addFirst(item);
             }
             return newContents;
         }
     }
 
-    public static class QuiverRightClickableItem implements RightClickableItem {
+    public static @NotNull List<Component> generateLore(@NotNull List<Component> lore, @NotNull List<ItemStack> content){
+        int sum = content.stream().mapToInt(ItemStack::getAmount).sum();
+        TextColor color = sum >= new QuiverInventoryInteractable().MAX_SIZE ? NamedTextColor.RED : NamedTextColor.WHITE;
+        lore.addFirst(Component.text(sum).append(Component.text(" / ")).append(Component.text(new QuiverInventoryInteractable().MAX_SIZE))
+                        .decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).color(color));
+
+        for (ItemStack itemStack : content.reversed()) {
+            CustomItem customItem = CustomItem.get(itemStack);
+            Component icon = Objects.requireNonNull(customItem).getComponents().getOrDefault(ComponentTypes.ARROW_ITEM).getIcon(customItem, itemStack);
+            lore.addFirst(icon.append(Component.text(" x "  ).append(Component.text(itemStack.getAmount())).
+                    decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).font(Key.key("default"))));
+        }
+        return lore;
+    }
+
+    public static class QuiverRightClickableItem extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
         @Override
-        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent playerInteractEvent) {
-            ItemStack item = playerInteractEvent.getItem();
-            if (item == null) return;
+        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+            event.setCancelled(true);
+            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(Objects.requireNonNull(event.getHand())), null)
+                    , event);
+        }
+
+        @Override
+        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerInteractEvent event) {
+            ItemStack item = event.getItem();
+            if (item == null) return ActionResult.NO_COOLDOWN;
             BundleContents data = item.getData(DataComponentTypes.BUNDLE_CONTENTS);
-            if (data == null) return;
+            if (data == null) return ActionResult.NO_COOLDOWN;
             List<ItemStack> contents = new ArrayList<>(data.contents());
-            if (contents.isEmpty()) return;
+            if (contents.isEmpty()) return ActionResult.NO_COOLDOWN;
 
             ItemStack firstItem = contents.removeFirst();
             contents.add(firstItem);
             item.setData(DataComponentTypes.BUNDLE_CONTENTS, BundleContents.bundleContents(contents));
+
+            List<Component> lines = generateLore(Objects.requireNonNull(customItem.getItem().lore()),contents);
+            item.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
+
+            ItemStack stack = item.withType(contents.getFirst().getType());
+            stack.unsetData(DataComponentTypes.POTION_CONTENTS);
+            stack.unsetData(DataComponentTypes.FIREWORKS);
+            new BaseUniversalSlot(Objects.requireNonNull(event.getHand())).setItem(stack, event.getPlayer());
+
+            return ActionResult.FULL_COOLDOWN;
         }
     }
 }
