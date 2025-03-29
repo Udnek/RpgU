@@ -19,9 +19,6 @@ public interface ActiveAbilityComponent<ActivationContext> extends AbilityCompon
         public @NotNull CustomComponentMap<AbilityComponent<?>> getComponents() {return components;}
         @Override
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
-       /* @Override
-        public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, boolean canselIfCooldown,
-                             UniversalInventorySlot slot, @NotNull Object object) {}*/
     };
 
     default void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event){}

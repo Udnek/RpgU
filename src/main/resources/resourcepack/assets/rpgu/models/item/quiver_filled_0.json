@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "rpgu:item/quiver_filled_base",
+        "layer1": "rpgu:item/quiver_filled_0"
+    }
+}

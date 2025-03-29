@@ -1,6 +1,8 @@
 package me.udnek.rpgu.util;
 
+import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
 import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
 import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
@@ -12,6 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityResurrectEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -64,18 +67,15 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void onDamage(DamageEvent event){
         Entity damager = event.getDamageInstance().getDamager();
-        if (damager == null) return;
+        if (!(damager instanceof LivingEntity livingEntity)) return;
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
                 CustomItem.consumeIfCustom(itemStack, customItem ->
                         customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                             if (!passive.getSlot().intersects(slot)) return;
-                            System.out.println(slot);
-                            System.out.println(passive.getSlot());
-                            System.out.println(passive.getSlot().intersects(slot));
                             passive.onDamage(customItem, slot, event);
                         }));
 
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, (LivingEntity) damager);
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, livingEntity);
     }
 
     @EventHandler
@@ -85,6 +85,42 @@ public class AbilityListener extends SelfRegisteringListener {
                         customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                             if (!passive.getSlot().intersects(slot)) return;
                             passive.onDeath(customItem, slot, event);
+                        }));
+
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
+    }
+
+    @EventHandler
+    public void bowShoot(EntityShootBowEvent event){
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
+            CustomItem.consumeIfCustom(itemStack, customItem ->
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                            if (!passive.getSlot().intersects(slot)) return;
+                            passive.onFire(customItem, slot, event);
+                        }));
+
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
+    }
+
+    @EventHandler
+    public void arrowChoose(PlayerReadyArrowEvent event){
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
+                CustomItem.consumeIfCustom(itemStack, customItem ->
+                    customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                        if (!passive.getSlot().intersects(slot)) return;
+                        passive.onChooseArrow(customItem, slot, event);
+                    }));
+
+        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getPlayer());
+    }
+
+    @EventHandler
+    public void arrowLoad(EntityLoadCrossbowEvent event){
+        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
+                CustomItem.consumeIfCustom(itemStack, customItem ->
+                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                            if (!passive.getSlot().intersects(slot)) return;
+                            passive.onLoadToCrossbow(customItem, slot, event);
                         }));
 
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
@@ -106,10 +142,7 @@ public class AbilityListener extends SelfRegisteringListener {
         }
         if (item == null) return;
         CustomItem.consumeIfCustom(item, customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
-                    passive.onGlide(customItem, event);
-                }));
-
-
+                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive ->
+                        passive.onGlide(customItem, event)));
     }
 }
