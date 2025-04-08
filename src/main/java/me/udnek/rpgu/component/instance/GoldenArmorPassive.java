@@ -1,5 +1,6 @@
 package me.udnek.rpgu.component.instance;
 
+import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
 import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
@@ -27,7 +28,7 @@ public class GoldenArmorPassive {
 
     public static void applyPassive(@NotNull Material material, @NotNull CustomItem customItem){
         EquipmentSlot equipmentSlot = material.getEquipmentSlot();
-        CustomComponentMap<CustomItem> components = customItem.getComponents();
+        CustomComponentMap<CustomItem, CustomComponent<CustomItem>> components = customItem.getComponents();
         int duration = 3 * 20;
 
         if (equipmentSlot == EquipmentSlot.HEAD) {

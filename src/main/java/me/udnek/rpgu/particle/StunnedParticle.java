@@ -1,7 +1,9 @@
 package me.udnek.rpgu.particle;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.effect.Effects;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Display;
@@ -25,14 +27,14 @@ public class StunnedParticle extends CustomFlatParticle {
     }
 
     @Override
-    public @Positive int getFrameTime() {return duration;}
-    @Override
-    public @Positive int getFramesAmount() {return 1;}
+    public @Positive int getFramesAmount() {return duration;}
     @Override
     public double getScale() {return 0.6;}
     @Override
     protected @NotNull ItemStack createDisplayItem() {
-        return new ItemStack(Material.GUNPOWDER);
+        ItemStack itemStack = new ItemStack(Material.GUNPOWDER);
+        itemStack.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "particle/stunned"));
+        return itemStack;
     }
     @Override
     protected @NotNull NamespacedKey getCurrentModelPath() {
@@ -48,7 +50,11 @@ public class StunnedParticle extends CustomFlatParticle {
     }
 
     @Override
-    protected void nextFrame() {}
+    protected void nextFrame() {
+        if (!Effects.STUN_EFFECT.has(targetEntity)){
+            stop();
+        }
+    }
     @Override
     protected void spawn() {
         super.spawn();

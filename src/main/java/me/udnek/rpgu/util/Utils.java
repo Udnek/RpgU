@@ -45,7 +45,8 @@ public class Utils {
 
     // NEARBY
     public static @NotNull Collection<LivingEntity> livingEntitiesInRadius(@NotNull Location location, double radius){
-        return location.getWorld().getNearbyLivingEntities(location, radius, livingEntity -> livingEntity.getLocation().distance(location) <= radius);
+        return location.getWorld().getNearbyLivingEntities(location, radius,
+                livingEntity -> livingEntity.getLocation().distance(location) <= radius);
     }
     public static @NotNull Collection<LivingEntity> livingEntitiesInRadiusIntersects(@NotNull Location location, double radius){
         return location.getWorld().getNearbyLivingEntities(location, radius+15,

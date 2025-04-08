@@ -36,6 +36,5 @@ public class MireTouchEffect extends ConstructableCustomEffect implements Listen
             PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOWNESS, DEBUFF_DURATION, getAppliedLevel(damager), false,  true, true);
             victim.addPotionEffect(potionEffect);
         }
-
     }
 }

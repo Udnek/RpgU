@@ -77,14 +77,26 @@ public class DamageInstance {
 
         DamageEvent event = new DamageEvent(this);
         event.callEvent();
+        if (event.isCancelled()) {
+            handlerEvent.setCancelled(true);
+            return;
+        }
 
         equipmentAttacks();
         event.setState(DamageEvent.State.AFTER_EQUIPMENT_ATTACKS);
         event.callEvent();
+        if (event.isCancelled()) {
+            handlerEvent.setCancelled(true);
+            return;
+        }
 
         equipmentReceives();
         event.setState(DamageEvent.State.AFTER_EQUIPMENT_RECEIVES);
         event.callEvent();
+        if (event.isCancelled()) {
+            handlerEvent.setCancelled(true);
+            return;
+        }
 
         if (victim.getNoDamageTicks() > 0 && victim.getLastDamage() > damage.getTotal()){
             handlerEvent.setCancelled(true);

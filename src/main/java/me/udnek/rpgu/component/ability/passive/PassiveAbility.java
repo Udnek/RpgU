@@ -3,6 +3,7 @@ package me.udnek.rpgu.component.ability.passive;
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import me.udnek.itemscoreu.customcomponent.ComponentHolder;
+import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
@@ -17,7 +18,7 @@ import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-public interface PassiveAbility extends ComponentHolder<AbilityComponent<?>> {
+public interface PassiveAbility extends ComponentHolder<AbilityComponent<?>, CustomComponent<AbilityComponent<?>>> {
     @NotNull CustomEquipmentSlot getSlot();
 
     default void getLore(@NotNull LoreBuilder loreBuilder) {}

@@ -1,11 +1,13 @@
-package me.udnek.rpgu.entity;
+package me.udnek.rpgu.entity.totem_of_saving;
 
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomEntity;
 import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
 import me.udnek.itemscoreu.customitem.ItemUtils;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -29,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> implements CustomTickingEntityType<TotemOfSavingEntity>, Listener {
+public class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> implements CustomTickingEntityType<TotemOfSavingEntity>, Listener {
 
     @Override
     public @NotNull String getRawId() {
@@ -41,7 +43,7 @@ class TotemOfSavingEntityType extends ConstructableCustomEntityType<Piglin> impl
         Piglin entity = super.spawnNewEntity(location);
 
         ItemStack head = new ItemStack(Material.GUNPOWDER);
-        head.editMeta(itemMeta -> itemMeta.setItemModel(new NamespacedKey(RpgU.getInstance(), "entity/totem_of_saving")));
+        head.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "entity/totem_of_saving"));
         EntityEquipment equipment = entity.getEquipment();
         equipment.clear();
         equipment.setItem(EquipmentSlot.HEAD, head);

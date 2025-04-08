@@ -6,6 +6,8 @@ import io.papermc.paper.datacomponent.item.BundleContents;
 import io.papermc.paper.datacomponent.item.ChargedProjectiles;
 import io.papermc.paper.datacomponent.item.ItemLore;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
+import me.udnek.itemscoreu.customcomponent.CustomComponent;
+import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customcomponent.instance.DispensableItem;
 import me.udnek.itemscoreu.customcomponent.instance.InventoryInteractableItem;
@@ -16,6 +18,7 @@ import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.util.Either;
+import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
@@ -37,7 +40,6 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -72,6 +74,7 @@ public class Quiver extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
+        getComponents().set(HiddenItemComponent.INSTANCE);
         getComponents().set(new QuiverRightClickableItem());
         getComponents().set(new QuiverInventoryInteractable());
         getComponents().set(DispensableItem.ALWAYS_DROP);

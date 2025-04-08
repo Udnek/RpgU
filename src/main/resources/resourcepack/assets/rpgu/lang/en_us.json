@@ -166,6 +166,8 @@
 	"item.rpgu.soul_binder": "Soul Binder",
 	"item.rpgu.soul_binder.description.0": "Player will respawn on it if there is no priority location",
 
+	"entity.rpgu.ancient_breeze" : "Ancient Breeze",
+
 	"subtitles.rpgu.backstab": "Backstab damage",
 
 	"hud.rpgu.air.level.0": "n0p",

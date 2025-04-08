@@ -1,6 +1,8 @@
 package me.udnek.rpgu.component;
 
 import me.udnek.itemscoreu.customcomponent.AbstractComponentHolder;
+import me.udnek.itemscoreu.customcomponent.ComponentHolder;
+import me.udnek.itemscoreu.customcomponent.CustomComponent;
 import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
 import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
 import me.udnek.itemscoreu.customitem.CustomItem;
@@ -11,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbilityActivationHandler<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>> {
+public abstract class AbilityActivationHandler<ActivationContext> extends AbstractComponentHolder<AbilityComponent<?>, CustomComponent<AbilityComponent<?>>> {
 
     public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, boolean canselIfCooldown,
                          @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull ActivationContext activationContext){
