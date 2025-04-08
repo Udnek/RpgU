@@ -2,6 +2,7 @@ package me.udnek.rpgu.component;
 
 import me.udnek.itemscoreu.customcomponent.ConstructableComponentType;
 import me.udnek.itemscoreu.customcomponent.CustomComponentType;
+import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customitem.CustomItem;
 import me.udnek.itemscoreu.customregistry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
@@ -13,6 +14,7 @@ import me.udnek.rpgu.component.ability.property.type.AbilityPropertyType;
 import me.udnek.rpgu.component.ability.property.type.AttributeBasedPropertyType;
 import me.udnek.rpgu.component.ability.property.type.ConstructableAbilityPropertyType;
 import me.udnek.rpgu.component.instance.ArrowComponent;
+import me.udnek.rpgu.component.instance.DamageResistent;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import org.bukkit.entity.Player;
 
@@ -21,6 +23,8 @@ public class ComponentTypes {
     public static final CustomComponentType<CustomItem, EquippableItemComponent> EQUIPPABLE_ITEM;
     public static final CustomComponentType<CustomItem, ActiveAbilityComponent<?>> ACTIVE_ABILITY_ITEM;
     public static final CustomComponentType<CustomItem, ArrowComponent> ARROW_ITEM;
+
+    public static final CustomComponentType<CustomEntityType, DamageResistent> DAMAGE_RESISTENT_ENTITY;
 
     public static final AttributeBasedPropertyType ABILITY_COOLDOWN;
     public static final AttributeBasedPropertyType ABILITY_CAST_RANGE;
@@ -36,6 +40,8 @@ public class ComponentTypes {
         EQUIPPABLE_ITEM = register(new ConstructableComponentType("equippable_item", EquippableItemComponent.EMPTY, ConstructableEquippableItemComponent::new));
         ACTIVE_ABILITY_ITEM = register(new ConstructableComponentType("active_ability_item", ActiveAbilityComponent.DEFAULT));
         ARROW_ITEM = register(new ConstructableComponentType("arrow_item", ArrowComponent.DEFAULT));
+
+        DAMAGE_RESISTENT_ENTITY = register(new ConstructableComponentType("damage_resistent", DamageResistent.DEFAULT));
 
         ABILITY_COOLDOWN = register(new AttributeBasedPropertyType("ability_cooldown", Attributes.COOLDOWN_TIME, -1, "ability.rpgu.cooldown", true));
         ABILITY_CAST_RANGE = register(new AttributeBasedPropertyType("ability_cast_range", Attributes.CAST_RANGE, -1, "ability.rpgu.cast_range"));

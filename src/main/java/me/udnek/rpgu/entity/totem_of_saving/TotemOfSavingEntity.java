@@ -1,14 +1,14 @@
-package me.udnek.rpgu.entity;
+package me.udnek.rpgu.entity.totem_of_saving;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.BundleContents;
 import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntity;
 import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
+import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Piglin;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> implements Listener {
+public class TotemOfSavingEntity extends ConstructableCustomEntity<Piglin> {
 
     @Override
     public @Positive int getTickDelay() {

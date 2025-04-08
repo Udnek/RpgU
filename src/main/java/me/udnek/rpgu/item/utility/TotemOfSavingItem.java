@@ -9,7 +9,7 @@ import me.udnek.itemscoreu.util.Either;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.entity.EntityTypes;
-import me.udnek.rpgu.entity.TotemOfSavingEntity;
+import me.udnek.rpgu.entity.totem_of_saving.TotemOfSavingEntity;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import org.bukkit.Location;
 import org.bukkit.Material;

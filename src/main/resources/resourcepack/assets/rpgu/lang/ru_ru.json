@@ -163,5 +163,7 @@
   "item.rpgu.soul_binder": "Связыватель души",
   "item.rpgu.soul_binder.description.0": "Игрок возродится на нём, если других приоритетных мест нет",
 
-  "item.rpgu.quiver": "Колчан"
+  "item.rpgu.quiver": "Колчан",
+
+  "entity.rpgu.ancient_breeze" : "Аншент бриз"
 }
