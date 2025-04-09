@@ -17,6 +17,8 @@ import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarViewer;
 import net.kyori.adventure.text.Component;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.*;
@@ -27,6 +29,7 @@ import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -41,10 +44,11 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
     protected double step = 1;
     protected List<Shield> shields = new ArrayList<>();
     public static final NamespacedKey ALIVE_SHIELDS_KEY = new NamespacedKey(RpgU.getInstance(), "alive_shields");
-    protected int shieldAmount = 0;
-    protected int splashAttackRadius = 5;
     protected BossBar bossBar;
     public static final int ANCIENT_BREEZE_HP = 200;
+    protected int SHIELD_AMOUNT = 0;
+    protected final int SPLASH_ATTACK_RADIUS = 5;
+    protected int EXPLOSIVE_ATTACK_COOLDOWN = 5 * 20;
 
     @Override
     public @Positive int getTickDelay() {
@@ -53,19 +57,20 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
 
     @Override
     public void load(@NotNull Entity entity) {
+        entity.setCustomNameVisible(false);
         super.load(entity);
 
         byte[] aliveShields = entity.getPersistentDataContainer().get(ALIVE_SHIELDS_KEY, PersistentDataType.BYTE_ARRAY);
         if (aliveShields == null) {
-            aliveShields = new byte[shieldAmount];
-            for (int i = 0; i < shieldAmount; i++) {
+            aliveShields = new byte[SHIELD_AMOUNT];
+            for (int i = 0; i < SHIELD_AMOUNT; i++) {
                 aliveShields[i] = (byte) 1;
             }
         }
         entity.getPersistentDataContainer().set(ALIVE_SHIELDS_KEY, PersistentDataType.BYTE_ARRAY, aliveShields);
 
-        for (int i = 0; i < shieldAmount; i++) {
-            Shield shield = new Shield(entity.getLocation(), 360 / shieldAmount * i, 1, 20, this);
+        for (int i = 0; i < SHIELD_AMOUNT; i++) {
+            Shield shield = new Shield(entity.getLocation(), 360 / SHIELD_AMOUNT * i, 1, 20, this);
             shields.add(shield);
             if (aliveShields[i] == 1) shield.spawnShield();
         }
@@ -87,6 +92,7 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
         step++;
         shields.forEach(shield -> shield.teleportEntity(entity.getLocation(), step));
 
+        if (EXPLOSIVE_ATTACK_COOLDOWN > 0) EXPLOSIVE_ATTACK_COOLDOWN -= 1;
 
         List<Player> playerInRadius = Utils.livingEntitiesInRadius(entity.getLocation(), 238).stream().filter(livingEntity -> livingEntity instanceof Player).map(livingEntity -> (Player) livingEntity).toList();
         playerInRadius.forEach(player -> player.showBossBar(bossBar));
@@ -94,7 +100,6 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
         for (BossBarViewer viewer : bossBar.viewers()) {
             if (!playerInRadius.contains(((Player) viewer))) ((Player) viewer).hideBossBar(bossBar);
         }
-
     }
 
     public void onEntityHit(DamageEvent event){
@@ -113,8 +118,8 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
     public void onEntityMove(EntityMoveEvent event) {}
 
     public void checkAliveShields() {
-        byte[] bytes = new byte[shieldAmount];
-        IntStream.range(0, shieldAmount).filter(i -> shields.get(i).isAlive()).forEach(i -> bytes[i] = (byte) 1);
+        byte[] bytes = new byte[SHIELD_AMOUNT];
+        IntStream.range(0, SHIELD_AMOUNT).filter(i -> shields.get(i).isAlive()).forEach(i -> bytes[i] = (byte) 1);
         entity.getPersistentDataContainer().set(ALIVE_SHIELDS_KEY, PersistentDataType.BYTE_ARRAY, bytes);
     }
 
@@ -126,18 +131,100 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
         Vector direction = targetLocationEye.toVector().subtract(entityLocationEye.toVector()).normalize();
 
         double distance = entityLocationEye.distance(targetLocationEye);
-        if (distance <= splashAttackRadius) {
-            splashAttack(splashAttackRadius, distance, direction);
+        if (distance <= SPLASH_ATTACK_RADIUS) {
+            splashAttack(distance, direction);
             return;
         }
 
         RayTraceResult rayTraceResult = entity.getWorld().rayTraceBlocks(entity.getEyeLocation(), direction, distance, FluidCollisionMode.NEVER, false);
         if (rayTraceResult != null && rayTraceResult.getHitBlock() != null) {
-            explosiveAttack(rayTraceResult.getHitBlock().getLocation());
+            if (EXPLOSIVE_ATTACK_COOLDOWN != 0) dropAttack(target);
+            else {
+                EXPLOSIVE_ATTACK_COOLDOWN = 20 * 5;
+                explosiveAttack(rayTraceResult.getHitBlock().getLocation());
+            }
             return;
         }
 
-        dropAttack(target);
+        throwsAttack(target);
+    }
+
+    protected void throwsAttack(@NotNull LivingEntity targetEntity)  {
+        Block block = findBlock(entity);
+        if (block == null) {
+            dropAttack(targetEntity);
+            return;
+        }
+
+        BlockData blockData = block.getBlockData();
+        Display blockDisplay = block.getWorld().spawn(
+                block.getLocation().toCenterLocation(),
+                BlockDisplay.class,
+                b -> b.setBlock(blockData)
+        );
+        block.setType(Material.AIR);
+
+        Location blockLocation = block.getLocation().clone();
+        Location eyeLocation = entity.getEyeLocation();
+        Vector direction = eyeLocation.toVector().subtract(block.getLocation().toVector()).normalize();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Location location = blockLocation.add(direction);
+                blockDisplay.teleport(location);
+
+                if (eyeLocation.distance(location) <= 1.5) {
+                    Vector velocity = targetEntity.getEyeLocation().toVector().subtract(eyeLocation.toVector()).normalize().add(new Vector(0, 0.1, 0));
+                    location.getWorld().spawn(
+                            eyeLocation,
+                            FallingBlock.class,
+                            fallingBlock -> {
+                                fallingBlock.setBlockData(blockData);
+                                fallingBlock.setVelocity(velocity);
+                                fallingBlock.setMaxDamage(0);
+                                fallingBlock.setHurtEntities(false);
+                                fallingBlock.setDropItem(false);
+                            }
+                    );
+                    EntityTypes.ANCIENT_BREEZE_PROJECTILE.spawn(eyeLocation).setVelocity(velocity);
+                    blockDisplay.remove();
+                    cancel();
+                }
+            }
+        }.runTaskTimer(RpgU.getInstance(), 0, 1);
+    }
+
+    protected @Nullable Block findBlock(@NotNull LivingEntity targetEntity){
+        int radius = 4;
+        Location eyeLocation = targetEntity.getEyeLocation();
+
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
+                    if (x * x + y * y + z * z > radius * radius) continue;
+
+                    Location blockLoc = eyeLocation.clone().add(x, y, z);
+                    Block block = blockLoc.getBlock();
+
+                    if (block.isSolid() && isBlockVisible(entity.getEyeLocation(), block) && block.getType().getHardness() != -1) {
+                        return block;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    protected boolean isBlockVisible(@NotNull Location entityEyeLocation, @NotNull Block block) {
+        Location blockLocation = block.getLocation().toCenterLocation();
+        Vector direction = blockLocation.toVector().clone().subtract(entityEyeLocation.toVector()).normalize();
+        double maxDistance = entityEyeLocation.distance(blockLocation);
+
+        RayTraceResult result = entityEyeLocation.getWorld().rayTraceBlocks(entityEyeLocation, direction, maxDistance,
+                FluidCollisionMode.ALWAYS);
+
+        return result != null && result.getHitBlock() != null;
     }
 
     protected void explosiveAttack(@NotNull Location location){
@@ -163,23 +250,23 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
         world.createExplosion(location, 4, false, true, entity);
     }
 
-    protected void splashAttack(int radius, double distance, @NotNull Vector vector) {
-        Collection<LivingEntity> livingEntities = Utils.livingEntitiesInRadiusIntersects(entity.getLocation(), radius);
+    protected void splashAttack(double distance, @NotNull Vector vector) {
+        Collection<LivingEntity> livingEntities = Utils.livingEntitiesInRadiusIntersects(entity.getLocation(), SPLASH_ATTACK_RADIUS);
         for (LivingEntity livingEntity : livingEntities) {
             CustomEntity ticking = CustomEntityType.getTicking(livingEntity);
             if (livingEntity == entity || (ticking != null && ticking.getType() == EntityTypes.ANCIENT_BREEZE_SHIELD)) continue;
 
             DamageUtils.damage(livingEntity, new Damage(Damage.Type.PHYSICAL, 8), DamageSource.builder(DamageType.MOB_ATTACK).build());
-            livingEntity.setVelocity(vector.multiply(radius - distance).setY(0.4));
+            livingEntity.setVelocity(vector.multiply(SPLASH_ATTACK_RADIUS - distance).setY(0.4));
             Effects.STUN_EFFECT.applyInvisible(livingEntity, 20 * 5, 0);
 
             Location location = Utils.rayTraceBlockUnder(entity.getLocation());
             if (location == null) location = entity.getLocation();
 
 
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    for (int y = -radius; y <= radius; y++) {
+            for (int x = -SPLASH_ATTACK_RADIUS; x <= SPLASH_ATTACK_RADIUS; x++) {
+                for (int y = -SPLASH_ATTACK_RADIUS; y <= SPLASH_ATTACK_RADIUS; y++) {
+                    for (int z = -SPLASH_ATTACK_RADIUS; z <= SPLASH_ATTACK_RADIUS; z++) {
                         Location blockLocation = location.clone().toCenterLocation().add(x, y, z);
                         if (blockLocation.distance(entity.getLocation()) > 5) continue;
                         me.udnek.itemscoreu.util.Utils.sendBlockDamageForAllPlayers(blockLocation, 0.6F, 0.1F, 2);
