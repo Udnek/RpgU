@@ -6,8 +6,6 @@ import io.papermc.paper.datacomponent.item.BundleContents;
 import io.papermc.paper.datacomponent.item.ChargedProjectiles;
 import io.papermc.paper.datacomponent.item.ItemLore;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
 import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
 import me.udnek.itemscoreu.customcomponent.instance.DispensableItem;
 import me.udnek.itemscoreu.customcomponent.instance.InventoryInteractableItem;

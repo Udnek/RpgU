@@ -176,6 +176,7 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
 
                 if (eyeLocation.distance(location) <= 1.5) {
                     Vector velocity = targetEntity.getEyeLocation().toVector().subtract(eyeLocation.toVector()).normalize().add(new Vector(0, 0.1, 0));
+                    EntityTypes.ANCIENT_BREEZE_PROJECTILE.spawn(eyeLocation).setVelocity(velocity);
                     location.getWorld().spawn(
                             eyeLocation,
                             FallingBlock.class,
@@ -187,7 +188,6 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
                                 fallingBlock.setDropItem(false);
                             }
                     );
-                    EntityTypes.ANCIENT_BREEZE_PROJECTILE.spawn(eyeLocation).setVelocity(velocity);
                     blockDisplay.remove();
                     cancel();
                 }
@@ -207,7 +207,7 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
                     Location blockLoc = eyeLocation.clone().add(x, y, z);
                     Block block = blockLoc.getBlock();
 
-                    if (block.isSolid() && isBlockVisible(entity.getEyeLocation(), block) && block.getType().getHardness() != -1) {
+                    if (block.isSolid() && isBlockVisible(block) && block.getType().getHardness() != -1) {
                         return block;
                     }
                 }
@@ -216,7 +216,8 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
         return null;
     }
 
-    protected boolean isBlockVisible(@NotNull Location entityEyeLocation, @NotNull Block block) {
+    protected boolean isBlockVisible(@NotNull Block block) {
+        Location entityEyeLocation = entity.getEyeLocation();
         Location blockLocation = block.getLocation().toCenterLocation();
         Vector direction = blockLocation.toVector().clone().subtract(entityEyeLocation.toVector()).normalize();
         double maxDistance = entityEyeLocation.distance(blockLocation);
@@ -250,14 +251,14 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
         world.createExplosion(location, 4, false, true, entity);
     }
 
-    protected void splashAttack(double distance, @NotNull Vector vector) {
+    protected void splashAttack(double distance, @NotNull Vector direction) {
         Collection<LivingEntity> livingEntities = Utils.livingEntitiesInRadiusIntersects(entity.getLocation(), SPLASH_ATTACK_RADIUS);
         for (LivingEntity livingEntity : livingEntities) {
             CustomEntity ticking = CustomEntityType.getTicking(livingEntity);
             if (livingEntity == entity || (ticking != null && ticking.getType() == EntityTypes.ANCIENT_BREEZE_SHIELD)) continue;
 
             DamageUtils.damage(livingEntity, new Damage(Damage.Type.PHYSICAL, 8), DamageSource.builder(DamageType.MOB_ATTACK).build());
-            livingEntity.setVelocity(vector.multiply(SPLASH_ATTACK_RADIUS - distance).setY(0.4));
+            livingEntity.setVelocity(direction.multiply(SPLASH_ATTACK_RADIUS - distance).setY(0.4));
             Effects.STUN_EFFECT.applyInvisible(livingEntity, 20 * 5, 0);
 
             Location location = Utils.rayTraceBlockUnder(entity.getLocation());

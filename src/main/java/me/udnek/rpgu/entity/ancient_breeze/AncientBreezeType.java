@@ -3,11 +3,8 @@ package me.udnek.rpgu.entity.ancient_breeze;
 import io.papermc.paper.event.entity.EntityMoveEvent;
 import io.papermc.paper.event.player.PlayerNameEntityEvent;
 import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntity;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
 import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
 import me.udnek.rpgu.entity.EntityTypes;
-import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
@@ -19,7 +16,6 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -64,29 +60,23 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
         return new AncientBreeze();
     }
 
-    public @Nullable AncientBreeze getIfCustom(@NotNull Entity entity) {
-        CustomEntity customEntity = CustomEntityType.getTicking(entity);
-        if (customEntity == null || customEntity.getType() != EntityTypes.ANCIENT_BREEZE) return null;
-        return (AncientBreeze) customEntity;
-    }
-
     @EventHandler
     public void onEntityHit(DamageEvent event){
-        AncientBreeze breeze = getIfCustom(event.getDamageInstance().getVictim());
+        AncientBreeze breeze = EntityTypes.ANCIENT_BREEZE.getIsThis(event.getDamageInstance().getVictim());
         if (breeze ==  null) return;
         breeze.onEntityHit(event);
     }
 
     @EventHandler
     public void onEntityRename(PlayerNameEntityEvent event){
-        AncientBreeze breeze = getIfCustom(event.getEntity());
+        AncientBreeze breeze = EntityTypes.ANCIENT_BREEZE.getIsThis(event.getEntity());
         if (breeze ==  null) return;
         breeze.onEntityRename(event);
     }
 
     @EventHandler
     public void onEntityMove(EntityMoveEvent event){
-        AncientBreeze breeze = getIfCustom(event.getEntity());
+        AncientBreeze breeze = EntityTypes.ANCIENT_BREEZE.getIsThis(event.getEntity());
         if (breeze ==  null) return;
         breeze.onEntityMove(event);
     }
@@ -94,7 +84,7 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
     @EventHandler
     public void onEntityLaunchProjectile(ProjectileLaunchEvent event){
         if (!(event.getEntity().getShooter() instanceof LivingEntity livingEntity)) return;
-        AncientBreeze breeze = getIfCustom(livingEntity);
+        AncientBreeze breeze = EntityTypes.ANCIENT_BREEZE.getIsThis(livingEntity);
         if (breeze == null) return;
         event.setCancelled(true);
         breeze.onEntityShoot();
