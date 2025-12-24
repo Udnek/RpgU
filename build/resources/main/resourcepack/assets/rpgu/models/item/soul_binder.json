@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "rpgu:item/soul_binder_top",
-    "bottom": "rpgu:item/soul_binder_bottom",
-    "side": "rpgu:item/soul_binder_side"
-  }
-}
