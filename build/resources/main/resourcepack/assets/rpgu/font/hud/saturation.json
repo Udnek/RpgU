@@ -1,0 +1,25 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/food/unit_saturation.png",
+			"ascent": -17,
+			"height": 7,
+			"chars": ["u"]
+		},
+		{
+			"type": "space",
+			"advances": {
+				"+": -3,
+				"-": 1,
+				"n": 0,
+				"j": 74,
+				"k": -74,
+
+				"b": 0,
+				"i": 0,
+				"o": 0
+			}
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "rpgu:item/gui/alloying/banner",
+    "tints": [
+      {
+        "type": "minecraft:custom_model_data",
+        "default": 0
+      }
+    ]
+  }
+}

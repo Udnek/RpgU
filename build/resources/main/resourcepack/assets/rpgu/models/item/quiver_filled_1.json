@@ -1,0 +1,8 @@
+{
+    "parent": "itemscoreu:item/generated_20x20",
+    "textures": {
+        "layer0": "rpgu:item/quiver_filled_base",
+        "layer1": "rpgu:item/quiver_filled_0",
+        "layer2": "rpgu:item/quiver_filled_1"
+    }
+}

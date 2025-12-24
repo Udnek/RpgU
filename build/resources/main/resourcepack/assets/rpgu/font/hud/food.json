@@ -1,0 +1,42 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/food/background.png",
+			"ascent": -26,
+			"height": 9,
+			"chars": ["b"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/food/icon.png",
+			"ascent": -26,
+			"height": 9,
+			"chars": ["i"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/food/unit.png",
+			"ascent": -27,
+			"height": 7,
+			"chars": ["u"]
+		},
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/hud/food/overlay.png",
+			"ascent": -26,
+			"height": 9,
+			"chars": ["o"]
+		},
+		{
+			"type": "space",
+			"advances": {
+				"+": -3,
+				"-": 1,
+				"n": -82,
+				"j": 77,
+				"k": -77
+			}
+		}
+	]
+}

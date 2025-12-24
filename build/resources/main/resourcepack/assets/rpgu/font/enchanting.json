@@ -1,0 +1,17 @@
+{
+	"providers": [
+		{
+			"type": "bitmap",
+			"file": "rpgu:font/enchantment_table_gui.png",
+			"ascent": 13,
+			"height": 256,
+			"chars": [
+				"0"
+			]
+		},
+		{
+			"type": "reference",
+			"id": "space:default"
+		}
+	]
+}

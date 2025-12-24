@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "rpgu:wolf"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "rpgu:wolf"
+      }
+    ]
+  }
+}

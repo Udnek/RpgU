@@ -1,0 +1,26 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "rpgu:font/artifact_slots.png",
+      "ascent": -4,
+      "height": 18,
+      "chars": [
+        "\uE001"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "rpgu:font/artifact_slots.png",
+      "ascent": -70,
+      "height": 18,
+      "chars": [
+        "\uE002"
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "space:default"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "itemscoreu:item/generated_20x20",
+    "textures": {
+        "layer0": "rpgu:item/quiver"
+    }
+}

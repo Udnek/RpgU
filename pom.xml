@@ -13,8 +13,8 @@
 
     <properties>
         <java.version>21</java.version>
-        <lib.itemscoreu>C:\Users\glebd\OneDrive\Documents\CODING\Java\ItemsCoreU\target\ItemsCoreU-1.0-SNAPSHOT-remapped.jar</lib.itemscoreu>
-        <lib.jeiu>C:\Users\glebd\OneDrive\Рабочий стол\TestServer\plugins\JeiU.jar</lib.jeiu>
+        <lib.itemscoreu>H:\test\plugins\ItemsCoreU-1.0-SNAPSHOT-remapped.jar</lib.itemscoreu>
+        <lib.jeiu>H:\test\plugins\JeiU.jar</lib.jeiu>
     </properties>
 
     <build>

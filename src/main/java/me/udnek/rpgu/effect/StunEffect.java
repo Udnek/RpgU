@@ -10,7 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionEffectTypeCategory;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +32,7 @@ public class StunEffect extends ConstructableCustomEffect implements Listener {
     @Override
     public void apply(@NotNull LivingEntity livingEntity, int duration, int amplifier, boolean ambient, boolean showParticles, boolean showIcon) {
         super.apply(livingEntity, duration, amplifier, ambient, showParticles, showIcon);
-        new StunnedParticle(livingEntity, duration).play(livingEntity.getLocation());
+        if (showParticles) new StunnedParticle(livingEntity, duration).play(livingEntity.getLocation());
     }
 
     @Override
