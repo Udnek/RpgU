@@ -79,7 +79,7 @@ fabric.properties
 target
 !out/artifacts/RpgU.jar
 
-build
-gradle
-.gradle
-.kotlin
+
+/.gradle/
+/build/
+/gradle/
