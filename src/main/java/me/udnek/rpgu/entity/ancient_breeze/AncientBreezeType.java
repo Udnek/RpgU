@@ -27,9 +27,7 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
     }
 
     @Override
-    public void load(@NotNull Entity entity) {
-
-    }
+    public void load(@NotNull Entity entity) {}
 
     @Override
     public @NotNull Breeze spawnNewEntity(@NotNull Location location) {
@@ -46,9 +44,7 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
     }
 
     @Override
-    public void unload(@NotNull Entity entity) {
-
-    }
+    public void unload(@NotNull Entity entity) {}
 
     @Override
     public @NotNull String getRawId() {
