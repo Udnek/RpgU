@@ -29,7 +29,7 @@ public class BackstabParticle extends CustomFlatParticle {
     @Override
     protected @NotNull ItemStack createDisplayItem() {
         ItemStack itemStack = new ItemStack(Material.LEATHER_HELMET);
-        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.custom.ModelData().addColor(COLOR).build());
+        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addColor(COLOR).build());
         return itemStack;
     }
 

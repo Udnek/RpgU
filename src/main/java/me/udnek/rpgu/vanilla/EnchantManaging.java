@@ -72,22 +72,22 @@ public class EnchantManaging {
         addEnchantingRecipe(enchantment, materials, List.of(), tableUpgradeSet);
     }
 
-    private static void addEnchantingRecipeCustomItem(@NotNull Enchantment enchantment, @NotNull List<CustomItem> custom.Items){
-        addEnchantingRecipe(enchantment, List.of(), custom.Items);
+    private static void addEnchantingRecipeCustomItem(@NotNull Enchantment enchantment, @NotNull List<CustomItem> customItems){
+        addEnchantingRecipe(enchantment, List.of(), customItems);
     }
 
-    private static void addEnchantingRecipeCustomItem(@NotNull Enchantment enchantment, @NotNull List<CustomItem> custom.Items, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
-        addEnchantingRecipe(enchantment, List.of(), custom.Items, tableUpgradeSet);
+    private static void addEnchantingRecipeCustomItem(@NotNull Enchantment enchantment, @NotNull List<CustomItem> customItems, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
+        addEnchantingRecipe(enchantment, List.of(), customItems, tableUpgradeSet);
     }
 
-    private static void addEnchantingRecipe(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> custom.Items){
-        addEnchantingRecipe(enchantment, materials, custom.Items, Set.of());
+    private static void addEnchantingRecipe(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> customItems){
+        addEnchantingRecipe(enchantment, materials, customItems, Set.of());
     }
 
-    private static void addEnchantingRecipe(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> custom.Items, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
+    private static void addEnchantingRecipe(@NotNull Enchantment enchantment, @NotNull List<Material> materials, @NotNull List<CustomItem> customItems, @NotNull Set<EnchantingTableUpgrade> tableUpgradeSet){
         List<CustomSingleRecipeChoice> recipeChoices = new ArrayList<>();
         for (Material material : materials){recipeChoices.add(new CustomSingleRecipeChoice(material));}
-        for (CustomItem custom.Item : custom.Items){recipeChoices.add(new CustomSingleRecipeChoice(custom.Item));}
+        for (CustomItem customItem : customItems){recipeChoices.add(new CustomSingleRecipeChoice(customItem));}
 
         RecipeManager.getInstance().register(
                 new EnchantingRecipe(new NamespacedKey(RpgU.getInstance(), enchantment.key().asMinimalString()), enchantment, recipeChoices, tableUpgradeSet)

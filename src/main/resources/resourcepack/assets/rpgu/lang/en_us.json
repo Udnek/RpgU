@@ -9,21 +9,12 @@
 	"active_ability.rpgu.title": "Active Ability:",
 	"passive_ability.rpgu.title": "Passive Ability:",
 
-	"ability.rpgu.cast_range": "Cast Range: %s blocks",
-	"ability.rpgu.area_of_effect": "AOE: %s blocks",
-	"ability.rpgu.cooldown": "Cooldown: %s seconds",
-	"ability.rpgu.cast_time": "Cast Time: %s seconds",
-	"ability.rpgu.duration": "Duration: %s seconds",
-	"ability.rpgu.damage": "Damage: %s",
-	"ability.rpgu.effects": "Effects: %s",
-	"ability.rpgu.effects.with_amplifier_with_duration": "%s %s (%s seconds)",
-	"ability.rpgu.effects.with_amplifier_no_duration": "%s %s",
-	"ability.rpgu.effects.no_amplifier_with_duration": "%s (%s seconds)",
-	"ability.rpgu.effects.no_amplifier_no_duration": "%s",
+	"ability.rpgu.damage": "Damage (%s): %s",
 
 	"damage_formula.rpgu.magical": "Magical: %s",
 	"damage_formula.rpgu.physical": "Physical: %s",
-	"magical_potential_formula.rpgu.linear": "%s + %s*MP",
+
+    "ability_property_description.rpgu.magic_potential": "MP",
 
 	"effect.rpgu.root": "Root",
 	"effect.rpgu.heavy_falling": "Heavy Falling",

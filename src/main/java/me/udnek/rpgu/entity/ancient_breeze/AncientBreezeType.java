@@ -9,7 +9,10 @@ import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Breeze;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -32,7 +35,7 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
     @Override
     public @NotNull Breeze spawnNewEntity(@NotNull Location location) {
         Breeze breeze = super.spawnNewEntity(location);
-        breeze.custom.Name(Component.translatable("entity.rpgu.ancient_breeze"));
+        breeze.customName(Component.translatable("entity.rpgu.ancient_breeze"));
         breeze.setCustomNameVisible(false);
         Objects.requireNonNull(breeze.getAttribute(Attribute.MAX_HEALTH)).setBaseValue(AncientBreeze.ANCIENT_BREEZE_HP);
         breeze.heal(AncientBreeze.ANCIENT_BREEZE_HP);

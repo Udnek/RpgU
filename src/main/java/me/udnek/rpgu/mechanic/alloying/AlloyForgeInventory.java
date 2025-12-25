@@ -73,7 +73,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
     @Override
     public boolean canTakeItem(@Nullable ItemStack itemStack, int slot) {
-        return !FILLER.isThisItem(inventory.getItem(slot));
+        return !FILLER.isThisItem(getInventory().getItem(slot));
     }
     public void iterateTroughAllInputSlots(@NotNull Consumer<Integer> consumer){
         for (int alloysSlot : ALLOYS_SLOTS) {
@@ -103,7 +103,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         if (progress == 0) model += "empty";
         else model += (int) (progress*29);
         icon.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), model));
-        inventory.setItem(PROGRESS_SLOT, icon);
+        getInventory().setItem(PROGRESS_SLOT, icon);
     }
 
     public void tickRecipe(){
@@ -137,7 +137,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         if (currentRecipe != null) return;
         if (!canFit(RESULT_SLOT, recipe.getResult())) return;
 
-        currentAddition = inventory.getItem(ADDITION_SLOT);
+        currentAddition = getInventory().getItem(ADDITION_SLOT);
         if (currentAddition != null) currentAddition = currentAddition.clone();
 
         iterateTroughAllInputSlots(integer -> takeItem(integer, 1));
@@ -157,12 +157,12 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
         List<ItemStack> alloys = new ArrayList<>();
         for (int alloySlot : ALLOYS_SLOTS) {
-            ItemStack item = inventory.getItem(alloySlot);
+            ItemStack item = getInventory().getItem(alloySlot);
             if (item != null) alloys.add(item);
         }
-        ItemStack fuel = inventory.getItem(FUEL_SLOT);
+        ItemStack fuel = getInventory().getItem(FUEL_SLOT);
         if (fuel == null) return;
-        ItemStack addition = inventory.getItem(ADDITION_SLOT);
+        ItemStack addition = getInventory().getItem(ADDITION_SLOT);
         if (addition == null) return;
 
         if (currentRecipe != null) return;
@@ -176,7 +176,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     public boolean canFit(int slot, @NotNull ItemStack addItem){
-        ItemStack item = inventory.getItem(slot);
+        ItemStack item = getInventory().getItem(slot);
         if (item == null) return true;
         if (slot == RESULT_SLOT && FILLER.isThisItem(item)) return true;
         if (!addItem.isSimilar(item)) return false;
@@ -184,22 +184,22 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     public void addItem(int slot, @NotNull ItemStack addItem){
-        ItemStack item = inventory.getItem(slot);
+        ItemStack item = getInventory().getItem(slot);
         if (item == null || (slot == RESULT_SLOT && FILLER.isThisItem(item))) {
-            inventory.setItem(slot, addItem);
+            getInventory().setItem(slot, addItem);
             return;
         }
         if (addItem.isSimilar(item)){
-            inventory.setItem(slot, item.add(addItem.getAmount()));
+            getInventory().setItem(slot, item.add(addItem.getAmount()));
         }
 
     }
     public void takeItem(int slot, int amount){
-        ItemStack item = inventory.getItem(slot);
+        ItemStack item = getInventory().getItem(slot);
         if (item == null) return;
-        inventory.setItem(slot, item.subtract(amount));
-        if (slot == RESULT_SLOT && inventory.getItem(slot) == null){
-            inventory.setItem(slot, FILLER.getItem());
+        getInventory().setItem(slot, item.subtract(amount));
+        if (slot == RESULT_SLOT && getInventory().getItem(slot) == null){
+            getInventory().setItem(slot, FILLER.getItem());
         }
     }
 
@@ -209,12 +209,13 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     @Override
-    public void generateInventory(int size, Component title) {
-        this.inventory = Bukkit.createInventory(this, size, title);
+    public @NotNull Inventory generateInventory(int size, Component title) {
+        Inventory inventory = super.getInventory();
         for (int i = 0; i < size; i++) {
             inventory.setItem(i, FILLER.getItem());
         }
-        iterateTroughAllInputSlots(integer -> inventory.setItem(integer, null));
+        iterateTroughAllInputSlots(i -> inventory.setItem(i, null));
+        return inventory;
     }
 
     @Override
@@ -231,13 +232,13 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         iterateTroughAllInputSlots(slot -> {
             ItemStack item = items.get(bundleSlot.get());
             if (!FILLER.isThisItem(item)){
-                inventory.setItem(slot, item);
+                getInventory().setItem(slot, item);
             }
             bundleSlot.incrementAndGet();
         });
         ItemStack result = items.get(bundleSlot.get());
         if (!FILLER.isThisItem(result)){
-            inventory.setItem(RESULT_SLOT, result);
+            getInventory().setItem(RESULT_SLOT, result);
         }
         ItemStack addition = items.get(bundleSlot.addAndGet(1));
         if (!FILLER.isThisItem(addition)){
@@ -259,7 +260,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
         SlotOrItemConsumer consumer = new SlotOrItemConsumer() {
             @Override
-            public void accept(Integer slot) {accept(inventory.getItem(slot));}
+            public void accept(Integer slot) {accept(getInventory().getItem(slot));}
             @Override
             public void accept(@Nullable ItemStack itemStack) {
                 saveMeta.addItem(Objects.requireNonNullElseGet(itemStack, FILLER::getItem));
@@ -291,7 +292,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
     @Override
     public void onHopperSearch(HopperInventorySearchEvent event) {
-        event.setInventory(inventory);
+        event.setInventory(getInventory());
     }
     @Override
     public void onHopperGivesItem(InventoryMoveItemEvent event) {
@@ -299,7 +300,7 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
     @Override
     public void onHopperTakesItem(InventoryMoveItemEvent event) {
-        ItemStack result = inventory.getItem(RESULT_SLOT);
+        ItemStack result = getInventory().getItem(RESULT_SLOT);
         event.setCancelled(true);
         if (!FILLER.isThisItem(result)) {
             event.getDestination().addItem(result.asQuantity(1));
@@ -319,11 +320,11 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         World world = event.getBlock().getWorld();
         Location location = block.getLocation().toCenterLocation();
         iterateTroughAllInputSlots(slot -> {
-            ItemStack item = inventory.getItem(slot);
+            ItemStack item = getInventory().getItem(slot);
             if (item == null) return;
             world.dropItemNaturally(location, item);
         });
-        ItemStack item = inventory.getItem(RESULT_SLOT);
+        ItemStack item = getInventory().getItem(RESULT_SLOT);
         if (!FILLER.isThisItem(item)) world.dropItemNaturally(location, item);
     }
 
@@ -338,8 +339,8 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         }
 
         if (event.getInventory() == event.getClickedInventory()){
-            if (inventory.getItem(RESULT_SLOT) == null){
-                inventory.setItem(RESULT_SLOT, FILLER.getItem());
+            if (getInventory().getItem(RESULT_SLOT) == null){
+                getInventory().setItem(RESULT_SLOT, FILLER.getItem());
             }
         }
         updateItemsTickLater();

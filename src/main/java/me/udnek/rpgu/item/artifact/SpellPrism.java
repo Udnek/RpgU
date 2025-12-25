@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.artifact;
 
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -39,7 +39,7 @@ public class SpellPrism extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                 .add(Attributes.COOLDOWN_TIME, new CustomAttributeModifier(-0.15, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS))
                 .add(Attributes.MAGICAL_POTENTIAL, new CustomAttributeModifier(0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS))
                 .build()));

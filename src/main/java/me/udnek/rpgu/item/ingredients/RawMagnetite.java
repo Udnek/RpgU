@@ -16,8 +16,8 @@ public class RawMagnetite extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "raw_magnetite";}
 
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void globalInitialization() {
+        super.globalInitialization();
 
         NmsLootTableContainer lootTable = Nms.get().getLootTableContainer(Nms.get().getLootTable("minecraft:blocks/iron_ore"));
         NmsCompositeEntryContainer mainEntry = (NmsCompositeEntryContainer) lootTable.getPool(0).getEntry(0);

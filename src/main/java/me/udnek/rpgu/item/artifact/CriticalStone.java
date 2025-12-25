@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.artifact;
 
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
@@ -21,6 +21,6 @@ public class CriticalStone extends ConstructableCustomItem {
 
         getComponents().set(HiddenItemComponent.INSTANCE);
         CustomAttributeModifier attribute = new CustomAttributeModifier(0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.CRITICAL_DAMAGE, attribute).build()));
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.CRITICAL_DAMAGE, attribute).build()));
     }
 }

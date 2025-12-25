@@ -4,35 +4,40 @@ import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
-import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.util.Either;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
+import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
+import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
-import me.udnek.rpgu.component.ability.property.EffectsProperty;
-import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class WitherWreath extends ConstructableCustomItem {
@@ -62,29 +67,25 @@ public class WitherWreath extends ConstructableCustomItem {
                 + getRawId()), -0.3, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
         CustomKeyedAttributeModifier attributeHealth = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "max_health_"
                 + getRawId()), -2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage)
+        getComponents().set(new VanillaAttributedItem(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage)
                 .add(Attribute.MAX_HEALTH, attributeHealth).build()));
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(5, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attribute).build()));
 
-        getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new Passive());
+        getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().set(Passive.DEFAULT);
     }
 
-    public class Passive extends ConstructablePassiveAbility<DamageEvent> {
+    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> {
+
+        public static final Passive DEFAULT = new Passive();
 
         public Passive(){
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     PotionEffectType.WITHER,
-                    Functions.CEIL(Functions.ATTRIBUTE(Attributes.ABILITY_DURATION, 20*2.5)),
-                    Functions.CONSTANT(1)
+                    PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(Attributes.ABILITY_DURATION, 20*2.5)),
+                    PropertyFunctions.CONSTANT(1)
             )));
-        }
-
-        @Override
-        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(WitherWreath.this, 1);
-            super.addLoreLines(componentable);
         }
 
         @Override
@@ -93,16 +94,23 @@ public class WitherWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity,
-                                            @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull DamageEvent damageEvent) {
+        public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {}
+
+        @Override
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull DamageEvent damageEvent) {
             if (!(damageEvent.getDamageInstance().getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
-            getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
+            getComponents().getOrException(RPGUComponents.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
             return ActionResult.FULL_COOLDOWN;
         }
 
         @Override
-        public void onDamage(@NotNull CustomItem custom.Item, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
-            activate(custom.Item, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), new Either<>(slot, null), event);
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
+        }
+
+        @Override
+        public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
+            return Abilities.WITHER_WREATH;
         }
     }
 }

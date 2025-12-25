@@ -2,7 +2,7 @@ package me.udnek.rpgu.util;
 
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.coreu.util.SelfRegisteringListener;
-import me.udnek.rpgu.component.ComponentTypes;
+import me.udnek.rpgu.component.Components;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.Plugin;
@@ -13,10 +13,10 @@ public class EntityListener extends SelfRegisteringListener {
 
     @EventHandler
     public void onEntityDamage(DamageEvent event) {
-        CustomEntityType.consumeIfCustom(event.getDamageInstance().getVictim(), custom.EntityType -> {
-            boolean resistentTo = custom.EntityType.getComponents().getOrDefault(ComponentTypes.DAMAGE_RESISTENT_ENTITY)
-                    .isResistentTo(custom.EntityType, event.getDamageInstance().getCause());
-            if (resistentTo) event.setCancelled(true);
+        CustomEntityType.consumeIfCustom(event.getDamageInstance().getVictim(), customEntityType -> {
+            boolean resistantTo = customEntityType.getComponents().getOrDefault(Components.DAMAGE_RESISTANT_ENTITY)
+                    .isResistantTo(customEntityType, event.getDamageInstance().getCause());
+            if (resistantTo) event.setCancelled(true);
         });
     }
 }

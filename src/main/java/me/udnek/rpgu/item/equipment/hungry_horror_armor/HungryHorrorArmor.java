@@ -1,17 +1,28 @@
 package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
 import io.papermc.paper.datacomponent.item.Equippable;
-import me.udnek.coreu.custom.attribute.CustomAttribute;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
-import me.udnek.coreu.util.LoreBuilder;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
+import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.lore.AttributesLorePart;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -33,15 +44,51 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
         getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
-    public @Nullable LoreBuilder getLoreBuilder(CustomEquipmentSlot slot) {
-        LoreBuilder loreBuilder = new LoreBuilder();
-        AttributesLorePart attributesLorePart = new AttributesLorePart();
-        loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.0").color(CustomAttribute.PLUS_COLOR));
-        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.1").color(NamedTextColor.GRAY));
-        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.2").color(NamedTextColor.GRAY));
-        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.3").color(NamedTextColor.GRAY));
-        attributesLorePart.addAttribute(slot, Component.translatable(translationKey()+".description.4").color(NamedTextColor.GRAY));
-        return loreBuilder;
+    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> {
+        public static final Passive DEFAULT = new Passive(PotionEffectType.HUNGER, CustomEquipmentSlot.CHEST);
+
+        protected final PotionEffectType effectType;
+        protected final CustomEquipmentSlot slot;
+
+        public Passive(@NotNull PotionEffectType effectType, @NotNull CustomEquipmentSlot slot){
+            this.effectType = effectType;
+            this.slot = slot;
+        }
+
+        @Override
+        public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
+            return Abilities.HUNGRY_HORROR;
+        }
+
+        @Override
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull DamageEvent damageEvent) {
+            if (!damageEvent.getDamageInstance().isCritical()) return ActionResult.NO_COOLDOWN;
+            Entity abstractDamager = damageEvent.getDamageInstance().getDamager();
+            if (!(abstractDamager instanceof LivingEntity damager)) return ActionResult.NO_COOLDOWN;
+
+            PotionEffect potionEffect = damager.getPotionEffect(effectType);
+            int applied;
+            if (potionEffect == null) {
+                applied = -1;
+            }
+            else {
+                applied = potionEffect.getAmplifier();
+            }
+            damager.addPotionEffect(new PotionEffect(effectType, 40, Math.min(applied+1, 4), false, true));
+            return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
+        }
+
+        @Override
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return slot;
+        }
+
+        @Override
+        public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {}
     }
 }

@@ -4,7 +4,7 @@ import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntity;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
-import me.udnek.rpgu.component.instance.DamageResistent;
+import me.udnek.rpgu.component.instance.DamageResistant;
 import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -24,14 +24,14 @@ import java.util.Objects;
 public class AncientBreezeShieldType extends ConstructableCustomEntityType<Piglin> implements CustomTickingEntityType<AncientBreezeShield>,Listener {
 
     public AncientBreezeShieldType(){
-        getComponents().set(DamageResistent.NO_ENVIRONMENT_DAMAGE);
+        getComponents().set(DamageResistant.NO_ENVIRONMENT_DAMAGE);
     }
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        CustomEntity custom.Entity = CustomEntityType.getTicking(event.getEntity());
-        if (custom.Entity == null || custom.Entity.getType() != EntityTypes.ANCIENT_BREEZE_SHIELD) return;
-        ((AncientBreezeShield) custom.Entity).entityDeath();
+        CustomEntity customEntity = CustomEntityType.getTicking(event.getEntity());
+        if (customEntity == null || customEntity.getType() != EntityTypes.ANCIENT_BREEZE_SHIELD) return;
+        ((AncientBreezeShield) customEntity).onDeath();
     }
 
     @Override

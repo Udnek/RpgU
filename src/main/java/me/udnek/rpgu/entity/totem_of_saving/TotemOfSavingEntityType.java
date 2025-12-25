@@ -69,15 +69,15 @@ public class TotemOfSavingEntityType extends ConstructableCustomEntityType<Pigli
 
     @EventHandler
     public void onTotemDeath(EntityDeathEvent event){
-        CustomEntity custom.Entity = CustomEntityType.getTicking(event.getEntity());
-        if (custom.Entity == null || custom.Entity.getType() != EntityTypes.TOTEM_OF_SAVING) return;
-        ((TotemOfSavingEntity) custom.Entity).onDeath(event);
+        CustomEntity customEntity = CustomEntityType.getTicking(event.getEntity());
+        if (customEntity == null || customEntity.getType() != EntityTypes.TOTEM_OF_SAVING) return;
+        ((TotemOfSavingEntity) customEntity).onDeath(event);
     }
 
     @EventHandler
     public void playerInteractWithTotem(PlayerInteractEntityEvent event){
-        CustomEntity custom.Entity = CustomEntityType.getTicking(event.getRightClicked());
-        if (!(custom.Entity instanceof TotemOfSavingEntity totemOfSavingEntity)) return;
+        CustomEntity customEntity = CustomEntityType.getTicking(event.getRightClicked());
+        if (!(customEntity instanceof TotemOfSavingEntity totemOfSavingEntity)) return;
         PlayerInventory inventory = event.getPlayer().getInventory();
         totemOfSavingEntity.getItems().forEach(itemStack -> {
             EquipmentSlot slot;
@@ -89,7 +89,7 @@ public class TotemOfSavingEntityType extends ConstructableCustomEntityType<Pigli
                 ItemUtils.giveAndDropLeftover(event.getPlayer(), itemStack);
             }
         });
-        custom.Entity.remove();
+        customEntity.remove();
     }
     @EventHandler
     public void onAgr(EntityTargetLivingEntityEvent event){

@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.util.LoreBuilder;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -20,8 +20,7 @@ public class HungryHorrorChestplate extends HungryHorrorArmor {
     @Override
     public @NotNull String getRawId() {return "hungry_horror_chestplate";}
 
-    @Override
-    public @Nullable LoreBuilder getLoreBuilder() {return getLoreBuilder(CustomEquipmentSlot.CHEST);}
+
 
     @Override
     public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {
@@ -34,6 +33,7 @@ public class HungryHorrorChestplate extends HungryHorrorArmor {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new HungryHorrorComponent(PotionEffectType.ABSORPTION, CustomEquipmentSlot.CHEST));
+        getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents()
+                .set(new Passive(PotionEffectType.ABSORPTION, CustomEquipmentSlot.CHEST));
     }
 }

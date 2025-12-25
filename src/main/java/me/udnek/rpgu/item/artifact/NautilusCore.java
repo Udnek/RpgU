@@ -1,25 +1,32 @@
 package me.udnek.rpgu.item.artifact;
 
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.util.LoreBuilder;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
+import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.lore.AttributesLorePart;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class NautilusCore extends ConstructableCustomItem {
@@ -38,43 +45,51 @@ public class NautilusCore extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable LoreBuilder getLoreBuilder() {
-        LoreBuilder loreBuilder = new LoreBuilder();
-        AttributesLorePart attributesLorePart = new AttributesLorePart();
-        loreBuilder.set(LoreBuilder.Position.ATTRIBUTES, attributesLorePart);
-        attributesLorePart.addFullDescription(EquipmentSlots.ARTIFACTS, this, 1);
-        return loreBuilder;
-    }
-
-    @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(new NautilusCoreComponent());
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().set(Passive.DEFAULT);
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                 .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.15, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS)
                 .build()
         ));
     }
 
-    public static class NautilusCoreComponent extends ConstructableEquippableItemComponent {
+    public static class Passive extends RPGUConstructablePassiveAbility<DamageInstance> {
+
+        public static final Passive DEFAULT = new Passive();
 
         @Override
-        public boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot) {
-            return EquipmentSlots.ARTIFACTS.intersects(slot);
+        public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
+            return Abilities.NAUTILUS_CORE;
         }
 
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot, @NotNull DamageInstance damageInstance) {
-            if (!damageInstance.isCritical()) return;
-            if (damageInstance.containsExtraFlag(new isMagicalCriticalApplied())) return;
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull DamageInstance damageInstance) {
+            if (!(damageInstance.getDamager() instanceof LivingEntity damager)) return ActionResult.NO_COOLDOWN;
+            if (!damageInstance.isCritical()) return ActionResult.NO_COOLDOWN;
+            if (damageInstance.containsExtraFlag(new isMagicalCriticalApplied())) return ActionResult.NO_COOLDOWN;
 
-            damageInstance.getDamage().multiplyMagical(Attributes.CRITICAL_DAMAGE.calculate(player));
+            damageInstance.getDamage().multiplyMagical(Attributes.CRITICAL_DAMAGE.calculate(damager));
             damageInstance.addExtraFlag(new isMagicalCriticalApplied());
+            return ActionResult.FULL_COOLDOWN;
         }
+
+        @Override
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
+        }
+
+        @Override
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return EquipmentSlots.ARTIFACTS;
+        }
+
+        @Override
+        public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {}
+
+        private static class isMagicalCriticalApplied extends DamageInstance.ExtraFlag{}
     }
 
-
-    private static class isMagicalCriticalApplied extends DamageInstance.ExtraFlag{}
 }
 
 

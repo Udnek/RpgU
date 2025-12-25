@@ -35,9 +35,9 @@ public class DarkMirror extends ConstructableCustomItem {
         getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
-    static class MagicalMirrorComponent implements RightClickableItem {
-        static HashMap<PotionEffectType, PotionEffectType> effectSwitches = new HashMap<>();
-        static List<PotionEffectType> dispellableEffects = new ArrayList<>();
+    public static class MagicalMirrorComponent implements RightClickableItem {
+        private static final HashMap<PotionEffectType, PotionEffectType> effectSwitches = new HashMap<>();
+        private static final List<PotionEffectType> dispellableEffects = new ArrayList<>();
         public static final int EXTRA_DURATION = 0;
 
         static{
@@ -80,7 +80,7 @@ public class DarkMirror extends ConstructableCustomItem {
         }
 
         @Override
-        public void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event) {
+        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
             event.setCancelled(true);
             Player player = event.getPlayer();
             Collection<PotionEffect> potionEffects = new ArrayList<>(player.getActivePotionEffects());

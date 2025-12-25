@@ -5,7 +5,7 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.PotionContents;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.event.CustomItemGeneratedEvent;
 import me.udnek.coreu.custom.event.InitializationEvent;
@@ -14,12 +14,15 @@ import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.registry.InitializationProcess;
 import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.ComponentU;
 import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.instance.*;
+import me.udnek.rpgu.component.ability.instance.AllyBuffingAuraPassive;
+import me.udnek.rpgu.component.ability.instance.DeathProtectionPassive;
+import me.udnek.rpgu.component.ability.instance.GliderPassive;
+import me.udnek.rpgu.component.instance.ArrowComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.util.Utils;
@@ -132,7 +135,7 @@ public class AttributeManaging extends SelfRegisteringListener {
 
     @EventHandler
     public void onInit(InitializationEvent event){
-        if (event.getStep() == InitializationProcess.Step.BEFORE_VANILLA_MANAGER){
+        if (event.getStep() == InitializationProcess.Step.GLOBAL_INITIALIZATION){
             for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
@@ -153,12 +156,14 @@ public class AttributeManaging extends SelfRegisteringListener {
     public void onItemGenerates(CustomItemGeneratedEvent event){
         ItemStack itemStack = event.getItemStack();
 
-        if (!VanillaItemManager.isReplaced(itemStack))return;
+        if (!VanillaItemManager.isReplaced(itemStack)) return;
 
         Material material = itemStack.getType();
-        CustomItem custom.Item = event.getCustomItem();
+        CustomItem customItem = event.getCustomItem();
 
-        if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
+        if (armorStats.containsKey(material)){
+            applyDefaultArmorAttribute(itemStack, material);
+        }
 
         if (leatherArmor.contains(material)) {
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(itemStack.getData(DataComponentTypes.MAX_DAMAGE)) * 17 / 10);
@@ -172,7 +177,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             ItemStack ironArmor = new ItemStack(Utils.replacePrefix(material, "iron_"));
 
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(ironArmor.getData(DataComponentTypes.MAX_DAMAGE)) * 9 / 10);
-            GoldenArmorPassive.applyPassive(material, custom.Item);
+            AllyBuffingAuraPassive.applyGoldenArmorBuff(material, customItem);
         }
 
         if (diamondArmor.contains(material)) {
@@ -189,7 +194,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(netheriteTool.
                     getData(DataComponentTypes.MAX_DAMAGE)));
             itemStack.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, Objects.requireNonNull(netheriteTool.
-                    getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)).showInTooltip(false));
+                    getData(DataComponentTypes.ATTRIBUTE_MODIFIERS)));
             itemStack.setData(DataComponentTypes.TOOL, Objects.requireNonNull(netheriteTool.getData(DataComponentTypes.TOOL)));
         }
 
@@ -201,35 +206,36 @@ public class AttributeManaging extends SelfRegisteringListener {
             event.setRepairData(new RepairData(Material.STRING));
         }
 
-        /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, custom.Item);}*/
+        /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}*/
 
         if (material == Material.SPYGLASS) {
-            custom.Item.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+            customItem.getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                     .add(Attributes.CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
                     .add(Attributes.CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
 
         if (material == Material.HEAVY_CORE){
-            custom.Item.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+            customItem.getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                     .add(Attributes.CRITICAL_DAMAGE, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
 
         if (material == Material.TOTEM_OF_UNDYING) {
-            custom.Item.getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents()
+                    .set(new DeathProtectionPassive(Objects.requireNonNull(Material.TOTEM_OF_UNDYING.getDefaultData(DataComponentTypes.DEATH_PROTECTION))));
             itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 64);
         }
 
         if (material == Material.ELYTRA) {
-            custom.Item.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 15 * 20));
-            custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new GliderComponent(itemStack, 15 * 20));
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents()
+                            .set(GliderPassive.of(itemStack, 15*20));
         }
 
         if (material == Material.ARROW) {
-            custom.Item.getComponents().set(new ArrowComponent() {
+            customItem.getComponents().set(new ArrowComponent() {
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
                     return Component.text("0").font(Key.key("rpgu:arrow")).color(NamedTextColor.WHITE).
                             decoration(TextDecoration.ITALIC, false);
                 }
@@ -237,18 +243,18 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.TIPPED_ARROW) {
-            custom.Item.getComponents().set(new ArrowComponent() {
+            customItem.getComponents().set(new ArrowComponent() {
                 @Override
-                public void onBeingShoot(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {
+                public void onBeingShoot(@NotNull CustomItem customItem, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {
                     Arrow arrow = (Arrow) event.getProjectile();
                     PotionContents dataFirst = itemStack.getData(DataComponentTypes.POTION_CONTENTS);
                     if (dataFirst != null) {
                         arrow.setBasePotionType(dataFirst.potion());
-                        if (dataFirst.custom.Color() != null) arrow.setColor(dataFirst.custom.Color());
+                        if (dataFirst.customColor() != null) arrow.setColor(dataFirst.customColor());
                     }
                 }
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
                     TextColor color = TextColor.color(Nms.get().getColorByEffects(Objects.requireNonNull(Objects.requireNonNull(
                             itemStack.getData(DataComponentTypes.POTION_CONTENTS)).potion()).getPotionEffects()).orElse(0));
                     return ComponentU.textWithNoSpace(-1, Component.text("3").color(color),16)
@@ -259,9 +265,9 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.SPECTRAL_ARROW) {
-            custom.Item.getComponents().set(new ArrowComponent() {
+            customItem.getComponents().set(new ArrowComponent() {
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
                     return Component.text("1").font(Key.key("rpgu:arrow")).decoration(TextDecoration.ITALIC, false)
                             .color(TextColor.color(-1));
                 }
@@ -269,14 +275,14 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.FIREWORK_ROCKET) {
-            custom.Item.getComponents().set(new ArrowComponent() {
+            customItem.getComponents().set(new ArrowComponent() {
                 @Override
-                public @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem custom.Item, @NotNull PlayerReadyArrowEvent event) {
+                public @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem customItem, @NotNull PlayerReadyArrowEvent event) {
                     return event.getBow().getType() != Material.CROSSBOW ? ChoseArrowResult.DENY : ChoseArrowResult.ALLOW;
                 }
 
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
                     return Component.text("4").font(Key.key("rpgu:arrow")).decoration(TextDecoration.ITALIC, false)
                             .color(TextColor.color(-1));
                 }

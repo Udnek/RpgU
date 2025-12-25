@@ -13,7 +13,6 @@ import me.udnek.coreu.nms.Nms;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
-import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -28,11 +27,11 @@ import java.util.*;
 public class RecipeManaging {
     public static void run(){
         new ShapedRecipeBuilder(Material.LODESTONE).recipeShape(new String[]{ "BBB", "BMB", "BBB"}).materialIngredients(Map.of('B', Material.STONE_BRICKS))
-                .custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
+                .customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.POWERED_RAIL).recipeShape(new String[]{"M M", "ISI", "MRM"}).materialIngredients(Map.of('S', Material.STICK, 'R',
-                Material.REDSTONE, 'I', Material.IRON_INGOT)).custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).setAmount(6).build(RpgU.getInstance());
+                Material.REDSTONE, 'I', Material.IRON_INGOT)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).setAmount(6).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.COMPASS).recipeShape(new String[]{" C ", "CMC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT))
-                .custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
+                .customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.BUCKET).recipeShape(new String[]{"C C", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.CROSSBOW).recipeShape(new String[]{"SCS", "GTG", " S "}).materialIngredients(Map.of('S', Material.STICK, 'C',
                 Material.COPPER_INGOT, 'G', Material.STRING, 'T', Material.TRIPWIRE_HOOK)).build(RpgU.getInstance());
@@ -52,39 +51,39 @@ public class RecipeManaging {
                 'L', Material.LEATHER_BOOTS)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.LEATHER_CHESTPLATE).recipeShape(new String[]{"L L", "FLF", "LFL"}).stackIngredients(Map.of( 'L',
-                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).custom.ItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.LEATHER_HELMET).recipeShape(new String[]{"FLF", "L L"}).stackIngredients(Map.of( 'L',
-                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).custom.ItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.LEATHER_LEGGINGS).recipeShape(new String[]{"LFL", "F F", "L L"}).stackIngredients(Map.of( 'L',
-                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).custom.ItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.LEATHER_BOOTS).recipeShape(new String[]{"F F", "L L"}).stackIngredients(Map.of( 'L',
-                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).custom.ItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
+                List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.BLAST_FURNACE).recipeShape(new String[]{"SSS", "FFA", "BBB"}).materialIngredients(Map.of('F', Material.FURNACE,
                 'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////
         new AlloyingRecipeBuilder(Material.NETHERITE_INGOT).addMaterialAlloy(Material.NETHERITE_SCRAP, 3).addCustomItemAlloy(Items.MAGNETITE_INGOT, 3)
-                .custom.ItemFuel(Set.of(Items.BLAST_COAL)).custom.ItemAddition(Set.of(Items.INGOT_MOLD)).build(RpgU.getInstance());
+                .customItemFuel(Set.of(Items.BLAST_COAL)).customItemAddition(Set.of(Items.INGOT_MOLD)).build(RpgU.getInstance());
         ///////////////////////////////////////////////////
         new AlloyingRecipeBuilder(Material.NETHERITE_HELMET).recipeKey("netherite_helmet_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_HELMET)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_HELMET)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_CHESTPLATE).recipeKey("netherite_chestplate_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_CHESTPLATE)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_CHESTPLATE)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_LEGGINGS).recipeKey("netherite_leggings_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_LEGGINGS)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_LEGGINGS)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_BOOTS).recipeKey("netherite_boots_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_BOOTS)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_BOOTS)).build(RpgU.getInstance());
         /////////////////////////////////////////////
         new AlloyingRecipeBuilder(Material.NETHERITE_HOE).recipeKey("netherite_hoe_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_HOE)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_HOE)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_AXE).recipeKey("netherite_axe_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_AXE)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_AXE)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_PICKAXE).recipeKey("netherite_pickaxe_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_PICKAXE)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_PICKAXE)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_SHOVEL).recipeKey("netherite_shovel_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_SHOVEL)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_SHOVEL)).build(RpgU.getInstance());
         new AlloyingRecipeBuilder(Material.NETHERITE_SWORD).recipeKey("netherite_sword_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
-                .materialFuel(Tag.ITEMS_COALS.getValues()).custom.ItemAddition(Set.of(Items.FERRUDAM_SWORD)).build(RpgU.getInstance());
+                .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_SWORD)).build(RpgU.getInstance());
         ////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.CHAINMAIL_CHESTPLATE).recipeShape(new String[]{"C C", "CCC", "CCC"}).materialIngredients(Map.of('C', Material.CHAIN))
                 .build(RpgU.getInstance());
@@ -105,13 +104,13 @@ public class RecipeManaging {
                 'L', Material.LEATHER_BOOTS)).build(RpgU.getInstance());
         //////////////////////////////////////////////
         for (Material material: Tag.BEDS.getValues()){
-            new ShapedRecipeBuilder(material).recipeShape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.replaceSufix(material,
-                    "_wool"))).custom.ItemIngredients(Map.of('F', Items.FABRIC)).tagIngredients(Map.of('P', Tag.PLANKS)).build(RpgU.getInstance());
+            new ShapedRecipeBuilder(material).recipeShape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.replaceSuffix(material,
+                    "_wool"))).customItemIngredients(Map.of('F', Items.FABRIC)).tagIngredients(Map.of('P', Tag.PLANKS)).build(RpgU.getInstance());
         }
         //////////////////////////////////////////////
         for (Material material: Tag.WOODEN_TRAPDOORS.getValues()){
             new ShapedRecipeBuilder(material).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
-                    .materialIngredients(Map.of('P', Utils.replaceSufix(material, "_planks"))).build(RpgU.getInstance());
+                    .materialIngredients(Map.of('P', Utils.replaceSuffix(material, "_planks"))).build(RpgU.getInstance());
         }
         new ShapedRecipeBuilder(Material.COPPER_TRAPDOOR).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
                 .materialIngredients(Map.of('P', Material.COPPER_INGOT)).build(RpgU.getInstance());
@@ -122,9 +121,9 @@ public class RecipeManaging {
                 addIngredient(Material.DAMAGED_ANVIL, 1).build(RpgU.getInstance());
         //////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.MINECART).recipeShape(new String[]{"I I", "MMM"}).materialIngredients(Map.of('I', Material.IRON_INGOT)).
-                custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
+                customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.PISTON).recipeShape(new String[]{"WWW", "CMC", "CRC"}).materialIngredients(Map.of('C', Material.COBBLESTONE,
-                'R', Material.REDSTONE)).custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).tagIngredients(Map.of('W', Tag.PLANKS))
+                'R', Material.REDSTONE)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).tagIngredients(Map.of('W', Tag.PLANKS))
                         .build(RpgU.getInstance());
 
         unregister();
@@ -159,9 +158,9 @@ public class RecipeManaging {
         private final ItemStack replace;
         private String recipeKey;
         private final List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
-        private Set<CustomItem> custom.ItemFuel = new HashSet<>();
+        private Set<CustomItem> customItemFuel = new HashSet<>();
         private Set<Material> materialFuel = new HashSet<>();
-        private Set<CustomItem> custom.ItemAddition = new HashSet<>();
+        private Set<CustomItem> customItemAddition = new HashSet<>();
         private Set<Material> materialAddition = new HashSet<>();
 
         public AlloyingRecipeBuilder(@NotNull Material replaceMaterial) {
@@ -174,8 +173,8 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder custom.ItemFuel(@NotNull Set<CustomItem> custom.ItemFuel){
-            this.custom.ItemFuel = custom.ItemFuel;
+        public AlloyingRecipeBuilder customItemFuel(@NotNull Set<CustomItem> customItemFuel){
+            this.customItemFuel = customItemFuel;
             return this;
         }
 
@@ -184,8 +183,8 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem custom.ItemAlloy, int amount){
-            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(custom.ItemAlloy));}
+        public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem customItemAlloy, int amount){
+            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(customItemAlloy));}
             return this;
         }
 
@@ -194,8 +193,8 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder custom.ItemAddition(@NotNull Set<CustomItem> custom.ItemAddition){
-            this.custom.ItemAddition = custom.ItemAddition;
+        public AlloyingRecipeBuilder customItemAddition(@NotNull Set<CustomItem> customItemAddition){
+            this.customItemAddition = customItemAddition;
             return this;
         }
 
@@ -205,11 +204,11 @@ public class RecipeManaging {
         }
 
         public CustomRecipeChoice fuel(){
-            return new CustomCompatibleRecipeChoice(custom.ItemFuel, materialFuel);
+            return new CustomCompatibleRecipeChoice(customItemFuel, materialFuel);
         }
 
         public CustomRecipeChoice addition(){
-            return new CustomCompatibleRecipeChoice(custom.ItemAddition, materialAddition);
+            return new CustomCompatibleRecipeChoice(customItemAddition, materialAddition);
         }
 
         public AlloyingRecipeBuilder build(@NotNull Plugin plugin){

@@ -24,6 +24,7 @@ import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorChestplate;
 import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorHelmet;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
+import me.udnek.rpgu.item.equipment.quiver.Quiver;
 import me.udnek.rpgu.item.equipment.wolf.WolfBoots;
 import me.udnek.rpgu.item.equipment.wolf.WolfChestplate;
 import me.udnek.rpgu.item.equipment.wolf.WolfHelmet;
@@ -39,10 +40,7 @@ public class Items {
     public static final CustomItem NAUTILUS_CORE = register(new NautilusCore());
     public static final CustomItem FISHERMAN_SNORKEL = register(new FishermanSnorkel());
     public static final CustomItem RUSTY_IRON_RING = register(new RustyIronRing());
-    public static final CustomItem BLOOD_STONE = register(new BloodStone());
-    public static final CustomItem HEALTH_STONE = register(new HealthStone());
     public static final CustomItem CRITICAL_STONE = register(new CriticalStone());
-    public static final CustomItem ARCANE_ACCUMULATOR = register(new ArcaneAccumulator());
     public static final CustomItem SPELL_PRISM = register(new SpellPrism());
 
     public static final CustomItem FLOWER_WREATH = register(new FlowerWreath());
@@ -126,7 +124,7 @@ public class Items {
     public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
 
 
-    private static @NotNull CustomItem register(@NotNull CustomItem custom.Item){
-        return CustomRegistries.ITEM.register(RpgU.getInstance(), custom.Item);
+    private static @NotNull CustomItem register(@NotNull CustomItem customItem){
+        return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);
     }
 }

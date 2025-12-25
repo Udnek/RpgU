@@ -1,9 +1,7 @@
 package me.udnek.rpgu.mechanic.damaging;
 
 import me.udnek.coreu.custom.event.CustomEvent;
-import org.bukkit.entity.Entity;
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.entity.EntityEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class DamageEvent extends CustomEvent implements Cancellable {

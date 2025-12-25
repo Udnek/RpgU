@@ -1,20 +1,21 @@
 package me.udnek.rpgu.item.utility;
 
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.util.Either;
+import me.udnek.coreu.rpgu.component.RPGUActiveItem;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
+import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.component.ability.property.EffectsProperty;
-import me.udnek.rpgu.component.ability.property.function.Functions;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.effect.Effects;
-import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -63,27 +64,28 @@ public class ArmadilloBar extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(AutoGeneratingFilesItem.HANDHELD);
-        getComponents().set(new ArmadilloBarComponent());
+        getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
-    public class ArmadilloBarComponent extends ConstructableActiveAbilityComponent<PlayerInteractEvent> {
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent> {
 
+        public static final Ability DEFAULT = new Ability();
         private static final int COOLDOWN = 25*20;
         private static final int DURATION = 10*20;
 
-        public ArmadilloBarComponent(){
-            getComponents().set(new AttributeBasedProperty(COOLDOWN, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(new AttributeBasedProperty(DURATION, ComponentTypes.ABILITY_DURATION));
+        public Ability(){
+            getComponents().set(new AttributeBasedProperty(COOLDOWN, RPGUComponents.ABILITY_COOLDOWN_TIME));
+            getComponents().set(new AttributeBasedProperty(DURATION, RPGUComponents.ABILITY_DURATION));
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
-                    Effects.MAGICAL_RESISTANCE.getBukkitType(),
-                    Functions.CONSTANT(0),
-                    Functions.CONSTANT(6)
+                    Effects.MAGIC_RESISTANCE.getBukkitType(),
+                    PropertyFunctions.CONSTANT(0),
+                    PropertyFunctions.CONSTANT(6)
             )));
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerInteractEvent event) {
-            final double duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(livingEntity);
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull PlayerInteractEvent event) {
+            final double duration = getComponents().getOrException(RPGUComponents.ABILITY_DURATION).get(livingEntity);
             final int PERIOD = 10;
             new BukkitRunnable() {
                 int count = 0;
@@ -101,7 +103,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
                 }
             }.runTaskTimer(RpgU.getInstance(), 0, PERIOD);
 
-            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(livingEntity);
+            List<PotionEffect> potionEffects = getComponents().getOrException(RPGUComponents.ABILITY_EFFECTS).get(livingEntity);
             for (PotionEffect effect : potionEffects) {
                 livingEntity.addPotionEffect(effect.withDuration((int) duration));
             }
@@ -110,14 +112,20 @@ public class ArmadilloBar extends ConstructableCustomItem {
         }
 
         @Override
-        public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(ArmadilloBar.this, 1);
-            super.addLoreLines(componentable);
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
         }
 
+
+
+//        @Override
+//        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+//            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+//        }
+
         @Override
-        public void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event) {
-            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+        public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
+            return Abilities.ARMADILLO_BAR;
         }
     }
 }

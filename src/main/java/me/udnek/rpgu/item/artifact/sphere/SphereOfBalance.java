@@ -4,8 +4,8 @@ import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
-import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
@@ -46,10 +46,10 @@ public class SphereOfBalance extends ConstructableCustomItem {
         super.initializeComponents();
 
         CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_"+getRawId()), -0.3, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
+        getComponents().set(new VanillaAttributedItem(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
 
         CustomAttributeModifier attributeMP = new CustomAttributeModifier(3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeMP).build()));
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, attributeMP).build()));
     }
 
 }

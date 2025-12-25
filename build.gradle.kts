@@ -15,8 +15,8 @@ java {
 }
 
 dependencies {
-    compileOnly("com.github.Udnek:CoreU:main-SNAPSHOT")
-    compileOnly("com.github.Udnek:JeiU:main-SNAPSHOT")
+    compileOnly(files("C:/Users/glebd/OneDrive/Documents/CODING/Java/CoreU/build/libs/CoreU-1.0-SNAPSHOT.jar"))
+    compileOnly(files("C:\\Users\\glebd\\OneDrive\\Documents\\CODING\\Java\\JeiU\\out\\artifacts\\JeiU.jar"))
     compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT")
     implementation(kotlin("stdlib-jdk8"))
 }

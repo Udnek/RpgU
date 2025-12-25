@@ -15,7 +15,6 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang3.ArrayUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -73,17 +72,17 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     }
 
     public @NotNull Player getPlayer(){
-        return (Player) inventory.getViewers().getFirst();
+        return (Player) getInventory().getViewers().getFirst();
     }
 
     public boolean hasBook(){
-        ItemStack item = inventory.getItem(BOOK_SLOT);
+        ItemStack item = getInventory().getItem(BOOK_SLOT);
         if (item == null) return false;
         if (CustomItem.isCustom(item)) return false;
         return item.getType() == Material.BOOK;
     }
     public boolean hasLapis(){
-        ItemStack item = inventory.getItem(LAPIS_SLOT);
+        ItemStack item = getInventory().getItem(LAPIS_SLOT);
         if (item == null) return false;
         if (CustomItem.isCustom(item)) return false;
         return item.getType() == Material.LAPIS_LAZULI;
@@ -91,7 +90,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public @NotNull List<@NotNull ItemStack> getPassionItems(){
         List<ItemStack> passionItems = new ArrayList<>();
         for (int slot : PASSION_SLOTS) {
-            ItemStack itemStack = inventory.getItem(slot);
+            ItemStack itemStack = getInventory().getItem(slot);
             if (itemStack != null) passionItems.add(itemStack);
         }
         return passionItems;
@@ -99,7 +98,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
     public void clearEnchantedBooks(){
         for (int slot : ENCHANTED_BOOKS_SLOTS) {
-            inventory.setItem(slot, FILLER.getItem());
+            getInventory().setItem(slot, FILLER.getItem());
         }
     }
 
@@ -109,9 +108,9 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         for (int i = 0; i < UPGRADE_SLOTS.length; i++) {
             int slot = UPGRADE_SLOTS[i];
             if (i >= this.upgrades.size()) {
-                inventory.setItem(slot, FILLER.getItem());
+                getInventory().setItem(slot, FILLER.getItem());
             } else {
-                inventory.setItem(slot, upgradeList.get(i).getIcon());
+                getInventory().setItem(slot, upgradeList.get(i).getIcon());
             }
         }
     }
@@ -135,7 +134,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public void proceedRecipe(@NotNull EnchantingRecipe recipe){
         Enchantment enchantment = recipe.getEnchantment();
         int playerLvl = getPlayer().getLevel();
-        ItemStack lapis = inventory.getItem(LAPIS_SLOT);
+        ItemStack lapis = getInventory().getItem(LAPIS_SLOT);
         int lapisAmount = lapis == null ? 0 : lapis.getAmount();
         int bookMaxLvl = enchantment.getMaxLevel()-3;
         if (upgrades.contains(EnchantingTableUpgrade.LOTS_OF_BOOKSHELF)) bookMaxLvl +=3;
@@ -146,9 +145,9 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         for (int i = 0; i < maxLevel; i++) {
             ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
             book.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments(
-                    Map.of(enchantment, startLevel+i), true)
+                    Map.of(enchantment, startLevel+i))
             );
-            inventory.setItem(ENCHANTED_BOOKS_SLOTS[i], book);
+            getInventory().setItem(ENCHANTED_BOOKS_SLOTS[i], book);
         }
     }
 
@@ -170,7 +169,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         if (event.isCancelled()) return;
 
         if (event.getSlot() < 0) return;
-        ItemStack book = inventory.getItem(event.getSlot());
+        ItemStack book = getInventory().getItem(event.getSlot());
         if (book != null && event.getClickedInventory() == event.getInventory()){
             if (ItemUtils.isVanillaMaterial(book, Material.ENCHANTED_BOOK)) {
                 if (Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> slot == event.getSlot())) {
@@ -199,13 +198,14 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         return canPlaceItem(itemStack, i) || Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> i == slot);
     }
 
+
     @Override
-    public void generateInventory(int size, @NotNull Component title) {
-        inventory = Bukkit.createInventory(this, size, title);
-        for (int i = 0; i < size; i++) {
+    public @NotNull Inventory generateInventory(int size, @Nullable Component title) {
+        Inventory inventory = super.generateInventory(size, title);
+        for (int i = 0; i < getInventorySize(); i++) {
             inventory.setItem(i, FILLER.getItem());
         }
-        iterateTroughAllInputSlots(integer -> inventory.setItem(integer, null));
+        return inventory;
     }
 
     @Override

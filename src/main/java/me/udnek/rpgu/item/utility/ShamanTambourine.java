@@ -3,23 +3,26 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.util.Either;
-import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.component.ability.property.CastTimeProperty;
+import me.udnek.coreu.rpgu.component.RPGUActiveItem;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
+import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.coreu.rpgu.component.ability.property.CastTimeProperty;
+import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
+import me.udnek.rpgu.component.Components;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
-import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
+import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
+import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -31,18 +34,17 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class ShamanTambourine extends ConstructableCustomItem{
-
-    public static int CAST_TIME = (int) (0.75 * 20);
 
     @Override
     public @NotNull String getRawId() {return "shaman_tambourine";}
 
     @Override
     public @Nullable DataSupplier<Consumable> getConsumable() {
-        Consumable build = Consumable.consumable().consumeSeconds(CAST_TIME / 20f).animation(ItemUseAnimation.BOW).hasConsumeParticles(false)
+        Consumable build = Consumable.consumable().consumeSeconds(Ability.CAST_TIME / 20f).animation(ItemUseAnimation.BOW).hasConsumeParticles(false)
                 .sound(Registry.SOUNDS.getKeyOrThrow(Sound.INTENTIONALLY_EMPTY).key()).build();
         return DataSupplier.of(build);
     }
@@ -67,28 +69,24 @@ public class ShamanTambourine extends ConstructableCustomItem{
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(AutoGeneratingFilesItem.HANDHELD);
-        getComponents().set(new ShamanTambourineComponent());
+        getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
-    public class ShamanTambourineComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> {
 
-        public ShamanTambourineComponent(){
-            getComponents().set(new DamageProperty(MPBasedDamageFunction.linearMageOnly(3, 1)));
-            getComponents().set(new AttributeBasedProperty(20*10, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(new AttributeBasedProperty(15, ComponentTypes.ABILITY_CAST_RANGE));
+        public static final Ability DEFAULT = new Ability();
+        public static final int CAST_TIME = (int) (0.75 * 20);
+
+        public Ability(){
+            getComponents().set(new DamageProperty(Damage.Type.MAGICAL, PropertyFunctions.LINEAR(Functions.ENTITY_TO_MP(), 3, 1)));
+            getComponents().set(new AttributeBasedProperty(20*10, RPGUComponents.ABILITY_COOLDOWN_TIME));
+            getComponents().set(new AttributeBasedProperty(15, RPGUComponents.ABILITY_CAST_RANGE));
             getComponents().set(new CastTimeProperty(CAST_TIME));
         }
 
         @Override
-        public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(ShamanTambourine.this, 1);
-            super.addLoreLines(componentable);
-        }
-
-        @Override
-        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerItemConsumeEvent event) {
-
-            double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
+            double castRange = getComponents().getOrException(RPGUComponents.ABILITY_CAST_RANGE).get(livingEntity);
             Location eyeLocation = livingEntity.getEyeLocation();
             Vector direction = livingEntity.getLocation().getDirection();
 
@@ -113,16 +111,27 @@ public class ShamanTambourine extends ConstructableCustomItem{
             }
             DamageUtils.damage(
                     living,
-                    getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity)),
+                    getComponents().getOrException(Components.ABILITY_DAMAGE).get(livingEntity),
                     livingEntity);
             new ParticleBuilder(Particle.SONIC_BOOM).count(1).location(rayTraceResult.getHitPosition().toLocation(livingEntity.getWorld())).spawn();
             return ActionResult.FULL_COOLDOWN;
         }
 
         @Override
-        public void onConsume(@NotNull CustomItem custom.Item, @NotNull PlayerItemConsumeEvent event) {
-            event.setCancelled(true);
-            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
         }
+
+        @Override
+        public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
+            return Abilities.SHAMAN_TAMBOURINE;
+        }
+
+
+//        @Override
+//        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
+//            event.setCancelled(true);
+//            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+//        }
     }
 }

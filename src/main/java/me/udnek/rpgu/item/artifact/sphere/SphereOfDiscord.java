@@ -4,8 +4,8 @@ import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
-import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
@@ -54,11 +54,11 @@ public class SphereOfDiscord extends ConstructableCustomItem {
         super.initializeComponents();
 
         CustomKeyedAttributeModifier attributeDamage = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "attack_damage_" + getRawId()), ATTACK_DAMAGE, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
+        getComponents().set(new VanillaAttributedItem(new VanillaAttributesContainer.Builder().add(Attribute.ATTACK_DAMAGE, attributeDamage).build()));
 
         CustomAttributeModifier magicalPotential = new CustomAttributeModifier(MAGICAL_POTENTIAL, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
         CustomAttributeModifier meeleMultiplier = new CustomAttributeModifier(MEELE_MULTIPLIER, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, magicalPotential).add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, meeleMultiplier).build()));
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MAGICAL_POTENTIAL, magicalPotential).add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, meeleMultiplier).build()));
     }
 
 }

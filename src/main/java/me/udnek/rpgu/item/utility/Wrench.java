@@ -58,7 +58,7 @@ public class Wrench extends ConstructableCustomItem {
         getComponents().set(AutoGeneratingFilesItem.HANDHELD);
         getComponents().set(new RightClickableItem() {
             @Override
-            public void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event) {
+            public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
                 event.setCancelled(true);
                 if (event.getClickedBlock() == null) return;
                 Block block = event.getClickedBlock();

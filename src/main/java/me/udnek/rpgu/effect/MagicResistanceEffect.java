@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectTypeCategory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MagicalResistanceEffect extends ConstructableCustomEffect {
+public class MagicResistanceEffect extends ConstructableCustomEffect {
     @Override
     public @NotNull PotionEffectTypeCategory getCategory() {return PotionEffectTypeCategory.BENEFICIAL;}
 
@@ -21,7 +21,7 @@ public class MagicalResistanceEffect extends ConstructableCustomEffect {
     public @Nullable PotionEffectType getVanillaDisguise() {return PotionEffectType.LUCK;}
 
     @Override
-    public @NotNull String getRawId() {return "magical_resistance";}
+    public @NotNull String getRawId() {return "magic_resistance";}
 
     @Override
     public @Nullable Particle getParticle() {

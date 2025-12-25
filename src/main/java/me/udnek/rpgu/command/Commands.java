@@ -12,16 +12,15 @@ import org.jetbrains.annotations.Nullable;
 public class Commands {
     public static void declareCommands() {
         RpgU instance = RpgU.getInstance();
-        instance.getCommand("debug_equipment").setExecutor(new DebugEquipmentCommand());
         instance.getCommand("custom._damage_system").setExecutor(new CustomDamageSystemCommand());
         instance.getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
         instance.getCommand("set_food").setExecutor(new SetFoodCommand());
     }
 
-    public static void sendError(@NotNull CommandSender commandSender, @NotNull String ..strings){
+    public static void sendError(@NotNull CommandSender commandSender, @NotNull String ...strings){
         sendError(commandSender, null,  strings);
     }
-    public static void sendError(@NotNull CommandSender commandSender, @Nullable TextColor textColor,  @NotNull String ..strings){
+    public static void sendError(@NotNull CommandSender commandSender, @Nullable TextColor textColor,  @NotNull String ...strings){
         StringBuilder string = new StringBuilder();
         if (textColor == null) textColor = NamedTextColor.RED;
         for (String world : strings) string.append(world).append("\n");

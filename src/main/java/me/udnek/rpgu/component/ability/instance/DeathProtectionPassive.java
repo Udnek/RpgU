@@ -1,0 +1,66 @@
+package me.udnek.rpgu.component.ability.instance;
+
+import io.papermc.paper.datacomponent.item.DeathProtection;
+import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
+import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
+import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.Abilities;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityResurrectEvent;
+import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<EntityResurrectEvent> {
+
+    public static final DeathProtectionPassive DEFAULT = new DeathProtectionPassive(DeathProtection.deathProtection().build());
+
+    public DeathProtectionPassive(@NotNull DeathProtection deathProtection){
+        for (ConsumeEffect consumeEffect : deathProtection.deathEffects()) {
+            if (!(consumeEffect instanceof ConsumeEffect.ApplyStatusEffects statusEffects)) continue;
+            EffectsProperty effectsProperty = new EffectsProperty();
+            for (PotionEffect effect : statusEffects.effects()) {
+                effectsProperty.add(new EffectsProperty.PotionData(effect));
+            }
+            getComponents().set(effectsProperty);
+        }
+        getComponents().set(new AttributeBasedProperty(40 * 20, RPGUComponents.ABILITY_COOLDOWN_TIME));
+    }
+
+    @Override
+    public @NotNull CustomEquipmentSlot getSlot() {
+        return CustomEquipmentSlot.DUMB_INVENTORY;
+    }
+
+    protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull EntityResurrectEvent entityResurrectEvent) {
+        if (entityResurrectEvent.isCancelled()) {slot.addItem(-1, livingEntity);}
+        entityResurrectEvent.setCancelled(false);
+        return ActionResult.FULL_COOLDOWN;
+    }
+
+    @Override
+    public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot slot, int tickDelay) {}
+
+    @Override
+    public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+        return null;
+    }
+
+    @Override
+    public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
+        return Abilities.DEATH_PROTECTION;
+    }
+}

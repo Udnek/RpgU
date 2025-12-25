@@ -5,6 +5,7 @@ import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.RightClickableBlock;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
 import me.udnek.coreu.custom.entitylike.block.constructabletype.DisplayBasedConstructableBlockType;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.serializabledata.SerializableData;
 import me.udnek.coreu.serializabledata.SerializableDataManager;
@@ -25,6 +26,7 @@ import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SoulBinderBlock extends DisplayBasedConstructableBlockType implements Listener {
@@ -57,9 +59,9 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
             final RightClickableBlock superComponent = getComponents().getOrException(CustomComponentType.RIGHT_CLICKABLE_BLOCK);
 
             @Override
-            public void onRightClick(@NotNull CustomBlockType custom.BlockType, @NotNull PlayerInteractEvent event) {
+            public void onRightClick(@NotNull CustomBlockType customBlockType, @NotNull PlayerInteractEvent event) {
                 if (event.getPlayer().isSneaking()) {
-                    superComponent.onRightClick(custom.BlockType, event);
+                    superComponent.onRightClick(customBlockType, event);
                     return;
                 }
                 event.setCancelled(true);
@@ -105,6 +107,11 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
     @Override
     public void load(@NotNull TileState tileState) {}
 
+    @Override
+    public @Nullable CustomItem getItem() {
+        return Items.SOUL_BINDER;
+    }
+
     public static class SoulBinderData implements SerializableData{
 
         protected Location location = null;
@@ -126,7 +133,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
 
         @Override
         public void deserialize(@Nullable String s) {
-            if (s != null) location = Location.deserialize(SerializableData.deserializeMap(s));
+            if (s != null) location = Location.deserialize(Collections.unmodifiableMap(SerializableData.deserializeMap(s)));
         }
 
         @Override

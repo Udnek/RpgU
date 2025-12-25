@@ -1,22 +1,16 @@
 package me.udnek.rpgu.util;
 
 import com.google.gson.JsonParser;
-import io.papermc.paper.datacomponent.DataComponentTypes;
-import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.event.CustomItemGeneratedEvent;
 import me.udnek.coreu.custom.event.InitializationEvent;
 import me.udnek.coreu.custom.event.ResourcepackInitializationEvent;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.item.ItemUtils;
-import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.registry.InitializationProcess;
 import me.udnek.coreu.resourcepack.path.VirtualRpJsonFile;
 import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.lore.AttributeLoreGenerator;
 import me.udnek.rpgu.vanilla.EnchantManaging;
 import me.udnek.rpgu.vanilla.RecipeManaging;
 import net.kyori.adventure.text.Component;
@@ -51,13 +45,15 @@ public class GeneralListener extends SelfRegisteringListener {
     public void setBasePlayerHealth(PlayerJoinEvent event){
         double basePlayerHealth = 10;
         Player player = event.getPlayer();
+
+        AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
+        double value = Objects.requireNonNull(attribute).getValue();
+        if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
+        if (value >= basePlayerHealth) player.setHealth(value);
         new BukkitRunnable(){
             @Override
             public void run() {
-                AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
-                double value = Objects.requireNonNull(attribute).getValue();
-                if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
-                if (value >= basePlayerHealth) player.setHealth(value);
+
             }
         }.runTaskLater(RpgU.getInstance(), 5);
     }
@@ -126,7 +122,7 @@ public class GeneralListener extends SelfRegisteringListener {
     public @NotNull MerchantRecipe replaceRecipe(@NotNull MerchantRecipe recipe, @NotNull ItemStack newItem){
         Map<Enchantment, Integer> oldItemEnchants = recipe.getResult().getEnchantments();
         newItem.addEnchantments(oldItemEnchants);
-        MerchantRecipe custom.Recipe = new MerchantRecipe(
+        MerchantRecipe customRecipe = new MerchantRecipe(
                 newItem, recipe.getUses(),
                 recipe.getMaxUses(),
                 recipe.hasExperienceReward(),
@@ -136,8 +132,8 @@ public class GeneralListener extends SelfRegisteringListener {
                 recipe.getSpecialPrice(),
                 recipe.shouldIgnoreDiscounts());
 
-        custom.Recipe.setIngredients(recipe.getIngredients());
-        return custom.Recipe;
+        customRecipe.setIngredients(recipe.getIngredients());
+        return customRecipe;
     }
 
     @EventHandler
@@ -147,26 +143,12 @@ public class GeneralListener extends SelfRegisteringListener {
         {
             event.titleOverride(Component.translatable(Material.CRAFTING_TABLE.translationKey()));
         }
-
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void itemGenerates(CustomItemGeneratedEvent event){
-        event.getCustomItem().getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).getLore(event.getLoreBuilder());
-        event.getCustomItem().getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(component ->
-                component.getLore(event.getLoreBuilder()));
-        AttributeLoreGenerator.generate(event.getItemStack(), event.getLoreBuilder());
-        if (VanillaItemManager.isReplaced(event.getCustomItem())){
-            ItemAttributeModifiers attributeModifiers = event.getItemStack().getData(DataComponentTypes.ATTRIBUTE_MODIFIERS);
-            if (attributeModifiers == null) return;
-            event.getItemStack().setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, attributeModifiers.showInTooltip(false));
-        }
     }
 
 
     @EventHandler
     public void recipeInitialization(InitializationEvent event){
-        if (event.getStep() != InitializationProcess.Step.AFTER_REGISTRIES_INITIALIZATION) return;
+        if (event.getStep() != InitializationProcess.Step.AFTER_GLOBAL_INITIALIZATION) return;
         RecipeManaging.run();
         EnchantManaging.run();
     }

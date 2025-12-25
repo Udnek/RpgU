@@ -4,14 +4,14 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
 import org.bukkit.Material;
@@ -49,11 +49,11 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
     @Override
     public void initializeComponents() {
         CustomAttributeModifier attribute = new CustomAttributeModifier(0.6,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
 
-        GreatAmethystSwordComponent swordComponent = new GreatAmethystSwordComponent();
-        swordComponent.getComponents().set(new AttributeBasedProperty(20*7, ComponentTypes.ABILITY_COOLDOWN));
-        getComponents().set(swordComponent);
+        Ability ability = new Ability();
+        ability.getComponents().set(new AttributeBasedProperty(20*7, RPGUComponents.ABILITY_COOLDOWN_TIME));
+        getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(ability);
     }
 
     @Override

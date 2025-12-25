@@ -75,7 +75,7 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
             if (aliveShields[i] == 1) shield.spawnShield();
         }
 
-        bossBar = BossBar.bossBar(Objects.requireNonNull(entity.custom.Name()), (float) (((Breeze) entity).getHealth() / ANCIENT_BREEZE_HP),
+        bossBar = BossBar.bossBar(Objects.requireNonNull(entity.customName()), (float) (((Breeze) entity).getHealth() / ANCIENT_BREEZE_HP),
                 BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
     }
 

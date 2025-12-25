@@ -1,18 +1,12 @@
 name: RpgU
 version: '${project.version}'
 main: me.udnek.rpgu.RpgU
-api-version: '1.21.4'
-depend: [ItemsCoreU, JeiU]
+api-version: '1.21.7'
+depend: [CoreU, JeiU]
 commands:
-  debug_equipment:
-    description: "debug_equipment"
-    usage: "/debug_equipment"
-    aliases: []
-    permission: rpgu.admin
-    permission-message: "You do not have permission to use this command"
   custom._damage_system:
-    description: "custom._damage_system"
-    usage: "/custom._damage_system"
+    description: "custom_damage_system"
+    usage: "/custom_damage_system"
     aliases: []
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"

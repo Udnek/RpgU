@@ -6,19 +6,15 @@ import me.udnek.coreu.custom.effect.CustomEffect;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.sound.CustomSound;
 import me.udnek.coreu.resourcepack.ResourcePackablePlugin;
-import me.udnek.jeiu.menu.JeiUMenu;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.Commands;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
-import me.udnek.rpgu.equipment.EquipmentListener;
-import me.udnek.rpgu.equipment.PlayerWearingEquipmentTask;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
@@ -46,23 +42,21 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         CustomEntityType totemOfSaving = EntityTypes.TOTEM_OF_SAVING;
         CustomEquipmentSlot.Single artifacts = EquipmentSlots.FIRST_ARTIFACT;
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
-        CustomEffect magicalResistance = Effects.MAGICAL_RESISTANCE;
+        CustomEffect magicalResistance = Effects.MAGIC_RESISTANCE;
         CustomBlockType soulBinder = Blocks.SOUL_BINDER;
         CustomSound backstab = Sounds.BACKSTAB;
 
         new DamageListener(this);
-        new EquipmentListener(this);
         new EnchantingListener(this);
         new ModifiedEntitySpawnListener(this);
         new GeneralListener(this);
         new AbilityListener(this);
         new AttributeManaging(this);
         new EntityListener(this);
+
         AlloyForgeManager.getInstance();
 
         Commands.declareCommands();
-
-        PlayerWearingEquipmentTask.getInstance().start(this);
 
         Hud.getInstance().register();
     }

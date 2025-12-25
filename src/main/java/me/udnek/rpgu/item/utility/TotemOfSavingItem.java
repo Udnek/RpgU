@@ -1,16 +1,19 @@
 package me.udnek.rpgu.item.utility;
 
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.util.Either;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
+import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.totem_of_saving.TotemOfSavingEntity;
-import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -24,6 +27,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -54,31 +58,21 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new TotemOfSavingComponent());
+        getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().set(Passive.DEFAULT);
     }
 
 
-    public class TotemOfSavingComponent extends ConstructablePassiveAbility<PlayerDeathEvent> {
+    public static class Passive extends RPGUConstructablePassiveAbility<PlayerDeathEvent> {
+
+        public static final Passive DEFAULT = new Passive();
 
         @Override
-        public @NotNull CustomEquipmentSlot getSlot() {
-            return CustomEquipmentSlot.DUMB_INVENTORY;
-        }
-
-
-        @Override
-        public void addLoreLines(@NotNull PassiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(TotemOfSavingItem.this, 1);
-            super.addLoreLines(componentable);
-        }
-
-        @Override
-        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerDeathEvent event) {
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull PlayerDeathEvent event) {
             Player player = event.getPlayer();
             ItemStack foundTotem = null;
             List<ItemStack> drops = event.getDrops();
             for (ItemStack itemStack : drops) {
-                if (!(custom.Item.isThisItem(itemStack))) continue;
+                if (!(customItem.isThisItem(itemStack))) continue;
                 foundTotem = itemStack;
                 break;
             }
@@ -101,9 +95,31 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
             return ActionResult.NO_COOLDOWN;
         }
 
+
+//        @Override
+//        public void onDeath(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
+//            activate(customItem, event.getPlayer(), new Either<>(slot, null), event);
+//        }
+
         @Override
-        public void onDeath(@NotNull CustomItem custom.Item, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
-            activate(custom.Item, event.getPlayer(), new Either<>(slot, null), event);
+        public @NotNull CustomEquipmentSlot getSlot() {
+            return CustomEquipmentSlot.DUMB_INVENTORY;
         }
+
+        @Override
+        public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {
+
+        }
+
+        @Override
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
+        }
+
+        @Override
+        public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
+            return Abilities.TOTEM_OF_SAVING;
+        }
+
     }
 }

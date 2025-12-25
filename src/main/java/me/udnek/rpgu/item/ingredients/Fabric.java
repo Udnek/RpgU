@@ -34,8 +34,8 @@ public class Fabric extends ConstructableCustomItem {
         consumer.accept(recipe);
     }
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void globalInitialization() {
+        super.globalInitialization();
         NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(
                         LootTables.BLAZE.getLootTable(),

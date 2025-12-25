@@ -4,7 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
@@ -26,8 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 import java.util.function.Consumer;
-
-
 
 public class PhantomBow extends ConstructableCustomItem implements Listener {
 
@@ -60,7 +58,7 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
         CustomAttributeModifier projectileSpeedAttribute = new CustomAttributeModifier(SPEED_BUFF, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.ACTIVE_HAND);
         CustomAttributeModifier projectileDamageMultiplierAttribute = new CustomAttributeModifier(1/(1+SPEED_BUFF)-1, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.ACTIVE_HAND);
 
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                 .add(Attributes.PROJECTILE_SPEED, projectileSpeedAttribute)
                 .add(Attributes.PROJECTILE_DAMAGE, projectileDamageMultiplierAttribute).build()));
     }

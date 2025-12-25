@@ -3,8 +3,8 @@ package me.udnek.rpgu.item.equipment;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
-import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
@@ -61,11 +61,11 @@ public class CeremonialDagger extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                 .add(Attributes.BACKSTAB_DAMAGE, BACKSTAB_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.MAIN_HAND)
                 .add(Attributes.BACKSTAB_DAMAGE, BACKSTAB_DAMAGE_MULTIPLIER_ARTIFACT, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                 .build()));
-        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder()
+        getComponents().set(new VanillaAttributedItem(new VanillaAttributesContainer.Builder()
                 .add(Attribute.SNEAKING_SPEED, new NamespacedKey(RpgU.getInstance(), getRawId()+"_sneak_artifact"),
                         0.5, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                 .build()));

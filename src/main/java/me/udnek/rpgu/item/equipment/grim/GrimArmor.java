@@ -4,7 +4,7 @@ import io.papermc.paper.datacomponent.item.Equippable;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
@@ -59,7 +59,7 @@ public abstract class GrimArmor extends ConstructableCustomItem {
         CustomAttributeModifier MP = new CustomAttributeModifier(stats.magicalPotential, AttributeModifier.Operation.ADD_NUMBER, slot);
         CustomAttributeModifier MD = new CustomAttributeModifier(stats.magicalDefense, AttributeModifier.Operation.ADD_NUMBER, slot);
         CustomAttributeModifier DM = new CustomAttributeModifier(stats.damageMultiplier, AttributeModifier.Operation.ADD_NUMBER, slot);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                 .add(Attributes.MAGICAL_POTENTIAL, MP)
                 .add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, MD)
                 .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, DM)

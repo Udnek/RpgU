@@ -4,7 +4,7 @@ import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.jeiu.item.Items;
 import me.udnek.jeiu.menu.RecipesMenu;
-import me.udnek.jeiu.visualizer.abstraction.AbstractVisualizer;
+import me.udnek.jeiu.visualizer.implementation.AbstractRecipeVisualizer;
 import me.udnek.rpgu.RpgU;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AlloyingRecipeVisualizer extends AbstractVisualizer {
+public class AlloyingRecipeVisualizer extends AbstractRecipeVisualizer {
     public static final int OFFSET = 9;
 
     protected @NotNull AlloyingRecipe recipe;

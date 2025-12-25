@@ -15,8 +15,8 @@ public class WolfPelt extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "wolf_pelt";}
 
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void globalInitialization() {
+        super.globalInitialization();
 
         NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(

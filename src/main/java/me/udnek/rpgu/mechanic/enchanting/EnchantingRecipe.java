@@ -6,8 +6,8 @@ import io.papermc.paper.datacomponent.item.ItemEnchantments;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipe;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
-import me.udnek.jeiu.visualizer.abstraction.Visualizable;
-import me.udnek.jeiu.visualizer.abstraction.Visualizer;
+import me.udnek.jeiu.visualizer.Visualizable;
+import me.udnek.jeiu.visualizer.Visualizer;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -94,7 +94,7 @@ public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType>, Vis
     @Override
     public @NotNull ItemStack getResult() {
         ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
-        itemStack.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments(Map.of(enchantment, 1), true));
+        itemStack.setData(DataComponentTypes.STORED_ENCHANTMENTS, ItemEnchantments.itemEnchantments(Map.of(enchantment, 1)));
         return itemStack;
     }
 

@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.equipment.magical;
 
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
@@ -35,7 +35,7 @@ public class MagicalSword extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(HiddenItemComponent.INSTANCE);
-        getComponents().set(new CustomItemAttributesComponent(
+        getComponents().set(new CustomAttributedItem(
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND)
                         .add(Attributes.COOLDOWN_TIME, -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.MAIN_HAND)

@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.util.LoreBuilder;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -21,9 +21,6 @@ public class HungryHorrorHelmet extends HungryHorrorArmor {
     public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
 
     @Override
-    public @Nullable LoreBuilder getLoreBuilder() {return getLoreBuilder(CustomEquipmentSlot.HEAD);}
-
-    @Override
     public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {
         AttributeModifier modifierHealth = new AttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_max_health_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
         AttributeModifier modifierArmor = new AttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_armor_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
@@ -37,6 +34,7 @@ public class HungryHorrorHelmet extends HungryHorrorArmor {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new HungryHorrorComponent(PotionEffectType.STRENGTH, CustomEquipmentSlot.HEAD));
+        getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents()
+                .set(new Passive(PotionEffectType.STRENGTH, CustomEquipmentSlot.HEAD));
     }
 }

@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.techincal;
 
 import io.papermc.paper.datacomponent.item.CustomModelData;
+import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.jeiu.component.Components;
 import net.kyori.adventure.key.Key;
@@ -17,7 +18,7 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set(Components.TECHNICAL_ITEM.getDefault());
+        getComponents().set(Components.ALWAYS_HIDDEN_ITEM.getDefault());
     }
     @Override
     public @Nullable DataSupplier<Key> getItemModel() {
@@ -25,8 +26,11 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     }
     @Override
     public @Nullable DataSupplier<CustomModelData> getCustomModelData() {
-        return DataSupplier.of(CustomModelData.custom.ModelData().addColor(Color.WHITE).build());
+        return DataSupplier.of(CustomModelData.customModelData().addColor(Color.WHITE).build());
     }
+
     @Override
-    public @Nullable Boolean getHideTooltip() {return true;}
+    public @Nullable DataSupplier<TooltipDisplay> getTooltipDisplay() {
+        return DataSupplier.of(TooltipDisplay.tooltipDisplay().hideTooltip(true).build());
+    }
 }

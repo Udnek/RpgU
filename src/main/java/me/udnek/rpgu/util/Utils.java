@@ -54,7 +54,7 @@ public class Utils {
     }
 
 
-    public static @NotNull Material replaceSufix(@NotNull Material material, @NotNull String string){
+    public static @NotNull Material replaceSuffix(@NotNull Material material, @NotNull String string){
         String key = material.getKey().getKey();
         String name = (key.substring(0, key.lastIndexOf("_")) + string).toUpperCase();
         return Preconditions.checkNotNull(Material.getMaterial(name), "There is no such material", name);

@@ -34,12 +34,12 @@ public class MagnetiteIngot extends ConstructableCustomItem {
         consumer.accept(recipe);
     }
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void globalInitialization() {
+        super.globalInitialization();
         addToLootTables(LootTables.SIMPLE_DUNGEON, LootTables.ABANDONED_MINESHAFT, LootTables.JUNGLE_TEMPLE);
     }
 
-    private void addToLootTables(LootTables ..lootTables) {
+    private void addToLootTables(LootTables ...lootTables) {
         for (LootTables lootTable : lootTables) {
             Nms.get().getLootTableContainer(lootTable.getLootTable()).addPool(
                     new NmsLootPoolBuilder(

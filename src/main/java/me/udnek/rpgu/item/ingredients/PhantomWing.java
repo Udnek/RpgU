@@ -15,8 +15,8 @@ public class PhantomWing extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "phantom_wing";}
 
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void globalInitialization() {
+        super.globalInitialization();
         Nms.get().getLootTableContainer(LootTables.PHANTOM.getLootTable()).addPool(new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(
                         LootTables.PHANTOM.getLootTable(),

@@ -7,33 +7,33 @@ import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.item.RepairData;
-import me.udnek.coreu.util.Either;
+import me.udnek.coreu.rpgu.component.RPGUActiveItem;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
+import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.active.ConstructableActiveAbilityComponent;
-import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.rpgu.component.Components;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
-import me.udnek.rpgu.component.ability.property.EffectsProperty;
-import me.udnek.rpgu.component.ability.property.function.AttributeFunction;
-import me.udnek.rpgu.component.ability.property.function.Functions;
-import me.udnek.rpgu.component.ability.property.function.MPBasedDamageFunction;
-import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.lore.ability.ActiveAbilityLorePart;
+import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
 import me.udnek.rpgu.particle.AmethystSpikeParticle;
 import me.udnek.rpgu.particle.ParticleUtils;
 import me.udnek.rpgu.util.Utils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -114,9 +114,9 @@ public class AmethystDoloire extends ConstructableCustomItem {
         super.initializeComponents();
 
         CustomAttributeModifier attribute = new CustomAttributeModifier(MELEE_MAGICAL_DAMAGE_MULTIPLIER,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
-        getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
+        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
 
-        getComponents().set(new GreatAmethystSwordComponent());
+        getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
     @Override
@@ -124,42 +124,40 @@ public class AmethystDoloire extends ConstructableCustomItem {
         return new RepairData(Material.AMETHYST_SHARD);
     }
 
-    public static class GreatAmethystSwordComponent extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent>{
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> {
+
+        public static final Ability DEFAULT = new Ability();
 
         public static double BASE_RADIUS = 0.8;
         public static double BASE_DAMAGE = 1.5;
 
-        public GreatAmethystSwordComponent() {
-            getComponents().set(new AttributeBasedProperty(20*15, ComponentTypes.ABILITY_COOLDOWN));
-            getComponents().set(new AttributeBasedProperty(10, ComponentTypes.ABILITY_CAST_RANGE));
-            getComponents().set(new AttributeBasedProperty(BASE_RADIUS, ComponentTypes.ABILITY_AREA_OF_EFFECT));
-            getComponents().set(new DamageProperty(MPBasedDamageFunction.linearMageOnly(BASE_DAMAGE, 0.2)));
+        public Ability() {
+            getComponents().set(new AttributeBasedProperty(20*15, RPGUComponents.ABILITY_COOLDOWN_TIME));
+            getComponents().set(new AttributeBasedProperty(10, RPGUComponents.ABILITY_CAST_RANGE));
+            getComponents().set(new AttributeBasedProperty(BASE_RADIUS, RPGUComponents.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new DamageProperty(Damage.Type.MAGICAL, PropertyFunctions.LINEAR(Functions.ENTITY_TO_MP(), BASE_DAMAGE, 0.2)));
             getComponents().set(new EffectsProperty(
-                    new EffectsProperty.PotionData(PotionEffectType.SLOWNESS, Functions.CEIL(new AttributeFunction(Attributes.ABILITY_DURATION, 20d*3d)), Functions.CONSTANT(2))
+                    new EffectsProperty.PotionData(
+                            PotionEffectType.SLOWNESS,
+                            PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(Attributes.ABILITY_DURATION, 20d*3d)),
+                            PropertyFunctions.CONSTANT(2))
             ));
         }
 
         @Override
-        public void addLoreLines(@NotNull ActiveAbilityLorePart componentable) {
-            componentable.addFullAbilityDescription(Items.AMETHYST_DOLOIRE, 2);
-            super.addLoreLines(componentable);
-        }
-
-        @Override
-        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
-                                            @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
             Location location = Utils.rayTraceBlockUnder(livingEntity);
 
             if (location == null) return ActionResult.PENALTY_COOLDOWN;
 
-            final double radius = getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity);
-            final double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
-            List<PotionEffect> potionEffects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).get(livingEntity);
+            final double radius = getComponents().getOrException(RPGUComponents.ABILITY_AREA_OF_EFFECT).get(livingEntity);
+            final double castRange = getComponents().getOrException(RPGUComponents.ABILITY_CAST_RANGE).get(livingEntity);
+            List<PotionEffect> potionEffects = getComponents().getOrException(RPGUComponents.ABILITY_EFFECTS).get(livingEntity);
 
             Vector direction = livingEntity.getLocation().getDirection();
             direction.setY(0).normalize().multiply(radius*2);
 
-            Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(livingEntity));
+            Damage damage = getComponents().getOrException(Components.ABILITY_DAMAGE).get(livingEntity);
 
             new BukkitRunnable(){
                 int count = 0;
@@ -185,9 +183,13 @@ public class AmethystDoloire extends ConstructableCustomItem {
         }
 
         @Override
-        public void onConsume(@NotNull CustomItem custom.Item, @NotNull PlayerItemConsumeEvent event) {
-            event.setCancelled(true);
-            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+        public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
+            return null;
+        }
+
+        @Override
+        public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
+            return Abilities.AMETHYST_DOLOIRE;
         }
     }
 }

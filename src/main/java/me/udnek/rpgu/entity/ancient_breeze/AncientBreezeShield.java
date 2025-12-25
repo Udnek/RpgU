@@ -10,11 +10,11 @@ public class AncientBreezeShield extends ConstructableCustomEntity<Piglin> {
 
     AncientBreeze spawnedBy;
 
-    public void setSpawnedBy(@NotNull AncientBreeze custom.Entity) {
-        spawnedBy = custom.Entity;
+    public void setSpawnedBy(@NotNull AncientBreeze customEntity) {
+        spawnedBy = customEntity;
     }
 
-    public void entityDeath() {
+    public void onDeath() {
         if (spawnedBy != null) spawnedBy.checkAliveShields();
     }
 

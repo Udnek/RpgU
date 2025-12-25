@@ -1,49 +1,55 @@
 package me.udnek.rpgu.component.ability.property;
 
+import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
-import me.udnek.rpgu.component.ComponentTypes;
-import me.udnek.rpgu.component.ability.AbilityComponent;
-import me.udnek.rpgu.component.ability.property.function.DamageFunction;
-import me.udnek.rpgu.component.ability.property.function.MultiLineDescription;
-import me.udnek.rpgu.lore.ability.AbilityLorePart;
+import me.udnek.coreu.rpgu.component.ability.RPGUItemAbility;
+import me.udnek.coreu.rpgu.component.ability.property.RPGUAbilityProperty;
+import me.udnek.coreu.rpgu.component.ability.property.function.MultiLineDescription;
+import me.udnek.coreu.rpgu.component.ability.property.function.RPGUPropertyFunction;
+import me.udnek.coreu.rpgu.lore.ability.AbilityLorePart;
+import me.udnek.rpgu.component.Components;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import net.kyori.adventure.text.Component;
+import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class DamageProperty implements AbilityProperty<Double, Damage> {
+import java.util.List;
 
-    protected DamageFunction<Double> formula;
+public class DamageProperty implements RPGUAbilityProperty<LivingEntity, Damage> {
 
-    public DamageProperty(@NotNull DamageFunction<Double> damageFunction){
+    protected RPGUPropertyFunction<LivingEntity, Double> formula;
+    protected Damage.Type type;
+
+    public DamageProperty(@NotNull Damage.Type type, @NotNull RPGUPropertyFunction<LivingEntity, Double> damageFunction){
+        this.type = type;
         this.formula = damageFunction;
     }
 
     @Override
     public @NotNull Damage getBase() {
-        return formula.apply(0d);
+        return new Damage(type, formula.getBase());
     }
 
     @Override
-    public @NotNull Damage get(@NotNull Double mp) {
-        return formula.apply(mp);
-    }
-
-    @Override
-    public @NotNull CustomComponentType<AbilityComponent<?>, ?> getType() {
-        return ComponentTypes.ABILITY_DAMAGE;
+    public @NotNull Damage get(@NotNull LivingEntity entity) {
+        return new Damage(type, formula.apply(entity));
     }
 
     @Override
     public void describe(@NotNull AbilityLorePart componentable) {
         MultiLineDescription description = formula.describe();
-        if (description.getComponents().size() > 1){
-            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", Component.empty()));
-            for (Component component : description.getComponents()) {
+        if (description.getLines().size() > 1){
+            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", List.of(Component.text(type.toString()), Component.empty())));
+            for (Component component : description.getLines()) {
                 componentable.addAbilityStatDoubleTab(component);
             }
         } else {
-            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", description.join()));
+            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", description.addLineToBeginning(Component.text(type.toString())).join()));
         }
+    }
 
+    @Override
+    public @NotNull CustomComponentType<? super RPGUItemAbility<?>, ? extends CustomComponent<? super RPGUItemAbility<?>>> getType() {
+        return Components.ABILITY_DAMAGE;
     }
 }

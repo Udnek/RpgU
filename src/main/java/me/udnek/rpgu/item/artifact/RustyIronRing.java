@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.artifact;
 
 import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
-import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
@@ -24,8 +24,8 @@ public class RustyIronRing extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "rusty_iron_ring";}
 
     @Override
-    public void afterInitialization() {
-        super.afterInitialization();
+    public void globalInitialization() {
+        super.globalInitialization();
         NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
                 NmsCustomLootEntryBuilder.fromVanilla(
                         LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
@@ -44,9 +44,15 @@ public class RustyIronRing extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        CustomKeyedAttributeModifier baseHp = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_max_health_rusty_iron_ring"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
-        CustomKeyedAttributeModifier baseArmor = new CustomKeyedAttributeModifier(new NamespacedKey(RpgU.getInstance(), "base_armor_rusty_iron_ring"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        CustomKeyedAttributeModifier baseHp = new CustomKeyedAttributeModifier(
+                new NamespacedKey(RpgU.getInstance(), "base_max_health_rusty_iron_ring"),
+                1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
+        CustomKeyedAttributeModifier baseArmor = new CustomKeyedAttributeModifier(
+                new NamespacedKey(RpgU.getInstance(), "base_armor_rusty_iron_ring"),
+                1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlots.ARTIFACTS);
 
-        getComponents().set(new VanillaAttributesComponent(new VanillaAttributesContainer.Builder().add(Attribute.MAX_HEALTH, baseHp).add(Attribute.ARMOR, baseArmor).build()));
+        getComponents().set(new VanillaAttributedItem(new VanillaAttributesContainer.Builder()
+                .add(Attribute.MAX_HEALTH, baseHp)
+                .add(Attribute.ARMOR, baseArmor).build()));
     }
 }
