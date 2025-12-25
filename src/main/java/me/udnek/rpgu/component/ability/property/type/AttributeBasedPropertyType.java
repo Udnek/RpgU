@@ -1,7 +1,7 @@
 package me.udnek.rpgu.component.ability.property.type;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customregistry.AbstractRegistrable;
+import me.udnek.coreu.custom.attribute.CustomAttribute;
+import me.udnek.coreu.custom.registry.AbstractRegistrable;
 import me.udnek.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.property.function.Modifiers;
 import me.udnek.rpgu.component.ability.property.function.MultiLineDescription;

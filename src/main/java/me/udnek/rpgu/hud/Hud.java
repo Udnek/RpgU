@@ -1,9 +1,9 @@
 package me.udnek.rpgu.hud;
 
-import me.udnek.itemscoreu.customhud.CustomHud;
-import me.udnek.itemscoreu.customhud.CustomHudManager;
-import me.udnek.itemscoreu.util.ComponentU;
-import me.udnek.itemscoreu.util.Utils;
+import me.udnek.coreu.custom.hud.CustomHud;
+import me.udnek.coreu.custom.hud.CustomHudManager;
+import me.udnek.coreu.util.ComponentU;
+import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.key.Key;
@@ -47,11 +47,11 @@ public class Hud implements CustomHud {
     @Override
     public @NotNull Component getText(@NotNull Player player) {
         if (player.getGameMode().isInvulnerable()) return Component.empty();
-        return ComponentU.textWithNoSpaceDefaultFont(
+        return ComponentU.textWithNoSpaceSpaceFont(
                 -91,
                 health(player).append(defense(player)),
                 0)
-                .append(ComponentU.textWithNoSpaceDefaultFont(10, food(player), 0))
+                .append(ComponentU.textWithNoSpaceSpaceFont(10, food(player), 0))
                 .append(air(player)).shadowColor(ShadowColor.none());
     }
 
@@ -106,7 +106,7 @@ public class Hud implements CustomHud {
         int dots = StringUtils.countMatches(rawText, ".");
         int size = (rawText.length()-dots)*4 + dots*2 -1;
 
-        Component text = ComponentU.textWithNoSpaceDefaultFont(
+        Component text = ComponentU.textWithNoSpaceSpaceFont(
                 40-size/2,
                 Component.text(rawText).font(HEALTH_NUMBER_FONT).color(NamedTextColor.WHITE),
                 size);

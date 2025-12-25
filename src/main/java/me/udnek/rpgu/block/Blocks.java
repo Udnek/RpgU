@@ -1,7 +1,7 @@
 package me.udnek.rpgu.block;
 
-import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
+import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
+import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import org.jetbrains.annotations.NotNull;
 

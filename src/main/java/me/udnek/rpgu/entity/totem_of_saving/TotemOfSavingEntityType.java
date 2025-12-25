@@ -1,11 +1,11 @@
 package me.udnek.rpgu.entity.totem_of_saving;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntity;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
-import me.udnek.itemscoreu.customitem.ItemUtils;
+import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntity;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Location;

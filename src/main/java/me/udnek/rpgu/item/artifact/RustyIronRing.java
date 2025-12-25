@@ -1,13 +1,13 @@
 package me.udnek.rpgu.item.artifact;
 
-import me.udnek.itemscoreu.customattribute.CustomKeyedAttributeModifier;
-import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
-import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
+import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
+import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
+import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
+import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;

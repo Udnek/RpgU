@@ -1,6 +1,6 @@
 package me.udnek.rpgu.component.ability.property;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import me.udnek.rpgu.component.ability.property.function.DamageFunction;

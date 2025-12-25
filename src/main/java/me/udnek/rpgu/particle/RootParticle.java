@@ -1,6 +1,6 @@
 package me.udnek.rpgu.particle;
 
-import me.udnek.itemscoreu.customparticle.ConstructableCustomParticle;
+import me.udnek.coreu.custom.particle.ConstructableCustomParticle;
 import me.udnek.rpgu.effect.Effects;
 import org.bukkit.Location;
 import org.bukkit.Material;

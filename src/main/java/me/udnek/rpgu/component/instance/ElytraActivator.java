@@ -1,8 +1,8 @@
 package me.udnek.rpgu.component.instance;
 
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

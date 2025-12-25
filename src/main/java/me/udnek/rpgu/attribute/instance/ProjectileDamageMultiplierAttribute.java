@@ -1,6 +1,6 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.itemscoreu.customattribute.ConstructableCustomAttribute;
+import me.udnek.coreu.custom.attribute.ConstructableCustomAttribute;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.event.EventHandler;

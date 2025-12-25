@@ -3,12 +3,12 @@ package me.udnek.rpgu.item.artifact.wreath;
 import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.Either;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.Either;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
@@ -76,7 +76,7 @@ public class FlowerWreath extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<CustomModelData> getCustomModelData() {
-        return DataSupplier.of(CustomModelData.customModelData().addColor(Color.fromRGB(flowerColors.get(Material.DANDELION))).build());
+        return DataSupplier.of(CustomModelData.custom.ModelData().addColor(Color.fromRGB(flowerColors.get(Material.DANDELION))).build());
     }
 
     @Override
@@ -98,7 +98,7 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     public void setColor(@NotNull ItemStack itemStack, @NotNull Color color){
-        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addColor(color).build());
+        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.custom.ModelData().addColor(color).build());
     }
 
     public int getIntColorByFlower(@NotNull Material flower){return flowerColors.getOrDefault(flower, 0);}

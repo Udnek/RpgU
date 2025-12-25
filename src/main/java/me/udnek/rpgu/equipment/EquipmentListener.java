@@ -1,10 +1,9 @@
 package me.udnek.rpgu.equipment;
 
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.EquippableItemComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -16,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EquipmentListener extends SelfRegisteringListener {
+public class EquipmentListener extends SelfReg {
     public EquipmentListener(JavaPlugin plugin) {
         super(plugin);
     }

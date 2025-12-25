@@ -1,6 +1,6 @@
 package me.udnek.rpgu.component.ability.property.function;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
+import me.udnek.coreu.custom.attribute.CustomAttribute;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;

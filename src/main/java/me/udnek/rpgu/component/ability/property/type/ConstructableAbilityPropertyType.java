@@ -1,6 +1,6 @@
 package me.udnek.rpgu.component.ability.property.type;
 
-import me.udnek.itemscoreu.customcomponent.ConstructableComponentType;
+import me.udnek.coreu.custom.component.ConstructableComponentType;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import me.udnek.rpgu.component.ability.property.AbilityProperty;
 import org.jetbrains.annotations.NotNull;

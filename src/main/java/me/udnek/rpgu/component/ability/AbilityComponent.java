@@ -1,9 +1,9 @@
 package me.udnek.rpgu.component.ability;
 
-import me.udnek.itemscoreu.customcomponent.ComponentHolder;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.component.ComponentHolder;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.LoreBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public interface AbilityComponent<ActivationContext> extends CustomComponent<CustomItem>, ComponentHolder<AbilityComponent<?>, CustomComponent<AbilityComponent<?>>> {

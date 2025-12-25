@@ -1,10 +1,10 @@
 package me.udnek.rpgu.item.ingredients;
 
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
-import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
+import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.inventory.FurnaceRecipe;

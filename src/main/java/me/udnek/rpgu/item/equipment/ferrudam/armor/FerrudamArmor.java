@@ -2,9 +2,9 @@ package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Equippable;
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.RepairData;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.NamespacedKey;

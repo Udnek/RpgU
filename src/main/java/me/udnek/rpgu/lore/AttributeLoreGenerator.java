@@ -1,14 +1,14 @@
 package me.udnek.rpgu.lore;
 
 import com.google.common.collect.Multimap;
-import me.udnek.itemscoreu.customattribute.*;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
-import me.udnek.itemscoreu.util.ComponentU;
-import me.udnek.itemscoreu.util.LoreBuilder;
-import me.udnek.itemscoreu.util.Utils;
+import me.udnek.coreu.custom.attribute.*;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.registry.CustomRegistries;
+import me.udnek.coreu.util.ComponentU;
+import me.udnek.coreu.util.LoreBuilder;
+import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import net.kyori.adventure.text.Component;
@@ -47,7 +47,7 @@ public class AttributeLoreGenerator {
         // CUSTOM
         CustomAttributesContainer customAttributes;
         // VANILLA-CUSTOM
-        me.udnek.itemscoreu.customattribute.VanillaAttributesContainer vanillaCustomAttributes;
+        me.udnek.coreu.custom.attribute.VanillaAttributesContainer vanillaCustomAttributes;
 
         CustomItem customItem = CustomItem.get(itemStack);
         if (customItem != null){

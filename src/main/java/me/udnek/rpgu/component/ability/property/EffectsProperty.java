@@ -1,7 +1,7 @@
 package me.udnek.rpgu.component.ability.property;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customeffect.CustomEffect;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.effect.CustomEffect;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;

@@ -1,6 +1,6 @@
 package me.udnek.rpgu.effect;
 
-import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
+import me.udnek.coreu.custom.effect.ConstructableCustomEffect;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

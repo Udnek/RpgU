@@ -1,7 +1,7 @@
 package me.udnek.rpgu.util;
 
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import org.bukkit.event.EventHandler;

@@ -2,11 +2,11 @@ package me.udnek.rpgu.item.utility;
 
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import io.papermc.paper.datacomponent.item.Tool;
-import me.udnek.itemscoreu.customcomponent.instance.AutoGeneratingFilesItem;
-import me.udnek.itemscoreu.customcomponent.instance.RightClickableItem;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.RepairData;
+import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
+import me.udnek.coreu.custom.component.instance.RightClickableItem;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.item.RepairData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;

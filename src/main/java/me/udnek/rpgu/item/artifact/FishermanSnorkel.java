@@ -1,11 +1,11 @@
 package me.udnek.rpgu.item.artifact;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ConstructableEquippableItemComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.lore.AttributesLorePart;

@@ -2,10 +2,10 @@ package me.udnek.rpgu.entity.ancient_breeze;
 
 import io.papermc.paper.event.entity.EntityMoveEvent;
 import io.papermc.paper.event.player.PlayerNameEntityEvent;
-import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntity;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntity;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntity;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntity;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
@@ -70,7 +70,7 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
             if (aliveShields[i] == 1) shield.spawnShield();
         }
 
-        bossBar = BossBar.bossBar(Objects.requireNonNull(entity.customName()), (float) (((Breeze) entity).getHealth() / ANCIENT_BREEZE_HP),
+        bossBar = BossBar.bossBar(Objects.requireNonNull(entity.custom.Name()), (float) (((Breeze) entity).getHealth() / ANCIENT_BREEZE_HP),
                 BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
     }
 
@@ -182,7 +182,7 @@ public class AncientBreeze extends ConstructableCustomEntity<Breeze> {
                     for (int y = -radius; y <= radius; y++) {
                         Location blockLocation = location.clone().toCenterLocation().add(x, y, z);
                         if (blockLocation.distance(entity.getLocation()) > 5) continue;
-                        me.udnek.itemscoreu.util.Utils.sendBlockDamageForAllPlayers(blockLocation, 0.6F, 0.1F, 2);
+                        me.udnek.coreu.util.Utils.sendBlockDamageForAllPlayers(blockLocation, 0.6F, 0.1F, 2);
                     }
                 }
             }

@@ -1,10 +1,10 @@
 package me.udnek.rpgu.component;
 
-import me.udnek.itemscoreu.customcomponent.ConstructableComponentType;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
+import me.udnek.coreu.custom.component.ConstructableComponentType;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.active.ActiveAbilityComponent;

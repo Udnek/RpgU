@@ -1,8 +1,8 @@
 package me.udnek.rpgu.vanilla;
 
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customrecipe.RecipeManager;
-import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.recipe.RecipeManager;
+import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingRecipe;

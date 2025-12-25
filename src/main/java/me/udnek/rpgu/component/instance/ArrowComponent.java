@@ -1,9 +1,9 @@
 package me.udnek.rpgu.component.instance;
 
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customitem.CustomItem;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.component.ComponentTypes;
 import net.kyori.adventure.text.Component;
 import org.bukkit.event.entity.EntityShootBowEvent;

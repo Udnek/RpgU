@@ -1,6 +1,6 @@
 package me.udnek.rpgu.mechanic.alloying;
 
-import me.udnek.itemscoreu.customrecipe.CustomRecipeType;
+import me.udnek.coreu.custom.recipe.CustomRecipeType;
 
 public class AlloyingRecipeType extends CustomRecipeType<AlloyingRecipe> {
     // TODO: 8/24/2024 MOVE TO REGISTRY

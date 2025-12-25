@@ -1,8 +1,8 @@
 package me.udnek.rpgu.item.equipment.hungry_horror_armor;
 
 import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

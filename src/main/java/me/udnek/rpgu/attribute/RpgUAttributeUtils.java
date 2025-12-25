@@ -1,6 +1,6 @@
 package me.udnek.rpgu.attribute;
 
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;

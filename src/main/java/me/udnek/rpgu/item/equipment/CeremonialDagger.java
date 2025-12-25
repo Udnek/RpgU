@@ -1,13 +1,13 @@
 package me.udnek.rpgu.item.equipment;
 
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
-import me.udnek.itemscoreu.customcomponent.instance.VanillaAttributesComponent;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.RepairData;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
+import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
+import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.attribute.RpgUAttributeUtils;

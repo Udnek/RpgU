@@ -1,8 +1,8 @@
 package me.udnek.rpgu.util;
 
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
-import me.udnek.itemscoreu.customsound.ConstructableCustomSound;
-import me.udnek.itemscoreu.customsound.CustomSound;
+import me.udnek.coreu.custom.registry.CustomRegistries;
+import me.udnek.coreu.custom.sound.ConstructableCustomSound;
+import me.udnek.coreu.custom.sound.CustomSound;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.NamespacedKey;
 import org.bukkit.SoundCategory;

@@ -1,13 +1,13 @@
 package me.udnek.rpgu.component;
 
-import me.udnek.itemscoreu.customattribute.CustomKeyedAttributeModifier;
-import me.udnek.itemscoreu.customattribute.VanillaAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
+import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ability.passive.PassiveAbility;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import net.kyori.adventure.text.Component;

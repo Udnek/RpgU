@@ -1,9 +1,9 @@
 /*package me.udnek.rpgu.equipment.slot;
 
 
-import me.udnek.itemscoreu.customequipmentslot.slot.AbstractCustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.equipmentslot.slot.AbstractCustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.rpgu.lore.TranslationKeys;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;

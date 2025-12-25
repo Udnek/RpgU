@@ -1,9 +1,9 @@
 package me.udnek.rpgu.equipment.slot;
 
 
-import me.udnek.itemscoreu.customequipmentslot.slot.*;
-import me.udnek.itemscoreu.customequipmentslot.universal.BaseUniversalSlot;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
+import me.udnek.coreu.custom.equipmentslot.slot.*;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.lore.TranslationKeys;
 

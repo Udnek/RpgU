@@ -1,14 +1,14 @@
 package me.udnek.rpgu.block;
 
 import com.destroystokyo.paper.ParticleBuilder;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customcomponent.instance.RightClickableBlock;
-import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
-import me.udnek.itemscoreu.customentitylike.block.constructabletype.DisplayBasedConstructableBlockType;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.serializabledata.SerializableData;
-import me.udnek.itemscoreu.serializabledata.SerializableDataManager;
-import me.udnek.itemscoreu.util.Either;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.RightClickableBlock;
+import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
+import me.udnek.coreu.custom.entitylike.block.constructabletype.DisplayBasedConstructableBlockType;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.serializabledata.SerializableData;
+import me.udnek.coreu.serializabledata.SerializableDataManager;
+import me.udnek.coreu.util.Either;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.text.Component;

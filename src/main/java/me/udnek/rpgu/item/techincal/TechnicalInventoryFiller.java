@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.techincal;
 
 import io.papermc.paper.datacomponent.item.CustomModelData;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.jeiu.component.Components;
 import net.kyori.adventure.key.Key;
 import org.bukkit.Color;
@@ -25,7 +25,7 @@ public class TechnicalInventoryFiller extends ConstructableCustomItem{
     }
     @Override
     public @Nullable DataSupplier<CustomModelData> getCustomModelData() {
-        return DataSupplier.of(CustomModelData.customModelData().addColor(Color.WHITE).build());
+        return DataSupplier.of(CustomModelData.custom.ModelData().addColor(Color.WHITE).build());
     }
     @Override
     public @Nullable Boolean getHideTooltip() {return true;}

@@ -1,9 +1,9 @@
 package me.udnek.rpgu.item.equipment.magical;
 
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.key.Key;

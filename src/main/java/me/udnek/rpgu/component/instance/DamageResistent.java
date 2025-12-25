@@ -1,8 +1,8 @@
 package me.udnek.rpgu.component.instance;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.rpgu.component.ComponentTypes;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;

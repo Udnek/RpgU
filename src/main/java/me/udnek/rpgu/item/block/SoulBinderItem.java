@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.block;
 
-import me.udnek.itemscoreu.customcomponent.instance.BlockPlacingItem;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.coreu.custom.component.instance.BlockPlacingItem;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.text.Component;

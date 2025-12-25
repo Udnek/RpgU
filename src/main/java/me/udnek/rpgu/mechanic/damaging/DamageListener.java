@@ -1,6 +1,6 @@
 package me.udnek.rpgu.mechanic.damaging;
 
-import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.coreu.util.SelfRegisteringListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.plugin.Plugin;

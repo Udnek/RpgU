@@ -1,6 +1,6 @@
 package me.udnek.rpgu.entity;
 
-import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.PiglinBrute;

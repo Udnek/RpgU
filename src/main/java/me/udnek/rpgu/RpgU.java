@@ -1,14 +1,14 @@
 package me.udnek.rpgu;
 
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customeffect.CustomEffect;
-import me.udnek.itemscoreu.customentitylike.block.CustomBlockType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customsound.CustomSound;
-import me.udnek.itemscoreu.resourcepack.ResourcePackablePlugin;
+import me.udnek.coreu.custom.attribute.CustomAttribute;
+import me.udnek.coreu.custom.effect.CustomEffect;
+import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.sound.CustomSound;
+import me.udnek.coreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.Commands;

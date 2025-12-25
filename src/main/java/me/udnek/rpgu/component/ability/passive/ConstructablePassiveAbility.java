@@ -1,7 +1,7 @@
 package me.udnek.rpgu.component.ability.passive;
 
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.component.AbilityActivationHandler;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import me.udnek.rpgu.component.ability.property.AbilityProperty;

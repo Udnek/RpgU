@@ -2,11 +2,11 @@ package me.udnek.rpgu.mechanic.alloying;
 
 import com.destroystokyo.paper.event.block.BlockDestroyEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import me.udnek.itemscoreu.custominventory.ConstructableCustomInventory;
-import me.udnek.itemscoreu.custominventory.SmartIntractableCustomInventory;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customrecipe.RecipeManager;
-import me.udnek.itemscoreu.util.ComponentU;
+import me.udnek.coreu.custom.inventory.ConstructableCustomInventory;
+import me.udnek.coreu.custom.inventory.SmartIntractableCustomInventory;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.recipe.RecipeManager;
+import me.udnek.coreu.util.ComponentU;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.key.Key;

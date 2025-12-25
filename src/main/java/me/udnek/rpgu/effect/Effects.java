@@ -1,7 +1,7 @@
 package me.udnek.rpgu.effect;
 
-import me.udnek.itemscoreu.customeffect.CustomEffect;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
+import me.udnek.coreu.custom.effect.CustomEffect;
+import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 
 public class Effects {

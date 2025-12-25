@@ -1,7 +1,7 @@
 package me.udnek.rpgu.lore.ability;
 
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.LoreBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;

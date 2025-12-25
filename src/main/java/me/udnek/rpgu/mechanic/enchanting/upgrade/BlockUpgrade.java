@@ -1,6 +1,6 @@
 package me.udnek.rpgu.mechanic.enchanting.upgrade;
 
-import me.udnek.itemscoreu.customregistry.AbstractRegistrable;
+import me.udnek.coreu.custom.registry.AbstractRegistrable;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingTableInventory;
 import me.udnek.rpgu.mechanic.enchanting.Utils;
 import org.bukkit.Location;

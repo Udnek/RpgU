@@ -2,8 +2,8 @@ package me.udnek.rpgu.mechanic.damaging;
 
 
 import com.google.common.base.Function;
-import me.udnek.itemscoreu.util.Reflex;
-import me.udnek.itemscoreu.util.Utils;
+import me.udnek.coreu.util.Reflex;
+import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;

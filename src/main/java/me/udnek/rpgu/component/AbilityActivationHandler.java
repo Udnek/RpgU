@@ -1,12 +1,12 @@
 package me.udnek.rpgu.component;
 
-import me.udnek.itemscoreu.customcomponent.AbstractComponentHolder;
-import me.udnek.itemscoreu.customcomponent.ComponentHolder;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.Either;
+import me.udnek.coreu.custom.component.AbstractComponentHolder;
+import me.udnek.coreu.custom.component.ComponentHolder;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.Either;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

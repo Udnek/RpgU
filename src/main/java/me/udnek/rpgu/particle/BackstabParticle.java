@@ -2,7 +2,7 @@ package me.udnek.rpgu.particle;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
-import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
+import me.udnek.coreu.custom.particle.CustomFlatParticle;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -29,7 +29,7 @@ public class BackstabParticle extends CustomFlatParticle {
     @Override
     protected @NotNull ItemStack createDisplayItem() {
         ItemStack itemStack = new ItemStack(Material.LEATHER_HELMET);
-        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData().addColor(COLOR).build());
+        itemStack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.custom.ModelData().addColor(COLOR).build());
         return itemStack;
     }
 

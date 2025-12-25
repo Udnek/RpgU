@@ -1,7 +1,7 @@
 package me.udnek.rpgu.particle;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import me.udnek.itemscoreu.customparticle.CustomFlatParticle;
+import me.udnek.coreu.custom.particle.CustomFlatParticle;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.effect.Effects;
 import org.bukkit.Material;

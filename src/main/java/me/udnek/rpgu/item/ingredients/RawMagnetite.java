@@ -1,14 +1,14 @@
 package me.udnek.rpgu.item.ingredients;
 
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.nms.loot.entry.NmsCompositeEntryContainer;
-import me.udnek.itemscoreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.itemscoreu.nms.loot.entry.NmsNestedEntryContainer;
-import me.udnek.itemscoreu.nms.loot.entry.NmsSingletonEntryContainer;
-import me.udnek.itemscoreu.nms.loot.pool.NmsLootPoolBuilder;
-import me.udnek.itemscoreu.nms.loot.table.NmsLootTableContainer;
-import me.udnek.itemscoreu.nms.loot.util.ItemStackCreator;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.nms.loot.entry.NmsCompositeEntryContainer;
+import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
+import me.udnek.coreu.nms.loot.entry.NmsNestedEntryContainer;
+import me.udnek.coreu.nms.loot.entry.NmsSingletonEntryContainer;
+import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.table.NmsLootTableContainer;
+import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import org.jetbrains.annotations.NotNull;
 
 public class RawMagnetite extends ConstructableCustomItem {

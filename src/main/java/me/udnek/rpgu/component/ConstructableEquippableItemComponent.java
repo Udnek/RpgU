@@ -1,7 +1,7 @@
 package me.udnek.rpgu.component;
 
 
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
 import me.udnek.rpgu.component.ability.passive.PassiveAbility;
 import org.jetbrains.annotations.NotNull;
 

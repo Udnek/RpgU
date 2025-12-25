@@ -1,6 +1,6 @@
 package me.udnek.rpgu.item.ingredients;
 
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;

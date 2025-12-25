@@ -1,9 +1,9 @@
 package me.udnek.rpgu.entity.ancient_breeze;
 
-import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntity;
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntity;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
 import me.udnek.rpgu.component.instance.DamageResistent;
 import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Location;

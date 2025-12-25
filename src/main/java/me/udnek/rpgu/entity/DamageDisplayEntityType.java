@@ -1,6 +1,6 @@
 package me.udnek.rpgu.entity;
 
-import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TextDisplay;

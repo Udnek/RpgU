@@ -1,11 +1,11 @@
 package me.udnek.rpgu.component.ability.active;
 
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
-import me.udnek.itemscoreu.customcomponent.CustomComponent;
-import me.udnek.itemscoreu.customcomponent.CustomComponentMap;
-import me.udnek.itemscoreu.customcomponent.CustomComponentType;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentMap;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.AbilityComponent;
 import org.bukkit.event.player.PlayerInteractEvent;

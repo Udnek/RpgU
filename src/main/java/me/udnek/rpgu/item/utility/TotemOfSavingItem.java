@@ -1,11 +1,11 @@
 package me.udnek.rpgu.item.utility;
 
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customequipmentslot.slot.SingleSlot;
-import me.udnek.itemscoreu.customequipmentslot.universal.UniversalInventorySlot;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.Either;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.Either;
 import me.udnek.rpgu.component.ComponentTypes;
 import me.udnek.rpgu.component.ability.passive.ConstructablePassiveAbility;
 import me.udnek.rpgu.entity.EntityTypes;

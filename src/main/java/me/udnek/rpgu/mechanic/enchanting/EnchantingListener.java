@@ -1,9 +1,9 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import me.udnek.itemscoreu.customenchantment.NmsEnchantmentContainer;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.coreu.custom.enchantment.NmsEnchantmentContainer;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

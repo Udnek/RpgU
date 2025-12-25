@@ -2,7 +2,7 @@ package me.udnek.rpgu.particle;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import com.google.common.base.Preconditions;
-import me.udnek.itemscoreu.ItemsCoreU;
+import me.udnek.coreu.ItemsCoreU;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -22,7 +22,7 @@ public class ParticleUtils {
                 particle.location(arrow.getLocation());
                 particle.spawn();
             }
-        }.runTaskTimer(ItemsCoreU.getInstance(), 0, 1);
+        }.runTaskTimer(coreu.getInstance(), 0, 1);
     }
     
     public static void drawLine(@NotNull Particle particle, @NotNull Location from, @NotNull Location to, double space) {

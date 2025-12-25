@@ -1,6 +1,6 @@
 package me.udnek.rpgu.equipment;
 
-import me.udnek.itemscoreu.util.TickingTask;
+import me.udnek.coreu.util.TickingTask;
 import me.udnek.rpgu.component.ComponentTypes;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

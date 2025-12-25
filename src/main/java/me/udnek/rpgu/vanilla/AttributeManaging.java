@@ -3,19 +3,19 @@ package me.udnek.rpgu.vanilla;
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.PotionContents;
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customevent.CustomItemGeneratedEvent;
-import me.udnek.itemscoreu.customevent.InitializationEvent;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.customitem.RepairData;
-import me.udnek.itemscoreu.customitem.VanillaItemManager;
-import me.udnek.itemscoreu.customregistry.InitializationProcess;
-import me.udnek.itemscoreu.nms.Nms;
-import me.udnek.itemscoreu.util.ComponentU;
-import me.udnek.itemscoreu.util.SelfRegisteringListener;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
+import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.event.CustomItemGeneratedEvent;
+import me.udnek.coreu.custom.event.InitializationEvent;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.item.RepairData;
+import me.udnek.coreu.custom.item.VanillaItemManager;
+import me.udnek.coreu.custom.registry.InitializationProcess;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.util.ComponentU;
+import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;
@@ -244,7 +244,7 @@ public class AttributeManaging extends SelfRegisteringListener {
                     PotionContents dataFirst = itemStack.getData(DataComponentTypes.POTION_CONTENTS);
                     if (dataFirst != null) {
                         arrow.setBasePotionType(dataFirst.potion());
-                        if (dataFirst.customColor() != null) arrow.setColor(dataFirst.customColor());
+                        if (dataFirst.custom.Color() != null) arrow.setColor(dataFirst.custom.Color());
                     }
                 }
                 @Override

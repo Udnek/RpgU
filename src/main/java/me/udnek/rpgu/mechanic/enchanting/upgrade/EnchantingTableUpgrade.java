@@ -1,9 +1,9 @@
 package me.udnek.rpgu.mechanic.enchanting.upgrade;
 
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
-import me.udnek.itemscoreu.customregistry.CustomRegistry;
-import me.udnek.itemscoreu.customregistry.MappedCustomRegistry;
-import me.udnek.itemscoreu.customregistry.Registrable;
+import me.udnek.coreu.custom.registry.CustomRegistries;
+import me.udnek.coreu.custom.registry.CustomRegistry;
+import me.udnek.coreu.custom.registry.MappedCustomRegistry;
+import me.udnek.coreu.custom.registry.Registrable;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Location;
 import org.bukkit.Material;

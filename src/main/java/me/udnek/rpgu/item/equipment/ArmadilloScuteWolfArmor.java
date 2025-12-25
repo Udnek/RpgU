@@ -2,9 +2,9 @@ package me.udnek.rpgu.item.equipment;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Equippable;
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
-import me.udnek.itemscoreu.customitem.RepairData;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.rpgu.RpgU;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

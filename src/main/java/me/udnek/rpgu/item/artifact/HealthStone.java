@@ -1,9 +1,9 @@
 package me.udnek.rpgu.item.artifact;
 
-import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
-import me.udnek.itemscoreu.customitem.ConstructableCustomItem;
+import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
+import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;

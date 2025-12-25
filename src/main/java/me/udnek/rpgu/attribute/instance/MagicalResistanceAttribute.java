@@ -1,6 +1,6 @@
 package me.udnek.rpgu.attribute.instance;
 
-import me.udnek.itemscoreu.customattribute.ConstructableReversedCustomAttribute;
+import me.udnek.coreu.custom.attribute.ConstructableReversedCustomAttribute;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;

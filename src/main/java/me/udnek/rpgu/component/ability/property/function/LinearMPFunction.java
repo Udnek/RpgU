@@ -1,6 +1,6 @@
 package me.udnek.rpgu.component.ability.property.function;
 
-import me.udnek.itemscoreu.util.Utils;
+import me.udnek.coreu.util.Utils;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 

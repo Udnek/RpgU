@@ -1,6 +1,6 @@
 package me.udnek.rpgu.effect;
 
-import me.udnek.itemscoreu.customeffect.ConstructableCustomEffect;
+import me.udnek.coreu.custom.effect.ConstructableCustomEffect;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.particle.RootParticle;
 import org.bukkit.NamespacedKey;

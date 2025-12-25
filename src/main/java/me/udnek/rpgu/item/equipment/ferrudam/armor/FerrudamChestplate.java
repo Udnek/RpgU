@@ -1,8 +1,8 @@
 package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customrecipe.choice.CustomCompatibleRecipeChoice;
-import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
+import me.udnek.coreu.custom.recipe.choice.CustomCompatibleRecipeChoice;
+import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;

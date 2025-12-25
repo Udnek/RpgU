@@ -1,13 +1,13 @@
 package me.udnek.rpgu.item.equipment.doloire;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import me.udnek.itemscoreu.customattribute.AttributeUtils;
-import me.udnek.itemscoreu.customattribute.CustomAttributeModifier;
-import me.udnek.itemscoreu.customattribute.CustomAttributesContainer;
-import me.udnek.itemscoreu.customcomponent.instance.CustomItemAttributesComponent;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.RepairData;
-import me.udnek.itemscoreu.customrecipe.choice.CustomSingleRecipeChoice;
+import me.udnek.coreu.custom.attribute.AttributeUtils;
+import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
+import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.item.RepairData;
+import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ComponentTypes;

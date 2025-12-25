@@ -1,9 +1,9 @@
 package me.udnek.rpgu.lore;
 
-import me.udnek.itemscoreu.customattribute.CustomAttribute;
-import me.udnek.itemscoreu.customequipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.itemscoreu.customitem.CustomItem;
-import me.udnek.itemscoreu.util.LoreBuilder;
+import me.udnek.coreu.custom.attribute.CustomAttribute;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.lore.ability.PassiveAbilityLorePart;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;

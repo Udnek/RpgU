@@ -1,8 +1,8 @@
 package me.udnek.rpgu.entity;
 
-import me.udnek.itemscoreu.customentitylike.entity.CustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
-import me.udnek.itemscoreu.customregistry.CustomRegistries;
+import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.entity.ancient_breeze.AncientBreeze;
 import me.udnek.rpgu.entity.ancient_breeze.AncientBreezeShield;

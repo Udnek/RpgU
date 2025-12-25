@@ -1,9 +1,9 @@
 package me.udnek.rpgu.multiblockstructure;
 
-import me.udnek.itemscoreu.multiblockstructure.MultiBlockStructure;
-import me.udnek.itemscoreu.multiblockstructure.blockchoice.AnyBlockChoice;
-import me.udnek.itemscoreu.multiblockstructure.blockchoice.BlockChoice;
-import me.udnek.itemscoreu.multiblockstructure.blockchoice.MaterialBlockChoice;
+import me.udnek.coreu.multiblockstructure.MultiBlockStructure;
+import me.udnek.coreu.multiblockstructure.blockchoice.AnyBlockChoice;
+import me.udnek.coreu.multiblockstructure.blockchoice.BlockChoice;
+import me.udnek.coreu.multiblockstructure.blockchoice.MaterialBlockChoice;
 import org.bukkit.Material;
 
 public class EnergyVaultStructure{
