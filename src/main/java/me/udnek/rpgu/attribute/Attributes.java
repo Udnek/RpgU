@@ -62,8 +62,8 @@ public class Attributes{
     }
 
 
-    private static CustomAttribute register(CustomAttribute customAttributeType){
-        return CustomRegistries.ATTRIBUTE.register(RpgU.getInstance(), customAttributeType);
+    private static CustomAttribute register(CustomAttribute custom.AttributeType){
+        return CustomRegistries.ATTRIBUTE.register(RpgU.getInstance(), custom.AttributeType);
     }
 
 }

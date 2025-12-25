@@ -19,8 +19,8 @@ public class EntityTypes {
     public static final CustomTickingEntityType<AncientBreezeShield> ANCIENT_BREEZE_SHIELD = register(new AncientBreezeShieldType());
     public static final CustomEntityType ANCIENT_BREEZE_PROJECTILE = register(new AncientBreezeProjectileType());
 
-    private static @NotNull <T extends CustomEntityType> T register(@NotNull T customEntityType){
-        return CustomRegistries.ENTITY_TYPE.register(RpgU.getInstance(), customEntityType);
+    private static @NotNull <T extends CustomEntityType> T register(@NotNull T custom.EntityType){
+        return CustomRegistries.ENTITY_TYPE.register(RpgU.getInstance(), custom.EntityType);
     }
 
 }

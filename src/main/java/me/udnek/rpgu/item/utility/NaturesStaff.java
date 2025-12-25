@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.utility;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -81,7 +81,7 @@ public class NaturesStaff extends ConstructableCustomItem {
 
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerInteractEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerInteractEvent event) {
             Collection<LivingEntity> livingEntitiesInRayTraceRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.DUST).color(Color.GREEN));
 
             EffectsProperty effects = getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS);
@@ -104,8 +104,8 @@ public class NaturesStaff extends ConstructableCustomItem {
         }
 
         @Override
-        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
-            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+        public void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event) {
+            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
         }
 
 

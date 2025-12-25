@@ -3,7 +3,7 @@ package me.udnek.rpgu.component.instance;
 import io.papermc.paper.datacomponent.item.DeathProtection;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.Either;
@@ -45,7 +45,7 @@ public class DeathProtectionPassive extends ConstructablePassiveAbility<EntityRe
 
 
     @Override
-    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
+    public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
                                         @NotNull EntityResurrectEvent entityResurrectEvent) {
         if (entityResurrectEvent.isCancelled()) {slot.getLeft().addItem(-1, livingEntity);}
         entityResurrectEvent.setCancelled(false);
@@ -53,8 +53,8 @@ public class DeathProtectionPassive extends ConstructablePassiveAbility<EntityRe
     }
 
     @Override
-    public void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
+    public void onResurrect(@NotNull CustomItem custom.Item, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
                             @NotNull EntityResurrectEvent event) {
-        if (!activatedBefore) activate(customItem, event.getEntity(), true, new Either<>(slot, null), event);
+        if (!activatedBefore) activate(custom.Item, event.getEntity(), true, new Either<>(slot, null), event);
     }
 }

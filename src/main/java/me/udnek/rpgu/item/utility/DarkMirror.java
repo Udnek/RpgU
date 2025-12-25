@@ -80,7 +80,7 @@ public class DarkMirror extends ConstructableCustomItem {
         }
 
         @Override
-        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+        public void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event) {
             event.setCancelled(true);
             Player player = event.getPlayer();
             Collection<PotionEffect> potionEffects = new ArrayList<>(player.getActivePotionEffects());

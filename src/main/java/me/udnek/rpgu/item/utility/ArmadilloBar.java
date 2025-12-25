@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -82,7 +82,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerInteractEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerInteractEvent event) {
             final double duration = getComponents().getOrException(ComponentTypes.ABILITY_DURATION).get(livingEntity);
             final int PERIOD = 10;
             new BukkitRunnable() {
@@ -116,8 +116,8 @@ public class ArmadilloBar extends ConstructableCustomItem {
         }
 
         @Override
-        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
-            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+        public void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event) {
+            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
         }
     }
 }

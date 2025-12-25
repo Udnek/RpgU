@@ -4,7 +4,7 @@
 		"model": "rpgu:item/particle/sweep/2",
 		"tints": [
 			{
-				"type": "minecraft:custom_model_data",
+				"type": "minecraft:custom._model_data",
 				"default": 0
 			}
 		]

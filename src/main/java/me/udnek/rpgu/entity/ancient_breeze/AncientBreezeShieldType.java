@@ -29,9 +29,9 @@ public class AncientBreezeShieldType extends ConstructableCustomEntityType<Pigli
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        CustomEntity customEntity = CustomEntityType.getTicking(event.getEntity());
-        if (customEntity == null || customEntity.getType() != EntityTypes.ANCIENT_BREEZE_SHIELD) return;
-        ((AncientBreezeShield) customEntity).entityDeath();
+        CustomEntity custom.Entity = CustomEntityType.getTicking(event.getEntity());
+        if (custom.Entity == null || custom.Entity.getType() != EntityTypes.ANCIENT_BREEZE_SHIELD) return;
+        ((AncientBreezeShield) custom.Entity).entityDeath();
     }
 
     @Override

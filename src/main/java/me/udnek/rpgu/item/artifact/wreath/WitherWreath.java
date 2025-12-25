@@ -7,7 +7,7 @@ import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
 import me.udnek.coreu.custom.component.instance.VanillaAttributesComponent;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -93,16 +93,16 @@ public class WitherWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity,
-                                            @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull DamageEvent damageEvent) {
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity,
+                                            @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull DamageEvent damageEvent) {
             if (!(damageEvent.getDamageInstance().getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
             getComponents().getOrException(ComponentTypes.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
             return ActionResult.FULL_COOLDOWN;
         }
 
         @Override
-        public void onDamage(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
-            activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), new Either<>(slot, null), event);
+        public void onDamage(@NotNull CustomItem custom.Item, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
+            activate(custom.Item, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), new Either<>(slot, null), event);
         }
     }
 }

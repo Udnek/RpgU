@@ -8,15 +8,15 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
 public interface DamageResistent extends CustomComponent<CustomEntityType> {
-    DamageResistent DEFAULT = (customEntityType, damageCause) -> false;
-    DamageResistent NO_ENVIRONMENT_DAMAGE = (customEntityType, damageCause) -> {
+    DamageResistent DEFAULT = (custom.EntityType, damageCause) -> false;
+    DamageResistent NO_ENVIRONMENT_DAMAGE = (custom.EntityType, damageCause) -> {
         switch (damageCause) {
             case FLY_INTO_WALL, FALL, HOT_FLOOR, DROWNING, SUFFOCATION -> {return true;}
             default -> {return false;}
         }
     };
 
-    boolean isResistentTo(@NotNull CustomEntityType customEntityType, @NotNull EntityDamageEvent.DamageCause damageCause);
+    boolean isResistentTo(@NotNull CustomEntityType custom.EntityType, @NotNull EntityDamageEvent.DamageCause damageCause);
 
     @Override
     default @NotNull CustomComponentType<CustomEntityType, ?> getType() {

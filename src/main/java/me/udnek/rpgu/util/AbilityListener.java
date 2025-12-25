@@ -33,30 +33,30 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void abilityRightClick(PlayerInteractEvent event){
         if (!event.getAction().isRightClick()) return;
-        CustomItem.consumeIfCustom(event.getItem(), customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(customItem, event));
+        CustomItem.consumeIfCustom(event.getItem(), custom.Item ->
+                custom.Item.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onRightClick(custom.Item, event));
     }
 
     @EventHandler
     public void abilityStopUsing(PlayerStopUsingItemEvent event){
-        CustomItem.consumeIfCustom(event.getItem(), customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(customItem, event));
+        CustomItem.consumeIfCustom(event.getItem(), custom.Item ->
+                custom.Item.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onStopUsing(custom.Item, event));
     }
 
     @EventHandler
     public void abilityConsume(PlayerItemConsumeEvent event){
-        CustomItem.consumeIfCustom(event.getItem(), customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(customItem, event));
+        CustomItem.consumeIfCustom(event.getItem(), custom.Item ->
+                custom.Item.getComponents().getOrDefault(ComponentTypes.ACTIVE_ABILITY_ITEM).onConsume(custom.Item, event));
     }
 
     @EventHandler
     public void entityResurrect(EntityResurrectEvent event){
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->  {
-            CustomItem.consumeIfCustom(itemStack, customItem ->
-                     customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+            CustomItem.consumeIfCustom(itemStack, custom.Item ->
+                     custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                              if (!passive.getSlot().intersects(slot)) return;
-                             passive.onResurrect(customItem, slot, activatedBefore.get(), event);
+                             passive.onResurrect(custom.Item, slot, activatedBefore.get(), event);
                      }));
             if (!(event.isCancelled())) activatedBefore.set(true);
         };
@@ -69,10 +69,10 @@ public class AbilityListener extends SelfRegisteringListener {
         Entity damager = event.getDamageInstance().getDamager();
         if (!(damager instanceof LivingEntity livingEntity)) return;
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                CustomItem.consumeIfCustom(itemStack, custom.Item ->
+                        custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                             if (!passive.getSlot().intersects(slot)) return;
-                            passive.onDamage(customItem, slot, event);
+                            passive.onDamage(custom.Item, slot, event);
                         }));
 
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, livingEntity);
@@ -81,10 +81,10 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void playerDeath(PlayerDeathEvent event){
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                CustomItem.consumeIfCustom(itemStack, custom.Item ->
+                        custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                             if (!passive.getSlot().intersects(slot)) return;
-                            passive.onDeath(customItem, slot, event);
+                            passive.onDeath(custom.Item, slot, event);
                         }));
 
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
@@ -93,10 +93,10 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void bowShoot(EntityShootBowEvent event){
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-            CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+            CustomItem.consumeIfCustom(itemStack, custom.Item ->
+                        custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                             if (!passive.getSlot().intersects(slot)) return;
-                            passive.onFire(customItem, slot, event);
+                            passive.onFire(custom.Item, slot, event);
                         }));
 
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
@@ -105,10 +105,10 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void arrowChoose(PlayerReadyArrowEvent event){
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                    customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                CustomItem.consumeIfCustom(itemStack, custom.Item ->
+                    custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                         if (!passive.getSlot().intersects(slot)) return;
-                        passive.onChooseArrow(customItem, slot, event);
+                        passive.onChooseArrow(custom.Item, slot, event);
                     }));
 
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getPlayer());
@@ -117,10 +117,10 @@ public class AbilityListener extends SelfRegisteringListener {
     @EventHandler
     public void arrowLoad(EntityLoadCrossbowEvent event){
         BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
+                CustomItem.consumeIfCustom(itemStack, custom.Item ->
+                        custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive -> {
                             if (!passive.getSlot().intersects(slot)) return;
-                            passive.onLoadToCrossbow(customItem, slot, event);
+                            passive.onLoadToCrossbow(custom.Item, slot, event);
                         }));
 
         UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
@@ -141,8 +141,8 @@ public class AbilityListener extends SelfRegisteringListener {
             }
         }
         if (item == null) return;
-        CustomItem.consumeIfCustom(item, customItem ->
-                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive ->
-                        passive.onGlide(customItem, event)));
+        CustomItem.consumeIfCustom(item, custom.Item ->
+                custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).getPassives(passive ->
+                        passive.onGlide(custom.Item, event)));
     }
 }

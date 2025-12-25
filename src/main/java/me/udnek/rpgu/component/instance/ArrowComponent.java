@@ -14,15 +14,15 @@ public interface ArrowComponent extends CustomComponent<CustomItem> {
     ArrowComponent DEFAULT = new ArrowComponent(){
 
         @Override
-        public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+        public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
             return Component.empty();
         }
     };
 
-    default void onBeingShoot(@NotNull CustomItem customItem, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {}
-    default @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem customItem, @NotNull PlayerReadyArrowEvent event) {return ChoseArrowResult.ALLOW;}
+    default void onBeingShoot(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {}
+    default @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem custom.Item, @NotNull PlayerReadyArrowEvent event) {return ChoseArrowResult.ALLOW;}
 
-    @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack);
+    @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack);
 
     enum ChoseArrowResult {
         ALLOW,

@@ -3,7 +3,7 @@ package me.udnek.rpgu.component.instance;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.Either;
@@ -40,13 +40,13 @@ public class GliderComponent extends ConstructablePassiveAbility<EntityToggleGli
     }
 
     @Override
-    public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
+    public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
                                         @NotNull EntityToggleGlideEvent entityToggleGlideEvent) {
         return ActionResult.NO_COOLDOWN;
     }
 
     @Override
-    public void onGlide(@NotNull CustomItem customItem, @NotNull EntityToggleGlideEvent event) {
-        activate(customItem, (LivingEntity) event.getEntity(), true, new Either<>(null, (SingleSlot) slot), event);
+    public void onGlide(@NotNull CustomItem custom.Item, @NotNull EntityToggleGlideEvent event) {
+        activate(custom.Item, (LivingEntity) event.getEntity(), true, new Either<>(null, (CustomEquipmentSlot.Single) slot), event);
     }
 }

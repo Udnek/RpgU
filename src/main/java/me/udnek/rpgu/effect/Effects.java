@@ -14,7 +14,7 @@ public class Effects {
     public static final CustomEffect MIRE_TOUCH = register(new MireTouchEffect());
     public static final CustomEffect STUN_EFFECT = register(new StunEffect());
 
-    private static CustomEffect register(CustomEffect customEffect){
-        return CustomRegistries.EFFECT.register(RpgU.getInstance(), customEffect);
+    private static CustomEffect register(CustomEffect custom.Effect){
+        return CustomRegistries.EFFECT.register(RpgU.getInstance(), custom.Effect);
     }
 }

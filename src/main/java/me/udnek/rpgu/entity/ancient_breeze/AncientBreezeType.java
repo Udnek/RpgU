@@ -2,8 +2,8 @@ package me.udnek.rpgu.entity.ancient_breeze;
 
 import io.papermc.paper.event.entity.EntityMoveEvent;
 import io.papermc.paper.event.player.PlayerNameEntityEvent;
-import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
-import me.udnek.itemscoreu.customentitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import net.kyori.adventure.text.Component;
@@ -32,7 +32,7 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
     @Override
     public @NotNull Breeze spawnNewEntity(@NotNull Location location) {
         Breeze breeze = super.spawnNewEntity(location);
-        breeze.customName(Component.translatable("entity.rpgu.ancient_breeze"));
+        breeze.custom.Name(Component.translatable("entity.rpgu.ancient_breeze"));
         breeze.setCustomNameVisible(false);
         Objects.requireNonNull(breeze.getAttribute(Attribute.MAX_HEALTH)).setBaseValue(AncientBreeze.ANCIENT_BREEZE_HP);
         breeze.heal(AncientBreeze.ANCIENT_BREEZE_HP);

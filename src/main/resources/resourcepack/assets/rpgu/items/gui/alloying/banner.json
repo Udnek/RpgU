@@ -4,7 +4,7 @@
     "model": "rpgu:item/gui/alloying/banner",
     "tints": [
       {
-        "type": "minecraft:custom_model_data",
+        "type": "minecraft:custom._model_data",
         "default": 0
       }
     ]

@@ -31,7 +31,7 @@ public class EffectsProperty implements AbilityProperty<LivingEntity, List<Potio
 
     public EffectsProperty(){}
 
-    public EffectsProperty(@NotNull PotionData ...data){
+    public EffectsProperty(@NotNull PotionData ..data){
         Arrays.stream(data).forEach(this::add);
     }
 
@@ -99,18 +99,18 @@ public class EffectsProperty implements AbilityProperty<LivingEntity, List<Potio
 
     public void applyOn(@NotNull LivingEntity source, @NotNull LivingEntity target){
         for (PotionEffect effect : get(source)) {
-            CustomEffect customEffect = CustomEffect.get(effect.getType());
-            if (customEffect == null) target.addPotionEffect(effect);
-            else customEffect.apply(target, effect);
+            CustomEffect custom.Effect = CustomEffect.get(effect.getType());
+            if (custom.Effect == null) target.addPotionEffect(effect);
+            else custom.Effect.apply(target, effect);
         }
     }
 
     public void applyOn(@NotNull LivingEntity source, @NotNull Iterable<LivingEntity> targets){
         for (PotionEffect effect : get(source)) {
-            CustomEffect customEffect = CustomEffect.get(effect.getType());
+            CustomEffect custom.Effect = CustomEffect.get(effect.getType());
             for (LivingEntity target : targets) {
-                if (customEffect == null) target.addPotionEffect(effect);
-                else customEffect.apply(target, effect);
+                if (custom.Effect == null) target.addPotionEffect(effect);
+                else custom.Effect.apply(target, effect);
             }
         }
     }

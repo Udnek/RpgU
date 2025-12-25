@@ -4,7 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -152,7 +152,7 @@ public class FlowerWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
                                             @Nullable Object o) {
             Location location = randomOffset(livingEntity);
             boolean isInForest = isForestMaterial(location.getBlock().getType());
@@ -169,8 +169,8 @@ public class FlowerWreath extends ConstructableCustomItem {
         }
 
         @Override
-        public void tick(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull SingleSlot slot) {
-            activate(customItem, livingEntity, new Either<>(null, slot) , new Object());
+        public void tick(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull CustomEquipmentSlot.Single slot) {
+            activate(custom.Item, livingEntity, new Either<>(null, slot) , new Object());
         }
     }
 }

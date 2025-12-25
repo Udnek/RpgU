@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.artifact;
 
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.LoreBuilder;
@@ -58,7 +58,7 @@ public class FishermanSnorkel extends ConstructableCustomItem {
             }
 
             @Override
-            public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot) {
+            public void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot) {
                 if (player.getMaximumAir() == player.getRemainingAir()) return;
 
                 FishHook fishHook = player.getFishHook();

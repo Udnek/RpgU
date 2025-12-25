@@ -5,10 +5,12 @@ import me.udnek.coreu.custom.attribute.CustomAttribute;
 import me.udnek.coreu.custom.effect.CustomEffect;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.sound.CustomSound;
 import me.udnek.coreu.resourcepack.ResourcePackablePlugin;
+import me.udnek.jeiu.menu.JeiUMenu;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.Commands;
@@ -40,10 +42,9 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
     @Override
     public void onEnable() {
         instance = this;
-
         CustomItem blazeBlade = Items.SHINY_AXE;
         CustomEntityType totemOfSaving = EntityTypes.TOTEM_OF_SAVING;
-        SingleSlot artifacts = EquipmentSlots.FIRST_ARTIFACT;
+        CustomEquipmentSlot.Single artifacts = EquipmentSlots.FIRST_ARTIFACT;
         CustomAttribute magicalPotential = Attributes.MAGICAL_POTENTIAL;
         CustomEffect magicalResistance = Effects.MAGICAL_RESISTANCE;
         CustomBlockType soulBinder = Blocks.SOUL_BINDER;
@@ -64,5 +65,10 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         PlayerWearingEquipmentTask.getInstance().start(this);
 
         Hud.getInstance().register();
+    }
+
+    @Override
+    public @NotNull Priority getPriority() {
+        return Priority.BASE;
     }
 }

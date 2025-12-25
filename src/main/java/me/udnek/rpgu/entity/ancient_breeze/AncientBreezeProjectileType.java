@@ -1,6 +1,6 @@
 package me.udnek.rpgu.entity.ancient_breeze;
 
-import me.udnek.itemscoreu.customentitylike.entity.ConstructableCustomEntityType;
+import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;

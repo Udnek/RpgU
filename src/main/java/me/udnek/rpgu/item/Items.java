@@ -123,11 +123,10 @@ public class Items {
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
 
     // BLOCKS
-
     public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
 
 
-    private static @NotNull CustomItem register(@NotNull CustomItem customItem){
-        return CustomRegistries.ITEM.register(RpgU.getInstance(), customItem);
+    private static @NotNull CustomItem register(@NotNull CustomItem custom.Item){
+        return CustomRegistries.ITEM.register(RpgU.getInstance(), custom.Item);
     }
 }

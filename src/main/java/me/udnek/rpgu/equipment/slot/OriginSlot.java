@@ -2,7 +2,7 @@
 
 
 import me.udnek.coreu.custom.equipmentslot.slot.AbstractCustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.rpgu.lore.TranslationKeys;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +11,7 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class OriginSlot extends AbstractCustomEquipmentSlot implements SingleSlot {
+public class OriginSlot extends AbstractCustomEquipmentSlot implements CustomEquipmentSlot.Single {
     public OriginSlot() {
         super("origin");
     }

@@ -223,8 +223,8 @@ public class DamageInstance {
                         if (impaling != 0 && victim.isInWaterOrRain()) damage.addMagical(impaling * NARROW_ENCHANTMENTS_DAMAGE_BONUS);
                     }
                     if (projectile.getShooter() instanceof Player shooter){
-                        PlayerEquipment.get(shooter).getEquipment((slot, customItem) ->
-                                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(customItem, shooter, slot, DamageInstance.this));
+                        PlayerEquipment.get(shooter).getEquipment((slot, custom.Item) ->
+                                custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerHitsWithProjectileWhenEquipped(custom.Item, shooter, slot, DamageInstance.this));
                     }
                 }
                 default -> {}
@@ -238,8 +238,8 @@ public class DamageInstance {
     private void equipmentAttacks() {
         if (!(damager instanceof Player player)) return;
 
-        PlayerEquipment.get(player).getEquipment((slot, customItem) ->
-                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(customItem, player, slot, DamageInstance.this));
+        PlayerEquipment.get(player).getEquipment((slot, custom.Item) ->
+                custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerAttacksWhenEquipped(custom.Item, player, slot, DamageInstance.this));
     }
 
     private void equipmentReceives() {
@@ -263,8 +263,8 @@ public class DamageInstance {
         }
 
         if (!(victim instanceof Player player)) return;
-        PlayerEquipment.get(player).getEquipment((slot, customItem) ->
-                customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(customItem, player, slot, DamageInstance.this));
+        PlayerEquipment.get(player).getEquipment((slot, custom.Item) ->
+                custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).onPlayerReceivesDamageWhenEquipped(custom.Item, player, slot, DamageInstance.this));
     }
 
     public abstract static class ExtraFlag{

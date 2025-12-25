@@ -14,8 +14,8 @@ public class DebugEquipmentCommand implements CommandExecutor {
         if (!(commandSender instanceof Player player)) return false;
 
         player.sendMessage("");
-        PlayerEquipment.EquipmentConsumer consumer = (slot, customItem) -> player.sendMessage(slot.getId()
-                + ": " + customItem.getId());
+        PlayerEquipment.EquipmentConsumer consumer = (slot, custom.Item) -> player.sendMessage(slot.getId()
+                + ": " + custom.Item.getId());
         PlayerEquipment.get(player).getEquipment(consumer);
 
         return true;

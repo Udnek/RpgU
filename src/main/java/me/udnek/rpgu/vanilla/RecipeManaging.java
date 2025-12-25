@@ -122,7 +122,7 @@ public class RecipeManaging {
                 addIngredient(Material.DAMAGED_ANVIL, 1).build(RpgU.getInstance());
         //////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.MINECART).recipeShape(new String[]{"I I", "MMM"}).materialIngredients(Map.of('I', Material.IRON_INGOT)).
-                customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
+                custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.PISTON).recipeShape(new String[]{"WWW", "CMC", "CRC"}).materialIngredients(Map.of('C', Material.COBBLESTONE,
                 'R', Material.REDSTONE)).custom.ItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).tagIngredients(Map.of('W', Tag.PLANKS))
                         .build(RpgU.getInstance());
@@ -159,9 +159,9 @@ public class RecipeManaging {
         private final ItemStack replace;
         private String recipeKey;
         private final List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
-        private Set<CustomItem> customItemFuel = new HashSet<>();
+        private Set<CustomItem> custom.ItemFuel = new HashSet<>();
         private Set<Material> materialFuel = new HashSet<>();
-        private Set<CustomItem> customItemAddition = new HashSet<>();
+        private Set<CustomItem> custom.ItemAddition = new HashSet<>();
         private Set<Material> materialAddition = new HashSet<>();
 
         public AlloyingRecipeBuilder(@NotNull Material replaceMaterial) {
@@ -174,8 +174,8 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder customItemFuel(@NotNull Set<CustomItem> customItemFuel){
-            this.custom.ItemFuel = customItemFuel;
+        public AlloyingRecipeBuilder custom.ItemFuel(@NotNull Set<CustomItem> custom.ItemFuel){
+            this.custom.ItemFuel = custom.ItemFuel;
             return this;
         }
 
@@ -184,8 +184,8 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem customItemAlloy, int amount){
-            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(customItemAlloy));}
+        public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem custom.ItemAlloy, int amount){
+            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(custom.ItemAlloy));}
             return this;
         }
 
@@ -194,8 +194,8 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder customItemAddition(@NotNull Set<CustomItem> customItemAddition){
-            this.custom.ItemAddition = customItemAddition;
+        public AlloyingRecipeBuilder custom.ItemAddition(@NotNull Set<CustomItem> custom.ItemAddition){
+            this.custom.ItemAddition = custom.ItemAddition;
             return this;
         }
 
@@ -205,11 +205,11 @@ public class RecipeManaging {
         }
 
         public CustomRecipeChoice fuel(){
-            return new CustomCompatibleRecipeChoice(customItemFuel, materialFuel);
+            return new CustomCompatibleRecipeChoice(custom.ItemFuel, materialFuel);
         }
 
         public CustomRecipeChoice addition(){
-            return new CustomCompatibleRecipeChoice(customItemAddition, materialAddition);
+            return new CustomCompatibleRecipeChoice(custom.ItemAddition, materialAddition);
         }
 
         public AlloyingRecipeBuilder build(@NotNull Plugin plugin){

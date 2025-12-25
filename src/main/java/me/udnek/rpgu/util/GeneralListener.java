@@ -126,7 +126,7 @@ public class GeneralListener extends SelfRegisteringListener {
     public @NotNull MerchantRecipe replaceRecipe(@NotNull MerchantRecipe recipe, @NotNull ItemStack newItem){
         Map<Enchantment, Integer> oldItemEnchants = recipe.getResult().getEnchantments();
         newItem.addEnchantments(oldItemEnchants);
-        MerchantRecipe customRecipe = new MerchantRecipe(
+        MerchantRecipe custom.Recipe = new MerchantRecipe(
                 newItem, recipe.getUses(),
                 recipe.getMaxUses(),
                 recipe.hasExperienceReward(),
@@ -136,8 +136,8 @@ public class GeneralListener extends SelfRegisteringListener {
                 recipe.getSpecialPrice(),
                 recipe.shouldIgnoreDiscounts());
 
-        customRecipe.setIngredients(recipe.getIngredients());
-        return customRecipe;
+        custom.Recipe.setIngredients(recipe.getIngredients());
+        return custom.Recipe;
     }
 
     @EventHandler

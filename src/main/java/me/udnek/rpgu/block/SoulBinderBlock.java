@@ -57,9 +57,9 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
             final RightClickableBlock superComponent = getComponents().getOrException(CustomComponentType.RIGHT_CLICKABLE_BLOCK);
 
             @Override
-            public void onRightClick(@NotNull CustomBlockType customBlockType, @NotNull PlayerInteractEvent event) {
+            public void onRightClick(@NotNull CustomBlockType custom.BlockType, @NotNull PlayerInteractEvent event) {
                 if (event.getPlayer().isSneaking()) {
-                    superComponent.onRightClick(customBlockType, event);
+                    superComponent.onRightClick(custom.BlockType, event);
                     return;
                 }
                 event.setCancelled(true);
@@ -104,9 +104,6 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
 
     @Override
     public void load(@NotNull TileState tileState) {}
-
-    @Override
-    public void unload(@NotNull TileState tileState) {}
 
     public static class SoulBinderData implements SerializableData{
 

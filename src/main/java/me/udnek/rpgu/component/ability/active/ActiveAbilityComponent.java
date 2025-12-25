@@ -22,9 +22,9 @@ public interface ActiveAbilityComponent<ActivationContext> extends AbilityCompon
         public void getLore(@NotNull LoreBuilder loreBuilder) {}
     };
 
-    default void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event){}
-    default void onStopUsing(@NotNull CustomItem customItem, @NotNull PlayerStopUsingItemEvent event){}
-    default void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event){}
+    default void onRightClick(@NotNull CustomItem custom.Item, @NotNull PlayerInteractEvent event){}
+    default void onStopUsing(@NotNull CustomItem custom.Item, @NotNull PlayerStopUsingItemEvent event){}
+    default void onConsume(@NotNull CustomItem custom.Item, @NotNull PlayerItemConsumeEvent event){}
 
 
     default @NotNull CustomComponentType<CustomItem, ?> getType(){return ComponentTypes.ACTIVE_ABILITY_ITEM;}

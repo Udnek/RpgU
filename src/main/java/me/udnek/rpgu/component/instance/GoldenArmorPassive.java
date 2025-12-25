@@ -3,7 +3,7 @@ package me.udnek.rpgu.component.instance;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentMap;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.Either;
@@ -26,9 +26,9 @@ import java.util.Collection;
 
 public class GoldenArmorPassive {
 
-    public static void applyPassive(@NotNull Material material, @NotNull CustomItem customItem){
+    public static void applyPassive(@NotNull Material material, @NotNull CustomItem custom.Item){
         EquipmentSlot equipmentSlot = material.getEquipmentSlot();
-        CustomComponentMap<CustomItem, CustomComponent<CustomItem>> components = customItem.getComponents();
+        CustomComponentMap<CustomItem, CustomComponent<CustomItem>> components = custom.Item.getComponents();
         int duration = 3 * 20;
 
         if (equipmentSlot == EquipmentSlot.HEAD) {
@@ -92,7 +92,7 @@ public class GoldenArmorPassive {
         public @NotNull CustomEquipmentSlot getSlot() {return slot;}
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
                                             @NotNull Object object) {
             Collection<LivingEntity> livingEntitiesInRadius = Utils.livingEntitiesInRadius(livingEntity.getLocation(), getComponents().getOrException(ComponentTypes.ABILITY_AREA_OF_EFFECT).get(livingEntity));
             for (LivingEntity livingEntityInRadius: livingEntitiesInRadius){
@@ -105,8 +105,8 @@ public class GoldenArmorPassive {
         }
 
         @Override
-        public void tick(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull SingleSlot slot) {
-            activate(customItem, livingEntity, new Either<>(null,  slot), new Object());
+        public void tick(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull CustomEquipmentSlot.Single slot) {
+            activate(custom.Item, livingEntity, new Either<>(null,  slot), new Object());
         }
     }
 }

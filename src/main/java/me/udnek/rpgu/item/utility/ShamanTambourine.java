@@ -4,7 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -86,7 +86,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerItemConsumeEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerItemConsumeEvent event) {
 
             double castRange = getComponents().getOrException(ComponentTypes.ABILITY_CAST_RANGE).get(livingEntity);
             Location eyeLocation = livingEntity.getEyeLocation();
@@ -120,9 +120,9 @@ public class ShamanTambourine extends ConstructableCustomItem{
         }
 
         @Override
-        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
+        public void onConsume(@NotNull CustomItem custom.Item, @NotNull PlayerItemConsumeEvent event) {
             event.setCancelled(true);
-            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
         }
     }
 }

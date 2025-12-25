@@ -3,7 +3,7 @@ package me.udnek.rpgu.item.artifact;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.LoreBuilder;
@@ -64,7 +64,7 @@ public class NautilusCore extends ConstructableCustomItem {
         }
 
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot, @NotNull DamageInstance damageInstance) {
             if (!damageInstance.isCritical()) return;
             if (damageInstance.containsExtraFlag(new isMagicalCriticalApplied())) return;
 

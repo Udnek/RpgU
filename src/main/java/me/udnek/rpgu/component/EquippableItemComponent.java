@@ -5,7 +5,7 @@ import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.LoreBuilder;
 import me.udnek.rpgu.component.ability.passive.PassiveAbility;
@@ -41,27 +41,27 @@ public interface EquippableItemComponent extends CustomComponent<CustomItem> {
 
     boolean isAppropriateSlot(@NotNull CustomEquipmentSlot slot);
     default void onEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack){
-        getAttributes(item, player, slot, (attributeInstance, customModifier) -> {
-            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
+        getAttributes(item, player, slot, (attributeInstance, custom.Modifier) -> {
+            AttributeModifier modifier = custom.Modifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) == null) {
                 attributeInstance.addModifier(modifier);
             }
         });
     }
     default void onUnequipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot slot, @NotNull ItemStack itemStack) {
-        getAttributes(item, player, slot, (attributeInstance, customModifier) -> {
-            AttributeModifier modifier = customModifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
+        getAttributes(item, player, slot, (attributeInstance, custom.Modifier) -> {
+            AttributeModifier modifier = custom.Modifier.toVanillaWitAdjustedKey("_" + slot.getKey().asString().replace(':', '_'));
             if (attributeInstance.getModifier(modifier.getKey()) != null) {
                 attributeInstance.removeModifier(modifier);
             }
         });
     }
-    default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot){
+    default void tickBeingEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot){
         getPassives(passiveAbility -> passiveAbility.tick(item, player, slot));
     }
-    default void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
-    default void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
-    default void onPlayerHitsWithProjectileWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance){}
+    default void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot, @NotNull DamageInstance damageInstance){}
+    default void onPlayerReceivesDamageWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot, @NotNull DamageInstance damageInstance){}
+    default void onPlayerHitsWithProjectileWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot, @NotNull DamageInstance damageInstance){}
     default @Nullable Component getHudImage(@NotNull CustomItem item, @NotNull Player player){return null;}
 
 

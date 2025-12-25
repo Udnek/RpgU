@@ -1,7 +1,7 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -73,12 +73,12 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot, @NotNull PlayerDeathEvent event) {
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot, @NotNull PlayerDeathEvent event) {
             Player player = event.getPlayer();
             ItemStack foundTotem = null;
             List<ItemStack> drops = event.getDrops();
             for (ItemStack itemStack : drops) {
-                if (!(customItem.isThisItem(itemStack))) continue;
+                if (!(custom.Item.isThisItem(itemStack))) continue;
                 foundTotem = itemStack;
                 break;
             }
@@ -102,8 +102,8 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         }
 
         @Override
-        public void onDeath(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
-            activate(customItem, event.getPlayer(), new Either<>(slot, null), event);
+        public void onDeath(@NotNull CustomItem custom.Item, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
+            activate(custom.Item, event.getPlayer(), new Either<>(slot, null), event);
         }
     }
 }

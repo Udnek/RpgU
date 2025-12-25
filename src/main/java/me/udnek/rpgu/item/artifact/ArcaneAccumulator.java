@@ -2,7 +2,7 @@ package me.udnek.rpgu.item.artifact;
 
 import me.udnek.coreu.custom.attribute.CustomAttribute;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.util.LoreBuilder;
@@ -47,7 +47,7 @@ public class ArcaneAccumulator extends ConstructableCustomItem {
         }
 
         @Override
-        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull SingleSlot slot, @NotNull DamageInstance damageInstance) {
+        public void onPlayerAttacksWhenEquipped(@NotNull CustomItem item, @NotNull Player player, @NotNull CustomEquipmentSlot.Single slot, @NotNull DamageInstance damageInstance) {
             if (damageInstance.getDamage().getMagical() == 0) return;
             int level = Effects.BONUS_AREA_OF_EFFECT.getAppliedLevel(player);
             if (level <= 7) {level += 1;}

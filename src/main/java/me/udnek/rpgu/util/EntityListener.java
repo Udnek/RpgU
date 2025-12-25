@@ -13,9 +13,9 @@ public class EntityListener extends SelfRegisteringListener {
 
     @EventHandler
     public void onEntityDamage(DamageEvent event) {
-        CustomEntityType.consumeIfCustom(event.getDamageInstance().getVictim(), customEntityType -> {
-            boolean resistentTo = customEntityType.getComponents().getOrDefault(ComponentTypes.DAMAGE_RESISTENT_ENTITY)
-                    .isResistentTo(customEntityType, event.getDamageInstance().getCause());
+        CustomEntityType.consumeIfCustom(event.getDamageInstance().getVictim(), custom.EntityType -> {
+            boolean resistentTo = custom.EntityType.getComponents().getOrDefault(ComponentTypes.DAMAGE_RESISTENT_ENTITY)
+                    .isResistentTo(custom.EntityType, event.getDamageInstance().getCause());
             if (resistentTo) event.setCancelled(true);
         });
     }

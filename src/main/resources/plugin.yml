@@ -10,9 +10,9 @@ commands:
     aliases: []
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"
-  custom_damage_system:
-    description: "custom_damage_system"
-    usage: "/custom_damage_system"
+  custom._damage_system:
+    description: "custom._damage_system"
+    usage: "/custom._damage_system"
     aliases: []
     permission: rpgu.admin
     permission-message: "You do not have permission to use this command"

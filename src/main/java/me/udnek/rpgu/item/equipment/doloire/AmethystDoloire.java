@@ -10,7 +10,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomItemAttributesComponent;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -146,7 +146,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
                                             @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
             Location location = Utils.rayTraceBlockUnder(livingEntity);
 
@@ -185,9 +185,9 @@ public class AmethystDoloire extends ConstructableCustomItem {
         }
 
         @Override
-        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
+        public void onConsume(@NotNull CustomItem custom.Item, @NotNull PlayerItemConsumeEvent event) {
             event.setCancelled(true);
-            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
         }
     }
 }

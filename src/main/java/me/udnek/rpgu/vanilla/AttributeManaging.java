@@ -156,7 +156,7 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (!VanillaItemManager.isReplaced(itemStack))return;
 
         Material material = itemStack.getType();
-        CustomItem customItem = event.getCustomItem();
+        CustomItem custom.Item = event.getCustomItem();
 
         if (armorStats.containsKey(material)){applyDefaultArmorAttribute(itemStack, material);}
 
@@ -172,7 +172,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             ItemStack ironArmor = new ItemStack(Utils.replacePrefix(material, "iron_"));
 
             itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(ironArmor.getData(DataComponentTypes.MAX_DAMAGE)) * 9 / 10);
-            GoldenArmorPassive.applyPassive(material, customItem);
+            GoldenArmorPassive.applyPassive(material, custom.Item);
         }
 
         if (diamondArmor.contains(material)) {
@@ -201,35 +201,35 @@ public class AttributeManaging extends SelfRegisteringListener {
             event.setRepairData(new RepairData(Material.STRING));
         }
 
-        /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, customItem);}*/
+        /*if (Tag.ITEMS_SWORDS.getValues().contains(material)) {SwordDash.applyAbility(itemStack, custom.Item);}*/
 
         if (material == Material.SPYGLASS) {
-            customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+            custom.Item.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                     .add(Attributes.CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
                     .add(Attributes.CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
 
         if (material == Material.HEAVY_CORE){
-            customItem.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
+            custom.Item.getComponents().set(new CustomItemAttributesComponent(new CustomAttributesContainer.Builder()
                     .add(Attributes.CRITICAL_DAMAGE, 0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
 
         if (material == Material.TOTEM_OF_UNDYING) {
-            customItem.getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
+            custom.Item.getComponents().getOrCreateDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new DeathProtectionPassive(Objects.requireNonNull(new ItemStack(Material.TOTEM_OF_UNDYING).getData(DataComponentTypes.DEATH_PROTECTION))));
             itemStack.setData(DataComponentTypes.MAX_STACK_SIZE, 64);
         }
 
         if (material == Material.ELYTRA) {
-            customItem.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 15 * 20));
-            customItem.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new GliderComponent(itemStack, 15 * 20));
+            custom.Item.getComponents().set(new ElytraActivator(CustomEquipmentSlot.CHEST, 15 * 20));
+            custom.Item.getComponents().getOrDefault(ComponentTypes.EQUIPPABLE_ITEM).addPassive(new GliderComponent(itemStack, 15 * 20));
         }
 
         if (material == Material.ARROW) {
-            customItem.getComponents().set(new ArrowComponent() {
+            custom.Item.getComponents().set(new ArrowComponent() {
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
                     return Component.text("0").font(Key.key("rpgu:arrow")).color(NamedTextColor.WHITE).
                             decoration(TextDecoration.ITALIC, false);
                 }
@@ -237,9 +237,9 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.TIPPED_ARROW) {
-            customItem.getComponents().set(new ArrowComponent() {
+            custom.Item.getComponents().set(new ArrowComponent() {
                 @Override
-                public void onBeingShoot(@NotNull CustomItem customItem, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {
+                public void onBeingShoot(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack, @NotNull EntityShootBowEvent event) {
                     Arrow arrow = (Arrow) event.getProjectile();
                     PotionContents dataFirst = itemStack.getData(DataComponentTypes.POTION_CONTENTS);
                     if (dataFirst != null) {
@@ -248,7 +248,7 @@ public class AttributeManaging extends SelfRegisteringListener {
                     }
                 }
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
                     TextColor color = TextColor.color(Nms.get().getColorByEffects(Objects.requireNonNull(Objects.requireNonNull(
                             itemStack.getData(DataComponentTypes.POTION_CONTENTS)).potion()).getPotionEffects()).orElse(0));
                     return ComponentU.textWithNoSpace(-1, Component.text("3").color(color),16)
@@ -259,9 +259,9 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.SPECTRAL_ARROW) {
-            customItem.getComponents().set(new ArrowComponent() {
+            custom.Item.getComponents().set(new ArrowComponent() {
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
                     return Component.text("1").font(Key.key("rpgu:arrow")).decoration(TextDecoration.ITALIC, false)
                             .color(TextColor.color(-1));
                 }
@@ -269,14 +269,14 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.FIREWORK_ROCKET) {
-            customItem.getComponents().set(new ArrowComponent() {
+            custom.Item.getComponents().set(new ArrowComponent() {
                 @Override
-                public @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem customItem, @NotNull PlayerReadyArrowEvent event) {
+                public @NotNull ChoseArrowResult onChooseArrow(@NotNull CustomItem custom.Item, @NotNull PlayerReadyArrowEvent event) {
                     return event.getBow().getType() != Material.CROSSBOW ? ChoseArrowResult.DENY : ChoseArrowResult.ALLOW;
                 }
 
                 @Override
-                public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
+                public @NotNull Component getIcon(@NotNull CustomItem custom.Item, @NotNull ItemStack itemStack) {
                     return Component.text("4").font(Key.key("rpgu:arrow")).decoration(TextDecoration.ITALIC, false)
                             .color(TextColor.color(-1));
                 }

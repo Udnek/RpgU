@@ -3,7 +3,7 @@ package me.udnek.rpgu.component.instance;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
-import me.udnek.coreu.custom.equipmentslot.slot.SingleSlot;
+import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot.Single;
 import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -31,12 +31,12 @@ import org.jetbrains.annotations.NotNull;
 public class SwordDash {
     public static int CAST_TIME = (int) (0.75 * 20);
 
-    public static void applyAbility(@NotNull ItemStack itemStack, @NotNull CustomItem customItem){
+    public static void applyAbility(@NotNull ItemStack itemStack, @NotNull CustomItem custom.Item){
         Consumable build =  Consumable.consumable().animation(ItemUseAnimation.SPEAR).consumeSeconds(CAST_TIME / 20f).hasConsumeParticles(false)
                 .sound(Registry.SOUNDS.getKeyOrThrow(Sound.INTENTIONALLY_EMPTY).key()).build();
 
         itemStack.setData(DataComponentTypes.CONSUMABLE, build);
-        customItem.getComponents().set(new Ability());
+        custom.Item.getComponents().set(new Ability());
     }
 
     static class Ability extends ConstructableActiveAbilityComponent<PlayerItemConsumeEvent> {
@@ -58,7 +58,7 @@ public class SwordDash {
         }
 
         @Override
-        public @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, SingleSlot> slot,
+        public @NotNull ActionResult action(@NotNull CustomItem custom.Item, @NotNull LivingEntity livingEntity, @NotNull Either<UniversalInventorySlot, CustomEquipmentSlot.Single> slot,
                                             @NotNull PlayerItemConsumeEvent playerItemConsumeEvent) {
             if (!(livingEntity instanceof  Player player)) return ActionResult.FULL_COOLDOWN;
             Location locationStart = player.getLocation();
@@ -71,7 +71,7 @@ public class SwordDash {
 
 
             Damage damage = getComponents().getOrException(ComponentTypes.ABILITY_DAMAGE).get(Attributes.MAGICAL_POTENTIAL.calculate(player));
-            Nms.get().setSpinAttack(player, 2 * 20, 1, customItem.getItem());
+            Nms.get().setSpinAttack(player, 2 * 20, 1, custom.Item.getItem());
 
             player.setVelocity(direction);
 
@@ -80,9 +80,9 @@ public class SwordDash {
         }
 
         @Override
-        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
+        public void onConsume(@NotNull CustomItem custom.Item, @NotNull PlayerItemConsumeEvent event) {
             event.setCancelled(true);
-            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
+            activate(custom.Item, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
         }
     }
 }
