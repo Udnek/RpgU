@@ -4,12 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import io.papermc.paper.event.player.PlayerStopUsingItemEvent;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
-import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.SelfRegisteringListener;
-import me.udnek.rpgu.component.Components;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -24,9 +19,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.BiConsumer;
 
 public class AbilityListener extends SelfRegisteringListener {
     public AbilityListener(@NotNull Plugin plugin) {

@@ -16,9 +16,9 @@ import me.udnek.rpgu.mechanic.damaging.Damage;
 public class Components {
 
     public static final CustomComponentType<CustomItem, ArrowComponent>
-            ARROW_ITEM = register(new ConstructableComponentType("arrow_item", ArrowComponent.DEFAULT));
+            ARROW_ITEM = register(new ConstructableComponentType<>("arrow_item", ArrowComponent.DEFAULT));
     public static final CustomComponentType<CustomEntityType, DamageResistant>
-            DAMAGE_RESISTANT_ENTITY = register(new ConstructableComponentType("damage_resistant_entity", DamageResistant.DEFAULT));
+            DAMAGE_RESISTANT_ENTITY = register(new ConstructableComponentType<>("damage_resistant_entity", DamageResistant.DEFAULT));
     public static final CustomComponentType<RPGUItemAbility<?>, DamageProperty>
             ABILITY_DAMAGE = register(new ConstructableComponentType<>("ability_damage", new DamageProperty(Damage.Type.PHYSICAL, PropertyFunctions.CONSTANT(0d))));
 

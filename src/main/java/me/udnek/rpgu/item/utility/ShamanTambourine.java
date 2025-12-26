@@ -6,6 +6,7 @@ import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -17,6 +18,7 @@ import me.udnek.coreu.rpgu.component.ability.property.CastTimeProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.rpgu.component.Components;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.item.Items;
@@ -72,7 +74,7 @@ public class ShamanTambourine extends ConstructableCustomItem{
         getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
-    public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> {
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> implements RPGUActiveTriggerableAbility<PlayerItemConsumeEvent> {
 
         public static final Ability DEFAULT = new Ability();
         public static final int CAST_TIME = (int) (0.75 * 20);
@@ -128,10 +130,10 @@ public class ShamanTambourine extends ConstructableCustomItem{
         }
 
 
-//        @Override
-//        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
-//            event.setCancelled(true);
-//            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
-//        }
+        @Override
+        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
+            event.setCancelled(true);
+            activate(customItem, event.getPlayer(), new BaseUniversalSlot(event.getHand()), event);
+        }
     }
 }

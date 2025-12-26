@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -14,6 +15,7 @@ import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.effect.Effects;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
@@ -31,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class ArmadilloBar extends ConstructableCustomItem {
@@ -67,7 +70,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
         getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
-    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent> {
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RPGUActiveTriggerableAbility<PlayerInteractEvent> {
 
         public static final Ability DEFAULT = new Ability();
         private static final int COOLDOWN = 25*20;
@@ -117,11 +120,10 @@ public class ArmadilloBar extends ConstructableCustomItem {
         }
 
 
-
-//        @Override
-//        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
-//            activate(customItem, event.getPlayer(), new Either<>(new BaseUniversalSlot(event.getHand()), null), event);
-//        }
+        @Override
+        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+            activate(customItem, event.getPlayer(), new BaseUniversalSlot(Objects.requireNonNull(event.getHand())), event);
+        }
 
         @Override
         public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {

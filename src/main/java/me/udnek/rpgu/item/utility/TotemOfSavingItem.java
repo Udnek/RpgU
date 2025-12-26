@@ -96,10 +96,9 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         }
 
 
-//        @Override
-//        public void onDeath(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
-//            activate(customItem, event.getPlayer(), new Either<>(slot, null), event);
-//        }
+        public void onDeath(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
+            activate(customItem, event.getPlayer(), slot, event);
+        }
 
         @Override
         public @NotNull CustomEquipmentSlot getSlot() {

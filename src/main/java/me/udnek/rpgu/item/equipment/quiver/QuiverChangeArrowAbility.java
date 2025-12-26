@@ -12,6 +12,7 @@ import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.ability.RPGUItemAbstractAbility;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.LivingEntity;
@@ -24,16 +25,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QuiverChangeArrowAbility extends RPGUConstructableActiveAbility<PlayerInteractEvent> {
+public class QuiverChangeArrowAbility extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RPGUActiveTriggerableAbility<PlayerInteractEvent> {
 
     public static final QuiverChangeArrowAbility DEFAULT = new QuiverChangeArrowAbility();
 
     private QuiverChangeArrowAbility(){}
 
-    // TODO TO BE CALLED
     public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
         event.setCancelled(true);
-        activate(customItem, event.getPlayer(), new BaseUniversalSlot(event.getHand()), event);
+        activate(customItem, event.getPlayer(), new BaseUniversalSlot(Objects.requireNonNull(event.getHand())), event);
     }
 
     @Override
