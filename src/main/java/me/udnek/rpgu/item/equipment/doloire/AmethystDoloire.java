@@ -12,6 +12,7 @@ import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -26,6 +27,7 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.Components;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.property.DamageProperty;
 import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.mechanic.damaging.Damage;
@@ -124,8 +126,8 @@ public class AmethystDoloire extends ConstructableCustomItem {
         return new RepairData(Material.AMETHYST_SHARD);
     }
 
-    public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> {
-
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> implements RPGUActiveTriggerableAbility<PlayerItemConsumeEvent> {
+//TODO фикс абилки она не работает
         public static final Ability DEFAULT = new Ability();
 
         public static double BASE_RADIUS = 0.8;
@@ -180,6 +182,12 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
 
             return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {
+            event.setCancelled(true);
+            activate(customItem, event.getPlayer(), new BaseUniversalSlot(event.getHand()), event);
         }
 
         @Override

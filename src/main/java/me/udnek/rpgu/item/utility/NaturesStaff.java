@@ -4,6 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
+import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -16,6 +17,7 @@ import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.effect.Effects;
 import org.apache.commons.lang3.tuple.Pair;
@@ -32,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class NaturesStaff extends ConstructableCustomItem {
@@ -64,7 +67,8 @@ public class NaturesStaff extends ConstructableCustomItem {
         getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
-    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent> {
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent>,
+            RPGUActiveTriggerableAbility<PlayerInteractEvent> {
 
         public static final Ability DEFAULT = new Ability();
 
@@ -101,6 +105,11 @@ public class NaturesStaff extends ConstructableCustomItem {
             }
 
             return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+            activate(customItem, event.getPlayer(), new BaseUniversalSlot(Objects.requireNonNull(event.getHand())), event);
         }
 
         @Override

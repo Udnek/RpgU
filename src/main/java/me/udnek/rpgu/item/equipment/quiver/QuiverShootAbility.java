@@ -20,6 +20,7 @@ import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.Components;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
 import me.udnek.rpgu.component.instance.ArrowComponent;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.tuple.Pair;
@@ -37,10 +38,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntityShootBowEvent> {
+public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntityShootBowEvent> implements RPGUPassiveTriggerableAbility<EntityShootBowEvent> {
     public static final QuiverShootAbility DEFAULT = new QuiverShootAbility();
 
     private QuiverShootAbility() {
+        //нужен когда 2 колчана в инвенторе, чтобы активировался только один
         getComponents().set(new AttributeBasedProperty(1, RPGUComponents.ABILITY_COOLDOWN_TIME));
     }
 
@@ -109,7 +111,7 @@ public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntitySh
             return;
         }
         ItemStack itemClone = item.clone();
-        if (slot.equals(new BaseUniversalSlot(40)) || slot.equals(new BaseUniversalSlot(player.getInventory().getHeldItemSlot()))){
+        if (slot.equals(player, new BaseUniversalSlot(40)) || slot.equals(player, new BaseUniversalSlot(player.getInventory().getHeldItemSlot()))){
             slot.setItem(itemClone, player);
             System.out.println("using delayed");
             new BukkitRunnable() {
@@ -149,6 +151,11 @@ public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntitySh
 
         first.setData(DataComponentTypes.ITEM_NAME, Objects.requireNonNull(first.getType().getDefaultData(DataComponentTypes.ITEM_NAME)));
         event.getCrossbow().setData(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectiles.chargedProjectiles(List.of(first)));
+    }
+
+    @Override
+    public void onShootBow(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull EntityShootBowEvent event) {
+        activate(customItem, event.getEntity(), slot, event);
     }
 
     @Override

@@ -104,7 +104,7 @@ public class FishermanSnorkel extends ConstructableCustomItem {
 
         @Override
         public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {
-
+            activate(customItem, player, baseUniversalSlot, i);
         }
 
         @Override
