@@ -4,7 +4,7 @@
     "model": "rpgu:item/gui/enchanting/banner",
     "tints": [
       {
-        "type": "minecraft:custom._model_data",
+        "type": "minecraft:custom_model_data",
         "default": 0
       }
     ]

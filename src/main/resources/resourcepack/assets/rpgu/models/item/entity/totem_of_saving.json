@@ -4,9 +4,9 @@
 		"0": "block/dark_oak_log",
 		"1": "block/dark_oak_log_top",
 		"3": "block/chain",
-		"4": "rpgu:item/entity/totem_of_saving/pumpkin_side",
-		"5": "rpgu:item/entity/totem_of_saving/pumpkin_top",
-		"6": "rpgu:item/entity/totem_of_saving/pumpkin_face",
+		"4": "rpgu:block/entity/totem_of_saving/pumpkin_side",
+		"5": "rpgu:block/entity/totem_of_saving/pumpkin_top",
+		"6": "rpgu:block/entity/totem_of_saving/pumpkin_face",
 		"particle": "block/dark_oak_log"
 	},
 	"elements": [

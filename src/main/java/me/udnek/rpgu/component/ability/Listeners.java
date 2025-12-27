@@ -21,11 +21,11 @@ public class Listeners extends SelfRegisteringListener {
 
     // TODO сдесь листенер райт кликов
     // TODO для всего остального (тотем возражления, элитра, и т.д.) сделать тут личные листенеры и вызывать activate(). (как во FnafU кароче)
-    public onASDJasd(){
-        for (var rightClickableItem : Items.FABRIC.getComponents().get(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().getAllTyped(RPGUActiveTriggerableAbility.class)) {
-            rightClickableItem.onRightClick(event);
-        }
-    }
+//    public onASDJasd(){
+//        for (var rightClickableItem : Items.FABRIC.getComponents().get(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().getAllTyped(RPGUActiveTriggerableAbility.class)) {
+//            rightClickableItem.onRightClick(event);
+//        }
+//    }
 
     // ELYTRA ACTIVATOR
 
