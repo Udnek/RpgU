@@ -12,6 +12,7 @@ import me.udnek.coreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.Commands;
+import me.udnek.rpgu.component.ability.Listeners;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -53,6 +54,8 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new AbilityListener(this);
         new AttributeManaging(this);
         new EntityListener(this);
+
+        new Listeners(this);
 
         AlloyForgeManager.getInstance();
 
