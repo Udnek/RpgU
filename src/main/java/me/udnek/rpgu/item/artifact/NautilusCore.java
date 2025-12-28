@@ -4,6 +4,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
@@ -36,6 +37,11 @@ import java.util.function.Consumer;
 public class NautilusCore extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "nautilus_core";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Nautilus Core", "Ядро наутилуса");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -88,7 +94,7 @@ public class NautilusCore extends ConstructableCustomItem {
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Critical hits apply on Magical Damage"), List.of("Критические удары применяются к магическому урону"));
         }
 
         @Override

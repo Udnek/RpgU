@@ -6,12 +6,9 @@ import io.papermc.paper.datacomponent.item.Consumable;
 import io.papermc.paper.datacomponent.item.consumable.ItemUseAnimation;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
-import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.CustomComponent;
-import me.udnek.coreu.custom.component.CustomComponentMap;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
@@ -22,7 +19,6 @@ import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
-import me.udnek.coreu.rpgu.component.ability.RPGUItemAbility;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
@@ -74,11 +70,11 @@ public class AmethystDoloire extends ConstructableCustomItem {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Amethyst Doloire", "Аметистовый долуар");}
 
     @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
-
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+
     }
 
     @Override

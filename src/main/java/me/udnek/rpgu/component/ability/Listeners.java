@@ -2,16 +2,24 @@ package me.udnek.rpgu.component.ability;
 
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
+import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.equipment.PlayerEquipmentManager;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
-import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.util.SelfRegisteringListener;
+import me.udnek.rpgu.component.ability.instance.DeathProtectionPassive;
+import me.udnek.rpgu.component.ability.instance.GliderPassive;
+import me.udnek.rpgu.item.equipment.quiver.QuiverShootAbility;
+import me.udnek.rpgu.item.utility.TotemOfSavingItem;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
+import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -32,6 +40,21 @@ public class Listeners extends SelfRegisteringListener implements Listener {
         super(plugin);
     }
 
+    private <T extends CustomComponent<CustomItem>> void joinConsumer(@NotNull CustomComponentType<CustomItem, T> type, @NotNull LivingEntity livingEntity,
+                                                                      @NotNull TriConsumer<T, CustomItem, UniversalInventorySlot> cons) {
+        if (livingEntity instanceof Player player) {
+            PlayerEquipmentManager.getInstance().getData(player).getEquipment(
+                    (slot, customItem) ->
+                            cons.accept(customItem.getComponents().getOrDefault(type), customItem, slot)
+                    );
+        } else {
+            BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
+                    CustomItem.consumeIfCustom(itemStack, customItem ->
+                            cons.accept(customItem.getComponents().getOrDefault(type), customItem, slot));
+
+            UniversalInventorySlot.iterateThroughNotEmpty(consumer, livingEntity);
+        }
+    }
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -57,95 +80,95 @@ public class Listeners extends SelfRegisteringListener implements Listener {
 
     @EventHandler
     public void onEntityShootBowEvent(EntityShootBowEvent event) {
-        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem -> {
-                    RPGUPassiveItem rpguPassiveItem = customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM);
-                    for (var trigger : rpguPassiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+        LivingEntity entity = event.getEntity();
+        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+                (passiveItem, customItem, slot) -> {
+                    for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        if (!trigger.getSlot().intersects(entity, slot)) continue;
                         trigger.onShootBow(customItem, slot, event);
                     }
                 });
-
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
     }
 
     @EventHandler
     public void onPlayerReadyArrow(PlayerReadyArrowEvent event) {
-        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().getOrDefault(Abilities.QUIVER_SHOOT)
-                                .onChooseArrow(customItem, slot, event));
-
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getPlayer());
+        Player player = event.getPlayer();
+        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, player,
+                (passiveItem, customItem, slot) -> {
+                    QuiverShootAbility quiverShootAbility = passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT);
+                    if (!quiverShootAbility.getSlot().intersects(player, slot)) return;
+                    quiverShootAbility.onChooseArrow(customItem, slot, event);
+                });
     }
 
     @EventHandler
     public void onEntityLoadCrossbowEvent(EntityLoadCrossbowEvent event) {
-        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                        customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().getOrDefault(Abilities.QUIVER_SHOOT)
-                                .onLoadToCrossbow(customItem, slot, event));
-
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
+        LivingEntity entity = event.getEntity();
+        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+                (passiveItem, customItem, slot) -> {
+                    QuiverShootAbility quiverShootAbility = passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT);
+                    if (!quiverShootAbility.getSlot().intersects(entity, slot)) return;
+                    quiverShootAbility.onLoadToCrossbow(customItem, slot, event);
+                });
     }
 
     @EventHandler
     public void playerDeath(PlayerDeathEvent event){
-        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem -> customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM)
-                        .getComponents().getOrDefault(Abilities.TOTEM_OF_SAVING).onDeath(customItem, slot, event));
-
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
+        Player entity = event.getEntity();
+        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+                (passiveItem, customItem, slot) -> {
+                    TotemOfSavingItem.Passive passive = passiveItem.getComponents().getOrDefault(Abilities.TOTEM_OF_SAVING);
+                    if (!passive.getSlot().intersects(entity, slot)) return;
+                    passive.onDeath(customItem, slot, event);
+                });
     }
 
     @EventHandler
     public void entityResurrect(EntityResurrectEvent event){
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
-        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->  {
-            CustomItem.consumeIfCustom(itemStack, customItem ->
-                     customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().getOrDefault(Abilities.DEATH_PROTECTION)
-                             .onResurrect(customItem, slot, activatedBefore.get(), event));
-
-            if (!(event.isCancelled())) activatedBefore.set(true);
-        };
-
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, event.getEntity());
+        LivingEntity entity = event.getEntity();
+        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+                (passive, customItem,  slot) -> {
+                    DeathProtectionPassive deathProtectionPassive = passive.getComponents().getOrDefault(Abilities.DEATH_PROTECTION);
+                    if (!deathProtectionPassive.getSlot().intersects(entity, slot)) return;
+                    deathProtectionPassive.onResurrect(customItem, slot, activatedBefore.get(), event);
+                    if (!(event.isCancelled())) activatedBefore.set(true);
+                });
     }
 
     @EventHandler
     public void onDamage(DamageEvent event){
         DamageInstance damageInstance = event.getDamageInstance();
 
-        if (damageInstance.getDamager() instanceof LivingEntity damager) {
-            BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                    CustomItem.consumeIfCustom(itemStack, customItem -> {
-                        RPGUPassiveItem rpguActiveItem = customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM);
-                        for (var trigger : rpguActiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+        if (damageInstance.getDamager() instanceof LivingEntity damager){
+            joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, damager,
+                    (passive, customItem, slot) -> {
+                        for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                            if (!trigger.getSlot().intersects(damager, slot)) continue;
                             trigger.onDamageDealt(customItem, slot, event);
-                        }});
-
-            UniversalInventorySlot.iterateThroughNotEmpty(consumer, damager);
+                        }
+                    });
         }
 
-        if (damageInstance.getVictim() instanceof LivingEntity victim) {
-            BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                    CustomItem.consumeIfCustom(itemStack, customItem -> {
-                        RPGUPassiveItem rpguActiveItem = customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM);
-                        for (var trigger : rpguActiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
-                            trigger.onDamageReceived(customItem, slot, event);
-                        }});
-
-            UniversalInventorySlot.iterateThroughNotEmpty(consumer, victim);
+         if (damageInstance.getVictim() instanceof LivingEntity victim) {
+             joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, victim,
+                     (passive, customItem, slot) -> {
+                         for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                             if (!trigger.getSlot().intersects(victim, slot)) continue;
+                             trigger.onDamageReceived(customItem, slot, event);
+                         }
+                     });
         }
     }
 
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent event){
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
-        BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                CustomItem.consumeIfCustom(itemStack, customItem ->
-                    customItem.getComponents().getOrDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().getOrDefault(Abilities.GLIDER)
-                            .onToggleGlide(customItem, slot, event));
-
-        UniversalInventorySlot.iterateThroughNotEmpty(consumer, livingEntity);
+        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, livingEntity,
+                (passive, customItem, slot) -> {
+                    GliderPassive gliderPassive = passive.getComponents().getOrDefault(Abilities.GLIDER);
+                    if (!gliderPassive.getSlot().intersects(livingEntity, slot)) return;
+                    gliderPassive.onToggleGlide(customItem, slot, event);
+                });
     }
 }

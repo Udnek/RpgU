@@ -12,15 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class WolfChestplate extends AbstractWolfArmor {
-    @Override
-    public @NotNull String getRawId() {return "wolf_chestplate";}
+    public WolfChestplate() {
+        super(Material.DIAMOND_CHESTPLATE, "wolf_chestplate", "Wolf Chestplate", "Волчья куртка");
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
-
-    @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeManaging.applyDefaultArmorAttribute(itemStack, Material.LEATHER_CHESTPLATE);
     }
 

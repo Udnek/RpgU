@@ -4,7 +4,6 @@ import me.udnek.coreu.custom.attribute.CustomAttributeConsumer;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.effect.ConstructableCustomEffect;
 import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
-import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;

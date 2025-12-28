@@ -16,13 +16,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.Objects;
 
 public abstract class GrimArmor extends ConstructableCustomItem {
 
@@ -46,7 +45,7 @@ public abstract class GrimArmor extends ConstructableCustomItem {
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
         Stats stats = getStats();
-        EquipmentSlotGroup slot = getEquippable().get().slot().getGroup();
+        EquipmentSlotGroup slot = Objects.requireNonNull(Objects.requireNonNull(getEquippable()).get()).slot().getGroup();
         AttributeUtils.addAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), slot+"_max_health"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
         AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), slot+"_armor"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
     }
@@ -58,7 +57,7 @@ public abstract class GrimArmor extends ConstructableCustomItem {
 
         Stats stats = getStats();
 
-        CustomEquipmentSlot slot = CustomEquipmentSlot.getFromVanilla(getEquippable().get().slot().getGroup());
+        CustomEquipmentSlot slot = CustomEquipmentSlot.getFromVanilla(Objects.requireNonNull(Objects.requireNonNull(getEquippable()).get()).slot().getGroup());
         CustomAttributeModifier MP = new CustomAttributeModifier(stats.magicalPotential, AttributeModifier.Operation.ADD_NUMBER, slot);
         CustomAttributeModifier MD = new CustomAttributeModifier(stats.magicalDefense, AttributeModifier.Operation.ADD_NUMBER, slot);
         CustomAttributeModifier DM = new CustomAttributeModifier(stats.damageMultiplier, AttributeModifier.Operation.ADD_NUMBER, slot);

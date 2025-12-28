@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.equipment.quiver;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.DispensableItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
@@ -24,6 +25,11 @@ public class Quiver extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {
         return "quiver";
+    }
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Quiver", "Колчан");
     }
 
     @Override

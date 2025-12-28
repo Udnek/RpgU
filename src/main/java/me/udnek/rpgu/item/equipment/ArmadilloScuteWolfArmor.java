@@ -14,7 +14,6 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
@@ -25,8 +24,8 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     public @NotNull String getRawId() {return "armadillo_scute_wolf_armor";}
 
     @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_" + getRawId()),
                 11, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.BODY);
     }
@@ -36,8 +35,7 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
         return new RepairData(Material.ARMADILLO_SCUTE);
     }
 
-    @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
+
 
     @Override
     public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(Material.WOLF_ARMOR.getDefaultData(DataComponentTypes.MAX_DAMAGE));}

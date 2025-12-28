@@ -21,7 +21,7 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -56,12 +56,9 @@ public class PhantomChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
-
-    @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
         Equippable equippable = new ItemStack(getMaterial()).getData(DataComponentTypes.EQUIPPABLE);
-        equippable = equippable.toBuilder().assetId(new NamespacedKey(RpgU.getInstance(), "phantom")).build();
+        equippable = Objects.requireNonNull(equippable).toBuilder().assetId(new NamespacedKey(RpgU.getInstance(), "phantom")).build();
         return DataSupplier.of(equippable);
     }
 

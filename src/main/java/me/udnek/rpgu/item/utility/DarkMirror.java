@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.utility;
 
 import me.udnek.coreu.custom.component.instance.RightClickableItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.jeiu.component.HiddenItemComponent;
@@ -10,6 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +23,11 @@ public class DarkMirror extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {
         return "dark_mirror";
+    }
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Dark Mirror", "Тёмное зеркало");
     }
 
     @Override

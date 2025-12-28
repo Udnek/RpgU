@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.ingredients;
 
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.nms.loot.entry.NmsCompositeEntryContainer;
@@ -10,10 +11,13 @@ import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
 import me.udnek.coreu.nms.loot.table.NmsLootTableContainer;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class RawMagnetite extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "raw_magnetite";}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Raw Magnetite", "Блок рудного магнетита");}
 
     @Override
     public void globalInitialization() {

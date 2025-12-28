@@ -20,7 +20,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
@@ -30,9 +29,6 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class HungryHorrorArmor extends ConstructableCustomItem {
-
-    @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {

@@ -1,7 +1,6 @@
 package me.udnek.rpgu.item.equipment.ferrudam.armor;
 
 import me.udnek.coreu.custom.attribute.AttributeUtils;
-import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.recipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
@@ -14,19 +13,17 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
 public class FerrudamHelmet extends FerrudamArmor {
-    @Override
-    public @NotNull String getRawId() {return "ferrudam_helmet";}
-    @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
-    @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ferrudam Helmet", "Ферродамовый шлем");}
+
+    public FerrudamHelmet() {
+        super(Material.DIAMOND_HELMET, "ferrudam_helmet", "Ferrudam Helmet", "Ферродамовый шлем");
+    }
+
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
@@ -53,8 +50,8 @@ public class FerrudamHelmet extends FerrudamArmor {
     }
 
     @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "base_max_health_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);
         AttributeUtils.removeAttribute(itemStack, Attribute.ARMOR);
         AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "base_armor_helmet"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD);

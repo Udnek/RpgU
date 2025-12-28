@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.utility;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -41,6 +42,11 @@ public class ArmadilloBar extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {
         return "armadillo_bar";
+    }
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Armadillo Bar", "Посох броненосца");
     }
 
     @Override
@@ -116,7 +122,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Dispels negative effects while active"), List.of("Снимает все негативные эффекты во время действия"));
         }
 
 

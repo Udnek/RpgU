@@ -6,22 +6,19 @@ import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
 import org.bukkit.Material;
 import org.bukkit.Tag;
-import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public abstract class FlintTool extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Integer> getMaxDamage() {
-        return DataSupplier.of((int) (getMaterial().getDefaultData(DataComponentTypes.MAX_DAMAGE) * 1.3));
+        return DataSupplier.of((int) (Objects.requireNonNull(getMaterial().getDefaultData(DataComponentTypes.MAX_DAMAGE)) * 1.3));
     }
 
-    @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
     public void initializeComponents() {

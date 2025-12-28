@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.ingredients;
 
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
@@ -12,12 +13,19 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class MagnetiteIngot extends ConstructableCustomItem {
+
     @Override
     public @NotNull String getRawId() {return "magnetite_ingot";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Magnetite Ingot", "Магнетитовый слиток");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

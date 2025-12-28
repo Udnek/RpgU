@@ -14,7 +14,6 @@ import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbi
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
-import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.apache.commons.lang3.tuple.Pair;

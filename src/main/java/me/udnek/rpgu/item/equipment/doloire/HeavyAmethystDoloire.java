@@ -3,10 +3,8 @@ package me.udnek.rpgu.item.equipment.doloire;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
-import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
-import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.RepairData;
@@ -43,8 +41,8 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Heavy Amethyst Doloire", "Тяжёлый аметистовый долуар");}
 
     @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
         //AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }

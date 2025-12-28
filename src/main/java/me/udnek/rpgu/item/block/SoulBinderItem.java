@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.block;
 
 import me.udnek.coreu.custom.component.instance.BlockPlacingItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.item.Items;
@@ -27,6 +28,11 @@ public class SoulBinderItem extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {
         return "soul_binder";
+    }
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Soul Binder", "Связыватель души");
     }
 
     @Override
