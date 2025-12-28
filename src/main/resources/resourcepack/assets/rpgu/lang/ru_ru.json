@@ -3,36 +3,17 @@
   "item.modifiers.first_artifact": "При экипировке как первый артефакта:",
   "item.modifiers.second_artifact": "При экипировке как второй артефакта:",
   "item.modifiers.third_artifact": "При экипировке как третий артефакта:",
-
-  "active_ability.rpgu.title": "Активная способность:",
-  "ability.rpgu.cast_range": "Дальность применения: %s блоков",
-  "ability.rpgu.area_of_effect": "Область действия заклинания: %s блоков",
-  "ability.rpgu.cooldown": "Откат: %s секунд",
-  "ability.rpgu.cast_time": "Время применения: %s секунд",
-  "ability.rpgu.duration": "Длительность: %s секунд",
-
   "damage_formula.rpgu.magical": "Магический урон: %s",
   "damage_formula.rpgu.physical": "Физический урон: %s",
-  "magical_potential_formula.rpgu.linear": "%s + %s*МП",
-
   "attribute.rpgu.name.physical_damage": "Физический урон",
   "attribute.rpgu.name.attack_speed": "Ударов в секунду",
   "attribute.rpgu.name.melee_magical_damage_multiplier": "Магический урон от атаки за еденицу МП",
   "attribute.rpgu.name.magical_potential": "Магический потенциал (МП)",
   "attribute.rpgu.name.magical_defense_multiplier": "Магическая защита за еденицу МП",
-  "attribute.rpgu.name.cast_range": "Дальность применения",
-  "attribute.rpgu.name.cooldown_time": "Время отката",
   "attribute.rpgu.name.projectile_damage": "Урон снаряда",
   "attribute.rpgu.name.projectile_speed": "Скорость снаряда",
   "attribute.rpgu.name.backstab_damage": "Урон со спины",
-  "attribute.rpgu.name.area_of_effect": "Область действия эффекта",
-
   "gui.rpgu.alloy_forge": "Металлургическая печь",
-
-  "item.rpgu.ferrudam_helmet": "Ферродамовый шлем",
-  "item.rpgu.ferrudam_chestplate": "Ферродамовый нагрудник",
-  "item.rpgu.ferrudam_leggings": "Ферродамовые поножи",
-  "item.rpgu.ferrudam_boots": "Ферродамовые ботинки",
 
   "item.rpgu.wolf_helmet": "Волчья шапка",
   "item.rpgu.wolf_chestplate": "Волчья куртка",
@@ -74,38 +55,17 @@
   "item.rpgu.totem_of_saving": "Тотем сохранения",
   "item.rpgu.totem_of_saving.passive_ability.0": "Сохраняет вещи после смерти в себе",
 
-  "item.rpgu.air_elemental_tome": "Фолиант элементаля воздуха",
-  "item.rpgu.air_elemental_tome.active_ability.height": "Высота подъёма: %s блоков",
-  "item.rpgu.air_elemental_tome.active_ability.0": "Поднимает цели в воздух",
-  "item.rpgu.air_elemental_tome.active_ability.1": " и ударяет о землю с увеличенным уроном",
-
-  "item.rpgu.flint_sword": "Кремневый меч",
-  "item.rpgu.flint_pickaxe": "Кремневая кирка",
-  "item.rpgu.flint_axe": "Кремневый топор",
-  "item.rpgu.flint_shovel": "Кремневая лопата",
-  "item.rpgu.flint_hoe": "Кремневая мотыга",
-
-  "item.rpgu.amethyst_dirk": "Аметистовый кортик",
-
-  "item.rpgu.phantom_chestplate": "Фантомная мантия",
-
-  "item.rpgu.hungry_horror_helmet": "Маска Голодного Ужаса",
   "item.rpgu.hungry_horror_helmet.description.0": "При атаке:",
   "item.rpgu.hungry_horror_helmet.description.1": " Повторно применяет эффект силы с увеличением",
   "item.rpgu.hungry_horror_helmet.description.2": " на один уровень и длительностью 2 секунды.",
   "item.rpgu.hungry_horror_helmet.description.3": " Максимальный уровень эффекта: V.",
   "item.rpgu.hungry_horror_helmet.description.4": " Если у вас нет эффекта, применяется Сила I на 2 секунды",
 
-  "item.rpgu.hungry_horror_chestplate": "Эгида Голодного Ужаса",
   "item.rpgu.hungry_horror_chestplate.description.0": "При атаке:",
   "item.rpgu.hungry_horror_chestplate.description.1": " Повторно применяет эффект поглощения с увеличением",
   "item.rpgu.hungry_horror_chestplate.description.2": " на один уровень и длительностью 2 секунды.",
   "item.rpgu.hungry_horror_chestplate.description.3": " Максимальный уровень эффекта: V.",
   "item.rpgu.hungry_horror_chestplate.description.4": " Если эффекта нет, применяется Поглощение I на 2 секунды",
-
-  "item.rpgu.flower_wreath": "Цветочный венок",
-
-  "item.rpgu.wither_wreath": "Увядший венок",
 
   "item.rpgu.nautilus_core": "Ядро наутилуса",
   "item.rpgu.nautilus_core.description.0": "Критические удары применяются к магическому урону",
@@ -121,29 +81,8 @@
   "item.rpgu.dark_mirror": "Тёмное зеркало",
   "item.rpgu.arcane_accumulator": "Загадочный накопитель",
 
-  "item.rpgu.evocation_robe": "Мантия заклинателя",
-  "item.rpgu.grim_helmet": "Мрачный шлем",
-  "item.rpgu.grim_chestplate": "Мрачный нагрудник",
-  "item.rpgu.amethyst_doloire": "Аметистовый долуар",
-  "item.rpgu.amethyst_doloire.active_ability.0": "Вызывает шипы из земли",
-  "item.rpgu.amethyst_doloire.active_ability.1": " и замедляет цель при попадании",
-  "item.rpgu.heavy_amethyst_doloire": "Тяжёлый аметистовый долуар",
-
-  "item.rpgu.natures_staff": "Посох природы",
-  "item.rpgu.natures_staff.active_ability.0": "Привязывает цели к земле",
-  "passive_ability.rpgu.title": "Пассивная способность:",
-  "item.rpgu.flower_wreath.passive_ability.0": "Накладывает регенерацию возле деревьев",
-
   "ability.rpgu.damage": "Урон: %s",
-  "ability.rpgu.effects": "Эффекты: %s",
-  "ability.rpgu.effects.with_amplifier_with_duration": "%s %s (%s секунд)",
-
-  "ability.rpgu.effects.no_amplifier_with_duration": "%s (%s секунд)",
-
   "effect.rpgu.root": "Оцепенение",
-  "item.rpgu.wither_wreath.passive_ability.0": "Применяет дебафы к существу при атаке",
-
-  "item.minecraft.golden_armor.passive_ability.0": "Усиливает ближайших прирученных существ",
 
   "effect.rpgu.mire_touch": "Вязкое прикосновение",
 
@@ -151,15 +90,9 @@
 
   "attribute.rpgu.name.health_regeneration": "Восстановление здоровья",
 
-  "item.rpgu.spell_prism": "Призма заклинателя",
-
   "subtitles.rpgu.backstab": "Удар в спину",
 
   "attribute.rpgu.name.critical_damage": "Критический урон",
-
-  "item.minecraft.totem_of_undying.passive_ability.0": "Спасает от смерти",
-  "item.minecraft.elytra.passive_ability.0": "Позволяет летать. Отправляется на перезарядку при получении урона от игроков",
-
   "item.rpgu.soul_binder": "Связыватель души",
   "item.rpgu.soul_binder.description.0": "Игрок возродится на нём, если других приоритетных мест нет",
 

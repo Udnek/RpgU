@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.artifact;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.rpgu.attribute.Attributes;
@@ -13,14 +14,15 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
 public class SpellPrism extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {
-        return "spell_prism";
-    }
+    public @NotNull String getRawId() {return "spell_prism";}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Spell Prism", "Призма заклинателя");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

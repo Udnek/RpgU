@@ -7,6 +7,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
@@ -33,19 +34,19 @@ import java.util.function.Consumer;
 public class HeavyAmethystDoloire extends AmethystDoloire {
 
     @Override
-    public @NotNull String getRawId() {
-        return "heavy_amethyst_doloire";
-    }
+    public @NotNull String getRawId() {return "heavy_amethyst_doloire";}
 
     @Override
     public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.EPIC);}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Heavy Amethyst Doloire", "Тяжёлый аметистовый долуар");}
 
     @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
         super.initializeAdditionalAttributes(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
         //AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
-
     }
 
     @Override

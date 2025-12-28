@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment.wolf;
 
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.Material;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -17,6 +19,9 @@ public class WolfHelmet extends AbstractWolfArmor {
 
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Wolf Helmet", "Волчья шапка");}
 
     @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {

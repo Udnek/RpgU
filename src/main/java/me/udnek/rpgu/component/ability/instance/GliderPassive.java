@@ -73,7 +73,8 @@ public class GliderPassive extends RPGUConstructablePassiveAbility<DamageEvent> 
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return null;
+        return Pair.of(List.of("Allows to fly. Cooldowns on damage from players"),
+                List.of("Позволяет летать. Отправляется на перезарядку при получении урона от игроков"));
     }
 
     @Override

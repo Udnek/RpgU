@@ -1,10 +1,12 @@
 package me.udnek.rpgu.item.equipment.grim;
 
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -19,6 +21,9 @@ public class GrimHelmet extends GrimArmor {
     public @NotNull Stats getStats() {
         return new Stats(2, 1, 0.1, 2, 2);
     }
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Grim Helmet", "Мрачный шлем");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

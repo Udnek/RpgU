@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.artifact.wreath;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.CustomModelData;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.rpgu.component.ability.instance.FlowerWreathPassive;
@@ -46,6 +47,8 @@ public class FlowerWreath extends ConstructableCustomItem {
 
     @Override
     public @NotNull String getRawId() {return "flower_wreath";}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flower Wreath", "Цветочный венок");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
