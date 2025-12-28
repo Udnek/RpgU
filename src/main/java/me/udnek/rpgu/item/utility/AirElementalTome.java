@@ -16,6 +16,7 @@ import me.udnek.coreu.rpgu.component.ability.active.RayTraceActiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
+import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
@@ -24,6 +25,7 @@ import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.effect.Effects;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -70,11 +72,12 @@ public class AirElementalTome extends ConstructableCustomItem {
         getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
 
-    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RayTraceActiveAbility<PlayerInteractEvent>
-            , RPGUActiveTriggerableAbility<PlayerInteractEvent> {
+    public static class Ability extends RPGUConstructableActiveAbility<PlayerInteractEvent>
+            implements RayTraceActiveAbility<PlayerInteractEvent>, RPGUActiveTriggerableAbility<PlayerInteractEvent> {
+
+        public static final double HEIGHT = 15;
 
         public static final Ability DEFAULT = new Ability();
-        public static final double HEIGHT = 15;
 
         public Ability(){
             getComponents().set(new AttributeBasedProperty(20*20, RPGUComponents.ABILITY_COOLDOWN_TIME));
@@ -135,9 +138,15 @@ public class AirElementalTome extends ConstructableCustomItem {
         }
 
         @Override
+        public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
+            super.getEngAndRuProperties(Eng_Ru_Args);
+            Eng_Ru_Args.accept("Lift Height: %s blocks", "Высота подъёма: %s блоков", List.of(Component.text(Utils.roundToTwoDigits(HEIGHT))));
+        }
+
+        @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return Pair.of(List.of("Lift Height: %s blocks", "Raises targets into the air", " and makes them fall with increased damage"),
-                    List.of("Высота подъёма: %s блоков", "Поднимает цели в воздух", " и ударяет о землю с увеличенным уроном"));
+            return Pair.of(List.of("Raises targets into the air", " and makes them fall with increased damage"),
+                    List.of("Поднимает цели в воздух", " и ударяет о землю с увеличенным уроном"));
         }
 
         @Override
