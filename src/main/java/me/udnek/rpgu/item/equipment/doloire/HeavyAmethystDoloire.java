@@ -4,8 +4,10 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
+import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
@@ -42,14 +44,18 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
         super.initializeAdditionalAttributes(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
-        AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+        //AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
 
     }
 
     @Override
     public void initializeComponents() {
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD_20X20);
+
         CustomAttributeModifier attribute = new CustomAttributeModifier(0.6,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
-        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
+        getComponents().getOrCreateDefault(CustomComponentType.CUSTOM_ATTRIBUTED_ITEM).addAttribute(
+                Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute
+        );
 
         Ability ability = new Ability();
         ability.getComponents().set(new AttributeBasedProperty(20*7, RPGUComponents.ABILITY_COOLDOWN_TIME));

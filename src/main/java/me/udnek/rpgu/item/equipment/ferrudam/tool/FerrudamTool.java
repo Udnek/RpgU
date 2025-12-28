@@ -21,7 +21,4 @@ public abstract class FerrudamTool extends ConstructableCustomItem {
 
     @Override
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
-
-    @Override
-    public boolean addDefaultAttributes() {return true;}
 }

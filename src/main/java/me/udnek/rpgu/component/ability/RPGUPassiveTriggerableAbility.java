@@ -1,6 +1,6 @@
 package me.udnek.rpgu.component.ability;
 
-import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUItemPassiveAbility;
 import org.bukkit.event.entity.EntityShootBowEvent;

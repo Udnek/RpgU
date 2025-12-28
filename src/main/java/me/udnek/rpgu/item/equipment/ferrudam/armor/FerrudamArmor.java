@@ -24,9 +24,6 @@ public abstract class FerrudamArmor extends ConstructableCustomItem {
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES});}
 
     @Override
-    public boolean addDefaultAttributes() {return true;}
-
-    @Override
     public @Nullable RepairData initializeRepairData() {return new RepairData(Items.FERRUDAM_INGOT);}
 
 

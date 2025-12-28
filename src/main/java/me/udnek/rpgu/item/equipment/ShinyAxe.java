@@ -33,8 +33,6 @@ public class ShinyAxe extends ConstructableCustomItem {
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
     @Override
     public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
-    @Override
-    public boolean addDefaultAttributes() {return true;}
 
     @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {

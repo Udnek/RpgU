@@ -39,12 +39,18 @@ public class DamageProperty implements RPGUAbilityProperty<LivingEntity, Damage>
     public void describe(@NotNull AbilityLorePart componentable) {
         MultiLineDescription description = formula.describe();
         if (description.getLines().size() > 1){
-            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", List.of(Component.text(type.toString()), Component.empty())));
+            componentable.addAbilityStat(Component.translatable(
+                    "ability.rpgu.damage",
+                    List.of(Component.text(type.toString()), Component.empty())
+            ));
             for (Component component : description.getLines()) {
                 componentable.addAbilityStatDoubleTab(component);
             }
         } else {
-            componentable.addAbilityStat(Component.translatable("ability.rpgu.damage", description.addLineToBeginning(Component.text(type.toString())).join()));
+            componentable.addAbilityStat(Component.translatable(
+                    "ability.rpgu.damage",
+                    List.of(Component.text(type.toString()), description.getLines().getFirst())
+            ));
         }
     }
 

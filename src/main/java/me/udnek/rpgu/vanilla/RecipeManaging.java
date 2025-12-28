@@ -85,13 +85,13 @@ public class RecipeManaging {
         new AlloyingRecipeBuilder(Material.NETHERITE_SWORD).recipeKey("netherite_sword_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_SWORD)).build(RpgU.getInstance());
         ////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.CHAINMAIL_CHESTPLATE).recipeShape(new String[]{"C C", "CCC", "CCC"}).materialIngredients(Map.of('C', Material.CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_CHESTPLATE).recipeShape(new String[]{"C C", "CCC", "CCC"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CHAINMAIL_HELMET).recipeShape(new String[]{"CCC", "C C"}).materialIngredients(Map.of('C', Material.CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_HELMET).recipeShape(new String[]{"CCC", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CHAINMAIL_LEGGINGS).recipeShape(new String[]{"CCC", "C C", "C C"}).materialIngredients(Map.of('C', Material.CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_LEGGINGS).recipeShape(new String[]{"CCC", "C C", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CHAINMAIL_BOOTS).recipeShape(new String[]{"C C", "C C"}).materialIngredients(Map.of('C', Material.CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_BOOTS).recipeShape(new String[]{"C C", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
         /////////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.GOLDEN_CHESTPLATE).recipeShape(new String[]{"GLG", "GGG", "GGG"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,

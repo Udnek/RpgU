@@ -1,10 +1,10 @@
 package me.udnek.rpgu.equipment.slot;
 
 
-import me.udnek.coreu.custom.equipmentslot.slot.ConstructableGroupSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.ConstructableSingleSlot;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipment.slot.ConstructableGroupSlot;
+import me.udnek.coreu.custom.equipment.slot.ConstructableSingleSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.rpgu.RpgU;
 

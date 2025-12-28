@@ -2,8 +2,9 @@ package me.udnek.rpgu.item.equipment.magical;
 
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.key.Key;
@@ -29,9 +30,6 @@ public class MagicalChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public boolean addDefaultAttributes() {return true;}
-
-    @Override
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(HiddenItemComponent.INSTANCE);
@@ -39,7 +37,7 @@ public class MagicalChestplate extends ConstructableCustomItem {
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MAGICAL_POTENTIAL, 5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST)
                         .add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, 1, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST)
-                        .add(Attributes.CAST_RANGE, 1, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.CHEST)
+                        .add(RPGUAttributes.ABILITY_CAST_RANGE, 1, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.CHEST)
                         .build()
         ));
     }

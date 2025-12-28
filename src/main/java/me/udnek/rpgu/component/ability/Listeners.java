@@ -2,8 +2,8 @@ package me.udnek.rpgu.component.ability;
 
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;

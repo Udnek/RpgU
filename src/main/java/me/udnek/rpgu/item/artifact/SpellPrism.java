@@ -4,6 +4,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.bukkit.Material;
@@ -40,7 +41,7 @@ public class SpellPrism extends ConstructableCustomItem {
         super.initializeComponents();
 
         getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
-                .add(Attributes.COOLDOWN_TIME, new CustomAttributeModifier(-0.15, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS))
+                .add(RPGUAttributes.ABILITY_COOLDOWN_TIME, new CustomAttributeModifier(-0.15, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlots.ARTIFACTS))
                 .add(Attributes.MAGICAL_POTENTIAL, new CustomAttributeModifier(0.2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS))
                 .build()));
     }

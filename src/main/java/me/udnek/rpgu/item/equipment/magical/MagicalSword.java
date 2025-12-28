@@ -2,8 +2,9 @@ package me.udnek.rpgu.item.equipment.magical;
 
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.attribute.Attributes;
 import net.kyori.adventure.key.Key;
@@ -24,9 +25,6 @@ public class MagicalSword extends ConstructableCustomItem {
     public @Nullable DataSupplier<Key> getItemModel() {return null;}
 
     @Override
-    public boolean addDefaultAttributes() {return true;}
-
-    @Override
     public @NotNull Material getMaterial() {
         return Material.IRON_SWORD;
     }
@@ -38,7 +36,7 @@ public class MagicalSword extends ConstructableCustomItem {
         getComponents().set(new CustomAttributedItem(
                 new CustomAttributesContainer.Builder()
                         .add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, 0.5, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND)
-                        .add(Attributes.COOLDOWN_TIME, -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.MAIN_HAND)
+                        .add(RPGUAttributes.ABILITY_COOLDOWN_TIME, -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.MAIN_HAND)
                         .build()
         ));
     }

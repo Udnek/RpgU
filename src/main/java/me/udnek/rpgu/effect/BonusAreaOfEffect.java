@@ -3,6 +3,7 @@ package me.udnek.rpgu.effect;
 import me.udnek.coreu.custom.attribute.CustomAttributeConsumer;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.effect.ConstructableCustomEffect;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.potion.PotionEffect;
@@ -24,6 +25,6 @@ public class BonusAreaOfEffect extends ConstructableCustomEffect {
 
     @Override
     public void getCustomAttributes(@NotNull PotionEffect context, @NotNull CustomAttributeConsumer consumer) {
-        consumer.accept(Attributes.AREA_OF_EFFECT, new CustomAttributeModifier(context.getAmplifier() + 1, AttributeModifier.Operation.ADD_NUMBER));
+        consumer.accept(RPGUAttributes.ABILITY_AREA_OF_EFFECT, new CustomAttributeModifier(context.getAmplifier() + 1, AttributeModifier.Operation.ADD_NUMBER));
     }
 }

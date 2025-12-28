@@ -4,11 +4,6 @@
 	"item.modifiers.second_artifact": "When equipped as Second Artifact:",
 	"item.modifiers.third_artifact": "When equipped as Third Artifact:",
 
-	"equipment.rpgu.description_line": " %s",
-
-	"active_ability.rpgu.title": "Active Ability:",
-	"passive_ability.rpgu.title": "Passive Ability:",
-
 	"ability.rpgu.damage": "Damage (%s): %s",
 
 	"damage_formula.rpgu.magical": "Magical: %s",
@@ -25,12 +20,9 @@
 	"attribute.rpgu.name.melee_magical_damage_multiplier": "Melee Magical Damage per Potential",
 	"attribute.rpgu.name.magical_potential": "Magical Potential (MP)",
 	"attribute.rpgu.name.magical_defense_multiplier": "Magical Defense per Potential",
-	"attribute.rpgu.name.cast_range": "Cast Range",
-	"attribute.rpgu.name.cooldown_time": "Cooldown Time",
 	"attribute.rpgu.name.projectile_damage": "Projectile Damage",
 	"attribute.rpgu.name.projectile_speed": "Projectile Speed",
 	"attribute.rpgu.name.backstab_damage": "Backstab damage",
-	"attribute.rpgu.name.area_of_effect": "Area of Effect",
 	"attribute.rpgu.name.health_regeneration": "Health Regeneration",
 	"attribute.rpgu.name.critical_damage": "Critical Damage",
 

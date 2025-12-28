@@ -5,11 +5,11 @@ import me.udnek.rpgu.attribute.Attributes;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class MagicalResistanceAttribute extends ConstructableReversedCustomAttribute {
+public class MagicResistanceAttribute extends ConstructableReversedCustomAttribute {
 
     public static final double MAX_DEFENSE_ABSORPTION = 0.8;
 
-    public MagicalResistanceAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
+    public MagicResistanceAttribute(@NotNull String rawId, double defaultValue, double min, double max) {
         super(rawId, defaultValue, min, max);
     }
 

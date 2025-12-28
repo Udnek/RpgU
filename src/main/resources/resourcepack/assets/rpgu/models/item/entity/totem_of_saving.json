@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "block/dark_oak_log",
 		"1": "block/dark_oak_log_top",
-		"3": "block/chain",
+		"3": "block/iron_chain",
 		"4": "rpgu:block/entity/totem_of_saving/pumpkin_side",
 		"5": "rpgu:block/entity/totem_of_saving/pumpkin_top",
 		"6": "rpgu:block/entity/totem_of_saving/pumpkin_face",

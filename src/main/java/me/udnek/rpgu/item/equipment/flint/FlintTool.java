@@ -19,19 +19,15 @@ public abstract class FlintTool extends ConstructableCustomItem {
     public @Nullable DataSupplier<Integer> getMaxDamage() {
         return DataSupplier.of((int) (getMaterial().getDefaultData(DataComponentTypes.MAX_DAMAGE) * 1.3));
     }
+
     @Override
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
-
 
     @Override
     public void initializeComponents() {
         super.initializeComponents();
         getComponents().set(AutoGeneratingFilesItem.HANDHELD);
     }
-
-    @Override
-    public boolean addDefaultAttributes() {return true;}
-
 
     @Override
     public @Nullable RepairData initializeRepairData() {

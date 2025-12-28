@@ -5,9 +5,10 @@ import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.item.Items;
@@ -69,8 +70,8 @@ public class EvocationRobe extends ConstructableCustomItem {
         super.initializeComponents();
         getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
                 .add(Attributes.MAGICAL_POTENTIAL, new CustomAttributeModifier(5,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST))
-                .add(Attributes.COOLDOWN_TIME, new CustomAttributeModifier(-0.3,  AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.CHEST))
-                .add(Attributes.CAST_RANGE, new CustomAttributeModifier(0.5,  AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.CHEST))
+                .add(RPGUAttributes.ABILITY_COOLDOWN_TIME, new CustomAttributeModifier(-0.3,  AttributeModifier.Operation.MULTIPLY_SCALAR_1, CustomEquipmentSlot.CHEST))
+                .add(RPGUAttributes.ABILITY_CAST_RANGE, new CustomAttributeModifier(0.5,  AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.CHEST))
                 .add(Attributes.MAGICAL_DEFENSE_MULTIPLIER, new CustomAttributeModifier(0.5,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.CHEST))
         .build()));
     }

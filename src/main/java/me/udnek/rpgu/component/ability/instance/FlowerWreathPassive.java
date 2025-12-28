@@ -3,10 +3,11 @@ package me.udnek.rpgu.component.ability.instance;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
@@ -39,7 +40,7 @@ public class FlowerWreathPassive extends RPGUConstructablePassiveAbility<Integer
         getComponents().set(new AttributeBasedProperty(6, RPGUComponents.ABILITY_CAST_RANGE));
         getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                 PotionEffectType.REGENERATION,
-                PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(Attributes.ABILITY_DURATION, DURATION)),
+                PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(RPGUAttributes.ABILITY_DURATION, DURATION)),
                 PropertyFunctions.CONSTANT(0),
                 true, true, true
         )));

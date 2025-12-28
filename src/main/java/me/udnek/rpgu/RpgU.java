@@ -2,16 +2,19 @@ package me.udnek.rpgu;
 
 
 import me.udnek.coreu.custom.attribute.CustomAttribute;
+import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.effect.CustomEffect;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.sound.CustomSound;
 import me.udnek.coreu.resourcepack.ResourcePackablePlugin;
+import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.Commands;
+import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.Listeners;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
@@ -19,9 +22,11 @@ import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
+import me.udnek.rpgu.item.utility.AirElementalTome;
 import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
+import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import me.udnek.rpgu.util.AbilityListener;
 import me.udnek.rpgu.util.EntityListener;
 import me.udnek.rpgu.util.GeneralListener;
@@ -46,6 +51,8 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         CustomEffect magicalResistance = Effects.MAGIC_RESISTANCE;
         CustomBlockType soulBinder = Blocks.SOUL_BINDER;
         CustomSound backstab = Sounds.BACKSTAB;
+        EnchantingTableUpgrade end = EnchantingTableUpgrade.END;
+        CustomComponentType<RPGUActiveItem, AirElementalTome.Ability> tome = Abilities.AIR_ELEMENTAL_TOME;
 
         new DamageListener(this);
         new EnchantingListener(this);

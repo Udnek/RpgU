@@ -5,7 +5,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
 import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.rpgu.RpgU;
@@ -43,9 +43,6 @@ public class CeremonialDagger extends ConstructableCustomItem {
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
     @Override
-    public boolean addDefaultAttributes() {return true;}
-
-    @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
         super.initializeAdditionalAttributes(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.SNEAKING_SPEED,
@@ -55,7 +52,8 @@ public class CeremonialDagger extends ConstructableCustomItem {
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
-        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, -2);
+        AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null,-2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+//        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, -2);
     }
 
     @Override

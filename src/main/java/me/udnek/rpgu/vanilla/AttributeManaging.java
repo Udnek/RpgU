@@ -6,7 +6,7 @@ import io.papermc.paper.datacomponent.item.PotionContents;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.event.CustomItemGeneratedEvent;
 import me.udnek.coreu.custom.event.InitializationEvent;
 import me.udnek.coreu.custom.item.CustomItem;
@@ -14,6 +14,7 @@ import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.registry.InitializationProcess;
 import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.ComponentU;
 import me.udnek.coreu.util.SelfRegisteringListener;
@@ -210,8 +211,8 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (material == Material.SPYGLASS) {
             customItem.getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder()
-                    .add(Attributes.CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
-                    .add(Attributes.CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
+                    .add(RPGUAttributes.ABILITY_CAST_RANGE, 0.7, AttributeModifier.Operation.ADD_SCALAR, CustomEquipmentSlot.HAND)
+                    .add(RPGUAttributes.ABILITY_CAST_RANGE, 0.3, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlots.ARTIFACTS)
                     .build()));
         }
 

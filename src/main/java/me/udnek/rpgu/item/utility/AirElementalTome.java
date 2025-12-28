@@ -3,10 +3,11 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
@@ -81,7 +82,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             getComponents().set(new AttributeBasedProperty(4*20, RPGUComponents.ABILITY_DURATION));
             getComponents().set(new EffectsProperty(new EffectsProperty.PotionData(
                     Effects.HEAVY_FALLING.getBukkitType(),
-                    PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(Attributes.ABILITY_DURATION, PropertyFunctions.CONSTANT(20*4d))),
+                    PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(RPGUAttributes.ABILITY_DURATION, PropertyFunctions.CONSTANT(20*4d))),
                     PropertyFunctions.FLOOR(PropertyFunctions.LINEAR(Functions.ENTITY_TO_MP(), 2d, 0.2))
             )));
         }

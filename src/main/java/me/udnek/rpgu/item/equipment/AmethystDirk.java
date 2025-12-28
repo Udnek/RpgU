@@ -4,7 +4,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.rpgu.attribute.Attributes;
@@ -36,8 +36,6 @@ public class AmethystDirk extends ConstructableCustomItem {
     @Override
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
-    @Override
-    public boolean addDefaultAttributes() {return true;}
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {

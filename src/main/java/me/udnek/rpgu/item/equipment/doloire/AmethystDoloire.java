@@ -8,17 +8,20 @@ import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.CustomComponent;
+import me.udnek.coreu.custom.component.CustomComponentMap;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
-import me.udnek.coreu.custom.equipmentslot.slot.CustomEquipmentSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.BaseUniversalSlot;
-import me.udnek.coreu.custom.equipmentslot.universal.UniversalInventorySlot;
+import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
+import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
+import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.item.RepairData;
+import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.coreu.rpgu.component.ability.RPGUItemAbility;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
@@ -64,21 +67,14 @@ public class AmethystDoloire extends ConstructableCustomItem {
     }
     @Override
     public @NotNull String getRawId() {return "amethyst_doloire";}
-    @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {
-        return List.of(new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES});
-    }
 
     @Override
     public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
 
     @Override
-    public boolean addDefaultAttributes() {return true;}
-
-    @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
         super.initializeAdditionalAttributes(itemStack);
-        getComponents().set(AutoGeneratingFilesItem.HANDHELD_20X20);
+
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_SPEED, null, -0.4, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
     }
@@ -106,7 +102,7 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Consumable> getConsumable() {
-        Consumable build = Consumable.consumable().consumeSeconds(CAST_TIME / 20f).animation(ItemUseAnimation.SPEAR).hasConsumeParticles(false)
+        Consumable build = Consumable.consumable().consumeSeconds(CAST_TIME / 20f).animation(ItemUseAnimation.TRIDENT).hasConsumeParticles(false)
                 .sound(Registry.SOUNDS.getKeyOrThrow(Sound.INTENTIONALLY_EMPTY).key()).build();
         return DataSupplier.of(build);
     }
@@ -114,9 +110,12 @@ public class AmethystDoloire extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        getComponents().set(AutoGeneratingFilesItem.HANDHELD_20X20);
 
-        CustomAttributeModifier attribute = new CustomAttributeModifier(MELEE_MAGICAL_DAMAGE_MULTIPLIER,  AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
-        getComponents().set(new CustomAttributedItem(new CustomAttributesContainer.Builder().add(Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute).build()));
+        CustomAttributeModifier attribute = new CustomAttributeModifier(MELEE_MAGICAL_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_NUMBER, CustomEquipmentSlot.MAIN_HAND);
+        getComponents().getOrCreateDefault(CustomComponentType.CUSTOM_ATTRIBUTED_ITEM).addAttribute(
+                Attributes.MELEE_MAGICAL_DAMAGE_MULTIPLIER, attribute
+        );
 
         getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(Ability.DEFAULT);
     }
@@ -130,18 +129,15 @@ public class AmethystDoloire extends ConstructableCustomItem {
 //TODO фикс абилки она не работает
         public static final Ability DEFAULT = new Ability();
 
-        public static double BASE_RADIUS = 0.8;
-        public static double BASE_DAMAGE = 1.5;
-
         public Ability() {
             getComponents().set(new AttributeBasedProperty(20*15, RPGUComponents.ABILITY_COOLDOWN_TIME));
             getComponents().set(new AttributeBasedProperty(10, RPGUComponents.ABILITY_CAST_RANGE));
-            getComponents().set(new AttributeBasedProperty(BASE_RADIUS, RPGUComponents.ABILITY_AREA_OF_EFFECT));
-            getComponents().set(new DamageProperty(Damage.Type.MAGICAL, PropertyFunctions.LINEAR(Functions.ENTITY_TO_MP(), BASE_DAMAGE, 0.2)));
+            getComponents().set(new AttributeBasedProperty(0.8d, RPGUComponents.ABILITY_AREA_OF_EFFECT));
+            getComponents().set(new DamageProperty(Damage.Type.MAGICAL, PropertyFunctions.LINEAR(Functions.ENTITY_TO_MP(), 1.5, 0.2)));
             getComponents().set(new EffectsProperty(
                     new EffectsProperty.PotionData(
                             PotionEffectType.SLOWNESS,
-                            PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(Attributes.ABILITY_DURATION, 20d*3d)),
+                            PropertyFunctions.CEIL(PropertyFunctions.ATTRIBUTE_WITH_BASE(RPGUAttributes.ABILITY_DURATION, 20d*3d)),
                             PropertyFunctions.CONSTANT(2))
             ));
         }
