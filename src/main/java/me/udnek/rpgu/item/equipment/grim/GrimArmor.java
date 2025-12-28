@@ -1,6 +1,7 @@
 package me.udnek.rpgu.item.equipment.grim;
 
 import io.papermc.paper.datacomponent.item.Equippable;
+import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
@@ -26,14 +27,10 @@ import java.util.List;
 public abstract class GrimArmor extends ConstructableCustomItem {
 
     @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
-
-    @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {
         Equippable build = Equippable.equippable(getMaterial().getEquipmentSlot()).assetId(new NamespacedKey(RpgU.getInstance(), "grim")).build();
         return DataSupplier.of(build);
     }
-    public abstract @NotNull Stats getStats();
 
     @Override
     public @Nullable DataSupplier<ItemRarity> getRarity() {
@@ -41,13 +38,19 @@ public abstract class GrimArmor extends ConstructableCustomItem {
     }
 
     @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {
+        return DataSupplier.of(null);
+    }
+
+    @Override
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         Stats stats = getStats();
         EquipmentSlotGroup slot = getEquippable().get().slot().getGroup();
         AttributeUtils.addAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), slot+"_max_health"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
         AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), slot+"_armor"), stats.maxHp, AttributeModifier.Operation.ADD_NUMBER, slot);
     }
+
 
     @Override
     public void initializeComponents() {
@@ -71,6 +74,8 @@ public abstract class GrimArmor extends ConstructableCustomItem {
     public @Nullable RepairData initializeRepairData() {
         return new RepairData(Material.BONE);
     }
+
+    public abstract @NotNull Stats getStats();
 
     public record Stats(double magicalPotential, double magicalDefense, double damageMultiplier, double maxHp, double armor){}
 

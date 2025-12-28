@@ -101,7 +101,9 @@ public class WitherWreath extends ConstructableCustomItem {
 
         @Override
         protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull DamageEvent damageEvent) {
-            if (!(damageEvent.getDamageInstance().getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
+            if (!(damageEvent.getDamageInstance().getVictim() instanceof LivingEntity livingVictim)) {
+                return ActionResult.NO_COOLDOWN;
+            }
             getComponents().getOrException(RPGUComponents.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
             return ActionResult.FULL_COOLDOWN;
         }
