@@ -13,6 +13,7 @@ import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbi
 import me.udnek.jeiu.component.HiddenItemComponent;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.NamespacedKey;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class HungryHorrorArmor extends ConstructableCustomItem {
 
@@ -44,7 +46,7 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
         getComponents().set(HiddenItemComponent.INSTANCE);
     }
 
-    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> {
+    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> implements RPGUPassiveTriggerableAbility<DamageEvent> {
         public static final Passive DEFAULT = new Passive(PotionEffectType.HUNGER, CustomEquipmentSlot.CHEST);
 
         protected final PotionEffectType effectType;
@@ -76,6 +78,11 @@ public abstract class HungryHorrorArmor extends ConstructableCustomItem {
             }
             damager.addPotionEffect(new PotionEffect(effectType, 40, Math.min(applied+1, 4), false, true));
             return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public void onDamageDealt(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
+            activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), slot, event);
         }
 
         @Override

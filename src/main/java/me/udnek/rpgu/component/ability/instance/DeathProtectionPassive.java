@@ -51,6 +51,11 @@ public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<Enti
         return ActionResult.FULL_COOLDOWN;
     }
 
+    public void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
+                            @NotNull EntityResurrectEvent event) {
+        if (!activatedBefore) activate(customItem, event.getEntity(), true, slot, event);
+    }
+
     @Override
     public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot slot, int tickDelay) {}
 

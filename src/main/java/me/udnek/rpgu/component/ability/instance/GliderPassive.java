@@ -13,6 +13,9 @@ import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
+import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -20,10 +23,12 @@ import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
+import java.util.Objects;
 
-public class GliderPassive extends RPGUConstructablePassiveAbility<EntityToggleGlideEvent> {
+public class GliderPassive extends RPGUConstructablePassiveAbility<DamageEvent> implements RPGUPassiveTriggerableAbility<DamageEvent> {
 
     public static final GliderPassive DEFAULT = new GliderPassive(CustomEquipmentSlot.CHEST, 0);
 
@@ -48,22 +53,31 @@ public class GliderPassive extends RPGUConstructablePassiveAbility<EntityToggleG
     public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {}
 
     @Override
-    public void activate(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull EntityToggleGlideEvent entityToggleGlideEvent) {
-        super.activate(customItem, livingEntity, slot, entityToggleGlideEvent);
+    protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull DamageEvent damageEvent) {
+        DamageInstance damageInstance = damageEvent.getDamageInstance();
+        if (!(damageInstance.getDamager() instanceof Player || damageInstance.getCausingDamager() instanceof Player)) return ActionResult.NO_COOLDOWN;
+        if (livingEntity.isGliding()) livingEntity.setGliding(false);
+        return ActionResult.FULL_COOLDOWN;
     }
 
     @Override
-    public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
-        return Abilities.GLIDER;
+    public void onDamageReceived(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
+        activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getVictim()), slot, event);
     }
 
-    @Override
-    protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull EntityToggleGlideEvent entityToggleGlideEvent) {
-        return null;
+    public void onToggleGlide(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull EntityToggleGlideEvent event) {
+        if (!event.isGliding()) return;
+        Player player = (Player) event.getEntity();
+        if (customItem.getCooldown(player) != 0) event.setCancelled(true);
     }
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
         return null;
+    }
+
+    @Override
+    public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
+        return Abilities.GLIDER;
     }
 }

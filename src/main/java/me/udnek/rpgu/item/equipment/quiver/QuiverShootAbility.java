@@ -57,8 +57,8 @@ public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntitySh
     @Override
     protected @NotNull RPGUItemAbstractAbility.ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull EntityShootBowEvent event) {
         ItemStack item = slot.getItem(livingEntity);
-        System.out.println("Shoot item: " + CustomItem.get(slot.getItem(livingEntity)).getId());
-        System.out.println("Shoot bow: " + event.getBow().getType());
+        //System.out.println("Shoot item: " + CustomItem.get(slot.getItem(livingEntity)).getId());
+        //System.out.println("Shoot bow: " + event.getBow().getType());
         if (item == null) throw new RuntimeException("Ебать как ты выбил это еблан!!!! Это говнокод");
         if (!item.isSimilar(event.getConsumable())) return RPGUItemAbstractAbility.ActionResult.NO_COOLDOWN;
         BundleContents data = item.getData(DataComponentTypes.BUNDLE_CONTENTS);
@@ -85,8 +85,6 @@ public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntitySh
             item.setData(DataComponentTypes.LORE, ItemLore.lore(lines));
         }
 
-
-
         AbstractArrow projectile = (AbstractArrow) event.getProjectile();
         arrowStack.setAmount(1);
         projectile.setItemStack(arrowStack);
@@ -95,7 +93,7 @@ public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntitySh
     }
 
     public void onChooseArrow(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerReadyArrowEvent event) {
-        System.out.println("called: " + slot + " item: " + (slot.getItem(event.getPlayer()) == null ? "null" : CustomItem.get(slot.getItem(event.getPlayer())).getId()));
+        //System.out.println("called: " + slot + " item: " + (slot.getItem(event.getPlayer()) == null ? "null" : CustomItem.get(slot.getItem(event.getPlayer())).getId()));
         Player player = event.getPlayer();
         ItemStack item = slot.getItem(player);
         if (item == null) throw new RuntimeException("Ебать как ты выбил это еблан!!!! Это говнокод");
@@ -113,7 +111,7 @@ public class QuiverShootAbility extends RPGUConstructablePassiveAbility<EntitySh
         ItemStack itemClone = item.clone();
         if (slot.equals(player, new BaseUniversalSlot(40)) || slot.equals(player, new BaseUniversalSlot(player.getInventory().getHeldItemSlot()))){
             slot.setItem(itemClone, player);
-            System.out.println("using delayed");
+            //System.out.println("using delayed");
             new BukkitRunnable() {
                 @Override
                 public void run() {

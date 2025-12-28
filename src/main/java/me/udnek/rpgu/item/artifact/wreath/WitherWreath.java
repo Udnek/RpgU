@@ -22,6 +22,7 @@ import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import org.apache.commons.lang3.tuple.Pair;
@@ -39,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class WitherWreath extends ConstructableCustomItem {
@@ -77,7 +79,7 @@ public class WitherWreath extends ConstructableCustomItem {
         getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents().set(Passive.DEFAULT);
     }
 
-    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> {
+    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> implements RPGUPassiveTriggerableAbility<DamageEvent> {
 
         public static final Passive DEFAULT = new Passive();
 
@@ -102,6 +104,11 @@ public class WitherWreath extends ConstructableCustomItem {
             if (!(damageEvent.getDamageInstance().getVictim() instanceof LivingEntity livingVictim)) return ActionResult.NO_COOLDOWN;
             getComponents().getOrException(RPGUComponents.ABILITY_EFFECTS).applyOn(livingEntity, livingVictim);
             return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public void onDamageDealt(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
+            activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), slot, event);
         }
 
         @Override

@@ -14,7 +14,9 @@ import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
+import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
@@ -25,8 +27,10 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class NautilusCore extends ConstructableCustomItem {
@@ -54,7 +58,7 @@ public class NautilusCore extends ConstructableCustomItem {
         ));
     }
 
-    public static class Passive extends RPGUConstructablePassiveAbility<DamageInstance> {
+    public static class Passive extends RPGUConstructablePassiveAbility<DamageEvent> implements RPGUPassiveTriggerableAbility<DamageEvent> {
 
         public static final Passive DEFAULT = new Passive();
 
@@ -63,8 +67,11 @@ public class NautilusCore extends ConstructableCustomItem {
             return Abilities.NAUTILUS_CORE;
         }
 
+
+
         @Override
-        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull DamageInstance damageInstance) {
+        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull DamageEvent damageEvent) {
+            DamageInstance damageInstance = damageEvent.getDamageInstance();
             if (!(damageInstance.getDamager() instanceof LivingEntity damager)) return ActionResult.NO_COOLDOWN;
             if (!damageInstance.isCritical()) return ActionResult.NO_COOLDOWN;
             if (damageInstance.containsExtraFlag(new isMagicalCriticalApplied())) return ActionResult.NO_COOLDOWN;
@@ -72,6 +79,11 @@ public class NautilusCore extends ConstructableCustomItem {
             damageInstance.getDamage().multiplyMagical(Attributes.CRITICAL_DAMAGE.calculate(damager));
             damageInstance.addExtraFlag(new isMagicalCriticalApplied());
             return ActionResult.FULL_COOLDOWN;
+        }
+
+        @Override
+        public void onDamageDealt(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull DamageEvent event) {
+            activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getDamager()), slot, event);
         }
 
         @Override
