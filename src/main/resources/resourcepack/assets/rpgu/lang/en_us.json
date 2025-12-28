@@ -28,13 +28,6 @@
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 
-	"item.rpgu.ferrudam_helmet": "Ferrudam Helmet",
-	"item.rpgu.ferrudam_chestplate": "Ferrudam Chestplate",
-	"item.rpgu.ferrudam_leggings": "Ferrudam Leggings",
-	"item.rpgu.ferrudam_boots": "Ferrudam Boots",
-
-	"item.rpgu.spell_prism": "Spell Prism",
-
 	"item.rpgu.wolf_helmet": "Wolf Helmet",
 	"item.rpgu.wolf_chestplate": "Wolf Chestplate",
 	"item.rpgu.wolf_leggings": "Wolf Leggings",
@@ -83,58 +76,18 @@
 	"item.rpgu.totem_of_saving": "Totem of Saving",
 	"item.rpgu.totem_of_saving.passive_ability.0": "Saves inventory on death in container",
 
-	"item.rpgu.air_elemental_tome": "Air Elemental Tome",
-	"item.rpgu.air_elemental_tome.active_ability.height": "Lift Height: %s blocks",
-	"item.rpgu.air_elemental_tome.active_ability.0": "Raises targets into the air",
-	"item.rpgu.air_elemental_tome.active_ability.1": " and makes them fall with increased damage",
-
-	"item.rpgu.evocation_robe": "Evocation Robe",
-
-	"item.rpgu.grim_helmet": "Grim Helmet",
-	"item.rpgu.grim_chestplate": "Grim Chestplate",
-
-	"item.rpgu.flint_sword": "Flint Sword",
-	"item.rpgu.flint_pickaxe": "Flint Pickaxe",
-	"item.rpgu.flint_axe": "Flint Axe",
-	"item.rpgu.flint_shovel": "Flint Shovel",
-	"item.rpgu.flint_hoe": "Flint Hoe",
-
-	"item.rpgu.amethyst_dirk": "Amethyst Dirk",
-
-	"item.rpgu.phantom_chestplate": "Phantom Cloak",
-
-	"item.rpgu.amethyst_doloire": "Amethyst Doloire",
-	"item.rpgu.amethyst_doloire.active_ability.0": "Strikes spikes from the ground",
-	"item.rpgu.amethyst_doloire.active_ability.1": " and slows target on hit",
-	"item.rpgu.heavy_amethyst_doloire": "Heavy Amethyst Doloire",
-
-	"item.rpgu.natures_staff": "Nature's Staff",
-	"item.rpgu.natures_staff.active_ability.0": "Roots targets to the ground",
-
-
-	"item.rpgu.hungry_horror_helmet": "Mask of Hungry Horror",
 	"item.rpgu.hungry_horror_helmet.description.0": "On Attack:",
 	"item.rpgu.hungry_horror_helmet.description.1": " Reapplies Strength effect with increased",
 	"item.rpgu.hungry_horror_helmet.description.2": " by one amplifier and 2 seconds duration.",
 	"item.rpgu.hungry_horror_helmet.description.3": " Max effect level: V.",
 	"item.rpgu.hungry_horror_helmet.description.4": " If you don't have effect, applies Strength I for 2 seconds.",
 
-	"item.rpgu.hungry_horror_chestplate": "Aegis of Hungry Horror",
 	"item.rpgu.hungry_horror_chestplate.description.0": "On Attack:",
 	"item.rpgu.hungry_horror_chestplate.description.1": " Reapplies Absorption effect with increased",
 	"item.rpgu.hungry_horror_chestplate.description.2": " by one amplifier and 2 seconds duration.",
 	"item.rpgu.hungry_horror_chestplate.description.3": " Max effect level: V.",
 	"item.rpgu.hungry_horror_chestplate.description.4": " If you don't have effect, applies Absorption I for 2 seconds.",
 
-	"item.rpgu.flower_wreath": "Flower Wreath",
-	"item.rpgu.flower_wreath.passive_ability.0": "Buffs near trees",
-
-	"item.rpgu.wither_wreath": "Wither Wreath",
-	"item.rpgu.wither_wreath.passive_ability.0": "Debuffs victim on attack",
-
-	"item.minecraft.golden_armor.passive_ability.0": "Buffs nearby tamed creatures",
-	"item.minecraft.totem_of_undying.passive_ability.0": "Saves from death",
-	"item.minecraft.elytra.passive_ability.0": "Allows to fly. Cooldowns on damage from players",
 
 	"item.rpgu.nautilus_core": "Nautilus Core",
 	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",

@@ -12,6 +12,7 @@ import me.udnek.coreu.custom.component.CustomComponentMap;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
@@ -67,9 +68,10 @@ public class AmethystDoloire extends ConstructableCustomItem {
     }
     @Override
     public @NotNull String getRawId() {return "amethyst_doloire";}
-
     @Override
     public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Amethyst Doloire", "Аметистовый долуар");}
 
     @Override
     public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
@@ -126,7 +128,6 @@ public class AmethystDoloire extends ConstructableCustomItem {
     }
 
     public static class Ability extends RPGUConstructableActiveAbility<PlayerItemConsumeEvent> implements RPGUActiveTriggerableAbility<PlayerItemConsumeEvent> {
-//TODO фикс абилки она не работает
         public static final Ability DEFAULT = new Ability();
 
         public Ability() {
@@ -188,7 +189,8 @@ public class AmethystDoloire extends ConstructableCustomItem {
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Strikes spikes from the ground", " and slows target on hit"),
+                    List.of("Вызывает шипы из земли", " и замедляет цель при попадании"));
         }
 
         @Override

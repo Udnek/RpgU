@@ -68,7 +68,7 @@ public class FlowerWreathPassive extends RPGUConstructablePassiveAbility<Integer
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return null;
+        return Pair.of(List.of("Buffs near trees"), List.of("Накладывает регенерацию возле деревьев"));
     }
 
     public @NotNull Location randomOffset(@NotNull LivingEntity livingEntity) {

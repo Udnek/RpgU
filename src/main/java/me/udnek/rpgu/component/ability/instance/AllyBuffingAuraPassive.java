@@ -109,7 +109,7 @@ public class AllyBuffingAuraPassive extends RPGUConstructablePassiveAbility<Inte
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return null;
+        return Pair.of(List.of("Buffs nearby tamed creatures"), List.of("Усиливает ближайших прирученных существ"));
     }
 
     @Override

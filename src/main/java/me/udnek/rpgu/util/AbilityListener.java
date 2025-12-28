@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public class AbilityListener extends SelfRegisteringListener {
+public class AbilityListener extends SelfRegisteringListener { //TODO удолить
     public AbilityListener(@NotNull Plugin plugin) {
         super(plugin);
     }

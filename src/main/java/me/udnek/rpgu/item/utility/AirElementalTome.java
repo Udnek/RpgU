@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.utility;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -21,6 +22,7 @@ import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.property.Functions;
 import me.udnek.rpgu.effect.Effects;
+import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -43,10 +45,9 @@ import java.util.function.Consumer;
 public class AirElementalTome extends ConstructableCustomItem {
 
     @Override
-    public @NotNull String getRawId() {
-        return "air_elemental_tome";
-    }
-
+    public @NotNull String getRawId() {return "air_elemental_tome";}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Air Elemental Tome", "Фолиант элементаля воздуха");}
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
@@ -135,7 +136,8 @@ public class AirElementalTome extends ConstructableCustomItem {
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Lift Height: %s blocks", "Raises targets into the air", " and makes them fall with increased damage"),
+                    List.of("Высота подъёма: %s блоков", "Поднимает цели в воздух", " и ударяет о землю с увеличенным уроном"));
         }
 
         @Override

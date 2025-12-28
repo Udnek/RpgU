@@ -6,6 +6,7 @@ import io.papermc.paper.datacomponent.item.ItemAttributeModifiers;
 import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
@@ -33,6 +34,9 @@ public class PhantomChestplate extends ConstructableCustomItem {
 
     @Override
     public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(150);}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Phantom Cloak", "Фантомная мантия");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

@@ -4,6 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -41,9 +42,9 @@ import java.util.function.Consumer;
 public class NaturesStaff extends ConstructableCustomItem {
 
     @Override
-    public @NotNull String getRawId() {
-        return "natures_staff";
-    }
+    public @NotNull String getRawId() {return "natures_staff";}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Nature's Staff", "Посох природы");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -115,7 +116,7 @@ public class NaturesStaff extends ConstructableCustomItem {
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Roots targets to the ground"), List.of("Привязывает цели к земле"));
         }
 
         @Override

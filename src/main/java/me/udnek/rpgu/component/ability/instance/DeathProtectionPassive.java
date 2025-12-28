@@ -61,7 +61,7 @@ public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<Enti
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return null;
+        return Pair.of(List.of("Saves from death"), List.of("Спасает от смерти"));
     }
 
     @Override

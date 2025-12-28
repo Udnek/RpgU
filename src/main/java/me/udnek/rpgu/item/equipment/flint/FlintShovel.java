@@ -1,11 +1,13 @@
 package me.udnek.rpgu.item.equipment.flint;
 
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -14,6 +16,8 @@ public class FlintShovel extends FlintTool {
     public @NotNull String getRawId() {return "flint_shovel";}
     @Override
     public @NotNull Material getMaterial() {return Material.STONE_SHOVEL;}
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flint Shovel", "Кремневая лопата");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {

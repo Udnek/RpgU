@@ -4,6 +4,7 @@ import me.udnek.coreu.custom.attribute.CustomAttributeModifier;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
@@ -29,9 +30,10 @@ public class AmethystDirk extends ConstructableCustomItem {
     }
 
     @Override
-    public @NotNull String getRawId() {
-        return "amethyst_dirk";
-    }
+    public @NotNull String getRawId() {return "amethyst_dirk";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Amethyst Dirk", "Аметистовый кортик");}
 
     @Override
     public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
