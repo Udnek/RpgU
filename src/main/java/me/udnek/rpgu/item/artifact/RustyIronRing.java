@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.artifact;
 
 import me.udnek.coreu.custom.attribute.CustomKeyedAttributeModifier;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.nms.Nms;
@@ -18,10 +19,18 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class RustyIronRing extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "rusty_iron_ring";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Rusty Iron Ring", "Ржавое железное кольцо");
+    }
 
     @Override
     public void globalInitialization() {
@@ -37,7 +46,7 @@ public class RustyIronRing extends ConstructableCustomItem {
         Nms.get().getLootTableContainer(LootTables.HUSK.getLootTable()).addPool(lootPoolBuilder);
         Nms.get().getLootTableContainer(LootTables.DROWNED.getLootTable()).addPool(lootPoolBuilder);
         Nms.get().getLootTableContainer(LootTables.STRAY.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(Bukkit.getLootTable(NamespacedKey.minecraft("entities/bogged"))).addPool(lootPoolBuilder);
+        Nms.get().getLootTableContainer(Objects.requireNonNull(Bukkit.getLootTable(NamespacedKey.minecraft("entities/bogged")))).addPool(lootPoolBuilder);
     }
 
     @Override

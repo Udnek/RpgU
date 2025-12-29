@@ -4,13 +4,13 @@ import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
-import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -36,23 +35,16 @@ public class CeremonialDagger extends ConstructableCustomItem {
         return Material.DIAMOND_SWORD;
     }
     @Override
-    public @NotNull String getRawId() {
-        return "ceremonial_dagger";
-    }
+    public @NotNull String getRawId() {return "ceremonial_dagger";}
     @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
-
-    @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
-        AttributeUtils.appendAttribute(itemStack, Attribute.SNEAKING_SPEED,
-                new NamespacedKey(RpgU.getInstance(), getRawId()+"_sneak"), 2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.MAINHAND);
-    }
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ceremonial Dagger", "Церемониальный кинжал");}
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
         super.modifyFinalItemStack(itemStack);
         AttributeUtils.appendAttribute(itemStack, Attribute.ATTACK_DAMAGE, null,-2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND);
+        AttributeUtils.appendAttribute(itemStack, Attribute.SNEAKING_SPEED,
+                new NamespacedKey(RpgU.getInstance(), getRawId()+"_sneak"), 2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlotGroup.MAINHAND);
 //        RpgUAttributeUtils.addSuitableAttribute(itemStack, Attribute.ATTACK_DAMAGE, null, -2);
     }
 

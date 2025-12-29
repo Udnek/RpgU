@@ -17,7 +17,6 @@ import me.udnek.coreu.rpgu.component.ability.active.RayTraceActiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
-import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.property.Functions;

@@ -2,6 +2,7 @@ package me.udnek.rpgu.item.utility;
 
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
@@ -36,6 +37,11 @@ import java.util.function.Consumer;
 public class TotemOfSavingItem extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "totem_of_saving";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Totem of Saving", "Тотем сохранения");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
@@ -106,13 +112,11 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
         }
 
         @Override
-        public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {
-
-        }
+        public void tick(@NotNull CustomItem customItem, @NotNull Player player, @NotNull BaseUniversalSlot baseUniversalSlot, int i) {}
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Saves inventory on death in container"), List.of("Сохраняет вещи после смерти в себе"));
         }
 
         @Override

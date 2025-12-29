@@ -3,6 +3,7 @@ package me.udnek.rpgu.item.artifact;
 import com.destroystokyo.paper.ParticleBuilder;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
@@ -35,6 +36,12 @@ public class FishermanSnorkel extends ConstructableCustomItem {
     public @NotNull Material getMaterial() {return Material.GOAT_HORN;}
     @Override
     public @NotNull String getRawId() {return "fisherman_snorkel";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Fisherman's Snorkel", "Рыбацкая трубка");
+    }
+
     @Override
     public @Nullable DataSupplier<MusicInstrument> getMusicInstrument() {return DataSupplier.of(MusicInstrument.DREAM_GOAT_HORN);}
     @Override
@@ -94,7 +101,8 @@ public class FishermanSnorkel extends ConstructableCustomItem {
 
         @Override
         public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-            return null;
+            return Pair.of(List.of("Allows to breathe underwater", " if the bobber has access to air"),
+                    List.of("Позволяет дышать под водой,", " если у поплавка есть доступ к воздуху"));
         }
 
         @Override

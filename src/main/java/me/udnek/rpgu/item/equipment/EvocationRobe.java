@@ -21,7 +21,6 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -34,9 +33,6 @@ public class EvocationRobe extends ConstructableCustomItem {
 
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
-
-    @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(new ItemFlag[]{ItemFlag.HIDE_ATTRIBUTES});}
 
     @Override
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Evocation Robe", "Мантия заклинателя");}
@@ -81,8 +77,8 @@ public class EvocationRobe extends ConstructableCustomItem {
     }
 
     @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeUtils.addAttribute(itemStack, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "chestplate_max_health"), 2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
         AttributeUtils.addAttribute(itemStack, Attribute.ARMOR, new NamespacedKey(RpgU.getInstance(), "chestplate_armor"), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST);
     }

@@ -28,53 +28,9 @@
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 
-	"item.rpgu.wolf_helmet": "Wolf Helmet",
-	"item.rpgu.wolf_chestplate": "Wolf Chestplate",
-	"item.rpgu.wolf_leggings": "Wolf Leggings",
-	"item.rpgu.wolf_boots": "Wolf Boots",
-
-	"item.rpgu.blaze_blade": "Blaze Blade",
-
-	"item.rpgu.shiny_axe": "Shiny Axe",
-	"item.rpgu.phantom_bow": "Phantom Bow",
-
-	"item.rpgu.ceremonial_dagger": "Ceremonial Dagger",
-
-	"item.rpgu.fabric": "Fabric",
-	"item.rpgu.ferrudam_ingot": "Ferrudam Ingot",
-	"item.rpgu.blast_coal": "Blast Coal",
-	"item.rpgu.ingot_mold": "Ingot Mold",
-	"item.rpgu.raw_magnetite": "Raw Magnetite",
-	"item.rpgu.magnetite_ingot": "Magnetite Ingot",
-	"item.rpgu.phantom_wing": "Phantom Wing",
-	"item.rpgu.esoteric_salve": "Esoteric Salve",
-	"item.rpgu.wolf_pelt": "Wolf Pelt",
-
-	"item.rpgu.wrench": "Wrench",
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
-	"item.rpgu.quiver": "Quiver",
-	"item.rpgu.quiver.passive_ability.0": "42",
 
-	"item.rpgu.shaman_tambourine": "Shaman Tambourine",
-	"item.rpgu.shaman_tambourine.active_ability.0": "Damages chosen target",
-
-	"item.rpgu.ferrudam_sword": "Ferrudam Sword",
-	"item.rpgu.ferrudam_pickaxe": "Ferrudam Pickaxe",
-	"item.rpgu.ferrudam_axe": "Ferrudam Axe",
-	"item.rpgu.ferrudam_shovel": "Ferrudam Shovel",
-	"item.rpgu.ferrudam_hoe": "Ferrudam Hoe",
-
-	"item.rpgu.dark_mirror": "Dark Mirror",
-	"item.rpgu.rusty_iron_ring": "Rusty Iron Ring",
-
-	"item.rpgu.arcane_accumulator": "Arcane Accumulator",
-
-	"item.rpgu.armadillo_bar": "Armadillo Bar",
-	"item.rpgu.armadillo_bar.active_ability.0": "Dispels negative effects while active",
-
-	"item.rpgu.totem_of_saving": "Totem of Saving",
-	"item.rpgu.totem_of_saving.passive_ability.0": "Saves inventory on death in container",
 
 	"item.rpgu.hungry_horror_helmet.description.0": "On Attack:",
 	"item.rpgu.hungry_horror_helmet.description.1": " Reapplies Strength effect with increased",
@@ -88,18 +44,6 @@
 	"item.rpgu.hungry_horror_chestplate.description.3": " Max effect level: V.",
 	"item.rpgu.hungry_horror_chestplate.description.4": " If you don't have effect, applies Absorption I for 2 seconds.",
 
-
-	"item.rpgu.nautilus_core": "Nautilus Core",
-	"item.rpgu.nautilus_core.description.0": "Critical hits apply on Magical Damage",
-
-	"item.rpgu.sphere_of_balance": "Sphere of Balance",
-	"item.rpgu.sphere_of_discord": "Sphere of Discord",
-
-	"item.rpgu.fisherman_snorkel": "Fisherman's Snorkel",
-	"item.rpgu.fisherman_snorkel.description.0": "Allows to breathe underwater",
-	"item.rpgu.fisherman_snorkel.description.1": " if the bobber has access to air",
-
-	"item.rpgu.soul_binder": "Soul Binder",
 	"item.rpgu.soul_binder.description.0": "Player will respawn on it if there is no priority location",
 
 	"entity.rpgu.ancient_breeze" : "Ancient Breeze",

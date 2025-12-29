@@ -12,15 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class WolfLeggings extends AbstractWolfArmor {
-    @Override
-    public @NotNull String getRawId() {return "wolf_leggings";}
+    public WolfLeggings() {
+        super(Material.DIAMOND_LEGGINGS, "wolf_leggings", "Wolf Leggings", "Волчьи штаны");
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_LEGGINGS;}
-
-    @Override
-    public void initializeAdditionalAttributes(@NotNull ItemStack itemStack) {
-        super.initializeAdditionalAttributes(itemStack);
+    protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
+        super.modifyFinalItemStack(itemStack);
         AttributeManaging.applyDefaultArmorAttribute(itemStack, Material.LEATHER_LEGGINGS);
     }
 

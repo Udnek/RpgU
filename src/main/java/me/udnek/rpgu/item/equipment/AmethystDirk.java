@@ -13,11 +13,13 @@ import me.udnek.rpgu.attribute.RpgUAttributeUtils;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class AmethystDirk extends ConstructableCustomItem {
@@ -35,8 +37,6 @@ public class AmethystDirk extends ConstructableCustomItem {
     @Override
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Amethyst Dirk", "Аметистовый кортик");}
 
-    @Override
-    public @Nullable List<ItemFlag> getTooltipHides() {return List.of(ItemFlag.HIDE_ATTRIBUTES);}
 
 
     @Override

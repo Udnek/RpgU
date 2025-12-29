@@ -22,7 +22,9 @@ public class HungryHorrorHelmet extends HungryHorrorArmor {
     public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Mask of Hungry Horror", "Маска Голодного Ужаса");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Mask of Hungry Horror", "Маска Голодного Ужаса");
+    }
 
     @Override
     public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {

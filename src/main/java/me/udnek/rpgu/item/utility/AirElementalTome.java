@@ -18,7 +18,6 @@ import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
 import me.udnek.coreu.rpgu.component.ability.property.function.PropertyFunctions;
 import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.property.Functions;

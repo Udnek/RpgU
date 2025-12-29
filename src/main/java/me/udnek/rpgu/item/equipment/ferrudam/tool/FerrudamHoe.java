@@ -1,5 +1,6 @@
 package me.udnek.rpgu.item.equipment.ferrudam.tool;
 
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.recipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -18,6 +20,12 @@ import java.util.function.Consumer;
 public class FerrudamHoe extends FerrudamTool {
     @Override
     public @NotNull String getRawId() {return "ferrudam_hoe";}
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Ferrudam Hoe", "Ферродамовая мотыга");
+    }
+
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_HOE;}
     @Override
