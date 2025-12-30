@@ -23,8 +23,8 @@ public class VanillaAbilities {
             register(new ConstructableComponentType<>("crossbow", CrossbowAbility.DEFAULT));
     public static final CustomComponentType<RPGUActiveItem, ShieldAbility> SHIELD =
             register(new ConstructableComponentType<>("shield", ShieldAbility.DEFAULT));
-    public static final CustomComponentType<RPGUActiveItem, AxeAbility> AXE =
-            register(new ConstructableComponentType<>("axe", AxeAbility.DEFAULT));
+    public static final CustomComponentType<RPGUActiveItem, ShieldCrashingAbility> SHIELD_CRASHING =
+            register(new ConstructableComponentType<>("shield_crashing", ShieldCrashingAbility.DEFAULT));
 
 
     private static <T extends CustomComponentType<?, ?>> T register(T type){

@@ -245,11 +245,12 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (material == Material.SHIELD) {
-            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new ShieldAbility());
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(
+                    new ShieldAbility(material.getDefaultData(DataComponentTypes.BLOCKS_ATTACKS)));
         }
 
         if (Tag.ITEMS_AXES.isTagged(material)) {
-            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new AxeAbility());
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new ShieldCrashingAbility());
         }
 
         if (material == Material.ARROW) {

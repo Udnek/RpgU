@@ -21,9 +21,9 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public class AxeAbility extends RPGUConstructableActiveAbility<PlayerShieldDisableEvent> implements RPGUActiveTriggerableAbility<PlayerShieldDisableEvent> {
+public class ShieldCrashingAbility extends RPGUConstructableActiveAbility<PlayerShieldDisableEvent> implements RPGUActiveTriggerableAbility<PlayerShieldDisableEvent> {
 
-    public static final AxeAbility DEFAULT = new AxeAbility();
+    public static final ShieldCrashingAbility DEFAULT = new ShieldCrashingAbility();
 
     @Override
     protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull PlayerShieldDisableEvent playerShieldDisableEvent) {
@@ -37,18 +37,17 @@ public class AxeAbility extends RPGUConstructableActiveAbility<PlayerShieldDisab
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return Pair.of(List.of("Axes have the special ability to do crushing blows"),
-                List.of("Топоры обладают особой способностью наносить сокрушительные удары"));
+        return Pair.of(List.of("Charged attacks disable the shield"), List.of("Заряженные атаки отключает щит"));
     }
 
     @Override
     public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
-        Eng_Ru_Args.accept("Crushing blows time: %s seconds", "Сокрушительные удары: %s секунд", List.of(Component.text(5)));
+        Eng_Ru_Args.accept("Disable time: %s seconds", "Сокрушительные удары: %s секунд", List.of(Component.text(5)));
     }
 
     @Override
     public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
-        return VanillaAbilities.AXE;
+        return VanillaAbilities.SHIELD_CRASHING;
     }
 }
