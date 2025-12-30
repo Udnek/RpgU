@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "me.udnek"
-project.version = "1.0-SNAPSHOT"
+version = "1.0-SNAPSHOT"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))

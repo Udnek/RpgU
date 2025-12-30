@@ -209,8 +209,8 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     @Override
-    public @NotNull Inventory generateInventory(int size, Component title) {
-        Inventory inventory = super.getInventory();
+    public @NotNull Inventory generateInventory(int size, @Nullable Component title) {
+        Inventory inventory = super.generateInventory(size, title);
         for (int i = 0; i < size; i++) {
             inventory.setItem(i, FILLER.getItem());
         }

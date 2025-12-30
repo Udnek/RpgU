@@ -15,7 +15,7 @@ import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.block.Blocks;
 import me.udnek.rpgu.command.Commands;
 import me.udnek.rpgu.component.ability.Abilities;
-import me.udnek.rpgu.component.ability.Listeners;
+import me.udnek.rpgu.component.ability.AbilityListener;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -27,8 +27,7 @@ import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
-import me.udnek.rpgu.util.AbilityListener;
-import me.udnek.rpgu.util.EntityListener;
+import me.udnek.rpgu.component.ComponentListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
@@ -58,11 +57,9 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new EnchantingListener(this);
         new ModifiedEntitySpawnListener(this);
         new GeneralListener(this);
-        new AbilityListener(this);
         new AttributeManaging(this);
-        new EntityListener(this);
-
-        new Listeners(this);
+        new ComponentListener(this);
+        new AbilityListener(this);
 
         AlloyForgeManager.getInstance();
 

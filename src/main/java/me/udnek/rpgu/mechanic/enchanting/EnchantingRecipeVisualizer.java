@@ -2,6 +2,7 @@ package me.udnek.rpgu.mechanic.enchanting;
 
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
+import me.udnek.jeiu.JeiU;
 import me.udnek.jeiu.item.Items;
 import me.udnek.jeiu.menu.RecipesMenu;
 import me.udnek.jeiu.visualizer.implementation.AbstractRecipeVisualizer;
@@ -19,11 +20,11 @@ import java.util.List;
 
 public class EnchantingRecipeVisualizer extends AbstractRecipeVisualizer {
 
-    public static final int PASSION_OFFSET = 16;
-    public static final int UPGRADES_OFFSET = -2;
-    public static final int LAPIS_SLOT = 0;
-    public static final int BOOK_SLOT = 1;
-    public static final int RESULT_SLOT = 9*5+1;
+    public static final int PASSION_OFFSET = 16+1+ RecipesMenu.VISUALIZER_X_OFFSET;
+    public static final int UPGRADES_OFFSET = -2+1+ RecipesMenu.VISUALIZER_X_OFFSET;
+    public static final int LAPIS_SLOT = 0+1+ RecipesMenu.VISUALIZER_X_OFFSET;
+    public static final int BOOK_SLOT = 1+1+ RecipesMenu.VISUALIZER_X_OFFSET;
+    public static final int RESULT_SLOT = 9*5+1+1+ RecipesMenu.VISUALIZER_X_OFFSET;
 
     protected @NotNull EnchantingRecipe recipe;
     public EnchantingRecipeVisualizer(@NotNull EnchantingRecipe recipe){

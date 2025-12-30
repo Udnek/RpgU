@@ -103,6 +103,7 @@ public class Items {
     public static final CustomItem PHANTOM_WING = register(new PhantomWing());
     public static final CustomItem ESOTERIC_SALVE = register(new EsotericSalve());
     public static final CustomItem WOLF_PELT = register(new WolfPelt());
+    public static final CustomItem WEAK_MAGIC_CORE = register(new WeakMagicCore());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
@@ -115,6 +116,7 @@ public class Items {
     public static final CustomItem AIR_ELEMENTAL_TOME = register(new AirElementalTome());
     public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
     public static final CustomItem NATURES_STAFF = register(new NaturesStaff());
+    public static final CustomItem NATURES_COMPASS = register(new NaturesCompass());
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());

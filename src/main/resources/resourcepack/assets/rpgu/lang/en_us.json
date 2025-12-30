@@ -4,10 +4,9 @@
 	"item.modifiers.second_artifact": "When equipped as Second Artifact:",
 	"item.modifiers.third_artifact": "When equipped as Third Artifact:",
 
-	"ability.rpgu.damage": "Damage (%s): %s",
-
-	"damage_formula.rpgu.magical": "Magical: %s",
-	"damage_formula.rpgu.physical": "Physical: %s",
+	"rpgu_ability_property.rpgu.damage": "Damage (%s): %s",
+    "damage_type.rpgu.physical": "Physical",
+    "damage_type.rpgu.magical": "Magical",
 
     "ability_property_description.rpgu.magic_potential": "MP",
 

@@ -53,6 +53,8 @@ public class Abilities {
             register(new ConstructableComponentType<>("armadillo_bar", ArmadilloBar.Ability.DEFAULT));
     public static final CustomComponentType<RPGUActiveItem, SwordDashAbility> SWORD_DASH =
             register(new ConstructableComponentType<>("sword_dash", SwordDashAbility.DEFAULT));
+    public static final CustomComponentType<RPGUActiveItem, NaturesCompass.Ability> NATURES_COMPASS =
+            register(new ConstructableComponentType<>("natures_compass", NaturesCompass.Ability.DEFAULT));
 
 
     private static <T extends CustomComponentType<?, ?>> T register(T type){

@@ -62,7 +62,6 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
 
     public static final int PASSION_SLOTS_AMOUNT = PASSION_SLOTS.length;
 
-
     protected final @NotNull Location tableLocation;
     protected Set<EnchantingTableUpgrade> upgrades;
 
@@ -137,7 +136,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         ItemStack lapis = getInventory().getItem(LAPIS_SLOT);
         int lapisAmount = lapis == null ? 0 : lapis.getAmount();
         int bookMaxLvl = enchantment.getMaxLevel()-3;
-        if (upgrades.contains(EnchantingTableUpgrade.LOTS_OF_BOOKSHELF)) bookMaxLvl +=3;
+        if (upgrades.contains(EnchantingTableUpgrade.LOTS_OF_BOOKSHELF)) bookMaxLvl += 3;
         else if (upgrades.contains(EnchantingTableUpgrade.DECENT_BOOKSHELF)) bookMaxLvl += 2;
         else if (upgrades.contains(EnchantingTableUpgrade.LITTLE_BOOKSHELF)) bookMaxLvl += 1;
         int maxLevel =  Math.min(Math.min(Math.min(enchantment.getMaxLevel(), playerLvl), bookMaxLvl), lapisAmount);
@@ -173,7 +172,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         if (book != null && event.getClickedInventory() == event.getInventory()){
             if (ItemUtils.isVanillaMaterial(book, Material.ENCHANTED_BOOK)) {
                 if (Arrays.stream(ENCHANTED_BOOKS_SLOTS).anyMatch(slot -> slot == event.getSlot())) {
-                    Integer enchantmentLvl = new ArrayList<>(book.getData(DataComponentTypes.STORED_ENCHANTMENTS).enchantments().values()).getFirst();
+                    int enchantmentLvl = new ArrayList<>(book.getData(DataComponentTypes.STORED_ENCHANTMENTS).enchantments().values()).getFirst();
                     takeItem(LAPIS_SLOT, enchantmentLvl);
                     takeItem(BOOK_SLOT, 1);
                     for (int slot : PASSION_SLOTS) {
@@ -205,6 +204,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         for (int i = 0; i < getInventorySize(); i++) {
             inventory.setItem(i, FILLER.getItem());
         }
+        iterateTroughAllInputSlots(i -> inventory.setItem(i, null));
         return inventory;
     }
 

@@ -1,5 +1,6 @@
 package me.udnek.rpgu.mechanic.damaging;
 
+import net.kyori.adventure.translation.Translatable;
 import org.jetbrains.annotations.NotNull;
 
 public class Damage {
@@ -55,9 +56,18 @@ public class Damage {
         return "[Physical=" + getPhysical() + "; Magical=" + getMagical() + "; Total=" + getTotal() + "]";
     }
 
-    public enum Type {
-        PHYSICAL,
-        MAGICAL
+    public enum Type implements Translatable {
+        PHYSICAL("damage_type.rpgu.physical"),
+        MAGICAL("damage_type.rpgu.magical");
+
+        private final String key;
+        Type(@NotNull String key){
+            this.key = key;
+        }
+        @Override
+        public @NotNull String translationKey() {
+            return key;
+        }
     }
 
 }

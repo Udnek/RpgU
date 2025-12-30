@@ -35,8 +35,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
-public class Listeners extends SelfRegisteringListener implements Listener {
-    public Listeners(@NotNull Plugin plugin) {
+public class AbilityListener extends SelfRegisteringListener implements Listener {
+    public AbilityListener(@NotNull Plugin plugin) {
         super(plugin);
     }
 

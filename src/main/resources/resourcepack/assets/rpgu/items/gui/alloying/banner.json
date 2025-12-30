@@ -8,5 +8,6 @@
         "default": 0
       }
     ]
-  }
+  },
+  "oversized_in_gui": true
 }

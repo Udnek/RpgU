@@ -28,12 +28,4 @@ public class Utils {
         }
         return result;
     }
-
-    public static @NotNull List<@NotNull Block> getBlocksInCuboid(@NotNull Location center, int radius){
-        return getBlocksInCuboid(center, radius, block -> true);
-    }
-
-    public static @NotNull List<@NotNull Block> getBlocksInCuboid(@NotNull Location center, int radius, @NotNull Predicate<@NotNull Block> predicate){
-        return getBlocksInCuboid(center, radius, radius, radius, predicate);
-    }
 }
