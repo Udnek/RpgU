@@ -10,7 +10,9 @@ import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
 import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.VanillaAbilities;
+import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
@@ -35,8 +37,14 @@ public class AxeAbility extends RPGUConstructableActiveAbility<PlayerShieldDisab
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return Pair.of(List.of("Attacking a shield user with an axe disables the use of the shield for 5 seconds"),
-                List.of("Атака пользователя щита топором отключает использование щита на 5 секунд"));
+        return Pair.of(List.of("Axes have the special ability to do crushing blows"),
+                List.of("Топоры обладают особой способностью наносить сокрушительные удары"));
+    }
+
+    @Override
+    public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
+        super.getEngAndRuProperties(Eng_Ru_Args);
+        Eng_Ru_Args.accept("Crushing blows time: %s seconds", "Сокрушительные удары: %s секунд", List.of(Component.text(5)));
     }
 
     @Override
