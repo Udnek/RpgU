@@ -26,7 +26,6 @@ public class BowAbility extends RPGUConstructableActiveAbility<EntityShootBowEve
 
     @Override
     protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull EntityShootBowEvent entityShootBowEvent) {
-        System.out.println("Пидор стрельнул: " + livingEntity.getName());
         return ActionResult.NO_COOLDOWN;
     }
 

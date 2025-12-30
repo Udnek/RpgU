@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 public interface RPGUActiveTriggerableAbility<Context> extends RPGUItemActiveAbility<Context> {
 
     default void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {}
-    default void onLeftClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {}
     default void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {}
     default void onShoot(@NotNull CustomItem customItem, @NotNull EntityShootBowEvent event) {}
     default void onShieldBreak(@NotNull CustomItem customItem, @NotNull PlayerShieldDisableEvent event) {}

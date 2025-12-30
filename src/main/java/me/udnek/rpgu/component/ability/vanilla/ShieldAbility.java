@@ -25,12 +25,11 @@ public class ShieldAbility extends RPGUConstructableActiveAbility<PlayerInteract
 
     @Override
     protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull PlayerInteractEvent entityShootBowEvent) {
-        System.out.println("ShieldAb" + livingEntity.getName());
         return ActionResult.NO_COOLDOWN;
     }
 
     @Override
-    public void onLeftClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+    public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
         activate(customItem, event.getPlayer(), new BaseUniversalSlot(Objects.requireNonNull(event.getHand())), event);
     }
 

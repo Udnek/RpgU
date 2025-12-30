@@ -19,7 +19,6 @@ import me.udnek.rpgu.item.utility.TotemOfSavingItem;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.logging.log4j.util.TriConsumer;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -66,11 +65,6 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
                 RPGUActiveItem rpguActiveItem = item.getComponents().getOrDefault(RPGUComponents.ACTIVE_ABILITY_ITEM);
                 for (var trigger : rpguActiveItem.getComponents().getAllTyped(RPGUActiveTriggerableAbility.class)) {
                     trigger.onRightClick(item, event);
-                }
-            } else if (event.getAction().isLeftClick()) {
-                RPGUActiveItem rpguActiveItem = item.getComponents().getOrDefault(RPGUComponents.ACTIVE_ABILITY_ITEM);
-                for (var trigger : rpguActiveItem.getComponents().getAllTyped(RPGUActiveTriggerableAbility.class)) {
-                    trigger.onLeftClick(item, event);
                 }
             }
         });

@@ -25,7 +25,6 @@ public class AxeAbility extends RPGUConstructableActiveAbility<PlayerShieldDisab
 
     @Override
     protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull PlayerShieldDisableEvent playerShieldDisableEvent) {
-        System.out.println("AxeAbility" + livingEntity.getName());
         return ActionResult.NO_COOLDOWN;
     }
 
