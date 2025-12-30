@@ -1,4 +1,4 @@
-package me.udnek.rpgu.component.ability.instance;
+package me.udnek.rpgu.component.ability.vanilla;
 
 import io.papermc.paper.datacomponent.item.DeathProtection;
 import io.papermc.paper.datacomponent.item.consumable.ConsumeEffect;
@@ -13,7 +13,7 @@ import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
-import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.VanillaAbilities;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -45,6 +45,7 @@ public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<Enti
         return CustomEquipmentSlot.DUMB_INVENTORY;
     }
 
+    @Override
     protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull EntityResurrectEvent entityResurrectEvent) {
         if (entityResurrectEvent.isCancelled()) {slot.addItem(-1, livingEntity);}
         entityResurrectEvent.setCancelled(false);
@@ -66,6 +67,6 @@ public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<Enti
 
     @Override
     public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
-        return Abilities.DEATH_PROTECTION;
+        return VanillaAbilities.DEATH_PROTECTION;
     }
 }

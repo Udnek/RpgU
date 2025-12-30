@@ -19,9 +19,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly(files("C:/Users/glebd/OneDrive/Documents/CODING/Java/CoreU/build/libs/CoreU-1.0-SNAPSHOT.jar"))
-    compileOnly(files("C:\\Users\\glebd\\OneDrive\\Documents\\CODING\\Java\\JeiU\\target\\JeiU-1.0-SNAPSHOT.jar"))
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly(files("C:/Users/PC/IdeaProjects/CoreU/build/libs/CoreU-1.0-SNAPSHOT.jar"))
+    compileOnly(files("H:/test/plugins/JeiU.jar"))
+    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT") {
+        exclude(group = "org.apache.commons", module = "commons-lang3")
+    }
+    compileOnly("org.apache.commons:commons-lang3:3.20.0")
+
     implementation(kotlin("stdlib-jdk8"))
 }
 

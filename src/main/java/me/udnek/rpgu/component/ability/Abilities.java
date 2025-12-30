@@ -6,7 +6,9 @@ import me.udnek.coreu.custom.registry.CustomRegistries;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.rpgu.RpgU;
-import me.udnek.rpgu.component.ability.instance.*;
+import me.udnek.rpgu.component.ability.instance.AllyBuffingAuraPassive;
+import me.udnek.rpgu.component.ability.instance.FlowerWreathPassive;
+import me.udnek.rpgu.component.ability.instance.SwordDashAbility;
 import me.udnek.rpgu.item.artifact.FishermanSnorkel;
 import me.udnek.rpgu.item.artifact.NautilusCore;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
@@ -18,14 +20,11 @@ import me.udnek.rpgu.item.utility.*;
 
 public class Abilities {
 
+    //PASSIVE
     public static final CustomComponentType<RPGUPassiveItem, TotemOfSavingItem.Passive> TOTEM_OF_SAVING =
             register(new ConstructableComponentType<>("totem_of_saving", TotemOfSavingItem.Passive.DEFAULT));
     public static final CustomComponentType<RPGUPassiveItem, NautilusCore.Passive> NAUTILUS_CORE =
             register(new ConstructableComponentType<>("nautilus_core", NautilusCore.Passive.DEFAULT));
-    public static final CustomComponentType<RPGUPassiveItem, DeathProtectionPassive> DEATH_PROTECTION =
-            register(new ConstructableComponentType<>("death_protection", DeathProtectionPassive.DEFAULT));
-    public static final CustomComponentType<RPGUPassiveItem, GliderPassive> GLIDER =
-            register(new ConstructableComponentType<>("glider", GliderPassive.DEFAULT));
     public static final CustomComponentType<RPGUPassiveItem, AllyBuffingAuraPassive> ALLY_BUFFING_AURA =
             register(new ConstructableComponentType<>("ally_buffing_aura", AllyBuffingAuraPassive.DEFAULT));
     public static final CustomComponentType<RPGUPassiveItem, FlowerWreathPassive> FLOWER_WREATH =
@@ -39,6 +38,7 @@ public class Abilities {
     public static final CustomComponentType<RPGUPassiveItem, HungryHorrorArmor.Passive> HUNGRY_HORROR =
             register(new ConstructableComponentType<>("hungry_horror", HungryHorrorArmor.Passive.DEFAULT));
 
+    //ACTIVE
     public static final CustomComponentType<RPGUActiveItem, QuiverChangeArrowAbility> QUIVER_CHANGE_ARROW =
             register(new ConstructableComponentType<>("quiver_change_arrow", QuiverChangeArrowAbility.DEFAULT));
     public static final CustomComponentType<RPGUActiveItem, AirElementalTome.Ability> AIR_ELEMENTAL_TOME =

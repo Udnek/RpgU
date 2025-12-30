@@ -21,8 +21,7 @@ import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.attribute.Attributes;
 import me.udnek.rpgu.component.ability.instance.AllyBuffingAuraPassive;
-import me.udnek.rpgu.component.ability.instance.DeathProtectionPassive;
-import me.udnek.rpgu.component.ability.instance.GliderPassive;
+import me.udnek.rpgu.component.ability.vanilla.*;
 import me.udnek.rpgu.component.instance.ArrowComponent;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.item.Items;
@@ -34,6 +33,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Arrow;
@@ -141,8 +141,11 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
             for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : Tag.ITEMS_AXES.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.CROSSBOW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SHIELD);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TOTEM_OF_UNDYING);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.ELYTRA);
@@ -231,6 +234,22 @@ public class AttributeManaging extends SelfRegisteringListener {
         if (material == Material.ELYTRA) {
             customItem.getComponents().getOrCreateDefault(RPGUComponents.PASSIVE_ABILITY_ITEM).getComponents()
                             .set(GliderPassive.of(itemStack, 15*20));
+        }
+
+        if (material == Material.BOW) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new BowAbility());
+        }
+
+        if (material == Material.CROSSBOW) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new CrossbowAbility());
+        }
+
+        if (material == Material.SHIELD) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new ShieldAbility());
+        }
+
+        if (Tag.ITEMS_AXES.isTagged(material)) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new AxeAbility());
         }
 
         if (material == Material.ARROW) {
