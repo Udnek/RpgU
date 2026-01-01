@@ -1,4 +1,4 @@
-package me.udnek.rpgu.component.ability.instance;
+package me.udnek.rpgu.component.ability.vanilla;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datacomponent.DataComponentTypes;
@@ -12,8 +12,8 @@ import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
-import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
+import me.udnek.rpgu.component.ability.VanillaAbilities;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.commons.lang3.tuple.Pair;
@@ -79,6 +79,6 @@ public class GliderPassive extends RPGUConstructablePassiveAbility<DamageEvent> 
 
     @Override
     public @NotNull CustomComponentType<? super RPGUPassiveItem, ? extends CustomComponent<? super RPGUPassiveItem>> getType() {
-        return Abilities.GLIDER;
+        return VanillaAbilities.GLIDER;
     }
 }

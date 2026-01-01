@@ -3,7 +3,6 @@ package me.udnek.rpgu.mechanic.alloying;
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.jeiu.item.Items;
-import me.udnek.jeiu.menu.JeiUMenu;
 import me.udnek.jeiu.menu.RecipesMenu;
 import me.udnek.jeiu.visualizer.implementation.AbstractRecipeVisualizer;
 import me.udnek.rpgu.RpgU;
