@@ -13,9 +13,7 @@ import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.component.ability.vanilla.DeathProtectionPassive;
-import me.udnek.rpgu.component.ability.vanilla.GliderPassive;
 import me.udnek.rpgu.item.equipment.quiver.QuiverShootAbility;
-import me.udnek.rpgu.item.utility.TotemOfSavingItem;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.logging.log4j.util.TriConsumer;
@@ -139,9 +137,10 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         Player entity = event.getEntity();
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
-                    TotemOfSavingItem.Passive passive = passiveItem.getComponents().getOrDefault(Abilities.TOTEM_OF_SAVING);
-                    if (!passive.getSlot().intersects(entity, slot)) return;
-                    passive.onDeath(customItem, slot, event);
+                    for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        if (!trigger.getSlot().intersects(entity, slot)) continue;
+                        trigger.onDeath(customItem, slot, event);
+                    }
                 });
     }
 
@@ -151,11 +150,13 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         LivingEntity entity = event.getEntity();
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passive, customItem,  slot) -> {
+                    if (activatedBefore.get()) return;
                     DeathProtectionPassive deathProtectionPassive = passive.getComponents().getOrDefault(VanillaAbilities.DEATH_PROTECTION);
                     if (!deathProtectionPassive.getSlot().intersects(entity, slot)) return;
                     deathProtectionPassive.onResurrect(customItem, slot, activatedBefore.get(), event);
                     if (!(event.isCancelled())) activatedBefore.set(true);
                 });
+        if (!activatedBefore.get()) event.setCancelled(true);
     }
 
     @EventHandler
@@ -188,9 +189,10 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, livingEntity,
                 (passive, customItem, slot) -> {
-                    GliderPassive gliderPassive = passive.getComponents().getOrDefault(VanillaAbilities.GLIDER);
-                    if (!gliderPassive.getSlot().intersects(livingEntity, slot)) return;
-                    gliderPassive.onToggleGlide(customItem, slot, event);
+                    for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        if (!trigger.getSlot().intersects(livingEntity, slot)) continue;
+                        trigger.onToggleGlide(customItem, slot, event);
+                    }
                 });
     }
 

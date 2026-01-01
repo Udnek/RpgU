@@ -27,12 +27,12 @@ import java.util.Objects;
 
 public class ShieldAbility extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RPGUActiveTriggerableAbility<PlayerInteractEvent> {
 
-    public static final ShieldAbility DEFAULT = new ShieldAbility(Material.SHIELD.getDefaultData(DataComponentTypes.BLOCKS_ATTACKS));
+    public static final ShieldAbility DEFAULT = new ShieldAbility(Objects.requireNonNull(Material.SHIELD.getDefaultData(DataComponentTypes.BLOCKS_ATTACKS)));
 
     private final float blockAngle;
 
-    public ShieldAbility(BlocksAttacks defaultData) {
-         this.blockAngle = validate(defaultData);
+    public ShieldAbility(@NotNull BlocksAttacks defaultData) {
+         this.blockAngle = validateAndGetAngle(defaultData);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ShieldAbility extends RPGUConstructableActiveAbility<PlayerInteract
         return VanillaAbilities.SHIELD;
     }
 
-    private float validate(BlocksAttacks blocksAttacks) {
+    private float validateAndGetAngle(@NotNull BlocksAttacks blocksAttacks) {
         List<DamageReduction> damageReductions = blocksAttacks.damageReductions();
         float firstAngle = damageReductions.getFirst().horizontalBlockingAngle();
         damageReductions.removeFirst();

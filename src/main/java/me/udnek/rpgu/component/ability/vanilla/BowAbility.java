@@ -42,6 +42,8 @@ public class BowAbility extends RPGUConstructableActiveAbility<EntityShootBowEve
     @Override
     public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
+        Eng_Ru_Args.accept("Maximum speed of the arrow fired: %s blocks per second", "Максимальная скорость выпущенной стрелы: %s блоков в секунду",
+                List.of(Component.text(60)));
         Eng_Ru_Args.accept("Full charge: %s seconds", "Полная натяжка: %s секунд", List.of(Component.text(0.9)));
         Eng_Ru_Args.accept("Damage at full charge: %s", "Урон при полной натяжке: %s", List.of(Component.text(6)));
         Eng_Ru_Args.accept("Critical charge: %s seconds", "Критическая натяжка: %s секунд", List.of(Component.text(1)));

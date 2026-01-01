@@ -65,6 +65,7 @@ public class GliderPassive extends RPGUConstructablePassiveAbility<DamageEvent> 
         activate(customItem, (LivingEntity) Objects.requireNonNull(event.getDamageInstance().getVictim()), slot, event);
     }
 
+    @Override
     public void onToggleGlide(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull EntityToggleGlideEvent event) {
         if (!event.isGliding()) return;
         Player player = (Player) event.getEntity();
