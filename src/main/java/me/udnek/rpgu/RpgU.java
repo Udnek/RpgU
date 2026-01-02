@@ -17,6 +17,8 @@ import me.udnek.rpgu.command.Commands;
 import me.udnek.rpgu.component.ComponentListener;
 import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.AbilityListener;
+import me.udnek.rpgu.component.ability.VanillaAbilities;
+import me.udnek.rpgu.component.ability.vanilla.ShieldCrashingAbility;
 import me.udnek.rpgu.effect.Effects;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.ModifiedEntitySpawnListener;
@@ -52,6 +54,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         CustomSound backstab = Sounds.BACKSTAB;
         EnchantingTableUpgrade end = EnchantingTableUpgrade.END;
         CustomComponentType<RPGUActiveItem, AirElementalTome.Ability> tome = Abilities.AIR_ELEMENTAL_TOME;
+        CustomComponentType<RPGUActiveItem, ShieldCrashingAbility> shieldCrashing = VanillaAbilities.SHIELD_CRASHING;
 
         new DamageListener(this);
         new EnchantingListener(this);

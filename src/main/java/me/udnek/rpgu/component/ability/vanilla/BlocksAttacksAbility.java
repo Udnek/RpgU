@@ -22,16 +22,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ShieldAbility extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RPGUActiveTriggerableAbility<PlayerInteractEvent> {
+public class BlocksAttacksAbility extends RPGUConstructableActiveAbility<PlayerInteractEvent> implements RPGUActiveTriggerableAbility<PlayerInteractEvent> {
 
-    public static final ShieldAbility DEFAULT = new ShieldAbility(Objects.requireNonNull(Material.SHIELD.getDefaultData(DataComponentTypes.BLOCKS_ATTACKS)));
+    public static final BlocksAttacksAbility DEFAULT = new BlocksAttacksAbility(Objects.requireNonNull(Material.SHIELD.getDefaultData(DataComponentTypes.BLOCKS_ATTACKS)));
 
     private final float blockAngle;
 
-    public ShieldAbility(@NotNull BlocksAttacks defaultData) {
+    public BlocksAttacksAbility(@NotNull BlocksAttacks defaultData) {
          this.blockAngle = validateAndGetAngle(defaultData);
     }
 
@@ -53,16 +54,16 @@ public class ShieldAbility extends RPGUConstructableActiveAbility<PlayerInteract
     @Override
     public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
-        Eng_Ru_Args.accept("Horizontal block angle: %s degrees", "Угол блокирования по горизонтали: %s градусов", List.of(Component.text(blockAngle)));
+        Eng_Ru_Args.accept("Horizontal block angle: %s degrees", "Горизонталшный угол блокировки: %s градусов", List.of(Component.text(blockAngle)));
     }
 
     @Override
     public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
-        return VanillaAbilities.SHIELD;
+        return VanillaAbilities.BLOCKS_ATTACKS;
     }
 
     private float validateAndGetAngle(@NotNull BlocksAttacks blocksAttacks) {
-        List<DamageReduction> damageReductions = blocksAttacks.damageReductions();
+        List<DamageReduction> damageReductions = new ArrayList<>(blocksAttacks.damageReductions());
         float firstAngle = damageReductions.getFirst().horizontalBlockingAngle();
         damageReductions.removeFirst();
         for (DamageReduction damageReduction : damageReductions) {
