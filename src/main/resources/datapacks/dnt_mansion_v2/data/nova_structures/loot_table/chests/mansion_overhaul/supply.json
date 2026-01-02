@@ -1,0 +1,76 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_wheat",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_iron_ingot",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_beetroot",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_diamonds",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_emerald",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_ender_pearl",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_golden_apple",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_meat",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_redstone",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_resin",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "nova_structures:chests/mansion_overhaul/supply_wood",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "minecraft:chests/woodland_mansion",
+          "weight": 3
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:reference",
+      "name": "nova_structures:loot_modifier"
+    }
+  ]
+}

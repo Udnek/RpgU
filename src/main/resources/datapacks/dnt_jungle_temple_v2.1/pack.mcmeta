@@ -1,0 +1,7 @@
+{
+	"pack": {
+			"description": "Structure datapack overhauling the Jungle Temple",
+			"min_format": [88,0],
+			"max_format": [88,0]
+	}
+}

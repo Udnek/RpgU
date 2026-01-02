@@ -1,0 +1,96 @@
+{
+	"name": "nova_structures:desert_temple/desert_temple_start",
+	"fallback": "nova_structures:desert_temple/room_fail",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_1",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_2",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_3",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_4",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_5",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_no_deco_1",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_no_deco_2",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_no_deco_3",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_no_deco_4",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_room_no_deco_5",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		}
+	]
+}

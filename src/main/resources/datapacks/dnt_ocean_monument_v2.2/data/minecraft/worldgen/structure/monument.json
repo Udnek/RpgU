@@ -1,0 +1,34 @@
+{
+	"type": "minecraft:jigsaw",
+	"start_pool": "nova_structures:ocean_monument/start",
+	"biomes": "#minecraft:has_structure/ocean_monument",
+	"start_height": {
+		"absolute": 19
+	},
+	"spawn_overrides": {
+    "axolotls": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "monster": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "minecraft:guardian",
+          "maxCount": 4,
+          "minCount": 2,
+          "weight": 1
+        }
+      ]
+    },
+    "underground_water_creature": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+	"step": "surface_structures",
+	"use_expansion_hack": false,
+	"max_distance_from_center": 128,
+	"size": 9,
+	"terrain_adaptation": "none"
+}

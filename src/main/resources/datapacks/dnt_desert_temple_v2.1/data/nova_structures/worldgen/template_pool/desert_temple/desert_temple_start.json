@@ -1,0 +1,42 @@
+{
+	"name": "nova_structures:desert_temple/desert_temple_start",
+	"fallback": "nova_structures:desert_temple/desert_temple_start",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_main_1",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_main_2",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_main_3",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:desert_temple/desert_temple_main_4",
+				"projection": "rigid",
+				"processors": "nova_structures:vanilla_desert_temple_degradation"
+			}
+		}
+	]
+}

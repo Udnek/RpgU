@@ -1,0 +1,15 @@
+{
+  "name": "nova_structures:mansion_overhaul/start",
+  "fallback": "nova_structures:mansion_overhaul/start",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/house/mansion_entry",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    }
+  ]
+}

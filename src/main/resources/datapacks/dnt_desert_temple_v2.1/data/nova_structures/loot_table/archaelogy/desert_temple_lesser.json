@@ -1,0 +1,105 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:music_disc_11"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:lapis_lazuli",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:brown_egg",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:blue_dye",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:red_dye",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:green_dye",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:lime_dye",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stone_pickaxe",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "type": "minecraft:uniform",
+                "min": 0.35,
+                "max": 0.65
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stone_shovel",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_damage",
+              "damage": {
+                "type": "minecraft:uniform",
+                "min": 0.35,
+                "max": 0.65
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cactus_flower",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cactus",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:friend_pottery_sherd",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:danger_pottery_sherd",
+          "weight": 3
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:reference",
+      "name": "nova_structures:loot_modifier"
+    }
+  ]
+}

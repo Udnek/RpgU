@@ -1,0 +1,105 @@
+{
+	"name": "nova_structure:nether_fortress/start",
+  "elements": [
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_intersect_spawner",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_intersect",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_grid_interupter_1",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_grid_interupter_2",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_cross_1",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 8
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_curve_1",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_curve_stair_l",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_curve_stair_r",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_straight_1",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_straight_2",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/bridge/nether_fortress_bridge_t-curve_1",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 5
+    }
+  ],
+  "fallback": "nova_structures:nether_fortress/bridge_fallback"
+}

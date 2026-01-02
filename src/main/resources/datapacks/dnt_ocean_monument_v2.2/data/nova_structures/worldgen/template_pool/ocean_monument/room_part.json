@@ -1,0 +1,933 @@
+{
+	"name": "nova_structures:ocean_monument/room_part",
+	"fallback": "nova_structures:ocean_monument/room_part",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_floor_hole_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_a_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_b_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_c_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_a_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_b_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_c_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_a_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_b_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x1_c_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x2_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x2_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_2x2_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_cross_8",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_curve_8",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_end_8",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_straight_8",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_t-curve_8",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_door_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_door_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_door_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_door_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_wall_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_wall_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_wall_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_wall_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_sponge_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_sponge_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_sponge_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_sponge_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_sponge_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_tall_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_tall_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_tall_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_tall_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_tall_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_treasure_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_treasure_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/room_part/monument_room_treasure_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_7",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_8",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_9",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/deco_10",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/shelf_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/shelf_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/shelf_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/shelf_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/shelf_5",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/deco/shelf_6",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		}
+	]
+}

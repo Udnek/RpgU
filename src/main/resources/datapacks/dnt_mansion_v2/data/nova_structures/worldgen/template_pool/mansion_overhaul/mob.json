@@ -1,0 +1,177 @@
+{
+  "name": "nova_structures:mansion_overhaul/mob",
+  "fallback": "nova_structures:mansion_overhaul/mob",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/chicken_jockey",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 3,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_allay",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_allay_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_enderman",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_enderman_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_evoker",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_evoker_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_iron_golem",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_iron_golem_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 3,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_pillager",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_pillager_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_ravager",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_ravager_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_villager",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_villager_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 3,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_vindicator",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_vindicator_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_witch",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/mob/mob_witch_fail",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    }
+  ]
+}

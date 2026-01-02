@@ -1,0 +1,204 @@
+{
+  "name": "nova_structures:mansion_overhaul/rooms",
+  "fallback": "nova_structures:mansion_overhaul/rooms",
+  "elements": [
+    {
+      "weight": 5,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_large_room30",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_large_room29",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 3,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_large_room28",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 2,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_large_room27",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room1",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room2",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room3",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room4",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room5",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room6",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room7",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room8",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_room9",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_1",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_2",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_3",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_4",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_5",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_6",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_7",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_8",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 4,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/rooms/mansion_3x3_basement_room_9",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    }
+  ]
+}
