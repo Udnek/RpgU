@@ -1,0 +1,139 @@
+{
+	"pack": {
+		"name": "Geophilic",
+		"id": "geophilic",
+		"version": "3.4.5",
+		"description": [
+			{
+				"text": "Geophilic",
+				"color": "#4080ff"
+			},
+			{
+				"text": " v3.4",
+				"color": "#767676"
+			},
+			{
+				"text": "\nA ",
+				"color": "#767676"
+			},
+			{
+				"text": "biome overhaul ",
+				"color": "#979797"
+			},
+			{
+				"text": "data pack",
+				"color": "#767676"
+			}
+		],
+		"pack_format": 15,
+		"supported_formats": [
+			15,
+			94
+		],
+		"min_format": 15,
+		"max_format": 94
+	},
+	"overlays": {
+		"entries": [
+			{
+				"formats": [
+					26,
+					512
+				],
+				"min_format": 26,
+				"max_format": 512,
+				"directory": "f26data"
+			},
+			{
+				"formats": [
+					41,
+					512
+				],
+				"min_format": 41,
+				"max_format": 512,
+				"directory": "f41data"
+			},
+			{
+				"formats": [
+					61,
+					512
+				],
+				"min_format": 61,
+				"max_format": 512,
+				"directory": "f61-pale_garden"
+			},
+			{
+				"formats": [
+					71,
+					512
+				],
+				"min_format": 71,
+				"max_format": 512,
+				"directory": "f71-spring_to_life"
+			},
+			{
+				"formats": [
+					18,
+					26
+				],
+				"min_format": 18,
+				"max_format": 26,
+				"directory": "biomes_1_20_2"
+			},
+			{
+				"formats": [
+					41,
+					41
+				],
+				"min_format": 41,
+				"max_format": 41,
+				"directory": "biomes_1_20_5"
+			},
+			{
+				"formats": [
+					48,
+					48
+				],
+				"min_format": 48,
+				"max_format": 48,
+				"directory": "biomes_1_21"
+			},
+			{
+				"formats": [
+					57,
+					57
+				],
+				"min_format": 57,
+				"max_format": 57,
+				"directory": "biomes_1_21_2"
+			},
+			{
+				"formats": [
+					61,
+					512
+				],
+				"min_format": 61,
+				"max_format": 512,
+				"directory": "biomes_1_21_4"
+			},
+			{
+				"formats": [
+					71,
+					512
+				],
+				"min_format": 71,
+				"max_format": 512,
+				"directory": "biomes_1_21_5"
+			},
+			{
+				"formats": [
+					94,
+					512
+				],
+				"min_format": 94,
+				"max_format": 512,
+				"directory": "biomes_1_21_11"
+			}
+		]
+	}
+}

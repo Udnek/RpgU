@@ -1,0 +1,64 @@
+{
+  "pack": {
+    "description": "§6CliffTree§f, vanilla-like worldgen overhaul!",
+    "min_format": 93,
+    "max_format": [
+      100,
+      10
+    ]
+  },
+  "overlays": {
+    "entries": [
+      {
+        "directory": "deprecated",
+        "min_format": 93,
+        "max_format": [
+          100,
+          10
+        ]
+      }
+    ]
+  },
+    "neoforge:overlays": {
+        "entries": [
+      {
+        "directory": "overlay.tectonic_no_carvers",
+        "formats": [1, 99],
+        "min_format": 1,
+        "max_format": 99,
+        "neoforge:conditions": [
+          {
+            "type": "neoforge:mod_loaded",
+            "modid": "tectonic"
+          },
+          {
+            "type": "tectonic:config",
+            "key": "no_carvers"
+          }
+        ]
+      }
+        ]
+    },
+    "fabric:overlays": {
+        "entries": [
+      {
+        "directory": "overlay.tectonic_no_carvers",
+        "condition": {
+          "condition": "fabric:and",
+          "values": [
+            {
+              "condition": "fabric:all_mods_loaded",
+              "values": [
+                "tectonic"
+              ]
+            },
+            {
+              "condition": "tectonic:config",
+              "key": "no_carvers"
+            }
+          ]
+        }
+      }
+        ]
+    }
+}

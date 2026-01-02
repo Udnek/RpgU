@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 public class Commands {
     public static void declareCommands() {
         RpgU instance = RpgU.getInstance();
-        instance.getCommand("custom._damage_system").setExecutor(new CustomDamageSystemCommand());
+        instance.getCommand("custom_damage_system").setExecutor(new CustomDamageSystemCommand());
         instance.getCommand("reset_cooldown").setExecutor(new ResetCooldownCommand());
         instance.getCommand("set_food").setExecutor(new SetFoodCommand());
     }

@@ -1,0 +1,51 @@
+{
+  "name": "nova_structures:mansion_overhaul/path",
+  "fallback": "nova_structures:mansion_overhaul/path_fallback",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/path/mansion_path_1",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/path/mansion_path_2",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/path/mansion_path_3",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/path/mansion_path_4",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "location": "nova_structures:mansion_overhaul/path/mansion_path_5",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element",
+		"processors": "nova_structures:mansion_overhaul_generic_degradation"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+	"name": "nova_structures:mansion_overhaul/foundation_outpost",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:feature_pool_element",
+        "feature": "nova_structures:mansion_outpost_base",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "nova_structures:mansion_overhaul/foundation_outpost"
+}

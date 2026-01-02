@@ -4,7 +4,7 @@ main: me.udnek.rpgu.RpgU
 api-version: '1.21.11'
 depend: [CoreU, JeiU]
 commands:
-  custom._damage_system:
+  custom_damage_system:
     description: "custom_damage_system"
     usage: "/custom_damage_system"
     aliases: []

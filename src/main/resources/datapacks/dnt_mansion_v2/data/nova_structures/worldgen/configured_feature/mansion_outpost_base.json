@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:block_column",
+  "config": {
+    "allowed_placement": {
+      "type": "minecraft:matching_block_tag",
+      "offset":[
+          0,
+          1,
+          0
+      ],
+      "tag": "nova_structures:support_goes_through"
+    },
+    "prioritize_tip": true,
+    "direction": "down",
+    "layers": [
+	  {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "minecraft:air",
+            "Properties": {}
+          }
+        }
+      },
+	  {
+        "height": 1,
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "minecraft:birch_planks",
+            "Properties": {}
+          }
+        }
+      },
+      {
+        "height": 98,
+        "provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "minecraft:cobblestone"
+              },
+              "weight": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+	"name": "nova_structures:ocean_monument/start",
+	"fallback": "nova_structures:ocean_monument/shell",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/shell/ocean_monument_center_1",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/shell/ocean_monument_center_2",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/shell/ocean_monument_center_3",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/shell/ocean_monument_center_4",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		}
+	]
+}

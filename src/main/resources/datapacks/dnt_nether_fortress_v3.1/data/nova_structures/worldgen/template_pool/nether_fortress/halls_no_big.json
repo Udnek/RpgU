@@ -1,0 +1,60 @@
+{
+	"name": "nova_structure:nether_fortress/start",
+  "elements": [
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/halls/nether_fortress_blaze_stairs",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/halls/nether_fortress_netherwart_stairs",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/halls/nether_fortress_stairs",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/halls/nether_fortress_straight",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/halls/nether_fortress_straight_tower_1",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+	{
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "nova_structures:nether_fortress/halls/nether_fortress_straight_tower_2",
+        "processors": "nova_structures:nether_fortress_overhaul_degradation",
+        "projection": "rigid"
+      },
+      "weight": 2
+    }
+  ],
+  "fallback": "nova_structures:nether_fortress/hallway_fallback"
+}

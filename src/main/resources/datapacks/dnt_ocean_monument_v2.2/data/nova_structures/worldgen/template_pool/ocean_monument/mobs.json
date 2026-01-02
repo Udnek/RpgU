@@ -1,0 +1,51 @@
+{
+	"name": "nova_structures:ocean_monument/mobs",
+	"fallback": "nova_structures:ocean_monument/mobs",
+	"elements": [
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/mob/mob_elder_guardian",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 2,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/mob/mob_drowned",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/mob/mob_drowned_armour",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/mob/mob_drowned_spear",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		},
+		{
+			"weight": 1,
+			"element": {
+				"element_type": "minecraft:single_pool_element",
+				"location": "nova_structures:ocean_monument/mob/mob_drowned_full_armour",
+				"projection": "rigid",
+				"processors": "nova_structures:monument_processor"
+			}
+		}
+	]
+}
