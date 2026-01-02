@@ -145,6 +145,7 @@ public class AttributeManaging extends SelfRegisteringListener {
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.MACE);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TRIDENT);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.CROSSBOW);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SHIELD);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
@@ -256,6 +257,10 @@ public class AttributeManaging extends SelfRegisteringListener {
 
         if (material ==  Material.MACE) {
             customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new MaceAbility());
+        }
+
+        if (material ==  Material.TRIDENT) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new TridentAbility());
         }
 
         if (material == Material.ARROW) {

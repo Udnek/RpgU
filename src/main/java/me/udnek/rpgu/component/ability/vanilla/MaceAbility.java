@@ -37,16 +37,16 @@ public class MaceAbility extends RPGUConstructableActiveAbility<EntityAttemptSma
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return Pair.of(List.of("When falling from above 1.5 blocks, deals a smash attack"),
-                List.of("При падении с высоты более 1,5 блоков наносится сокрушающий удар"));
+        return Pair.of(List.of("When falling deals a smash attack"),
+                List.of("При падении наносится сокрушающий удар"));
 
     }
 
     @Override
     public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
-        Eng_Ru_Args.accept("Flight speed: %s blocks per second", "Скорость полёта: %s блоков в секунду", List.of(Component.text(50)));
-        Eng_Ru_Args.accept("Damage when shot: %s", "Урон при выстреле: %s", List.of(Component.text(8)));//TODO переделать при изменение
+        Eng_Ru_Args.accept("Minimum fall height: %s blocks", "Минимальная высота падения: %s блока", List.of(Component.text(1.5)));
+       //TODO допистаь при изменение
     }
 
     @Override
