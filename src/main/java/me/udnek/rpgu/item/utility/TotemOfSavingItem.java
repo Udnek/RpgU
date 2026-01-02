@@ -12,6 +12,7 @@ import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.rpgu.component.ability.Abilities;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.entity.totem_of_saving.TotemOfSavingEntity;
 import org.apache.commons.lang3.tuple.Pair;
@@ -68,7 +69,7 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
     }
 
 
-    public static class Passive extends RPGUConstructablePassiveAbility<PlayerDeathEvent> {
+    public static class Passive extends RPGUConstructablePassiveAbility<PlayerDeathEvent> implements RPGUPassiveTriggerableAbility<PlayerDeathEvent> {
 
         public static final Passive DEFAULT = new Passive();
 
@@ -101,7 +102,7 @@ public class TotemOfSavingItem extends ConstructableCustomItem {
             return ActionResult.NO_COOLDOWN;
         }
 
-
+        @Override
         public void onDeath(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, @NotNull PlayerDeathEvent event) {
             activate(customItem, event.getPlayer(), slot, event);
         }

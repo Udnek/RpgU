@@ -1,6 +1,8 @@
 package me.udnek.rpgu.component.ability;
 
+import com.destroystokyo.paper.event.player.PlayerLaunchProjectileEvent;
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
+import io.papermc.paper.event.entity.EntityAttemptSmashAttackEvent;
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent;
 import io.papermc.paper.event.player.PlayerShieldDisableEvent;
 import me.udnek.coreu.custom.component.CustomComponent;
@@ -12,15 +14,12 @@ import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.SelfRegisteringListener;
-import me.udnek.rpgu.component.ability.vanilla.DeathProtectionPassive;
-import me.udnek.rpgu.component.ability.vanilla.GliderPassive;
-import me.udnek.rpgu.item.equipment.quiver.QuiverShootAbility;
-import me.udnek.rpgu.item.utility.TotemOfSavingItem;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityResurrectEvent;
@@ -80,7 +79,26 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         });
     }
 
+    @EventHandler
+    public void onPlayerLaunchProjectile(PlayerLaunchProjectileEvent event) {
+        CustomItem.consumeIfCustom(event.getItemStack(), item -> {
+            RPGUActiveItem rpguActiveItem = item.getComponents().getOrDefault(RPGUComponents.ACTIVE_ABILITY_ITEM);
+            for (var trigger : rpguActiveItem.getComponents().getAllTyped(RPGUActiveTriggerableAbility.class)) {
+                if (event.getProjectile() instanceof Trident) trigger.onLaunchTrident(item, event);
+            }
+        });
+    }
 
+    @EventHandler
+    public void onEntityAttemptSmashAttack(EntityAttemptSmashAttackEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity)) return;
+        CustomItem.consumeIfCustom(event.getWeapon(), item -> {
+            RPGUActiveItem rpguActiveItem = item.getComponents().getOrDefault(RPGUComponents.ACTIVE_ABILITY_ITEM);
+            for (var trigger : rpguActiveItem.getComponents().getAllTyped(RPGUActiveTriggerableAbility.class)) {
+                trigger.onSmashAttack(item, event);
+            }
+        });
+    }
 
     @EventHandler
     public void onEntityShootBowEvent(EntityShootBowEvent event) {
@@ -88,7 +106,6 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
                     for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
-                        if (!trigger.getSlot().intersects(entity, slot)) continue;
                         trigger.onShootBow(customItem, slot, event);
                     }
                 });
@@ -117,9 +134,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         Player player = event.getPlayer();
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, player,
                 (passiveItem, customItem, slot) -> {
-                    QuiverShootAbility quiverShootAbility = passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT);
-                    if (!quiverShootAbility.getSlot().intersects(player, slot)) return;
-                    quiverShootAbility.onChooseArrow(customItem, slot, event);
+                    passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT).onChooseArrow(customItem, slot, event);
                 });
     }
 
@@ -128,9 +143,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         LivingEntity entity = event.getEntity();
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
-                    QuiverShootAbility quiverShootAbility = passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT);
-                    if (!quiverShootAbility.getSlot().intersects(entity, slot)) return;
-                    quiverShootAbility.onLoadToCrossbow(customItem, slot, event);
+                    passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT).onLoadToCrossbow(customItem, slot, event);
                 });
     }
 
@@ -139,9 +152,9 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         Player entity = event.getEntity();
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
-                    TotemOfSavingItem.Passive passive = passiveItem.getComponents().getOrDefault(Abilities.TOTEM_OF_SAVING);
-                    if (!passive.getSlot().intersects(entity, slot)) return;
-                    passive.onDeath(customItem, slot, event);
+                    for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        trigger.onDeath(customItem, slot, event);
+                    }
                 });
     }
 
@@ -151,11 +164,11 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         LivingEntity entity = event.getEntity();
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passive, customItem,  slot) -> {
-                    DeathProtectionPassive deathProtectionPassive = passive.getComponents().getOrDefault(VanillaAbilities.DEATH_PROTECTION);
-                    if (!deathProtectionPassive.getSlot().intersects(entity, slot)) return;
-                    deathProtectionPassive.onResurrect(customItem, slot, activatedBefore.get(), event);
+                    if (activatedBefore.get()) return;
+                    passive.getComponents().getOrDefault(VanillaAbilities.DEATH_PROTECTION).onResurrect(customItem, slot, activatedBefore.get(), event);
                     if (!(event.isCancelled())) activatedBefore.set(true);
                 });
+        if (!activatedBefore.get()) event.setCancelled(true);
     }
 
     @EventHandler
@@ -166,7 +179,6 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
             joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, damager,
                     (passive, customItem, slot) -> {
                         for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
-                            if (!trigger.getSlot().intersects(damager, slot)) continue;
                             trigger.onDamageDealt(customItem, slot, event);
                         }
                     });
@@ -176,7 +188,6 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
              joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, victim,
                      (passive, customItem, slot) -> {
                          for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
-                             if (!trigger.getSlot().intersects(victim, slot)) continue;
                              trigger.onDamageReceived(customItem, slot, event);
                          }
                      });
@@ -188,11 +199,9 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
         joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, livingEntity,
                 (passive, customItem, slot) -> {
-                    GliderPassive gliderPassive = passive.getComponents().getOrDefault(VanillaAbilities.GLIDER);
-                    if (!gliderPassive.getSlot().intersects(livingEntity, slot)) return;
-                    gliderPassive.onToggleGlide(customItem, slot, event);
+                    for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        trigger.onToggleGlide(customItem, slot, event);
+                    }
                 });
     }
-
-
 }

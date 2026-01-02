@@ -1,5 +1,7 @@
 package me.udnek.rpgu.component.ability;
 
+import com.destroystokyo.paper.event.player.PlayerLaunchProjectileEvent;
+import io.papermc.paper.event.entity.EntityAttemptSmashAttackEvent;
 import io.papermc.paper.event.player.PlayerShieldDisableEvent;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUItemActiveAbility;
@@ -14,4 +16,6 @@ public interface RPGUActiveTriggerableAbility<Context> extends RPGUItemActiveAbi
     default void onConsume(@NotNull CustomItem customItem, @NotNull PlayerItemConsumeEvent event) {}
     default void onShoot(@NotNull CustomItem customItem, @NotNull EntityShootBowEvent event) {}
     default void onShieldBreak(@NotNull CustomItem customItem, @NotNull PlayerShieldDisableEvent event) {}
+    default void onLaunchTrident(@NotNull CustomItem customItem, @NotNull PlayerLaunchProjectileEvent event) {}
+    default void onSmashAttack(@NotNull CustomItem customItem, @NotNull EntityAttemptSmashAttackEvent event) {}
 }

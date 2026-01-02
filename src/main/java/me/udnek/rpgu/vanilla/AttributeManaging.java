@@ -144,6 +144,8 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : Tag.ITEMS_AXES.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.MACE);
+            VanillaItemManager.getInstance().replaceVanillaMaterial(Material.TRIDENT);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.CROSSBOW);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SHIELD);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.HEAVY_CORE);
@@ -244,21 +246,29 @@ public class AttributeManaging extends SelfRegisteringListener {
             customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new CrossbowAbility());
         }
 
-        if (material == Material.SHIELD) {
+        if (itemStack.hasData(DataComponentTypes.BLOCKS_ATTACKS)) {
             customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(
-                    new ShieldAbility(material.getDefaultData(DataComponentTypes.BLOCKS_ATTACKS)));
+                    new BlocksAttacksAbility(Objects.requireNonNull(itemStack.getData(DataComponentTypes.BLOCKS_ATTACKS))));
         }
 
         if (Tag.ITEMS_AXES.isTagged(material)) {
             customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new ShieldCrashingAbility());
         }
 
+        if (material ==  Material.MACE) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new MaceAbility());
+        }
+
+        if (material ==  Material.TRIDENT) {
+            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new TridentAbility());
+        }
+
         if (material == Material.ARROW) {
             customItem.getComponents().set(new ArrowComponent() {
                 @Override
                 public @NotNull Component getIcon(@NotNull CustomItem customItem, @NotNull ItemStack itemStack) {
-                    return Component.text("0").font(Key.key("rpgu:arrow")).color(NamedTextColor.WHITE).
-                            decoration(TextDecoration.ITALIC, false);
+                    return Component.text("0").font(Key.key("rpgu:arrow")).color(NamedTextColor.WHITE)
+                                    .decoration(TextDecoration.ITALIC, false);
                 }
             });
         }
