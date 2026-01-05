@@ -1,22 +1,33 @@
 package me.udnek.rpgu.util;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.Component;
+import org.bukkit.*;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.generator.structure.Structure;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class Utils {
     public static <T extends Number> void consumeIfPositive(@NotNull T t, @NotNull Consumer<T> consumer){
         if (t.doubleValue() > 0) consumer.accept(t);
+    }
+
+    public static @NotNull Component translateStructure(@NotNull Structure structure){
+        return translateStructure(RegistryAccess.registryAccess()
+                .getRegistry(RegistryKey.STRUCTURE).getKeyOrThrow(structure));
+    }
+    public static @NotNull Component translateStructure(@NotNull Key id){
+        return Component.translatable(String.format("structure.%s.%s", id.namespace(), id.value()), id.asString());
     }
 
     // RAYTRACE

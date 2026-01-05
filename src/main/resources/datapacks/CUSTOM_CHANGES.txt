@@ -1,0 +1,2 @@
+clifftree:
+    removed loot tables for blocks

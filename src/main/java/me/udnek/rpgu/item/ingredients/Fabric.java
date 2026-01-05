@@ -4,8 +4,8 @@ import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
+import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
@@ -40,16 +40,15 @@ public class Fabric extends ConstructableCustomItem {
     @Override
     public void globalInitialization() {
         super.globalInitialization();
-        NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
-                NmsCustomLootEntryBuilder.fromVanilla(
+        PoolWrapper lootPoolBuilder = new PoolWrapper.Builder(
+                new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.FABRIC)).fromVanilla(
                         LootTables.BLAZE.getLootTable(),
-                        itemStack -> ItemUtils.isVanillaMaterial(itemStack, Material.BLAZE_ROD),
-                        new ItemStackCreator.Custom(Items.FABRIC)
-                )
-        );
+                        itemStack -> ItemUtils.isVanillaMaterial(itemStack, Material.BLAZE_ROD)
+                ).buildAndWrap()
+        ).build();
 
-        Nms.get().getLootTableContainer(LootTables.ZOMBIE.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(LootTables.HUSK.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(LootTables.DROWNED.getLootTable()).addPool(lootPoolBuilder);
+        Nms.get().getLootTableWrapper(LootTables.ZOMBIE.getLootTable()).addPool(lootPoolBuilder);
+        Nms.get().getLootTableWrapper(LootTables.HUSK.getLootTable()).addPool(lootPoolBuilder);
+        Nms.get().getLootTableWrapper(LootTables.DROWNED.getLootTable()).addPool(lootPoolBuilder);
     }
 }

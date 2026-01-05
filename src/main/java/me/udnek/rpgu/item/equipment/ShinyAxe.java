@@ -4,10 +4,11 @@ import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
+import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
@@ -50,14 +51,13 @@ public class ShinyAxe extends ConstructableCustomItem {
     @Override
     public void globalInitialization() {
         super.globalInitialization();
-        Nms.get().getLootTableContainer(LootTables.PIGLIN_BRUTE.getLootTable())
-                        .addPool(new NmsLootPoolBuilder(
-                                NmsCustomLootEntryBuilder.fromVanilla(
-                                        LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
-                                        itemStack -> itemStack.getType() == Material.GOLD_INGOT,
-                                        new ItemStackCreator.Custom(Items.SHINY_AXE)
-                                )
-                        ));
+        Nms.get().getLootTableWrapper(LootTables.PIGLIN_BRUTE.getLootTable())
+                        .addPool(new PoolWrapper.Builder(
+                                new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.SHINY_AXE)).fromVanilla(
+                                        LootTables.BASTION_OTHER.getLootTable(),
+                                        stack -> ItemUtils.isVanillaMaterial(stack, Material.IRON_SWORD)
+                                ).buildAndWrap()
+                        ).build());
     }
 
     @Override

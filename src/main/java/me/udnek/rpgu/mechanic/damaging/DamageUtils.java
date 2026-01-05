@@ -35,12 +35,14 @@ public class DamageUtils {
     }
 
     public static boolean canDamageThisTick(@NotNull DamageType damageType){
-        if (damageType != DamageType.ON_FIRE && (
-            DamageTypeTags.IS_FIRE.isTagged(damageType) ||
-            damageType == DamageType.CACTUS ||
-            damageType == DamageType.SWEET_BERRY_BUSH)
+        if (damageType != DamageType.ON_FIRE &&
+                (
+                DamageTypeTags.IS_FIRE.isTagged(damageType) ||
+                damageType == DamageType.CACTUS ||
+                damageType == DamageType.SWEET_BERRY_BUSH
+                )
         ) {
-          return Bukkit.getCurrentTick() % 15 == 0;
+          return Bukkit.getCurrentTick() % 10 == 0;
         }
         return true;
     }

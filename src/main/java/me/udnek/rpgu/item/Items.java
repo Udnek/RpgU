@@ -32,6 +32,7 @@ import me.udnek.rpgu.item.equipment.wolf.WolfLeggings;
 import me.udnek.rpgu.item.ingredients.*;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 import me.udnek.rpgu.item.utility.*;
+import org.bukkit.generator.structure.Structure;
 import org.jetbrains.annotations.NotNull;
 
 public class Items {
@@ -117,6 +118,8 @@ public class Items {
     public static final CustomItem SHAMAN_TAMBOURINE = register(new ShamanTambourine());
     public static final CustomItem NATURES_STAFF = register(new NaturesStaff());
     public static final CustomItem NATURES_COMPASS = register(new NaturesCompass());
+    public static final CustomItem FOLDED_MAP_MANSION = register(new FoldedMap(Structure.MANSION));
+    public static final CustomItem FOLDED_MAP_BURIED_TREASURE = register(new FoldedMap(Structure.BURIED_TREASURE));
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());

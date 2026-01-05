@@ -3,8 +3,8 @@ package me.udnek.rpgu.item.ingredients;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
+import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
@@ -24,12 +24,13 @@ public class PhantomWing extends ConstructableCustomItem {
     @Override
     public void globalInitialization() {
         super.globalInitialization();
-        Nms.get().getLootTableContainer(LootTables.PHANTOM.getLootTable()).addPool(new NmsLootPoolBuilder(
-                NmsCustomLootEntryBuilder.fromVanilla(
-                        LootTables.PHANTOM.getLootTable(),
-                        itemStack -> itemStack.getType() == Material.PHANTOM_MEMBRANE,
-                        new ItemStackCreator.Custom(Items.PHANTOM_WING)
-                ))
+        Nms.get().getLootTableWrapper(LootTables.PHANTOM.getLootTable()).addPool(
+                new PoolWrapper.Builder(
+                        new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.PHANTOM_WING)).fromVanilla(
+                                LootTables.PHANTOM.getLootTable(),
+                                itemStack -> itemStack.getType() == Material.PHANTOM_MEMBRANE
+                        ).buildAndWrap()
+                ).build()
         );
     }
 }

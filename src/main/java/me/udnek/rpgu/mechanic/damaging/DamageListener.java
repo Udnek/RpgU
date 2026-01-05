@@ -8,13 +8,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class DamageListener extends SelfRegisteringListener {
 
-    public static boolean CUSTOM_DAMAGE_SYSTEM = true;
+    public static boolean customDamageSystemEnabled = true;
 
     public DamageListener(@NotNull Plugin plugin) {super(plugin);}
 
     @EventHandler
     public void onEntityTakesDamage(EntityDamageEvent event) {
-        if (!CUSTOM_DAMAGE_SYSTEM) {
+        if (!customDamageSystemEnabled) {
             DamageVisualizer.visualize(new Damage(Damage.Type.PHYSICAL, event.getDamage()), event.getEntity());
             return;
         }

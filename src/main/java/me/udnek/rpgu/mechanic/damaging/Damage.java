@@ -19,11 +19,6 @@ public class Damage {
         addMagical(magicalDamage);
     }
 
-    public void nullify(){
-        physicalDamage = 0;
-        magicalDamage = 0;
-    }
-
     public @NotNull Damage addPhysical(double amount){physicalDamage += amount; return this;}
     public @NotNull Damage addMagical(double amount){magicalDamage += amount; return this;}
     public @NotNull Damage add(@NotNull Type type, double amount){
@@ -48,8 +43,6 @@ public class Damage {
     public double getMagical() {return magicalDamage;}
 
     public double getTotal() {return getPhysical() + getMagical();}
-
-
 
     @Override
     public String toString(){

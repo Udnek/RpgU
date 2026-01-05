@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 public class CustomDamageSystemCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        DamageListener.CUSTOM_DAMAGE_SYSTEM = !DamageListener.CUSTOM_DAMAGE_SYSTEM;
-        commandSender.sendMessage("Custom damage system is now: " + DamageListener.CUSTOM_DAMAGE_SYSTEM);
+        DamageListener.customDamageSystemEnabled = !DamageListener.customDamageSystemEnabled;
+        commandSender.sendMessage("Custom damage system is now: " + DamageListener.customDamageSystemEnabled);
         return true;
     }
 }

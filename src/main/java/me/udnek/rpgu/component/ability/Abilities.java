@@ -55,6 +55,8 @@ public class Abilities {
             register(new ConstructableComponentType<>("sword_dash", SwordDashAbility.DEFAULT));
     public static final CustomComponentType<RPGUActiveItem, NaturesCompass.Ability> NATURES_COMPASS =
             register(new ConstructableComponentType<>("natures_compass", NaturesCompass.Ability.DEFAULT));
+    public static final CustomComponentType<RPGUActiveItem, FoldedMap.Ability> FOLDED_MAP =
+            register(new ConstructableComponentType<>("folded_map", FoldedMap.Ability.DEFAULT));
 
 
     private static <T extends CustomComponentType<?, ?>> T register(T type){

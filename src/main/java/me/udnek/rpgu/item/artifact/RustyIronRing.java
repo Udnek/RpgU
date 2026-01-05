@@ -5,9 +5,10 @@ import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.nms.loot.entry.NmsCustomLootEntryBuilder;
-import me.udnek.coreu.nms.loot.pool.NmsLootPoolBuilder;
+import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
+import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
@@ -35,18 +36,17 @@ public class RustyIronRing extends ConstructableCustomItem {
     @Override
     public void globalInitialization() {
         super.globalInitialization();
-        NmsLootPoolBuilder lootPoolBuilder = new NmsLootPoolBuilder(
-                NmsCustomLootEntryBuilder.fromVanilla(
+        PoolWrapper pool = new PoolWrapper.Builder(
+                new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.RUSTY_IRON_RING)).fromVanilla(
                         LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
-                        itemStack -> itemStack.getType() == Material.GOLD_INGOT,
-                        new ItemStackCreator.Custom(Items.RUSTY_IRON_RING)
-                )
-        );
-        Nms.get().getLootTableContainer(LootTables.ZOMBIE.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(LootTables.HUSK.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(LootTables.DROWNED.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(LootTables.STRAY.getLootTable()).addPool(lootPoolBuilder);
-        Nms.get().getLootTableContainer(Objects.requireNonNull(Bukkit.getLootTable(NamespacedKey.minecraft("entities/bogged")))).addPool(lootPoolBuilder);
+                        stack -> ItemUtils.isVanillaMaterial(stack, Material.GOLD_INGOT)
+                ).buildAndWrap()
+        ).build();
+        Nms.get().getLootTableWrapper(LootTables.ZOMBIE.getLootTable()).addPool(pool);
+        Nms.get().getLootTableWrapper(LootTables.HUSK.getLootTable()).addPool(pool);
+        Nms.get().getLootTableWrapper(LootTables.DROWNED.getLootTable()).addPool(pool);
+        Nms.get().getLootTableWrapper(LootTables.STRAY.getLootTable()).addPool(pool);
+        Nms.get().getLootTableWrapper(Objects.requireNonNull(Bukkit.getLootTable(NamespacedKey.minecraft("entities/bogged")))).addPool(pool);
     }
 
     @Override
