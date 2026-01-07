@@ -27,7 +27,7 @@ public class FerrudamPickaxe extends FerrudamTool {
         return TranslatableThing.ofEngAndRu("Ferrudam Pickaxe", "Ферродамовая кирка");
     }
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "FFF",

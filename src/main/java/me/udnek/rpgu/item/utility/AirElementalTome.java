@@ -50,7 +50,7 @@ public class AirElementalTome extends ConstructableCustomItem {
     @Override
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Air Elemental Tome", "Фолиант элементаля воздуха");}
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 " R ",
@@ -137,7 +137,7 @@ public class AirElementalTome extends ConstructableCustomItem {
         }
 
         @Override
-        public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
+        public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
             super.getEngAndRuProperties(Eng_Ru_Args);
             Eng_Ru_Args.accept("Lift Height: %s blocks", "Высота подъёма: %s блоков", List.of(Component.text(Utils.roundToTwoDigits(HEIGHT))));
         }

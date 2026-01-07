@@ -52,7 +52,7 @@ public class BlocksAttacksAbility extends RPGUConstructableActiveAbility<PlayerI
     }
 
     @Override
-    public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
+    public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
         Eng_Ru_Args.accept("Horizontal block angle: %s degrees", "Горизонталшный угол блокировки: %s градусов", List.of(Component.text(blockAngle)));
     }

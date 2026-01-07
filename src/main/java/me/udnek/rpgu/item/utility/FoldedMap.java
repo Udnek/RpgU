@@ -109,7 +109,7 @@ public class FoldedMap extends ConstructableCustomItem {
         }
 
         @Override
-        public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
+        public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
             super.getEngAndRuProperties(Eng_Ru_Args);
             Eng_Ru_Args.accept("Search Radius: %s", "Радиус поиска: %s", List.of(Component.text(SEARCH_RADIUS)));
         }

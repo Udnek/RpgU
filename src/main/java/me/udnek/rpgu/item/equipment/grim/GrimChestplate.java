@@ -26,7 +26,7 @@ public class GrimChestplate extends GrimArmor {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Grim Chestplate", "Мрачный нагрудник");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "BHB",

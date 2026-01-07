@@ -22,7 +22,7 @@ public class EsotericSalve extends ConstructableCustomItem {
     }
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapelessRecipe recipe = new ShapelessRecipe(getNewRecipeKey(), getItem().add(1));
 
         recipe.addIngredient(new RecipeChoice.MaterialChoice(Material.GLOW_INK_SAC));

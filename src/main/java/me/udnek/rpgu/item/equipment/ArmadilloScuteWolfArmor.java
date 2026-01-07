@@ -57,7 +57,7 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     }
     
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 "S  ",

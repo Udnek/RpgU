@@ -51,7 +51,7 @@ public class FlowerWreath extends ConstructableCustomItem {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flower Wreath", "Цветочный венок");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 "AAA",

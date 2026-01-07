@@ -20,7 +20,7 @@ public class FlintShovel extends FlintTool {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flint Shovel", "Кремневая лопата");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 " F ",
