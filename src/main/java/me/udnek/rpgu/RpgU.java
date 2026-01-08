@@ -26,13 +26,13 @@ import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.utility.AirElementalTome;
-import me.udnek.rpgu.mechanic.alloying.AlloyForgeManager;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
+import net.kyori.adventure.text.BlockNBTComponent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +41,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
     private static RpgU instance;
 
     public static @NotNull RpgU getInstance() { return instance; }
+
 
     @Override
     public void onEnable() {
@@ -63,8 +64,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new AttributeManaging(this);
         new ComponentListener(this);
         new AbilityListener(this);
-
-        AlloyForgeManager.getInstance();
 
         Commands.declareCommands();
 

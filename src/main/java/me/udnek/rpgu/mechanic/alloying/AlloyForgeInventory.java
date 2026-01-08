@@ -8,6 +8,7 @@ import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.recipe.RecipeManager;
 import me.udnek.coreu.util.ComponentU;
 import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.block.AlloyForgeBlockEntity;
 import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -38,7 +39,7 @@ import java.util.function.Consumer;
 public class AlloyForgeInventory extends ConstructableCustomInventory implements AlloyForgeMachine, SmartIntractableCustomInventory {
 
     public static final TextColor COLOR = TextColor.color(91, 100, 118);
-    public static final int CRAFT_DURATION = 20*20 / AlloyForgeManager.TICK_DELAY;
+    public static final int CRAFT_DURATION = 20*20;
     public static final NamespacedKey SERIALIZE_RECIPE_KEY = new NamespacedKey(RpgU.getInstance(), "alloy_forge_recipe");
     public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
@@ -53,28 +54,25 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
 
     protected boolean shouldUpdateItems = false;
     protected float progress = 0;
-    protected AlloyingRecipe currentRecipe = null;
-    protected ItemStack currentAddition = null;
+    protected @Nullable AlloyingRecipe currentRecipe = null;
+    protected @Nullable ItemStack currentAddition = null;
 
-    protected final Block block;
+    protected final @NotNull AlloyForgeBlockEntity block;
 
-    public AlloyForgeInventory(@NotNull Block block){
+    public AlloyForgeInventory(@NotNull AlloyForgeBlockEntity block){
         this.block = block;
     }
 
-    public static void acceptIfInventoryIsForge(Inventory inventory, Consumer<AlloyForgeInventory> consumer){
-        if (inventory.getHolder() instanceof AlloyForgeInventory alloyForgeInventory){
-            consumer.accept(alloyForgeInventory);
-        }
-    }
     @Override
     public boolean canPlaceItem(@Nullable ItemStack itemStack, int slot) {
         return canTakeItem(itemStack, slot) && slot != RESULT_SLOT;
     }
+
     @Override
     public boolean canTakeItem(@Nullable ItemStack itemStack, int slot) {
         return !FILLER.isThisItem(getInventory().getItem(slot));
     }
+
     public void iterateTroughAllInputSlots(@NotNull Consumer<Integer> consumer){
         for (int alloysSlot : ALLOYS_SLOTS) {
             consumer.accept(alloysSlot);
@@ -82,12 +80,9 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         consumer.accept(FUEL_SLOT);
         consumer.accept(ADDITION_SLOT);
     }
+
     @Override
     public void tick() {
-        if (block.getType() != Material.BLAST_FURNACE){
-            AlloyForgeManager.getInstance().addUnloadTicket(block);
-            return;
-        }
         if (shouldUpdateItems){
             shouldUpdateItems = false;
             updateItems();
@@ -119,18 +114,12 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
             progress = 0;
             addItem(RESULT_SLOT, result);
             currentRecipe = null;
-            setLit(false);
+            block.setLit(false);
             updateProgressAnimation();
             updateItemsTickLater();
         } else {
             progress += 1f/CRAFT_DURATION;
         }
-    }
-
-    public void setLit(boolean lit){
-        Furnace blockData = (Furnace) block.getBlockData();
-        blockData.setLit(lit);
-        block.setBlockData(blockData, true);
     }
 
     public void foundRecipe(@NotNull AlloyingRecipe recipe){
@@ -146,9 +135,8 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         progress = 0;
 
         serializeItems();
-        setLit(true);
+        block.setLit(true);
     }
-
 
     public void updateItems(){
         serializeItems();
@@ -203,7 +191,6 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
         }
     }
 
-
     public void updateItemsTickLater(){
         shouldUpdateItems = true;
     }
@@ -219,12 +206,11 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
     }
 
     @Override
-    public void unload(@NotNull Block block) {}
+    public void unload() {}
 
     @Override
-    public void load(@NotNull Block block) {
-        BlastFurnace state = (BlastFurnace) block.getState();
-        ItemStack fuel = state.getInventory().getFuel();
+    public void load() {
+        ItemStack fuel = block.getReal().getInventory().getItem(0);
         if (fuel == null || fuel.getType() != Material.BUNDLE) return;
         BundleMeta saveMeta = (BundleMeta) fuel.getItemMeta();
         List<ItemStack> items = saveMeta.getItems();
@@ -265,8 +251,8 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
             public void accept(@Nullable ItemStack itemStack) {
                 saveMeta.addItem(Objects.requireNonNullElseGet(itemStack, FILLER::getItem));
             }
-
         };
+
         iterateTroughAllInputSlots(consumer);
         consumer.accept(RESULT_SLOT);
         consumer.accept(currentAddition);
@@ -279,61 +265,56 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
             saveMeta.displayName(Component.text(currentRecipe.getKey().asString()));
         }
         saveItem.setItemMeta(saveMeta);
-        BlastFurnace state = (BlastFurnace) block.getState();
-        state.getInventory().setFuel(saveItem);
+        block.getReal().getInventory().setItem(0, saveItem);
     }
 
     @Override
-    public void onBlastInventoryOpen(InventoryOpenEvent event) {
-        if (event.getPlayer().getGameMode() == GameMode.SPECTATOR) return;
-        event.setCancelled(true);
-        open((Player) event.getPlayer());
-    }
-
-    @Override
-    public void onHopperSearch(HopperInventorySearchEvent event) {
+    public void onHopperSearch(@NotNull HopperInventorySearchEvent event) {
         event.setInventory(getInventory());
     }
+
     @Override
-    public void onHopperGivesItem(InventoryMoveItemEvent event) {
+    public void onHopperGivesItem(@NotNull InventoryMoveItemEvent event) {
         updateItemsTickLater();
     }
+
     @Override
-    public void onHopperTakesItem(InventoryMoveItemEvent event) {
+    public void onHopperTakesItem(@NotNull InventoryMoveItemEvent event) {
         ItemStack result = getInventory().getItem(RESULT_SLOT);
         event.setCancelled(true);
-        if (!FILLER.isThisItem(result)) {
+        if (result != null && !FILLER.isThisItem(result)) {
             event.getDestination().addItem(result.asQuantity(1));
             takeItem(RESULT_SLOT, 1);
+            updateItemsTickLater();
         }
-        updateItemsTickLater();
     }
-    @Override
-    public void onDestroy(BlockDestroyEvent event) {destroy(event);}
-    @Override
-    public void onBreak(BlockBreakEvent event) {destroy(event);}
-    protected void destroy(BlockExpEvent event){
-        BlastFurnace state = (BlastFurnace) block.getState();
-        state.getInventory().setFuel(null);
 
-        AlloyForgeManager.getInstance().addUnloadTicket(block);
-        World world = event.getBlock().getWorld();
-        Location location = block.getLocation().toCenterLocation();
+    @Override
+    public void destroy(){
+        World world = block.getReal().getWorld();
+        Location location = block.getReal().getLocation().toCenterLocation();
         iterateTroughAllInputSlots(slot -> {
             ItemStack item = getInventory().getItem(slot);
             if (item == null) return;
             world.dropItemNaturally(location, item);
         });
         ItemStack item = getInventory().getItem(RESULT_SLOT);
-        if (!FILLER.isThisItem(item)) world.dropItemNaturally(location, item);
+        if (!FILLER.isThisItem(item) && item != null) {
+            world.dropItemNaturally(location, item);
+        }
     }
 
     @Override
-    public void onPlayerClicksItem(InventoryClickEvent event) {
+    public void openInventory(@NotNull Player player) {
+        open(player);
+    }
+
+    @Override
+    public void onPlayerClicksItem(@NotNull InventoryClickEvent event) {
 
         SmartIntractableCustomInventory.super.onPlayerClicksItem(event);
 
-        // TODO: 8/26/2024 REMOVE WHEN FIXED IN ITEMSCOREU
+        // TODO: 8/26/2024 REMOVE WHEN FIXED IN COREU
         if (event.getClickedInventory() != this.getInventory() && event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY){
             event.setCancelled(false);
         }
@@ -359,9 +340,9 @@ public class AlloyForgeInventory extends ConstructableCustomInventory implements
                 176)
                 .append(Component.translatable("gui.rpgu.alloy_forge").font(NamespacedKey.minecraft("default")).color(NamedTextColor.BLACK));
     }
+
     @Override
     public int getInventorySize() {return 9*5;}
-
 
     public interface SlotOrItemConsumer extends Consumer<Integer>{
         @Override

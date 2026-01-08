@@ -10,9 +10,12 @@ import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.table.LootTableWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
+import org.bukkit.NamespacedKey;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class RawMagnetite extends ConstructableCustomItem {
     @Override
@@ -27,7 +30,9 @@ public class RawMagnetite extends ConstructableCustomItem {
     public void globalInitialization() {
         super.globalInitialization();
 
-        LootTableWrapper lootTable = Nms.get().getLootTableWrapper(Nms.get().getLootTable("minecraft:blocks/iron_ore"));
+        LootTableWrapper lootTable = Nms.get().getLootTableWrapper(
+                Objects.requireNonNull(Nms.get().getLootTable(NamespacedKey.minecraft("blocks/iron_ore")))
+        );
         CompositeEntryWrapper mainEntry = (CompositeEntryWrapper) lootTable.getPool(0).getEntry(0);
 
         SingletonEntryWrapper ironEntry = (SingletonEntryWrapper) mainEntry.getChild(1);
