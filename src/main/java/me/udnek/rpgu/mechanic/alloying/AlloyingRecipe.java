@@ -25,10 +25,6 @@ public class AlloyingRecipe implements CustomRecipe<AlloyingRecipeType>, Visuali
     protected final NamespacedKey id;
     protected final boolean keepEnchantments;
     public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> alloys, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result, boolean keepEnchantments){
-        Preconditions.checkArgument(key != null, "Key can not be null!");
-        Preconditions.checkArgument(fuel != null, "Fuel can not be null!");
-        Preconditions.checkArgument(addition != null, "TargetInput can not be null!");
-        Preconditions.checkArgument(result != null, "Result can not be null!");
         Preconditions.checkArgument(alloys.size() <= 6, "Alloys must be <= 6!");
         for (CustomRecipeChoice alloyInput : alloys) {
             Preconditions.checkArgument(alloyInput != null, "AlloyInput can not be null!");
