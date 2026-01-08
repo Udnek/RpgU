@@ -1,7 +1,7 @@
 package me.udnek.rpgu.mechanic.enchanting;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import me.udnek.coreu.custom.enchantment.NmsEnchantmentWrapper;
+import me.udnek.coreu.nms.EnchantmentWrapper;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
@@ -46,7 +46,7 @@ public class EnchantingListener extends SelfRegisteringListener {
 
     @EventHandler
     public void onLoad(ServerLoadEvent event){
-        NmsEnchantmentWrapper enchantment = Nms.get().getEnchantmentWrapper(Enchantment.PROTECTION);
+        EnchantmentWrapper enchantment = Nms.get().getEnchantmentWrapper(Enchantment.PROTECTION);
         enchantment.clearEffects();
         enchantment.addEffect(
                 new NamespacedKey(RpgU.getInstance(), "enchantment.protection"),
