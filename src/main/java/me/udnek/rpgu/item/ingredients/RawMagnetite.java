@@ -30,7 +30,9 @@ public class RawMagnetite extends ConstructableCustomItem {
     public void globalInitialization() {
         super.globalInitialization();
 
-        LootTableWrapper lootTable = Nms.get().getLootTableWrapper(Objects.requireNonNull(Nms.get().getLootTable(new NamespacedKey("minecraft", "blocks/iron_ore"))));
+        LootTableWrapper lootTable = Nms.get().getLootTableWrapper(
+                Objects.requireNonNull(Nms.get().getLootTable(NamespacedKey.minecraft("blocks/iron_ore")))
+        );
         CompositeEntryWrapper mainEntry = (CompositeEntryWrapper) lootTable.getPool(0).getEntry(0);
 
         SingletonEntryWrapper ironEntry = (SingletonEntryWrapper) mainEntry.getChild(1);
