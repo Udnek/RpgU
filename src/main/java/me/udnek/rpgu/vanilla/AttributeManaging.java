@@ -3,7 +3,6 @@ package me.udnek.rpgu.vanilla;
 import com.destroystokyo.paper.event.player.PlayerReadyArrowEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.PotionContents;
-import io.papermc.paper.registry.keys.StructureKeys;
 import me.udnek.coreu.custom.attribute.AttributeUtils;
 import me.udnek.coreu.custom.attribute.CustomAttributesContainer;
 import me.udnek.coreu.custom.component.instance.CustomAttributedItem;
@@ -15,11 +14,6 @@ import me.udnek.coreu.custom.item.RepairData;
 import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.registry.InitializationProcess;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.nms.NmsUtils;
-import me.udnek.coreu.nms.loot.condition.LootConditionWrapper;
-import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
-import me.udnek.coreu.nms.loot.pool.PoolWrapper;
-import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.coreu.rpgu.attribute.RPGUAttributes;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.ComponentU;
@@ -48,7 +42,6 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.loot.LootTables;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -143,7 +136,7 @@ public class AttributeManaging extends SelfRegisteringListener {
 
     @EventHandler
     public void onInit(InitializationEvent event){
-        if (event.getStep() == InitializationProcess.Step.BEFORE_REGISTRIES_LOADED){
+        if (event.getStep() == InitializationProcess.Step.GLOBAL_INITIALIZATION){
             for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/

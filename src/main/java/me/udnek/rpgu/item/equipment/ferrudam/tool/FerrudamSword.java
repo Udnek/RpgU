@@ -29,7 +29,7 @@ public class FerrudamSword extends FerrudamTool {
     @Override
     public @NotNull Material getMaterial() {return Material.DIAMOND_SWORD;}
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "F",

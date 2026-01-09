@@ -62,7 +62,7 @@ public class CeremonialDagger extends ConstructableCustomItem {
     }
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 "DSG",
@@ -79,7 +79,7 @@ public class CeremonialDagger extends ConstructableCustomItem {
 
     @Override
     public @Nullable RepairData initializeRepairData() {
-        Set<@NotNull Material> materials = new HashSet<>(Set.of(Material.GOLD_INGOT, Material.DIAMOND));
+        Set<Material> materials = new HashSet<>(Set.of(Material.GOLD_INGOT, Material.DIAMOND));
         materials.addAll(Tag.ITEMS_STONE_TOOL_MATERIALS.getValues());
         return new RepairData(Set.of(), materials);
     }

@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 public class Utils {
 
-    public static @NotNull List<@NotNull Block> getBlocksInCuboid(@NotNull Location center, int xRadius, int yRadius, int zRadius, @NotNull Predicate<@NotNull Block> predicate){
+    public static @NotNull List<Block> getBlocksInCuboid(@NotNull Location center, int xRadius, int yRadius, int zRadius, @NotNull Predicate<Block> predicate){
         Preconditions.checkArgument(xRadius >= 0 && yRadius >= 0 && zRadius >= 0, "Radius must be not negative");
         Location clone = center.clone();
         List<Block> result = new ArrayList<>();

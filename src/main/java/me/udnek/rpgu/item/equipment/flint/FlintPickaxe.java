@@ -21,7 +21,7 @@ public class FlintPickaxe extends FlintTool {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flint Pickaxe", "Кремневая кирка");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "FCF",

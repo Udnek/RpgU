@@ -33,11 +33,7 @@ public class RecipeManaging {
         new ShapedRecipeBuilder(Material.COMPASS).recipeShape(new String[]{" C ", "CMC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT))
                 .customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.BUCKET).recipeShape(new String[]{"C C", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CROSSBOW).recipeShape(new String[]{"SCS", "GTG", " S "}).materialIngredients(Map.of('S', Material.STICK, 'C',
-                Material.COPPER_INGOT, 'G', Material.STRING, 'T', Material.TRIPWIRE_HOOK)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.SHEARS).recipeShape(new String[]{" C", "C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.SHIELD).recipeShape(new String[]{"CPC", "CPC", "CPC"}).materialIngredients(Map.of('C', Material.COPPER_INGOT))
-                .tagIngredients(Map.of('P', Tag.PLANKS)).build(RpgU.getInstance());
         new ShapedRecipeBuilder(Material.CLOCK).recipeShape(new String[]{" C ", "CRC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT,
                 'R', Material.REDSTONE)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////////////////////////////////////////////

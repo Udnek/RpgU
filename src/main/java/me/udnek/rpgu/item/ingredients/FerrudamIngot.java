@@ -20,7 +20,7 @@ public class FerrudamIngot extends ConstructableCustomItem {
     @Override
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ferrudam Ingot", "Ферродамовый слиток");}
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
         CustomSingleRecipeChoice ironIngot = new CustomSingleRecipeChoice(Material.IRON_INGOT);
         alloys.add(ironIngot);

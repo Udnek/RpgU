@@ -86,7 +86,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
         if (CustomItem.isCustom(item)) return false;
         return item.getType() == Material.LAPIS_LAZULI;
     }
-    public @NotNull List<@NotNull ItemStack> getPassionItems(){
+    public @NotNull List<ItemStack> getPassionItems(){
         List<ItemStack> passionItems = new ArrayList<>();
         for (int slot : PASSION_SLOTS) {
             ItemStack itemStack = getInventory().getItem(slot);

@@ -40,7 +40,7 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Phantom Bow", "Фантомный лук");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 " WS",

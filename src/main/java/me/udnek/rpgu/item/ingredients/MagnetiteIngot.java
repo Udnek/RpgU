@@ -29,7 +29,7 @@ public class MagnetiteIngot extends ConstructableCustomItem {
     }
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         RecipeChoice.ExactChoice rawMagnetite = new RecipeChoice.ExactChoice(Items.RAW_MAGNETITE.getItem());
 
         FurnaceRecipe recipe = new FurnaceRecipe(

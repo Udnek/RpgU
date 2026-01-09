@@ -62,7 +62,7 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
     }
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         AlloyingRecipe recipe = new AlloyingRecipe(new NamespacedKey(
                 RpgU.getInstance(),
                 getRawId()),

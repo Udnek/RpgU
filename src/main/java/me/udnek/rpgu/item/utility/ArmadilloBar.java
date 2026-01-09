@@ -53,7 +53,7 @@ public class ArmadilloBar extends ConstructableCustomItem {
     public @Nullable DataSupplier<Integer> getMaxStackSize() {return DataSupplier.of(1);}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 " AA",

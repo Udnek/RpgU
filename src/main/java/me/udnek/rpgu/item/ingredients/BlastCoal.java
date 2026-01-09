@@ -19,7 +19,7 @@ public class BlastCoal extends ConstructableCustomItem {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Blast Coal", "Металлургический уголь");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapelessRecipe recipe = new ShapelessRecipe(getNewRecipeKey(), getItem().add(2));
 
         RecipeChoice.MaterialChoice coal = new RecipeChoice.MaterialChoice(Tag.ITEMS_COALS);

@@ -66,7 +66,7 @@ public class NaturesCompass extends ConstructableCustomItem {
     }
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
         recipe.shape(
                 "LML",
@@ -154,7 +154,7 @@ public class NaturesCompass extends ConstructableCustomItem {
         }
 
         @Override
-        public void getEngAndRuProperties(TriConsumer<@NotNull String, @NotNull String, @NotNull List<Component>> Eng_Ru_Args) {
+        public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
             super.getEngAndRuProperties(Eng_Ru_Args);
             Eng_Ru_Args.accept("Search Radius: %s blocks", "Радиус поиска: % блоков", List.of(Component.text(SEARCH_RADIUS)));
         }

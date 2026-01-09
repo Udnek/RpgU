@@ -18,7 +18,7 @@ public class IngotMold extends ConstructableCustomItem {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ingot Mold", "Литейная форма");}
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<@NotNull Recipe> consumer) {
+    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
         recipe.shape(
                 "C C",
