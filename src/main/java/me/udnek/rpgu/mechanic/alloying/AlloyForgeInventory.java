@@ -1,6 +1,5 @@
 package me.udnek.rpgu.mechanic.alloying;
 
-import com.destroystokyo.paper.event.block.BlockDestroyEvent;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.inventory.ConstructableCustomInventory;
 import me.udnek.coreu.custom.inventory.SmartIntractableCustomInventory;
@@ -15,12 +14,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
-import org.bukkit.block.BlastFurnace;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.type.Furnace;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockExpEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

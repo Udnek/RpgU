@@ -32,7 +32,6 @@ import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
-import net.kyori.adventure.text.BlockNBTComponent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 

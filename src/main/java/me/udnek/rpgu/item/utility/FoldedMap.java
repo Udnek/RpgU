@@ -1,12 +1,11 @@
 package me.udnek.rpgu.item.utility;
 
+import io.papermc.paper.datacomponent.item.CustomModelData;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
-import io.papermc.paper.registry.keys.StructureKeys;
-import io.papermc.paper.registry.keys.StructureTypeKeys;
-import io.papermc.paper.registry.keys.tags.StructureTagKeys;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
+import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -17,19 +16,19 @@ import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
+import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.component.ability.Abilities;
 import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.util.TriConsumer;
-import org.bukkit.Bukkit;
-import org.bukkit.Tag;
+import org.bukkit.Color;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.generator.structure.Structure;
-import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCursor;
 import org.jetbrains.annotations.NotNull;
@@ -41,12 +40,33 @@ import java.util.Set;
 
 public class FoldedMap extends ConstructableCustomItem {
 
-    @NotNull
     protected final Key structure;
+    protected final Color color;
+    protected final String ruTranslations;
+    protected final String engTranslations;
 
-    public FoldedMap(@NotNull Structure structure) {
-        this.structure = RegistryAccess.registryAccess()
-                .getRegistry(RegistryKey.STRUCTURE).getKeyOrThrow(structure);
+    public FoldedMap(@NotNull Structure structure, @NotNull Color color, @NotNull String engTranslations, @NotNull String ruTranslations) {
+        this.color = color;
+        this.structure = RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE).getKeyOrThrow(structure);
+        this.ruTranslations = ruTranslations;
+        this.engTranslations = engTranslations;
+    }
+
+    @Nullable
+    @Override
+    public DataSupplier<CustomModelData> getCustomModelData() {
+        return DataSupplier.of(CustomModelData.customModelData().addColor(color).build());
+    }
+
+    @Nullable
+    @Override
+    public DataSupplier<Key> getItemModel() {
+        return DataSupplier.of(new  NamespacedKey(RpgU.getInstance(), "folded_map"));
+    }
+
+    @Override
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu(engTranslations, ruTranslations);
     }
 
     @Override
