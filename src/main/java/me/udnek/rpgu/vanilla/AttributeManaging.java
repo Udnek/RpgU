@@ -326,6 +326,7 @@ public class AttributeManaging extends SelfRegisteringListener {
     }
 
     public static void applyDefaultArmorAttribute(@NotNull ItemStack target, @NotNull Material source, boolean addArmor, boolean addAttackDamage) {
+        target.unsetData(DataComponentTypes.ATTRIBUTE_MODIFIERS);
         EquipmentSlotGroup slot = source.getEquipmentSlot().getGroup();
         AttributeUtils.appendAttribute(target, Attribute.MAX_HEALTH, new NamespacedKey(RpgU.getInstance(), "max_health_" + slot),
                 armorStats.get(source).hp, AttributeModifier.Operation.ADD_NUMBER, slot);
