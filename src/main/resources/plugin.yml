@@ -1,5 +1,5 @@
 name: RpgU
-version: '${project.version}'
+version: '1.0-SNAPSHOT'
 main: me.udnek.rpgu.RpgU
 api-version: '1.21.11'
 depend: [CoreU, JeiU]

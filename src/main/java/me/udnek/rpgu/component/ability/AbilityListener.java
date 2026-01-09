@@ -8,7 +8,6 @@ import io.papermc.paper.event.player.PlayerShieldDisableEvent;
 import me.udnek.coreu.custom.component.CustomComponent;
 import me.udnek.coreu.custom.component.CustomComponentType;
 import me.udnek.coreu.custom.equipment.PlayerEquipmentManager;
-import me.udnek.coreu.custom.equipment.universal.BaseUniversalSlot;
 import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
@@ -29,31 +28,30 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.BiConsumer;
 
 public class AbilityListener extends SelfRegisteringListener implements Listener {
     public AbilityListener(@NotNull Plugin plugin) {
         super(plugin);
     }
 
-    private <T extends CustomComponent<CustomItem>> void joinConsumer(@NotNull CustomComponentType<CustomItem, T> type, @NotNull LivingEntity livingEntity,
-                                                                      @NotNull TriConsumer<T, CustomItem, UniversalInventorySlot> cons) {
+    private <T extends CustomComponent<CustomItem>> void getEquipmentComponentsByType(@NotNull CustomComponentType<CustomItem, T> type,
+                                                                                      @NotNull LivingEntity livingEntity,
+                                                                                      @NotNull TriConsumer<T, CustomItem, UniversalInventorySlot> cons) {
         if (livingEntity instanceof Player player) {
             PlayerEquipmentManager.getInstance().getData(player).getEquipment(
                     (slot, customItem) ->
                             cons.accept(customItem.getComponents().getOrDefault(type), customItem, slot)
                     );
         } else {
-            BiConsumer<BaseUniversalSlot, ItemStack> consumer = (slot, itemStack) ->
-                    CustomItem.consumeIfCustom(itemStack, customItem ->
-                            cons.accept(customItem.getComponents().getOrDefault(type), customItem, slot));
-
-            UniversalInventorySlot.iterateThroughNotEmpty(consumer, livingEntity);
+            UniversalInventorySlot.iterateThroughNotEmpty(
+                    (slot, itemStack) -> {
+                        CustomItem.consumeIfCustom(itemStack, customItem ->
+                                cons.accept(customItem.getComponents().getOrDefault(type), customItem, slot));
+            }, livingEntity);
         }
     }
 
@@ -103,7 +101,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
     @EventHandler
     public void onEntityShootBowEvent(EntityShootBowEvent event) {
         LivingEntity entity = event.getEntity();
-        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
                     for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
                         trigger.onShootBow(customItem, slot, event);
@@ -132,7 +130,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
     @EventHandler
     public void onPlayerReadyArrow(PlayerReadyArrowEvent event) {
         Player player = event.getPlayer();
-        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, player,
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, player,
                 (passiveItem, customItem, slot) -> {
                     passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT).onChooseArrow(customItem, slot, event);
                 });
@@ -141,7 +139,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
     @EventHandler
     public void onEntityLoadCrossbowEvent(EntityLoadCrossbowEvent event) {
         LivingEntity entity = event.getEntity();
-        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
                     passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT).onLoadToCrossbow(customItem, slot, event);
                 });
@@ -150,7 +148,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
     @EventHandler
     public void playerDeath(PlayerDeathEvent event){
         Player entity = event.getEntity();
-        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
                     for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
                         trigger.onDeath(customItem, slot, event);
@@ -162,7 +160,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
     public void entityResurrect(EntityResurrectEvent event){
         AtomicBoolean activatedBefore = new AtomicBoolean(false);
         LivingEntity entity = event.getEntity();
-        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passive, customItem,  slot) -> {
                     if (activatedBefore.get()) return;
                     passive.getComponents().getOrDefault(VanillaAbilities.DEATH_PROTECTION).onResurrect(customItem, slot, activatedBefore.get(), event);
@@ -176,7 +174,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         DamageInstance damageInstance = event.getDamageInstance();
 
         if (damageInstance.getDamager() instanceof LivingEntity damager){
-            joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, damager,
+            getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, damager,
                     (passive, customItem, slot) -> {
                         for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
                             trigger.onDamageDealt(customItem, slot, event);
@@ -185,7 +183,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         }
 
          if (damageInstance.getVictim() instanceof LivingEntity victim) {
-             joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, victim,
+             getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, victim,
                      (passive, customItem, slot) -> {
                          for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
                              trigger.onDamageReceived(customItem, slot, event);
@@ -197,7 +195,7 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent event){
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
-        joinConsumer(RPGUComponents.PASSIVE_ABILITY_ITEM, livingEntity,
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, livingEntity,
                 (passive, customItem, slot) -> {
                     for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
                         trigger.onToggleGlide(customItem, slot, event);
