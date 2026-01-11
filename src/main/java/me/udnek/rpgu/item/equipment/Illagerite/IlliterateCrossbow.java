@@ -17,7 +17,7 @@ public class IlliterateCrossbow extends ConstructableCustomItem {
     @Override
     public @NotNull String getRawId() {return "illagerite_crossbow";}
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Iillagerite Crossbow", "Злодейский арбалет");}
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Iillagerite Crossbow", "Злодеянитовый арбалет");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
