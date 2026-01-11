@@ -13,6 +13,7 @@ import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.RPGUComponents;
 import me.udnek.coreu.util.SelfRegisteringListener;
+import me.udnek.rpgu.item.equipment.quiver.QuiverShootAbility;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.logging.log4j.util.TriConsumer;
@@ -132,7 +133,9 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         Player player = event.getPlayer();
         getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, player,
                 (passiveItem, customItem, slot) -> {
-                    passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT).onChooseArrow(customItem, slot, event);
+                    QuiverShootAbility quiverShootAbility = passiveItem.getComponents().get(Abilities.QUIVER_SHOOT);
+                    if (quiverShootAbility == null) return;
+                    quiverShootAbility.onChooseArrow(customItem, slot, event);
                 });
     }
 
@@ -141,7 +144,9 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         LivingEntity entity = event.getEntity();
         getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
-                    passiveItem.getComponents().getOrDefault(Abilities.QUIVER_SHOOT).onLoadToCrossbow(customItem, slot, event);
+                    QuiverShootAbility quiverShootAbility = passiveItem.getComponents().get(Abilities.QUIVER_SHOOT);
+                    if (quiverShootAbility == null) return;
+                    quiverShootAbility.onLoadToCrossbow(customItem, slot, event);
                 });
     }
 
@@ -163,7 +168,9 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passive, customItem,  slot) -> {
                     if (activatedBefore.get()) return;
-                    passive.getComponents().getOrDefault(VanillaAbilities.DEATH_PROTECTION).onResurrect(customItem, slot, activatedBefore.get(), event);
+                    for (var trigger : passive.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        trigger.onResurrect(customItem, slot, activatedBefore.get(), event);
+                    }
                     if (!(event.isCancelled())) activatedBefore.set(true);
                 });
         if (!activatedBefore.get()) event.setCancelled(true);

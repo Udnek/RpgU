@@ -13,6 +13,7 @@ import me.udnek.coreu.rpgu.component.RPGUPassiveItem;
 import me.udnek.coreu.rpgu.component.ability.passive.RPGUConstructablePassiveAbility;
 import me.udnek.coreu.rpgu.component.ability.property.AttributeBasedProperty;
 import me.udnek.coreu.rpgu.component.ability.property.EffectsProperty;
+import me.udnek.rpgu.component.ability.RPGUPassiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.VanillaAbilities;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.LivingEntity;
@@ -24,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<EntityResurrectEvent> {
+public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<EntityResurrectEvent> implements RPGUPassiveTriggerableAbility<EntityResurrectEvent> {
 
     public static final DeathProtectionPassive DEFAULT = new DeathProtectionPassive(DeathProtection.deathProtection().build());
 
@@ -52,6 +53,7 @@ public class DeathProtectionPassive extends RPGUConstructablePassiveAbility<Enti
         return ActionResult.FULL_COOLDOWN;
     }
 
+    @Override
     public void onResurrect(@NotNull CustomItem customItem, @NotNull UniversalInventorySlot slot, boolean activatedBefore,
                             @NotNull EntityResurrectEvent event) {
         if (!activatedBefore) activate(customItem, event.getEntity(), true, slot, event);

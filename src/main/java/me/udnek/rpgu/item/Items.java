@@ -10,6 +10,8 @@ import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
 import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
+import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
+import me.udnek.rpgu.item.equipment.Illagerite.IlliterateCrossbow;
 import me.udnek.rpgu.item.equipment.doloire.AmethystDoloire;
 import me.udnek.rpgu.item.equipment.doloire.HeavyAmethystDoloire;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
@@ -95,6 +97,9 @@ public class Items {
 
     public static final CustomItem QUIVER = register(new Quiver());
 
+    public static final CustomItem ILLAGERITE_AXE = register(new IllageriteAxe());
+    public static final CustomItem ILLAGERITE_CROSSBOW = register(new IlliterateCrossbow());
+
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
     public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
@@ -106,6 +111,7 @@ public class Items {
     public static final CustomItem ESOTERIC_SALVE = register(new EsotericSalve());
     public static final CustomItem WOLF_PELT = register(new WolfPelt());
     public static final CustomItem WEAK_MAGIC_CORE = register(new WeakMagicCore());
+    public static final CustomItem ILLAGERITE = register(new Illagerite());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
