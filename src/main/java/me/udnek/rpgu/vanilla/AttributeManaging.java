@@ -141,7 +141,9 @@ public class AttributeManaging extends SelfRegisteringListener {
             for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
             /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
             for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            for (Material item : Tag.ITEMS_AXES.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
+            for (Material item : Tag.ITEMS_AXES.getValues()) {
+                if (!VanillaItemManager.isDisabled(item)) VanillaItemManager.getInstance().replaceVanillaMaterial(item);
+            }
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.MACE);
