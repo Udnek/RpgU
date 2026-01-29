@@ -12,7 +12,7 @@ import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import me.udnek.rpgu.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -136,18 +136,6 @@ public class RecipeManaging {
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_chestplate"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_leggings"));
         RecipeManager.getInstance().unregister(NamespacedKey.minecraft("diamond_boots"));
-
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SWORD);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_PICKAXE);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
-
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.TURTLE_HELMET);
-
-        VanillaItemManager.getInstance().disableVanillaMaterial(Material.WOLF_ARMOR);
-
-        Nms.get().removeAllEntriesContains(LootTables.RUINED_PORTAL.getLootTable(), itemStack -> ItemUtils.isVanillaMaterial(itemStack,Material.CLOCK));
     }
 
     public static class AlloyingRecipeBuilder{

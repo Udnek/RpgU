@@ -10,6 +10,7 @@ public class Blocks {
 
     public static final CustomBlockType SOUL_BINDER = register(new SoulBinderBlock());
     public static final CustomBlockEntityType ALLOY_FORGE = register(new AlloyForgeBlockType());
+    public static final CustomBlockEntityType MACERATOR = register(new MaceratorBlockType());
 
     private static @NotNull <T extends CustomBlockType> T register(@NotNull T type){
         return CustomRegistries.BLOCK_TYPE.register(RpgU.getInstance(), type);

@@ -137,12 +137,12 @@ public class AttributeManaging extends SelfRegisteringListener {
     @EventHandler
     public void onInit(InitializationEvent event){
         if (event.getStep() == InitializationProcess.Step.GLOBAL_INITIALIZATION){
-            for (Material item : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            for (Material item : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            /*for (Material item : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}*/
-            for (Material item : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(item);}
-            for (Material item : Tag.ITEMS_AXES.getValues()) {
-                if (!VanillaItemManager.isDisabled(item)) VanillaItemManager.getInstance().replaceVanillaMaterial(item);
+            for (Material material : armorStats.keySet()) {VanillaItemManager.getInstance().replaceVanillaMaterial(material);}
+            for (Material material : diamondTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(material);}
+            /*for (Material material : Tag.ITEMS_SWORDS.getValues()) {VanillaItemManager.getInstance().replaceVanillaMaterial(material);}*/
+            for (Material material : netheriteTools) {VanillaItemManager.getInstance().replaceVanillaMaterial(material);}
+            for (Material material : Tag.ITEMS_AXES.getValues()) {
+                if (!VanillaItemManager.isDisabled(material)) VanillaItemManager.getInstance().replaceVanillaMaterial(material);
             }
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.SPYGLASS);
             VanillaItemManager.getInstance().replaceVanillaMaterial(Material.BOW);
@@ -254,7 +254,9 @@ public class AttributeManaging extends SelfRegisteringListener {
         }
 
         if (Tag.ITEMS_AXES.isTagged(material)) {
-            customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new ShieldCrashingAbility());
+            if (!VanillaItemManager.isDisabled(itemStack)){
+                customItem.getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new ShieldCrashingAbility());
+            }
         }
 
         if (material ==  Material.MACE) {

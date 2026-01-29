@@ -4,7 +4,7 @@ import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;

@@ -8,6 +8,7 @@ import me.udnek.rpgu.item.artifact.sphere.SphereOfBalance;
 import me.udnek.rpgu.item.artifact.sphere.SphereOfDiscord;
 import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
+import me.udnek.rpgu.item.block.MaceratorItem;
 import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
@@ -136,6 +137,7 @@ public class Items {
 
     // BLOCKS
     public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
+    public static final CustomItem MACERATOR = register(new MaceratorItem());
 
 
     private static @NotNull CustomItem register(@NotNull CustomItem customItem){

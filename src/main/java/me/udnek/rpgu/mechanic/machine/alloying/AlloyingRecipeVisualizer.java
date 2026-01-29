@@ -1,4 +1,4 @@
-package me.udnek.rpgu.mechanic.alloying;
+package me.udnek.rpgu.mechanic.machine.alloying;
 
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;

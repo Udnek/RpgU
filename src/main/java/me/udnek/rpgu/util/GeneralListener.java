@@ -6,7 +6,9 @@ import me.udnek.coreu.custom.event.InitializationEvent;
 import me.udnek.coreu.custom.event.ResourcepackInitializationEvent;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.item.ItemUtils;
+import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.registry.InitializationProcess;
+import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.resourcepack.path.VirtualRpJsonFile;
 import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
@@ -29,6 +31,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
+import org.bukkit.loot.LootTables;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +80,8 @@ public class GeneralListener extends SelfRegisteringListener {
                 	"model": {
                 		"type": "minecraft:model",
                 		"model": "rpgu:item/gui/alloying/progress/%lvl%"
-                	}
+                	},
+                    "oversized_in_gui": true
                 }""";
         for (int i = 0; i <= 29; i++) {
             event.addFile(new VirtualRpJsonFile(
@@ -147,9 +151,24 @@ public class GeneralListener extends SelfRegisteringListener {
 
 
     @EventHandler
-    public void recipeInitialization(InitializationEvent event){
+    public void initialization(InitializationEvent event){
+        if (event.getStep() == InitializationProcess.Step.BEFORE_REGISTRIES_LOADED) unregisterMaterials();
         if (event.getStep() != InitializationProcess.Step.AFTER_GLOBAL_INITIALIZATION) return;
         RecipeManaging.run();
         EnchantManaging.run();
+    }
+
+    private void unregisterMaterials(){
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SWORD);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_PICKAXE);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_AXE);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_SHOVEL);
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.STONE_HOE);
+
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.TURTLE_HELMET);
+
+        VanillaItemManager.getInstance().disableVanillaMaterial(Material.WOLF_ARMOR);
+
+        Nms.get().removeAllEntriesContains(LootTables.RUINED_PORTAL.getLootTable(), itemStack -> ItemUtils.isVanillaMaterial(itemStack,Material.CLOCK));
     }
 }

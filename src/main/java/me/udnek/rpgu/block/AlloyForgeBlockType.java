@@ -7,7 +7,7 @@ import me.udnek.coreu.custom.entitylike.block.CustomBlockEntityType;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
 import me.udnek.coreu.custom.entitylike.block.constructabletype.DisplayBasedConstructableBlockType;
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.rpgu.mechanic.alloying.AlloyForgeInventory;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyForgeInventory;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.inventory.HopperInventorySearchEvent;
@@ -15,6 +15,8 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class AlloyForgeBlockType extends DisplayBasedConstructableBlockType implements CustomBlockEntityType {
     @Override
@@ -30,44 +32,27 @@ public class AlloyForgeBlockType extends DisplayBasedConstructableBlockType impl
             public void onRightClick(@NotNull CustomBlockType customBlockType, @NotNull PlayerInteractEvent event) {
                 if (event.getPlayer().isSneaking()) return;
                 assert event.getClickedBlock() != null;
-                CustomBlockEntity ticking = CustomBlockType.getTicking(event.getClickedBlock());
-                if (ticking instanceof AlloyForgeBlockEntity alloyForgeBlock){
-                    alloyForgeBlock.machine.openInventory(event.getPlayer());
-                }
-
+                ((AlloyForgeBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(event.getClickedBlock()))).machine.openInventory(event.getPlayer());
             }
         });
         getComponents().set(new HopperInteractingBlock() {
             @Override
             public void onHopperSearch(@NotNull CustomBlockType customBlockType, @NotNull HopperInventorySearchEvent event) {
-                CustomBlockEntity ticking = CustomBlockType.getTicking(event.getBlock());
-                if (ticking instanceof AlloyForgeBlockEntity alloyForgeBlock){
-                    alloyForgeBlock.machine.onHopperSearch(event);
-                }
+                ((AlloyForgeBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(event.getSearchBlock()))).machine.onHopperSearch(event);
             }
 
             @Override
-            public void onItemMoveInto(@NotNull CustomBlockType customBlockType, @NotNull InventoryMoveItemEvent event) {
-                if (event.getDestination() instanceof AlloyForgeInventory alloyForgeInventory){
-                    alloyForgeInventory.onHopperGivesItem(event);
-                }
-            }
+            public void onItemMoveInto(@NotNull CustomBlockType customBlockType, @NotNull InventoryMoveItemEvent event) {}
 
             @Override
-            public void onItemMoveFrom(@NotNull CustomBlockType customBlockType, @NotNull InventoryMoveItemEvent event) {
-                if (event.getDestination() instanceof AlloyForgeInventory alloyForgeInventory){
-                    alloyForgeInventory.onHopperTakesItem(event);
-                }
-            }
+            public void onItemMoveFrom(@NotNull CustomBlockType customBlockType, @NotNull InventoryMoveItemEvent event) {}
         });
     }
 
     @Override
     public void onGenericDestroy(@NotNull Block block) {
         super.onGenericDestroy(block);
-        if (CustomBlockType.getTicking(block) instanceof AlloyForgeBlockEntity alloyForgeBlock){
-            alloyForgeBlock.machine.destroy();
-        }
+        ((AlloyForgeBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(block))).machine.destroy();
     }
 
     @Override
