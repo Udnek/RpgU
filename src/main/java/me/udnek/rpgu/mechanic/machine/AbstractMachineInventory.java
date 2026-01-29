@@ -302,8 +302,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
 
 
 
-    @Override
-    public int getInventorySize() {return 9*5;}
+
 
     public interface SlotOrItemConsumer extends Consumer<Integer>{
         @Override

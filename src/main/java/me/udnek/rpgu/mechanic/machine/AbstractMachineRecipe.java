@@ -4,7 +4,6 @@ import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipe;
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
-import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

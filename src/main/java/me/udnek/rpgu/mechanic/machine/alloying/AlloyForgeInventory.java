@@ -5,14 +5,14 @@ import me.udnek.coreu.custom.recipe.RecipeManager;
 import me.udnek.coreu.util.ComponentU;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.block.AlloyForgeBlockEntity;
-import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.machine.AbstractMachineInventory;
 import me.udnek.rpgu.mechanic.machine.RecipeTypes;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.jetbrains.annotations.NotNull;
@@ -80,7 +80,7 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
 
     @Override
     public void updateProgressAnimation(){
-        ItemStack icon = Items.TECHNICAL_INVENTORY_FILLER.getItem();
+        ItemStack icon = FILLER.getItem();
         icon.editMeta(ColorableArmorMeta.class, itemMeta -> itemMeta.setColor(Color.fromRGB(COLOR.value())));
 
         String model = "gui/alloying/progress/";
@@ -121,6 +121,9 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
             currentAddition = addition;
         }
     }
+
+    @Override
+    public int getInventorySize() {return 9*6;}
 
     @Override
     public @Nullable Component getTitle() {

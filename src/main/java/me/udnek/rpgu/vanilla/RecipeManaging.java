@@ -1,15 +1,12 @@
 package me.udnek.rpgu.vanilla;
 
 import me.udnek.coreu.custom.item.CustomItem;
-import me.udnek.coreu.custom.item.ItemUtils;
-import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.recipe.RecipeManager;
 import me.udnek.coreu.custom.recipe.builder.ShapedRecipeBuilder;
 import me.udnek.coreu.custom.recipe.builder.ShapelessRecipeBuilder;
 import me.udnek.coreu.custom.recipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
-import me.udnek.coreu.nms.Nms;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
@@ -18,7 +15,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.loot.LootTables;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 

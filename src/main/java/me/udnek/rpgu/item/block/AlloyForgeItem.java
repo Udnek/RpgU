@@ -4,21 +4,15 @@ import me.udnek.coreu.custom.component.instance.BlockPlacingItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.block.Blocks;
-import me.udnek.rpgu.item.Items;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class MaceratorItem extends ConstructableCustomItem {
+public class AlloyForgeItem extends ConstructableCustomItem {
 
     @Override
     public @NotNull Material getMaterial() {
@@ -28,12 +22,12 @@ public class MaceratorItem extends ConstructableCustomItem {
 
     @Override
     public @NotNull String getRawId() {
-        return "macerator";
+        return "alloy_forge";
     }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {
-        return TranslatableThing.ofEngAndRu("Macerator", "Дробитель");
+        return TranslatableThing.ofEngAndRu("", "");//TODO
     }
 
     @Override

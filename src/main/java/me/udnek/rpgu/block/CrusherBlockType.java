@@ -22,31 +22,30 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class AlloyForgeBlockType extends RotatableCustomBlockType implements CustomBlockEntityType {
-
+public class CrusherBlockType extends RotatableCustomBlockType implements CustomBlockEntityType {
     @Override
     public @NotNull String getRawId() {
-        return "alloy_forge";
+        return "crusher";
     }
 
     @Override
     public @NotNull CustomBlockEntity createNewClass() {
-        return new AlloyForgeBlockEntity();
+        return new CrusherBlockEntity();
     }
 
     @Override
     public @Nullable CustomItem getItem() {
-        return Items.ALLOY_FORGE;
+        return Items.CRUSHER;
     }
 
     @Override
     public @Nullable Either<LootTable, List<ItemStack>> getLoot() {
-        return new Either<>(null, List.of(Items.ALLOY_FORGE.getItem()));
+        return new Either<>(null, List.of(Items.CRUSHER.getItem()));
     }
 
     @Override
     public @NotNull Material getBreakSpeedBaseBlock() {
-        return Material.BLAST_FURNACE;
+        return null;
     }
 
     @Override

@@ -1,0 +1,7 @@
+{
+	"parent": "rpgu:item/crusher",
+	"textures": {
+		"0": "rpgu:item/crusher/working",
+		"particle": "rpgu:item/crusher/working"
+	}
+}

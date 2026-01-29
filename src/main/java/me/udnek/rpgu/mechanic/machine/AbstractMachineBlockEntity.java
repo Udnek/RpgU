@@ -9,7 +9,9 @@ public abstract class AbstractMachineBlockEntity extends ConstructableCustomBloc
 
     public @NotNull AbstractMachine machine;
 
-
+    protected AbstractMachineBlockEntity() {
+        this.machine = null;
+    }
 
     @Override
     public void delayedTick() {

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "rpgu:item/macerator_top",
-    "bottom": "rpgu:item/macerator_bottom",
-    "side": "rpgu:item/macerator_side"
-  }
-}
