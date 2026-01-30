@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AlloyingRecipeVisualizer extends AbstractRecipeVisualizer {
-    public static final int OFFSET = RecipesMenu.VISUALIZER_X_OFFSET;
+    public static final int OFFSET = RecipesMenu.VISUALIZER_X_OFFSET + 1;
 
     protected @NotNull AlloyingRecipe recipe;
     public AlloyingRecipeVisualizer(@NotNull AlloyingRecipe recipe){
@@ -29,10 +29,11 @@ public class AlloyingRecipeVisualizer extends AbstractRecipeVisualizer {
             setChoice(AlloyForgeInventory.STUFF_SLOTS[index] + OFFSET, stuffs.get(index));
         }
 
-        /*List<CustomSingleRecipeChoice> alloys = recipe.getAlloys();
+        List<CustomSingleRecipeChoice> alloys = recipe.getAlloys();
         for (int index = 0; index < alloys.size(); index++) {
-            setChoice(AlloyForgeInventory.INPUT_SLOTS[index] + OFFSET, inputs.get(index));
-        }*/// TODO
+            setChoice(AlloyForgeInventory.ALLOYS_SLOTS[index] + OFFSET, alloys.get(index));
+        }
+
         setChoice(AlloyForgeInventory.FUEL_SLOT + OFFSET, recipe.getFuel());
         setChoice(AlloyForgeInventory.ADDITION_SLOT + OFFSET, recipe.getAddition());
         menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET-1, recipe.getResult());

@@ -42,6 +42,7 @@ public class FerrudamHelmet extends FerrudamArmor {
                 getNewRecipeKey(),
                 List.of(ingot, ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                List.of(),
                 new CustomSingleRecipeChoice(Material.IRON_HELMET),
                 getItem()
         );

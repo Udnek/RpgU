@@ -32,6 +32,7 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
     public static final NamespacedKey SERIALIZE_RECIPE_KEY = new NamespacedKey(RpgU.getInstance(), "alloy_forge_recipe");
     public static final int[] STUFF_SLOTS = IntStream.concat(IntStream.range(3, 7), IntStream.range(12, 16)).toArray();
     public static final int FUEL_SLOT = 46;
+    public static final int[] ALLOYS_SLOTS = new int[]{ 0, 1, 9, 10, 18, 19, 27, 28 };
     public static final int ADDITION_SLOT = 39;
     public static final int RESULT_SLOT = 42;
     public static final int PROGRESS_SLOT = 9*2-1;
@@ -54,6 +55,11 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
             ItemStack item = getInventory().getItem(stuffSlot);
             if (item != null) stuffs.add(item);
         }
+        List<ItemStack> alloys = new ArrayList<>();
+        for (int alloySlot : ALLOYS_SLOTS) {
+            ItemStack item = getInventory().getItem(alloySlot);
+            if (item != null) alloys.add(item);
+        }
         ItemStack fuel = getInventory().getItem(fuelSlot);
         if (fuel == null) return;
         ItemStack addition = getInventory().getItem(ADDITION_SLOT);
@@ -62,7 +68,7 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
         if (currentRecipe != null) return;
         List<AlloyingRecipe> recipes = RecipeManager.getInstance().getByType(RecipeTypes.ALLOYING);
         for (AlloyingRecipe recipe : recipes) {
-            boolean matches = recipe.test(stuffs, stuffs, fuel, addition);
+            boolean matches = recipe.test(stuffs, alloys, fuel, addition);
             if (!matches) continue;
             if (!canPlaceIntoResult(recipe.getResult())) return;
             onFoundRecipe(recipe);
@@ -73,6 +79,9 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
     @Override
     public void iterateTroughAllInputSlots(@NonNull Consumer<Integer> consumer) {
         super.iterateTroughAllInputSlots(consumer);
+        for (int alloysSlot : ALLOYS_SLOTS) {
+            consumer.accept(alloysSlot);
+        }
         consumer.accept(ADDITION_SLOT);
     }
 

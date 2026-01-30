@@ -54,27 +54,27 @@ public class RecipeManaging {
         new ShapedRecipeBuilder(Material.BLAST_FURNACE).recipeShape(new String[]{"SSS", "FFA", "BBB"}).materialIngredients(Map.of('F', Material.FURNACE,
                 'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////
-        new AlloyingRecipeBuilder(Material.NETHERITE_INGOT).addMaterialAlloy(Material.NETHERITE_SCRAP, 3).addCustomItemAlloy(Items.MAGNETITE_INGOT, 3)
+        new AlloyingRecipeBuilder(Material.NETHERITE_INGOT).addStuffs(Material.NETHERITE_SCRAP, 3).addStuffs(Items.MAGNETITE_INGOT, 3)
                 .customItemFuel(Set.of(Items.BLAST_COAL)).customItemAddition(Set.of(Items.INGOT_MOLD)).build(RpgU.getInstance());
         ///////////////////////////////////////////////////
-        new AlloyingRecipeBuilder(Material.NETHERITE_HELMET).recipeKey("netherite_helmet_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_HELMET).recipeKey("netherite_helmet_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_HELMET)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_CHESTPLATE).recipeKey("netherite_chestplate_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_CHESTPLATE).recipeKey("netherite_chestplate_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_CHESTPLATE)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_LEGGINGS).recipeKey("netherite_leggings_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_LEGGINGS).recipeKey("netherite_leggings_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_LEGGINGS)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_BOOTS).recipeKey("netherite_boots_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_BOOTS).recipeKey("netherite_boots_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_BOOTS)).build(RpgU.getInstance());
         /////////////////////////////////////////////
-        new AlloyingRecipeBuilder(Material.NETHERITE_HOE).recipeKey("netherite_hoe_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_HOE).recipeKey("netherite_hoe_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_HOE)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_AXE).recipeKey("netherite_axe_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_AXE).recipeKey("netherite_axe_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_AXE)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_PICKAXE).recipeKey("netherite_pickaxe_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_PICKAXE).recipeKey("netherite_pickaxe_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_PICKAXE)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_SHOVEL).recipeKey("netherite_shovel_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_SHOVEL).recipeKey("netherite_shovel_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_SHOVEL)).build(RpgU.getInstance());
-        new AlloyingRecipeBuilder(Material.NETHERITE_SWORD).recipeKey("netherite_sword_smithing").addMaterialAlloy(Material.NETHERITE_INGOT, 1)
+        new AlloyingRecipeBuilder(Material.NETHERITE_SWORD).recipeKey("netherite_sword_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_SWORD)).build(RpgU.getInstance());
         ////////////////////////////////////////////
         new ShapedRecipeBuilder(Material.CHAINMAIL_CHESTPLATE).recipeShape(new String[]{"C C", "CCC", "CCC"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
@@ -138,6 +138,7 @@ public class RecipeManaging {
         private final ItemStack replace;
         private String recipeKey;
         private final List<CustomSingleRecipeChoice> stuff = new ArrayList<>();
+        private final List<CustomSingleRecipeChoice> alloy = new ArrayList<>();
         private Set<CustomItem> customItemFuel = new HashSet<>();
         private Set<Material> materialFuel = new HashSet<>();
         private Set<CustomItem> customItemAddition = new HashSet<>();
@@ -163,12 +164,22 @@ public class RecipeManaging {
             return this;
         }
 
-        public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem customItemAlloy, int amount){
+        public AlloyingRecipeBuilder addStuffs(@NotNull CustomItem customItemAlloy, int amount){
             for (int i = 0; i < amount; i++){this.stuff.add(new CustomSingleRecipeChoice(customItemAlloy));}
             return this;
         }
 
-        public AlloyingRecipeBuilder addMaterialAlloy(@NotNull Material materialAlloy, int amount){
+        public AlloyingRecipeBuilder addStuffs(@NotNull Material materialAlloy, int amount){
+            for (int i = 0; i < amount; i++){this.stuff.add(new CustomSingleRecipeChoice(materialAlloy));}
+            return this;
+        }
+
+        public AlloyingRecipeBuilder addAlloy(@NotNull CustomItem customItemAlloy, int amount){
+            for (int i = 0; i < amount; i++){this.stuff.add(new CustomSingleRecipeChoice(customItemAlloy));}
+            return this;
+        }
+
+        public AlloyingRecipeBuilder addAlloy(@NotNull Material materialAlloy, int amount){
             for (int i = 0; i < amount; i++){this.stuff.add(new CustomSingleRecipeChoice(materialAlloy));}
             return this;
         }
@@ -194,7 +205,7 @@ public class RecipeManaging {
         public AlloyingRecipeBuilder build(@NotNull Plugin plugin){
             RecipeManager.getInstance().unregister(NamespacedKey.minecraft(recipeKey));
 
-            AlloyingRecipe recipe = new AlloyingRecipe(new NamespacedKey(plugin, recipeKey), stuff, fuel(), addition(), replace);
+            AlloyingRecipe recipe = new AlloyingRecipe(new NamespacedKey(plugin, recipeKey), stuff, fuel(), alloy, addition(), replace);
 
             RecipeManager.getInstance().register(recipe);
 

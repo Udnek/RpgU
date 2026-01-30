@@ -47,6 +47,7 @@ public class FerrudamPickaxe extends FerrudamTool {
                 getNewRecipeKey(),
                 List.of(ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                List.of(),
                 new CustomSingleRecipeChoice(Material.IRON_PICKAXE),
                 getItem()
         );

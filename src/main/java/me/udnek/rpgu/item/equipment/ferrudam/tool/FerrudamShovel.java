@@ -48,6 +48,7 @@ public class FerrudamShovel extends FerrudamTool {
                 getNewRecipeKey(),
                 List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT)),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                List.of(),
                 new CustomSingleRecipeChoice(Material.IRON_SHOVEL),
                 getItem()
         );

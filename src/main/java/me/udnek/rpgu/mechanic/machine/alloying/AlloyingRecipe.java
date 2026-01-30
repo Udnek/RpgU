@@ -20,18 +20,22 @@ public class AlloyingRecipe extends AbstractMachineRecipe {
     protected final CustomRecipeChoice addition;
     protected final boolean keepEnchantments;
 
-    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result, boolean keepEnchantments){
+    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel, @NotNull List<CustomSingleRecipeChoice> alloys,  @NotNull CustomRecipeChoice addition, @NotNull ItemStack result, boolean keepEnchantments){
         super(key, stuffs, fuel, result);
-        Preconditions.checkArgument(this.stuffs.size() <= 6, "Stuffs must be <= 6!");
-        for (CustomRecipeChoice stuffsInput : this.stuffs) {
+        Preconditions.checkArgument(stuffs.size() <= 8, "Stuffs must be <= 6!");
+        for (CustomRecipeChoice stuffsInput : stuffs) {
             Preconditions.checkArgument(stuffsInput != null, "StuffsInput can not be null!");
         }
-        this.alloys = new ArrayList<>(stuffs);//TODO поменять на норм
+        Preconditions.checkArgument(alloys.size() <= 8, "Alloys must be <= 6!");
+        for (CustomRecipeChoice stuffsInput : alloys) {
+            Preconditions.checkArgument(stuffsInput != null, "AlloysInput can not be null!");
+        }
+        this.alloys = new ArrayList<>(alloys);
         this.addition = addition;
         this.keepEnchantments = keepEnchantments;
     }
-    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result){
-        this(key, stuffs, fuel, addition, result, true);
+    public AlloyingRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel, @NotNull List<CustomSingleRecipeChoice> alloys, @NotNull CustomRecipeChoice addition, @NotNull ItemStack result){
+        this(key, stuffs, fuel, alloys, addition, result, true);
     }
 
     public @NotNull List<CustomSingleRecipeChoice> getAlloys() {return new ArrayList<>(alloys);}

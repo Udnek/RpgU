@@ -68,6 +68,7 @@ public class HeavyAmethystDoloire extends AmethystDoloire {
                 getRawId()),
                 List.of(new CustomSingleRecipeChoice(Material.HEAVY_CORE)),
                 new CustomSingleRecipeChoice(Items.BLAST_COAL),
+                List.of(),
                 new CustomSingleRecipeChoice(Items.AMETHYST_DOLOIRE),
                 getItem()
         );

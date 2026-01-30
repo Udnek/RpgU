@@ -34,6 +34,7 @@ public class FerrudamIngot extends ConstructableCustomItem {
                 getNewRecipeKey(),
                 stuffs,
                 new CustomSingleRecipeChoice(Items.BLAST_COAL),
+                List.of(),
                 new CustomSingleRecipeChoice(Items.INGOT_MOLD),
                 getItem()
         );
