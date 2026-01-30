@@ -13,7 +13,9 @@ import me.udnek.rpgu.item.block.CrusherItem;
 import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
-import me.udnek.rpgu.item.equipment.Illagerite.IlliterateCrossbow;
+import me.udnek.rpgu.item.equipment.Illagerite.IllageriteCrossbow;
+import me.udnek.rpgu.item.equipment.Illagerite.IllageriteKey;
+import me.udnek.rpgu.item.equipment.Illagerite.IllageriteUpgrade;
 import me.udnek.rpgu.item.equipment.doloire.AmethystDoloire;
 import me.udnek.rpgu.item.equipment.doloire.HeavyAmethystDoloire;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
@@ -100,7 +102,9 @@ public class Items {
     public static final CustomItem QUIVER = register(new Quiver());
 
     public static final CustomItem ILLAGERITE_AXE = register(new IllageriteAxe());
-    public static final CustomItem ILLAGERITE_CROSSBOW = register(new IlliterateCrossbow());
+    public static final CustomItem ILLAGERITE_CROSSBOW = register(new IllageriteCrossbow());
+    public static final CustomItem ILLAGERITE_KEY = register(new IllageriteKey());
+    public static final CustomItem ILLAGERITE_UPGRADE = register(new IllageriteUpgrade());
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
