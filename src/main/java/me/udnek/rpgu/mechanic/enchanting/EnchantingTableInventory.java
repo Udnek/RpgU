@@ -11,6 +11,7 @@ import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.util.ComponentU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
+import me.udnek.rpgu.mechanic.machine.RecipeTypes;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -118,7 +119,7 @@ public class EnchantingTableInventory extends ConstructableCustomInventory imple
     public void recalculate(){
         clearEnchantedBooks();
         if (!(hasLapis() && hasBook())){return;}
-        List<EnchantingRecipe> recipes = RecipeManager.getInstance().getByType(EnchantingRecipeType.INSTANCE);
+        List<EnchantingRecipe> recipes = RecipeManager.getInstance().getByType(RecipeTypes.ENCHANTING);
         EnchantingRecipe enchantingRecipe = null;
         for (EnchantingRecipe recipe : recipes) {
             if (recipe.test(getPassionItems(), upgrades)) {

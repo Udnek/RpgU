@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "rpgu:item/alloy_forge_lit"
+  },
+  "oversized_in_gui": true,
+  "hand_animation_on_swap": true,
+  "swap_animation_scale": 1
+}

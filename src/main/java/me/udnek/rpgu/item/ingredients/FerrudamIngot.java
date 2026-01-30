@@ -4,7 +4,7 @@ import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
@@ -21,19 +21,20 @@ public class FerrudamIngot extends ConstructableCustomItem {
     public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ferrudam Ingot", "Ферродамовый слиток");}
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
-        List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
+        List<CustomSingleRecipeChoice> stuffs = new ArrayList<>();
         CustomSingleRecipeChoice ironIngot = new CustomSingleRecipeChoice(Material.IRON_INGOT);
-        alloys.add(ironIngot);
-        alloys.add(ironIngot);
-        alloys.add(ironIngot);
+        stuffs.add(ironIngot);
+        stuffs.add(ironIngot);
+        stuffs.add(ironIngot);
         CustomSingleRecipeChoice diamondIngot = new CustomSingleRecipeChoice(Material.DIAMOND);
-        alloys.add(diamondIngot);
-        alloys.add(diamondIngot);
+        stuffs.add(diamondIngot);
+        stuffs.add(diamondIngot);
 
         AlloyingRecipe recipe = new AlloyingRecipe(
                 getNewRecipeKey(),
-                alloys,
+                stuffs,
                 new CustomSingleRecipeChoice(Items.BLAST_COAL),
+                List.of(),
                 new CustomSingleRecipeChoice(Items.INGOT_MOLD),
                 getItem()
         );

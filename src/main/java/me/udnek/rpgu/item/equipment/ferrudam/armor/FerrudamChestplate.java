@@ -5,7 +5,7 @@ import me.udnek.coreu.custom.recipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
@@ -43,6 +43,7 @@ public class FerrudamChestplate extends FerrudamArmor {
                 getNewRecipeKey(),
                 List.of(ingot, ingot, ingot, ingot),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                List.of(),
                 new CustomSingleRecipeChoice(Material.IRON_CHESTPLATE),
                 getItem()
         );

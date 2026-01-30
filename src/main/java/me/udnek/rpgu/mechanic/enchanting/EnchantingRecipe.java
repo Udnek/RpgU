@@ -5,10 +5,10 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemEnchantments;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipe;
+import me.udnek.coreu.custom.recipe.CustomRecipeType;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
-import me.udnek.jeiu.visualizer.Visualizable;
-import me.udnek.jeiu.visualizer.Visualizer;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
+import me.udnek.rpgu.mechanic.machine.RecipeTypes;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType>, Visualizable {
+public class EnchantingRecipe implements CustomRecipe {
 
     protected final @NotNull NamespacedKey key;
     protected final @NotNull Enchantment enchantment;
@@ -104,12 +104,7 @@ public class EnchantingRecipe implements CustomRecipe<EnchantingRecipeType>, Vis
     }
 
     @Override
-    public @NotNull EnchantingRecipeType getType() {
-        return EnchantingRecipeType.INSTANCE;
-    }
-
-    @Override
-    public @NotNull Visualizer getVisualizer() {
-        return new EnchantingRecipeVisualizer(this);
+    public @NotNull CustomRecipeType<?> getType() {
+        return RecipeTypes.ENCHANTING;
     }
 }

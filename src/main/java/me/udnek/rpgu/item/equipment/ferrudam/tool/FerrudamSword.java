@@ -4,7 +4,7 @@ import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.recipe.choice.CustomCompatibleRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.mechanic.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.Recipe;
@@ -49,6 +49,7 @@ public class FerrudamSword extends FerrudamTool {
                 getNewRecipeKey(),
                 List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT)),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
+                List.of(),
                 new CustomSingleRecipeChoice(Material.IRON_SWORD),
                 getItem()
         );

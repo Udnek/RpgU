@@ -1,45 +1,32 @@
 package me.udnek.rpgu.block;
 
-import me.udnek.coreu.custom.entitylike.block.ConstructableCustomBlockEntity;
+import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockEntityType;
-import me.udnek.rpgu.mechanic.alloying.AlloyForgeInventory;
-import me.udnek.rpgu.mechanic.alloying.AlloyForgeMachine;
-import org.bukkit.block.ShulkerBox;
-import org.bukkit.block.TileState;
+import me.udnek.rpgu.RpgU;
+import me.udnek.rpgu.mechanic.machine.AbstractMachineBlockEntity;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyForgeInventory;
+import org.bukkit.NamespacedKey;
+import org.bukkit.entity.ItemDisplay;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class AlloyForgeBlockEntity extends ConstructableCustomBlockEntity<ShulkerBox> {
+import java.util.Objects;
 
-    public @NotNull AlloyForgeMachine machine;
+public class AlloyForgeBlockEntity extends AbstractMachineBlockEntity {
 
     public AlloyForgeBlockEntity() {
         machine = new AlloyForgeInventory(this);
     }
 
-    @Override
-    public void delayedTick() {
-        machine.tick();
-    }
-
     public void setLit(boolean lit) {
-        // todo
-    }
-
-    @Override
-    public void load(@NotNull TileState tileState) {
-        super.load(tileState);
-        machine.load();
-    }
-
-    @Override
-    public void unload() {
-        super.unload();
-        machine.unload();
-    }
-
-    @Override
-    public boolean isValid() {
-        return true;
+        ItemDisplay display = Objects.requireNonNull(Blocks.ALLOY_FORGE.getDisplay(getReal().getBlock()));
+        ItemStack newDisplay = display.getItemStack();
+        if (lit) {
+            newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "alloy_forge_lit"));
+        } else {
+            newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "alloy_forge"));
+        }
+        display.setItemStack(newDisplay);
     }
 
     @Override
