@@ -137,7 +137,7 @@ public class RecipeManaging {
     public static class AlloyingRecipeBuilder{
         private final ItemStack replace;
         private String recipeKey;
-        private final List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
+        private final List<CustomSingleRecipeChoice> stuff = new ArrayList<>();
         private Set<CustomItem> customItemFuel = new HashSet<>();
         private Set<Material> materialFuel = new HashSet<>();
         private Set<CustomItem> customItemAddition = new HashSet<>();
@@ -164,12 +164,12 @@ public class RecipeManaging {
         }
 
         public AlloyingRecipeBuilder addCustomItemAlloy(@NotNull CustomItem customItemAlloy, int amount){
-            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(customItemAlloy));}
+            for (int i = 0; i < amount; i++){this.stuff.add(new CustomSingleRecipeChoice(customItemAlloy));}
             return this;
         }
 
         public AlloyingRecipeBuilder addMaterialAlloy(@NotNull Material materialAlloy, int amount){
-            for (int i = 0; i < amount; i++){this.alloys.add(new CustomSingleRecipeChoice(materialAlloy));}
+            for (int i = 0; i < amount; i++){this.stuff.add(new CustomSingleRecipeChoice(materialAlloy));}
             return this;
         }
 
@@ -194,7 +194,7 @@ public class RecipeManaging {
         public AlloyingRecipeBuilder build(@NotNull Plugin plugin){
             RecipeManager.getInstance().unregister(NamespacedKey.minecraft(recipeKey));
 
-            AlloyingRecipe recipe = new AlloyingRecipe(new NamespacedKey(plugin, recipeKey), alloys, fuel(), addition(), replace);
+            AlloyingRecipe recipe = new AlloyingRecipe(new NamespacedKey(plugin, recipeKey), stuff, fuel(), addition(), replace);
 
             RecipeManager.getInstance().register(recipe);
 

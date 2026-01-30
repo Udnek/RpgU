@@ -24,25 +24,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 public class AlloyForgeInventory extends AbstractMachineInventory {
 
     public static final TextColor COLOR = TextColor.color(91, 100, 118);
     public static final NamespacedKey SERIALIZE_RECIPE_KEY = new NamespacedKey(RpgU.getInstance(), "alloy_forge_recipe");
-    public static final int[] ALLOYS_SLOTS = new int[]{
-            9*0+0, 9*0+1, 9*0+2,
-            9*1+0, 9*1+1, 9*1+2
-            };
-    public static final int FUEL_SLOT = 9*3+1;
-    public static final int ADDITION_SLOT = 9*2+4;
-    public static final int RESULT_SLOT = 9*2+7;
+    public static final int[] STUFF_SLOTS = IntStream.concat(IntStream.range(3, 7), IntStream.range(12, 16)).toArray();
+    public static final int FUEL_SLOT = 46;
+    public static final int ADDITION_SLOT = 39;
+    public static final int RESULT_SLOT = 42;
     public static final int PROGRESS_SLOT = 9*2-1;
 
     protected @Nullable ItemStack currentAddition = null;
     protected final @NotNull AlloyForgeBlockEntity alloyBlock;
 
     public AlloyForgeInventory(@NotNull AlloyForgeBlockEntity block){
-        super(block, ALLOYS_SLOTS, new int[]{RESULT_SLOT}, FUEL_SLOT, SERIALIZE_RECIPE_KEY);
+        super(block, STUFF_SLOTS, new int[]{RESULT_SLOT}, FUEL_SLOT, SERIALIZE_RECIPE_KEY);
         this.alloyBlock = block;
     }
 
@@ -51,12 +49,12 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
 
         if (currentRecipe != null) return;
 
-        List<ItemStack> alloys = new ArrayList<>();
-        for (int alloySlot : ALLOYS_SLOTS) {
-            ItemStack item = getInventory().getItem(alloySlot);
-            if (item != null) alloys.add(item);
+        List<ItemStack> stuffs = new ArrayList<>();
+        for (int stuffSlot : stuffSlots) {
+            ItemStack item = getInventory().getItem(stuffSlot);
+            if (item != null) stuffs.add(item);
         }
-        ItemStack fuel = getInventory().getItem(FUEL_SLOT);
+        ItemStack fuel = getInventory().getItem(fuelSlot);
         if (fuel == null) return;
         ItemStack addition = getInventory().getItem(ADDITION_SLOT);
         if (addition == null) return;
@@ -64,7 +62,7 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
         if (currentRecipe != null) return;
         List<AlloyingRecipe> recipes = RecipeManager.getInstance().getByType(RecipeTypes.ALLOYING);
         for (AlloyingRecipe recipe : recipes) {
-            boolean matches = recipe.test(alloys, fuel, addition);
+            boolean matches = recipe.test(stuffs, stuffs, fuel, addition);
             if (!matches) continue;
             if (!canPlaceIntoResult(recipe.getResult())) return;
             onFoundRecipe(recipe);
@@ -102,7 +100,6 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
     @Override
     public void onFoundRecipe(@NonNull AlloyingRecipe recipe) {
         currentAddition = getInventory().getItem(ADDITION_SLOT);
-        /*if (currentAddition != null) currentAddition = currentAddition.clone();//TODO test delite*/
         alloyBlock.setLit(true);
         super.onFoundRecipe(recipe);
     }

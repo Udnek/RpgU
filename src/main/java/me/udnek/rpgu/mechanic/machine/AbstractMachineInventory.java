@@ -30,8 +30,8 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
 
     public static final CustomItem FILLER = Items.FERRUDAM_BOOTS;
 
-    protected final int[] alloySlots;
-    protected final int[] resulSlots;
+    protected final int[] stuffSlots;
+    protected final int[] resultSlots;
     protected final int fuelSlot;
 
     protected boolean shouldUpdateItems = false;
@@ -40,10 +40,10 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
     protected final NamespacedKey serializeRecipeKey;
     protected final @NotNull AbstractMachineBlockEntity block;
 
-    public AbstractMachineInventory(@NotNull AbstractMachineBlockEntity block, int[] alloySlots, int[] resulSlots, int fuelSlot, @NotNull NamespacedKey recipeKey){
+    public AbstractMachineInventory(@NotNull AbstractMachineBlockEntity block, int[] stuffSlots, int[] resultSlots, int fuelSlot, @NotNull NamespacedKey recipeKey){
         this.block = block;
-        this.alloySlots = Arrays.stream(alloySlots).sorted().toArray();
-        this.resulSlots = Arrays.stream(resulSlots).sorted().toArray();
+        this.stuffSlots = Arrays.stream(stuffSlots).sorted().toArray();
+        this.resultSlots = Arrays.stream(resultSlots).sorted().toArray();
         this.fuelSlot = fuelSlot;
         this.serializeRecipeKey = recipeKey;
     }
@@ -54,7 +54,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
 
     @Override
     public boolean canPlaceItem(@Nullable ItemStack itemStack, int slot) {
-        return canTakeItem(itemStack, slot) && Arrays.stream(resulSlots).anyMatch(i -> i != slot);
+        return canTakeItem(itemStack, slot) && Arrays.stream(resultSlots).anyMatch(i -> i != slot);
     }
 
     @Override
@@ -63,15 +63,15 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
     }
 
     public void iterateTroughAllInputSlots(@NotNull Consumer<Integer> consumer){
-        for (int alloysSlot : alloySlots) {
-            consumer.accept(alloysSlot);
+        for (int stuffSlot : stuffSlots) {
+            consumer.accept(stuffSlot);
         }
         consumer.accept(fuelSlot);
     }
 
     public boolean canPlaceIntoResult(@NotNull ItemStack addItem){
         int toPlace = addItem.getAmount();
-        for (int slot : resulSlots) {
+        for (int slot : resultSlots) {
             ItemStack item = getInventory().getItem(slot);
             if (item == null || FILLER.isThisItem(item) || item.getType().isAir()) return true;
             if (!addItem.isSimilar(item)) continue;
@@ -85,14 +85,30 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         return toPlace <= 0;
     }
 
-    public void addItem(int slot, @NotNull ItemStack addItem){
-        ItemStack item = getInventory().getItem(slot);
-        if (item == null || (Arrays.stream(resulSlots).anyMatch(i -> i == slot) && FILLER.isThisItem(item))) {
+    public void addItemToResult(@NotNull ItemStack addItem){
+        int remaining = addItem.getAmount();
+
+        for (int slot : resultSlots) {
+            ItemStack item = getInventory().getItem(slot);
+            if (item == null || item.isEmpty() || FILLER.isThisItem(item) || !addItem.isSimilar(item)) continue;
+
+            int spaceLeft = item.getMaxStackSize() - item.getAmount();
+            if (spaceLeft <= 0) continue;
+
+            int canAdd = Math.min(spaceLeft, remaining);
+            item.setAmount(item.getAmount() + canAdd);
+            remaining -= canAdd;
+
+            if (remaining == 0) return;
+        }
+
+        addItem.setAmount(remaining);
+
+        for (int slot : resultSlots) {
+            ItemStack item = getInventory().getItem(slot);
+            if (item == null || item.isEmpty() || !FILLER.isThisItem(item)) continue;
             getInventory().setItem(slot, addItem);
             return;
-        }
-        if (addItem.isSimilar(item)){
-            getInventory().setItem(slot, item.add(addItem.getAmount()));
         }
     }
 
@@ -100,7 +116,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         ItemStack item = getInventory().getItem(slot);
         if (item == null) return;
         getInventory().setItem(slot, item.subtract(amount));
-        if (Arrays.stream(resulSlots).anyMatch(i -> i == slot) && getInventory().getItem(slot) == null){
+        if (Arrays.stream(resultSlots).anyMatch(i -> i == slot) && getInventory().getItem(slot) == null){
             getInventory().setItem(slot, FILLER.getItem());
         }
     }
@@ -145,8 +161,8 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
 
     protected void getSlotsOrItemToSerialize(@NotNull SlotOrItemConsumer consumer) {
         iterateTroughAllInputSlots(consumer);
-        for (int resulSlot : resulSlots) {
-            consumer.accept(resulSlot);
+        for (int resultSlot : resultSlots) {
+            consumer.accept(resultSlot);
         }
     }
 
@@ -168,7 +184,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
             if (!canPlaceIntoResult(result)) return;
             progress = 0;
             onReady(result);
-            addItem(resulSlots[0], result);//TODO
+            addItemToResult(result);
             currentRecipe = null;
             updateProgressAnimation();
             updateItemsTickLater();
@@ -205,10 +221,10 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
             }
             bundleSlot.incrementAndGet();
         });
-        for (int resulSlot : resulSlots) {
+        for (int resultSlot : resultSlots) {
             ItemStack result = items.get(bundleSlot.get());
             if (!FILLER.isThisItem(result)){
-                getInventory().setItem(resulSlot, result);
+                getInventory().setItem(resultSlot, result);
             }
         }
     }
@@ -222,7 +238,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
             if (item == null) return;
             world.dropItemNaturally(location, item);
         });
-        for (int slot : resulSlots) {
+        for (int slot : resultSlots) {
             ItemStack item = getInventory().getItem(slot);
             if (item == null || item.isEmpty() || FILLER.isThisItem(item)) continue;
             world.dropItemNaturally(location, item.clone());
@@ -239,7 +255,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         super.onHopperMoveFrom(event);
         event.setCancelled(true);
 
-        for (int slot : resulSlots) {
+        for (int slot : resultSlots) {
             ItemStack result = getInventory().getItem(slot);
             if (result != null && !result.isEmpty() && !FILLER.isThisItem(result)) {
                 event.getDestination().addItem(result.asQuantity(1));
@@ -291,7 +307,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         }
 
         if (event.getInventory() == event.getClickedInventory()){
-            for (int slot : resulSlots) {
+            for (int slot : resultSlots) {
                 if (getInventory().getItem(slot) == null){
                     getInventory().setItem(slot, FILLER.getItem());
                 }
