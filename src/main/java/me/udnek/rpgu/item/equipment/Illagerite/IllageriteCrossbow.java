@@ -3,6 +3,8 @@ package me.udnek.rpgu.item.equipment.Illagerite;
 import me.udnek.coreu.custom.component.instance.AutoGeneratingFilesItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
+import me.udnek.coreu.rpgu.component.RPGUComponents;
+import me.udnek.rpgu.component.ability.vanilla.CrossbowAbility;
 import org.bukkit.Material;
 import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class IlliterateCrossbow extends ConstructableCustomItem {
+public class IllageriteCrossbow extends ConstructableCustomItem {
 
     @Override
     public @NotNull Material getMaterial() {return Material.CROSSBOW;}
@@ -27,6 +29,7 @@ public class IlliterateCrossbow extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
+        getComponents().getOrCreateDefault(RPGUComponents.ACTIVE_ABILITY_ITEM).getComponents().set(new CrossbowAbility());
         getComponents().set(AutoGeneratingFilesItem.CROSSBOW);
     }
 
