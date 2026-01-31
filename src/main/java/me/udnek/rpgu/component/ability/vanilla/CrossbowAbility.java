@@ -36,7 +36,7 @@ public class CrossbowAbility extends RPGUConstructableActiveAbility<EntityShootB
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return Pair.of(List.of("Charges and shoots an arrow"), List.of("Натягивает и выпускает стрелу"));
+        return Pair.of(List.of("Charges and shoots an projectile"), List.of("Заряжает и выпускает снаряд"));
     }
 
     @Override
