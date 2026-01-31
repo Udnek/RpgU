@@ -43,7 +43,7 @@ public class TridentAbility extends RPGUConstructableActiveAbility<PlayerLaunchP
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return Pair.of(List.of("Throws this item"), List.of("Метает этот предмет"));
+        return Pair.of(List.of("Throws the trident"), List.of("Метает трезубец"));
 
     }
 
@@ -51,7 +51,7 @@ public class TridentAbility extends RPGUConstructableActiveAbility<PlayerLaunchP
     public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
         Eng_Ru_Args.accept("Flight speed: %s blocks per second", "Скорость полёта: %s блоков в секунду", List.of(Component.text(50)));
-        Eng_Ru_Args.accept("Damage when shot: %s", "Урон при выстреле: %s", List.of(Component.text(8)));
+        Eng_Ru_Args.accept("Projectile damage: %s", "Урон снаряда: %s", List.of(Component.text(8)));
     }
 
     @Override
