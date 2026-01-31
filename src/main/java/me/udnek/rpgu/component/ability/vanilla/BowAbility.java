@@ -26,7 +26,7 @@ public class BowAbility extends RPGUConstructableActiveAbility<EntityShootBowEve
 
     @Override
     protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NonNull EntityShootBowEvent entityShootBowEvent) {
-        return ActionResult.NO_COOLDOWN;
+        return ActionResult.FULL_COOLDOWN;
     }
 
     @Override
@@ -36,17 +36,17 @@ public class BowAbility extends RPGUConstructableActiveAbility<EntityShootBowEve
 
     @Override
     public @Nullable Pair<List<String>, List<String>> getEngAndRuDescription() {
-        return Pair.of(List.of("Shoots a stretched arrow"), List.of("Стреляет натянутой стрелой"));
+        return Pair.of(List.of("Charges and shoots an arrow"), List.of("Натягивает и выпускает стрелу"));
     }
 
     @Override
     public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
-        Eng_Ru_Args.accept("Maximum speed of the arrow fired: %s blocks per second", "Максимальная скорость выпущенной стрелы: %s блоков в секунду",
+        Eng_Ru_Args.accept("Maximum arrow speed: %s blocks per second", "Максимальная скорость выпущенной стрелы: %s блоков в секунду",
                 List.of(Component.text(60)));
-        Eng_Ru_Args.accept("Full charge: %s seconds", "Полная натяжка: %s секунд", List.of(Component.text(0.9)));
+        Eng_Ru_Args.accept("Full charge time: %s seconds", "Время полной натяжки: %s секунд", List.of(Component.text(0.9)));
         Eng_Ru_Args.accept("Damage at full charge: %s", "Урон при полной натяжке: %s", List.of(Component.text(6)));
-        Eng_Ru_Args.accept("Critical charge: %s seconds", "Критическая натяжка: %s секунд", List.of(Component.text(1)));
+        Eng_Ru_Args.accept("Critical charge time: %s seconds", "Время критической натяжки: %s секунд", List.of(Component.text(1)));
     }
 
     @Override

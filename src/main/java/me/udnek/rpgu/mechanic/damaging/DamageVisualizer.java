@@ -77,17 +77,14 @@ public class DamageVisualizer {
         double mainDamage = damage.getTotal();
         TextColor damageColor = getDamageColor(mainDamage);
 
-        Component text =
-                Component.text(Utils.roundToTwoDigits(mainDamage)).color(damageColor).decorate(TextDecoration.BOLD)
-                        .appendNewline()
-                        .append(Component.text(
-                                "("
-                                +Utils.roundToTwoDigits(physicalDamage)+
-                                "+"
-                                +Utils.roundToTwoDigits(magicalDamage)+
-                                ")").color(SUB_LINE_DAMAGE_COLOR).font(Key.key("minecraft:uniform")).decoration(TextDecoration.BOLD, false));
-
-        return text;
+        return Component.text(Utils.roundToTwoDigits(mainDamage)).color(damageColor).decorate(TextDecoration.BOLD)
+                .appendNewline()
+                .append(Component.text(
+                        "("
+                        +Utils.roundToTwoDigits(physicalDamage)+
+                        "+"
+                        +Utils.roundToTwoDigits(magicalDamage)+
+                        ")").color(SUB_LINE_DAMAGE_COLOR).font(Key.key("minecraft:uniform")).decoration(TextDecoration.BOLD, false));
     }
 
     private static @NotNull TextColor getDamageColor(double mainDamage) {
