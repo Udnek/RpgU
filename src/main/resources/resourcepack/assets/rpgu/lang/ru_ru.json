@@ -45,5 +45,9 @@
   "damage_type.rpgu.physical": "Физический",
   "damage_type.rpgu.magical": "Магический",
   "ability_property_description.rpgu.magic_potential": "MP",
-  "item.rpgu.golden_armor": "Розевое золото"
+
+  "item.minecraft.golden_boots": "Розовозолотые ботинки",
+  "item.minecraft.golden_chestplate": "Розовозолотая нагрудник",
+  "item.minecraft.golden_helmet": "Розовозолотый шлем",
+  "item.minecraft.golden_leggings": "Розовозолотые поножи"
 }
