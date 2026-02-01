@@ -41,7 +41,7 @@
   "item.rpgu.soul_binder.description.0": "Игрок возродится на нём, если других приоритетных мест нет",
 
   "entity.rpgu.ancient_breeze" : "Аншент бриз",
-  "rpgu_ability_property.rpgu.damage": "Урон(%s): %s",
+  "rpgu_ability_property.rpgu.damage": "Урон (%s): %s",
   "damage_type.rpgu.physical": "Физический",
   "damage_type.rpgu.magical": "Магический",
   "ability_property_description.rpgu.magic_potential": "MP",
