@@ -26,16 +26,24 @@ import java.util.function.Consumer;
 
 public class EvocationRobe extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "evocation_robe";}
+    public @NotNull String getRawId() {
+        return "evocation_robe";
+    }
 
     @Override
-    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {
+        return DataSupplier.of(ItemRarity.UNCOMMON);
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_CHESTPLATE;
+    }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Evocation Robe", "Мантия заклинателя");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Evocation Robe", "Мантия заклинателя");
+    }
 
     @Override
     public @Nullable DataSupplier<Equippable> getEquippable() {

@@ -27,16 +27,24 @@ import java.util.function.Consumer;
 
 public class PhantomChestplate extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "phantom_chestplate";}
+    public @NotNull String getRawId() {
+        return "phantom_chestplate";
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_CHESTPLATE;
+    }
 
     @Override
-    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(150);}
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of(150);
+    }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Phantom Cloak", "Фантомная мантия");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Phantom Cloak", "Фантомная мантия");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

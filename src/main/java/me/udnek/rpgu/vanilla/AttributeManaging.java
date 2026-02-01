@@ -182,9 +182,9 @@ public class AttributeManaging extends SelfRegisteringListener {
 
 
         if (goldenArmor.contains(material)){
-            ItemStack ironArmor = new ItemStack(Utils.replacePrefix(material, "iron_"));
-
-            itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(ironArmor.getData(DataComponentTypes.MAX_DAMAGE)) * 9 / 10);
+            itemStack.setData(DataComponentTypes.ITEM_NAME, Component.translatable("item.rpgu." + material.getKey().getKey()));
+            itemStack.setData(DataComponentTypes.MAX_DAMAGE, Objects.requireNonNull(
+                    new ItemStack(Utils.replacePrefix(material, "iron_")).getData(DataComponentTypes.MAX_DAMAGE)) * 9 / 10);
             AllyBuffingAuraPassive.applyGoldenArmorBuff(material, customItem);
         }
 

@@ -31,7 +31,9 @@ public class SphereOfDiscord extends ConstructableCustomItem {
     private static final double ATTACK_DAMAGE = -0.6;
 
     @Override
-    public @NotNull String getRawId() {return "sphere_of_discord";}
+    public @NotNull String getRawId() {
+        return "sphere_of_discord";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

@@ -22,7 +22,9 @@ public class MagicalChestplate extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable DataSupplier<Key> getItemModel() {return null;}
+    public @Nullable DataSupplier<Key> getItemModel() {
+        return null;
+    }
 
     @Override
     public @NotNull Material getMaterial() {

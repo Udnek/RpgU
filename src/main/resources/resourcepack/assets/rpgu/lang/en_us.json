@@ -29,7 +29,10 @@
 
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
-
+	"item.minecraft.golden_boots": "Rose Gold Boots",
+	"item.minecraft.golden_chestplate": "Rose Gold Chestplate",
+	"item.minecraft.golden_helmet": "Rose Gold Helmet",
+	"item.minecraft.golden_leggings": "Rose Gold Leggings",
 
 	"item.rpgu.hungry_horror_helmet.description.0": "On Attack:",
 	"item.rpgu.hungry_horror_helmet.description.1": " Reapplies Strength effect with increased",

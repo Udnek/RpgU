@@ -47,10 +47,14 @@ import java.util.function.Consumer;
 public class WitherWreath extends ConstructableCustomItem {
 
     @Override
-    public @NotNull String getRawId() {return "wither_wreath";}
+    public @NotNull String getRawId() {
+        return "wither_wreath";
+    }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Wither Wreath", "Увядший венок");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Wither Wreath", "Увядший венок");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

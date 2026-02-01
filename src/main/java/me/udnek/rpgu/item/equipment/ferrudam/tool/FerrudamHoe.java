@@ -19,7 +19,9 @@ import java.util.function.Consumer;
 
 public class FerrudamHoe extends FerrudamTool {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_hoe";}
+    public @NotNull String getRawId() {
+        return "ferrudam_hoe";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {
@@ -27,7 +29,9 @@ public class FerrudamHoe extends FerrudamTool {
     }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_HOE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_HOE;
+    }
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());

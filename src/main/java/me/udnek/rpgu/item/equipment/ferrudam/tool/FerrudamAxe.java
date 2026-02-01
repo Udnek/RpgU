@@ -19,9 +19,13 @@ import java.util.function.Consumer;
 
 public class FerrudamAxe extends FerrudamTool {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_axe";}
+    public @NotNull String getRawId() {
+        return "ferrudam_axe";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_AXE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_AXE;
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

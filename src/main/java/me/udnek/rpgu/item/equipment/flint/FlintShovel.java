@@ -13,11 +13,17 @@ import java.util.function.Consumer;
 
 public class FlintShovel extends FlintTool {
     @Override
-    public @NotNull String getRawId() {return "flint_shovel";}
+    public @NotNull String getRawId() {
+        return "flint_shovel";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.STONE_SHOVEL;}
+    public @NotNull Material getMaterial() {
+        return Material.STONE_SHOVEL;
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flint Shovel", "Кремневая лопата");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Flint Shovel", "Кремневая лопата");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

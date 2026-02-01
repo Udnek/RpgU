@@ -16,10 +16,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class HungryHorrorHelmet extends HungryHorrorArmor {
     @Override
-    public @NotNull String getRawId() {return "hungry_horror_helmet";}
+    public @NotNull String getRawId() {
+        return "hungry_horror_helmet";
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_HELMET;
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

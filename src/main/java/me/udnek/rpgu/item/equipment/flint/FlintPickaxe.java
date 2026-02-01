@@ -14,11 +14,17 @@ import java.util.function.Consumer;
 
 public class FlintPickaxe extends FlintTool {
     @Override
-    public @NotNull String getRawId() {return "flint_pickaxe";}
+    public @NotNull String getRawId() {
+        return "flint_pickaxe";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.STONE_PICKAXE;}
+    public @NotNull Material getMaterial() {
+        return Material.STONE_PICKAXE;
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flint Pickaxe", "Кремневая кирка");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Flint Pickaxe", "Кремневая кирка");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

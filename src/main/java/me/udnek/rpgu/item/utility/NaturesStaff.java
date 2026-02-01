@@ -41,9 +41,13 @@ import java.util.function.Consumer;
 public class NaturesStaff extends ConstructableCustomItem {
 
     @Override
-    public @NotNull String getRawId() {return "natures_staff";}
+    public @NotNull String getRawId() {
+        return "natures_staff";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Nature's Staff", "Посох природы");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Nature's Staff", "Посох природы");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

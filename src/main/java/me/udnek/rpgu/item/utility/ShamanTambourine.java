@@ -43,7 +43,9 @@ import java.util.function.Consumer;
 public class ShamanTambourine extends ConstructableCustomItem{
 
     @Override
-    public @NotNull String getRawId() {return "shaman_tambourine";}
+    public @NotNull String getRawId() {
+        return "shaman_tambourine";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

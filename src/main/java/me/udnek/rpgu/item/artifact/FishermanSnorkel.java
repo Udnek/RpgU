@@ -33,9 +33,13 @@ import java.util.function.Consumer;
 
 public class FishermanSnorkel extends ConstructableCustomItem {
     @Override
-    public @NotNull Material getMaterial() {return Material.GOAT_HORN;}
+    public @NotNull Material getMaterial() {
+        return Material.GOAT_HORN;
+    }
     @Override
-    public @NotNull String getRawId() {return "fisherman_snorkel";}
+    public @NotNull String getRawId() {
+        return "fisherman_snorkel";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {
@@ -43,9 +47,13 @@ public class FishermanSnorkel extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable DataSupplier<MusicInstrument> getMusicInstrument() {return DataSupplier.of(MusicInstrument.DREAM_GOAT_HORN);}
+    public @Nullable DataSupplier<MusicInstrument> getMusicInstrument() {
+        return DataSupplier.of(MusicInstrument.DREAM_GOAT_HORN);
+    }
     @Override
-    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.COMMON);}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {
+        return DataSupplier.of(ItemRarity.COMMON);
+    }
 
     @Override
     public void initializeComponents() {

@@ -12,10 +12,14 @@ import java.util.function.Consumer;
 
 public class GrimHelmet extends GrimArmor {
     @Override
-    public @NotNull String getRawId() {return "grim_helmet";}
+    public @NotNull String getRawId() {
+        return "grim_helmet";
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_HELMET;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_HELMET;
+    }
 
     @Override
     public @NotNull Stats getStats() {
@@ -23,7 +27,9 @@ public class GrimHelmet extends GrimArmor {
     }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Grim Helmet", "Мрачный шлем");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Grim Helmet", "Мрачный шлем");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

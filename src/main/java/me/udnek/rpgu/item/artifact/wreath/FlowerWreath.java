@@ -46,9 +46,13 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     @Override
-    public @NotNull String getRawId() {return "flower_wreath";}
+    public @NotNull String getRawId() {
+        return "flower_wreath";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flower Wreath", "Цветочный венок");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Flower Wreath", "Цветочный венок");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
@@ -70,7 +74,7 @@ public class FlowerWreath extends ConstructableCustomItem {
     }
 
     @Override
-    public ItemStack getItemFromCraftingMatrix(ItemStack result, ItemStack[] matrix, @NotNull Recipe recipe) {
+    public ItemStack getItemFromCraftingMatrix(@Nullable ItemStack result, @Nullable ItemStack[] matrix, @NotNull Recipe recipe) {
         Color finalColor = Color.fromRGB(255, 255, 255);
         Color[] colors = new Color[8];
         int i = 0;

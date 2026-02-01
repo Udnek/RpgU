@@ -3,8 +3,6 @@
   "item.modifiers.first_artifact": "При экипировке как первый артефакта:",
   "item.modifiers.second_artifact": "При экипировке как второй артефакта:",
   "item.modifiers.third_artifact": "При экипировке как третий артефакта:",
-  "damage_formula.rpgu.magical": "Магический урон: %s",
-  "damage_formula.rpgu.physical": "Физический урон: %s",
   "attribute.rpgu.name.physical_damage": "Физический урон",
   "attribute.rpgu.name.attack_speed": "Ударов в секунду",
   "attribute.rpgu.name.melee_magical_damage_multiplier": "Магический урон от атаки за еденицу МП",
@@ -28,7 +26,6 @@
   "item.rpgu.hungry_horror_chestplate.description.2": " на один уровень и длительностью 2 секунды.",
   "item.rpgu.hungry_horror_chestplate.description.3": " Максимальный уровень эффекта: V.",
   "item.rpgu.hungry_horror_chestplate.description.4": " Если эффекта нет, применяется Поглощение I на 2 секунды",
-  "ability.rpgu.damage": "Урон: %s",
   "effect.rpgu.root": "Оцепенение",
 
   "effect.rpgu.mire_touch": "Вязкое прикосновение",
@@ -43,5 +40,14 @@
 
   "item.rpgu.soul_binder.description.0": "Игрок возродится на нём, если других приоритетных мест нет",
 
-  "entity.rpgu.ancient_breeze" : "Аншент бриз"
+  "entity.rpgu.ancient_breeze" : "Аншент бриз",
+  "rpgu_ability_property.rpgu.damage": "Урон (%s): %s",
+  "damage_type.rpgu.physical": "Физический",
+  "damage_type.rpgu.magical": "Магический",
+  "ability_property_description.rpgu.magic_potential": "MP",
+
+  "item.minecraft.golden_boots": "Розовозолотые ботинки",
+  "item.minecraft.golden_chestplate": "Розовозолотая нагрудник",
+  "item.minecraft.golden_helmet": "Розовозолотый шлем",
+  "item.minecraft.golden_leggings": "Розовозолотые поножи"
 }

@@ -21,9 +21,11 @@ import java.util.function.Consumer;
 
 public class Fabric extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "fabric";}
+    public @NotNull String getRawId() {
+        return "fabric";}
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Fabric", "Ткань");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Fabric", "Ткань");}
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

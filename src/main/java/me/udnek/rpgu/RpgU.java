@@ -39,7 +39,9 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
     private static RpgU instance;
 
-    public static @NotNull RpgU getInstance() { return instance; }
+    public static @NotNull RpgU getInstance() {
+        return instance;
+    }
 
 
     @Override

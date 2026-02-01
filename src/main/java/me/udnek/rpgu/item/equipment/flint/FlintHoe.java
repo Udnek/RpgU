@@ -14,11 +14,17 @@ import java.util.function.Consumer;
 
 public class FlintHoe extends FlintTool {
     @Override
-    public @NotNull String getRawId() {return "flint_hoe";}
+    public @NotNull String getRawId() {
+        return "flint_hoe";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.STONE_HOE;}
+    public @NotNull Material getMaterial() {
+        return Material.STONE_HOE;
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Flint Hoe", "Кремневая мотыга");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Flint Hoe", "Кремневая мотыга");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

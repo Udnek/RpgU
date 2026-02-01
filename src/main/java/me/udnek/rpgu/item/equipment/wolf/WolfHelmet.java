@@ -13,7 +13,8 @@ import java.util.function.Consumer;
 
 public class WolfHelmet extends AbstractWolfArmor {
 
-    public WolfHelmet() {super(Material.DIAMOND_HELMET, "wolf_helmet", "Wolf Helmet", "Волчья шапка");}
+    public WolfHelmet() {super(Material.DIAMOND_HELMET, "wolf_helmet", "Wolf Helmet", "Волчья шапка");
+    }
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {

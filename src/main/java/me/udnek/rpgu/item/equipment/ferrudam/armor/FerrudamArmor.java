@@ -25,7 +25,9 @@ public abstract class FerrudamArmor extends AbstractArmor {
     }
 
     @Override
-    public @Nullable RepairData initializeRepairData() {return new RepairData(Items.FERRUDAM_INGOT);}
+    public @Nullable RepairData initializeRepairData() {
+        return new RepairData(Items.FERRUDAM_INGOT);
+    }
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {

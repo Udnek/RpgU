@@ -18,10 +18,14 @@ import java.util.function.Consumer;
 
 public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
     @Override
-    public @NotNull Material getMaterial() {return Material.LEATHER_HELMET;}
+    public @NotNull Material getMaterial() {
+        return Material.LEATHER_HELMET;
+    }
 
     @Override
-    public @NotNull String getRawId() {return "armadillo_scute_wolf_armor";}
+    public @NotNull String getRawId() {
+        return "armadillo_scute_wolf_armor";
+    }
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
@@ -38,7 +42,9 @@ public class ArmadilloScuteWolfArmor extends ConstructableCustomItem {
 
 
     @Override
-    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(Material.WOLF_ARMOR.getDefaultData(DataComponentTypes.MAX_DAMAGE));}
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of(Material.WOLF_ARMOR.getDefaultData(DataComponentTypes.MAX_DAMAGE));
+    }
 
     @Override
     public @Nullable DataSupplier<Integer> getMaxStackSize() {

@@ -12,7 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class CriticalStone extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "critical_stone";}
+    public @NotNull String getRawId() {
+        return "critical_stone";
+    }
 
 
     @Override

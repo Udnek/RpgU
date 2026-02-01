@@ -23,13 +23,21 @@ import org.jetbrains.annotations.Nullable;
 
 public class ShinyAxe extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "shiny_axe";}
+    public @NotNull String getRawId() {
+        return "shiny_axe";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_AXE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_AXE;
+    }
     @Override
-    public @Nullable DataSupplier<Integer> getMaxDamage() {return DataSupplier.of(300);}
+    public @Nullable DataSupplier<Integer> getMaxDamage() {
+        return DataSupplier.of(300);
+    }
     @Override
-    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {
+        return DataSupplier.of(ItemRarity.UNCOMMON);
+    }
     @Override
     public @Nullable TranslatableThing getTranslations() {
         return TranslatableThing.ofEngAndRu("Shiny Axe", "Блестящий топор");
