@@ -13,6 +13,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class AlloyingRecipe extends AbstractMachineRecipe {
 
@@ -45,10 +46,9 @@ public class AlloyingRecipe extends AbstractMachineRecipe {
     public boolean test(@NotNull List<ItemStack> stuffsInput, @NotNull List<ItemStack> alloysInput, @NotNull ItemStack fuelInput, @NotNull ItemStack additionInput) {
         if (!fuel.test(fuelInput)) return false;
         if (!addition.test(additionInput)) return false;
-        if (!isMatchesAllRequiredInputs(stuffs, stuffsInput)) return false;
+        if (!isMatchesAllRequiredInputs(stuff, stuffsInput)) return false;
         return isMatchesAllRequiredInputs(alloys, alloysInput);
     }
-
 
     @Override
     public void replaceItem(@NonNull ItemStack oldItem, @NonNull ItemStack newItem) {
@@ -60,11 +60,17 @@ public class AlloyingRecipe extends AbstractMachineRecipe {
     }
 
     @Override
-    public boolean isIngredient(@NonNull ItemStack itemStack) {
+    public void getPossibleIngredients(@NotNull Consumer<CustomRecipeChoice> consumer) {
+        super.getPossibleIngredients(consumer);
         for (CustomRecipeChoice alloy : alloys) {
-            if (alloy.test(itemStack)) return true;
+            consumer.accept(alloy);
         }
-        return super.isIngredient(itemStack) || addition.test(itemStack);
+    }
+
+    @NotNull
+    @Override
+    public ItemStack getResult() {
+        return result;
     }
 
     @Override
