@@ -8,7 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class FerrudamTool extends ConstructableCustomItem {
     @Override
-    public @Nullable RepairData initializeRepairData() {return new RepairData(Items.FERRUDAM_INGOT);}
+    public @Nullable RepairData initializeRepairData() {
+        return new RepairData(Items.FERRUDAM_INGOT);
+    }
 
     @Override
     public void initializeComponents() {

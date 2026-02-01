@@ -12,10 +12,14 @@ import java.util.function.Consumer;
 
 public class GrimChestplate extends GrimArmor {
     @Override
-    public @NotNull String getRawId() {return "grim_chestplate";}
+    public @NotNull String getRawId() {
+        return "grim_chestplate";
+    }
 
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_CHESTPLATE;
+    }
 
     @Override
     public @NotNull Stats getStats() {
@@ -23,7 +27,9 @@ public class GrimChestplate extends GrimArmor {
     }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Grim Chestplate", "Мрачный нагрудник");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Grim Chestplate", "Мрачный нагрудник");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

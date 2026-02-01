@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.ingredients;
+package me.udnek.rpgu.item.ingredients.ferrudam;
 
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -16,9 +16,13 @@ import java.util.function.Consumer;
 
 public class FerrudamIngot extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_ingot";}
+    public @NotNull String getRawId() {
+        return "ferrudam_ingot";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ferrudam Ingot", "Ферродамовый слиток");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Ferrudam Ingot", "Ферродамовый слиток");
+    }
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         List<CustomSingleRecipeChoice> stuffs = new ArrayList<>();

@@ -32,10 +32,14 @@ public class AmethystDirk extends ConstructableCustomItem {
     }
 
     @Override
-    public @NotNull String getRawId() {return "amethyst_dirk";}
+    public @NotNull String getRawId() {
+        return "amethyst_dirk";
+    }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Amethyst Dirk", "Аметистовый кортик");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Amethyst Dirk", "Аметистовый кортик");
+    }
 
 
 

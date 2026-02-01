@@ -50,7 +50,9 @@ public class ArmadilloBar extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable DataSupplier<Integer> getMaxStackSize() {return DataSupplier.of(1);}
+    public @Nullable DataSupplier<Integer> getMaxStackSize() {
+        return DataSupplier.of(1);
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
@@ -67,7 +69,9 @@ public class ArmadilloBar extends ConstructableCustomItem {
     }
 
     @Override
-    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.RARE);}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {
+        return DataSupplier.of(ItemRarity.RARE);
+    }
 
     @Override
     public void initializeComponents() {

@@ -14,8 +14,14 @@ import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteCrossbow;
-import me.udnek.rpgu.item.ingredients.IllageriteKey;
-import me.udnek.rpgu.item.ingredients.IllageriteUpgrade;
+import me.udnek.rpgu.item.equipment.Illagerite.armor.IllageriteBoots;
+import me.udnek.rpgu.item.equipment.Illagerite.armor.IllageriteChestplate;
+import me.udnek.rpgu.item.equipment.Illagerite.armor.IllageriteHelmet;
+import me.udnek.rpgu.item.equipment.Illagerite.armor.IllageriteLeggings;
+import me.udnek.rpgu.item.equipment.cobalt_armor.CobaltBoots;
+import me.udnek.rpgu.item.equipment.cobalt_armor.CobaltChestplate;
+import me.udnek.rpgu.item.equipment.cobalt_armor.CobaltHelmet;
+import me.udnek.rpgu.item.equipment.cobalt_armor.CobaltLeggings;
 import me.udnek.rpgu.item.equipment.doloire.AmethystDoloire;
 import me.udnek.rpgu.item.equipment.doloire.HeavyAmethystDoloire;
 import me.udnek.rpgu.item.equipment.ferrudam.armor.FerrudamBoots;
@@ -36,6 +42,13 @@ import me.udnek.rpgu.item.equipment.wolf.WolfChestplate;
 import me.udnek.rpgu.item.equipment.wolf.WolfHelmet;
 import me.udnek.rpgu.item.equipment.wolf.WolfLeggings;
 import me.udnek.rpgu.item.ingredients.*;
+import me.udnek.rpgu.item.ingredients.cobalt.CobaltUpgrade;
+import me.udnek.rpgu.item.ingredients.cobalt.GlacialCobaltIngot;
+import me.udnek.rpgu.item.ingredients.ferrudam.FerrudamIngot;
+import me.udnek.rpgu.item.ingredients.ferrudam.FerrudamUpgrade;
+import me.udnek.rpgu.item.ingredients.illagerite.IllageriteIngot;
+import me.udnek.rpgu.item.ingredients.illagerite.IllageriteKey;
+import me.udnek.rpgu.item.ingredients.illagerite.IllageriteUpgrade;
 import me.udnek.rpgu.item.techincal.TechnicalInventoryFiller;
 import me.udnek.rpgu.item.utility.*;
 import org.bukkit.Color;
@@ -103,12 +116,19 @@ public class Items {
 
     public static final CustomItem ILLAGERITE_AXE = register(new IllageriteAxe());
     public static final CustomItem ILLAGERITE_CROSSBOW = register(new IllageriteCrossbow());
-    public static final CustomItem ILLAGERITE_KEY = register(new IllageriteKey());
-    public static final CustomItem ILLAGERITE_UPGRADE = register(new IllageriteUpgrade());
+
+    public static final CustomItem ILLAGERITE_HELMET = register(new IllageriteHelmet());
+    public static final CustomItem ILLAGERITE_CHESTPLATE = register(new IllageriteChestplate());
+    public static final CustomItem ILLAGERITE_LEGGINGS = register(new IllageriteLeggings());
+    public static final CustomItem ILLAGERITE_BOOTS = register(new IllageriteBoots());
+
+    public static final CustomItem COBALT_HELMET = register(new CobaltHelmet());
+    public static final CustomItem COBALT_CHESTPLATE = register(new CobaltChestplate());
+    public static final CustomItem COBALT_LEGGINGS = register(new CobaltLeggings());
+    public static final CustomItem COBALT_BOOTS = register(new CobaltBoots());
 
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
-    public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
     public static final CustomItem BLAST_COAL = register(new BlastCoal());
     public static final CustomItem INGOT_MOLD = register(new IngotMold());
     public static final CustomItem RAW_MAGNETITE = register(new RawMagnetite());
@@ -117,7 +137,16 @@ public class Items {
     public static final CustomItem ESOTERIC_SALVE = register(new EsotericSalve());
     public static final CustomItem WOLF_PELT = register(new WolfPelt());
     public static final CustomItem WEAK_MAGIC_CORE = register(new WeakMagicCore());
-    public static final CustomItem ILLAGERITE = register(new Illagerite());
+
+    public static final CustomItem FERRUDAM_INGOT = register(new FerrudamIngot());
+    public static final CustomItem FERRUDAM_UPGRADE = register(new FerrudamUpgrade());
+
+    public static final CustomItem ILLAGERITE_INGOT = register(new IllageriteIngot());
+    public static final CustomItem ILLAGERITE_KEY = register(new IllageriteKey());
+    public static final CustomItem ILLAGERITE_UPGRADE = register(new IllageriteUpgrade());
+
+    public static final CustomItem COBALT_INGOT = register(new GlacialCobaltIngot());
+    public static final CustomItem COBALT_UPGRADE = register(new CobaltUpgrade());
 
     // TECHNICAL
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
@@ -135,6 +164,7 @@ public class Items {
             register(new FoldedMap(Structure.MANSION, Color.BLUE, "Map of Mansion", "Карта особняка")); //TODO поменять названия
     public static final CustomItem FOLDED_MAP_BURIED_TREASURE =
             register(new FoldedMap(Structure.BURIED_TREASURE, Color.AQUA, "Map of Treasure", "Карта сокровища")); //TODO поменять названия
+
 
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());

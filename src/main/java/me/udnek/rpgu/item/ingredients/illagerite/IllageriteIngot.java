@@ -1,4 +1,4 @@
-package me.udnek.rpgu.item.ingredients;
+package me.udnek.rpgu.item.ingredients.illagerite;
 
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
@@ -8,11 +8,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class IllageriteKey extends ConstructableCustomItem {
+public class IllageriteIngot extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "illagerite_key";}
+    public @NotNull String getRawId() {
+        return "illagerite_ingot";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Illagerite Key", "Злодеянитовый ключь");}
+    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Illagerite Ingot", "Злодеянитовый слиток");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

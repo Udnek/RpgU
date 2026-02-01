@@ -46,9 +46,13 @@ import java.util.function.Consumer;
 public class AirElementalTome extends ConstructableCustomItem {
 
     @Override
-    public @NotNull String getRawId() {return "air_elemental_tome";}
+    public @NotNull String getRawId() {
+        return "air_elemental_tome";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Air Elemental Tome", "Фолиант элементаля воздуха");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Air Elemental Tome", "Фолиант элементаля воздуха");
+    }
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
         ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), this.getItem());
@@ -95,7 +99,7 @@ public class AirElementalTome extends ConstructableCustomItem {
             Collection<LivingEntity> livingEntitiesInRadius = findLivingEntitiesInRayTraceRadius(livingEntity, new ParticleBuilder(Particle.SMALL_GUST));
 
             if (livingEntitiesInRadius == null) return ActionResult.NO_COOLDOWN;
-            if (livingEntitiesInRadius.isEmpty()) {return ActionResult.PENALTY_COOLDOWN;}
+            if (livingEntitiesInRadius.isEmpty()) return ActionResult.PENALTY_COOLDOWN;
             for (LivingEntity livingEntityInRadius : livingEntitiesInRadius) {
                 new BukkitRunnable() {
                     int count = 0;

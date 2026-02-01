@@ -16,13 +16,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class HungryHorrorChestplate extends HungryHorrorArmor {
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_CHESTPLATE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_CHESTPLATE;
+    }
 
     @Override
-    public @NotNull String getRawId() {return "hungry_horror_chestplate";}
+    public @NotNull String getRawId() {
+        return "hungry_horror_chestplate";
+    }
 
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Aegis of Hungry Horror", "Эгида Голодного Ужаса");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Aegis of Hungry Horror", "Эгида Голодного Ужаса");
+    }
 
     @Override
     public @Nullable DataSupplier<ItemAttributeModifiers> getAttributeModifiers() {

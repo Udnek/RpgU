@@ -10,6 +10,7 @@ import me.udnek.coreu.custom.equipment.universal.UniversalInventorySlot;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
 import me.udnek.coreu.rpgu.component.ability.active.RPGUConstructableActiveAbility;
+import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.component.ability.RPGUActiveTriggerableAbility;
 import me.udnek.rpgu.component.ability.VanillaAbilities;
 import net.kyori.adventure.text.Component;
@@ -54,7 +55,8 @@ public class BlocksAttacksAbility extends RPGUConstructableActiveAbility<PlayerI
     @Override
     public void getEngAndRuProperties(TriConsumer<String, String, List<Component>> Eng_Ru_Args) {
         super.getEngAndRuProperties(Eng_Ru_Args);
-        Eng_Ru_Args.accept("Horizontal block angle: %s degrees", "Горизонталшный угол блокировки: %s градусов", List.of(Component.text(blockAngle)));
+        Eng_Ru_Args.accept("Horizontal block angle: %s degrees", "Горизонталшный угол блокировки: %s градусов",
+                List.of(Component.text(Utils.roundToTwoDigits(blockAngle))));
     }
 
     @Override

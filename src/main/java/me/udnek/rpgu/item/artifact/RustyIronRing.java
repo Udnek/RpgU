@@ -26,7 +26,9 @@ import java.util.Objects;
 
 public class RustyIronRing extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "rusty_iron_ring";}
+    public @NotNull String getRawId() {
+        return "rusty_iron_ring";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

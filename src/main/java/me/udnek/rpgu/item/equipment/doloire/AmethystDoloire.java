@@ -63,11 +63,17 @@ public class AmethystDoloire extends ConstructableCustomItem {
         return Material.STONE_SWORD;
     }
     @Override
-    public @NotNull String getRawId() {return "amethyst_doloire";}
+    public @NotNull String getRawId() {
+        return "amethyst_doloire";
+    }
     @Override
-    public @Nullable DataSupplier<ItemRarity> getRarity() {return DataSupplier.of(ItemRarity.UNCOMMON);}
+    public @Nullable DataSupplier<ItemRarity> getRarity() {
+        return DataSupplier.of(ItemRarity.UNCOMMON);
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Amethyst Doloire", "Аметистовый долуар");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Amethyst Doloire", "Аметистовый долуар");
+    }
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {

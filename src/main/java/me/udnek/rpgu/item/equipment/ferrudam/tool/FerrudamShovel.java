@@ -19,9 +19,13 @@ import java.util.function.Consumer;
 
 public class FerrudamShovel extends FerrudamTool {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_shovel";}
+    public @NotNull String getRawId() {
+        return "ferrudam_shovel";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_SHOVEL;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_SHOVEL;
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

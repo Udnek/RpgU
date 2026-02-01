@@ -33,11 +33,17 @@ public class PhantomBow extends ConstructableCustomItem implements Listener {
     public static final double SPEED_BUFF = 0.25;
 
     @Override
-    public @NotNull Material getMaterial() {return Material.BOW;}
+    public @NotNull Material getMaterial() {
+        return Material.BOW;
+    }
     @Override
-    public @NotNull String getRawId() {return "phantom_bow";}
+    public @NotNull String getRawId() {
+        return "phantom_bow";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Phantom Bow", "Фантомный лук");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Phantom Bow", "Фантомный лук");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

@@ -25,7 +25,9 @@ import java.util.function.Consumer;
 
 public class SphereOfBalance extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "sphere_of_balance";}
+    public @NotNull String getRawId() {
+        return "sphere_of_balance";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

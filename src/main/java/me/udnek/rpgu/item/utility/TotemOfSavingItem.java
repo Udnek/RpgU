@@ -37,7 +37,9 @@ import java.util.function.Consumer;
 
 public class TotemOfSavingItem extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "totem_of_saving";}
+    public @NotNull String getRawId() {
+        return "totem_of_saving";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

@@ -19,9 +19,13 @@ import java.util.function.Consumer;
 
 public class FerrudamPickaxe extends FerrudamTool {
     @Override
-    public @NotNull String getRawId() {return "ferrudam_pickaxe";}
+    public @NotNull String getRawId() {
+        return "ferrudam_pickaxe";
+    }
     @Override
-    public @NotNull Material getMaterial() {return Material.DIAMOND_PICKAXE;}
+    public @NotNull Material getMaterial() {
+        return Material.DIAMOND_PICKAXE;
+    }
     @Override
     public @Nullable TranslatableThing getTranslations() {
         return TranslatableThing.ofEngAndRu("Ferrudam Pickaxe", "Ферродамовая кирка");

@@ -36,7 +36,9 @@ import java.util.function.Consumer;
 
 public class NautilusCore extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "nautilus_core";}
+    public @NotNull String getRawId() {
+        return "nautilus_core";
+    }
 
     @Override
     public @Nullable TranslatableThing getTranslations() {

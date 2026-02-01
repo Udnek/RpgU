@@ -20,9 +20,13 @@ import java.util.function.Consumer;
 
 public class SpellPrism extends ConstructableCustomItem {
     @Override
-    public @NotNull String getRawId() {return "spell_prism";}
+    public @NotNull String getRawId() {
+        return "spell_prism";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Spell Prism", "Призма заклинателя");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Spell Prism", "Призма заклинателя");
+    }
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {

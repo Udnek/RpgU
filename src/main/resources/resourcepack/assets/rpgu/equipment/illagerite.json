@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "rpgu:illagerite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "rpgu:illagerite"
+      }
+    ]
+  }
+}

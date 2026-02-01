@@ -35,9 +35,13 @@ public class CeremonialDagger extends ConstructableCustomItem {
         return Material.DIAMOND_SWORD;
     }
     @Override
-    public @NotNull String getRawId() {return "ceremonial_dagger";}
+    public @NotNull String getRawId() {
+        return "ceremonial_dagger";
+    }
     @Override
-    public @Nullable TranslatableThing getTranslations() {return TranslatableThing.ofEngAndRu("Ceremonial Dagger", "Церемониальный кинжал");}
+    public @Nullable TranslatableThing getTranslations() {
+        return TranslatableThing.ofEngAndRu("Ceremonial Dagger", "Церемониальный кинжал");
+    }
 
     @Override
     protected void modifyFinalItemStack(@NotNull ItemStack itemStack) {
