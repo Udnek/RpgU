@@ -27,6 +27,9 @@
 
 	"gui.rpgu.alloy_forge": "Alloy Forge",
 
+	"crusher.rpgu.probability": "Probability: %s%%",
+
+
 	"item.rpgu.wrench.description.0": "Rotates blocks on interact",
 
 	"item.minecraft.golden_boots": "Rose Gold Boots",

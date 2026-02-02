@@ -1,6 +1,5 @@
 package me.udnek.rpgu.mechanic.machine;
 
-import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipe;
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
@@ -16,14 +15,12 @@ public abstract class AbstractMachineRecipe implements CustomRecipe {
 
     protected final List<CustomSingleRecipeChoice> stuff;
     protected final CustomRecipeChoice fuel;
-    protected ItemStack result;
     protected final NamespacedKey id;
     protected final int craftDuration = 20 * 20;
 
-    public AbstractMachineRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel, @NotNull ItemStack result) {
+    public AbstractMachineRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel) {
         this.stuff = new ArrayList<>(stuffs);
         this.fuel = fuel;
-        this.result = result.clone();
         this.id = key;
     }
 
@@ -57,9 +54,6 @@ public abstract class AbstractMachineRecipe implements CustomRecipe {
             stuff.replaceItem(oldItem, newItem);
         }
         fuel.replaceItem(oldItem, newItem);
-        if (ItemUtils.isSameIds(result, oldItem)){
-            result = newItem.clone();
-        }
     }
 
     @Override
@@ -68,11 +62,6 @@ public abstract class AbstractMachineRecipe implements CustomRecipe {
             consumer.accept(choice);
         }
         consumer.accept(fuel);
-    }
-
-    @Override
-    public void getPossibleResults(@NotNull Consumer<ItemStack> consumer) {
-        consumer.accept(result.clone());
     }
 
     @Override

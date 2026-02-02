@@ -45,7 +45,7 @@ public class CrusherBlockType extends RotatableCustomBlockType implements Custom
 
     @Override
     public @NotNull Material getBreakSpeedBaseBlock() {
-        return null;
+        return Material.BLAST_FURNACE;
     }
 
     @Override
@@ -56,13 +56,13 @@ public class CrusherBlockType extends RotatableCustomBlockType implements Custom
             public void onRightClick(@NotNull CustomBlockType customBlockType, @NotNull PlayerInteractEvent event) {
                 if (event.getPlayer().isSneaking()) return;
                 assert event.getClickedBlock() != null;
-                ((AlloyForgeBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(event.getClickedBlock()))).machine.openInventory(event.getPlayer());
+                ((CrusherBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(event.getClickedBlock()))).machine.openInventory(event.getPlayer());
             }
         });
         getComponents().set(new HopperInteractingBlock() {
             @Override
             public void onHopperSearch(@NotNull CustomBlockType customBlockType, @NotNull HopperInventorySearchEvent event) {
-                ((AlloyForgeBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(event.getSearchBlock()))).machine.onHopperSearch(event);
+                ((CrusherBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(event.getSearchBlock()))).machine.onHopperSearch(event);
             }
 
             @Override
@@ -76,6 +76,6 @@ public class CrusherBlockType extends RotatableCustomBlockType implements Custom
     @Override
     public void onGenericDestroy(@NotNull Block block) {
         super.onGenericDestroy(block);
-        ((AlloyForgeBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(block))).machine.destroy();
+        ((CrusherBlockEntity) Objects.requireNonNull(CustomBlockType.getTicking(block))).machine.destroy();
     }
 }

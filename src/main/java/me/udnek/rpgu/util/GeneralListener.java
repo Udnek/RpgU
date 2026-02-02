@@ -63,33 +63,37 @@ public class GeneralListener extends SelfRegisteringListener {
 
     @EventHandler
     public void onResourcepackInitialization(ResourcepackInitializationEvent event){
+        generateFiles(15, "crusher", event);
+        generateFiles(33, "alloying", event);
+    }
+
+    private void generateFiles(int count, @NotNull String path, ResourcepackInitializationEvent event){
         String model = """
                 {
-                	"parent": "rpgu:item/gui/alloying/progress/template",
+                	"parent": "rpgu:item/gui/%path%/progress/template",
                 	"textures": {
-                		"layer0": "rpgu:item/gui/alloying/progress/%lvl%"
+                		"layer0": "rpgu:item/gui/%path%/progress/%lvl%"
                 	}
                 }""";
-        for (int i = 0; i <= 29; i++) {
+        for (int i = 0; i <= count; i++) {
             event.addFile(new VirtualRpJsonFile(
-                    JsonParser.parseString(model.replace("%lvl%", String.valueOf(i))).getAsJsonObject(),
-                    AutoGeneratingFilesItem.GENERATED.getModelPath(new NamespacedKey(RpgU.getInstance(), "gui/alloying/progress/"+i))));
+                    JsonParser.parseString(model.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject(),
+                    AutoGeneratingFilesItem.GENERATED.getModelPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i))));
         }
         String definition = """
                 {
                 	"model": {
                 		"type": "minecraft:model",
-                		"model": "rpgu:item/gui/alloying/progress/%lvl%"
+                		"model": "rpgu:item/gui/%path%/progress/%lvl%"
                 	},
                     "oversized_in_gui": true
                 }""";
-        for (int i = 0; i <= 29; i++) {
+        for (int i = 0; i <= count; i++) {
             event.addFile(new VirtualRpJsonFile(
-                    JsonParser.parseString(definition.replace("%lvl%", String.valueOf(i))).getAsJsonObject(),
-                    AutoGeneratingFilesItem.GENERATED.getDefinitionPath(new NamespacedKey(RpgU.getInstance(), "gui/alloying/progress/"+i))));
+                    JsonParser.parseString(definition.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject(),
+                    AutoGeneratingFilesItem.GENERATED.getDefinitionPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i))));
         }
     }
-
 
     @EventHandler(priority = EventPriority.HIGH)
     public void villagerTrades(VillagerAcquireTradeEvent event){

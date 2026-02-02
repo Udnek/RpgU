@@ -10,6 +10,7 @@ import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.machine.crusher.CrusherRecipe;
 import me.udnek.rpgu.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -117,6 +118,13 @@ public class RecipeManaging {
         new ShapedRecipeBuilder(Material.PISTON).recipeShape(new String[]{"WWW", "CMC", "CRC"}).materialIngredients(Map.of('C', Material.COBBLESTONE,
                 'R', Material.REDSTONE)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).tagIngredients(Map.of('W', Tag.PLANKS))
                         .build(RpgU.getInstance());
+
+        RecipeManager.getInstance().register(new CrusherRecipe(new NamespacedKey(RpgU.getInstance(), "grass_block"),
+                new CustomSingleRecipeChoice(Material.GRASS_BLOCK),
+                List.of(
+                        new CrusherRecipe.ResultEntry(Material.GRASS_BLOCK.asItemType().createItemStack(), 1),
+                        new CrusherRecipe.ResultEntry(Items.BLAST_COAL.getItem(), 0.5)
+                )));//TODO delite
 
         unregister();
     }
