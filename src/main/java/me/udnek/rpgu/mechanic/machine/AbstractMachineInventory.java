@@ -5,7 +5,6 @@ import me.udnek.coreu.custom.inventory.SmartIntractableCustomInventory;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.recipe.RecipeManager;
 import me.udnek.rpgu.item.Items;
-import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,9 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
@@ -50,6 +47,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
 
     public abstract void updateProgressAnimation();
     public abstract void updateItems();
+    public abstract List<ItemStack> getResult();
 
 
     @Override
@@ -69,47 +67,75 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         consumer.accept(fuelSlot);
     }
 
-    public boolean canPlaceIntoResult(@NotNull ItemStack addItem){
-        int toPlace = addItem.getAmount();
+    public boolean canPlaceIntoResult(@NotNull List<ItemStack> items) {
+        Map<Integer, ItemStack> resultInfo = new HashMap<>();
         for (int slot : resultSlots) {
-            ItemStack item = getInventory().getItem(slot);
-            if (item == null || FILLER.isThisItem(item) || item.getType().isAir()) return true;
-            if (!addItem.isSimilar(item)) continue;
-
-            int spaceLeft = item.getMaxStackSize() - item.getAmount();
-            if (spaceLeft > 0) {
-                toPlace -= spaceLeft;
-                if (toPlace <= 0) return true;
+            ItemStack is = getInventory().getItem(slot);
+            if (is != null && !is.isEmpty()) {
+                resultInfo.put(slot, is.clone());
             }
         }
-        return toPlace <= 0;
+
+        for (ItemStack toAdd : items) {
+            if (toAdd == null || toAdd.isEmpty()) continue;
+            boolean isPlaced = false;
+            for (int slot : resultSlots) {
+                ItemStack current = resultInfo.getOrDefault(slot, null);
+                if (current == null || FILLER.isThisItem(current) || current.isEmpty()) {
+                    resultInfo.put(slot, toAdd.clone());
+                    isPlaced = true;
+                    break;
+                }
+                if (toAdd.isSimilar(current)) {
+                    int newSpace = current.getAmount() + toAdd.getAmount();
+                    if (newSpace <= current.getMaxStackSize()) {
+                        current.setAmount(newSpace);
+                        isPlaced = true;
+                        break;
+                    }
+                }
+            }
+            if (isPlaced) continue;
+            for (int slot : resultSlots) {
+                if (!resultInfo.containsKey(slot)) {
+                    resultInfo.put(slot, toAdd.clone());
+                    isPlaced = true;
+                    break;
+                }
+            }
+            if (!isPlaced) return false;
+        }
+        return true;
     }
 
-    public void addItemToResult(@NotNull ItemStack addItem){
-        int remaining = addItem.getAmount();
+    public void addItemToResult(@NotNull List<ItemStack> items){
+        for (ItemStack addItem : items) {
+            int remaining = addItem.getAmount();
 
-        for (int slot : resultSlots) {
-            ItemStack item = getInventory().getItem(slot);
-            if (item == null || item.isEmpty() || FILLER.isThisItem(item) || !addItem.isSimilar(item)) continue;
+            for (int slot : resultSlots) {
+                ItemStack item = getInventory().getItem(slot);
+                if (item == null || item.isEmpty() || FILLER.isThisItem(item) || !addItem.isSimilar(item)) continue;
 
-            int spaceLeft = item.getMaxStackSize() - item.getAmount();
-            if (spaceLeft <= 0) continue;
+                int spaceLeft = item.getMaxStackSize() - item.getAmount();
+                if (spaceLeft <= 0) continue;
 
-            int canAdd = Math.min(spaceLeft, remaining);
-            item.setAmount(item.getAmount() + canAdd);
-            remaining -= canAdd;
+                int canAdd = Math.min(spaceLeft, remaining);
+                item.setAmount(item.getAmount() + canAdd);
+                remaining -= canAdd;
 
-            if (remaining == 0) return;
+                if (remaining == 0) break;
+            }
+            if (remaining == 0) continue;
+
+            addItem.setAmount(remaining);
+            for (int slot : resultSlots) {
+                ItemStack item = getInventory().getItem(slot);
+                if (item == null || item.isEmpty() || !FILLER.isThisItem(item)) continue;
+                getInventory().setItem(slot, addItem);
+                break;
+            }
         }
 
-        addItem.setAmount(remaining);
-
-        for (int slot : resultSlots) {
-            ItemStack item = getInventory().getItem(slot);
-            if (item == null || item.isEmpty() || !FILLER.isThisItem(item)) continue;
-            getInventory().setItem(slot, addItem);
-            return;
-        }
     }
 
     public void takeItem(int slot, int amount){
@@ -125,8 +151,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         shouldUpdateItems = true;
     }
 
-    public void onFoundRecipe(@NotNull AlloyingRecipe recipe){
-        iterateTroughAllInputSlots(integer -> takeItem(integer, 1));
+    public void onFoundRecipe(@NotNull AbstractMachineRecipe recipe){
         currentRecipe = recipe;
         progress = 0;
         serializeItems();
@@ -180,7 +205,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         updateProgressAnimation();
 
         if (progress >= 1){
-            ItemStack result = currentRecipe.getResult();
+            List<ItemStack> result = getResult();
             if (!canPlaceIntoResult(result)) return;
             progress = 0;
             onReady(result);
@@ -193,7 +218,7 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         }
     }
 
-    protected void onReady(@NotNull ItemStack item) {}
+    protected void onReady(@NotNull List<ItemStack> item) {}
 
     @Override
     public void load() {

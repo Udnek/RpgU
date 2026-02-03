@@ -4,6 +4,7 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.entitylike.block.CustomBlockEntityType;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.mechanic.machine.AbstractMachineBlockEntity;
+import me.udnek.rpgu.mechanic.machine.crusher.CrusherInventory;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.inventory.ItemStack;
@@ -13,24 +14,54 @@ import java.util.Objects;
 
 public class CrusherBlockEntity extends AbstractMachineBlockEntity {
 
+    private boolean lit;
+    private boolean working;
+
     public CrusherBlockEntity() {
-        machine = null;
+        machine = new CrusherInventory(this);
     }
 
-    public void setState(boolean isLit, boolean isWorking) {
-        ItemDisplay display = Objects.requireNonNull(Blocks.CRUSHER.getDisplay(getReal().getBlock()));
-        ItemStack newDisplay = display.getItemStack();
-        if (isLit) {
-            if (isWorking) {
-                newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher_working"));
+
+    public void setLit(boolean lit) {
+        if (this.lit != lit) {
+            ItemDisplay display = Objects.requireNonNull(Blocks.CRUSHER.getDisplay(getReal().getBlock()));
+            ItemStack newDisplay = display.getItemStack();
+            if (lit) {
+                if (working) {
+                    newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher_working"));
+                } else {
+                    newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher_lit"));
+                }
+            }else {
+                if (!working) {
+                    newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher"));
+                }
             }
-            else {
-                newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher_lit"));
-            }
-        } else {
-            newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher"));
+            display.setItemStack(newDisplay);
+            this.lit = lit;
         }
-        display.setItemStack(newDisplay);
+    }
+
+    public  void setWorking(boolean working) {
+        if (this.working != working) {
+            ItemDisplay display = Objects.requireNonNull(Blocks.CRUSHER.getDisplay(getReal().getBlock()));
+            ItemStack newDisplay = display.getItemStack();
+            if (working) {
+                if (lit) {
+                    newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher_working"));
+                } else {
+                    throw new RuntimeException("off lit when start working");
+                }
+            }else {
+                if (lit) {
+                    newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher_lit"));
+                } else {
+                    newDisplay.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), "crusher"));
+                }
+            }
+            display.setItemStack(newDisplay);
+            this.working = working;
+        }
     }
 
     @Override

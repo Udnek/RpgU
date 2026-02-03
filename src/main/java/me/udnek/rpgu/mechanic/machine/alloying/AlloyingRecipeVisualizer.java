@@ -36,7 +36,7 @@ public class AlloyingRecipeVisualizer extends AbstractRecipeVisualizer {
 
         setChoice(AlloyForgeInventory.FUEL_SLOT + OFFSET, recipe.getFuel());
         setChoice(AlloyForgeInventory.ADDITION_SLOT + OFFSET, recipe.getAddition());
-        menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET-1, recipe.getResult());
+        menu.setItem(AlloyForgeInventory.RESULT_SLOT + OFFSET-1, recipe.getNewResult());
 
         menu.setItem(RecipesMenu.getRecipeStationPosition(), me.udnek.rpgu.item.Items.ALLOY_FORGE);
         menu.setThemedItem(AlloyForgeInventory.FUEL_SLOT + OFFSET - 9, Items.FIRE_ICON);

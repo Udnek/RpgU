@@ -10,11 +10,14 @@ import me.udnek.rpgu.mechanic.enchanting.EnchantingRecipe;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingRecipeVisualizer;
 import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipeVisualizer;
+import me.udnek.rpgu.mechanic.machine.crusher.CrusherRecipe;
+import me.udnek.rpgu.mechanic.machine.crusher.CrusherRecipeVisualizer;
 import org.jetbrains.annotations.NotNull;
 
 public class RecipeTypes {
 
     public static final CustomRecipeType<AlloyingRecipe> ALLOYING = register(new CustomRecipeType<>("alloying"));
+    public static final CustomRecipeType<CrusherRecipe> CRUSHER = register(new CustomRecipeType<>("crusher"));
     public static final CustomRecipeType<EnchantingRecipe> ENCHANTING = register(new CustomRecipeType<>("enchanting"));
 
     static {
@@ -22,6 +25,12 @@ public class RecipeTypes {
             @Override
             public @NotNull Visualizer getVisualizer(@NotNull CustomRecipe customRecipe) {
                 return new AlloyingRecipeVisualizer((AlloyingRecipe) customRecipe);
+            }
+        });
+        CRUSHER.getComponents().set(new VisualizableRecipeType() {
+            @Override
+            public @NotNull Visualizer getVisualizer(@NotNull CustomRecipe customRecipe) {
+                return new CrusherRecipeVisualizer((CrusherRecipe) customRecipe);
             }
         });
         ENCHANTING.getComponents().set(new VisualizableRecipeType() {

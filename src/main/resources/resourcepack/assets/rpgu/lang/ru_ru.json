@@ -49,5 +49,7 @@
   "item.minecraft.golden_boots": "Розовозолотые ботинки",
   "item.minecraft.golden_chestplate": "Розовозолотая нагрудник",
   "item.minecraft.golden_helmet": "Розовозолотый шлем",
-  "item.minecraft.golden_leggings": "Розовозолотые поножи"
+  "item.minecraft.golden_leggings": "Розовозолотые поножи",
+
+  "crusher.rpgu.probability": "Вероятность: %s%%"
 }

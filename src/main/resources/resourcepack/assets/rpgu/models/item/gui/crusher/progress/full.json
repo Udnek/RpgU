@@ -1,0 +1,6 @@
+{
+	"parent": "rpgu:item/gui/crusher/progress/template",
+	"textures": {
+		"layer0": "rpgu:item/gui/crusher/progress/full"
+	}
+}

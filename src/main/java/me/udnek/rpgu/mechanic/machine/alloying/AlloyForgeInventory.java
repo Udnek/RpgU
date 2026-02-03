@@ -6,6 +6,7 @@ import me.udnek.coreu.util.ComponentU;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.block.AlloyForgeBlockEntity;
 import me.udnek.rpgu.mechanic.machine.AbstractMachineInventory;
+import me.udnek.rpgu.mechanic.machine.AbstractMachineRecipe;
 import me.udnek.rpgu.mechanic.machine.RecipeTypes;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -45,6 +46,12 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
         this.alloyBlock = block;
     }
 
+    @Override
+    public List<ItemStack> getResult() {
+        return List.of(((AlloyingRecipe) Objects.requireNonNull(currentRecipe)).getNewResult());
+    }
+
+    @Override
     public void updateItems(){
         serializeItems();
 
@@ -70,7 +77,7 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
         for (AlloyingRecipe recipe : recipes) {
             boolean matches = recipe.test(stuffs, alloys, fuel, addition);
             if (!matches) continue;
-            if (!canPlaceIntoResult(recipe.getResult())) return;
+            if (!canPlaceIntoResult(List.of(recipe.getNewResult()))) return;
             onFoundRecipe(recipe);
             return;
         }
@@ -92,22 +99,23 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
 
         String model = "gui/alloying/progress/";
         if (progress == 0) model += "empty";
-        else model += (int) (progress*29);
+        else model += (int) (progress*35);
         icon.setData(DataComponentTypes.ITEM_MODEL, new NamespacedKey(RpgU.getInstance(), model));
         getInventory().setItem(PROGRESS_SLOT, icon);
     }
 
     @Override
-    protected void onReady(@NonNull ItemStack result) {
-        super.onReady(result);
+    protected void onReady(@NonNull List<ItemStack> results) {
+        super.onReady(results);
         alloyBlock.setLit(false);
         if (Objects.requireNonNull(((AlloyingRecipe) currentRecipe)).isKeepEnchantments() && currentAddition != null){
-            result.addEnchantments(currentAddition.getEnchantments());
+            results.getFirst().addEnchantments(currentAddition.getEnchantments());
         }
     }
 
     @Override
-    public void onFoundRecipe(@NonNull AlloyingRecipe recipe) {
+    public void onFoundRecipe(@NonNull AbstractMachineRecipe recipe) {
+        iterateTroughAllInputSlots(integer -> takeItem(integer, 1));
         currentAddition = getInventory().getItem(ADDITION_SLOT);
         alloyBlock.setLit(true);
         super.onFoundRecipe(recipe);
