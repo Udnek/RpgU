@@ -27,6 +27,7 @@ import me.udnek.rpgu.equipment.slot.EquipmentSlots;
 import me.udnek.rpgu.hud.Hud;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.item.utility.AirElementalTome;
+import me.udnek.rpgu.jeiu.JeiUListener;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
@@ -46,7 +47,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
     public static @NotNull RpgU getInstance() {
         return instance;
     }
-
 
     @Override
     public void onEnable() {
@@ -71,6 +71,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new ComponentListener(this);
         new AbilityListener(this);
         new VehicleListener(this);
+        new JeiUListener(this);
 
         Commands.declareCommands();
 
