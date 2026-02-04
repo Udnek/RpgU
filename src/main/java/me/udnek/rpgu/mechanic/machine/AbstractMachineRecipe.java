@@ -16,7 +16,6 @@ public abstract class AbstractMachineRecipe implements CustomRecipe {
     protected final List<CustomSingleRecipeChoice> stuff;
     protected final CustomRecipeChoice fuel;
     protected final NamespacedKey id;
-    protected final int craftDuration = 20 * 20;
 
     public AbstractMachineRecipe(@NotNull NamespacedKey key, @NotNull List<CustomSingleRecipeChoice> stuffs, @NotNull CustomRecipeChoice fuel) {
         this.stuff = new ArrayList<>(stuffs);
@@ -46,7 +45,7 @@ public abstract class AbstractMachineRecipe implements CustomRecipe {
 
     public @NotNull List<CustomSingleRecipeChoice> getStuff() {return new ArrayList<>(stuff);}
 
-    public int getCraftDuration() {return craftDuration;}
+    public abstract int getCraftDuration();
 
     @Override
     public void replaceItem(@NotNull ItemStack oldItem, @NotNull ItemStack newItem) {

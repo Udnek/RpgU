@@ -8,6 +8,7 @@ import me.udnek.coreu.custom.entitylike.block.CustomBlockType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.coreu.custom.equipment.slot.CustomEquipmentSlot;
 import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.custom.recipe.CustomRecipeType;
 import me.udnek.coreu.custom.sound.CustomSound;
 import me.udnek.coreu.resourcepack.ResourcePackablePlugin;
 import me.udnek.coreu.rpgu.component.RPGUActiveItem;
@@ -29,6 +30,9 @@ import me.udnek.rpgu.item.utility.AirElementalTome;
 import me.udnek.rpgu.mechanic.damaging.DamageListener;
 import me.udnek.rpgu.mechanic.enchanting.EnchantingListener;
 import me.udnek.rpgu.mechanic.enchanting.upgrade.EnchantingTableUpgrade;
+import me.udnek.rpgu.mechanic.machine.RecipeTypes;
+import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
+import me.udnek.rpgu.mechanic.railing.VehicleListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
@@ -57,6 +61,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         EnchantingTableUpgrade end = EnchantingTableUpgrade.END;
         CustomComponentType<RPGUActiveItem, AirElementalTome.Ability> tome = Abilities.AIR_ELEMENTAL_TOME;
         CustomComponentType<RPGUActiveItem, ShieldCrashingAbility> shieldCrashing = VanillaAbilities.SHIELD_CRASHING;
+        CustomRecipeType<AlloyingRecipe> alloying = RecipeTypes.ALLOYING;
 
         new DamageListener(this);
         new EnchantingListener(this);
@@ -65,6 +70,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         new AttributeManaging(this);
         new ComponentListener(this);
         new AbilityListener(this);
+        new VehicleListener(this);
 
         Commands.declareCommands();
 
