@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 
 public abstract class AbstractMachineInventory extends ConstructableCustomInventory implements AbstractMachine, SmartIntractableCustomInventory {
 
-    public static final CustomItem FILLER = Items.FERRUDAM_BOOTS;
+    public static final CustomItem FILLER = Items.TECHNICAL_INVENTORY_FILLER;
 
     protected final int[] stuffSlots;
     protected final int[] resultSlots;

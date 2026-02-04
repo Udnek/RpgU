@@ -78,8 +78,13 @@ public class AlloyingRecipe extends AbstractMachineRecipe {
         }
     }
 
+    @Override
+    public int getCraftDuration() {
+        return 15*20;
+    }
+
     public @NotNull ItemStack getNewResult() {
-        return result;
+        return result.clone();
     }
 
     @Override
