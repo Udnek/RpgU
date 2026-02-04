@@ -25,20 +25,20 @@ public class FerrudamIngot extends ConstructableCustomItem {
     }
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
-        List<CustomSingleRecipeChoice> stuffs = new ArrayList<>();
+        List<CustomSingleRecipeChoice> alloys = new ArrayList<>();
         CustomSingleRecipeChoice ironIngot = new CustomSingleRecipeChoice(Material.IRON_INGOT);
-        stuffs.add(ironIngot);
-        stuffs.add(ironIngot);
-        stuffs.add(ironIngot);
+        alloys.add(ironIngot);
+        alloys.add(ironIngot);
+        alloys.add(ironIngot);
         CustomSingleRecipeChoice diamondIngot = new CustomSingleRecipeChoice(Material.DIAMOND);
-        stuffs.add(diamondIngot);
-        stuffs.add(diamondIngot);
+        alloys.add(diamondIngot);
+        alloys.add(diamondIngot);
 
         AlloyingRecipe recipe = new AlloyingRecipe(
                 getNewRecipeKey(),
-                stuffs,
-                new CustomSingleRecipeChoice(Items.BLAST_COAL),
                 List.of(),
+                new CustomSingleRecipeChoice(Items.BLAST_COAL),
+                alloys,
                 new CustomSingleRecipeChoice(Items.INGOT_MOLD),
                 getItem()
         );

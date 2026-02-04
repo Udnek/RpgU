@@ -3,7 +3,6 @@ package me.udnek.rpgu.mechanic.enchanting;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.ItemEnchantments;
-import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipe;
 import me.udnek.coreu.custom.recipe.CustomRecipeType;
 import me.udnek.coreu.custom.recipe.choice.CustomRecipeChoice;

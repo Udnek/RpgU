@@ -11,7 +11,9 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,23 +28,13 @@ public class FerrudamBoots extends FerrudamArmor {
 
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
-        recipe.shape(
-                "F F",
-                "F F");
-
-        RecipeChoice.ExactChoice ferrudam = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
-        recipe.setIngredient('F', ferrudam);
-
-        consumer.accept(recipe);
-
         var ingot = new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT);
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
                 getNewRecipeKey(),
-                List.of(ingot, ingot),
+                List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_UPGRADE)),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
-                List.of(),
+                List.of(ingot, ingot),
                 new CustomSingleRecipeChoice(Material.IRON_BOOTS),
                 getItem()
         );

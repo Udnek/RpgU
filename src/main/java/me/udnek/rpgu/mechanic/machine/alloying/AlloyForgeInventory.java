@@ -130,10 +130,7 @@ public class AlloyForgeInventory extends AbstractMachineInventory {
     @Override
     protected void getSlotsOrItemToDeserialize(@NonNull List<ItemStack> items, @NonNull AtomicInteger bundleSlot) {
         super.getSlotsOrItemToDeserialize(items, bundleSlot);
-        ItemStack addition = items.get(bundleSlot.addAndGet(1));
-        if (!FILLER.isThisItem(addition)){
-            currentAddition = addition;
-        }
+        tryConsumeNextItem(itemStack -> currentAddition = itemStack, items, bundleSlot);
     }
 
     @Override

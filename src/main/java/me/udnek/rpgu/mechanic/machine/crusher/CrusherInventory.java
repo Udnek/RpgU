@@ -52,20 +52,9 @@ public class CrusherInventory extends AbstractMachineInventory {
         super.tick(tickDelay);
         if (isLit()){
             if (currentResult == null) updateItemsTickLater();
-            crusherBlock.setLit(true);
             litTime -= tickDelay;
         } else {
             crusherBlock.setLit(false);
-            ItemStack fuel = getInventory().getItem(fuelSlot);
-            if (fuel != null) {
-                ItemType itemType = fuel.getType().asItemType();
-                if (itemType == null) return;
-                int burnDuration = itemType.getBurnDuration();
-                if (burnDuration == 0) return;
-                litTime = burnDuration;
-                takeItem(fuelSlot, 1);
-            }
-
         }
     }
 
@@ -84,7 +73,7 @@ public class CrusherInventory extends AbstractMachineInventory {
     @Override
     public void updateItems() {
         serializeItems();
-        if (currentRecipe != null || !isLit()) return;
+        if (currentRecipe != null) return;
 
         List<ItemStack> stuffs = new ArrayList<>();
         for (int stuffSlot : stuffSlots) {
@@ -98,43 +87,27 @@ public class CrusherInventory extends AbstractMachineInventory {
             if (!matches) continue;
             List<ItemStack> result = recipe.generateResult();
             if (!canPlaceIntoResult(result)) return;
+
+            if (!isLit()) {
+                ItemStack fuel = getInventory().getItem(fuelSlot);
+                if (fuel == null) return;
+                ItemType itemType = fuel.getType().asItemType();
+                if (itemType == null) return;
+                int burnDuration = itemType.getBurnDuration();
+                if (burnDuration == 0) return;
+                onBeginLit(burnDuration);
+            }
+
             currentResult = result;
             onFoundRecipe(recipe);
             return;
         }
-
-        /*ItemStack fuel = getInventory().getItem(fuelSlot);
-        if (fuel == null) {
-            if (!isLit()) return;
-            findRecipe(stuffs);
-            return;
-        }
-
-
-
-        if (!isLit()) {
-            ItemType itemType = fuel.getType().asItemType();
-            if (itemType == null) return;
-            int burnDuration = itemType.getBurnDuration();
-            if (burnDuration == 0) return;
-            litTime = burnDuration;
-            takeItem(fuelSlot, 1);
-        }
-
-        findRecipe(stuffs);*/
     }
 
-    private void findRecipe(List<ItemStack> stuffs) {
-        List<CrusherRecipe> recipes = RecipeManager.getInstance().getByType(RecipeTypes.CRUSHER);
-        for (CrusherRecipe recipe : recipes) {
-            boolean matches = recipe.test(stuffs);
-            if (!matches) continue;
-            List<ItemStack> result = recipe.generateResult();
-            if (!canPlaceIntoResult(result)) return;
-            currentResult = result;
-            onFoundRecipe(recipe);
-            return;
-        }
+    protected void onBeginLit(int burnDuration) {
+        litTime = burnDuration;
+        takeItem(fuelSlot, 1);
+        crusherBlock.setLit(true);
     }
 
     @Override

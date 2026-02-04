@@ -1,16 +1,11 @@
 package me.udnek.rpgu.mechanic.machine.crusher;
 
 import com.google.common.base.Preconditions;
-import io.papermc.paper.datacomponent.DataComponentTypes;
-import io.papermc.paper.datacomponent.item.ItemLore;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipeType;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
-import me.udnek.coreu.util.Utils;
 import me.udnek.rpgu.mechanic.machine.AbstractMachineRecipe;
 import me.udnek.rpgu.mechanic.machine.RecipeTypes;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -31,9 +26,6 @@ public class CrusherRecipe extends AbstractMachineRecipe {
     public CrusherRecipe(NamespacedKey key, CustomSingleRecipeChoice stuff, List<ResultEntry> results) {
         super(key, List.of(stuff), new CustomSingleRecipeChoice(Material.AIR));
         Preconditions.checkArgument(results.size() <= 9, "Alloys must be <= 8!");
-        for (ResultEntry resultEntry : results) {
-            Preconditions.checkArgument(resultEntry != null, "AlloysInput can not be null!");
-        }
         this.results = results;
     }
 
