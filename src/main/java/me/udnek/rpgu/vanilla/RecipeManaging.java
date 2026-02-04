@@ -23,36 +23,36 @@ import java.util.*;
 
 public class RecipeManaging {
     public static void run(){
-        new ShapedRecipeBuilder(Material.LODESTONE).recipeShape(new String[]{ "BBB", "BMB", "BBB"}).materialIngredients(Map.of('B', Material.STONE_BRICKS))
+        new ShapedRecipeBuilder(Material.LODESTONE).shape(new String[]{ "BBB", "BMB", "BBB"}).materialIngredients(Map.of('B', Material.STONE_BRICKS))
                 .customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.POWERED_RAIL).recipeShape(new String[]{"M M", "ISI", "MRM"}).materialIngredients(Map.of('S', Material.STICK, 'R',
-                Material.REDSTONE, 'I', Material.IRON_INGOT)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).setAmount(6).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.COMPASS).recipeShape(new String[]{" C ", "CMC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT))
+        new ShapedRecipeBuilder(Material.POWERED_RAIL).shape(new String[]{"M M", "ISI", "MRM"}).materialIngredients(Map.of('S', Material.STICK, 'R',
+                Material.REDSTONE, 'I', Material.IRON_INGOT)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).resultAmount(6).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.COMPASS).shape(new String[]{" C ", "CMC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT))
                 .customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.BUCKET).recipeShape(new String[]{"C C", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.SHEARS).recipeShape(new String[]{" C", "C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CLOCK).recipeShape(new String[]{" C ", "CRC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT,
+        new ShapedRecipeBuilder(Material.BUCKET).shape(new String[]{"C C", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.SHEARS).shape(new String[]{" C", "C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT)).build(RpgU.getInstance());
+        new ShapedRecipeBuilder(Material.CLOCK).shape(new String[]{" C ", "CRC", " C "}).materialIngredients(Map.of('C', Material.COPPER_INGOT,
                 'R', Material.REDSTONE)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.IRON_CHESTPLATE).recipeShape(new String[]{"ILI", "III", "III"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
+        new ShapedRecipeBuilder(Material.IRON_CHESTPLATE).shape(new String[]{"ILI", "III", "III"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
                 'L', Material.LEATHER_CHESTPLATE)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.IRON_HELMET).recipeShape(new String[]{"III", "ILI"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
+        new ShapedRecipeBuilder(Material.IRON_HELMET).shape(new String[]{"III", "ILI"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
                 'L', Material.LEATHER_HELMET)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.IRON_LEGGINGS).recipeShape(new String[]{"III", "ILI", "I I"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
+        new ShapedRecipeBuilder(Material.IRON_LEGGINGS).shape(new String[]{"III", "ILI", "I I"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
                 'L', Material.LEATHER_LEGGINGS)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.IRON_BOOTS).recipeShape(new String[]{"ILI", "I I"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
+        new ShapedRecipeBuilder(Material.IRON_BOOTS).shape(new String[]{"ILI", "I I"}).materialIngredients(Map.of('I', Material.IRON_INGOT,
                 'L', Material.LEATHER_BOOTS)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.LEATHER_CHESTPLATE).recipeShape(new String[]{"L L", "FLF", "LFL"}).stackIngredients(Map.of( 'L',
+        new ShapedRecipeBuilder(Material.LEATHER_CHESTPLATE).shape(new String[]{"L L", "FLF", "LFL"}).stackIngredients(Map.of( 'L',
                 List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.LEATHER_HELMET).recipeShape(new String[]{"FLF", "L L"}).stackIngredients(Map.of( 'L',
+        new ShapedRecipeBuilder(Material.LEATHER_HELMET).shape(new String[]{"FLF", "L L"}).stackIngredients(Map.of( 'L',
                 List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.LEATHER_LEGGINGS).recipeShape(new String[]{"LFL", "F F", "L L"}).stackIngredients(Map.of( 'L',
+        new ShapedRecipeBuilder(Material.LEATHER_LEGGINGS).shape(new String[]{"LFL", "F F", "L L"}).stackIngredients(Map.of( 'L',
                 List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.LEATHER_BOOTS).recipeShape(new String[]{"F F", "L L"}).stackIngredients(Map.of( 'L',
+        new ShapedRecipeBuilder(Material.LEATHER_BOOTS).shape(new String[]{"F F", "L L"}).stackIngredients(Map.of( 'L',
                 List.of(new ItemStack(Material.LEATHER), Items.WOLF_PELT.getItem()))).customItemIngredients(Map.of('F', Items.FABRIC)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.BLAST_FURNACE).recipeShape(new String[]{"SSS", "FFA", "BBB"}).materialIngredients(Map.of('F', Material.FURNACE,
+        new ShapedRecipeBuilder(Material.BLAST_FURNACE).shape(new String[]{"SSS", "FFA", "BBB"}).materialIngredients(Map.of('F', Material.FURNACE,
                 'S', Material.SMOOTH_STONE,'B', Material.BRICKS,'A', Material.AMETHYST_BLOCK)).build(RpgU.getInstance());
         ////////////////////////////////////////////////////
         new AlloyingRecipeBuilder(Material.NETHERITE_INGOT).addStuffs(Material.NETHERITE_SCRAP, 3).addStuffs(Items.MAGNETITE_INGOT, 3)
@@ -78,34 +78,34 @@ public class RecipeManaging {
         new AlloyingRecipeBuilder(Material.NETHERITE_SWORD).recipeKey("netherite_sword_smithing").addStuffs(Material.NETHERITE_INGOT, 1)
                 .materialFuel(Tag.ITEMS_COALS.getValues()).customItemAddition(Set.of(Items.FERRUDAM_SWORD)).build(RpgU.getInstance());
         ////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.CHAINMAIL_CHESTPLATE).recipeShape(new String[]{"C C", "CCC", "CCC"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_CHESTPLATE).shape(new String[]{"C C", "CCC", "CCC"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CHAINMAIL_HELMET).recipeShape(new String[]{"CCC", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_HELMET).shape(new String[]{"CCC", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CHAINMAIL_LEGGINGS).recipeShape(new String[]{"CCC", "C C", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_LEGGINGS).shape(new String[]{"CCC", "C C", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.CHAINMAIL_BOOTS).recipeShape(new String[]{"C C", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
+        new ShapedRecipeBuilder(Material.CHAINMAIL_BOOTS).shape(new String[]{"C C", "C C"}).materialIngredients(Map.of('C', Material.IRON_CHAIN))
                 .build(RpgU.getInstance());
         /////////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.GOLDEN_CHESTPLATE).recipeShape(new String[]{"GLG", "GGG", "GGG"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
+        new ShapedRecipeBuilder(Material.GOLDEN_CHESTPLATE).shape(new String[]{"GLG", "GGG", "GGG"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
                 'L', Material.LEATHER_CHESTPLATE)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.GOLDEN_HELMET).recipeShape(new String[]{"GGG", "GLG"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
+        new ShapedRecipeBuilder(Material.GOLDEN_HELMET).shape(new String[]{"GGG", "GLG"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
                 'L', Material.LEATHER_HELMET)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.GOLDEN_LEGGINGS).recipeShape(new String[]{"GGG", "GLG", "G G"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
+        new ShapedRecipeBuilder(Material.GOLDEN_LEGGINGS).shape(new String[]{"GGG", "GLG", "G G"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
                 'L', Material.LEATHER_LEGGINGS)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.GOLDEN_BOOTS).recipeShape(new String[]{"GLG", "G G"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
+        new ShapedRecipeBuilder(Material.GOLDEN_BOOTS).shape(new String[]{"GLG", "G G"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
                 'L', Material.LEATHER_BOOTS)).build(RpgU.getInstance());
         //////////////////////////////////////////////
         for (Material material: Tag.BEDS.getValues()){
-            new ShapedRecipeBuilder(material).recipeShape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.replaceSuffix(material,
+            new ShapedRecipeBuilder(material).shape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.replaceSuffix(material,
                     "_wool"))).customItemIngredients(Map.of('F', Items.FABRIC)).tagIngredients(Map.of('P', Tag.PLANKS)).build(RpgU.getInstance());
         }
         //////////////////////////////////////////////
         for (Material material: Tag.WOODEN_TRAPDOORS.getValues()){
-            new ShapedRecipeBuilder(material).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
+            new ShapedRecipeBuilder(material).resultAmount(6).shape(new String[]{"PPP", "PPP"})
                     .materialIngredients(Map.of('P', Utils.replaceSuffix(material, "_planks"))).build(RpgU.getInstance());
         }
-        new ShapedRecipeBuilder(Material.COPPER_TRAPDOOR).setAmount(6).recipeShape(new String[]{"PPP", "PPP"})
+        new ShapedRecipeBuilder(Material.COPPER_TRAPDOOR).resultAmount(6).shape(new String[]{"PPP", "PPP"})
                 .materialIngredients(Map.of('P', Material.COPPER_INGOT)).build(RpgU.getInstance());
         //////////////////////////////////////////////
         new ShapelessRecipeBuilder(Material.ANVIL).addIngredient(Material.IRON_INGOT, 3).
@@ -113,9 +113,9 @@ public class RecipeManaging {
         new ShapelessRecipeBuilder(Material.CHIPPED_ANVIL).addIngredient(Material.IRON_INGOT, 3).
                 addIngredient(Material.DAMAGED_ANVIL, 1).build(RpgU.getInstance());
         //////////////////////////////////////////////
-        new ShapedRecipeBuilder(Material.MINECART).recipeShape(new String[]{"I I", "MMM"}).materialIngredients(Map.of('I', Material.IRON_INGOT)).
+        new ShapedRecipeBuilder(Material.MINECART).shape(new String[]{"I I", "MMM"}).materialIngredients(Map.of('I', Material.IRON_INGOT)).
                 customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).build(RpgU.getInstance());
-        new ShapedRecipeBuilder(Material.PISTON).recipeShape(new String[]{"WWW", "CMC", "CRC"}).materialIngredients(Map.of('C', Material.COBBLESTONE,
+        new ShapedRecipeBuilder(Material.PISTON).shape(new String[]{"WWW", "CMC", "CRC"}).materialIngredients(Map.of('C', Material.COBBLESTONE,
                 'R', Material.REDSTONE)).customItemIngredients(Map.of('M', Items.MAGNETITE_INGOT)).tagIngredients(Map.of('W', Tag.PLANKS))
                         .build(RpgU.getInstance());
 

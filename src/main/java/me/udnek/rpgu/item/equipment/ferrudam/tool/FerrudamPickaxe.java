@@ -8,8 +8,6 @@ import me.udnek.rpgu.mechanic.machine.alloying.AlloyingRecipe;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,26 +30,13 @@ public class FerrudamPickaxe extends FerrudamTool {
     }
     @Override
     protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
-        ShapedRecipe recipe = new ShapedRecipe(getNewRecipeKey(), getItem());
-        recipe.shape(
-                "FFF",
-                " S ",
-                " S ");
-
-        RecipeChoice.ExactChoice ferrudam = new RecipeChoice.ExactChoice(Items.FERRUDAM_INGOT.getItem());
-        RecipeChoice.MaterialChoice stick = new RecipeChoice.MaterialChoice(Material.STICK);
-        recipe.setIngredient('F', ferrudam);
-        recipe.setIngredient('S', stick);
-
-        consumer.accept(recipe);
-
         var ingot = new CustomSingleRecipeChoice(Items.FERRUDAM_INGOT);
 
         AlloyingRecipe recipeAlloy = new AlloyingRecipe(
                 getNewRecipeKey(),
-                List.of(ingot, ingot),
+                List.of(new CustomSingleRecipeChoice(Items.FERRUDAM_UPGRADE)),
                 new CustomCompatibleRecipeChoice(Set.of(), Tag.ITEMS_COALS.getValues()),
-                List.of(),
+                List.of(ingot, ingot),
                 new CustomSingleRecipeChoice(Material.IRON_PICKAXE),
                 getItem()
         );
