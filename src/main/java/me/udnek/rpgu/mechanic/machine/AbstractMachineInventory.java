@@ -239,19 +239,18 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
     }
 
     protected void getSlotsOrItemToDeserialize(@NotNull List<ItemStack> items, @NotNull AtomicInteger bundleSlot) {
-        iterateTroughAllInputSlots(slot -> {
-            ItemStack item = items.get(bundleSlot.get());
-            if (!FILLER.isThisItem(item)){
-                getInventory().setItem(slot, item);
-            }
-            bundleSlot.incrementAndGet();
-        });
+        iterateTroughAllInputSlots(slot -> tryConsumeNextItem(itemStack -> getInventory().setItem(slot, itemStack), items, bundleSlot));
         for (int resultSlot : resultSlots) {
-            ItemStack result = items.get(bundleSlot.get());
-            if (!FILLER.isThisItem(result)){
-                getInventory().setItem(resultSlot, result);
-            }
+            tryConsumeNextItem(itemStack -> getInventory().setItem(resultSlot, itemStack), items, bundleSlot);
         }
+    }
+
+    protected void tryConsumeNextItem(@NotNull Consumer<ItemStack> consumer, @NotNull List<ItemStack> items, @NotNull AtomicInteger bundleSlot){
+        ItemStack item = items.get(bundleSlot.get());
+        if (!FILLER.isThisItem(item)){
+            consumer.accept(item);
+        }
+        bundleSlot.incrementAndGet();
     }
 
     @Override
@@ -340,10 +339,6 @@ public abstract class AbstractMachineInventory extends ConstructableCustomInvent
         }
         updateItemsTickLater();
     }
-
-
-
-
 
     public interface SlotOrItemConsumer extends Consumer<Integer>{
         @Override
