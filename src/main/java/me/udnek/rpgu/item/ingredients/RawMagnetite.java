@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class RawMagnetite extends ConstructableCustomItem {
     @Override
@@ -57,7 +58,7 @@ public class RawMagnetite extends ConstructableCustomItem {
         Nms.get().getLootTableWrapper(LootTables.SKELETON.getLootTable()).addPool(
                 new PoolWrapper.Builder(
                         new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.SPHERE_OF_DISCORD))
-                                .addCondition(LootConditionWrapper.structure(StructureKeys.MANSION.key()))
+                                .addCondition(LootConditionWrapper.structure(Set.of(StructureKeys.MANSION.key())))
                                 .buildAndWrap()
                 ).build()
         );
