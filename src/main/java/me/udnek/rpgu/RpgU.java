@@ -38,13 +38,17 @@ import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NullUnmarked;
 
+@NullMarked
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
-    private static RpgU instance;
+    private static @UnknownNullability RpgU instance;
 
-    public static @NotNull RpgU getInstance() {
+    public static RpgU getInstance() {
         return instance;
     }
 
@@ -79,7 +83,7 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
     }
 
     @Override
-    public @NotNull Priority getPriority() {
+    public Priority getPriority() {
         return Priority.BASE;
     }
 }

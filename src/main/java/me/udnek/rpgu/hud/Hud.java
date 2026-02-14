@@ -31,6 +31,11 @@ public class Hud implements CustomHud {
 
     private static final TextColor PHYSICAL_DEFENSE_COLOR = NamedTextColor.WHITE;
     private static final TextColor MAGICAL_DEFENSE_COLOR = NamedTextColor.LIGHT_PURPLE;
+    private static final TextColor HEALTH_BAR_DEFAULT_COLOR = TextColor.color(1f, 0f, 0f);
+    private static final TextColor HEALTH_BAR_INVULNERABILITY_COLOR = TextColor.fromHexString("#ff6e6e");
+    private static final TextColor HEALTH_BAR_FROZEN_COLOR = TextColor.fromHexString("#84bcff");
+    private static final TextColor HEALTH_BAR_POISON_COLOR = TextColor.fromHexString("#947818");
+    private static final TextColor HEALTH_BAR_WITHER_COLOR = TextColor.fromHexString("#341a1a");
 
     private static final String BASE_PREFIX = "hud.rpgu.stat.level.";
     private static final Component BACKGROUND = Component.translatable("hud.rpgu.stat.background");
@@ -112,11 +117,11 @@ public class Hud implements CustomHud {
                 size);
 
         TextColor color;
-        if (player.getNoDamageTicks() > 0) color = TextColor.fromHexString("#ff6e6e");
-        else if (player.getFreezeTicks() > 0) color = TextColor.fromHexString("#84bcff");
-        else if (player.hasPotionEffect(PotionEffectType.POISON)) color = TextColor.fromHexString("#947818");
-        else if (player.hasPotionEffect(PotionEffectType.WITHER)) color = TextColor.fromHexString("#341a1a");
-        else color = TextColor.color(1f, 0f, 0f);
+        if (player.getNoDamageTicks() > 0) color = HEALTH_BAR_INVULNERABILITY_COLOR;
+        else if (player.getFreezeTicks() > 0) color = HEALTH_BAR_FROZEN_COLOR;
+        else if (player.hasPotionEffect(PotionEffectType.POISON)) color = HEALTH_BAR_POISON_COLOR;
+        else if (player.hasPotionEffect(PotionEffectType.WITHER)) color = HEALTH_BAR_WITHER_COLOR;
+        else color = HEALTH_BAR_DEFAULT_COLOR;
 
         return wrap(healthImage.append(absorptionImage.font(HEALTH_ABSORPTION_FONT).color(NamedTextColor.WHITE)), HEALTH_FONT, color).append(text);
     }

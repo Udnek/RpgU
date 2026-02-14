@@ -54,8 +54,6 @@ public class RawMagnetite extends ConstructableCustomItem {
         // adding new
         mainEntry.addChild(NestedEntryWrapper.createFromLootTable(ironAndMag));
 
-
-
         Nms.get().getLootTableWrapper(LootTables.SKELETON.getLootTable()).addPool(
                 new PoolWrapper.Builder(
                         new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.SPHERE_OF_DISCORD))
