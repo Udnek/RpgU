@@ -30,9 +30,9 @@ public class StructureManaging {
             StructureWrapper structureWrapper = Nms.get().getStructureWrapper(key);
             if (structureWrapper == null) continue;
             System.out.println("///////////////////////////////////////////////////////////////////////////////");
-            System.out.println(key + "1");
-            structureWrapper.getSpawnOverrides().forEach((structureWrappers, structureWrappers12) -> {
-                        System.out.println(structureWrappers12.getSpawns());
+            System.out.println(key);
+            structureWrapper.getSpawnOverrides().forEach((a, b) -> {
+                        System.out.println(a + ": " + b.getSpawns());
                     });
             structureWrapper.editSpawnOverrides(
                     (map -> {
@@ -40,18 +40,16 @@ public class StructureManaging {
                         wrapper.addSpawn(new StructureSpawnOverrideWrapper.SpawnEntry(2, EntityType.WITCH, 1, 1));
                         wrapper.addSpawn(new StructureSpawnOverrideWrapper.SpawnEntry(1, EntityType.PILLAGER, 2, 4));
                         map.put(MobCategoryWrapper.MONSTER, wrapper);
-                        System.out.println("///////////////////////////////////////////////////////////////////////////////");
-                        System.out.println(key + "2");
-                        map.forEach((s, structureWrappers12) -> {
-                            System.out.println(structureWrappers12.getSpawns());
+                        System.out.println("------------");
+                        map.forEach((a, b) -> {
+                            System.out.println(a + ": " + b.getSpawns());
                         });
                         return map;
                     }));
 
-            System.out.println("///////////////////////////////////////////////////////////////////////////////");
-            System.out.println(key + "3");
-            Nms.get().getStructureWrapper(key).getSpawnOverrides().forEach((structureWrappers, structureWrappers12) -> {
-                System.out.println(structureWrappers12.getSpawns());
+            System.out.println("------------");
+            structureWrapper.getSpawnOverrides().forEach((a, b) -> {
+                System.out.println(a + ": " + b.getSpawns());
             });
         }
     }
