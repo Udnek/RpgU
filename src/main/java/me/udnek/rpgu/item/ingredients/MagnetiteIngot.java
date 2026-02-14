@@ -13,15 +13,16 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.loot.LootTables;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.function.Consumer;
 
+@NullMarked
 public class MagnetiteIngot extends ConstructableCustomItem {
 
     @Override
-    public @NotNull String getRawId() {return "magnetite_ingot";}
+    public String getRawId() {return "magnetite_ingot";}
 
     @Override
     public @Nullable TranslatableThing getTranslations() {
@@ -29,7 +30,7 @@ public class MagnetiteIngot extends ConstructableCustomItem {
     }
 
     @Override
-    protected void generateRecipes(@NotNull Consumer<Recipe> consumer) {
+    protected void generateRecipes(Consumer<Recipe> consumer) {
         RecipeChoice.ExactChoice rawMagnetite = new RecipeChoice.ExactChoice(Items.RAW_MAGNETITE.getItem());
 
         FurnaceRecipe recipe = new FurnaceRecipe(
@@ -48,7 +49,7 @@ public class MagnetiteIngot extends ConstructableCustomItem {
         addToLootTables(LootTables.SIMPLE_DUNGEON, LootTables.ABANDONED_MINESHAFT, LootTables.JUNGLE_TEMPLE);
     }
 
-    private void addToLootTables(@NotNull LootTables ...lootTables) {
+    private void addToLootTables(LootTables ...lootTables) {
         for (LootTables lootTable : lootTables) {
             Nms.get().getLootTableWrapper(lootTable.getLootTable()).addPool(
                     new PoolWrapper.Builder(
