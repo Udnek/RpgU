@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.recipe.CustomRecipeType;
 import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
+import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.machine.AbstractMachineRecipe;
 import me.udnek.rpgu.mechanic.machine.RecipeTypes;
 import org.bukkit.Material;
@@ -24,7 +25,7 @@ public class CrusherRecipe extends AbstractMachineRecipe {
     protected final List<ResultEntry> results;
 
     public CrusherRecipe(NamespacedKey key, CustomSingleRecipeChoice stuff, List<ResultEntry> results) {
-        super(key, List.of(stuff), new CustomSingleRecipeChoice(Material.AIR));
+        super(key, List.of(stuff), new CustomSingleRecipeChoice(Items.TECHNICAL_INVENTORY_FILLER));
         Preconditions.checkArgument(results.size() <= 9, "Alloys must be <= 8!");
         this.results = results;
     }
