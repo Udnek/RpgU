@@ -37,8 +37,8 @@ public class StructureManaging {
             structureWrapper.editSpawnOverrides(
                     (map -> {
                         StructureSpawnOverrideWrapper wrapper = StructureSpawnOverrideWrapper.of(BoundingBoxTypeWrapper.PIECE);
-                        wrapper.addSpawn(new StructureSpawnOverrideWrapper.SpawnEntry(2, EntityType.WITCH, 1, 1));
-                        wrapper.addSpawn(new StructureSpawnOverrideWrapper.SpawnEntry(1, EntityType.PILLAGER, 2, 4));
+                        wrapper.addSpawn(new StructureSpawnOverrideWrapper.SpawnEntry(1, EntityType.WITCH, 1, 1));
+                        wrapper.addSpawn(new StructureSpawnOverrideWrapper.SpawnEntry(5, EntityType.PILLAGER, 20, 1024));
                         map.put(MobCategoryWrapper.MONSTER, wrapper);
                         System.out.println("------------");
                         map.forEach((a, b) -> {

@@ -19,5 +19,8 @@ public class JeiUListener extends SelfRegisteringListener {
         if (id.startsWith("archaelogy")){ // MISSPELLING
             event.setIcon(new ItemStack(Material.BRUSH));
         }
+        else if (id.startsWith("keys")){
+            event.setIcon(new ItemStack(Material.TRIAL_KEY));
+        }
     }
 }
