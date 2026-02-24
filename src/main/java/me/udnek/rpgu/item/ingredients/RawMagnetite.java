@@ -40,8 +40,8 @@ public class RawMagnetite extends ConstructableCustomItem {
 
         EntryWrapper magnetiteEntry = new NmsCustomEntry.Builder(new ItemStackCreator.Custom(this))
                 .setFunctions(ironEntry.getFunctions())
-                .setConditions(ironEntry.getConditions()).buildAndWrap();
-
+                .setConditions(ironEntry.getConditions())
+                .buildAndWrap();
 
         LootTableWrapper ironAndMag = lootTable.copy();
         // clears
@@ -54,13 +54,5 @@ public class RawMagnetite extends ConstructableCustomItem {
         mainEntry.removeChild(1);
         // adding new
         mainEntry.addChild(NestedEntryWrapper.createFromLootTable(ironAndMag));
-
-        Nms.get().getLootTableWrapper(LootTables.SKELETON.getLootTable()).addPool(
-                new PoolWrapper.Builder(
-                        new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.SPHERE_OF_DISCORD))
-                                .addCondition(LootConditionWrapper.structure(Set.of(StructureKeys.MANSION.key())))
-                                .buildAndWrap()
-                ).build()
-        );
     }
 }
