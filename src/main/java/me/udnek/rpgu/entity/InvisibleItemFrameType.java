@@ -5,6 +5,9 @@ import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Hanging;
@@ -49,8 +52,12 @@ public class InvisibleItemFrameType extends ConstructableCustomEntityType<ItemFr
     public void onDeath(HangingBreakByEntityEvent event){
         Hanging entity = event.getEntity();
         if (CustomEntityType.get(entity) != EntityTypes.INVISIBLE_ITEM_FRAME) return;
+
         Location location = entity.getLocation().clone().toCenterLocation();
-        location.getWorld().dropItemNaturally(location, Items.INVISIBLE_FRAME_ITEM.getItem());
+        World world = location.getWorld();
+        world.dropItemNaturally(location, Items.INVISIBLE_FRAME_ITEM.getItem());
+        world.playSound(location, Sound.ENTITY_ITEM_FRAME_BREAK, SoundCategory.BLOCKS, 1, 1);
+
         entity.remove();
         event.setCancelled(true);
     }
