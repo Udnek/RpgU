@@ -10,6 +10,7 @@ import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
 import me.udnek.rpgu.item.block.AlloyForgeItem;
 import me.udnek.rpgu.item.block.CrusherItem;
+import me.udnek.rpgu.item.block.InvisibleItemFrameItem;
 import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
@@ -174,6 +175,7 @@ public class Items {
     public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
     public static final CustomItem CRUSHER = register(new CrusherItem());
     public static final CustomItem ALLOY_FORGE = register(new AlloyForgeItem());
+    public static final CustomItem INVISIBLE_FRAME_ITEM =  register(new InvisibleItemFrameItem());
 
 
     private static @NotNull CustomItem register(@NotNull CustomItem customItem){

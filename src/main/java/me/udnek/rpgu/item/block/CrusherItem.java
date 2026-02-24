@@ -19,7 +19,6 @@ public class CrusherItem extends ConstructableCustomItem {
         return Material.BARRIER;
     }
 
-
     @Override
     public @NotNull String getRawId() {
         return "crusher";

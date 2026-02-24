@@ -13,6 +13,8 @@ public class EntityTypes {
 
     public static final CustomTickingEntityType<TotemOfSavingEntity> TOTEM_OF_SAVING = register(new TotemOfSavingEntityType());
 
+    public static final CustomEntityType INVISIBLE_ITEM_FRAME = register(new InvisibleItemFrameType());
+
     public static final CustomEntityType DAMAGE_DISPLAY = register(new DamageDisplayEntityType());
 
     public static final CustomTickingEntityType<AncientBreeze> ANCIENT_BREEZE = register(new AncientBreezeType());
