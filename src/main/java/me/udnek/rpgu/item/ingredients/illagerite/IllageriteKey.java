@@ -8,8 +8,6 @@ import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
 import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.vanilla.StructureManaging;
-import net.kyori.adventure.key.Key;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.Nullable;
@@ -49,10 +47,6 @@ public class IllageriteKey extends ConstructableCustomItem {
                             .addCondition(LootConditionWrapper.structure(StructureManaging.ILLAGER_STRUCTURE_KEYS))
                             .buildAndWrap())
                     .build());
-        }
-
-        for (Key key : StructureManaging.ILLAGER_STRUCTURE_KEYS) {
-            Nms.get().convertContainerWithVaultInStructure(new NamespacedKey(key.namespace(), key.value()), lootTable -> this.getItem());
         }
     }
 }

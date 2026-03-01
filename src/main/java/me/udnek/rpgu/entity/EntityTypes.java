@@ -7,8 +7,9 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.entity.ancient_breeze.*;
 import me.udnek.rpgu.entity.totem_of_saving.TotemOfSavingEntity;
 import me.udnek.rpgu.entity.totem_of_saving.TotemOfSavingEntityType;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class EntityTypes {
 
     public static final CustomTickingEntityType<TotemOfSavingEntity> TOTEM_OF_SAVING = register(new TotemOfSavingEntityType());
@@ -21,7 +22,7 @@ public class EntityTypes {
     public static final CustomTickingEntityType<AncientBreezeShield> ANCIENT_BREEZE_SHIELD = register(new AncientBreezeShieldType());
     public static final CustomEntityType ANCIENT_BREEZE_PROJECTILE = register(new AncientBreezeProjectileType());
 
-    private static @NotNull <T extends CustomEntityType> T register(@NotNull T customEntityType){
+    private static <T extends CustomEntityType> T register(T customEntityType){
         return CustomRegistries.ENTITY_TYPE.register(RpgU.getInstance(), customEntityType);
     }
 
