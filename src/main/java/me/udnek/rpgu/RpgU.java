@@ -42,6 +42,7 @@ import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
+@SuppressWarnings("unused")
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
     private static @UnknownNullability RpgU instance;
