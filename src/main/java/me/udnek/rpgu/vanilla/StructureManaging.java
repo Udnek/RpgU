@@ -161,7 +161,7 @@ public class StructureManaging {
         @Override
         public V put(K key, V value) {
             if (containsKey(key)) {
-                throw new IllegalStateException("Ключ уже существует: " + key);
+                throw new IllegalStateException("The key already exists: " + key);
             }
             return super.put(key, value);
         }
