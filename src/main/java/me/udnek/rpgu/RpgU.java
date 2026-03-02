@@ -37,14 +37,12 @@ import me.udnek.rpgu.mechanic.railing.VehicleListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
-import me.udnek.rpgu.vanilla.StructureManaging;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.NullUnmarked;
 
 @NullMarked
+@SuppressWarnings("unused")
 public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
 
     private static @UnknownNullability RpgU instance;
@@ -81,8 +79,6 @@ public final class RpgU extends JavaPlugin implements ResourcePackablePlugin {
         Commands.declareCommands();
 
         Hud.getInstance().register();
-
-        StructureManaging.run();
     }
 
     @Override

@@ -15,6 +15,7 @@ import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.vanilla.EnchantManaging;
 import me.udnek.rpgu.vanilla.RecipeManaging;
+import me.udnek.rpgu.vanilla.StructureManaging;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -160,6 +161,7 @@ public class GeneralListener extends SelfRegisteringListener {
         if (event.getStep() != InitializationProcess.Step.AFTER_GLOBAL_INITIALIZATION) return;
         RecipeManaging.run();
         EnchantManaging.run();
+        StructureManaging.run();
     }
 
     private void unregisterMaterials(){

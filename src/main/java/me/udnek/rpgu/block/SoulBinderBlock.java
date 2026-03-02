@@ -23,21 +23,22 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootTable;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Collections;
 import java.util.List;
 
+@NullMarked
 public class SoulBinderBlock extends DisplayBasedConstructableBlockType implements Listener {
 
     @Override
-    public @NotNull ItemStack getFakeDisplay() {
+    public ItemStack getFakeDisplay() {
         return Items.SOUL_BINDER.getItem();
     }
 
     @Override
-    public @NotNull String getRawId() {
+    public String getRawId() {
         return "soul_binder";
     }
 
@@ -47,7 +48,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
     }
 
     @Override
-    public @NotNull Material getBreakSpeedBaseBlock() {
+    public Material getBreakSpeedBaseBlock() {
         return Material.IRON_BLOCK;
     }
 
@@ -59,7 +60,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
             final RightClickableBlock superComponent = getComponents().getOrException(CustomComponentType.RIGHT_CLICKABLE_BLOCK);
 
             @Override
-            public void onRightClick(@NotNull CustomBlockType customBlockType, @NotNull PlayerInteractEvent event) {
+            public void onRightClick(CustomBlockType customBlockType, PlayerInteractEvent event) {
                 if (event.getPlayer().isSneaking()) {
                     superComponent.onRightClick(customBlockType, event);
                     return;
@@ -79,7 +80,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
         });
     }
 
-    public void playEffect(@NotNull Location location){
+    public void playEffect(Location location){
         ParticleBuilder builder = new ParticleBuilder(Particle.SOUL);
         Location centerLocation = location.toCenterLocation();
         builder.location(centerLocation);
@@ -105,7 +106,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
     }
 
     @Override
-    public void load(@NotNull TileState tileState) {}
+    public void load(TileState tileState) {}
 
     @Override
     public @Nullable CustomItem getItem() {
@@ -118,7 +119,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
 
         public SoulBinderData(){}
 
-        public SoulBinderData(@NotNull Location location){
+        public SoulBinderData(Location location){
             this.location = location;
         }
 
@@ -127,7 +128,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
         }
 
         @Override
-        public @NotNull String serialize() {
+        public String serialize() {
             return SerializableData.serializeMap(location.serialize());
         }
 
@@ -137,7 +138,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
         }
 
         @Override
-        public @NotNull String getDataName() {
+        public String getDataName() {
             return "soul_binder";
         }
     }

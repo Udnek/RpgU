@@ -10,6 +10,7 @@ import me.udnek.rpgu.item.artifact.wreath.FlowerWreath;
 import me.udnek.rpgu.item.artifact.wreath.WitherWreath;
 import me.udnek.rpgu.item.block.AlloyForgeItem;
 import me.udnek.rpgu.item.block.CrusherItem;
+import me.udnek.rpgu.item.block.InvisibleItemFrameItem;
 import me.udnek.rpgu.item.block.SoulBinderItem;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
@@ -36,7 +37,15 @@ import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorChestplate;
 import me.udnek.rpgu.item.equipment.hungry_horror_armor.HungryHorrorHelmet;
 import me.udnek.rpgu.item.equipment.magical.MagicalChestplate;
 import me.udnek.rpgu.item.equipment.magical.MagicalSword;
+import me.udnek.rpgu.item.equipment.nether_star_armor.NetherStarBoots;
+import me.udnek.rpgu.item.equipment.nether_star_armor.NetherStarChestplate;
+import me.udnek.rpgu.item.equipment.nether_star_armor.NetherStarHelmet;
+import me.udnek.rpgu.item.equipment.nether_star_armor.NetherStarLeggings;
 import me.udnek.rpgu.item.equipment.quiver.Quiver;
+import me.udnek.rpgu.item.equipment.turtle_armor.TurtleBoots;
+import me.udnek.rpgu.item.equipment.turtle_armor.TurtleChestplate;
+import me.udnek.rpgu.item.equipment.turtle_armor.TurtleHelmet;
+import me.udnek.rpgu.item.equipment.turtle_armor.TurtleLeggings;
 import me.udnek.rpgu.item.equipment.wolf.WolfBoots;
 import me.udnek.rpgu.item.equipment.wolf.WolfChestplate;
 import me.udnek.rpgu.item.equipment.wolf.WolfHelmet;
@@ -55,6 +64,7 @@ import org.bukkit.Color;
 import org.bukkit.generator.structure.Structure;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 public class Items {
 
     // ARTIFACTS
@@ -127,6 +137,16 @@ public class Items {
     public static final CustomItem COBALT_LEGGINGS = register(new CobaltLeggings());
     public static final CustomItem COBALT_BOOTS = register(new CobaltBoots());
 
+    public static final CustomItem NETHER_STAR_HELMET = register(new NetherStarHelmet());
+    public static final CustomItem NETHER_STAR_CHESTPLATE = register(new NetherStarChestplate());
+    public static final CustomItem NETHER_STAR_LEGGINGS = register(new NetherStarLeggings());
+    public static final CustomItem NETHER_STAR_BOOTS = register(new NetherStarBoots());
+
+    public static final CustomItem TURTLE_HELMET = register(new TurtleHelmet());
+    public static final CustomItem TURTLE_CHESTPLATE = register(new TurtleChestplate());
+    public static final CustomItem TURTLE_LEGGINGS = register(new TurtleLeggings());
+    public static final CustomItem TURTLE_BOOTS = register(new TurtleBoots());
+
     // INGREDIENT
     public static final CustomItem FABRIC = register(new Fabric());
     public static final CustomItem BLAST_COAL = register(new BlastCoal());
@@ -174,6 +194,7 @@ public class Items {
     public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
     public static final CustomItem CRUSHER = register(new CrusherItem());
     public static final CustomItem ALLOY_FORGE = register(new AlloyForgeItem());
+    public static final CustomItem INVISIBLE_FRAME_ITEM =  register(new InvisibleItemFrameItem());
 
 
     private static @NotNull CustomItem register(@NotNull CustomItem customItem){

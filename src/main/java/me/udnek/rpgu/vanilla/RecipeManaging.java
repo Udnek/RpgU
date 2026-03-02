@@ -96,12 +96,12 @@ public class RecipeManaging {
         new ShapedRecipeBuilder(Material.GOLDEN_BOOTS).shape(new String[]{"GLG", "G G"}).materialIngredients(Map.of('G', Material.GOLD_INGOT,
                 'L', Material.LEATHER_BOOTS)).build(RpgU.getInstance());
         //////////////////////////////////////////////
-        for (Material material: Tag.BEDS.getValues()){
+        for (Material material: Tag.BEDS.getValues().stream().sorted().toList()){
             new ShapedRecipeBuilder(material).shape(new String[]{"FFW", "PPP"}).materialIngredients(Map.of('W', Utils.replaceSuffix(material,
                     "_wool"))).customItemIngredients(Map.of('F', Items.FABRIC)).tagIngredients(Map.of('P', Tag.PLANKS)).build(RpgU.getInstance());
         }
         //////////////////////////////////////////////
-        for (Material material: Tag.WOODEN_TRAPDOORS.getValues()){
+        for (Material material: Tag.WOODEN_TRAPDOORS.getValues().stream().sorted().toList()){
             new ShapedRecipeBuilder(material).resultAmount(6).shape(new String[]{"PPP", "PPP"})
                     .materialIngredients(Map.of('P', Utils.replaceSuffix(material, "_planks"))).build(RpgU.getInstance());
         }

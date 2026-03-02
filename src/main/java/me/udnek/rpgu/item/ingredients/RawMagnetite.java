@@ -1,22 +1,17 @@
 package me.udnek.rpgu.item.ingredients;
 
-import io.papermc.paper.registry.keys.StructureKeys;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.nms.loot.condition.LootConditionWrapper;
 import me.udnek.coreu.nms.loot.entry.*;
 import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.table.LootTableWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
-import me.udnek.rpgu.item.Items;
 import org.bukkit.NamespacedKey;
-import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class RawMagnetite extends ConstructableCustomItem {
     @Override

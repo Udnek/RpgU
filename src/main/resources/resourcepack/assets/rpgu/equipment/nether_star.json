@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "rpgu:turtle"
+        "texture": "rpgu:nether_star"
       }
     ],
     "humanoid_leggings": [
       {
-        "texture": "rpgu:turtle"
+        "texture": "rpgu:nether_star"
       }
     ]
   }

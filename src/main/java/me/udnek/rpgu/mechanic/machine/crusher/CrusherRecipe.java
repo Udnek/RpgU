@@ -7,7 +7,6 @@ import me.udnek.coreu.custom.recipe.choice.CustomSingleRecipeChoice;
 import me.udnek.rpgu.item.Items;
 import me.udnek.rpgu.mechanic.machine.AbstractMachineRecipe;
 import me.udnek.rpgu.mechanic.machine.RecipeTypes;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
