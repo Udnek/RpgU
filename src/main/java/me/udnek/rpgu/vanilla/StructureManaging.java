@@ -90,7 +90,7 @@ public class StructureManaging {
         //StructureKeys.MANSION
         map.put("nova_structures:chests/mansion_overhaul/supply", 0.03f);
         map.put("nova_structures:chests/mansion_overhaul/mansion_overhaul_generic", 0.05f);
-        map.put("nova_structures:chests/woodland_mansion", 0.16f);
+        map.put("minecraft:chests/woodland_mansion", 0.16f);
         //StructureKeys.PILLAGER_OUTPOST
         map.put("nova_structures:chests/pillager_outpost_treasure", 0.18f);
         map.put("nova_structures:chests/pillager_outpost_storage", 0.22f);
@@ -128,7 +128,7 @@ public class StructureManaging {
         }
     }
 
-    public static void addPoolWithItemToLootTable(NamespacedKey key, float chance, CustomItem customItem){
+    public static void addPoolWithItemToLootTable(NamespacedKey key, float chance, CustomItem customItem) {
         Nms.get().getLootTableWrapper(Objects.requireNonNull(Nms.get().getLootTable(key))).addPool(
                 new PoolWrapper.Builder(
                         new NmsCustomEntry.Builder(new ItemStackCreator.Custom(customItem))
