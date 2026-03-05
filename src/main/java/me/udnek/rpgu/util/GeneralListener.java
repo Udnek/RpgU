@@ -9,7 +9,7 @@ import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.custom.item.VanillaItemManager;
 import me.udnek.coreu.custom.registry.InitializationProcess;
 import me.udnek.coreu.nms.Nms;
-import me.udnek.coreu.resourcepack.path.VirtualRpJsonFile;
+import me.udnek.coreu.resourcepack.file.RpJsonFile;
 import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.item.Items;
@@ -77,9 +77,9 @@ public class GeneralListener extends SelfRegisteringListener {
                 	}
                 }""";
         for (int i = 0; i <= count; i++) {
-            event.addFile(new VirtualRpJsonFile(
-                    JsonParser.parseString(model.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject(),
-                    AutoGeneratingFilesItem.GENERATED.getModelPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i))));
+            event.addFile(new RpJsonFile(
+                    AutoGeneratingFilesItem.GENERATED.getModelPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i)),
+                    JsonParser.parseString(model.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject()));
         }
         String definition = """
                 {
@@ -90,9 +90,9 @@ public class GeneralListener extends SelfRegisteringListener {
                     "oversized_in_gui": true
                 }""";
         for (int i = 0; i <= count; i++) {
-            event.addFile(new VirtualRpJsonFile(
-                    JsonParser.parseString(definition.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject(),
-                    AutoGeneratingFilesItem.GENERATED.getDefinitionPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i))));
+            event.addFile(new RpJsonFile(
+                    AutoGeneratingFilesItem.GENERATED.getDefinitionPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i)),
+                    JsonParser.parseString(definition.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject()));
         }
     }
 
