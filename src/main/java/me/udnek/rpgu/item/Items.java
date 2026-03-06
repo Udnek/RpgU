@@ -185,6 +185,7 @@ public class Items {
             register(new FoldedMap(Structure.MANSION, Color.BLUE, "Map of Mansion", "Карта особняка")); //TODO поменять названия
     public static final CustomItem FOLDED_MAP_BURIED_TREASURE =
             register(new FoldedMap(Structure.BURIED_TREASURE, Color.AQUA, "Map of Treasure", "Карта сокровища")); //TODO поменять названия
+    public static final CustomItem SOUL_CAGE = register(new SoulCage());
 
 
     // EXAMPLES

@@ -47,9 +47,11 @@ public class InvisibleItemFrameItem extends ConstructableCustomItem {
         super.initializeComponents();
         getComponents().set((RightClickableItem) (customItem, playerInteractEvent) -> {
             if (!playerInteractEvent.hasBlock()) return;
-            ItemStack item = playerInteractEvent.getItem();
-            assert item != null;
-            item.setAmount(item.getAmount() - 1);
+            if (!playerInteractEvent.getPlayer().getGameMode().isInvulnerable()) {
+                ItemStack item = playerInteractEvent.getItem();
+                assert item != null;
+                item.setAmount(item.getAmount() - 1);
+            }
             EntityTypes.INVISIBLE_ITEM_FRAME.spawn(Objects.requireNonNull(playerInteractEvent.getInteractionPoint()));
         });
     }

@@ -37,6 +37,8 @@ public class Abilities {
             register(new ConstructableComponentType<>("quiver_shoot", QuiverShootAbility.DEFAULT));
     public static final CustomComponentType<RPGUPassiveItem, HungryHorrorArmor.Passive> HUNGRY_HORROR =
             register(new ConstructableComponentType<>("hungry_horror", HungryHorrorArmor.Passive.DEFAULT));
+    public static final CustomComponentType<RPGUPassiveItem, SoulCage.Passive> SOUL_CAGE =
+            register(new ConstructableComponentType<>("soul_cage", SoulCage.Passive.DEFAULT));
 
     //ACTIVE
     public static final CustomComponentType<RPGUActiveItem, QuiverChangeArrowAbility> QUIVER_CHANGE_ARROW =

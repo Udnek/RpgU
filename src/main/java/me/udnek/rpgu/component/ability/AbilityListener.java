@@ -19,13 +19,11 @@ import me.udnek.rpgu.mechanic.damaging.DamageInstance;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityResurrectEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.EntityToggleGlideEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -156,7 +154,20 @@ public class AbilityListener extends SelfRegisteringListener implements Listener
         getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
                 (passiveItem, customItem, slot) -> {
                     for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
-                        trigger.onDeath(customItem, slot, event);
+                        trigger.onPlayerDeath(customItem, slot, event);
+                    }
+                });
+    }
+
+    @EventHandler
+    public void entityDeath(EntityDeathEvent event){
+        if (!(event.getEntity() instanceof Tameable tameable)) return;
+        Player entity = (Player) tameable.getOwner();
+        if (entity ==  null) return;
+        getEquipmentComponentsByType(RPGUComponents.PASSIVE_ABILITY_ITEM, entity,
+                (passiveItem, customItem, slot) -> {
+                    for (var trigger : passiveItem.getComponents().getAllTyped(RPGUPassiveTriggerableAbility.class)) {
+                        trigger.onTamedEntityDeath(customItem, slot, event);
                     }
                 });
     }
