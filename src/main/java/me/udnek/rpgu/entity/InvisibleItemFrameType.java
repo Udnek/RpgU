@@ -14,7 +14,7 @@ import org.bukkit.entity.Hanging;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingBreakEvent;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
@@ -29,6 +29,7 @@ public class InvisibleItemFrameType extends ConstructableCustomEntityType<ItemFr
     protected ItemFrame spawnNewEntity(Location location) {
         ItemFrame itemFrame = super.spawnNewEntity(location);
         itemFrame.setGlowing(true);
+        location.getWorld().playSound(location, Sound.ENTITY_ITEM_FRAME_PLACE, SoundCategory.BLOCKS, 1, 1);
         return itemFrame;
     }
 
@@ -49,7 +50,7 @@ public class InvisibleItemFrameType extends ConstructableCustomEntityType<ItemFr
     }
 
     @EventHandler
-    public void onDeath(HangingBreakByEntityEvent event){
+    public void onDeath(HangingBreakEvent event){
         Hanging entity = event.getEntity();
         if (CustomEntityType.get(entity) != EntityTypes.INVISIBLE_ITEM_FRAME) return;
 

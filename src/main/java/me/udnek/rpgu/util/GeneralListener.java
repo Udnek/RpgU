@@ -78,6 +78,7 @@ public class GeneralListener extends SelfRegisteringListener {
                 }""";
         for (int i = 0; i <= count; i++) {
             event.addFile(new RpJsonFile(
+                    this,
                     AutoGeneratingFilesItem.GENERATED.getModelPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i)),
                     JsonParser.parseString(model.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject()));
         }
@@ -91,6 +92,7 @@ public class GeneralListener extends SelfRegisteringListener {
                 }""";
         for (int i = 0; i <= count; i++) {
             event.addFile(new RpJsonFile(
+                    this,
                     AutoGeneratingFilesItem.GENERATED.getDefinitionPath(new NamespacedKey(RpgU.getInstance(), "gui/" + path + "/progress/"+i)),
                     JsonParser.parseString(definition.replace("%lvl%", String.valueOf(i)).replace("%path%", path)).getAsJsonObject()));
         }
