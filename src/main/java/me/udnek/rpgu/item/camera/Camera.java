@@ -1,17 +1,21 @@
 package me.udnek.rpgu.item.camera;
 
 
-import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import me.udnek.coreu.custom.component.instance.RightClickableItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.CustomItem;
+import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.util.LogUtils;
+import me.udnek.rpgu.RpgU;
 import net.kyori.adventure.key.Key;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -26,6 +30,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @NullMarked
 public class Camera extends ConstructableCustomItem {
@@ -64,45 +70,26 @@ public class Camera extends ConstructableCustomItem {
                         if (rendered) return;
                         rendered = true;
 
+                        final float fov = 75f;
+                        final double halfPlaneSize = Math.tan(Math.toRadians(fov)/2d);
+
                         Location location = player.getEyeLocation();
-                        Location frameLocation = location.clone();
-                        Vector frameDirection = location.getDirection();
+                        Vector direction = new Vector();
+                        for (int y = 0; y < 128; y++) {
+                            for (int x = 0; x < 128; x++) {
 
-                        final float fovMultiplayer = 90f;
+                                direction.setX((x-64)/64f *halfPlaneSize);
+                                direction.setZ(1);
+                                direction.setY((y-64)/64f *halfPlaneSize);
 
-                        for (int y = 0; y < 128; ++y) {
-                            for (int x = 0; x < 128; ++x) {
+                                direction.rotateAroundX(Math.toRadians(location.getPitch()));
+                                direction.rotateAroundY(-Math.toRadians(location.getYaw())); // rotating counter-clockwise
 
-                                frameDirection = location.getDirection().clone();
-
-                                frameDirection.setX(frameDirection.getX() + (y-64)/64f);
-                                frameDirection.setZ(frameDirection.getZ() + (y-64)/64f);
-                                frameDirection.setY(frameDirection.getY() + (y-64)/64f);
-
-
-                                //frameDirection.rotateAroundZ((y-64)/64f*Math.sin(frameDirection.getX()));
-                                //frameDirection.rotateAroundX((y-64)/64f*Math.cos(frameDirection.getZ()));
-                                //frameDirection.rotateAroundY((x-64)/64f);
-
-
-
-                                frameLocation.setYaw(
-                                        (float) (location.getYaw() + (Math.asin((x-64)/64f))/Math.PI*2*fovMultiplayer)
-                                );
-                                frameLocation.setPitch(
-                                        (float) (location.getPitch() + (Math.asin((y-64)/64f))/Math.PI*2*fovMultiplayer)
-                                );
-                                //frameDirection.multiply(new Vector(frameDirection.getX(), frameDirection.getY(), frameDirection.getZ()));
-                                //frameDirection
-                                //        .rotateAroundAxis(new Vector((x-64)*0.1, (y-64)*0.1, 1), Math.toRadians(90));
-                                //Bukkit.getLogger().info(location.getPitch() + " " +location.getYaw());
-
-
-                                Color color = traceLocation(frameLocation);
-                                mapCanvas.setPixelColor(x, y, color);
+                                Vector vecColor = trace(x, y, location, direction);
+                                Color color = vectorToColor(vecColor);
+                                mapCanvas.setPixelColor(127-x, 127-y, color); // inverting y, cause canvas 0 in top-left
                             }
                         }
-
                     }
                 };
 
@@ -119,73 +106,141 @@ public class Camera extends ConstructableCustomItem {
         });
     }
 
-    public static Color getSkyColor(Location location){
+
+    @SuppressWarnings("PointlessArithmeticExpression")
+    public static Vector getSkyColor(Location location, Vector direction) {
         long time = location.getWorld().getTime();
-        if (time >= 13_000 && time <= 22_300){
-            if (PerlinNoiseGenerator.getNoise(location.getDirection().getX()*30f, location.getDirection().getY()*30f, time*0.002f) > 0.7){
-                return new Color(1f, 1f, 1f);
+        // night
+        if (13_000 <= time && time <= 22_300){
+            // stars
+            if (PerlinNoiseGenerator.getNoise(direction.getX()*30f, direction.getY()*30f, time*0.002f) > 0.7){
+                return new Vector(1f, 1f, 1f);
             }
         }
 
-        float multiplier = (float) (Math.sin((time/24_000f*Math.PI*2))+1)/2;
-        return new Color(0.6f * multiplier, 0.6f* multiplier, 1f*multiplier);
+        float mul = (float) (Math.sin((time/24_000f*Math.PI*2))+1)/2;
+
+        return new Vector(110f/255*mul, 177f/255*mul, 255f/255*mul);
     }
 
-    public static Color traceLocation(Location location){
-        return traceLocation(location, location.getDirection());
+    public static Vector rgbToColor(int rgb){
+        return new Vector(
+                (rgb >> 16 & 255)/255f,
+                (rgb >> 8 & 255)/255f,
+                (rgb >> 0 & 255)/255f);
     }
 
-    public static Color traceLocation(Location location, Vector direction){
+    public static float checkComponent(String name, double c){
+        if (!(0 <= c && c <= 1)){
+            LogUtils.log(RpgU.getInstance(), name + " exceeded limit: " + c, NamedTextColor.YELLOW);
+            return Math.clamp((float) c, 0f, 1f);
+        }
+        return (float) c;
+    }
+
+    public static Color vectorToColor(Vector rgb){
+        return new Color(
+                checkComponent("red", rgb.getX()),
+                checkComponent("blue", rgb.getY()),
+                checkComponent("green", rgb.getZ())
+        );
+    }
+
+    public static Vector mapColor(Block block){
+        return rgbToColor(Nms.get().getMapColor(block.getType()));
+    }
+
+    public static Vector trace(int x, int y, Location location, Vector direction){
+        if ((x+y) % 2 == 0){ // adding transparent things
+            return trace(x, y, location, direction, FluidCollisionMode.ALWAYS, false, new HashSet<>());
+        }
+        return trace(x, y, location, direction, FluidCollisionMode.ALWAYS, true, new HashSet<>());
+    }
+
+    public static Vector trace(int x, int y, Location location, Vector direction, FluidCollisionMode fluidCollision, boolean ignorePassable, Set<Material> ignoreCollision){
         final double maxDistance = 200d;
 
-        RayTraceResult rayTraceResult = location.getWorld().rayTraceBlocks(
+        RayTraceResult traceResult = location.getWorld().rayTraceBlocks(
                 location,
                 direction,
                 maxDistance,
-                FluidCollisionMode.ALWAYS,
-                true);
+                fluidCollision,
+                ignorePassable,
+                b -> !ignoreCollision.contains(b.getType())
+        );
 
-        if (rayTraceResult == null) return getSkyColor(location);
+        if (traceResult == null) return getSkyColor(location, direction);
 
-        Block block = rayTraceResult.getHitBlock();
-        //if (block == null) new Color(0);
+        Block block = traceResult.getHitBlock();
+        BlockFace blockFace = traceResult.getHitBlockFace();
+        assert blockFace != null;
+        assert block != null;
 
-        float blueAddendum = 0f;
         if (block.getType() == Material.WATER){
-            RayTraceResult waterRayTraceResult = location.getWorld().rayTraceBlocks(
-                    location,
-                    direction,
-                    maxDistance,
-                    FluidCollisionMode.NEVER,
-                    true);
-
-            if (waterRayTraceResult != null){
-                rayTraceResult = waterRayTraceResult;
-                blueAddendum = 190f;
-                block = rayTraceResult.getHitBlock();
+           return trace(x, y, location, direction, FluidCollisionMode.NEVER, ignorePassable, ignoreCollision).multiply(0.3)
+                   .add(
+                           rgbToColor(Nms.get().getBiomeWrapper(block.getBiome()).waterColor()).multiply(0.7)// water transparency
+                   );
+        }
+        Vector color = mapColor(block);
+        if (ignorePassable){ // so block must be solid
+            if (color.isZero() || block.getType().isTransparent()){
+                ignoreCollision.add(block.getType());
+                return trace(x, y, location, direction, fluidCollision, true, ignoreCollision); // trying to trace solid
             }
-
         }
 
-        //int colorOfMaterial = NMSTest.getColorOfMaterial(block.getType());
-        int colorOfMaterial = 0;
-        float lightLevel = (block.getLocation().add(rayTraceResult.getHitBlockFace().getDirection()).getBlock().getLightLevel()+1)/16f;
-        float distanceAddendum = (float) (location.distance(block.getLocation()) / maxDistance)*50;
-        //float stroke = (float) Math.cos(rayTraceResult.getHitPosition().distanceSquared(block.getLocation().toCenterLocation().toVector()));
-        //Bukkit.getLogger().info(String.valueOf(stroke));
-
-        float multipliers = lightLevel;
-
-        Color color = new Color(colorOfMaterial);
-        int red = (int) Math.min(color.getRed() * multipliers + distanceAddendum, 255);
-        int green = (int) Math.min(color.getGreen() * multipliers + distanceAddendum, 255);
-        int blue = (int) Math.min((color.getBlue() + blueAddendum)* multipliers + distanceAddendum, 255);
-        color = new Color(red, green, blue);
-
-        //block.setType(Material.DIAMOND_BLOCK);
-        //location.getWorld().setBlockData(block.getLocation(), block.getBlockData());
-
+        applyShading(color, block, blockFace);
         return color;
+//        // adding transparent and passable things
+//        if ((x+y) % 2 == 0) {
+//            RayTraceResult passableTrace = location.getWorld().rayTraceBlocks(
+//                    location,
+//                    direction,
+//                    maxDistance,
+//                    FluidCollisionMode.NEVER,
+//                    false,
+//                    b -> !ignoreCollision.contains(b.getType())
+//            );
+//            if (passableTrace == null) return color;
+//            Block passableBlock = passableTrace.getHitBlock();
+//            assert passableBlock != null;
+//            if (!passableBlock.isPassable()) return color;
+//            Vector passableColor = mapColor(passableBlock);
+//            assert passableTrace.getHitBlockFace() != null;
+//            applyShading(passableColor, passableBlock, passableTrace.getHitBlockFace());
+//
+//            color.multiply(0.5).add(passableColor.multiply(0.5));
+//        } else {
+//            if (color.isZero()) { // transparent
+//                ignoreCollision.add(block.getType());
+//                return trace(x, y, location, direction, fluidCollision, ignorePassable, ignoreCollision);
+//            }
+//        }
+    }
+
+    public static void applyShading(Vector color, Block block, BlockFace face){
+        applyLightShading(color, block, face);
+        applyFaceShading(color, face);
+    }
+
+    public static void applyBiomeShading(Vector color, Block block){
+        Nms.get().getBiomeWrapper(block.getBiome()).
+    }
+    public static void applyLightShading(Vector color, Block block, BlockFace face){
+        Block relative = block.getRelative(face);
+        float light = relative.getLightLevel();
+        color.multiply(light/15f);
+    }
+    public static void applyFaceShading(Vector color, BlockFace face){
+        double mul = switch (face){
+            case UP -> 1;
+            case DOWN -> 0.6;
+            case NORTH, SOUTH -> 0.85; // slightly
+            case EAST, WEST -> 0.75; // more
+            default -> 1;
+        };
+        color.multiply(mul);
     }
 }
 
