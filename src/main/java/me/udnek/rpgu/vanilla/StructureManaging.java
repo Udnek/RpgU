@@ -1,5 +1,6 @@
 package me.udnek.rpgu.vanilla;
 
+import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.keys.StructureKeys;
 import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.nms.MobCategoryWrapper;
@@ -15,6 +16,7 @@ import me.udnek.rpgu.item.Items;
 import net.kyori.adventure.key.Key;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
+import org.bukkit.loot.LootTable;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.HashMap;
@@ -129,7 +131,9 @@ public class StructureManaging {
     }
 
     public static void addPoolWithItemToLootTable(NamespacedKey key, float chance, CustomItem customItem){
-        Nms.get().getLootTableWrapper(Objects.requireNonNull(Nms.get().getLootTable(key))).addPool(
+        LootTable lootTable = Nms.get().getLootTable(key);
+        Preconditions.checkArgument(lootTable != null, "Unknown lootTable: " + key);
+        Nms.get().getLootTableWrapper(lootTable).addPool(
                 new PoolWrapper.Builder(
                         new NmsCustomEntry.Builder(new ItemStackCreator.Custom(customItem))
                                 .addCondition(LootConditionWrapper.randomChange(chance))

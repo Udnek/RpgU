@@ -12,6 +12,7 @@ import me.udnek.rpgu.item.block.AlloyForgeItem;
 import me.udnek.rpgu.item.block.CrusherItem;
 import me.udnek.rpgu.item.block.InvisibleItemFrameItem;
 import me.udnek.rpgu.item.block.SoulBinderItem;
+import me.udnek.rpgu.item.camera.Camera;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteCrossbow;
@@ -189,6 +190,7 @@ public class Items {
     // EXAMPLES
     public static final CustomItem MAGICAL_CHESTPLATE = register(new MagicalChestplate());
     public static final CustomItem MAGICAL_SWORD = register(new MagicalSword());
+    public static final CustomItem CAMERA = register(new Camera());
 
     // BLOCKS
     public static final CustomItem SOUL_BINDER = register(new SoulBinderItem());
