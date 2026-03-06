@@ -37,6 +37,7 @@ import me.udnek.rpgu.mechanic.railing.VehicleListener;
 import me.udnek.rpgu.util.GeneralListener;
 import me.udnek.rpgu.util.Sounds;
 import me.udnek.rpgu.vanilla.AttributeManaging;
+import org.bukkit.map.MapRenderer;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.UnknownNullability;
 import org.jspecify.annotations.NullMarked;

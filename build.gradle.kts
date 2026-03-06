@@ -20,8 +20,8 @@ repositories {
 
 dependencies {
 
-    compileOnly(files("C:/Users/glebd/OneDrive/Documents/CODING/Java/CoreU/build/libs/CoreU-1.0-SNAPSHOT.jar"))
-    compileOnly(files("C:\\Users\\glebd\\OneDrive\\Documents\\CODING\\Java\\JeiU\\build\\libs\\JeiU-1.0-SNAPSHOT.jar"))
+    compileOnly(files("/home/udnek/IdeaProjects/CoreU/build/libs/CoreU-1.0-SNAPSHOT.jar"))
+    compileOnly(files("/home/udnek/IdeaProjects/JeiU/build/libs/JeiU-1.0-SNAPSHOT.jar"))
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT") {
         exclude(group = "org.apache.commons", module = "commons-lang3")
     }
