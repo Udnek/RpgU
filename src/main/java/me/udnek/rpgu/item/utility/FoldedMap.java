@@ -31,13 +31,14 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapCursor;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+@NullMarked
 public class FoldedMap extends ConstructableCustomItem {
 
     protected final Key structure;
@@ -45,7 +46,7 @@ public class FoldedMap extends ConstructableCustomItem {
     protected final String ruTranslations;
     protected final String engTranslations;
 
-    public FoldedMap(@NotNull Structure structure, @NotNull Color color, @NotNull String engTranslations, @NotNull String ruTranslations) {
+    public FoldedMap(Structure structure, Color color, String engTranslations, String ruTranslations) {
         this.color = color;
         this.structure = RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE).getKeyOrThrow(structure);
         this.ruTranslations = ruTranslations;
@@ -61,7 +62,7 @@ public class FoldedMap extends ConstructableCustomItem {
     @Nullable
     @Override
     public DataSupplier<Key> getItemModel() {
-        return DataSupplier.of(new  NamespacedKey(RpgU.getInstance(), "folded_map"));
+        return DataSupplier.of(new NamespacedKey(RpgU.getInstance(), "folded_map"));
     }
 
     @Override
@@ -70,7 +71,7 @@ public class FoldedMap extends ConstructableCustomItem {
     }
 
     @Override
-    public @NotNull String getRawId() {
+    public String getRawId() {
         return "folded_map_to_"+structure.value();
     }
 
@@ -90,7 +91,7 @@ public class FoldedMap extends ConstructableCustomItem {
                 RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE).getKeyOrThrow(Structure.BURIED_TREASURE)
         ){
             @Override
-            protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot universalInventorySlot, @NotNull PlayerInteractEvent event) {
+            protected ActionResult action(CustomItem customItem, LivingEntity livingEntity, UniversalInventorySlot universalInventorySlot, PlayerInteractEvent event) {
                 throwCanNotChangeDefault();
                 return ActionResult.NO_COOLDOWN;
             }
@@ -98,7 +99,7 @@ public class FoldedMap extends ConstructableCustomItem {
 
         protected Key structureKey;
 
-        public Ability(@NotNull Key structureKey){
+        public Ability(Key structureKey){
             // validation
             RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE).getOrThrow(structureKey);
             this.structureKey = structureKey;
@@ -106,7 +107,7 @@ public class FoldedMap extends ConstructableCustomItem {
         }
 
         @Override
-        protected @NotNull ActionResult action(@NotNull CustomItem customItem, @NotNull LivingEntity livingEntity, @NotNull UniversalInventorySlot slot, @NotNull PlayerInteractEvent event) {
+        protected ActionResult action(CustomItem customItem, LivingEntity livingEntity, UniversalInventorySlot slot, PlayerInteractEvent event) {
             if (!(livingEntity instanceof Player player)) return ActionResult.NO_COOLDOWN;
 
             @Nullable ItemStack map = Nms.get().generateExplorerMap(
@@ -124,7 +125,7 @@ public class FoldedMap extends ConstructableCustomItem {
         }
 
         @Override
-        public void onRightClick(@NotNull CustomItem customItem, @NotNull PlayerInteractEvent event) {
+        public void onRightClick(CustomItem customItem, PlayerInteractEvent event) {
             activate(customItem, event.getPlayer(), new BaseUniversalSlot(Objects.requireNonNull(event.getHand())), event);
         }
 
@@ -140,7 +141,7 @@ public class FoldedMap extends ConstructableCustomItem {
         }
 
         @Override
-        public @NotNull CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
+        public CustomComponentType<? super RPGUActiveItem, ? extends CustomComponent<? super RPGUActiveItem>> getType() {
             return Abilities.FOLDED_MAP;
         }
     }
