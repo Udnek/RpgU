@@ -6,6 +6,8 @@ import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
@@ -13,7 +15,6 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
 
-import java.util.Objects;
 import java.util.function.Consumer;
 
 @NullMarked
@@ -45,14 +46,23 @@ public class InvisibleItemFrameItem extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set((RightClickableItem) (customItem, playerInteractEvent) -> {
-            if (!playerInteractEvent.hasBlock()) return;
-            if (!playerInteractEvent.getPlayer().getGameMode().isInvulnerable()) {
-                ItemStack item = playerInteractEvent.getItem();
+        getComponents().set((RightClickableItem) (customItem, event) -> {
+            if (!event.hasBlock()) return;
+            if (!event.getPlayer().getGameMode().isInvulnerable()) {
+                ItemStack item = event.getItem();
                 assert item != null;
                 item.setAmount(item.getAmount() - 1);
             }
-            EntityTypes.INVISIBLE_ITEM_FRAME.spawn(Objects.requireNonNull(playerInteractEvent.getInteractionPoint()));
+
+            assert event.getHand() != null;
+            event.getPlayer().swingHand(event.getHand());
+
+            Block clickedBlock = event.getClickedBlock();
+            assert clickedBlock != null;
+            Block relative = clickedBlock.getRelative(event.getBlockFace());
+
+            ItemFrame frame = (ItemFrame) EntityTypes.INVISIBLE_ITEM_FRAME.spawn(relative.getLocation());
+            frame.setFacingDirection(event.getBlockFace(), true);
         });
     }
 }
