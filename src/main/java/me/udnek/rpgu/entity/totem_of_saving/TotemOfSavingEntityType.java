@@ -5,6 +5,7 @@ import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntity;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.entity.EntityTypes;
@@ -28,6 +29,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -66,6 +68,11 @@ public class TotemOfSavingEntityType extends ConstructableCustomEntityType<Pigli
 
         return entity;
     }
+
+    @Override
+    protected @Nullable CustomItem getSpawnEgg() {
+        return null;
+    }//TODO delite
 
     @EventHandler
     public void onTotemDeath(EntityDeathEvent event){

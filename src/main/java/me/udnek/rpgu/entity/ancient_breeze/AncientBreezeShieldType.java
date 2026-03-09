@@ -4,6 +4,7 @@ import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntity;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.component.instance.DamageResistant;
 import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Location;
@@ -18,6 +19,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -59,6 +61,11 @@ public class AncientBreezeShieldType extends ConstructableCustomEntityType<Pigli
         entity.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, PotionEffect.INFINITE_DURATION, 0, true, false, true));
         return entity;
     }
+
+    @Override
+    protected @Nullable CustomItem getSpawnEgg() {
+        return null;
+    }//TODO delite
 
     @Override
     public void load(@NotNull Entity entity) {}

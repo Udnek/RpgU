@@ -5,16 +5,14 @@ import me.udnek.coreu.custom.attribute.VanillaAttributesContainer;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.component.instance.VanillaAttributedItem;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
-import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.nms.Nms;
+import me.udnek.coreu.nms.loot.condition.LootConditionWrapper;
 import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
 import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.RpgU;
 import me.udnek.rpgu.equipment.slot.EquipmentSlots;
-import me.udnek.rpgu.item.Items;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -39,9 +37,8 @@ public class RustyIronRing extends ConstructableCustomItem {
     public void globalInitialization() {
         super.globalInitialization();
         PoolWrapper pool = new PoolWrapper.Builder(
-                new NmsCustomEntry.Builder(new ItemStackCreator.Custom(Items.RUSTY_IRON_RING)).fromVanilla(
-                        LootTables.ZOMBIFIED_PIGLIN.getLootTable(),
-                        stack -> ItemUtils.isVanillaMaterial(stack, Material.GOLD_INGOT)
+                new NmsCustomEntry.Builder(
+                        new ItemStackCreator.Custom(this)).addCondition(LootConditionWrapper.randomChange(0.0083f)
                 ).buildAndWrap()
         ).build();
         Nms.get().getLootTableWrapper(LootTables.ZOMBIE.getLootTable()).addPool(pool);
