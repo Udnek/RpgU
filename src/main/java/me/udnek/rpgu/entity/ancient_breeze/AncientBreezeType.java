@@ -4,6 +4,7 @@ import io.papermc.paper.event.entity.EntityMoveEvent;
 import io.papermc.paper.event.player.PlayerNameEntityEvent;
 import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomTickingEntityType;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.mechanic.damaging.DamageEvent;
 import net.kyori.adventure.text.Component;
@@ -19,6 +20,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.loot.LootTables;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -45,6 +47,11 @@ public class AncientBreezeType extends ConstructableCustomEntityType<Breeze> imp
         breeze.setRemoveWhenFarAway(false);
         return breeze;
     }
+
+    @Override
+    protected @Nullable CustomItem getSpawnEgg() {
+        return null;
+    }//TODO delite
 
     @Override
     public void unload(@NotNull Entity entity) {}
