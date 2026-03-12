@@ -12,6 +12,7 @@ import me.udnek.rpgu.item.block.AlloyForgeItem;
 import me.udnek.rpgu.item.block.CrusherItem;
 import me.udnek.rpgu.item.block.InvisibleItemFrameItem;
 import me.udnek.rpgu.item.block.SoulBinderItem;
+import me.udnek.rpgu.item.camera.Camera;
 import me.udnek.rpgu.item.equipment.*;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteAxe;
 import me.udnek.rpgu.item.equipment.Illagerite.IllageriteCrossbow;
@@ -172,6 +173,7 @@ public class Items {
     public static final  CustomItem TECHNICAL_INVENTORY_FILLER = register(new TechnicalInventoryFiller());
 
     // UTILITY
+    public static final CustomItem CAMERA = register(new Camera());
     public static final CustomItem WRENCH = register(new Wrench());
     public static final CustomItem DARK_MIRROR = register(new DarkMirror());
     public static final CustomItem TOTEM_OF_SAVING = register(new TotemOfSavingItem());
