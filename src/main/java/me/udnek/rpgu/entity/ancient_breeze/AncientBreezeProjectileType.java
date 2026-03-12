@@ -1,7 +1,6 @@
 package me.udnek.rpgu.entity.ancient_breeze;
 
 import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
-import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.entity.EntityTypes;
 import me.udnek.rpgu.mechanic.damaging.Damage;
 import me.udnek.rpgu.mechanic.damaging.DamageUtils;
@@ -14,7 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class AncientBreezeProjectileType extends ConstructableCustomEntityType<Snowball> implements Listener {
 
@@ -22,11 +20,6 @@ public class AncientBreezeProjectileType extends ConstructableCustomEntityType<S
     public @NotNull EntityType getVanillaType() {
         return EntityType.SNOWBALL;
     }
-
-    @Override
-    protected @Nullable CustomItem getSpawnEgg() {
-        return null;
-    }//TODO delite
 
     @Override
     public void load(@NotNull Entity entity) {}
