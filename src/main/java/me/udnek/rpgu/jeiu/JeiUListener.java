@@ -4,9 +4,7 @@ import me.udnek.coreu.util.SelfRegisteringListener;
 import me.udnek.jeiu.event.UnknownLootTableIconEvent;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.map.MapRenderer;
 import org.bukkit.plugin.Plugin;
 
 public class JeiUListener extends SelfRegisteringListener {

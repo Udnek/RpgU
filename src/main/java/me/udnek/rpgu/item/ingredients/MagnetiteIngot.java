@@ -5,7 +5,6 @@ import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.coreu.custom.item.ItemUtils;
 import me.udnek.coreu.nms.Nms;
 import me.udnek.coreu.nms.loot.entry.NmsCustomEntry;
-import me.udnek.coreu.nms.loot.pool.PoolWrapper;
 import me.udnek.coreu.nms.loot.util.ItemStackCreator;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Material;
@@ -46,18 +45,12 @@ public class MagnetiteIngot extends ConstructableCustomItem {
     @Override
     public void globalInitialization() {
         super.globalInitialization();
-        addToLootTables(LootTables.SIMPLE_DUNGEON, LootTables.ABANDONED_MINESHAFT, LootTables.JUNGLE_TEMPLE);
-    }
-
-    private void addToLootTables(LootTables ...lootTables) {
-        for (LootTables lootTable : lootTables) {
-            Nms.get().getLootTableWrapper(lootTable.getLootTable()).addPool(
-                    new PoolWrapper.Builder(
-                            new NmsCustomEntry.Builder(new ItemStackCreator.Custom(this)).fromVanilla(
-                                    lootTable.getLootTable(),
-                                    stack -> ItemUtils.isVanillaMaterial(stack, Material.IRON_INGOT)
-                            ).buildAndWrap()
-                    ).build()
+        for (LootTables lootTable : new LootTables[]{LootTables.SIMPLE_DUNGEON, LootTables.ABANDONED_MINESHAFT, LootTables.JUNGLE_TEMPLE}) {
+            Nms.get().getLootTableWrapper(lootTable.getLootTable()).getPool(0).addEntry(
+                    new NmsCustomEntry.Builder(new ItemStackCreator.Custom(this)).fromVanilla(
+                            lootTable.getLootTable(),
+                            stack -> ItemUtils.isVanillaMaterial(stack, Material.IRON_INGOT)
+                    ).buildAndWrap()
             );
         }
     }

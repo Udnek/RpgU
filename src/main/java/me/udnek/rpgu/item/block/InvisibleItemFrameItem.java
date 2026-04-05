@@ -1,14 +1,14 @@
 package me.udnek.rpgu.item.block;
 
 import com.destroystokyo.paper.MaterialTags;
-import me.udnek.coreu.custom.component.instance.RightClickableItem;
+import me.udnek.coreu.custom.component.instance.SpawnEggItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
 import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -46,23 +46,14 @@ public class InvisibleItemFrameItem extends ConstructableCustomItem {
     @Override
     public void initializeComponents() {
         super.initializeComponents();
-        getComponents().set((RightClickableItem) (customItem, event) -> {
-            if (!event.hasBlock()) return;
-            if (!event.getPlayer().getGameMode().isInvulnerable()) {
-                ItemStack item = event.getItem();
-                assert item != null;
-                item.setAmount(item.getAmount() - 1);
+
+        getComponents().set(new SpawnEggItem(EntityTypes.INVISIBLE_ITEM_FRAME) {
+            @Override
+            public @Nullable Entity onPlace(PlayerInteractEvent event) {
+                ItemFrame frame = (ItemFrame) super.onPlace(event);
+                if (frame != null) frame.setFacingDirection(event.getBlockFace(), true);
+                return frame;
             }
-
-            assert event.getHand() != null;
-            event.getPlayer().swingHand(event.getHand());
-
-            Block clickedBlock = event.getClickedBlock();
-            assert clickedBlock != null;
-            Block relative = clickedBlock.getRelative(event.getBlockFace());
-
-            ItemFrame frame = (ItemFrame) EntityTypes.INVISIBLE_ITEM_FRAME.spawn(relative.getLocation());
-            frame.setFacingDirection(event.getBlockFace(), true);
         });
     }
 }

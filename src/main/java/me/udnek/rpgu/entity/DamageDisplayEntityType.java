@@ -1,10 +1,11 @@
 package me.udnek.rpgu.entity;
 
 import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
-import me.udnek.coreu.custom.item.CustomItem;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TextDisplay;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,9 +16,9 @@ public class DamageDisplayEntityType extends ConstructableCustomEntityType<TextD
     }
 
     @Override
-    protected @Nullable CustomItem getSpawnEgg() {
-        return null;
-    }//TODO delite
+    protected @Nullable ItemStack getSpawnEgg() {
+        return new ItemStack(Material.AIR);
+    }
 
     @Override
     public void load(@NotNull Entity entity) {}
