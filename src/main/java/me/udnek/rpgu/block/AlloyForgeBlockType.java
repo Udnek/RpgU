@@ -41,7 +41,7 @@ public class AlloyForgeBlockType extends RotatableCustomBlockType implements Cus
 
     @Override
     public @Nullable Either<LootTable, List<ItemStack>> getLoot() {
-        return new Either<>(null, List.of(Items.ALLOY_FORGE.getItem()));
+        return Either.ofRight(List.of(Items.ALLOY_FORGE.getItem()));
     }
 
     @Override

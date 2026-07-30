@@ -44,7 +44,7 @@ public class SoulBinderBlock extends DisplayBasedConstructableBlockType implemen
 
     @Override
     public @Nullable Either<LootTable, List<ItemStack>> getLoot() {
-        return new Either<>(null, List.of(Items.SOUL_BINDER.getItem()));
+        return Either.ofRight(List.of(Items.SOUL_BINDER.getItem()));
     }
 
     @Override

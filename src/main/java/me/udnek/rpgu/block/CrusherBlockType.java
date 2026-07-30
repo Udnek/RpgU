@@ -40,7 +40,7 @@ public class CrusherBlockType extends RotatableCustomBlockType implements Custom
 
     @Override
     public @Nullable Either<LootTable, List<ItemStack>> getLoot() {
-        return new Either<>(null, List.of(Items.CRUSHER.getItem()));
+        return Either.ofRight(List.of(Items.CRUSHER.getItem()));
     }
 
     @Override

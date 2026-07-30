@@ -3,6 +3,7 @@ package me.udnek.rpgu.entity;
 import io.papermc.paper.event.player.PlayerItemFrameChangeEvent;
 import me.udnek.coreu.custom.entitylike.entity.ConstructableCustomEntityType;
 import me.udnek.coreu.custom.entitylike.entity.CustomEntityType;
+import me.udnek.coreu.custom.item.CustomItem;
 import me.udnek.rpgu.item.Items;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -15,7 +16,6 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingBreakEvent;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
 
@@ -36,8 +36,8 @@ public class InvisibleItemFrameType extends ConstructableCustomEntityType<ItemFr
     }
 
     @Override
-    protected @Nullable ItemStack getSpawnEgg() {
-        return Items.INVISIBLE_FRAME_ITEM.getItem();
+    protected @Nullable CustomItem getSpawnEgg() {
+        return Items.INVISIBLE_FRAME_ITEM;
     }
 
     @EventHandler

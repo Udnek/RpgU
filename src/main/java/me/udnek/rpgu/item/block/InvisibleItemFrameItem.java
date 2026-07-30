@@ -1,14 +1,9 @@
 package me.udnek.rpgu.item.block;
 
 import com.destroystokyo.paper.MaterialTags;
-import me.udnek.coreu.custom.component.instance.SpawnEggItem;
 import me.udnek.coreu.custom.component.instance.TranslatableThing;
 import me.udnek.coreu.custom.item.ConstructableCustomItem;
-import me.udnek.rpgu.entity.EntityTypes;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
@@ -47,13 +42,13 @@ public class InvisibleItemFrameItem extends ConstructableCustomItem {
     public void initializeComponents() {
         super.initializeComponents();
 
-        getComponents().set(new SpawnEggItem(EntityTypes.INVISIBLE_ITEM_FRAME) {
-            @Override
-            public @Nullable Entity onPlace(PlayerInteractEvent event) {
-                ItemFrame frame = (ItemFrame) super.onPlace(event);
-                if (frame != null) frame.setFacingDirection(event.getBlockFace(), true);
-                return frame;
-            }
-        });
+//        getComponents().set(new SpawnEggItem(EntityTypes.INVISIBLE_ITEM_FRAME) {
+//            @Override
+//            public @Nullable Entity onPlace(PlayerInteractEvent event) {
+//                ItemFrame frame = (ItemFrame) super.onPlace(event);
+//                if (frame != null) frame.setFacingDirection(event.getBlockFace(), true);
+//                return frame;
+//            }
+//        });
     }
 }
