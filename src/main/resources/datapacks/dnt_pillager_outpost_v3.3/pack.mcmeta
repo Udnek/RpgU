@@ -1,7 +1,0 @@
-{
-	"pack": {
-			"description": "Structure datapack overhauling the Pillager Outpost",
-			"min_format": [88,0],
-			"max_format": [88,0]
-	}
-}

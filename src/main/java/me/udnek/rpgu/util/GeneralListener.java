@@ -51,15 +51,9 @@ public class GeneralListener extends SelfRegisteringListener {
         Player player = event.getPlayer();
 
         AttributeInstance attribute = player.getAttribute(Attribute.MAX_HEALTH);
-        double value = Objects.requireNonNull(attribute).getValue();
-        if (value != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
-        if (value >= basePlayerHealth) player.setHealth(value);
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-
-            }
-        }.runTaskLater(RpgU.getInstance(), 5);
+        double currentMaxHealth = Objects.requireNonNull(attribute).getValue();
+        if (currentMaxHealth >= basePlayerHealth) player.setHealth(basePlayerHealth);
+        if (currentMaxHealth != basePlayerHealth) attribute.setBaseValue(basePlayerHealth);
     }
 
     @EventHandler

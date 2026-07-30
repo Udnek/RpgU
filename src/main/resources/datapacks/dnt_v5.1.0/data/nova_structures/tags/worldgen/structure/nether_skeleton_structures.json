@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-	"#nova_structures:nether_towers",
-	"#nova_structures:nether_keep",
-	"#nova_structures:nether_port",
-	"minecraft:fortress"
-  ]
-}
